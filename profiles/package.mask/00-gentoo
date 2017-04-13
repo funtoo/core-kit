@@ -1,0 +1,755 @@
+####################################################################
+#
+# When you add an entry to the top of this file, add your name, the date, and
+# an explanation of why something is getting masked. Please be extremely
+# careful not to commit atoms that are not valid, as it can cause large-scale
+# breakage, especially if it ends up in the daily snapshot.
+#
+## Example:
+##
+## # Dev E. Loper <developer@gentoo.org> (28 Jun 2012)
+## # Masking  these versions until we can get the
+## # v4l stuff to work properly again
+## =media-video/mplayer-0.90_pre5
+## =media-video/mplayer-0.90_pre5-r1
+#
+# - Best last rites (removal) practices -
+# Include the following info:
+# a) reason for masking
+# b) bug # for the removal (and yes you should have one)
+# c) date of removal (either the date or "in x days")
+#
+## Example:
+##
+## # Dev E. Loper <developer@gentoo.org> (23 May 2015)
+## # Masked for removal in 30 days.  Doesn't work
+## # with new libfoo. Upstream dead, gtk-1, smells
+## # funny. (bug #987654)
+## app-misc/some-package
+
+#--- END OF EXAMPLES ---
+
+# NP-Hardass <NP-Hardass@gentoo.org> (10 Apr 2017)
+# Masked for testing
+virtual/wine
+app-eselect/eselect-wine
+app-emulation/wine-desktop-common
+app-emulation/wine-gecko
+app-emulation/wine-mono
+app-emulation/wine-vanilla
+app-emulation/wine-staging
+app-emulation/wine-d3d9
+app-emulation/wine-any
+
+# Michael Weber <xmw@gentoo.org> (08 Apr 2017)
+# Experimental version.
+>=net-wireless/gnuradio-3.7.11
+
+# Patrice Clement <monsieurp@gentoo.org> (07 Apr 2017)
+# Part of the JDK since Java 6. Removal in 30 days.
+dev-java/jaxme
+
+# David Seifert <soap@gentoo.org> (05 Apr 2017)
+# Abandoned, no releases since 2008, only partially
+# compatible with C++11, multiple bugs, upstream dead
+# Masked for removal in 30 days.
+# Bugs #359247, #400547, #409119, #594144
+dev-libs/STLport
+
+# Mike Gilbert <floppym@gentoo> (05 Apr 2017)
+# Unmaintained.
+# Pinned dependencies cause conflicts with other packages.
+# Live ebuild is broken, and requires packaging several new deps.
+# Removal in 30 days.
+# Bug: https://bugs.gentoo.org/614758
+net-misc/flexget
+
+# Mart Raudsepp <leio@gentoo.org> (04 Apr 2017)
+# Masked for removal in 30 days. Does not work with new
+# gnome-base/gnome-shell.
+# gnome-extra/gnome-shell-extensions-topicons-plus is a
+# fork that has added features and works with modern
+# gnome-shell that is suitable as a system-wide replacement
+# package. Alternatively it can be installed per-user from
+# https://extensions.gnome.org/extension/1031/topicons/
+gnome-extra/gnome-shell-extensions-topicons
+
+# NP-Hardassr <NP-Hardass@gentoo.org> (03 Apr 2017)
+# Masked for removal in 30 days. Unable to generate new
+# hashes for the manifest, per Bug #612720, Bug #612718
+# Upstream has also deprecated these in favor of
+# app-emulation/crossover-bin
+app-emulation/crossover-office-bin
+app-emulation/crossover-office-pro-bin
+
+# Amadeusz Zolnowski <aidecoe@gentoo.org> (2 Apr 2017)
+# Masked, committed accidentally. It's not tested yet, possibly broken.
+=net-im/ejabberd-17.01
+
+# Hans de Graaff <graaff@gentoo.org> (2 Apr 2017)
+# Mask vulnerable slot for security bug. Bug #611384.
+# Removal in 30 days.
+dev-ruby/rubyzip:0
+
+# Yixun Lan <dlan@gentoo.org> (30 Mar 2017)
+# Masked, broken due to emoji support which requre npm package installed (bug #612218)
+=app-i18n/ibus-1.5.15
+
+# Matt Turner <mattst88@gentoo.org> (29 Mar 2017)
+# Use sys-kernel/linux-firmware instead, which these packages are subsets of
+# Bug #614218
+sys-firmware/radeon-ucode
+sys-firmware/amdgpu-ucode
+
+# Patrice Clement <monsieurp@gentoo.org> (28 Mar 2017)
+# Part of the JDK since Java 6. Removal in 30 days.
+dev-java/swing-worker
+
+# Michał Górny <mgorny@gentoo.org> (27 Mar 2017)
+# No revdeps or real use case. Uses ECB mode for encryption which is
+# a bad idea. Requires patching for dev-python/pycryptodome. Abandoned
+# upstream and downstream. Removal in 30 days. Bug #611592.
+dev-python/edpwd
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (24 Mar 2017)
+# Tests fail recently, module is abandoned, upstream does
+# not respond, no revdeps. Removal in 30 days. Bug 603918.
+dev-perl/File-DirWalk
+
+# Lars Wendler <polynomial-c@gentoo.org> (24 Mar 2017)
+# Masked until Mozilla and Chrome agreed how to handle
+# Symantec trust issues properly (bug #613714)
+=app-misc/ca-certificates-20161130.3.30-r1
+
+# Pawel Hajdan, Jr. <phajdan.jr@gentoo.org> (20 Mar 2017)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+>=www-client/chromium-59
+
+# David Seifert <soap@gentoo.org> (19 Mar 2017)
+# EOL'd upstream, fetch restricted, digests missing
+# Masked for removal in 30 days. Bug #612746.
+sci-libs/acml
+
+# Kent Fredric <kentnl@gentoo.org> (18 Mar 2017)
+# ExtUtils::MakeMaker 7.18+ Block
+# Masked until strictly needed to avoid accidental conflicts later
+# And will be unmasked sometime after dev-lang/perl-5.26 ships
+>=perl-core/ExtUtils-MakeMaker-7.180.0
+>=virtual/perl-ExtUtils-MakeMaker-7.180.0
+>=virtual/perl-ExtUtils-Command-7.180.0
+>=dev-perl/Net-Twitter-4.10.420
+
+# Michael Palimaka <kensington@gentoo.org> (18 Mar 2017)
+# Broken. Dead upstream. Unmaintained.
+# Masked for removal in 30 days.
+net-misc/apt-proxy
+
+# Michael Palimaka <kensington@gentoo.org> (18 Mar 2017)
+# Broken. Dead upstream. Unmaintained.
+# Masked for removal in 30 days. Bug #604836.
+gnome-extra/zeitgeist-datasources
+
+# Michael Palimaka <kensington@gentoo.org> (18 Mar 2017)
+# Fails to run. Ancient. Unmaintained. Dead upstream.
+# Masked for removal in 30 days. Bug #605120.
+net-p2p/phxd
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (17 Mar 2017)
+# Requires obsolete gstreamer:0.10, bug 604686
+# Removal in 30 days
+dev-perl/GStreamer
+dev-perl/GStreamer-Interfaces
+
+# Patrice Clement <monsieurp@gentoo.org> (18 Mar 2017)
+# Does not compile anymore. Upstream dead.
+# Removal in 30 days.
+dev-java/swidgets
+
+# Michael Palimaka <kensington@gentoo.org> (13 Mar 2017)
+# Testing x32 patch backports from 3.9
+=dev-util/cmake-3.7.2-r10
+
+# David Seifert <soap@gentoo.org> (12 Mar 2017)
+# Bundles half of glibc, unmaintained upstream,
+# not really necessary anymore with 64-bit flash
+# Masked for removal in 30 days. Bug #609258.
+www-plugins/nspluginwrapper
+
+# David Seifert <soap@gentoo.org> (12 Mar 2017)
+# Awful codebase, lots of widechars stored in chars,
+# invokes undefined behaviour, last release in 2004.
+# Masked for removal in 30 days. Bug #593942, #593976.
+app-text/uvconv
+app-i18n/x-unikey
+
+# Michael Palimaka <kensington@gentoo.org> (11 Mar 2017)
+# Fails to build. Dead upstream.
+# Masked for removal in 30 days. Bug #592184.
+dev-scheme/schoca
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (11 Mar 2017)
+# Fails since upgrade to dev-lang/perl-5.12 (!).
+# Removal in 30 days. Bug 336898.
+dev-perl/Net-Google-SafeBrowsing-UpdateRequest
+dev-perl/Mail-SpamAssassin-Plugin-GoogleSafeBrowsing
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (11 Mar 2017)
+# Dead upstream; the library has been picked up by
+# dev-perl/Text-BibTeX and is further developed there.
+# Please uninstall dev-libs/btparse and re-build your
+# application against >=dev-perl/Text-BibTeX-0.780.0-r1
+# (this should happen automatically with tellico, the
+# only reverse dependency in the main tree).
+# Removal in 30 days. Bug 599710.
+dev-libs/btparse
+
+# Patrice Clement <monsieurp@gentoo.org> (11 Mar 2017)
+# Upstream dead: no update since 2003. Ebuild is outdated and buggy.
+# Removal in 30 days. Bug #279088
+dev-java/jusb
+
+# Anthony G. Basile <blueness@gentoo.org> (11 Mar 2017)
+# Masked for removal in 30 days.  No longer supported
+# upstream.  Use net-proxy/obfs4proxy instread.
+net-proxy/obfsproxy
+
+# Gnome Team <gnome@gentoo.org> (08 Mar 2017)
+# GNOME 3.24 mask (#611270)
+>=x11-themes/adwaita-icon-theme-3.23
+>=app-accessibility/at-spi2-core-2.23
+>=dev-libs/atk-2.23
+>=dev-cpp/atkmm-2.25
+>=sys-apps/baobab-3.23
+>=media-gfx/eog-3.23
+>=www-client/epiphany-3.23
+>=gnome-extra/evolution-data-server-3.23
+>=gnome-base/gdm-3.23
+>=sci-geosciences/geocode-glib-3.23
+>=dev-libs/gjs-1.47
+>=dev-libs/glib-2.51
+>=dev-cpp/glibmm-2.51
+>=x11-themes/gnome-backgrounds-3.23
+>=gnome-extra/gnome-boxes-3.23
+>=gnome-extra/gnome-calculator-3.23
+>=gnome-extra/gnome-calendar-3.23
+>=gnome-extra/gnome-clocks-3.23
+>=gnome-base/gnome-control-center-3.23
+>=gnome-base/gnome-desktop-3.23
+>=sys-apps/gnome-disk-utility-3.23
+>=gnome-extra/gnome-logs-3.23
+>=sci-geosciences/gnome-maps-3.23
+>=net-libs/gnome-online-accounts-3.23
+>=media-gfx/gnome-photos-3.23
+>=gnome-base/gnome-session-3.23
+>=gnome-base/gnome-settings-daemon-3.23
+>=gnome-base/gnome-shell-3.23
+>=gnome-extra/gnome-shell-extensions-3.23
+>=gnome-extra/gnome-software-3.23
+>=gnome-extra/gnome-system-monitor-3.23
+>=x11-terms/gnome-terminal-3.23
+>=dev-libs/gobject-introspection-1.51
+>=gnome-base/gsettings-desktop-schemas-3.23
+>=app-text/gspell-1.3
+>=net-libs/gtk-vnc-0.7
+>=x11-libs/gtksourceview-3.23
+>=gnome-base/gvfs-1.31
+>=dev-libs/libgee-0.19
+>=gnome-base/libgtop-2.35
+>=net-libs/libsoup-2.57
+>=x11-wm/mutter-3.23
+>=gnome-base/nautilus-3.23
+>=app-accessibility/orca-3.23
+>=dev-cpp/pangomm-2.41
+>=media-video/totem-3.23
+>=app-misc/tracker-1.11
+>=dev-lang/vala-0.35
+>=x11-libs/vte-0.47
+>=gnome-base/dconf-editor-3.23
+>=dev-util/devhelp-3.23
+>=mail-client/evolution-3.23
+>=dev-vcs/gitg-3.23
+>=gnome-extra/gnome-builder-3.23
+>=games-board/gnome-mines-3.23
+>=media-sound/gnome-music-3.23
+>=games-arcade/gnome-nibbles-3.23
+>=games-puzzle/hitori-3.23
+>=games-puzzle/lightsoff-3.23
+>=net-irc/polari-3.23
+>=net-misc/rygel-0.33
+>=games-puzzle/swell-foop-3.23
+
+# Alexis Ballier <aballier@gentoo.org> (03 Mar 2017)
+# Beta release, some packages fail to build.
+>=dev-lang/ocaml-4.05.0_beta2
+>=dev-ml/camlp4-4.05
+>=dev-ml/ppx_tools-5.0.4.05.0
+
+# Eray Aslan <eras@gentoo.org> (01 Mar 2017)
+# Mask experimental software
+=mail-mta/postfix-3.3*
+
+# Davide Pesavento <pesa@gentoo.org> (25 Feb 2017)
+# Library name changed in 2.10, breaking many consumers.
+# Needs full revdep testing.
+>=dev-python/qscintilla-python-2.10
+>=x11-libs/qscintilla-2.10
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (19 Feb 2017)
+# Dead upstream for >3 years. Closed source. Bundles outdated
+# libraries that certainly have known security issues (e.g.,
+# icu-36 (!) or curl). Use at your own risk.
+app-text/acroread
+media-fonts/acroread-asianfonts
+
+# Michael Palimaka <kensington@gentoo.org> (19 Feb 2017)
+# Revdeps need patching.
+>=media-gfx/libopenraw-0.1.0
+
+# Mart Raudsepp <leio@gentoo.org> (16 Feb 2017)
+# Old gstreamer 0.10 version, which is security vulnerable.
+# Use gstreamer:1.0 with media-plugins/gst-plugins-libav
+# instead (despite the name, it uses media-video/ffmpeg too).
+# Please keep this mask entry until gstreamer:0.10 is still
+# in tree or at least gets an affecting GLSA from bug 601354
+# Bug #594878.
+media-plugins/gst-plugins-ffmpeg
+
+# Kent Fredric <kentnl@gentoo.org> (04 Feb 2017)
+# Unsecure versions that have been only restored to tree
+# to resolve compatibility problems with mail-filter/amavisd-new
+# Use with caution due to these being removed for CVE-2016-1251
+# Bug: #601144
+# Bug: #604678
+<dev-perl/DBD-mysql-4.41.0
+
+# Alon Bar-Lev <alonbl@gentoo.org> (06 Feb 2017)
+# Needs openssl-1.1
+>=dev-libs/opencryptoki-3.6
+
+# Andreas Sturmlechner <asturm@gentoo.org> (03 Feb 2017)
+# Drops USE=firebird because it requires not yet packaged Firebird-3.0.
+# Affects libreoffice-base.
+# Bug #586634.
+=app-office/libreoffice-5.3.0.3
+
+# Bernard Cafarelli <voyageur@gentoo.org> (30 Jan 2017)
+# Alpha release with new features, masked for testing
+=app-text/tesseract-4.00.00_alpha*
+
+# Michał Górny <mgorny@gentoo.org> (26 Jan 2017)
+# Pre-release, masked for testing. Major changes since 2.0.4,
+# including dropped support for BlueZ 4.
+=net-wireless/blueman-2.1_alpha*
+
+# Yixun Lan <dlan@gentoo.org> (16 Jan 2017)
+# Masked, Vulnerable due to RGW Denial of Service (bug #598206)
+# We mask it instead of removing them, due user may need them while
+# upgrade from old versions (<0.94.x)
+<sys-cluster/ceph-10.2.3-r1
+
+# Jeroen Roovers <jer@gentoo.org> (12 Jan 2017)
+# Use x11-drivers/nvidia-drivers[tools] instead.
+media-video/nvidia-settings
+
+# Michael Orlitzky <mjo@gentoo.org> (07 Jan 2017)
+# This package has some dangerous quality and security issues, but
+# people may still find it useful. It is masked to prevent accidental
+# use. See bugs 603346 and 604998 for more information.
+app-admin/amazon-ec2-init
+
+# Mart Raudsepp <leio@gentoo.org> (07 Jan 2017)
+# No releases of this API version since March 2001, abandoned
+# in favour of glib:2 for 14 years; bug 604966.
+# Removed at 2017-02-08, mask kept for longer display to users.
+dev-libs/glib:1
+
+# Mart Raudsepp <leio@gentoo.org> (06 Jan 2017)
+# No releases of this API version since April 2001, abandoned
+# in favour of gtk+:2 for 14 years; bug 604862.
+# Removed at 2017-02-08, mask kept for longer display to users.
+x11-libs/gtk+:1
+
+# Robin H. Johnson <robbat2@gentoo.org> (05 Jan 2017)
+# Masking for testing
+=app-emulation/ganeti-2.16*
+=app-emulation/ganeti-2.17*
+
+# Markos Chandras <hwoarang@gentoo.org> (10 Dec 2016)
+# Reverse dependencies need testing, wrt bug #580760
+>=net-libs/libtorrent-rasterbar-1.1.1
+
+# Kent Fredric (19 Nov 2016)
+# virtual/perl-MathBigInt-1.999.726+ Mask Block
+# Will likely not be unmasked until future Perls
+# include equivalent versions to avoid complications with virtuals
+>=virtual/perl-Math-BigInt-1.999.726
+>=perl-core/Math-BigInt-1.999.726
+>=dev-perl/Math-BigInt-GMP-1.600.0
+
+# Robin H. Johnson <robbat2@gentoo.org> (18 Nov 2016)
+# Depends on slotted lua
+=dev-db/redis-3.2.5-r1
+=dev-db/redis-3.2.5-r2
+=dev-db/redis-3.2.6-r1
+=dev-db/redis-3.2.6-r2
+
+# Ian Stakenvicius (17 Nov 2016)
+# Does not honour LD_LIBRARY_PATH set in the environment, causing
+# all mozilla packages to fail in src_install() when xpcshell is
+# called in ${WORKDIR}, #580726
+# Segfaults when creating directories #578582
+=sys-apps/sandbox-2.11*
+
+# Michał Górny <mgorny@gentoo.org> (17 Nov 2016)
+# New version masked for testing. It supports source-window buffer size
+# over 2G but it 'currently performs 3-5% slower and has 1-2% worse
+# compression'.
+>=dev-util/xdelta-3.1.0
+
+# Gilles Dartiguelongue <eva@gentoo.org> (12 Nov 2016)
+# Keep shotwell development series masked.
+>=media-gfx/shotwell-0.25
+
+# Tim Harder <radhermit@gentoo.org> (03 Nov 2016)
+# Masked for testing
+=sys-fs/fuse-3.0.0*
+
+# Julian Ospald <hasufell@gentoo.org> (21 Jul 2013)
+# Mask all unfetchable versions and those with tons of random
+# bugs and segfaults (all). Don't ask for a version bump unless
+# there is a working release.
+sci-geosciences/googleearth
+
+# Denis Dupeyron <calchan@gentoo.org> (12 Sep 2016)
+# Masked for testing, see bug #588894.
+=x11-misc/light-locker-1.7.0-r1
+
+# Lars Wendler <polynomial-c@gentoo.org> (26 Aug 2016)
+# Masked while being tested and reverse deps aren't fully compatible
+=dev-libs/openssl-1.1*
+
+# Brian Evans <grknight@gentoo.org> (18 Aug 2016)
+# Mask new MariaDB alphas for testing
+>=dev-db/mariadb-10.2.0
+
+# Mike Gilbert <floppym@gentoo.org> (07 Aug 2016)
+# Fails to switch cpufreq governor.
+# https://bugs.gentoo.org/590780
+~sys-power/cpupower-4.7.0
+
+# Michał Górny <mgorny@gentoo.org> (7 Aug 2016)
+# Issue with thunar detailed view
+# Masked for more restrictive testing.
+=xfce-base/exo-0.11.1
+
+# Michał Górny <mgorny@gentoo.org> (18 Jul 2016)
+# Pre-release of a complete rewrite, provided for early testing. Not all
+# functionality is provided yet. Use --pretend to make sure correct
+# files will be removed.
+>=app-admin/eclean-kernel-1.99
+
+# Kent Fredric <kentnl@gentoo.org> (16 Jul 2016)
+# Test2/Test-Simple-1.301 Block
+# Radically changed upstream and is critical to all Perl modules.
+# Masked for extended testing.
+# Will likely not be unmasked till equivalent versions ship in Perl itself.
+>=perl-core/Test-Simple-1.301.0
+>=virtual/perl-Test-Simple-1.301.0
+dev-perl/Test2-Suite
+>=dev-perl/Data-Validate-Domain-0.120.0
+dev-perl/Test2-Plugin-NoWarnings
+dev-perl/Params-ValidationCompiler
+>=dev-perl/DateTime-Locale-1.60.0
+>=dev-perl/DateTime-TimeZone-2.20.0
+>=dev-perl/DateTime-1.370.0
+>=dev-perl/DateTime-Format-Strptime-1.710.0
+>=dev-perl/Log-Dispatch-2.590.0
+
+# Aaron Bauman <bman@gentoo.org> (30 Jun 2016)
+# Unpatched security vulnerability per bug #509920
+www-apps/egroupware
+
+# Aaron Bauman <bman@gentoo.org> (26 Jun 2016)
+# Unpatched security vulnerability per bug #475120
+<media-video/motion-4.0.1-r1
+
+# Chris Reffett <creffett@gentoo.org> (25 May 2016)
+# The webkit-gtk:4 backend for Xiphos has known text display issues.
+# Use at your own risk.
+=app-text/xiphos-4.0.4-r1
+
+# Lars Wendler <polynomial-c@gentoo.org> (2 May 2016)
+# Broken reverse deps. At least one header file has been moved around.
+>=media-gfx/imagemagick-7.0.1.0
+
+# Richard Freeman <rich0@gentoo.org> (16 Apr 2016)
+# Masked for extended testing, and porting of openrc scripts
+# if necessary.
+>=media-tv/mythtv-0.28
+>=media-plugins/mythplugins-0.28
+>=www-apps/mythweb-0.28
+
+# James Le Cuirot <chewi@gentoo.org> (03 Apr 2016)
+# Masking Spring Framework for the time being as 3.2.4 is old, has
+# multiple vulnerabilities, and we're not likely to update it
+# soon. Hopefully we can revisit it when the Maven stuff works out.
+dev-java/spring-aop
+dev-java/spring-beans
+dev-java/spring-core
+dev-java/spring-expression
+dev-java/spring-instrument
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (03 Apr 2016)
+# Can exhaust all available memory depending on task
+# but is made available for experts who heed this warning
+# as newer versions produce different output. Contact
+# the proxied maintainer Matthew Brewer <tomboy64@sina.cn>
+# for questions.
+<=media-gfx/slic3r-1.1.9999
+
+# José María Alonso <nimiux@gentoo.org> (24 Mar 2016)
+# Fails to build dev-lisp/sbcl-1.3.3 #563812
+=dev-lisp/asdf-3.1.7
+=dev-lisp/uiop-3.1.7
+
+# Aaron Bauman <bman@gentoo.org> (19 Mar 2016)
+# Unpatched security vulnerability per bug #512356.
+=app-forensics/chkrootkit-0.49
+
+# James Le Cuirot <chewi@gentoo.org> (07 Feb 2016)
+# Masked until 2.0 final arrives, which hopefully won't depend on
+# commons-dbcp:0 as that requires Java 6. Note that the 2.0 in the
+# tree should have actually been 2.0_beta1. There are no revdeps.
+dev-java/jcs
+
+# Andreas K. Hüttel <dilfridge@gentoo.org> (9 Jan 2016)
+# Errorneously added. Is already in perl-core. Please uninstall.
+dev-perl/ExtUtils-Constant
+
+# Andrey Grozin <grozin@gentoo.org> (04 Jan 2016)
+# Needs a bump and substantial ebuild rewrite
+=sci-mathematics/reduce-20110414-r1
+
+# Michał Górny <mgorny@gentoo.org> (30 Oct 2015)
+# Uses unsafe ioctls that could result in data corruption. Upstream
+# is working on replacing them in the wip/dedup-syscall branch.
+# Keep it masked until they are done. sys-fs/duperemove is
+# the suggested replacement for the meantime.
+sys-fs/bedup
+
+# Ian Delaney <idella4@gentoo.org> (27 Oct 2015)
+# fails to build dev-lisp/sbcl-1.2.16 #563812
+# mgorny: dev-lisp/uiop as version-bound revdep
+=dev-lisp/asdf-3.1.6
+=dev-lisp/uiop-3.1.6
+
+# Justin Lecher <jlec@gentoo.org> (23 Oct 2015)
+# Breaking changes #563540
+=app-text/ghostscript-gpl-9.18
+
+# Mike Pagano <mpagano@gentoo.org> (2 Oct 2015)
+# A regression in kernel 4.1.9 could lead to a system
+# lockup.  This has been fixed in gentoo-sources-4.1.9-r1
+# and the hope is that this patch will make it to 4.1.10
+# Expires (2 Oct 2017)
+=sys-kernel/vanilla-sources-4.1.9
+=sys-kernel/gentoo-sources-4.1.9
+
+# Andreas K. Huettel <dilfridge@gentoo.org> (19 Sep 2015)
+# Masked for security reasons, bugs 516044, 552644
+# Keeping it in the tree for now for users who cannot upgrade
+# (commercial product, separate licenses for major versions)
+=app-emulation/vmware-workstation-9*
+=app-emulation/vmware-modules-271*
+
+# Lars Wendler <polynomial-c@gentoo.org> (09 Sep 2015)
+# Masked for testing.
+>=net-fs/samba-4.6.0_rc1
+
+# Lars Wendler <polynomial-c@gentoo.org> (20 Aug 2015)
+# Releases are not from original upstream but from a fork.
+# Masked as requested by vapier.
+~net-misc/iputils-20160308
+
+# Sebastian Pipping <sping@gentoo.org> (8 Aug 2015)
+# Upcoming, too young to go into testing unmasked
+dev-libs/iniparser:4
+
+# Davide Pesavento <pesa@gentoo.org> (23 Jul 2015)
+# Standalone version of qtwebkit from the 2.3 upstream branch.
+# Needs revdep testing. Bug #388207.
+=dev-qt/qtwebkit-4.10*
+
+# Ben de Groot <yngwin@gentoo.org> (20 Jul 2015)
+# Version bump is a WIP, see bug #524242
+# It works (except USE=vamp) but is not up to Gentoo standards yet
+>=media-sound/audacity-2.1.1
+
+# Patrick Lauer <patrick@gentoo.org> (14 Jun 2015)
+# Has race condition / failure modes that make systems unusable
+# See #551724 and duplicates
+=sys-fs/udev-init-scripts-29
+
+# Justin Lecher <jlec@gentoo.org> (28 Feb 2015)
+# Unfixed security problems
+# No upstream support anymore
+# CVE-2015-{0219,0220,0221,0222,5145}
+# #536586
+# #554864
+=dev-python/django-1.4*
+=dev-python/django-1.5*
+=dev-python/django-1.6*
+# Not supported by any django version upstream supports
+dev-python/south
+
+# Tony Vroon <chainsaw@gentoo.org> (5 Jan 2015)
+# Asterisk 13 is an LTS release but has not seen
+# sufficient releases to be considered ready for
+# production usage. You are welcome to have a go
+# but please be careful.
+=net-misc/asterisk-13*
+
+# Jeroen Roovers <jer@gentoo.org> (12 Dec 2014)
+# The 96 and 173 branches are no longer supported and remain vulnerable to
+# CVE-2014-8298 (bug #532342). You may be able to mitigate the vulnerability by
+# disabling GLX indirect rendering protocol support on the X server.
+<x11-drivers/nvidia-drivers-304
+
+# Robin H. Johnson <robbat2@gentoo.org> (04 Aug 2014)
+# Masked for testing, presently fails upstream testsuite:
+# FAIL:07:02:35 (00:00:00) db_dump/db_load(./TESTDIR.3/recd001.db:child killed: kill signal): expected 0, got 1
+# FAIL:07:02:35 (00:00:00) Dump/load of ./TESTDIR.3/recd001.db failed.
+# FAIL:07:02:35 (00:00:00) db_verify_preop: expected 0, got 1
+=sys-libs/db-6.1*
+=sys-libs/db-6.2*
+
+# Ulrich Müller <ulm@gentoo.org> (15 Jul 2014)
+# Permanently mask sys-libs/lib-compat and its reverse dependencies,
+# pending multiple security vulnerabilities and QA issues.
+# See bugs #515926 and #510960.
+sys-libs/lib-compat
+sys-libs/lib-compat-loki
+games-action/mutantstorm-demo
+games-action/phobiaii
+games-fps/rtcw
+games-fps/unreal
+games-strategy/heroes3
+games-strategy/heroes3-demo
+games-strategy/smac
+sys-block/afacli
+
+# Mikle Kolyada <zlogene@gentoo.org> (27 Jun 2014)
+# Masked for proper testing. (Major updates in the code).
+~dev-perl/PortageXS-0.2.12
+
+# Hans de Graaff <graaff@gentoo.org> (1 Jun 2014)
+# Mask new rubinius version for testing. This needs more work
+# to fully integrate it in our Gentoo ruby handling. Volunteers
+# welcome.
+=dev-lang/rubinius-3*
+
+# Tom Wijsman <TomWij@gentoo.org> (03 May 2014)
+# Needs to be further tested and revised by both Java and Ruby herds.
+>=dev-java/jruby-1.7.12
+dev-ruby/bitescript
+dev-ruby/duby
+dev-ruby/weakling
+
+# Matti Bickel <mabi@gentoo.org> (22 Apr 2014)
+# Masked slotted lua for testing
+# William Hubbs <williamh@gentoo.org> (07 Aug 2016)
+# Taking this mask since Mabi is retired
+# Rafael Martins <rafaelmartins@gentoo.org> (04 Dec 2016)
+# Adding Lua 5.3 to mask
+app-eselect/eselect-lua
+=dev-lang/lua-5.1.5-r2
+=dev-lang/lua-5.1.5-r100
+=dev-lang/lua-5.2.3
+=dev-lang/lua-5.2.3-r1
+=dev-lang/lua-5.3.3
+
+# Sergey Popov <pinkbyte@gentoo.org> (20 Mar 2014)
+# Security mask of vulnerable versions, wrt bug #424167
+<net-nds/openldap-2.4.35
+
+# Mike Gilbert <floppym@gentoo.org> (04 Mar 2014)
+# Dev channel releases are only for people who are developers or want more
+# experimental features and accept a more unstable release.
+www-plugins/chrome-binary-plugins:unstable
+
+# Justin Lecher <jlec@gentoo.org> (14 Oct 2013)
+# Seems to break all deps - API change?
+>=sci-libs/metis-5
+
+# Sergey Popov <pinkbyte@gentoo.org> (18 Sep 2013)
+# Mask development releases of botan:
+# - causes many API breakages
+# - do not compile in some USE-flag combinations
+# - requires at least gcc 4.7(and possibly even 4.8 for some features)
+>=dev-libs/botan-1.11.0
+
+# Michael Weber <xmw@gentoo.org> (17 Jul 2013)
+# Upstream next versions
+>=sys-boot/raspberrypi-firmware-1_pre
+
+# Chí-Thanh Christopher Nguyễn <chithanh@gentoo.org> (25 Jun 2013)
+# Mask new ptlib/opal for breakage, tracked in bug #474742
+# Lars Wendler <polynomial-c@gentoo.org> (29 Apr 2014)
+# Adjusted mask so newer versions get covered as well.
+>=net-libs/ptlib-2.12.0
+>=net-libs/opal-3.12.0
+
+# Richard Freeman <rich0@gentoo.org> (24 Mar 2013)
+# Contains known buffer overflows.  Package generally works
+# but should not be fed untrusted input (eg from strangers).
+# Masked to ensure users are aware before they install.
+app-text/cuneiform
+
+# Samuli Suominen <ssuominen@gentoo.org> (06 Mar 2012)
+# Masked for testing since this is known to break nearly
+# every reverse dependency wrt bug 407091
+>=dev-lang/lua-5.2.0
+
+# Samuli Suominen <ssuominen@gentoo.org> (30 Oct 2011)
+# Masked for security bug #294253, use only at your own risk!
+=media-libs/fmod-3*
+
+# Diego E. Pettenò <flameeyes@gentoo.org> (03 Jan 2009)
+# These packages are not supposed to be merged directly, instead
+# please use sys-devel/crossdev to install them.
+dev-libs/cygwin
+dev-util/mingw-runtime
+dev-util/mingw64-runtime
+dev-util/w32api
+sys-libs/newlib
+dev-embedded/avr-libc
+
+# Chris Gianelloni <wolf31o2@gentoo.org> (03 Mar 2008)
+# Masking due to security bug #194607 and security bug #204067
+games-fps/doom3
+games-fps/doom3-cdoom
+games-fps/doom3-chextrek
+games-fps/doom3-data
+games-fps/doom3-demo
+games-fps/doom3-ducttape
+games-fps/doom3-eventhorizon
+games-fps/doom3-hellcampaign
+games-fps/doom3-inhell
+games-fps/doom3-lms
+games-fps/doom3-mitm
+games-fps/doom3-roe
+games-fps/quake4-bin
+games-fps/quake4-data
+games-fps/quake4-demo
+
+# <klieber@gentoo.org> (01 Apr 2004)
+# The following packages contain a remotely-exploitable
+# security vulnerability and have been hard masked accordingly.
+#
+# Please see https://bugs.gentoo.org/show_bug.cgi?id=44351 for more info
+#
+games-fps/unreal-tournament-goty
+games-fps/unreal-tournament-strikeforce
+games-fps/unreal-tournament-bonuspacks
+games-fps/aaut

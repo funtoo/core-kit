@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile install prepare test
+DEPEND=app-portage/portage-utils app-arch/xz-utils
+DESCRIPTION=PAM base configuration files
+EAPI=5
+HOMEPAGE=http://www.gentoo.org/proj/en/base/pam/
+IUSE=consolekit cracklib debug gnome-keyring minimal mktemp +nullok pam_krb5 pam_ssh passwdqc securetty selinux +sha512 systemd
+KEYWORDS=*
+LICENSE=GPL-2
+PDEPEND=consolekit? ( sys-auth/consolekit ) gnome-keyring? ( >=gnome-base/gnome-keyring-2.32[pam] )
+RDEPEND=|| ( >=sys-libs/pam-1.1.3 ( sys-auth/openpam || ( sys-freebsd/freebsd-pam-modules sys-netbsd/netbsd-pam-modules ) ) ) cracklib? ( sys-libs/pam[cracklib] ) mktemp? ( sys-auth/pam_mktemp ) pam_krb5? ( || ( >=sys-libs/pam-1.1.3 sys-auth/openpam ) >=sys-auth/pam_krb5-4.3 ) pam_ssh? ( sys-auth/pam_ssh ) passwdqc? ( >=sys-auth/pam_passwdqc-1.0.4 ) selinux? ( sys-libs/pam[selinux] ) sha512? ( >=sys-libs/pam-1.1.3 ) systemd? ( >=sys-apps/systemd-204[pam] ) !<sys-apps/shadow-4.1.5-r1 !<sys-freebsd/freebsd-pam-modules-6.2-r1 !<sys-libs/pam-0.99.9.0-r1
+RESTRICT=binchecks
+SLOT=0
+SRC_URI=mirror://funtoo/pambase/pambase-20150213.tar.xz
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=aff66875491b09bcdd00ce7123df201b

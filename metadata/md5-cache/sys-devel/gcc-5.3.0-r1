@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst postrm prepare setup unpack
+DEPEND=sys-libs/zlib nls? ( sys-devel/gettext ) virtual/libiconv !sys-devel/gcc:5.3 >=sys-devel/bison-1.875 >=sys-devel/flex-2.5.4 elibc_glibc? ( >=sys-libs/glibc-2.8 ) >=sys-devel/binutils-2.18
+DESCRIPTION=The GNU Compiler Collection
+EAPI=5
+IUSE=ada go +fortran objc objc++ openmp cxx nls vanilla doc multilib altivec libssp hardened graphite sanitize
+KEYWORDS=*
+LICENSE=GPL-3+ LGPL-3+ || ( GPL-3+ libgcc libstdc++ gcc-runtime-library-exception-3.1 ) FDL-1.3+
+PDEPEND=>=sys-devel/gcc-config-1.5 >=sys-devel/libtool-2.4.3 elibc_glibc? ( >=sys-libs/glibc-2.8 )
+RDEPEND=sys-libs/zlib nls? ( sys-devel/gettext ) virtual/libiconv !sys-devel/gcc:5.3
+RESTRICT=strip
+SLOT=5.3.0
+SRC_URI=mirror://gnu/gcc/gcc-5.3.0/gcc-5.3.0.tar.bz2 http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz http://www.mpfr.org/mpfr-3.1.4/mpfr-3.1.4.tar.xz mirror://gnu/gmp/gmp-6.1.0.tar.xz mirror://funtoo/gcc/gcc-5.3.0-patches-1.1.tar.bz2 hardened? ( mirror://funtoo/gcc/gcc-4.4.3-specs-0.2.0.tar.bz2 mirror://funtoo/gcc/gcc-5.3.0-piepatches-v0.6.5.tar.bz2 ) graphite? ( http://www.bastoul.net/cloog/pages/download/count.php3?url=./cloog-0.18.4.tar.gz http://isl.gforge.inria.fr/isl-0.16.1.tar.bz2 ) ada? ( amd64? ( mirror://funtoo/gcc/gnat-gpl-2014-x86_64-linux-bin.tar.gz ) x86? ( mirror://funtoo/gcc/gnat-gpl-2014-x86-linux-bin.tar.gz ) )
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	165fc17c38d1b11dac2008280dab6e80	pax-utils	4c2654a34ebe732e85fda354f6ee642f	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=22dc543bf99efacc3d034d8d64e545b7

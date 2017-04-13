@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst prepare setup test
+DEPEND=clvm? ( cman? ( =sys-cluster/cman-3* ) corosync? ( sys-cluster/corosync ) openais? ( sys-cluster/openais ) =sys-cluster/libdlm-3* ) readline? ( sys-libs/readline ) udev? ( >=virtual/libudev-208:=[static-libs?] ) virtual/pkgconfig >=sys-devel/binutils-2.20.1-r1 sys-devel/autoconf-archive static? ( selinux? ( sys-libs/libselinux[static-libs] ) udev? ( >=virtual/libudev-208:=[static-libs] ) >=sys-apps/util-linux-2.16[static-libs] ) >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 virtual/pkgconfig virtual/pkgconfig
+DESCRIPTION=User-land utilities for LVM2 (device-mapper) software.
+EAPI=5
+HOMEPAGE=http://sources.redhat.com/lvm2/
+IUSE=readline +static static-libs systemd clvm cman corosync +lvm1 lvm2create_initrd openais selinux udev +thin device-mapper-only
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=clvm? ( cman? ( =sys-cluster/cman-3* ) corosync? ( sys-cluster/corosync ) openais? ( sys-cluster/openais ) =sys-cluster/libdlm-3* ) readline? ( sys-libs/readline ) udev? ( >=virtual/libudev-208:=[static-libs?] ) >=sys-apps/baselayout-2.2 !<sys-apps/openrc-0.11 !<sys-fs/cryptsetup-1.1.2 !!sys-fs/clvm !!sys-fs/lvm-user >=sys-apps/util-linux-2.16 lvm2create_initrd? ( sys-apps/makedev ) thin? ( >=sys-block/thin-provisioning-tools-0.3.0 )
+REQUIRED_USE=device-mapper-only? ( !clvm !cman !corosync !lvm1 !lvm2create_initrd !openais !thin ) systemd? ( udev )
+SLOT=0
+SRC_URI=ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.145.tgz ftp://sources.redhat.com/pub/lvm2/old/LVM2.2.02.145.tgz
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	flag-o-matic	35067884fbff37bc0c8e7421c5315558	libtool	e32ea84bf82cf8987965b574672dba93	linux-info	ca370deef9d44125d829f2eb6ebc83e0	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	165fc17c38d1b11dac2008280dab6e80	systemd	ec2e9154031d942186c75c0aabb41900	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	udev	0498b698e76cdc94930b59a00c73dd9c	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=fb7288038d71f68a8f2b97a4533f0537

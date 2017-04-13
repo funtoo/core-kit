@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual for utilities to manage Linux kernel modules
+EAPI=2
+KEYWORDS=*
+RDEPEND=sys-apps/kmod[tools]
+SLOT=0
+_md5_=6346f6d04ce5f556cbf87e3e6a273421

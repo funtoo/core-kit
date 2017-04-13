@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install setup test unpack
+DEPEND=>=sys-devel/gcc-3.4.4 arm? ( >=sys-devel/binutils-2.16.90 >=sys-devel/gcc-4.1.0 ) x86? ( >=sys-devel/gcc-4.3 ) amd64? ( >=sys-devel/binutils-2.19 >=sys-devel/gcc-4.3 ) ppc? ( >=sys-devel/gcc-4.1.0 ) ppc64? ( >=sys-devel/gcc-4.1.0 ) >=sys-devel/binutils-2.15.94 >=sys-kernel/linux-headers-2.6.9 >=sys-devel/gcc-config-1.3.12 >=app-misc/pax-utils-0.1.10 virtual/os-headers nls? ( sys-devel/gettext ) >=sys-apps/sandbox-1.2.18.1-r2 !<sys-apps/portage-2.1.2 selinux? ( sys-libs/libselinux ) >=sys-kernel/linux-headers-2.6.39 >=sys-devel/libtool-2.4-r4 !vanilla? ( >=sys-libs/timezone-data-2007c ) >=app-portage/elt-patches-20170317 sys-devel/gnuconfig
+DESCRIPTION=GNU libc6 (also called glibc2) C library
+EAPI=0
+HOMEPAGE=http://www.gnu.org/software/libc/libc.html
+IUSE=debug gd glibc-omitfp hardened multilib nls selinux profile vanilla crosscompile_opts_headers-only
+KEYWORDS=~*
+LICENSE=LGPL-2
+RDEPEND=!sys-kernel/ps3-sources nls? ( sys-devel/gettext ) selinux? ( sys-libs/libselinux ) vanilla? ( !sys-libs/timezone-data ) !vanilla? ( sys-libs/timezone-data )
+RESTRICT=strip
+SLOT=2.2
+SRC_URI=mirror://gnu/glibc/glibc-2.13.tar.bz2 ftp://sources.redhat.com/pub/glibc/releases/glibc-2.13.tar.bz2 ftp://sources.redhat.com/pub/glibc/snapshots/glibc-2.13.tar.bz2 mirror://gentoo/glibc-2.13.tar.bz2 mirror://gnu/glibc/glibc-ports-2.13.tar.bz2 ftp://sources.redhat.com/pub/glibc/releases/glibc-ports-2.13.tar.bz2 ftp://sources.redhat.com/pub/glibc/snapshots/glibc-ports-2.13.tar.bz2 mirror://gentoo/glibc-ports-2.13.tar.bz2 mirror://gentoo/glibc-2.13-patches-11.tar.bz2 http://dev.gentoo.org/~vapier/dist/glibc-2.13-patches-11.tar.bz2 http://dev.gentoo.org/~azarah/glibc/glibc-2.13-patches-11.tar.bz2
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	flag-o-matic	35067884fbff37bc0c8e7421c5315558	gnuconfig	3920de1188fc7bfee873515453ed1d10	libtool	e32ea84bf82cf8987965b574672dba93	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=6b166bde05a516270bcced16c377ab63

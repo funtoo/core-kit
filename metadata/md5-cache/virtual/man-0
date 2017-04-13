@@ -1,0 +1,6 @@
+DEFINED_PHASES=-
+EAPI=3
+KEYWORDS=*
+RDEPEND=sys-apps/man-db
+SLOT=0
+_md5_=acd10954eb384e5e373e94196ad4d09d

@@ -1,0 +1,16 @@
+diff -ur mcelog-129/Makefile mcelog-129.new/Makefile
+--- mcelog-129/Makefile	2016-01-05 09:47:22.482909668 -0600
++++ mcelog-129.new/Makefile	2016-01-05 09:49:12.098884522 -0600
+@@ -1,4 +1,11 @@
+-CFLAGS := -g -Os
++CC ?= gcc
++
++# set to 1 to enable debug flags
++DEBUG = 0
++ifeq ($(DEBUG),1)
++CFLAGS += -g -Os
++endif
++
+ prefix := /usr
+ etcprefix :=
+ MANDIR := ${prefix}/share/man

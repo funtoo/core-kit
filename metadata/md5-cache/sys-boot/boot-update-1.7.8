@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm preinst prerm setup unpack
+DEPEND=python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)]
+DESCRIPTION=Funtoo Core Boot Framework for global boot loader configuration
+EAPI=5
+HOMEPAGE=http://www.funtoo.org/Package:Boot-Update
+IUSE=python_targets_python2_7
+LICENSE=GPL-3
+RDEPEND=python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python3_4(-),-python_single_target_python3_5(-),-python_single_target_python3_6(-),python_single_target_python2_7(+)] >=sys-boot/grub-2.00-r5[binfont]
+REQUIRED_USE=python_targets_python2_7
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://www.github.com/funtoo/boot-update/tarball/1.7.8 -> boot-update-1.7.8.tar.gz http://www.memtest.org/download/5.01/memtest86+-5.01.bin.gz
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	ea24b511b0ad59831d0151aa634dfad2	multilib	165fc17c38d1b11dac2008280dab6e80	python-single-r1	c3e54dd0dc1e70c6252f2551a55bf053	python-utils-r1	a166d0f5815d7f1e67bb60a196f1bf7e	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=0bb3445cfc0dbf900fde64a399534ba8

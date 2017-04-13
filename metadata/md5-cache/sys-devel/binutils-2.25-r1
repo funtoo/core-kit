@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install postinst prepare setup test
+DEPEND=>=sys-devel/binutils-config-3 zlib? ( sys-libs/zlib ) test? ( dev-util/dejagnu ) nls? ( sys-devel/gettext ) sys-devel/flex virtual/yacc
+DESCRIPTION=The official GNU collection of binary linker/assembler tools.
+EAPI=5
+HOMEPAGE=http://www.gnu.org/software/binutils/
+IUSE=cxx multislot multitarget nls static-libs test zlib
+KEYWORDS=*
+LICENSE=|| ( GPL-3 LGPL-3 )
+RDEPEND=>=sys-devel/binutils-config-3 zlib? ( sys-libs/zlib )
+SLOT=2.25
+SRC_URI=mirror://funtoo/binutils/binutils-2.25.20150509.tar.bz2
+_eclasses_=multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=cf8e3b960d7d28a5d8df4abb12aa31a7

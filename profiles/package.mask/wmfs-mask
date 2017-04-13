@@ -1,0 +1,3 @@
+# do not let people accidentally install live ebuilds
+=x11-wm/wmfs-99999999
+=x11-wm/wmfs2-99999999

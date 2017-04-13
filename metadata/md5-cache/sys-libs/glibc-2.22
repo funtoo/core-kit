@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install prepare test unpack
+DEPEND=>=app-misc/pax-utils-0.1.10 !<sys-apps/sandbox-1.6 !<sys-apps/portage-2.1.2 selinux? ( sys-libs/libselinux ) >=sys-devel/binutils-2.24 >=sys-devel/gcc-4.4 virtual/os-headers sys-devel/gnuconfig virtual/pkgconfig
+DESCRIPTION=GNU libc6 (also called glibc2) C library
+EAPI=4
+HOMEPAGE=http://www.gnu.org/software/libc/libc.html
+IUSE=debug gd hardened multilib nscd selinux systemtap profile suid vanilla crosscompile_opts_headers-only
+KEYWORDS=*
+LICENSE=LGPL-2.1+ BSD HPND ISC inner-net rc PCRE
+PDEPEND=!vanilla? ( sys-libs/timezone-data )
+RDEPEND=!sys-kernel/ps3-sources sys-apps/gentoo-functions selinux? ( sys-libs/libselinux ) !sys-libs/nss-db vanilla? ( !sys-libs/timezone-data )
+RESTRICT=strip
+SLOT=2.2
+SRC_URI=mirror://gnu/glibc/glibc-2.22.tar.xz ftp://sourceware.org/pub/glibc/releases/glibc-2.22.tar.xz ftp://sourceware.org/pub/glibc/snapshots/glibc-2.22.tar.xz mirror://gentoo/glibc-2.22.tar.xz mirror://gentoo/glibc-2.22-patches-13.tar.bz2 http://dev.gentoo.org/~vapier/dist/glibc-2.22-patches-13.tar.bz2 http://dev.gentoo.org/~azarah/glibc/glibc-2.22-patches-13.tar.bz2 http://dev.gentoo.org/~blueness/glibc/glibc-2.22-patches-13.tar.bz2
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	flag-o-matic	35067884fbff37bc0c8e7421c5315558	gnuconfig	3920de1188fc7bfee873515453ed1d10	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	165fc17c38d1b11dac2008280dab6e80	multiprocessing	284a473719153462f3e974d86c8cb81c	systemd	ec2e9154031d942186c75c0aabb41900	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	unpacker	45d07319df5f40ee6af58418b0f930be	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=6570a52706420f01da2250d4f1754c41
