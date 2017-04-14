@@ -66,6 +66,8 @@ dev-libs/openssl:rfc3779 - Enable support for RFC 3779 (X.509 Extensions for IP 
 dev-libs/openssl:sslv2 - Support for the old/insecure SSLv2 protocol -- note: not required for TLS/https
 dev-libs/openssl:sslv3 - Support for the old/insecure SSLv3 protocol -- note: not required for TLS/https
 dev-libs/openssl:tls-heartbeat - Enable the Heartbeat Extension in TLS and DTLS
+dev-libs/protobuf:java - Builds the Java implementation. This is not needed for Java support in protoc.
+dev-libs/protobuf:python - Builds the Python implementation. This is not needed for Python support in protoc.
 dev-util/cmake:system-jsoncpp - Use system copy of dev-libs/jsoncpp instead of bundled one.
 dev-util/ctags:ada - Enable Ada support
 dev-util/ctags:json - Enable JSON output support
@@ -102,6 +104,12 @@ net-misc/curl:ssh - Enabled SSH urls in curl using libssh2
 net-misc/curl:ssl - Enable crypto engine support (via openssl if USE='-gnutls -nss')
 net-misc/dhcpcd:embedded - Embed the definitions of dhcp options in the dhcpcd executable
 net-misc/iputils:SECURITY_HAZARD - Allow non-root users to flood (ping -f). This is generally a very bad idea.
+net-misc/mosh:client - Build network client
+net-misc/mosh:examples - Include example scripts
+net-misc/mosh:mosh-hardening - Enable compiler and linker options to frustrate memory corruption exploits
+net-misc/mosh:server - Build network server
+net-misc/mosh:ufw - Install net-firewall/ufw rule set
+net-misc/mosh:utempter - Include libutempter support
 net-misc/ntp:openntpd - Allow ntp to be installed alongside openntpd
 net-misc/ntp:parse-clocks - Add support for PARSE clocks
 net-misc/ntp:samba - Provide support for Samba's signing daemon (needed for Active Directory domain controllers)
