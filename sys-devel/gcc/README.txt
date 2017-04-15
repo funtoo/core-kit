@@ -22,5 +22,4 @@ Other important notes on this ebuild:
 * objc-gc is enabled by default when objc is enabled.
 * gcj is not currently supported by this ebuild.
 * graphite is not currently supported by this ebuild.
-* multislot is a good USE flag to set when testing this ebuild; (It allows this gcc to co-exist along identical x.y versions.)
 * hardened is now supported, but we have deprecated the nopie and nossp USE flags from gentoo.

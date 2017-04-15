@@ -13,10 +13,12 @@ dev-libs
 dev-util
 dev-vcs
 mail-mta
+net-dialup
 net-dns
 net-firewall
 net-mail
 net-misc
+net-wireless
 sec-policy
 sys-apps
 sys-auth
@@ -27,5 +29,6 @@ sys-firmware
 sys-fs
 sys-kernel
 sys-libs
+sys-power
 sys-process
 virtual
