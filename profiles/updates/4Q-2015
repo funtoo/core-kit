@@ -43,4 +43,3 @@ move kde-base/libkleo kde-apps/libkleo
 move kde-base/libkpgp kde-apps/libkpgp
 slotmove =dev-embedded/libftdi-1* 0 1
 slotmove =dev-embedded/libftdi-9999 0 1
-move app-text/zeal app-doc/zeal

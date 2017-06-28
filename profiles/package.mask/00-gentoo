@@ -29,6 +29,31 @@
 
 #--- END OF EXAMPLES ---
 
+# Matthew Brewer <tomboy64@sina.cn> (19 Apr 2017)
+# Masking sys-cluster/sx and net-misc/libres3 for removal in 30 days.
+# Upstream completely vanished. Github mirror only contains outdated versions.
+sys-cluster/sx
+net-misc/libres3
+
+# Rick Farina <zerochaos@gentoo.org> (17 Apr 2017)
+# Masking old versions because upstream changed versioning
+# Please keep this mask for 1 year to ease upgrades for users
+=app-crypt/hashcat-3.10-r1
+=app-crypt/hashcat-3.30
+=app-crypt/hashcat-3.40
+
+# Aaron W. Swenson <titanofold@gentoo.org> (17 Apr 2017)
+# Masked for removal by 17 May 2017. Past end of life. Susceptible to security
+# bugs (603716 and 603720). Upgrade to latest version.
+=dev-db/postgresql-9.1.24
+
+# Kent Fredric <kentnl@gentoo.org> (17 Apr 2017)
+# Should be provided by dev-lang/perl or a virtual since perl 5.9,
+# But was added accidentally in 2012. Don't depend on this,
+# and if you need a version newer than 0.11, ask perl project
+# for a virtual
+dev-perl/encoding-warnings
+
 # James Le Cuirot <chewi@gentoo.org> (14 Apr 2017)
 # Outdated and stuck behind a temperamental registration wall that I
 # have lost my patience with. Removal in 30 days if no one cares
@@ -143,11 +168,6 @@ dev-perl/File-DirWalk
 # experimental features and accept a more unstable release.
 >=www-client/chromium-59
 
-# David Seifert <soap@gentoo.org> (19 Mar 2017)
-# EOL'd upstream, fetch restricted, digests missing
-# Masked for removal in 30 days. Bug #612746.
-sci-libs/acml
-
 # Kent Fredric <kentnl@gentoo.org> (18 Mar 2017)
 # ExtUtils::MakeMaker 7.18+ Block
 # Masked until strictly needed to avoid accidental conflicts later
@@ -157,79 +177,9 @@ sci-libs/acml
 >=virtual/perl-ExtUtils-Command-7.180.0
 >=dev-perl/Net-Twitter-4.10.420
 
-# Michael Palimaka <kensington@gentoo.org> (18 Mar 2017)
-# Broken. Dead upstream. Unmaintained.
-# Masked for removal in 30 days.
-net-misc/apt-proxy
-
-# Michael Palimaka <kensington@gentoo.org> (18 Mar 2017)
-# Broken. Dead upstream. Unmaintained.
-# Masked for removal in 30 days. Bug #604836.
-gnome-extra/zeitgeist-datasources
-
-# Michael Palimaka <kensington@gentoo.org> (18 Mar 2017)
-# Fails to run. Ancient. Unmaintained. Dead upstream.
-# Masked for removal in 30 days. Bug #605120.
-net-p2p/phxd
-
-# Andreas K. Hüttel <dilfridge@gentoo.org> (17 Mar 2017)
-# Requires obsolete gstreamer:0.10, bug 604686
-# Removal in 30 days
-dev-perl/GStreamer
-dev-perl/GStreamer-Interfaces
-
-# Patrice Clement <monsieurp@gentoo.org> (18 Mar 2017)
-# Does not compile anymore. Upstream dead.
-# Removal in 30 days.
-dev-java/swidgets
-
 # Michael Palimaka <kensington@gentoo.org> (13 Mar 2017)
 # Testing x32 patch backports from 3.9
 =dev-util/cmake-3.7.2-r10
-
-# David Seifert <soap@gentoo.org> (12 Mar 2017)
-# Bundles half of glibc, unmaintained upstream,
-# not really necessary anymore with 64-bit flash
-# Masked for removal in 30 days. Bug #609258.
-www-plugins/nspluginwrapper
-
-# David Seifert <soap@gentoo.org> (12 Mar 2017)
-# Awful codebase, lots of widechars stored in chars,
-# invokes undefined behaviour, last release in 2004.
-# Masked for removal in 30 days. Bug #593942, #593976.
-app-text/uvconv
-app-i18n/x-unikey
-
-# Michael Palimaka <kensington@gentoo.org> (11 Mar 2017)
-# Fails to build. Dead upstream.
-# Masked for removal in 30 days. Bug #592184.
-dev-scheme/schoca
-
-# Andreas K. Hüttel <dilfridge@gentoo.org> (11 Mar 2017)
-# Fails since upgrade to dev-lang/perl-5.12 (!).
-# Removal in 30 days. Bug 336898.
-dev-perl/Net-Google-SafeBrowsing-UpdateRequest
-dev-perl/Mail-SpamAssassin-Plugin-GoogleSafeBrowsing
-
-# Andreas K. Hüttel <dilfridge@gentoo.org> (11 Mar 2017)
-# Dead upstream; the library has been picked up by
-# dev-perl/Text-BibTeX and is further developed there.
-# Please uninstall dev-libs/btparse and re-build your
-# application against >=dev-perl/Text-BibTeX-0.780.0-r1
-# (this should happen automatically with tellico, the
-# only reverse dependency in the main tree).
-# Removal in 30 days. Bug 599710.
-dev-libs/btparse
-
-# Patrice Clement <monsieurp@gentoo.org> (11 Mar 2017)
-# Upstream dead: no update since 2003. Ebuild is outdated and buggy.
-# Removal in 30 days. Bug #279088
-dev-java/jusb
-
-# Anthony G. Basile <blueness@gentoo.org> (11 Mar 2017)
-# Masked for removal in 30 days.  No longer supported
-# upstream.  Use net-proxy/obfs4proxy instread.
-net-proxy/obfsproxy
 
 # Gnome Team <gnome@gentoo.org> (08 Mar 2017)
 # GNOME 3.24 mask (#611270)
@@ -285,8 +235,6 @@ net-proxy/obfsproxy
 >=gnome-base/dconf-editor-3.23
 >=dev-util/devhelp-3.23
 >=mail-client/evolution-3.23
->=dev-vcs/gitg-3.23
->=gnome-extra/gnome-builder-3.23
 >=games-board/gnome-mines-3.23
 >=media-sound/gnome-music-3.23
 >=games-arcade/gnome-nibbles-3.23

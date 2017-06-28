@@ -1,5 +1,6 @@
 app-admin
 app-arch
+app-backup
 app-crypt
 app-doc
 app-editors
@@ -9,13 +10,16 @@ app-portage
 app-shells
 app-text
 dev-db
+dev-lang
 dev-libs
+dev-scheme
 dev-util
 dev-vcs
 mail-mta
 net-dialup
 net-dns
 net-firewall
+net-libs
 net-mail
 net-misc
 net-wireless
@@ -24,6 +28,7 @@ sys-apps
 sys-auth
 sys-block
 sys-boot
+sys-cluster
 sys-devel
 sys-firmware
 sys-fs

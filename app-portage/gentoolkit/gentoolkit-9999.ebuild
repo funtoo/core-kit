@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
@@ -23,7 +22,7 @@ KEYWORDS=""
 
 DEPEND="sys-apps/portage[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
-	!<=app-portage/gentoolkit-dev-0.2.7
+	!app-portage/gentoolkit-dev
 	sys-apps/gawk
 	sys-apps/gentoo-functions"
 

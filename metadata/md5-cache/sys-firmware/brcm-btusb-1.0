@@ -1,8 +1,0 @@
-DEFINED_PHASES=install
-DESCRIPTION=Firmware for Broadcom-based Bluetooth USB dongles
-EAPI=6
-HOMEPAGE=http://plugable.com/2014/06/23/plugable-usb-bluetooth-adapter-solving-hfphsp-profile-issues-on-linux/
-KEYWORDS=*
-LICENSE=Broadcom
-SLOT=0
-_md5_=1a41086dc2896f6e415ceffe5d74a2fb

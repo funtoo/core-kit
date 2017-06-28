@@ -9,4 +9,3 @@ slotmove =dev-python/pydns-2.3.4 0 2
 move sys-devel/systemd-sdk sys-devel/systemd-m4
 move dev-python/quantumclient dev-python/neutronclient
 slotmove =net-libs/libecap-0.2.0 2 0.2
-move sys-fs/mdev-bb sys-fs/mdev

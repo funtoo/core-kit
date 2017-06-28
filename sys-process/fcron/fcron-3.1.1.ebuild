@@ -1,6 +1,5 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-process/fcron/fcron-3.1.1.ebuild,v 1.8 2013/02/08 14:54:04 jer Exp $
 
 EAPI=5
 
@@ -15,15 +14,13 @@ SRC_URI="http://fcron.free.fr/archives/${MY_P}.src.tar.gz"
 
 LICENSE="GPL-2"
 KEYWORDS="amd64 arm hppa ia64 ~mips ppc sparc x86 ~x86-fbsd"
-IUSE="debug pam selinux linguas_fr +system-crontab readline"
+IUSE="debug pam selinux l10n_fr +system-crontab readline"
 
 DEPEND="selinux? ( sys-libs/libselinux )
 	pam? ( virtual/pam )
-	readline? ( sys-libs/readline )"
+	readline? ( sys-libs/readline:= )"
 
-# see bug 282214 for the reason to depend on bash
 RDEPEND="${DEPEND}
-	app-shells/bash
 	>=app-misc/editor-wrapper-3
 	pam? ( >=sys-auth/pambase-20100310 )"
 
@@ -162,7 +159,7 @@ src_install() {
 	doman doc/en/man/*.{1,5,8}
 
 	for lang in fr; do
-		use linguas_${lang} || continue
+		use l10n_${lang} || continue
 
 		doman -i18n=${lang} doc/${lang}/man/*.{1,5,8} || die
 		docinto html/${lang}
@@ -191,7 +188,7 @@ pkg_config() {
 	if use system-crontab; then
 		elog "This is going to set up fcron to execute check_system_crontabs."
 		elog "In this configuration, you're no longer free to edit the systab"
-		elog "at your leisure, at it'll be rewritten the moment the crontabs"
+		elog "at your leisure, as it'll be rewritten the moment the crontabs"
 		elog "are modified."
 		/usr/libexec/check_system_crontabs -v -i -f
 	else

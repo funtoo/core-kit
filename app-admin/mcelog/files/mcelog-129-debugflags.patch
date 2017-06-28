@@ -1,6 +1,12 @@
-diff -ur mcelog-129/Makefile mcelog-129.new/Makefile
---- mcelog-129/Makefile	2016-01-05 09:47:22.482909668 -0600
-+++ mcelog-129.new/Makefile	2016-01-05 09:49:12.098884522 -0600
+From: Julian Ospald <hasufell@gentoo.org>
+Date: Wed Oct 24 15:41:33 UTC 2012
+Subject: build system
+
+don't overwrite system CFLAGS, only append "-g -Os" if DEBUG=1 is passed
+as argument
+
+--- a/Makefile
++++ b/Makefile
 @@ -1,4 +1,11 @@
 -CFLAGS := -g -Os
 +CC ?= gcc

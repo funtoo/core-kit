@@ -56,6 +56,9 @@ dev-libs/gmp:pgo - After building gmp, run some tests against to produce faster 
 dev-libs/libevent:debug - Support runtime debug mode and malloc hooks (for programmers)
 dev-libs/libffi:pax_kernel - Use PaX emulated trampolines, for we can't use PROT_EXEC
 dev-libs/libgpg-error:common-lisp - Install common-lisp files
+dev-libs/libnl:doc - Install development documentation
+dev-libs/libnl:python - Install experimental dev-lang/python bindings
+dev-libs/libnl:utils - Install command line interface utils
 dev-libs/libpcre:bzip2 - Add support for pcregrep command to search within bzip2-compressed files (via app-arch/bzip2).
 dev-libs/libpcre:pcre16 - Build PCRE library for 16 bit characters (e.g. UTF-16).
 dev-libs/libpcre:pcre32 - Build PCRE library for 32 bit characters (e.g. UTF-32).
@@ -70,11 +73,19 @@ dev-libs/openssl:sslv3 - Support for the old/insecure SSLv3 protocol -- note: no
 dev-libs/openssl:tls-heartbeat - Enable the Heartbeat Extension in TLS and DTLS
 dev-libs/protobuf:java - Builds the Java implementation. This is not needed for Java support in protoc.
 dev-libs/protobuf:python - Builds the Python implementation. This is not needed for Python support in protoc.
+dev-scheme/guile:debug-freelist - Include garbage collector freelist debugging code
+dev-scheme/guile:debug-malloc - Include malloc debugging code
+dev-scheme/guile:deprecated - Enable deprecated features
+dev-scheme/guile:discouraged - (implied by deprecated) enable merely discouraged features
+dev-scheme/guile:networking - Include networking interfaces
+dev-scheme/guile:regex - Include regular expression interfaces
 dev-util/cmake:system-jsoncpp - Use system copy of dev-libs/jsoncpp instead of bundled one.
 dev-util/ctags:ada - Enable Ada support
 dev-util/ctags:json - Enable JSON output support
 dev-util/ctags:xml - Enable XML parsing support
 dev-util/ctags:yaml - Enable YAML parsing support
+dev-util/pkgconf:pkg-config - Install as a replacement for dev-util/pkgconfig
+dev-util/pkgconf:strict - Adhere to POSIX pkg-config specification. Useful for finding uses of non-standard pkg-config invocations
 dev-vcs/git:blksha1 - Use the new optimized SHA1 implementation
 dev-vcs/git:cgi - Install gitweb too
 dev-vcs/git:curl - Support fetching and pushing (requires webdav too) over http:// and https:// protocols
@@ -102,11 +113,31 @@ net-dns/avahi:howl-compat - Enable compat libraries for howl
 net-dns/avahi:introspection - Use dev-libs/gobject-introspection for introspection
 net-dns/avahi:mdnsresponder-compat - Enable compat libraries for mDNSResponder
 net-dns/avahi:utils - Install the avahi gtk+ utils avahi-discover, bssh, and bvnc
+net-dns/bind-tools:gost - Enables gost OpenSSL engine support
+net-dns/bind-tools:gssapi - Enable gssapi support
+net-dns/bind-tools:urandom - Use /dev/urandom instead of /dev/random
 net-firewall/ebtables:perl - Install the ebtables-save script which uses perl
 net-firewall/iptables:conntrack - Build against net-libs/libnetfilter_conntrack when enables the connlabel matcher
 net-firewall/iptables:netlink - Build against libnfnetlink which enables the nfnl_osf util
 net-firewall/iptables:nftables - Support nftables kernel interface
 net-firewall/iptables:pcap - Build against net-libs/libpcap which enables the nfbpf_compile util
+net-libs/gnutls:crywrap - Build the crywrap TLS proxy service
+net-libs/gnutls:dane - Build libgnutls-dane, implementing DNS-based Authentication of Named Entities. Requires net-dns/unbound
+net-libs/gnutls:openpgp - Enable openpgp support
+net-libs/gnutls:openssl - Build openssl compatibility libraries
+net-libs/gnutls:pkcs11 - Add support for PKCS#11 through app-crypt/p11-kit
+net-libs/gnutls:sslv2 - Support for the old/insecure SSLv2 protocol
+net-libs/gnutls:sslv3 - Support for the old/insecure SSLv3 protocol
+net-libs/gnutls:test-full - Enable full test mode
+net-libs/gnutls:tls-heartbeat - Enable the Heartbeat Extension in TLS and DTLS
+net-libs/gnutls:tools - Build extra tools
+net-libs/gnutls:valgrind - Enable usage of dev-util/valgrind in debug
+net-libs/libproxy:gnome - Enable support for reading proxy settings from GNOME
+net-libs/libproxy:kde - Enable support for reading proxy settings from KDE
+net-libs/libproxy:spidermonkey - Use libmozjs from dev-lang/spidermonkey for PAC parsing
+net-libs/libproxy:webkit - Use libjavascriptcoregtk from net-libs/webkit-gtk for PAC parsing
+net-libs/neon:libproxy - Add support for net-libs/libproxy
+net-libs/neon:pkcs11 - Add support for PKCS#11 using dev-libs/pakchois
 net-misc/curl:http2 - Enabled HTTP/2.0 support
 net-misc/curl:metalink - Enable metalink support
 net-misc/curl:rtmp - Enable RTMP Streaming Media support
@@ -194,6 +225,8 @@ sys-apps/util-linux:kill - build the kill program
 sys-apps/util-linux:pam - build runuser helper
 sys-apps/util-linux:suid - install mount/umount as setuid so non-root users may mount/umount devices, and wall/write as setgid so non-root users can notify other users
 sys-apps/util-linux:tty-helpers - install the mesg/wall/write tools for talking to local users
+sys-auth/consolekit:policykit - Use the PolicyKit framework (sys-auth/polkit) to get authorization for suspend/shutdown.
+sys-auth/consolekit:systemd-units - Install systemd unit files to replace the modern functionality of logind in sys-apps/systemd. Not recommended.
 sys-auth/nss-mdns:search-domains - Honour search domains from /etc/resolv.conf (see bug #201948 for possible side effects)
 sys-auth/pambase:consolekit - Enable pam_ck_connector module on local system logins. This allows for console logins to make use of ConsoleKit authorization.
 sys-auth/pambase:cracklib - Enable pam_cracklib module on system authentication stack. This produces warnings when changing password to something easily crackable. It requires the same USE flag to be enabled on sys-libs/pam or system login might be impossible.
@@ -205,8 +238,15 @@ sys-auth/pambase:mktemp - Enable pam_mktemp module on system auth stack for sess
 sys-auth/pambase:passwdqc - Enable pam_passwdqc module on system auth stack for password quality validation. This is an alternative to pam_cracklib producing warnings, rejecting or providing example passwords when changing your system password. It is used by default by OpenWall GNU/*/Linux and by FreeBSD.
 sys-auth/pambase:sha512 - Switch Linux-PAM's pam_unix module to use sha512 for passwords hashes rather than MD5. This option requires >=sys-libs/pam-1.0.1 built against >=sys-libs/glibc-2.7, if it's built against an earlier version, it will silently be ignored, and MD5 hashes will be used. All the passwords changed after this USE flag is enabled will be saved to the shadow file hashed using SHA512 function. The password previously saved will be left untouched. Please note that while SHA512-hashed passwords will still be recognised if the USE flag is removed, the shadow file will not be compatible with systems using an earlier glibc version.
 sys-auth/pambase:ssh - Enable pam_ssh module on system auth stack for authentication and session handling. This module will accept as password the passphrase of a private SSH key (one of ~/.ssh/id_rsa, ~/.ssh/id_dsa or ~/.ssh/identity), and will spawn an ssh-agent instance to cache the open key.
+sys-auth/polkit:elogind - Use sys-auth/elogind instead of sys-auth/consolekit for session tracking
+sys-auth/polkit:systemd - Use sys-apps/systemd instead of sys-auth/consolekit for session tracking
+sys-block/parted:debug - Enable debugging as encouraged by upstream: [The default configuration] includes --enable-debug (by default), which contains many assertions. Obviously, these "waste" space, but in the past, they have caught potentially dangerous bugs before they would have done damage, so we think it's worth it. Also, it means we get more bug reports ;)
+sys-block/parted:device-mapper - Enable device-mapper support from sys-fs/lvm2 in parted
 sys-boot/grub:binfont - Install a pre-generated binary font
 sys-boot/grub:mkfont - Enables support for grub-mkfont
+sys-boot/plymouth:gdm - Enables smooth transition to GDM
+sys-boot/plymouth:libkms - Provides abstraction to the DRM drivers (intel, nouveau and vmwgfx at this moment)
+sys-boot/plymouth:pango - Adds support for printing text on splash screen and text prompts, e.g. for password
 sys-devel/autogen:libopts - install the libopts tarball (a few packages want this for developing)
 sys-devel/gcc:d - Enable support for the D programming language
 sys-devel/gcc:default - After building, set this compiler as default using gcc-config
@@ -320,4 +360,5 @@ sys-process/htop:vserver - Enable vserver support
 sys-process/procps:kill - Build the kill program
 sys-process/procps:modern-top - Enables new startup defaults of top. Keeps old defaults if disabled
 sys-process/procps:ncurses - Build programs that use ncurses: top, slabtop, watch
+virtual/linux-sources:firmware - Install linux kernel firmware
 virtual/ssh:minimal - Prefer net-misc/dropbear over net-misc/openssh

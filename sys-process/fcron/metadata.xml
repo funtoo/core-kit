@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<herd>cron</herd>
-	<maintainer>
-		<email>flameeyes@gentoo.org</email>
+	<maintainer type="person">
+		<email>whissi@gentoo.org</email>
+		<name>Thomas Deutschmann</name>
+	</maintainer>
+	<maintainer type="project">
+		<email>cron-bugs@gentoo.org</email>
+		<name>Gentoo Cron Project</name>
 	</maintainer>
 	<use>
 		<flag name="debug">

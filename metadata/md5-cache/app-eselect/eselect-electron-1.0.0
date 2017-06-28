@@ -7,4 +7,4 @@ LICENSE=GPL-2
 RDEPEND=app-admin/eselect
 SLOT=0
 SRC_URI=https://github.com/elprans/eselect-electron/archive/v1.0.0.tar.gz
-_md5_=745cfbb0da17ab64aaba04a5ff350741
+_md5_=ba2d4e3ec2df0cb407f9680295503364
