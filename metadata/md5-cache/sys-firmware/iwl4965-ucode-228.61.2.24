@@ -1,0 +1,9 @@
+DEFINED_PHASES=compile install postinst
+DESCRIPTION=Intel (R) Wireless WiFi Link 4965AGN ucode
+EAPI=0
+HOMEPAGE=http://intellinuxwireless.org/?p=iwlwifi
+KEYWORDS=amd64 x86
+LICENSE=ipw3945
+SLOT=1
+SRC_URI=http://www.linuxwireless.org/attachments/en/users/Drivers/iwlegacy/iwlwifi-4965-ucode-228.61.2.24.tgz
+_md5_=1ef9fca7bc8dd01dd6d5545b74e96cad

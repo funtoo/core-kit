@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="5"
 
@@ -15,7 +16,7 @@ SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz"
 LICENSE="MIT"
 # The subslot reflects the SONAME.
 SLOT="0/6"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
 IUSE="ada +cxx debug doc gpm minimal profile static-libs test threads tinfo trace unicode"
 
 DEPEND="gpm? ( sys-libs/gpm[${MULTILIB_USEDEP}] )"
@@ -36,7 +37,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.0-pkg-config.patch"
 	"${FILESDIR}/${PN}-5.9-gcc-5.patch" #545114
 	"${FILESDIR}/${PN}-6.0-ticlib.patch" #557360
-	"${FILESDIR}/${PN}-6.0-cppflags-cross.patch" #601426
 )
 
 src_prepare() {
@@ -63,32 +63,6 @@ src_configure() {
 
 	multijob_init
 
-	# When installing ncurses, we have to use a compatible version of tic.
-	# This comes up when cross-compiling, doing multilib builds, upgrading,
-	# or installing for the first time.  Build a local copy of tic whenever
-	# the host version isn't available. #249363 #557598
-	if ! ROOT=/ has_version "~sys-libs/${P}:0" ; then
-		local lbuildflags="-static"
-
-		# some toolchains don't quite support static linking
-		local dbuildflags="-Wl,-rpath,${WORKDIR}/lib"
-		case ${CHOST} in
-			*-darwin*)  dbuildflags=     ;;
-			*-aix*)     dbuildflags=     ;;
-		esac
-		echo "int main() {}" | \
-			$(tc-getCC) -o x -x c - ${lbuildflags} -pipe >& /dev/null \
-			|| lbuildflags="${dbuildflags}"
-
-		# We can't re-use the multilib BUILD_DIR because we run outside of it.
-		BUILD_DIR="${WORKDIR}" \
-		CHOST=${CBUILD} \
-		CFLAGS=${BUILD_CFLAGS} \
-		CXXFLAGS=${BUILD_CXXFLAGS} \
-		CPPFLAGS=${BUILD_CPPFLAGS} \
-		LDFLAGS="${BUILD_LDFLAGS} ${lbuildflags}" \
-		multijob_child_init do_configure cross --without-shared --with-normal
-	fi
 	multilib-minimal_src_configure
 	multijob_finish
 }
@@ -174,11 +148,6 @@ do_configure() {
 	else
 		conf+=( --includedir="${EPREFIX}"/usr/include/${target} )
 	fi
-	# See comments in src_configure.
-	if [[ ${target} != "cross" ]] ; then
-		local cross_path="${WORKDIR}/cross"
-		[[ -d ${cross_path} ]] && export TIC_PATH="${cross_path}/progs/tic"
-	fi
 
 	# Force bash until upstream rebuilds the configure script with a newer
 	# version of autotools. #545532
@@ -189,11 +158,6 @@ do_configure() {
 
 src_compile() {
 	# See comments in src_configure.
-	if ! ROOT=/ has_version "~sys-libs/${P}:0" ; then
-		BUILD_DIR="${WORKDIR}" \
-		do_compile cross -C progs tic
-	fi
-
 	multilib-minimal_src_compile
 }
 

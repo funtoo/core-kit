@@ -1,31 +1,22 @@
-# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
 inherit autotools eutils linux-info multilib systemd toolchain-funcs udev flag-o-matic
 
-DESCRIPTION="User-land utilities for LVM2 (device-mapper) software"
-HOMEPAGE="https://sourceware.org/lvm2/"
-SRC_URI="ftp://sourceware.org/pub/lvm2/${PN/lvm/LVM}.${PV}.tgz
-	ftp://sourceware.org/pub/lvm2/old/${PN/lvm/LVM}.${PV}.tgz"
+DESCRIPTION="User-land utilities for LVM2 (device-mapper) software."
+HOMEPAGE="http://sources.redhat.com/lvm2/"
+SRC_URI="ftp://sources.redhat.com/pub/lvm2/${PN/lvm/LVM}.${PV}.tgz
+	ftp://sources.redhat.com/pub/lvm2/old/${PN/lvm/LVM}.${PV}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux"
-IUSE="readline static static-libs systemd clvm cman corosync lvm1 lvm2create_initrd openais selinux +udev +thin device-mapper-only"
+KEYWORDS="*"
+IUSE="readline +static static-libs systemd clvm cman corosync +lvm1 lvm2create_initrd openais selinux udev +thin device-mapper-only"
 REQUIRED_USE="device-mapper-only? ( !clvm !cman !corosync !lvm1 !lvm2create_initrd !openais !thin )
-	systemd? ( udev )
-	clvm? ( !systemd )"
+	systemd? ( udev )"
 
-DEPEND_COMMON="
-	clvm? (
-		cman? ( =sys-cluster/cman-3* )
-		corosync? ( sys-cluster/corosync )
-		openais? ( sys-cluster/openais )
-		=sys-cluster/libdlm-3*
-	)
-
-	readline? ( sys-libs/readline:0= )
+DEPEND_COMMON="clvm? ( cman? ( =sys-cluster/cman-3* ) corosync? ( sys-cluster/corosync ) openais? ( sys-cluster/openais ) =sys-cluster/libdlm-3* )
+	readline? ( sys-libs/readline )
 	udev? ( >=virtual/libudev-208:=[static-libs?] )"
 # /run is now required for locking during early boot. /var cannot be assumed to
 # be available -- thus, pull in recent enough baselayout for /run.
@@ -40,18 +31,18 @@ RDEPEND="${DEPEND_COMMON}
 	lvm2create_initrd? ( sys-apps/makedev )
 	thin? ( >=sys-block/thin-provisioning-tools-0.3.0 )"
 # note: thin- 0.3.0 is required to avoid --disable-thin_check_needs_check
-# USE 'static' currently only works with eudev, bug 520450
 DEPEND="${DEPEND_COMMON}
 	virtual/pkgconfig
 	>=sys-devel/binutils-2.20.1-r1
 	sys-devel/autoconf-archive
 	static? (
 		selinux? ( sys-libs/libselinux[static-libs] )
-		udev? ( >=sys-fs/eudev-3.1.2[static-libs] )
+		udev? ( >=virtual/libudev-208:=[static-libs] )
 		>=sys-apps/util-linux-2.16[static-libs]
 	)"
 
 S=${WORKDIR}/${PN/lvm/LVM}.${PV}
+MYDIR="$FILESDIR/${PV}"
 
 pkg_setup() {
 	local CONFIG_CHECK="~SYSVIPC"
@@ -79,7 +70,9 @@ pkg_setup() {
 
 src_prepare() {
 	# Gentoo specific modification(s):
-	epatch "${FILESDIR}"/${PN}-2.02.129-example.conf.in.patch
+	epatch "${MYDIR}"/${PN}-2.02.129-example.conf.in.patch
+	# Funtoo change. FL-1755. Do not probe cdrom by lvm
+	epatch "${MYDIR}"/${PN}-2.02.145-no-cdrom-probe.patch
 
 	sed -i \
 		-e "1iAR = $(tc-getAR)" \
@@ -98,14 +91,15 @@ src_prepare() {
 	sed -i -e "s:/usr/bin/true:$(type -P true):" scripts/blk_availability_systemd_red_hat.service.in || die #517514
 
 	# For upstream -- review and forward:
-	epatch "${FILESDIR}"/${PN}-2.02.63-always-make-static-libdm.patch
-	epatch "${FILESDIR}"/${PN}-2.02.56-lvm2create_initrd.patch
-	epatch "${FILESDIR}"/${PN}-2.02.67-createinitrd.patch #301331
-	epatch "${FILESDIR}"/${PN}-2.02.99-locale-muck.patch #330373
-	epatch "${FILESDIR}"/${PN}-2.02.70-asneeded.patch # -Wl,--as-needed
-	epatch "${FILESDIR}"/${PN}-2.02.139-dynamic-static-ldflags.patch #332905
-	epatch "${FILESDIR}"/${PN}-2.02.129-static-pkgconfig-libs.patch #370217, #439414 + blkid
-	epatch "${FILESDIR}"/${PN}-2.02.130-pthread-pkgconfig.patch #492450
+	epatch "${MYDIR}"/${PN}-2.02.63-always-make-static-libdm.patch
+	epatch "${MYDIR}"/${PN}-2.02.56-lvm2create_initrd.patch
+	epatch "${MYDIR}"/${PN}-2.02.67-createinitrd.patch #301331
+	epatch "${MYDIR}"/${PN}-2.02.99-locale-muck.patch #330373
+	epatch "${MYDIR}"/${PN}-2.02.70-asneeded.patch # -Wl,--as-needed
+	epatch "${MYDIR}"/${PN}-2.02.139-dynamic-static-ldflags.patch #332905
+	epatch "${MYDIR}"/${PN}-2.02.129-static-pkgconfig-libs.patch #370217, #439414 + blkid
+	epatch "${MYDIR}"/${PN}-2.02.130-pthread-pkgconfig.patch #492450
+	epatch "${MYDIR}"/${PN}-2.02.145-mkdev.patch #580062
 
 	# Without thin-privision-tools, there is nothing to install for target install_man7:
 	use thin || { sed -i -e '/^install_lvm2/s:install_man7::' man/Makefile.in || die; }
@@ -224,28 +218,40 @@ src_compile() {
 src_install() {
 	local inst
 	INSTALL_TARGETS="install install_tmpfiles_configuration"
-	# install systemd related files only when requested, bug #522430
+
+	# install systemd files only when systemd USE enabled, not unconditionally.
 	use systemd && INSTALL_TARGETS="${INSTALL_TARGETS} install_systemd_units install_systemd_generators"
+
 	use device-mapper-only && INSTALL_TARGETS="install_device-mapper"
+
 	for inst in ${INSTALL_TARGETS}; do
 		emake DESTDIR="${D}" ${inst}
 	done
 
-	newinitd "${FILESDIR}"/device-mapper.rc-2.02.105-r2 device-mapper
-	newconfd "${FILESDIR}"/device-mapper.conf-1.02.22-r3 device-mapper
+	newinitd "${MYDIR}"/device-mapper.rc-2.02.105-r2 device-mapper
+	newconfd "${MYDIR}"/device-mapper.conf-1.02.22-r3 device-mapper
+
+	cp "${MYDIR}/lvm.confd-2.02.28-r3" "${T}/lvm.confd"
+
+	if use udev; then
+		sed -e "s/@COMMENT@//" -i "${T}/lvm.confd"
+	else
+		sed -e "s/@COMMENT@/#/" -i "${T}/lvm.confd"
+	fi
+
 
 	if use !device-mapper-only ; then
-		newinitd "${FILESDIR}"/dmeventd.initd-2.02.67-r1 dmeventd
-		newinitd "${FILESDIR}"/lvm.rc-2.02.105-r2 lvm
-		newconfd "${FILESDIR}"/lvm.confd-2.02.28-r2 lvm
+		newinitd "${MYDIR}"/dmeventd.initd-2.02.67-r1 dmeventd
+		newinitd "${MYDIR}"/lvm.rc-2.02.105-r2 lvm
+		newconfd "${T}/lvm.confd" lvm
 
-		newinitd "${FILESDIR}"/lvm-monitoring.initd-2.02.105-r2 lvm-monitoring
-		newinitd "${FILESDIR}"/lvmetad.initd-2.02.105-r2 lvmetad
+		newinitd "${MYDIR}"/lvm-monitoring.initd-2.02.105-r2 lvm-monitoring
+		newinitd "${MYDIR}"/lvmetad.initd-2.02.105-r3 lvmetad
 	fi
 
 	if use clvm; then
-		newinitd "${FILESDIR}"/clvmd.rc-2.02.39 clvmd
-		newconfd "${FILESDIR}"/clvmd.confd-2.02.39 clvmd
+		newinitd "${MYDIR}"/clvmd.rc-2.02.39 clvmd
+		newconfd "${MYDIR}"/clvmd.confd-2.02.39 clvmd
 	fi
 
 	if use static-libs; then
@@ -265,7 +271,7 @@ src_install() {
 	fi
 
 	insinto /etc
-	doins "${FILESDIR}"/dmtab
+	doins "${MYDIR}"/dmtab
 
 	dodoc README VERSION* WHATS_NEW WHATS_NEW_DM doc/*.{c,txt} conf/*.conf
 }
@@ -273,9 +279,6 @@ src_install() {
 pkg_postinst() {
 	ewarn "Make sure the \"lvm\" init script is in the runlevels:"
 	ewarn "# rc-update add lvm boot"
-	ewarn
-	ewarn "Make sure to enable lvmetad in /etc/lvm/lvm.conf if you want"
-	ewarn "to enable lvm autoactivation and metadata caching."
 }
 
 src_test() {

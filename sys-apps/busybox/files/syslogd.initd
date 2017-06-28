@@ -1,10 +1,11 @@
 #!/sbin/openrc-run
 # Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 command="/bin/busybox syslogd"
 command_args="${SYSLOGD_OPTS}"
-pidfile="/run/syslogd.pid"
+pidfile="/var/run/syslogd.pid"
 
 depend() {
 	need clock hostname

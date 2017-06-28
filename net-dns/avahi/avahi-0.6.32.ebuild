@@ -1,7 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="gdbm"
@@ -14,16 +13,14 @@ DESCRIPTION="System which facilitates service discovery on a local network"
 HOMEPAGE="http://avahi.org/"
 SRC_URI="https://github.com/lathiat/avahi/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-S="${WORKDIR}/${P}"
-
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ~mips ppc ppc64 sparc x86"
-IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6 kernel_linux mdnsresponder-compat mono nls python qt4 selinux test utils"
+KEYWORDS="*"
+IUSE="+autoipd bookmarks +dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6 kernel_linux mdnsresponder-compat mono nls python qt4 selinux test utils"
 
 REQUIRED_USE="
 	utils? ( || ( gtk gtk3 ) )
-	python? ( dbus gdbm )
+	python? ( dbus gdbm ${PYTHON_REQUIRED_USE} )
 	mono? ( dbus )
 	howl-compat? ( dbus )
 	mdnsresponder-compat? ( dbus )
@@ -33,34 +30,36 @@ COMMON_DEPEND="
 	dev-libs/libdaemon
 	dev-libs/expat
 	dev-libs/glib:2[${MULTILIB_USEDEP}]
-	gdbm? ( sys-libs/gdbm[${MULTILIB_USEDEP}] )
+	gdbm? ( >=sys-libs/gdbm-1.10-r1[${MULTILIB_USEDEP}] )
 	qt4? ( dev-qt/qtcore:4[${MULTILIB_USEDEP}] )
 	gtk? ( x11-libs/gtk+:2[${MULTILIB_USEDEP}] )
 	gtk3? ( x11-libs/gtk+:3[${MULTILIB_USEDEP}] )
-	dbus? ( sys-apps/dbus[${MULTILIB_USEDEP}] )
+	dbus? ( >=sys-apps/dbus-1.6.18-r1[${MULTILIB_USEDEP}] )
 	kernel_linux? ( sys-libs/libcap )
-	introspection? ( dev-libs/gobject-introspection:= )
+	introspection? ( dev-libs/gobject-introspection )
 	mono? (
 		dev-lang/mono
 		gtk? ( dev-dotnet/gtk-sharp )
 	)
 	python? (
 		${PYTHON_DEPS}
-		gtk? ( dev-python/pygtk )
-		dbus? ( dev-python/dbus-python )
+		gtk? ( dev-python/pygtk[${PYTHON_USEDEP}] )
+		dbus? ( dev-python/dbus-python[${PYTHON_USEDEP}] )
 	)
 	bookmarks? (
-		dev-python/twisted-core
-		dev-python/twisted-web
+		${PYTHON_DEPS}
+		>=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
 	)
 "
 
 DEPEND="
 	${COMMON_DEPEND}
-	doc? ( app-doc/doxygen )
-	app-doc/xmltoman
 	dev-util/intltool
-	virtual/pkgconfig[${MULTILIB_USEDEP}]
+	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
+	doc? (
+		app-doc/doxygen
+	)
+	app-doc/xmltoman
 "
 
 RDEPEND="
@@ -108,8 +107,10 @@ src_prepare() {
 	# https://github.com/lathiat/avahi/issues/27
 	epatch "${FILESDIR}"/${PN}-0.6.31-fix-locale-build.patch
 
-	# Bug #525832
-	epatch_user
+	# Update the init scripts for the new openrc, bug #594622
+	epatch "${FILESDIR}"/${PN}-0.6.32-openrc-0.21.7-fix-init-scripts.patch
+
+	eapply_user
 
 	# Prevent .pyc files in DESTDIR
 	>py-compile
@@ -123,7 +124,7 @@ src_prepare() {
 src_configure() {
 	# those steps should be done once-per-ebuild rather than per-ABI
 	use sh && replace-flags -O? -O0
-	use python && python_export_best
+	use python && python_setup 'python2*'
 
 	# We need to unset DISPLAY, else the configure script might have problems detecting the pygtk module
 	unset DISPLAY
@@ -179,7 +180,7 @@ multilib_src_configure() {
 		--disable-qt3 \
 		$(use_enable qt4) \
 		$(use_enable gdbm) \
-		$(systemd_with_unitdir) \
+		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)" \
 		"${myconf[@]}"
 }
 
@@ -191,10 +192,10 @@ multilib_src_compile() {
 
 multilib_src_install() {
 	emake install DESTDIR="${D}"
-	use bookmarks && use python && use dbus && use gtk || \
+	if ! (use bookmarks && use python && use dbus && use gtk); then
 		rm -f "${ED}"/usr/bin/avahi-bookmarks
+	fi
 
-	# https://github.com/lathiat/avahi/issues/28
 	use howl-compat && dosym avahi-compat-howl.pc /usr/$(get_libdir)/pkgconfig/howl.pc
 	use mdnsresponder-compat && dosym avahi-compat-libdns_sd/dns_sd.h /usr/include/dns_sd.h
 
@@ -210,7 +211,7 @@ multilib_src_install_all() {
 		insinto /$(get_libdir)/rcscripts/net
 		doins "${FILESDIR}"/autoipd.sh
 
-		insinto /$(get_libdir)/netifrc/net
+		insinto /$(get_libdir)/rc/net
 		newins "${FILESDIR}"/autoipd-openrc.sh autoipd.sh
 	fi
 
