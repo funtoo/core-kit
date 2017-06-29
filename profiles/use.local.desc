@@ -218,6 +218,9 @@ sys-apps/pciutils:zlib - Support compressed pci.ids database
 sys-apps/portage:epydoc - Build html API documentation with epydoc.
 sys-apps/portage:python3 - Use python3 as Python interpreter.
 sys-apps/shadow:audit - Enable support for sys-process/audit
+sys-apps/smartmontools:minimal - Do not install the monitoring daemon and associated scripts.
+sys-apps/smartmontools:update_drivedb - Install a script to update the drivedb file.
+sys-apps/tcp-wrappers:netgroups - Support matching NIS (host) netgroup names via the @netgroup syntax (if you don't know what this means, you most likely do not need it)
 sys-apps/util-linux:caps - build setpriv helper (run programs with diff capabilities)
 sys-apps/util-linux:cramfs - build mkfs/fsck helpers for cramfs filesystems
 sys-apps/util-linux:fdformat - build fdformat (floppy disk format)
@@ -326,6 +329,8 @@ sys-fs/lvm2:clvm - Allow users to build clustered lvm2
 sys-fs/lvm2:cman - Cman support for clustered lvm
 sys-fs/lvm2:lvm1 - Allow users to build lvm2 with lvm1 support
 sys-fs/lvm2:nolvmstatic - Allow users to build lvm2 dynamically
+sys-fs/quota:netlink - Compile daemon receiving quota messages via netlink
+sys-fs/quota:rpc - Enable quota interaction via RPC
 sys-fs/zfs:kernel-builtin - Disable dependency on sys-fs/zfs-kmod under the assumption that ZFS is part of the kernel source tree
 sys-fs/zfs:rootfs - Enable dependencies required for booting off a pool containing a rootfs
 sys-fs/zfs:test-suite - Install regression test suite
@@ -350,6 +355,8 @@ sys-libs/readline:utils - Install rlfe (ReadLine Front-End) helper tool -- a wra
 sys-libs/timezone-data:leaps_timezone - Install the set of "right" timezones; these timezones include leap seconds when counting seconds since the epoch (while POSIX does not) as they are based on the TAI (International Atomic Time) clock
 sys-libs/zlib:minizip - include the minizip library for quick and dirty zip extraction
 sys-power/pm-utils:ntp - Install support for net-misc/ntp
+sys-process/cronie:anacron - Install the periodic anacron command scheduler.
+sys-process/cronie:inotify - Enable inotify filesystem monitoring support.
 sys-process/fcron:debug - Enable debug code and output. Since version 3.0.5 this will no longer force foreground execution, and fcron will be able to run as a service properly.
 sys-process/fcron:mta - Enable mta support for sending emails from fcron
 sys-process/fcron:pam - Enable PAM support for fcron. This means that fcron will pass through the "fcron" stack before executing the jobs, and fcrontab will use the "fcrontab" stack to authenticate the user before editing its crontab file.
@@ -357,6 +364,7 @@ sys-process/fcron:system-crontab - Set up fcron to respect /etc/crontab and /etc
 sys-process/htop:oom - Add column to track the OOM-killer score of processes
 sys-process/htop:openvz - Enable openvz support
 sys-process/htop:vserver - Enable vserver support
+sys-process/lsof:rpc - support looking up RPC service info
 sys-process/procps:kill - Build the kill program
 sys-process/procps:modern-top - Enables new startup defaults of top. Keeps old defaults if disabled
 sys-process/procps:ncurses - Build programs that use ncurses: top, slabtop, watch
