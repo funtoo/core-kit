@@ -18,18 +18,15 @@ IUSE="debug selinux utempter vim-syntax kernel_FreeBSD kernel_linux"
 
 CDEPEND="
 	dev-libs/libevent:0=
-	sys-libs/ncurses:0=
 	utempter? (
 		kernel_linux? ( sys-libs/libutempter )
 		kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-lib-9.0 sys-libs/libutempter ) )
-	)"
-
-DEPEND="
-	${CDEPEND}
+	)
+	sys-libs/ncurses:0="
+DEPEND="${CDEPEND}
 	virtual/pkgconfig"
-
-RDEPEND="
-	${CDEPEND}
+RDEPEND="${CDEPEND}
+	dev-libs/libevent:=
 	selinux? ( sec-policy/selinux-screen )
 	vim-syntax? (
 		|| (
@@ -38,21 +35,21 @@ RDEPEND="
 		)
 	)"
 
-DOCS=( CHANGES README TODO example_tmux.conf )
-
-PATCHES=(
-	# usptream fixes (can be removed with next version bump)
-	"${FILESDIR}/${PN}-2.4-flags.patch"
-)
-
-S="${WORKDIR}/${P/_/-}"
+DOCS=( CHANGES FAQ README TODO )
 
 src_prepare() {
+	# respect CFLAGS and don't add some includes
+	sed \
+		-e 's:-I/usr/local/include::' \
+		-e 's:-O2::' \
+		-i Makefile.am || die
+
 	# bug 438558
 	# 1.7 segfaults when entering copy mode if compiled with -Os
 	replace-flags -Os -O2
 
 	default
+
 	eautoreconf
 }
 
@@ -62,12 +59,16 @@ src_configure() {
 		$(use_enable debug)
 		$(use_enable utempter)
 	)
-
 	econf "${myeconfargs[@]}"
 }
 
 src_install() {
 	default
+
+	einstalldocs
+
+	dodoc example_tmux.conf
+	docompress -x /usr/share/doc/${PF}/example_tmux.conf
 
 	if use vim-syntax; then
 		insinto /usr/share/vim/vimfiles/ftdetect

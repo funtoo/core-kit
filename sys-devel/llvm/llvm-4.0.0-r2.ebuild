@@ -12,8 +12,8 @@ inherit cmake-utils flag-o-matic multilib-minimal pax-utils \
 	python-any-r1 toolchain-funcs versionator
 
 DESCRIPTION="Low Level Virtual Machine"
-HOMEPAGE="https://llvm.org/"
-SRC_URI="https://releases.llvm.org/${PV/_//}/${P/_/}.src.tar.xz
+HOMEPAGE="http://llvm.org/"
+SRC_URI="http://releases.llvm.org/${PV/_//}/${P/_/}.src.tar.xz
 	!doc? ( https://dev.gentoo.org/~mgorny/dist/llvm-manpages-${PV}.tar.bz2 )"
 
 # Keep in sync with CMakeLists.txt
@@ -32,7 +32,7 @@ ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 LICENSE="UoI-NCSA rc BSD public-domain
 	llvm_targets_ARM? ( LLVM-Grant )"
 SLOT="$(get_major_version)"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="debug +doc gold libedit +libffi ncurses test
 	elibc_musl kernel_Darwin ${ALL_LLVM_TARGETS[*]}"
 
@@ -60,7 +60,7 @@ DEPEND="${RDEPEND}
 # installed means llvm-config there will take precedence.
 RDEPEND="${RDEPEND}
 	!sys-devel/llvm:0"
-PDEPEND="sys-devel/llvm-common
+PDEPEND="app-vim/llvm-vim
 	gold? ( sys-devel/llvmgold )"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
@@ -155,12 +155,11 @@ multilib_src_configure() {
 	fi
 
 	if tc-is-cross-compiler; then
-		local tblgen="${EPREFIX}/usr/lib/llvm/${SLOT}/bin/llvm-tblgen"
-		[[ -x "${tblgen}" ]] \
-			|| die "${tblgen} not found or usable"
+		[[ -x "/usr/bin/llvm-tblgen" ]] \
+			|| die "/usr/bin/llvm-tblgen not found or usable"
 		mycmakeargs+=(
 			-DCMAKE_CROSSCOMPILING=ON
-			-DLLVM_TABLEGEN="${tblgen}"
+			-DLLVM_TABLEGEN=/usr/bin/llvm-tblgen
 		)
 	fi
 

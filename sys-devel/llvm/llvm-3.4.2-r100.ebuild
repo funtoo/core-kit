@@ -8,12 +8,11 @@ inherit eutils check-reqs flag-o-matic multilib pax-utils prefix \
 	python-any-r1 toolchain-funcs
 
 DESCRIPTION="Low Level Virtual Machine"
-HOMEPAGE="https://llvm.org/"
-SRC_URI="https://llvm.org/releases/${PV}/${P}.src.tar.gz
-	clang? ( https://llvm.org/releases/3.4/compiler-rt-3.4.src.tar.gz
-		https://llvm.org/releases/${PV}/cfe-${PV}.src.tar.gz )
-	https://dev.gentoo.org/~mgorny/dist/llvm/${PN}-3.4-manpages.tar.bz2
-	https://dev.gentoo.org/~mgorny/dist/llvm/${P}-patchset.tar.gz"
+HOMEPAGE="http://llvm.org/"
+SRC_URI="http://llvm.org/releases/${PV}/${P}.src.tar.gz
+	clang? ( http://llvm.org/releases/3.4/compiler-rt-3.4.src.tar.gz
+		http://llvm.org/releases/${PV}/cfe-${PV}.src.tar.gz )
+	https://dev.gentoo.org/~mgorny/dist/${PN}-3.4-manpages.tar.bz2"
 
 # Additional licenses:
 # 1. OpenBSD regex: Henry Spencer's license ('rc' in Gentoo) + BSD.
@@ -97,16 +96,16 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch "${WORKDIR}/${P}-patchset"/nodoctargz.patch
-	epatch "${WORKDIR}/${P}-patchset"/gentoo-install.patch
+	epatch "${FILESDIR}"/3.6.2/nodoctargz.patch
+	epatch "${FILESDIR}"/3.4.2/gentoo-install.patch
 
 	if use clang; then
 		# Automatically select active system GCC's libraries, bugs #406163 and #417913
-		epatch "${WORKDIR}/${P}-patchset"/clang/gentoo-runtime-gcc-detection-v3.patch
+		epatch "${FILESDIR}"/3.4.2/clang/gentoo-runtime-gcc-detection-v3.patch
 
-		epatch "${WORKDIR}/${P}-patchset"/clang/gentoo-install.patch
-		epatch "${WORKDIR}/${P}-patchset"/clang/darwin_build_fix.patch
-		epatch "${WORKDIR}/${P}-patchset"/clang/darwin_prefix-include-paths.patch
+		epatch "${FILESDIR}"/3.4.2/clang/gentoo-install.patch
+		epatch "${FILESDIR}"/3.4.2/clang/darwin_build_fix.patch
+		epatch "${FILESDIR}"/3.9.1/clang/darwin_prefix-include-paths.patch
 		eprefixify tools/clang/lib/Frontend/InitHeaderSearch.cpp
 	fi
 
@@ -147,14 +146,14 @@ src_prepare() {
 	python_setup
 }
 
-src_configure() {
+multilib_src_configure() {
 	# disable timestamps since they confuse ccache
 	local conf_flags=(
 		--disable-timestamps
 		--enable-keep-symbols
 		--enable-shared
 		--with-optimize-option=
-		--enable-optimized
+		--enableoptimized
 		--disable-assertions
 		--disable-expensive-checks
 		--disable-terminfo
@@ -165,6 +164,12 @@ src_configure() {
 
 		ac_cv_prog_XML2CONFIG=""
 	)
+
+	if use clang; then
+		conf_flags+=(
+			--with-clang-resource-dir=../lib/clang/${PV}
+		)
+	fi
 
 	if use libffi; then
 		local CPPFLAGS=${CPPFLAGS}
@@ -198,8 +203,8 @@ src_install() {
 	if ! use clang; then
 		rm "${WORKDIR}"/${PN}-3.4-manpages/clang.1 || die
 	else
-		for tool in clang{,++} ; do
-			dosym ${tool} /usr/bin/${CHOST}-${tool}
+		for tool in clang{,++}{,-${PV}} ; do
+			dosym /usr/bin/${tool} /usr/bin/${CHOST}-${tool}
 		done
 	fi
 	doman "${WORKDIR}"/${PN}-3.4-manpages/*.1

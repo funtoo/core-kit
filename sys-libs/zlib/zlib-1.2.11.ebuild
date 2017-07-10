@@ -29,13 +29,6 @@ src_prepare() {
 		cd contrib/minizip || die
 		eautoreconf
 	fi
-
-	case ${CHOST} in
-	*-mingw*|mingw*)
-		# uses preconfigured Makefile rather than configure script
-		multilib_copy_sources
-		;;
-	esac
 }
 
 echoit() { echo "$@"; "$@"; }
@@ -69,7 +62,7 @@ multilib_src_compile() {
 	*-mingw*|mingw*)
 		emake -f win32/Makefile.gcc STRIP=true PREFIX=${CHOST}-
 		sed \
-			-e 's|@prefix@|/usr|g' \
+			-e 's|@prefix@|${EPREFIX}/usr|g' \
 			-e 's|@exec_prefix@|${prefix}|g' \
 			-e 's|@libdir@|${exec_prefix}/'$(get_libdir)'|g' \
 			-e 's|@sharedlibdir@|${exec_prefix}/'$(get_libdir)'|g' \
@@ -98,8 +91,7 @@ multilib_src_install() {
 			LIBRARY_PATH="${ED}/usr/$(get_libdir)" \
 			INCLUDE_PATH="${ED}/usr/include" \
 			SHARED_MODE=1
-		# overwrites zlib.pc created from win32/Makefile.gcc #620136
-		insinto /usr/$(get_libdir)/pkgconfig
+		insinto /usr/share/pkgconfig
 		doins zlib.pc
 		;;
 

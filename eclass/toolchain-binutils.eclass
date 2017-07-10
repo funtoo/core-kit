@@ -75,7 +75,7 @@ add_src_uri() {
 	else
 		a+=".bz2"
 	fi
-	set -- mirror://gentoo https://dev.gentoo.org/~vapier/dist https://dev.gentoo.org/~tamiko/distfiles
+	set -- mirror://gentoo https://dev.gentoo.org/~vapier/dist
 	SRC_URI="${SRC_URI} ${@/%//${a}}"
 }
 add_src_uri binutils-${BVER}-patches-${PATCHVER}.tar ${PATCHVER}

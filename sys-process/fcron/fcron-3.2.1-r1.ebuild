@@ -50,8 +50,6 @@ src_prepare() {
 
 	mv configure.in configure.ac || die
 
-	cp "${FILESDIR}"/crontab.2 "${WORKDIR}"/crontab || die
-
 	eautoconf
 }
 
@@ -164,7 +162,7 @@ src_install() {
 	newinitd "${FILESDIR}"/fcron.init.4 fcron
 	systemd_newunit "${S}/script/fcron.init.systemd" fcron.service
 
-	local DOCS=( MANIFEST VERSION "${WORKDIR}/crontab")
+	local DOCS=( MANIFEST VERSION "${FILESDIR}/crontab")
 	DOCS+=( doc/en/txt/{readme,thanks,faq,todo,relnotes,changes}.txt )
 
 	local HTML_DOCS=( doc/en/HTML/. )

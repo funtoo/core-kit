@@ -15,7 +15,7 @@ SLOT="0"
 if [[ ${PV} != *_pre ]] ; then
 KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 fi
-IUSE="acl examples iconv ipv6 static stunnel xattr"
+IUSE="acl iconv ipv6 static stunnel xattr"
 
 LIB_DEPEND="acl? ( virtual/acl[static-libs(+)] )
 	xattr? ( kernel_linux? ( sys-apps/attr[static-libs(+)] ) )
@@ -64,11 +64,9 @@ src_install() {
 	fi
 
 	# Install the useful contrib scripts
-	if use examples ; then
-		exeinto /usr/share/rsync
-		doexe support/*
-		rm -f "${ED}"/usr/share/rsync/{Makefile*,*.c}
-	fi
+	exeinto /usr/share/rsync
+	doexe support/*
+	rm -f "${ED}"/usr/share/rsync/{Makefile*,*.c}
 
 	eprefixify "${ED}"/etc/{,xinetd.d}/rsyncd*
 

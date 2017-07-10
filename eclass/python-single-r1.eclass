@@ -271,11 +271,8 @@ if [[ ! ${_PYTHON_SINGLE_R1} ]]; then
 # are both in PYTHON_COMPAT and match any of the patterns passed
 # as parameters to the function.
 #
-# The patterns can be either fnmatch-style patterns (matched via bash
-# == operator against PYTHON_COMPAT values) or '-2' / '-3' to indicate
-# appropriately all enabled Python 2/3 implementations (alike
-# python_is_python3). Remember to escape or quote the fnmatch patterns
-# to prevent accidental shell filename expansion.
+# Remember to escape or quote the patterns to prevent shell filename
+# expansion.
 #
 # When all implementations are requested, please use ${PYTHON_USEDEP}
 # instead. Please also remember to set an appropriate REQUIRED_USE
@@ -294,15 +291,19 @@ if [[ ! ${_PYTHON_SINGLE_R1} ]]; then
 python_gen_usedep() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	local impl matches=()
+	local impl pattern
+	local matches=()
 
 	for impl in "${_PYTHON_SUPPORTED_IMPLS[@]}"; do
-		if _python_impl_matches "${impl}" "${@}"; then
-			matches+=(
-				"python_targets_${impl}(-)?"
-				"python_single_target_${impl}(+)?"
-			)
-		fi
+		for pattern; do
+			if [[ ${impl} == ${pattern} ]]; then
+				matches+=(
+					"python_targets_${impl}(-)?"
+					"python_single_target_${impl}(+)?"
+				)
+				break
+			fi
+		done
 	done
 
 	[[ ${matches[@]} ]] || die "No supported implementations match python_gen_usedep patterns: ${@}"
@@ -318,12 +319,6 @@ python_gen_usedep() {
 # are both in PYTHON_COMPAT and match any of the patterns passed
 # as parameters to the function.
 #
-# The patterns can be either fnmatch-style patterns (matched via bash
-# == operator against PYTHON_COMPAT values) or '-2' / '-3' to indicate
-# appropriately all enabled Python 2/3 implementations (alike
-# python_is_python3). Remember to escape or quote the fnmatch patterns
-# to prevent accidental shell filename expansion.
-#
 # Example:
 # @CODE
 # PYTHON_COMPAT=( python{2_7,3_4} )
@@ -337,7 +332,8 @@ python_gen_usedep() {
 python_gen_useflags() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	local flag_prefix impl matches=()
+	local flag_prefix impl pattern
+	local matches=()
 
 	if [[ ${#_PYTHON_SUPPORTED_IMPLS[@]} -eq 1 ]]; then
 		flag_prefix=python_targets
@@ -346,9 +342,12 @@ python_gen_useflags() {
 	fi
 
 	for impl in "${_PYTHON_SUPPORTED_IMPLS[@]}"; do
-		if _python_impl_matches "${impl}" "${@}"; then
-			matches+=( "${flag_prefix}_${impl}" )
-		fi
+		for pattern; do
+			if [[ ${impl} == ${pattern} ]]; then
+				matches+=( "${flag_prefix}_${impl}" )
+				break
+			fi
+		done
 	done
 
 	echo "${matches[@]}"
@@ -360,12 +359,6 @@ python_gen_useflags() {
 # Output a list of <dependency>-ies made conditional to USE flags
 # of Python implementations which are both in PYTHON_COMPAT and match
 # any of the patterns passed as the remaining parameters.
-#
-# The patterns can be either fnmatch-style patterns (matched via bash
-# == operator against PYTHON_COMPAT values) or '-2' / '-3' to indicate
-# appropriately all enabled Python 2/3 implementations (alike
-# python_is_python3). Remember to escape or quote the fnmatch patterns
-# to prevent accidental shell filename expansion.
 #
 # In order to enforce USE constraints on the packages, verbatim
 # '${PYTHON_USEDEP}' (quoted!) may be placed in the dependency
@@ -389,7 +382,8 @@ python_gen_useflags() {
 python_gen_cond_dep() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	local flag_prefix impl matches=()
+	local flag_prefix impl pattern
+	local matches=()
 
 	if [[ ${#_PYTHON_SUPPORTED_IMPLS[@]} -eq 1 ]]; then
 		flag_prefix=python_targets
@@ -401,17 +395,20 @@ python_gen_cond_dep() {
 	shift
 
 	for impl in "${_PYTHON_SUPPORTED_IMPLS[@]}"; do
-		if _python_impl_matches "${impl}" "${@}"; then
-			# substitute ${PYTHON_USEDEP} if used
-			# (since python_gen_usedep() will not return ${PYTHON_USEDEP}
-			#  the code is run at most once)
-			if [[ ${dep} == *'${PYTHON_USEDEP}'* ]]; then
-				local usedep=$(python_gen_usedep "${@}")
-				dep=${dep//\$\{PYTHON_USEDEP\}/${usedep}}
-			fi
+		for pattern; do
+			if [[ ${impl} == ${pattern} ]]; then
+				# substitute ${PYTHON_USEDEP} if used
+				# (since python_gen_usedep() will not return ${PYTHON_USEDEP}
+				#  the code is run at most once)
+				if [[ ${dep} == *'${PYTHON_USEDEP}'* ]]; then
+					local usedep=$(python_gen_usedep "${@}")
+					dep=${dep//\$\{PYTHON_USEDEP\}/${usedep}}
+				fi
 
-			matches+=( "${flag_prefix}_${impl}? ( ${dep} )" )
-		fi
+				matches+=( "${flag_prefix}_${impl}? ( ${dep} )" )
+				break
+			fi
+		done
 	done
 
 	echo "${matches[@]}"
@@ -425,12 +422,6 @@ python_gen_cond_dep() {
 # without the argument (or with empty argument). If any implementation
 # patterns are passed, the output dependencies will be generated only
 # for the implementations matching them.
-#
-# The patterns can be either fnmatch-style patterns (matched via bash
-# == operator against PYTHON_COMPAT values) or '-2' / '-3' to indicate
-# appropriately all enabled Python 2/3 implementations (alike
-# python_is_python3). Remember to escape or quote the fnmatch patterns
-# to prevent accidental shell filename expansion.
 #
 # Use this function when you need to request different USE flags
 # on the Python interpreter depending on package's USE flags. If you
@@ -468,11 +459,14 @@ python_gen_impl_dep() {
 
 	local patterns=( "${@-*}" )
 	for impl in "${_PYTHON_SUPPORTED_IMPLS[@]}"; do
-		if _python_impl_matches "${impl}" "${patterns[@]}"; then
-			local PYTHON_PKG_DEP
-			python_export "${impl}" PYTHON_PKG_DEP
-			matches+=( "${flag_prefix}_${impl}? ( ${PYTHON_PKG_DEP} )" )
-		fi
+		for pattern in "${patterns[@]}"; do
+			if [[ ${impl} == ${pattern} ]]; then
+				local PYTHON_PKG_DEP
+				python_export "${impl}" PYTHON_PKG_DEP
+				matches+=( "${flag_prefix}_${impl}? ( ${PYTHON_PKG_DEP} )" )
+				break
+			fi
+		done
 	done
 
 	echo "${matches[@]}"

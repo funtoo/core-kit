@@ -337,9 +337,7 @@ gnome2_pkg_preinst() {
 gnome2_pkg_postinst() {
 	xdg_pkg_postinst
 	gnome2_gconf_install
-	if [[ -n ${GNOME2_ECLASS_ICONS} ]]; then
-		gnome2_icon_cache_update
-	fi
+	gnome2_icon_cache_update
 	gnome2_schemas_update
 	gnome2_scrollkeeper_update
 	gnome2_gdk_pixbuf_update
