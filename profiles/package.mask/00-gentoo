@@ -29,10 +29,16 @@
 
 #--- END OF EXAMPLES ---
 
+# Hans de Graaff <graaff@gentoo.org> (09 Jul 2017)
+# Upstream has removed the code and the published gem.
+# Removal in 30 days.
+dev-ruby/modernizr
+
 # Lars Wendler <polynomial-c@gentoo.org> (07 Jul 2017)
 # Masked until >=net-fs/samba-4.7 is in the tree and 
 # unmasked. (bug #624106)
->=sys-libs/ldb-1.2.0
+# See also https://bugzilla.samba.org/show_bug.cgi?id=12859
+>=sys-libs/ldb-1.1.30
 
 # Michael Palimaka <kensington@gentoo.org> (06 Jul 2017)
 # Obsolete. l10n is now included in app-office/calligra:5.
@@ -362,7 +368,7 @@ dev-perl/Params-ValidationCompiler
 # Thomas Deutschmann <whissi@gentoo.org> (24 May 2017)
 # Broken runscript/changed behavior causing lvm2 to fail
 # on boot. Bug #617578
-=sys-fs/lvm2-2.02.171
+>=sys-fs/lvm2-2.02.171
 
 # Michał Górny <mgorny@gentoo.org> (22 May 2017)
 # for Maciej S. Szmigiero <mail@maciej.szmigiero.name>
