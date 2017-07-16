@@ -29,6 +29,15 @@
 
 #--- END OF EXAMPLES ---
 
+# Matt Turner <mattst88@gentoo.org> (16 Jul 2017)
+# Header package for removed x11-libs/libXevie. No dependencies. Removal in a
+# month (#615314)
+x11-proto/evieext
+
+# Thomas Deutschmann <whissi@gentoo.org> (16 Jul 2017)
+# Discontinued project with multiple vulnerabilities, removal in a month (#620802)
+media-gfx/autotrace
+
 # Pacho Ramos <pacho@gentoo.org> (14 Jul 2017)
 # Not usable, dead since 2003, removal in a month (#24706)
 app-mobilephone/esms
@@ -81,12 +90,6 @@ dev-util/mutrace
 # #587288. Removal in a month.
 sys-libs/libacpi
 sys-power/yacpi
-
-# Pacho Ramos <pacho@gentoo.org> (14 Jul 2017)
-# games-engines/renpy cannot be used with its only reverse dep in the tree
-# as-is, it needs a major version bump and build fixing too, bug #587872.
-# Removal in a month.
-games-engines/renpy
 
 # Pacho Ramos <pacho@gentoo.org> (14 Jul 2017)
 # Doesn't build for a long time, bug #587942
@@ -297,10 +300,6 @@ net-libs/dhcpcd-dbus
 # Not compatible with python >= 3.5 but neither needed by anything in the
 # tree anymore, bug #624670. Removal in a month.
 =dev-python/beautifulsoup-3.1.0.1-r2
-
-# Kent Fredric <kentnl@gentoo.org> (12 Jul 2017)
-# Masked for staging purposes
-=dev-lang/perl-5.24.2*
 
 # Hans de Graaff <graaff@gentoo.org> (09 Jul 2017)
 # Upstream has removed the code and the published gem.
