@@ -423,16 +423,6 @@ app-emulation/vmware-modules
 app-emulation/vmware-tools
 
 # Pacho Ramos <pacho@gentoo.org> (17 Jun 2017)
-# Not compatible with ffmpeg-3 (#602786), other bug reports and NPAPI
-# plugins support in main browsers is dying. Removal in a month.
-www-plugins/gnash
-
-# Pacho Ramos <pacho@gentoo.org> (17 Jun 2017)
-# Not compatible with ffmpeg-3 (#591946), neither builds without ffmpeg
-# support (#607492) and NPAPI plugins are dying. Removal in a month.
-www-plugins/lightspark
-
-# Pacho Ramos <pacho@gentoo.org> (17 Jun 2017)
 # Not compatible with ffmpeg-3 (#589806) and needs vulnerable qtwebkit:4
 # (#620740). Removal in a month.
 net-voip/homer
@@ -1017,10 +1007,6 @@ app-eselect/eselect-lua
 =dev-lang/lua-5.2.3-r1
 =dev-lang/lua-5.3.3
 
-# Sergey Popov <pinkbyte@gentoo.org> (20 Mar 2014)
-# Security mask of vulnerable versions, wrt bug #424167
-<net-nds/openldap-2.4.35
-
 # Mike Gilbert <floppym@gentoo.org> (04 Mar 2014)
 # Dev channel releases are only for people who are developers or want more
 # experimental features and accept a more unstable release.
@@ -1094,3 +1080,7 @@ games-fps/unreal-tournament-goty
 games-fps/unreal-tournament-strikeforce
 games-fps/unreal-tournament-bonuspacks
 games-fps/aaut
+
+# Nicolas Bock <nicolasbock@gentoo.org> (17 Jul 2017)
+# Keep shotwell development series masked.
+>=media-gfx/shotwell-0.27
