@@ -24,6 +24,7 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.20
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
 	!<sys-libs/glibc-2.11
+	>=dev-libs/glib-2.22.0
 	!sys-apps/gentoo-systemd-integration
 	!sys-apps/systemd
 	abi_x86_32? (
@@ -31,7 +32,6 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.20
 		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
 	)"
 DEPEND="${COMMON_DEPEND}
-	dev-libs/glib
 	dev-util/gperf
 	virtual/os-headers
 	virtual/pkgconfig
