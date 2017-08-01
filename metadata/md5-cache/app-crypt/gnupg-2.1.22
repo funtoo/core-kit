@@ -10,4 +10,4 @@ RDEPEND=>=dev-libs/npth-1.2 >=dev-libs/libassuan-2.4.3 >=dev-libs/libgcrypt-1.7.
 SLOT=0
 SRC_URI=mirror://gnupg/gnupg/gnupg-2.1.22.tar.bz2
 _eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	e12dd5e3cf1f359292cea2a70abeba5f	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=1b2f25e6c4f40935d4637e94749578cf
+_md5_=75d5e2ee336023a0cdbba5e60924ec24
