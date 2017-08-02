@@ -1,0 +1,9 @@
+DEFINED_PHASES=install
+DESCRIPTION=Manages multiple Ruby versions
+EAPI=0
+HOMEPAGE=http://www.gentoo.org
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=>=app-admin/eselect-1.0.2
+SLOT=0
+_md5_=5debcca0c9511b90e4e68c71b5316713

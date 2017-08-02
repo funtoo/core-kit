@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # See `man savedconfig.eclass` for info on how to use USE=savedconfig.
@@ -15,7 +14,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	MY_P=${PN}-${PV/_/-}
 	SRC_URI="https://www.busybox.net/downloads/${MY_P}.tar.bz2"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~arm-linux ~x86-linux"
+	KEYWORDS="*"
 fi
 
 LICENSE="GPL-2" # GPL-2 only
@@ -36,19 +35,17 @@ S=${WORKDIR}/${MY_P}
 
 busybox_config_option() {
 	local flag=$1 ; shift
-	if [[ ${flag} != [yn] && ${flag} != \"* ]] ; then
+	if [[ ${flag} != [yn] ]] ; then
 		busybox_config_option $(usex ${flag} y n) "$@"
 		return
 	fi
-	local expr
 	while [[ $# -gt 0 ]] ; do
-		case ${flag} in
-		y) expr="s:.*\<CONFIG_$1\>.*set:CONFIG_$1=y:g" ;;
-		n) expr="s:CONFIG_$1=y:# CONFIG_$1 is not set:g" ;;
-		*) expr="s:.*\<CONFIG_$1\>.*:CONFIG_$1=${flag}:g" ;;
-		esac
-		sed -i -e "${expr}" .config || die
-		einfo "$(grep "CONFIG_$1[= ]" .config || echo "Could not find CONFIG_$1 ...")"
+		if [[ ${flag} == "y" ]] ; then
+			sed -i -e "s:.*\<CONFIG_$1\>.*set:CONFIG_$1=y:g" .config
+		else
+			sed -i -e "s:CONFIG_$1=y:# CONFIG_$1 is not set:g" .config
+		fi
+		einfo $(grep "CONFIG_$1[= ]" .config || echo Could not find CONFIG_$1 ...)
 		shift
 	done
 }
@@ -112,7 +109,7 @@ src_configure() {
 
 	# now turn off stuff we really don't want
 	busybox_config_option n DMALLOC
-	busybox_config_option n FEATURE_2_4_MODULES #607548
+	busybox_config_option n FEATURE_2_4_MODULES #607548, FL-3707.
 	busybox_config_option n FEATURE_SUID_CONFIG
 	busybox_config_option n BUILD_AT_ONCE
 	busybox_config_option n BUILD_LIBBUSYBOX
@@ -127,9 +124,6 @@ src_configure() {
 	# all calls to system() will fail.
 	busybox_config_option y ASH
 	busybox_config_option n HUSH
-
-	busybox_config_option '"/run"' PID_FILE_PATH
-	busybox_config_option '"/run/ifstate"' IFUPDOWN_IFSTATE_PATH
 
 	# disable ipv6 applets
 	if ! use ipv6; then
