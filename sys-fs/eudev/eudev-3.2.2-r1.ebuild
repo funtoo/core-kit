@@ -1,3 +1,4 @@
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -6,14 +7,16 @@ KV_min=2.6.39
 
 inherit autotools linux-info multilib multilib-minimal user
 
-GITHUB_REPO="$PN"
-GITHUB_USER="funtoo"
-GITHUB_TAG="v${PV}-funtoo"
-SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz"
-KEYWORDS="*"
+if [[ ${PV} = 9999* ]]; then
+	EGIT_REPO_URI="https://github.com/gentoo/eudev.git"
+	inherit git-r3
+else
+	SRC_URI="https://dev.gentoo.org/~blueness/${PN}/${P}.tar.gz"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
-HOMEPAGE="https://github.com/funtoo/eudev"
+HOMEPAGE="https://github.com/gentoo/eudev"
 
 LICENSE="LGPL-2.1 MIT GPL-2"
 SLOT="0"
@@ -24,7 +27,6 @@ COMMON_DEPEND=">=sys-apps/util-linux-2.20
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
 	!<sys-libs/glibc-2.11
-	>=dev-libs/glib-2.22.0
 	!sys-apps/gentoo-systemd-integration
 	!sys-apps/systemd
 	abi_x86_32? (
@@ -53,11 +55,6 @@ PDEPEND=">=sys-fs/udev-init-scripts-26
 # are different in ABIs. In this case, we install libgudev headers in native
 # ABI but not for non-native ABI.
 multilib_check_headers() { :; }
-
-src_unpack() {
-	unpack ${A}
-	mv "${WORKDIR}/${GITHUB_USER}-${PN}"-??????? "${S}" || die
-}
 
 pkg_pretend() {
 	ewarn
@@ -114,7 +111,6 @@ multilib_src_configure() {
 		--with-rootrundir=/run
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
 		--with-rootlibexecdir="${EPREFIX}"/lib/udev
-		--with-firmware-path="/lib/firmware"
 		--enable-split-usr
 		--enable-manpages
 		--disable-hwdb
