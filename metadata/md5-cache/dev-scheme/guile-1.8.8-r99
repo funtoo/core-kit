@@ -1,0 +1,11 @@
+DEFINED_PHASES=-
+DEPEND=dev-scheme/guile:0/1.8.8[debug?,debug-freelist?,debug-malloc?,deprecated?,discouraged?,emacs?,networking?,nls?,regex?,threads?]
+DESCRIPTION=Scheme interpreter
+EAPI=5
+HOMEPAGE=http://www.gnu.org/software/guile/
+IUSE=debug debug-freelist debug-malloc +deprecated discouraged emacs networking nls +regex +threads
+KEYWORDS=*
+LICENSE=metapackage
+RDEPEND=dev-scheme/guile:0/1.8.8[debug?,debug-freelist?,debug-malloc?,deprecated?,discouraged?,emacs?,networking?,nls?,regex?,threads?]
+SLOT=12
+_md5_=b489890071dbf88ac334e2f6200f3dfd

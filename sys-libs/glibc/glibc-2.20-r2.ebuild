@@ -1,17 +1,19 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-libs/glibc/glibc-2.20-r2.ebuild,v 1.13 2015/07/21 02:41:57 vapier Exp $
 
 EAPI="4"
 
-inherit toolchain-glibc
+inherit eutils versionator toolchain-funcs flag-o-matic gnuconfig multilib systemd unpacker multiprocessing
 
 DESCRIPTION="GNU libc6 (also called glibc2) C library"
-HOMEPAGE="https://www.gnu.org/software/libc/libc.html"
+HOMEPAGE="http://www.gnu.org/software/libc/libc.html"
 
 LICENSE="LGPL-2.1+ BSD HPND ISC inner-net rc PCRE"
-KEYWORDS="alpha amd64 arm arm64 -hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86"
+KEYWORDS="*"
 RESTRICT="strip" # strip ourself #46186
 EMULTILIB_PKG="true"
+EBLIT_VER="2.20-r2"
 
 # Configuration variables
 RELEASE_VER=""
@@ -25,7 +27,7 @@ case ${PV} in
 	RELEASE_VER=${PV}
 	;;
 esac
-GCC_BOOTSTRAP_VER="4.7.3-r1"
+#GCC_BOOTSTRAP_VER="4.7.3-r1"
 PATCH_VER="5"                                  # Gentoo patchset
 : ${NPTL_KERN_VER:="2.6.32"}                   # min kernel version nptl requires
 
@@ -92,7 +94,7 @@ upstream_uris() {
 }
 gentoo_uris() {
 	local devspace="HTTP~vapier/dist/URI HTTP~azarah/glibc/URI HTTP~blueness/glibc/URI"
-	devspace=${devspace//HTTP/https://dev.gentoo.org/}
+	devspace=${devspace//HTTP/http://dev.gentoo.org/}
 	echo mirror://gentoo/$1 ${devspace//URI/$1}
 }
 SRC_URI=$(
@@ -101,22 +103,67 @@ SRC_URI=$(
 )
 SRC_URI+=" ${GCC_BOOTSTRAP_VER:+multilib? ( $(gentoo_uris gcc-${GCC_BOOTSTRAP_VER}-multilib-bootstrap.tar.bz2) )}"
 
-src_unpack() {
-	[[ -n ${GCC_BOOTSTRAP_VER} ]] && use multilib && unpack gcc-${GCC_BOOTSTRAP_VER}-multilib-bootstrap.tar.bz2
+# eblit-include [--skip] <function> [version]
+eblit-include() {
+	local skipable=false
+	[[ $1 == "--skip" ]] && skipable=true && shift
+	[[ $1 == pkg_* ]] && skipable=true
 
-	toolchain-glibc_src_unpack
+	local e v func=$1 ver=$2
+	[[ -z ${func} ]] && die "Usage: eblit-include <function> [version]"
+	for v in ${ver:+-}${ver} -${PVR} -${PV} "" ; do
+		e="${FILESDIR}/eblits-${EBLIT_VER}/${func}${v}.eblit"
+		if [[ -e ${e} ]] ; then
+			source "${e}"
+			return 0
+		fi
+	done
+	${skipable} && return 0
+	die "Could not locate requested eblit '${func}' in ${FILESDIR}/eblits-${EBLIT_VER}/"
 }
 
-src_prepare() {
-	toolchain-glibc_src_prepare
+# eblit-run-maybe <function>
+# run the specified function if it is defined
+eblit-run-maybe() {
+	[[ $(type -t "$@") == "function" ]] && "$@"
+}
 
+# eblit-run <function> [version]
+# aka: src_unpack() { eblit-run src_unpack ; }
+eblit-run() {
+	eblit-include --skip common "${*:2}"
+	eblit-include "$@"
+	eblit-run-maybe eblit-$1-pre
+	eblit-${PN}-$1
+	eblit-run-maybe eblit-$1-post
+}
+
+src_unpack()    { eblit-run src_unpack    ; }
+src_prepare()   { eblit-run src_prepare   ; }
+src_configure() { eblit-run src_configure ; }
+src_compile()   { eblit-run src_compile   ; }
+src_test()      { eblit-run src_test      ; }
+src_install()   { eblit-run src_install   ; }
+
+# FILESDIR might not be available during binpkg install
+for x in pretend setup {pre,post}inst ; do
+	e="${FILESDIR}/eblits-${EBLIT_VER}/pkg_${x}.eblit"
+	if [[ -e ${e} ]] ; then
+		. "${e}"
+		eval "pkg_${x}() { eblit-run pkg_${x} ; }"
+	fi
+done
+
+eblit-src_unpack-pre() {
+	[[ -n ${GCC_BOOTSTRAP_VER} ]] && use multilib && unpack gcc-${GCC_BOOTSTRAP_VER}-multilib-bootstrap.tar.bz2
+}
+
+eblit-src_prepare-post() {
 	cd "${S}"
-
-	epatch "${FILESDIR}"/2.19/${PN}-2.19-ia64-gcc-4.8-reloc-hack.patch #503838
 
 	if use hardened ; then
 		einfo "Patching to get working PIE binaries on PIE (hardened) platforms"
-		tc-enables-pie && epatch "${FILESDIR}"/2.17/glibc-2.17-hardened-pie.patch
+		gcc-specs-pie && epatch "${FILESDIR}"/2.20/glibc-2.17-hardened-pie.patch
 		epatch "${FILESDIR}"/2.20/glibc-2.20-hardened-inittls-nosysenter.patch
 
 		# We don't enable these for non-hardened as the output is very terse --

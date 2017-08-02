@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -11,9 +10,8 @@ SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="debug nethack pam selinux multiuser"
-
 CDEPEND="
 	>=sys-libs/ncurses-5.2:0=
 	pam? ( virtual/pam )"
@@ -26,6 +24,7 @@ DEPEND="${CDEPEND}
 # - Don't use utempter even if it is found on the system.
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.3.0-no-utempter.patch
+	"${FILESDIR}"/term-fix.patch
 )
 
 pkg_setup() {
@@ -63,16 +62,17 @@ src_configure() {
 	append-cppflags "-DMAXWIN=${MAX_SCREEN_WINDOWS:-100}"
 
 	if [[ ${CHOST} == *-solaris* ]] ; then
-		# enable msg_header by upping the feature standard compatible
-		# with c99 mode
-		append-cppflags -D_XOPEN_SOURCE=600
+		# https://lists.gnu.org/archive/html/screen-devel/2014-04/msg00095.html
+		append-cppflags -D_XOPEN_SOURCE \
+			-D_XOPEN_SOURCE_EXTENDED=1 \
+			-D__EXTENSIONS__
+		append-libs -lsocket -lnsl
 	fi
 
 	use nethack || append-cppflags "-DNONETHACK"
 	use debug && append-cppflags "-DDEBUG"
 
 	econf \
-		--with-socket-dir="${EPREFIX}/tmp/screen" \
 		--with-sys-screenrc="${EPREFIX}/etc/screenrc" \
 		--with-pty-mode=0620 \
 		--with-pty-group=5 \
@@ -91,25 +91,11 @@ src_compile() {
 }
 
 src_install() {
-	local tmpfiles_perms tmpfiles_group
 
 	dobin screen
 
-	if use multiuser || use prefix
-	then
-		fperms 4755 /usr/bin/screen
-		tmpfiles_perms="0755"
-		tmpfiles_group="root"
-	else
-		fowners root:utmp /usr/bin/screen
-		fperms 2755 /usr/bin/screen
-		tmpfiles_perms="0775"
-		tmpfiles_group="utmp"
-	fi
 
-	dodir /etc/tmpfiles.d
-	echo "d /tmp/screen ${tmpfiles_perms} root ${tmpfiles_group}" \
-		> "${ED}"/etc/tmpfiles.d/screen.conf
+	fperms 4755 /usr/bin/screen
 
 	insinto /usr/share/screen
 	doins terminfo/{screencap,screeninfo.src}
@@ -135,19 +121,4 @@ pkg_postinst() {
 		elog "We enable some xterm hacks in our default screenrc, which might break some"
 		elog "applications. Please check /etc/screenrc for information on these changes."
 	fi
-
-	# Add /tmp/screen in case it doesn't exist yet. This should solve
-	# problems like bug #508634 where tmpfiles.d isn't in effect.
-	local rundir="${EROOT%/}/tmp/screen"
-	if [[ ! -d ${rundir} ]] ; then
-		if use multiuser || use prefix ; then
-			tmpfiles_group="root"
-		else
-			tmpfiles_group="utmp"
-		fi
-		mkdir -m 0775 "${rundir}"
-		chgrp ${tmpfiles_group} "${rundir}"
-	fi
-
-	ewarn "This revision changes the screen socket location to ${rundir}"
 }

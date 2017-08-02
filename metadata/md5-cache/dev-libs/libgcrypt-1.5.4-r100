@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DESCRIPTION=General purpose crypto library based on the code used in GnuPG
+EAPI=5
+HOMEPAGE=http://www.gnupg.org/
+IUSE=abi_x86_32
+KEYWORDS=*
+LICENSE=LGPL-2.1 MIT
+RDEPEND==dev-libs/libgcrypt-compat-1.5.4*[abi_x86_32=]
+SLOT=11/11
+_md5_=f7a4e4e5fd1986bc97552da9462716e5

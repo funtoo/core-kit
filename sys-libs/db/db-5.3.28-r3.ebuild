@@ -1,8 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit eutils db flag-o-matic java-pkg-opt-2 autotools multilib multilib-minimal toolchain-funcs
+inherit eutils db flag-o-matic java-pkg-opt-2 autotools multilib multilib-minimal
 
 #Number of official patches
 #PATCHNO=`echo ${PV}|sed -e "s,\(.*_p\)\([0-9]*\),\2,"`
@@ -19,7 +18,7 @@ fi
 S_BASE="${WORKDIR}/${MY_P}"
 S="${S_BASE}/build_unix"
 DESCRIPTION="Oracle Berkeley DB"
-HOMEPAGE="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html"
+HOMEPAGE="http://www.oracle.com/technology/software/products/berkeley-db/index.html"
 SRC_URI="http://download.oracle.com/berkeley-db/${MY_P}.tar.gz"
 for (( i=1 ; i<=${PATCHNO} ; i++ )) ; do
 	export SRC_URI="${SRC_URI} http://www.oracle.com/technology/products/berkeley-db/db/update/${MY_PV}/patch.${MY_PV}.${i}"
@@ -27,17 +26,17 @@ done
 
 LICENSE="Sleepycat"
 SLOT="5.3"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="~*"
 IUSE="doc java cxx tcl test"
 
 REQUIRED_USE="test? ( tcl )"
 
 # the entire testsuite needs the TCL functionality
-DEPEND="tcl? ( >=dev-lang/tcl-8.5.15-r1:0=[${MULTILIB_USEDEP}] )
-	test? ( >=dev-lang/tcl-8.5.15-r1:0=[${MULTILIB_USEDEP}] )
+DEPEND="tcl? ( >=dev-lang/tcl-8.5.15-r1[${MULTILIB_USEDEP}] )
+	test? ( >=dev-lang/tcl-8.5.15-r1[${MULTILIB_USEDEP}] )
 	java? ( >=virtual/jdk-1.5 )
 	>=sys-devel/binutils-2.16.1"
-RDEPEND="tcl? ( >=dev-lang/tcl-8.5.15-r1:0=[${MULTILIB_USEDEP}] )
+RDEPEND="tcl? ( >=dev-lang/tcl-8.5.15-r1[${MULTILIB_USEDEP}] )
 	java? ( >=virtual/jre-1.5 )"
 
 MULTILIB_WRAPPED_HEADERS=(
@@ -66,8 +65,8 @@ src_prepare() {
 	# core, ~300MB each. This patch uses links instead, saves a lot of space.
 	epatch "${FILESDIR}"/${PN}-6.0.20-test-link.patch
 
-	# Needed when compiling with clang
-	epatch "${FILESDIR}"/${PN}-5.1.29-rename-atomic-compare-exchange.patch
+#FL-1505 add sql shared libs patch, required for binutils-2.24
+	epatch "${FILESDIR}"/${PN}-5.3.28-sql-libs.patch	
 
 	# Upstream release script grabs the dates when the script was run, so lets
 	# end-run them to keep the date the same.
@@ -105,22 +104,24 @@ src_prepare() {
 	done
 }
 
+src_configure() {
+	# Add linker versions to the symbols. Easier to do, and safer than header file
+	# mumbo jumbo.
+	if use userland_GNU ; then
+		append-ldflags -Wl,--default-symver
+	fi
+
+	multilib-minimal_src_configure
+}
+
 multilib_src_configure() {
 	local myconf=()
-
-	tc-ld-disable-gold #470634
 
 	# compilation with -O0 fails on amd64, see bug #171231
 	if [[ ${ABI} == amd64 ]]; then
 		local CFLAGS=${CFLAGS} CXXFLAGS=${CXXFLAGS}
 		replace-flags -O0 -O2
 		is-flagq -O[s123] || append-flags -O2
-	fi
-
-	# Add linker versions to the symbols. Easier to do, and safer than header file
-	# mumbo jumbo.
-	if use userland_GNU ; then
-		append-ldflags -Wl,--default-symver
 	fi
 
 	# use `set` here since the java opts will contain whitespace
@@ -135,7 +136,7 @@ multilib_src_configure() {
 	if use tcl || use test ; then
 		myconf+=(
 			--enable-tcl
-			--with-tcl="${EPREFIX}/usr/$(get_libdir)"
+			--with-tcl=/usr/$(get_libdir)
 		)
 	else
 		myconf+=(--disable-tcl )
@@ -143,8 +144,6 @@ multilib_src_configure() {
 
 	# sql_compat will cause a collision with sqlite3
 	# --enable-sql_compat
-	# Don't --enable-sql* because we don't want to use bundled sqlite.
-	# See Gentoo bug #605688
 	ECONF_SOURCE="${S_BASE}"/dist \
 	STRIP="true" \
 	econf \
@@ -152,8 +151,8 @@ multilib_src_configure() {
 		--enable-dbm \
 		--enable-o_direct \
 		--without-uniquename \
-		--disable-sql \
-		--disable-sql_codegen \
+		--enable-sql \
+		--enable-sql_codegen \
 		--disable-sql_compat \
 		$([[ ${ABI} == arm ]] && echo --with-mutex=ARM/gcc-assembly) \
 		$([[ ${ABI} == amd64 ]] && echo --with-mutex=x86/gcc-assembly) \
@@ -172,9 +171,9 @@ multilib_src_install() {
 	db_src_install_usrlibcleanup
 
 	if multilib_is_native_abi && use java; then
-		java-pkg_regso "${ED}"/usr/"$(get_libdir)"/libdb_java*.so
-		java-pkg_dojar "${ED}"/usr/"$(get_libdir)"/*.jar
-		rm -f "${ED}"/usr/"$(get_libdir)"/*.jar
+		java-pkg_regso "${D}"/usr/"$(get_libdir)"/libdb_java*.so
+		java-pkg_dojar "${D}"/usr/"$(get_libdir)"/*.jar
+		rm -f "${D}"/usr/"$(get_libdir)"/*.jar
 	fi
 }
 
@@ -185,9 +184,9 @@ multilib_src_install_all() {
 
 	dodir /usr/sbin
 	# This file is not always built, and no longer exists as of db-4.8
-	if [[ -f "${ED}"/usr/bin/berkeley_db_svc ]] ; then
-		mv "${ED}"/usr/bin/berkeley_db_svc \
-			"${ED}"/usr/sbin/berkeley_db"${SLOT/./}"_svc || die
+	if [[ -f "${D}"/usr/bin/berkeley_db_svc ]] ; then
+		mv "${D}"/usr/bin/berkeley_db_svc \
+			"${D}"/usr/sbin/berkeley_db"${SLOT/./}"_svc || die
 	fi
 }
 
