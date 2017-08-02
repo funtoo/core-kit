@@ -1,3 +1,4 @@
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -10,12 +11,12 @@ SRC_URI="http://roy.marples.name/downloads/${PN}/${P}.tar.bz2"
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="*"
-IUSE=""
+KEYWORDS="alpha amd64 arm hppa ia64 ~m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+IUSE="selinux"
 
 DEPEND="!net-dns/resolvconf-gentoo
 	!<net-dns/dnsmasq-2.40-r1"
-RDEPEND=""
+RDEPEND="selinux? ( sec-policy/selinux-resolvconf )"
 
 src_configure() {
 	econf \

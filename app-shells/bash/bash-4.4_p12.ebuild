@@ -50,6 +50,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~s
 IUSE="afs bashlogger examples mem-scramble +net nls plugins +readline"
 
 DEPEND=">=sys-libs/ncurses-5.2-r2:0=
+	readline? ( >=sys-libs/readline-${READLINE_VER}:0= )
 	nls? ( virtual/libintl )"
 RDEPEND="${DEPEND}
 	!<sys-apps/portage-2.1.6.7_p1
@@ -79,12 +80,12 @@ src_prepare() {
 	# Include official patches
 	[[ ${PLEVEL} -gt 0 ]] && epatch $(patches -s)
 
-#	# Clean out local libs so we know we use system ones w/releases.
-#	if is_release ; then
-#		rm -rf lib/{readline,termcap}/*
-#		touch lib/{readline,termcap}/Makefile.in # for config.status
-#		sed -ri -e 's:\$[(](RL|HIST)_LIBSRC[)]/[[:alpha:]]*.h::g' Makefile.in || die
-#	fi
+	# Clean out local libs so we know we use system ones w/releases.
+	if is_release ; then
+		rm -rf lib/{readline,termcap}/*
+		touch lib/{readline,termcap}/Makefile.in # for config.status
+		sed -ri -e 's:\$[(](RL|HIST)_LIBSRC[)]/[[:alpha:]]*.h::g' Makefile.in || die
+	fi
 
 	# Prefixify hardcoded path names. No-op for non-prefix.
 	hprefixify pathnames.h.in
@@ -123,17 +124,17 @@ src_configure() {
 	# be safe.
 	# Exact cached version here doesn't really matter as long as it
 	# is at least what's in the DEPEND up above.
-	# export ac_cv_rl_version=${READLINE_VER%%_*}
+	export ac_cv_rl_version=${READLINE_VER%%_*}
 
 	# Force linking with system curses ... the bundled termcap lib
 	# sucks bad compared to ncurses.  For the most part, ncurses
 	# is here because readline needs it.  But bash itself calls
 	# ncurses in one or two small places :(.
 
-#	if is_release ; then
-#		# Use system readline only with released versions.
-#		myconf+=( --with-installed-readline=. )
-#	fi
+	if is_release ; then
+		# Use system readline only with released versions.
+		myconf+=( --with-installed-readline=. )
+	fi
 
 	if use plugins; then
 		append-ldflags -Wl,-rpath,/usr/$(get_libdir)/bash
