@@ -32,8 +32,6 @@ app-editors/nano:justify - Enable justify/unjustify functions for text formattin
 app-editors/nano:magic - Add magic file support (sys-apps/file) to automatically detect appropriate syntax highlighting
 app-editors/nano:minimal - Disable all fancy features, including ones that otherwise have a dedicated USE flag (such as spelling).
 app-eselect/eselect-php:fpm - Enable the FastCGI Process Manager SAPI
-app-misc/ca-certificates:cacert - Include root certs from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
-app-misc/ca-certificates:insecure_certs - Install certs which are known to *not* being trustworthy.
 app-misc/pax-utils:python - Install a more powerful/faster version of lddtree
 app-misc/screen:multiuser - Enable multiuser support (by setting correct permissions)
 app-misc/screen:nethack - Express error messages in nethack style
