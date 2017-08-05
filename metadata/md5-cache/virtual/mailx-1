@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual for mail implementations
+EAPI=5
+KEYWORDS=*
+RDEPEND=|| ( net-mail/mailutils mail-client/mailx mail-client/nail mail-client/s-nail sys-freebsd/freebsd-ubin )
+SLOT=0
+_md5_=708cccb7ac522755853cde16a1dcb31d

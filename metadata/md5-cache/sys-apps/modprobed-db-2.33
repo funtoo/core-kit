@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DEPEND=sys-apps/kmod
+DESCRIPTION=Keeps a running list of ALL modules ever probed on a system and allows for easy recall on demand.
+EAPI=5
+HOMEPAGE=https://wiki.archlinux.org/index.php/Modprobed-db
+KEYWORDS=~*
+LICENSE=MIT
+SLOT=0
+SRC_URI=http://repo-ck.com/source/modprobed-db/modprobed-db-2.33.tar.xz
+_md5_=95ee658a43464e9dfd3dbe5034858174
