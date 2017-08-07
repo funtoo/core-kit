@@ -356,5 +356,4 @@ sys-process/procps:elogind - Use sys-auth/elogind for session tracking.
 sys-process/procps:kill - Build the kill program
 sys-process/procps:modern-top - Enables new startup defaults of top. Keeps old defaults if disabled
 sys-process/procps:ncurses - Build programs that use ncurses: top, slabtop, watch
-virtual/linux-sources:firmware - Install linux kernel firmware
 virtual/ssh:minimal - Prefer net-misc/dropbear over net-misc/openssh
