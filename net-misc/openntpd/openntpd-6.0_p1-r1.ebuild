@@ -59,6 +59,7 @@ src_install() {
 
 	newinitd "${FILESDIR}/${PN}.init.d-20080406-r6" ntpd
 	newconfd "${FILESDIR}/${PN}.conf.d-20080406-r6" ntpd
+	keepdir "${NTP_HOME}"
 
 	systemd_newunit "${FILESDIR}/${PN}.service-20080406-r4" ntpd.service
 }
