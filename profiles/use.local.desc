@@ -73,8 +73,6 @@ dev-libs/openssl:rfc3779 - Enable support for RFC 3779 (X.509 Extensions for IP 
 dev-libs/openssl:sslv2 - Support for the old/insecure SSLv2 protocol -- note: not required for TLS/https
 dev-libs/openssl:sslv3 - Support for the old/insecure SSLv3 protocol -- note: not required for TLS/https
 dev-libs/openssl:tls-heartbeat - Enable the Heartbeat Extension in TLS and DTLS
-dev-libs/protobuf:java - Builds the Java implementation. This is not needed for Java support in protoc.
-dev-libs/protobuf:python - Builds the Python implementation. This is not needed for Python support in protoc.
 dev-scheme/guile:debug-freelist - Include garbage collector freelist debugging code
 dev-scheme/guile:debug-malloc - Include malloc debugging code
 dev-scheme/guile:deprecated - Enable deprecated features
