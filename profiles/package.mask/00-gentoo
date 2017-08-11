@@ -29,7 +29,12 @@
 
 #--- END OF EXAMPLES ---
 
-# Denis Dupeyron <calchan@gentoo.org> (09 AUg 2017)
+# Patrice Clement <monsieurp@gentoo.org> (10 Aug 2017)
+# Not ready for production yet.
+=dev-java/javatoolkit-0.4.0
+=dev-java/javatoolkit-0.5.0
+
+# Denis Dupeyron <calchan@gentoo.org> (09 Aug 2017)
 # Masked for testing of fix for long standing incompatibility between recent versions of ansible and jinja
 # https://github.com/ansible/ansible/issues/20494
 =app-admin/ansible-2.3.2.0-r1
@@ -705,11 +710,6 @@ net-wireless/cpyrit-cuda
 =app-crypt/hashcat-3.10-r1
 =app-crypt/hashcat-3.30
 =app-crypt/hashcat-3.40
-
-# Aaron W. Swenson <titanofold@gentoo.org> (17 Apr 2017)
-# Masked for removal by 17 May 2017. Past end of life. Susceptible to security
-# bugs (603716 and 603720). Upgrade to latest version.
-=dev-db/postgresql-9.1.24
 
 # NP-Hardass <NP-Hardass@gentoo.org> (10 Apr 2017)
 # Masked for testing
