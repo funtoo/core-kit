@@ -8,5 +8,5 @@ LICENSE=GPL-2
 RDEPEND==dev-lang/python-3* dev-python/appi:0/0.1
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://www.github.com/funtoo/ego/tarball/1.1.3-r2 -> ego-1.1.3-r2.tar.gz
+SRC_URI=https://www.github.com/funtoo/ego/tarball/1.1.3-r3 -> ego-1.1.3-r3.tar.gz
 _md5_=def95ad20bd7cac8a6f24723a04b782d
