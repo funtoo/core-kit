@@ -2,10 +2,11 @@ DEFINED_PHASES=install postinst unpack
 DESCRIPTION=Funtoo's configuration tool: ego, epro.
 EAPI=5
 HOMEPAGE=http://www.funtoo.org/Package:Ego
+IUSE=zsh-completion
 KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND==dev-lang/python-3* dev-python/appi:0/0.1
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://www.github.com/funtoo/ego/tarball/1.1.3 -> ego-1.1.3.tar.gz
-_md5_=3bb9d9c3aba85185453cbe1c1e459536
+_md5_=a6395bfdc20edc900e47a6dd1130a625
