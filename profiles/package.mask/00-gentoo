@@ -29,6 +29,12 @@
 
 #--- END OF EXAMPLES ---
 
+# Patrice Clement (23 Aug 2017)
+# Packages depending on this library need to be tested first before
+# it is unmasked. Possibly some slotting is still needed.
+# Package testing tracked in bug #611022.
+>=dev-libs/msgpack-1.4.2
+
 # Michał Górny <mgorny@gentoo.org> (21 Aug 2017)
 # xfce4-mixer is discontinued upstream and no longer considered part
 # of the DE since 4.12. It requires vulnerable gstreamer:0.10, and no
@@ -41,11 +47,6 @@ xfce-extra/xfce4-mixer
 # Open security bugs, no upstream, bug 628432
 # Alternatives: app-arch/libarchive, app-arch/unar
 app-arch/unrar-gpl
-
-# Michael Orlitzky <mjo@gentoo.org> (20 Aug 2017)
-# Masked until somebody who uses systemd tells me
-# I didn't break the service file or configuration.
-=mail-filter/spamassassin-3.4.1-r14
 
 # Andreas Sturmlechner <asturm@gentoo.org> (20 Aug 2017)
 # Masked for removal in 30 days. Use kde-apps/kio-extras[mtp,slp] instead.
