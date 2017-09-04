@@ -29,6 +29,23 @@
 
 #--- END OF EXAMPLES ---
 
+# Gilles Dartiguelongue <eva@gentoo.org> (04 Sep 2017)
+# Release barely known to projects using enchant
+# soversion is completely broken, bug #629750
+# Breaks gtkspell (build) & gspell (runtime) at least, bug #629772
+>=app-text/enchant-2
+
+# Lars Wendler <polynomial-c@gentoo.org> (03 Sep 2017)
+# Masked because it introduced a new object API which breaks consumers:
+# https://cgit.freedesktop.org/poppler/poppler/commit/poppler/Object.h?id=9773c1534668d84b8267c3e5c9d612076fa231a5
+# See also our tracker bug: https://bugs.gentoo.org/629836
+=app-text/poppler-0.58.0
+
+# Anthony G. Basile <blueness@gentoo.org> (03 Sep 2017)
+# Masked for testing
+# See bug #628692#c4
+=sys-fs/eudev-3.2.3
+
 # Michael Palimaka <kensington@gentoo.org> (03 Sep 2017)
 # Dead upstream. Use media-libs/phonon instead.
 # Masked for removal in 30 days. Bug #629144.
@@ -36,7 +53,7 @@ dev-qt/qtphonon
 
 # Gilles Dartiguelongue <eva@gentoo.org> (2 Sep 1017)
 # Gnome 3.26 package mask
->=dev-libs/libgepub-0.5
+>=app-text/libgepub-0.5
 
 # Aaron Bauman <bman@gentoo.org> (1 Sep 2017)
 # vulnerable per bug #513818 and dead upstream
