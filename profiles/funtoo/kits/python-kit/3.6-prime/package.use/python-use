@@ -2,15 +2,14 @@ dev-util/boost-build python_single_target_python2_7
 dev-util/itstool python_single_target_python2_7
 dev-vcs/git python_single_target_python2_7
 net-wireless/bluez python_single_target_python2_7
-sys-apps/portage python_single_target_/bin/sh: python_targets_/bin/sh:
 sys-apps/usbutils python_single_target_python2_7
-=sys-apps/util-linux-2.26.2 python_single_target_python2_7
-=sys-apps/util-linux-2.29.2 python_single_target_python2_7
 =sys-apps/util-linux-2.29.1-r1 python_single_target_python2_7
-=sys-apps/util-linux-2.28.2 python_single_target_python2_7
 =sys-apps/util-linux-9999 python_single_target_python2_7
+=sys-apps/util-linux-2.28.2 python_single_target_python2_7
+=sys-apps/util-linux-2.26.2 python_single_target_python2_7
 =sys-apps/util-linux-2.29.2-r1 python_single_target_python2_7
-=sys-boot/boot-update-1.7.8 python_single_target_python2_7
+=sys-apps/util-linux-2.29.2 python_single_target_python2_7
 =sys-boot/boot-update-1.7.9 python_single_target_python3_4 python_targets_python3_4
+=sys-boot/boot-update-1.7.8 python_single_target_python2_7
 sys-devel/llvm python_single_target_python2_7
 sys-fs/cryptsetup python_single_target_python2_7
