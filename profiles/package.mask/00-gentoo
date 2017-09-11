@@ -29,6 +29,31 @@
 
 #--- END OF EXAMPLES ---
 
+# Andreas Sturmlechner <asturm@gentoo.org> (11 Sep 2017)
+# Plasma-4 fragment, no more rdeps, masked for removal in 30 days.
+# Masked for removal in 30 days.
+kde-apps/knotify
+
+# Andreas Sturmlechner <asturm@gentoo.org> (10 Sep 2017)
+# Requires dead Qt 4. Dead upstream. Does not work.
+# Use net-misc/dropbox or kde-apps/dolphin-plugins instead.
+# Masked for removal in 30 days.
+kde-misc/kfilebox
+
+# Kent Fredric <kentnl@gentoo.org> (10 Sep 2017)
+# Staging block for Perl 5.24.3
+=dev-lang/perl-5.24.3_rc1
+=dev-lang/perl-5.24.3_rc2
+=dev-lang/perl-5.24.3_rc3
+=virtual/perl-Module-CoreList-5.201.709.220
+=virtual/perl-Time-HiRes-1.974.100-r1
+
+# Andreas Sturmlechner <asturm@gentoo.org> (10 Sep 2017)
+# Requires dead Qt 4. Dead upstream. Unmaintained.
+# Use media-video/kmplayer or kde-apps/dragon instead.
+# Masked for removal in 30 days.
+media-video/kplayer
+
 # Michael Palimaka <kensington@gentoo.org> (10 Sep 2017)
 # Requires dead Qt 4. Dead upstream. Build failures.
 # Bug #622548, #623574. Masked for removal in 30 days.
@@ -566,7 +591,6 @@ dev-ruby/poltergeist
 =virtual/perl-Test-Simple-1.302.73
 =virtual/perl-Thread-Queue-3.120.0
 =virtual/perl-Thread-Semaphore-2.130.0
-=virtual/perl-Time-HiRes-1.974.100
 =virtual/perl-Time-Local-1.250.0
 =virtual/perl-XSLoader-0.270.0
 =virtual/perl-bignum-0.470.0
