@@ -201,12 +201,6 @@ kde-misc/akonadi-git-resource
 # Upstream is no longer providing public patches
 sys-kernel/hardened-sources
 
-# Andreas Sturmlechner <asturm@gentoo.org> (27 Aug 2017)
-# Requires deprecated libkcddb:4, upstream is not going to port.
-# See also: https://github.com/dfaust/soundkonverter/issues/23
-# Masked for removal in 30 days.
-media-sound/soundkonverter
-
 # Michael Palimaka <kensington@gentoo.org> (27 Aug 2017)
 # Requires deprecated Qt/KDE4. Dead upstream. Use kde-apps/spectacle instead.
 # Masked for removal in 30 days.
@@ -636,10 +630,6 @@ app-emulation/wine-any
 >=dev-python/qscintilla-python-2.10
 >=x11-libs/qscintilla-2.10
 
-# Michael Palimaka <kensington@gentoo.org> (19 Feb 2017)
-# Revdeps need patching.
->=media-gfx/libopenraw-0.1.0
-
 # Mart Raudsepp <leio@gentoo.org> (16 Feb 2017)
 # Old gstreamer 0.10 version, which is security vulnerable.
 # Use gstreamer:1.0 with media-plugins/gst-plugins-libav
@@ -742,11 +732,6 @@ x11-libs/gtk+:1
 # Lars Wendler <polynomial-c@gentoo.org> (26 Aug 2016)
 # Masked while being tested and reverse deps aren't fully compatible
 =dev-libs/openssl-1.1*
-
-# Mike Gilbert <floppym@gentoo.org> (07 Aug 2016)
-# Fails to switch cpufreq governor.
-# https://bugs.gentoo.org/590780
-~sys-power/cpupower-4.7.0
 
 # Michał Górny <mgorny@gentoo.org> (18 Jul 2016)
 # Pre-release of a complete rewrite, provided for early testing. Not all
