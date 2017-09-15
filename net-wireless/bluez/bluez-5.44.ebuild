@@ -4,7 +4,7 @@
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
-inherit autotools ltprune multilib python-single-r1 readme.gentoo-r1 systemd udev user multilib-minimal
+inherit autotools eutils multilib python-single-r1 readme.gentoo-r1 systemd udev user multilib-minimal
 
 DESCRIPTION="Bluetooth Tools and System Daemons for Linux"
 HOMEPAGE="http://www.bluez.org"
@@ -13,13 +13,13 @@ SRC_URI="mirror://kernel/linux/bluetooth/${P}.tar.xz"
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/3"
 KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~mips ~ppc ~ppc64 ~x86"
-IUSE="alsa cups doc debug deprecated extra-tools experimental +mesh +obex +readline selinux systemd test test-programs +udev user-session"
 
+IUSE="alsa cups doc debug deprecated extra-tools experimental +obex +readline selinux systemd test test-programs +udev user-session"
 # Since this release all remaining extra-tools need readline support, but this could
 # change in the future, hence, this REQUIRED_USE constraint could be dropped
 # again in the future.
 REQUIRED_USE="
-	extra-tools? ( deprecated readline )
+	extra-tools? ( readline )
 	test? ( ${PYTHON_REQUIRED_USE} )
 	test-programs? ( ${PYTHON_REQUIRED_USE} )
 	user-session? ( systemd )
@@ -31,11 +31,8 @@ CDEPEND="
 	>=sys-apps/hwids-20121202.2
 	alsa? ( media-libs/alsa-lib )
 	cups? ( net-print/cups:= )
-	mesh? (
-		dev-libs/json-c:=
-		sys-libs/readline:0= )
 	obex? ( dev-libs/libical:= )
-	readline? ( sys-libs/readline:0= )
+	readline? ( sys-libs/readline:= )
 	systemd? ( sys-apps/systemd )
 	udev? ( >=virtual/udev-172 )
 "
@@ -112,9 +109,6 @@ src_prepare() {
 			Makefile.{in,tools} || die
 	fi
 
-	# Broken test https://bugzilla.kernel.org/show_bug.cgi?id=196621
-	sed -i -e '/unit_tests += unit\/test-gatt\b/d' Makefile.am || die
-
 	eautoreconf
 
 	multilib_copy_sources
@@ -124,9 +118,7 @@ multilib_src_configure() {
 	local myconf=(
 		# readline is automagic when client is enabled
 		# --enable-client always needs readline, bug #504038
-		# --enable-mesh is handled in the same way
 		ac_cv_header_readline_readline_h=$(multilib_native_usex readline)
-		ac_cv_header_readline_readline_h=$(multilib_native_usex mesh)
 	)
 
 	if ! multilib_is_native_abi; then
@@ -154,7 +146,6 @@ multilib_src_configure() {
 		$(multilib_native_use_enable cups) \
 		$(multilib_native_use_enable deprecated) \
 		$(multilib_native_use_enable experimental) \
-		$(multilib_native_use_enable mesh) \
 		$(multilib_native_use_enable obex) \
 		$(multilib_native_use_enable readline client) \
 		$(multilib_native_use_enable systemd) \
@@ -196,8 +187,10 @@ multilib_src_install() {
 			# http://permalink.gmane.org/gmane.linux.bluez.kernel/53115
 			# http://comments.gmane.org/gmane.linux.bluez.kernel/54564
 			# gatttool is only built with readline, bug #530776
-			dobin attrib/gatttool
-			dobin tools/btmgmt
+			if use readline; then
+				dobin attrib/gatttool
+				dobin tools/btmgmt
+			fi
 		fi
 
 		# Unittests are not that useful once installed, so make them optional
@@ -240,12 +233,12 @@ multilib_src_install_all() {
 	# But we keep installing them due to 'historical' reasons
 	insinto /etc/bluetooth
 	local d
-	for d in input network; do
+	for d in input network proximity; do
 		doins profiles/${d}/${d}.conf
 	done
 	doins src/main.conf
 
-	newinitd "${FILESDIR}"/bluetooth-init.d-r4 bluetooth
+	newinitd "${FILESDIR}"/bluetooth-init.d-r3 bluetooth
 	newinitd "${FILESDIR}"/rfcomm-init.d-r2 rfcomm
 
 	einstalldocs
@@ -257,7 +250,6 @@ pkg_postinst() {
 	readme.gentoo_print_elog
 
 	use udev && udev_reload
-	systemd_reenable bluetooth.service
 
 	has_version net-dialup/ppp || elog "To use dial up networking you must install net-dialup/ppp."
 }

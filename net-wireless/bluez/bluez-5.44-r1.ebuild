@@ -4,7 +4,7 @@
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
-inherit autotools ltprune multilib python-single-r1 readme.gentoo-r1 systemd udev user multilib-minimal
+inherit autotools eutils multilib python-single-r1 readme.gentoo-r1 systemd udev user multilib-minimal
 
 DESCRIPTION="Bluetooth Tools and System Daemons for Linux"
 HOMEPAGE="http://www.bluez.org"
@@ -13,13 +13,13 @@ SRC_URI="mirror://kernel/linux/bluetooth/${P}.tar.xz"
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/3"
 KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~mips ~ppc ~ppc64 ~x86"
-IUSE="alsa cups doc debug deprecated extra-tools experimental +obex +readline selinux systemd test test-programs +udev user-session"
 
+IUSE="alsa cups doc debug deprecated extra-tools experimental +obex +readline selinux systemd test test-programs +udev user-session"
 # Since this release all remaining extra-tools need readline support, but this could
 # change in the future, hence, this REQUIRED_USE constraint could be dropped
 # again in the future.
 REQUIRED_USE="
-	extra-tools? ( deprecated readline )
+	extra-tools? ( readline )
 	test? ( ${PYTHON_REQUIRED_USE} )
 	test-programs? ( ${PYTHON_REQUIRED_USE} )
 	user-session? ( systemd )
@@ -79,6 +79,9 @@ PATCHES=(
 
 	# ???
 	"${FILESDIR}"/0004-agent-Assert-possible-infinite-loop.patch
+
+	# CVE-2017-1000250 fix. the blueborne problem. https://www.armis.com/blueborne/
+	"${FILESDIR}"/${P}-CVE-2017-1000250.patch
 )
 
 pkg_setup() {
@@ -187,8 +190,10 @@ multilib_src_install() {
 			# http://permalink.gmane.org/gmane.linux.bluez.kernel/53115
 			# http://comments.gmane.org/gmane.linux.bluez.kernel/54564
 			# gatttool is only built with readline, bug #530776
-			dobin attrib/gatttool
-			dobin tools/btmgmt
+			if use readline; then
+				dobin attrib/gatttool
+				dobin tools/btmgmt
+			fi
 		fi
 
 		# Unittests are not that useful once installed, so make them optional
@@ -248,7 +253,6 @@ pkg_postinst() {
 	readme.gentoo_print_elog
 
 	use udev && udev_reload
-	systemd_reenable bluetooth.service
 
 	has_version net-dialup/ppp || elog "To use dial up networking you must install net-dialup/ppp."
 }
