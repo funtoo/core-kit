@@ -29,6 +29,11 @@
 
 #--- END OF EXAMPLES ---
 
+# Kent Fredric <kentnl@gentoo.org> (19 Sep 2017)
+# Dead upstream, broken on Perl 5.26. Bugs #631302, #623116
+# Masked for removal in 30 days.
+dev-perl/Syntax-Highlight-Engine-Simple-Perl
+
 # Pawel Hajdan, Jr. <phajdan.jr@gentoo.org> (18 Sep 2017)
 # Dev channel releases are only for people who are developers or want more
 # experimental features and accept a more unstable release.
@@ -260,11 +265,6 @@ xfce-extra/xfce4-mixer
 # Open security bugs, no upstream, bug 628432
 # Alternatives: app-arch/libarchive, app-arch/unar
 app-arch/unrar-gpl
-
-# Andreas Sturmlechner <asturm@gentoo.org> (20 Aug 2017)
-# Masked for removal in 30 days. Use kde-apps/kio-extras[mtp,slp] instead.
-kde-misc/kio-mtp
-kde-misc/kio-slp
 
 # Michał Górny <mgorny@gentoo.org> (20 Aug 2017)
 # Pre-release of a new incompatible version that breaks the only reverse
@@ -800,13 +800,6 @@ dev-libs/iniparser:4
 =dev-python/django-1.6*
 =dev-python/django-1.7*
 =dev-python/django-1.9*
-
-# Tony Vroon <chainsaw@gentoo.org> (5 Jan 2015)
-# Asterisk 13 is an LTS release but has not seen
-# sufficient releases to be considered ready for
-# production usage. You are welcome to have a go
-# but please be careful.
-=net-misc/asterisk-13*
 
 # Jeroen Roovers <jer@gentoo.org> (12 Dec 2014)
 # The 96 and 173 branches are no longer supported and remain vulnerable to
