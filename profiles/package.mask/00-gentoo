@@ -29,10 +29,21 @@
 
 #--- END OF EXAMPLES ---
 
+# Bernard Cafarelli <voyageur@gentoo.org> (20 Sep 2017)
+# Requires qt 5.8, not yet in tree. Bug #631570
+>=media-video/orion-1.6.0
+
 # Michael Palimaka <kensington@gentoo.org> (21 Sep 2017)
 # Requires dead Qt 4. Dead upstream.
 # Masked for removal in 30 days.
 media-libs/herqq
+
+# Patrice Clement <monsieurp@gentoo.org> (20 Sep 2017)
+# Upstream has been dead for years.
+# Masked for removal in 30 days.
+dev-java/db4o-jdk5
+dev-java/db4o-jdk11
+dev-java/db4o-jdk12
 
 # Andrey Grozin <grozin@gentoo.org> (19 Sep 2017)
 # This package was a stopgap to bump dev-python/spyder to 3.*
@@ -299,7 +310,7 @@ games-rpg/a-bird-story
 # Last version from 2011, and has a vulnerable init script
 # (bug 603382). The proxy-maintainer is unknown to bugzilla,
 # and the previous maintainer jmbsvicetto is OK with masking.
-net-misc/vde
+<net-misc/vde-2.3.2-r4
 
 # Mats Lidell <matsl@gentoo.org> (17 Aug 2017)
 # Masked ede and all its dependencies due to security reasons. 
