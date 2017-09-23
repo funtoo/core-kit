@@ -29,6 +29,17 @@
 
 #--- END OF EXAMPLES ---
 
+# Andreas K. Huettel <dilfridge@gentoo.org> (23 Sep 2017)
+# Broken on Perl 5.26 (bug 623096), no fix in sight. No consumers.
+# Removal in 30 days.
+dev-perl/rpm-build-perl
+
+# Hans de Graaff <graaff@gentoo.org> (23 Sep 2017) Mask old
+# unmaintained slots for removal in 30 days. Upgrade to the newer
+# slots.
+dev-ruby/capybara:0
+dev-ruby/xpath:0
+
 # Bernard Cafarelli <voyageur@gentoo.org> (20 Sep 2017)
 # Requires qt 5.8, not yet in tree. Bug #631570
 >=media-video/orion-1.6.0
@@ -288,18 +299,6 @@ app-arch/unrar-gpl
 # dependency in Gentoo. Masked until 2.0.0 proper is released, or
 # dev-cpp/libjson-rpc-cpp is fixed, whichever happens first.
 >=dev-cpp/catch-2
-
-# Hans de Graaff <graaff@gentoo.org> (20 Aug 2017)
-# Mask Ruby 2.1 for removal, bug 615822
-# This version is no longer supported by upstream
-# since March 2017.
-# This mask also includes all remaining ruby21-only packages.
-dev-lang/ruby:2.1
-dev-ruby/activeresource:4.1
-dev-ruby/builder:3
-dev-ruby/rails-observers
-dev-ruby/samuel
-games-rpg/a-bird-story
 
 # Sébastien Fabbro <bicatali@gentoo.org> (19 Aug 2017)
 # ipython-6 is python-3 only and causes circular dependencies
