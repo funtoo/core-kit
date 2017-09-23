@@ -15,6 +15,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64"
 IUSE="python setproctitle"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="dev-libs/protobuf-c
 	dev-libs/libnl:3
@@ -27,7 +28,10 @@ DEPEND="${RDEPEND}
 	app-text/xmlto"
 RDEPEND="${RDEPEND}
 	python? (
-		dev-libs/protobuf[python,${PYTHON_USEDEP}]
+		|| (
+			dev-python/protobuf-python[${PYTHON_USEDEP}]
+			dev-libs/protobuf[python,${PYTHON_USEDEP}]
+		)
 		dev-python/ipaddr[${PYTHON_USEDEP}]
 	)"
 
@@ -41,7 +45,6 @@ PATCHES=(
 	"${FILESDIR}"/2.3/${PN}-2.3-no-git.patch
 	"${FILESDIR}"/${PN}-2.8-automagic-libbsd.patch
 	"${FILESDIR}"/2.0/${PN}-2.0-sysroot.patch
-	"${FILESDIR}"/2.3/${PN}-2.3-aarch64.patch
 )
 
 criu_arch() {
