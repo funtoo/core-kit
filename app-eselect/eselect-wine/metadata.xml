@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
@@ -6,7 +6,10 @@
 		<name>NP-Hardass</name>
 	</maintainer>
 	<maintainer type="person">
-		<email>gentoo-wine@eroen.eu</email>
+		<email>gentoo@eroen.eu</email>
 		<name>eroen</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="bitbucket">NP-Hardass/eselect-wine</remote-id>
+	</upstream>
 </pkgmetadata>

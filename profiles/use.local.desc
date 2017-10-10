@@ -20,7 +20,7 @@ app-arch/unzip:natspec - Use dev-libs/libnatspec to correctly decode non-ascii f
 app-arch/zip:natspec - Use dev-libs/libnatspec to correctly decode non-ascii file names archived in Windows.
 app-crypt/gnupg:mta - Build mta support using virtual/mta.
 app-crypt/gnupg:smartcard - Build scdaemon software. Enables usage of OpenPGP cards. For other type of smartcards, try app-crypt/gnupg-pkcs11-scd. Bring in dev-libs/libusb as a dependency; enable scdaemon.
-app-crypt/gnupg:tofu - Enable support for Trust of First use trust model; requires dev-db/sqlite.
+app-crypt/gnupg:tofu - Enable support for Trust on First use trust model; requires dev-db/sqlite.
 app-crypt/gnupg:tools - Install extra tools (including gpgsplit and gpg-zip).
 app-crypt/gnupg:usb - Build direct CCID access for scdaemon; requires dev-libs/libusb.
 app-crypt/gnupg:wks-server - Install the wks-server
@@ -80,8 +80,8 @@ dev-scheme/guile:deprecated - Enable deprecated features
 dev-scheme/guile:discouraged - (implied by deprecated) enable merely discouraged features
 dev-scheme/guile:networking - Include networking interfaces
 dev-scheme/guile:regex - Include regular expression interfaces
+dev-util/cmake:server - Enable cmake-server support.
 dev-util/cmake:system-jsoncpp - Use system copy of dev-libs/jsoncpp instead of bundled one.
-dev-util/ctags:ada - Enable Ada support
 dev-util/ctags:json - Enable JSON output support
 dev-util/ctags:xml - Enable XML parsing support
 dev-util/ctags:yaml - Enable YAML parsing support
@@ -122,7 +122,6 @@ net-firewall/iptables:conntrack - Build against net-libs/libnetfilter_conntrack 
 net-firewall/iptables:netlink - Build against libnfnetlink which enables the nfnl_osf util
 net-firewall/iptables:nftables - Support nftables kernel interface
 net-firewall/iptables:pcap - Build against net-libs/libpcap which enables the nfbpf_compile util
-net-libs/gnutls:crywrap - Build the crywrap TLS proxy service
 net-libs/gnutls:dane - Build libgnutls-dane, implementing DNS-based Authentication of Named Entities. Requires net-dns/unbound
 net-libs/gnutls:openpgp - Enable openpgp support
 net-libs/gnutls:openssl - Build openssl compatibility libraries
@@ -296,6 +295,7 @@ sys-fs/aufs4:nfs - Enable support for nfs export
 sys-fs/aufs4:pax_kernel - Apply patch needed for pax enabled kernels
 sys-fs/aufs4:ramfs - Enable initramfs/rootfs support
 sys-fs/btrfs-progs:convert - Build ext2 conversion utility (btrfs-convert)
+sys-fs/btrfs-progs:reiserfs - Enable reiserfs support in btrfs-convert tool.
 sys-fs/btrfs-progs:static - Build static binaries in addition to the dynamic ones
 sys-fs/cryptsetup:gcrypt - Use dev-libs/libgcrypt crypto backend
 sys-fs/cryptsetup:kernel - Use kernel crypto backend (mainly for embedded systems)
@@ -352,6 +352,7 @@ sys-process/htop:oom - Add column to track the OOM-killer score of processes
 sys-process/htop:openvz - Enable openvz support
 sys-process/htop:vserver - Enable vserver support
 sys-process/lsof:rpc - support looking up RPC service info
+sys-process/procps:elogind - Use sys-auth/elogind for session tracking.
 sys-process/procps:kill - Build the kill program
 sys-process/procps:modern-top - Enables new startup defaults of top. Keeps old defaults if disabled
 sys-process/procps:ncurses - Build programs that use ncurses: top, slabtop, watch
