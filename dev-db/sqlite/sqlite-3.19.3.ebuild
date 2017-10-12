@@ -19,7 +19,7 @@ SRC_URI="doc? ( https://sqlite.org/2017/${PN}-doc-${DOC_PV}.zip )
 
 LICENSE="public-domain"
 SLOT="3"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm ~arm64 ~hppa ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="debug doc icu +readline secure-delete static-libs tcl test tools"
 
 RDEPEND="icu? ( dev-libs/icu:0=[${MULTILIB_USEDEP}] )
@@ -49,7 +49,7 @@ pkg_setup() {
 
 src_prepare() {
 	if full_tarball; then
-		eapply -p0 "${FILESDIR}/${PN}-3.16.0-full_tarball-build.patch"
+		eapply -p0 "${FILESDIR}/${PN}-3.18.0-full_tarball-build.patch"
 
 		eapply_user
 
@@ -205,7 +205,7 @@ multilib_src_compile() {
 	emake HAVE_TCL="$(usex tcl 1 "")" TCLLIBDIR="${EPREFIX}/usr/$(get_libdir)/${P}"
 
 	if use tools && multilib_is_native_abi; then
-		emake changeset dbhash rbu scrub showdb showjournal showstat4 showwal sqldiff sqlite3_analyzer
+		emake changeset dbdump dbhash rbu scrub showdb showjournal showstat4 showwal sqldiff sqlite3_analyzer
 	fi
 }
 
@@ -231,6 +231,7 @@ multilib_src_install() {
 		}
 
 		install_tool changeset sqlite3-changeset
+		install_tool dbdump sqlite3-db-dump
 		install_tool dbhash sqlite3-db-hash
 		install_tool rbu sqlite3-rbu
 		install_tool scrub sqlite3-scrub
