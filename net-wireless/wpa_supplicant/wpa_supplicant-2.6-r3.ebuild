@@ -1,9 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit eutils toolchain-funcs qt4-r2 qmake-utils systemd multilib
+inherit qmake-utils systemd toolchain-funcs
 
 DESCRIPTION="IEEE 802.1X/WPA supplicant for secure wireless transfers"
 HOMEPAGE="http://hostap.epitest.fi/wpa_supplicant/"
@@ -11,43 +10,38 @@ SRC_URI="http://hostap.epitest.fi/releases/${P}.tar.gz"
 LICENSE="|| ( GPL-2 BSD )"
 
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~arm64 ~ia64 ~mips ppc ppc64 ~sparc x86 ~x86-fbsd"
-IUSE="ap dbus gnutls eap-sim fasteap +hs2-0 libressl p2p ps3 qt4 qt5 readline selinux smartcard ssl tdls uncommon-eap-types wimax wps kernel_linux kernel_FreeBSD"
-REQUIRED_USE="fasteap? ( !gnutls !ssl ) smartcard? ( ssl ) ?? ( qt4 qt5 )"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+IUSE="ap dbus gnutls eap-sim fasteap +hs2-0 libressl p2p ps3 qt5 readline selinux smartcard ssl tdls uncommon-eap-types wimax wps kernel_linux kernel_FreeBSD"
+REQUIRED_USE="fasteap? ( !ssl ) smartcard? ( ssl )"
 
 CDEPEND="dbus? ( sys-apps/dbus )
 	kernel_linux? (
-		eap-sim? ( sys-apps/pcsc-lite )
 		dev-libs/libnl:3
 		net-wireless/crda
+		eap-sim? ( sys-apps/pcsc-lite )
 	)
 	!kernel_linux? ( net-libs/libpcap )
-	qt4? (
-		dev-qt/qtcore:4
-		dev-qt/qtgui:4
-		dev-qt/qtsvg:4
-	)
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
-		dev-qt/qtwidgets:5
 		dev-qt/qtsvg:5
+		dev-qt/qtwidgets:5
 	)
 	readline? (
 		sys-libs/ncurses:0=
 		sys-libs/readline:0=
 	)
 	ssl? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl )
-	)
-	!ssl? (
 		gnutls? (
-			net-libs/gnutls
-			dev-libs/libgcrypt:*
+			dev-libs/libgcrypt:0=
+			net-libs/gnutls:=
 		)
-		!gnutls? ( dev-libs/libtommath )
+		!gnutls? (
+			!libressl? ( dev-libs/openssl:0= )
+			libressl? ( dev-libs/libressl:0= )
+		)
 	)
+	!ssl? ( dev-libs/libtommath )
 "
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
@@ -76,12 +70,18 @@ Kconfig_style_config() {
 }
 
 pkg_setup() {
-	if use gnutls && use ssl ; then
-		elog "You have both 'gnutls' and 'ssl' USE flags enabled: defaulting to USE=\"ssl\""
+	if use ssl ; then
+		if use gnutls && use libressl ; then
+			elog "You have both 'gnutls' and 'libressl' USE flags enabled: defaulting to USE=\"gnutls\""
+		fi
+	else
+		elog "You have 'ssl' USE flag disabled: defaulting to internal TLS implementation"
 	fi
 }
 
 src_prepare() {
+	default
+
 	# net/bpf.h needed for net-libs/libpcap on Gentoo/FreeBSD
 	sed -i \
 		-e "s:\(#include <pcap\.h>\):#include <net/bpf.h>\n\1:" \
@@ -100,45 +100,40 @@ src_prepare() {
 		-e "s:/usr/lib/pkcs11:/usr/$(get_libdir):" \
 		wpa_supplicant.conf || die
 
-	#if use dbus; then
-	#	epatch "${FILESDIR}/${P}-dbus-path-fix.patch"
-	#fi
-
 	# systemd entries to D-Bus service files (bug #372877)
 	echo 'SystemdService=wpa_supplicant.service' \
 		| tee -a dbus/*.service >/dev/null || die
 
-	cd "${WORKDIR}/${P}"
+	cd "${WORKDIR}/${P}" || die
 
 	if use wimax; then
 		# generate-libeap-peer.patch comes before
 		# fix-undefined-reference-to-random_get_bytes.patch
-		epatch "${FILESDIR}/${P}-generate-libeap-peer.patch"
+		eapply "${FILESDIR}/${P}-generate-libeap-peer.patch"
 
 		# multilib-strict fix (bug #373685)
-		sed -e "s/\/usr\/lib/\/usr\/$(get_libdir)/" -i src/eap_peer/Makefile
+		sed -e "s/\/usr\/lib/\/usr\/$(get_libdir)/" -i src/eap_peer/Makefile || die
 	fi
 
 	# bug (320097)
-	epatch "${FILESDIR}/${P}-do-not-call-dbus-functions-with-NULL-path.patch"
-
-	# TODO - NEED TESTING TO SEE IF STILL NEEDED, NOT COMPATIBLE WITH 1.0 OUT OF THE BOX,
-	# SO WOULD BE NICE TO JUST DROP IT, IF IT IS NOT NEEDED.
-	# bug (374089)
-	#epatch "${FILESDIR}/${P}-dbus-WPAIE-fix.patch"
+	eapply "${FILESDIR}/${P}-do-not-call-dbus-functions-with-NULL-path.patch"
 
 	# bug (596332)
-	epatch "${FILESDIR}/${P}-libressl.patch"
+	eapply "${FILESDIR}/${P}-libressl.patch"
+
+	# Security backports from upstream. https://w1.fi/security/2017-1/wpa-packet-number-reuse-with-replayed-messages.txt
+	eapply "${FILESDIR}"/2017-1/*
 }
 
 src_configure() {
 	# Toolchain setup
 	tc-export CC
 
-	cp defconfig .config
+	cp defconfig .config || die
 
 	# Basic setup
 	Kconfig_style_config CTRL_IFACE
+	Kconfig_style_config MATCH_IFACE
 	Kconfig_style_config BACKEND file
 	Kconfig_style_config IBSS_RSN
 	Kconfig_style_config IEEE80211W
@@ -215,10 +210,12 @@ src_configure() {
 
 	# SSL authentication methods
 	if use ssl ; then
-		Kconfig_style_config TLS openssl
-	elif use gnutls ; then
-		Kconfig_style_config TLS gnutls
-		Kconfig_style_config GNUTLS_EXTRA
+		if use gnutls ; then
+			Kconfig_style_config TLS gnutls
+			Kconfig_style_config GNUTLS_EXTRA
+		else
+			Kconfig_style_config TLS openssl
+		fi
 	else
 		Kconfig_style_config TLS internal
 	fi
@@ -286,15 +283,10 @@ src_configure() {
 		Kconfig_style_config LIBNL32
 	fi
 
-	if use qt4 ; then
-		pushd "${S}"/wpa_gui-qt4 > /dev/null
-		eqmake4 wpa_gui.pro
-		popd > /dev/null
-	fi
 	if use qt5 ; then
-		pushd "${S}"/wpa_gui-qt4 > /dev/null
+		pushd "${S}"/wpa_gui-qt4 > /dev/null || die
 		eqmake5 wpa_gui.pro
-		popd > /dev/null
+		popd > /dev/null || die
 	fi
 }
 
@@ -307,11 +299,9 @@ src_compile() {
 		emake -C ../src/eap_peer
 	fi
 
-	if use qt4 || use qt5; then
-		pushd "${S}"/wpa_gui-qt4 > /dev/null
+	if use qt5; then
 		einfo "Building wpa_gui"
-		emake
-		popd > /dev/null
+		emake -C "${S}"/wpa_gui-qt4
 	fi
 }
 
@@ -322,9 +312,9 @@ src_install() {
 	# baselayout-1 compat
 	if has_version "<sys-apps/baselayout-2.0.0"; then
 		dodir /sbin
-		dosym /usr/sbin/wpa_supplicant /sbin/wpa_supplicant
+		dosym ../usr/sbin/wpa_supplicant /sbin/wpa_supplicant
 		dodir /bin
-		dosym /usr/bin/wpa_cli /bin/wpa_cli
+		dosym ../usr/bin/wpa_cli /bin/wpa_cli
 	fi
 
 	if has_version ">=sys-apps/openrc-0.5.0"; then
@@ -342,7 +332,7 @@ src_install() {
 
 	doman doc/docbook/*.{5,8}
 
-	if use qt4 || use qt5 ; then
+	if use qt5 ; then
 		into /usr
 		dobin wpa_gui-qt4/wpa_gui
 		doicon wpa_gui-qt4/icons/wpa_gui.svg
@@ -352,12 +342,12 @@ src_install() {
 	use wimax && emake DESTDIR="${D}" -C ../src/eap_peer install
 
 	if use dbus ; then
-		pushd "${S}"/dbus > /dev/null
+		pushd "${S}"/dbus > /dev/null || die
 		insinto /etc/dbus-1/system.d
 		newins dbus-wpa_supplicant.conf wpa_supplicant.conf
 		insinto /usr/share/dbus-1/system-services
 		doins fi.epitest.hostap.WPASupplicant.service fi.w1.wpa_supplicant1.service
-		popd > /dev/null
+		popd > /dev/null || die
 
 		# This unit relies on dbus support, bug 538600.
 		systemd_dounit systemd/wpa_supplicant.service
@@ -371,25 +361,25 @@ src_install() {
 pkg_postinst() {
 	elog "If this is a clean installation of wpa_supplicant, you"
 	elog "have to create a configuration file named"
-	elog "/etc/wpa_supplicant/wpa_supplicant.conf"
+	elog "${EROOT%/}/etc/wpa_supplicant/wpa_supplicant.conf"
 	elog
 	elog "An example configuration file is available for reference in"
-	elog "/usr/share/doc/${PF}/"
+	elog "${EROOT%/}/usr/share/doc/${PF}/"
 
-	if [[ -e ${ROOT}etc/wpa_supplicant.conf ]] ; then
+	if [[ -e "${EROOT%/}"/etc/wpa_supplicant.conf ]] ; then
 		echo
-		ewarn "WARNING: your old configuration file ${ROOT}etc/wpa_supplicant.conf"
-		ewarn "needs to be moved to ${ROOT}etc/wpa_supplicant/wpa_supplicant.conf"
+		ewarn "WARNING: your old configuration file ${EROOT%/}/etc/wpa_supplicant.conf"
+		ewarn "needs to be moved to ${EROOT%/}/etc/wpa_supplicant/wpa_supplicant.conf"
 	fi
 
 	# Mea culpa, feel free to remove that after some time --mgorny.
 	local fn
 	for fn in wpa_supplicant{,@wlan0}.service; do
-		if [[ -e "${ROOT}"/etc/systemd/system/network.target.wants/${fn} ]]
+		if [[ -e "${EROOT%/}"/etc/systemd/system/network.target.wants/${fn} ]]
 		then
 			ebegin "Moving ${fn} to multi-user.target"
-			mv "${ROOT}"/etc/systemd/system/network.target.wants/${fn} \
-				"${ROOT}"/etc/systemd/system/multi-user.target.wants/
+			mv "${EROOT%/}"/etc/systemd/system/network.target.wants/${fn} \
+				"${EROOT%/}"/etc/systemd/system/multi-user.target.wants/ || die
 			eend ${?} \
 				"Please try to re-enable ${fn}"
 		fi
