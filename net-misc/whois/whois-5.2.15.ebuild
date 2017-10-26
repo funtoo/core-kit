@@ -1,12 +1,12 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit toolchain-funcs
+EAPI=5
+inherit eutils toolchain-funcs
 
 MY_P=${P/-/_}
 DESCRIPTION="improved Whois Client"
-HOMEPAGE="https://www.linux.it/~md/software/"
+HOMEPAGE="http://www.linux.it/~md/software/"
 SRC_URI="mirror://debian/pool/main/w/whois/${MY_P}.tar.xz"
 
 LICENSE="GPL-2"
@@ -23,12 +23,9 @@ DEPEND="${RDEPEND}
 	>=dev-lang/perl-5
 	nls? ( sys-devel/gettext )"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-4.7.2-config-file.patch
-)
-
 src_prepare() {
-	default
+	epatch "${FILESDIR}"/${PN}-4.7.2-config-file.patch
+
 	if use nls ; then
 		sed -i -e 's:#\(.*pos\):\1:' Makefile || die
 	else
