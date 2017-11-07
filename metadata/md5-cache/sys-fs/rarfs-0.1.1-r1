@@ -1,0 +1,13 @@
+DEFINED_PHASES=install
+DEPEND=sys-fs/fuse virtual/pkgconfig
+DESCRIPTION=Fuse module to mount uncompressed RAR archives
+EAPI=6
+HOMEPAGE=https://sourceforge.net/projects/rarfs/
+IUSE=python_targets_python2_7
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=sys-fs/fuse
+SLOT=0
+SRC_URI=mirror://sourceforge/rarfs/rarfs-0.1.1.tar.gz
+_eclasses_=multibuild	72647e255187a1fadc81097b3657e5c3	multilib	97f470f374f2e94ccab04a2fb21d811e	python-r1	0c067f080a047742ffac024b16895b45	python-utils-r1	c9de01becf9df3f8c10aeec3dc693f5d	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_md5_=76ee28909d4c9e37e5eae905ff8201e7
