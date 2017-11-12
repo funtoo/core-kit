@@ -1,23 +1,25 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 
-PYTHON_COMPAT=( python3_4 )
+PYTHON_COMPAT=( python3_{4,5,6} )
 
-inherit flag-o-matic python-any-r1 toolchain-funcs eutils
+inherit flag-o-matic python-any-r1 toolchain-funcs
 
 DESCRIPTION="Network utility to retrieve files from the WWW"
 HOMEPAGE="https://www.gnu.org/software/wget/"
-SRC_URI="mirror://gnu/wget/${P}.tar.xz"
+SRC_URI="mirror://gnu/wget/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="debug gnutls idn ipv6 libressl nls ntlm pcre +ssl static test uuid zlib"
 REQUIRED_USE=" ntlm? ( !gnutls ssl ) gnutls? ( ssl )"
 
-LIB_DEPEND="idn? ( net-dns/libidn[static-libs(+)] )
+PATCHES=( "${FILESDIR}"/${PN}-1.19.2-fix-segfault-due-to-derefencing-null-ptr.patch )
+
+# Force a newer libidn2 to avoid libunistring deps. #612498
+LIB_DEPEND="idn? ( >=net-dns/libidn2-0.14[static-libs(+)] )
 	pcre? ( dev-libs/libpcre[static-libs(+)] )
 	ssl? (
 		gnutls? ( net-libs/gnutls:0=[static-libs(+)] )
@@ -49,7 +51,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-1.17.1-gnulib-cygwin-sys_select.patch
+	default
+
 	# revert some hack that breaks linking, bug #585924
 	if [[ ${CHOST} == *-darwin* ]] || [[ ${CHOST} == *-solaris* ]] || [[ ${CHOST} == *-uclibc* ]]; then
 		sed -i \
@@ -68,24 +71,29 @@ src_configure() {
 		tc-export PKG_CONFIG
 		PKG_CONFIG+=" --static"
 	fi
+
+	# There is no flag that controls this.  libunistring-prefix only
+	# controls the search path (which is why we turn it off below).
+	# Further, libunistring is only needed w/older libidn2 installs,
+	# and since we force the latest, we can force off libunistring. #612498
+	ac_cv_libunistring=no \
 	econf \
 		--disable-assert \
 		--disable-rpath \
-		$(use_with ssl ssl $(usex gnutls gnutls openssl)) \
-		$(use_enable ssl opie) \
-		$(use_enable ssl digest) \
+		--without-included-libunistring \
+		--without-libunistring-prefix \
+		$(use_enable debug) \
 		$(use_enable idn iri) \
 		$(use_enable ipv6) \
 		$(use_enable nls) \
 		$(use_enable ntlm) \
 		$(use_enable pcre) \
-		$(use_enable debug) \
+		$(use_enable ssl digest) \
+		$(use_enable ssl opie) \
+		$(use_with idn libidn) \
+		$(use_with ssl ssl $(usex gnutls gnutls openssl)) \
 		$(use_with uuid libuuid) \
 		$(use_with zlib)
-}
-
-src_test() {
-	emake check
 }
 
 src_install() {
@@ -95,5 +103,6 @@ src_install() {
 		-e "s:/usr/local/etc:${EPREFIX}/etc:g" \
 		"${ED}"/etc/wgetrc \
 		"${ED}"/usr/share/man/man1/wget.1 \
-		"${ED}"/usr/share/info/wget.info
+		"${ED}"/usr/share/info/wget.info \
+		|| die
 }
