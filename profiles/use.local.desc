@@ -252,6 +252,11 @@ sys-boot/plymouth:gdm - Enables smooth transition to GDM
 sys-boot/plymouth:libkms - Provides abstraction to the DRM drivers (intel, nouveau and vmwgfx at this moment)
 sys-boot/plymouth:pango - Adds support for printing text on splash screen and text prompts, e.g. for password
 sys-devel/autogen:libopts - install the libopts tarball (a few packages want this for developing)
+sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
+sys-devel/clang:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
+sys-devel/clang:multitarget - Build all host targets (default: host only)
+sys-devel/clang:static-analyzer - Install the Clang static analyzer
+sys-devel/clang:z3 - Enable the static analyzer constraint manager backend using sci-mathematics/z3
 sys-devel/gcc:d - Enable support for the D programming language
 sys-devel/gcc:default - After building, set this compiler as default using gcc-config
 sys-devel/gcc:fixed-point - Enable fixed-point arithmetic support for MIPS targets in gcc (Warning: significantly increases compile time!)
