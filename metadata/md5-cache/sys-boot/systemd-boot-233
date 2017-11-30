@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare
+DEPEND=>=sys-apps/util-linux-2.27.1 app-text/docbook-xml-dtd:4.2 app-text/docbook-xml-dtd:4.5 app-text/docbook-xsl-stylesheets dev-libs/libxslt:0 >=dev-util/intltool-0.50 dev-util/gperf >=sys-boot/gnu-efi-3.0.2 sys-libs/libcap virtual/pkgconfig >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=UEFI boot manager from systemd (formerly gummiboot)
+EAPI=6
+HOMEPAGE=https://www.freedesktop.org/wiki/Software/systemd/systemd-boot/
+KEYWORDS=~amd64
+LICENSE=GPL-2 LGPL-2.1 MIT public-domain
+RDEPEND=>=sys-apps/util-linux-2.27.1 !sys-apps/systemd
+RESTRICT=test
+SLOT=0
+SRC_URI=https://github.com/systemd/systemd/archive/v233.tar.gz -> systemd-233.tar.gz
+_eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	libtool	e32ea84bf82cf8987965b574672dba93	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_md5_=70f09880b799e431a402368c6856d71f

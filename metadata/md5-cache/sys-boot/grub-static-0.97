@@ -1,0 +1,12 @@
+DEFINED_PHASES=config install postinst postrm preinst prerm
+DEPEND=!<sys-boot/grub-2
+DESCRIPTION=Static GNU GRUB boot loader
+EAPI=0
+HOMEPAGE=https://www.gnu.org/software/grub/
+KEYWORDS=-* amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=!<sys-boot/grub-2
+SLOT=0
+SRC_URI=mirror://gentoo/grub-static-0.97.tar.bz2
+_eclasses_=mount-boot	ea24b511b0ad59831d0151aa634dfad2
+_md5_=0bace963991da8e7085c029481953912
