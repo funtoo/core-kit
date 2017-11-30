@@ -248,9 +248,20 @@ sys-block/parted:debug - Enable debugging as encouraged by upstream: [The defaul
 sys-block/parted:device-mapper - Enable device-mapper support from sys-fs/lvm2 in parted
 sys-boot/grub:binfont - Install a pre-generated binary font
 sys-boot/grub:mkfont - Enables support for grub-mkfont
+sys-boot/lilo:device-mapper - Enable support for device-mapper from sys-fs/lvm2
+sys-boot/lilo:minimal - Do not install the dolilo helper script
+sys-boot/lilo:pxeserial - Avoid character echo on PXE serial console
 sys-boot/plymouth:gdm - Enables smooth transition to GDM
 sys-boot/plymouth:libkms - Provides abstraction to the DRM drivers (intel, nouveau and vmwgfx at this moment)
 sys-boot/plymouth:pango - Adds support for printing text on splash screen and text prompts, e.g. for password
+sys-boot/refind:btrfs - Builds the EFI binary btrfs filesystem driver
+sys-boot/refind:ext2 - Builds the EFI binary ext2 filesystem driver
+sys-boot/refind:ext4 - Builds the EFI binary ext4 filesystem driver
+sys-boot/refind:gnuefi - Compile using GNU-EFI instead of Tianocore
+sys-boot/refind:hfs - Builds the EFI binary hfs filesystem driver
+sys-boot/refind:iso9660 - Builds the EFI binary iso9660 filesystem driver
+sys-boot/refind:ntfs - Builds the EFI binary ntfs filesystem driver
+sys-boot/refind:reiserfs - Builds the EFI binary reiserfs filesystem driver
 sys-devel/autogen:libopts - install the libopts tarball (a few packages want this for developing)
 sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
 sys-devel/clang:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
