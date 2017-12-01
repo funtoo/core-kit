@@ -32,6 +32,8 @@ app-editors/nano:justify - Enable justify/unjustify functions for text formattin
 app-editors/nano:magic - Add magic file support (sys-apps/file) to automatically detect appropriate syntax highlighting
 app-editors/nano:minimal - Disable all fancy features, including ones that otherwise have a dedicated USE flag (such as spelling).
 app-emulation/lxc:cgmanager - Enable support for cgroup management using app-admin/cgmanager
+app-emulation/lxd:daemon - Build the system daemon, not just the client tool
+app-emulation/lxd:dnsmasq - Depend on dnsmasq to provide DHCP and DNS.
 app-eselect/eselect-php:fpm - Enable the FastCGI Process Manager SAPI
 app-misc/pax-utils:python - Install a more powerful/faster version of lddtree
 app-misc/screen:multiuser - Enable multiuser support (by setting correct permissions)
