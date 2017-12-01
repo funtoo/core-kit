@@ -35,6 +35,39 @@
 dev-util/qfsm
 
 # Andreas Sturmlechner <asturm@gentoo.org> (30 Nov 2017)
+# Declared dead upstream. Masked for removal in 30 days. Bug #620708
+kde-apps/blogilo
+kde-apps/jovie
+kde-apps/kabcclient
+kde-apps/kaccessible
+kde-apps/kdepim-kresources
+kde-apps/kdepim-l10n
+kde-apps/kdepim-wizards
+kde-apps/kdepimlibs
+kde-apps/kdewebdev-meta
+kde-apps/kfilereplace
+kde-apps/kioclient
+kde-apps/klinkstatus
+kde-apps/knode
+kde-apps/knotify
+kde-apps/kppp
+kde-apps/kremotecontrol
+kde-apps/ktimetracker
+kde-apps/ktimezoned
+kde-apps/libkface
+kde-apps/libkpgp
+
+# Andreas Sturmlechner <asturm@gentoo.org> (30 Nov 2017)
+# Depends on dead kdepimlibs:4. KF5-based snapshot available.
+app-office/kraft:4
+
+# Andreas Sturmlechner <asturm@gentoo.org> (30 Nov 2017)
+# Depends on dead kdepimlibs:4. KF5-based snapshot available.
+kde-apps/kopete:4
+kde-misc/kopete-antispam
+kde-misc/kopete-thinklight
+
+# Andreas Sturmlechner <asturm@gentoo.org> (30 Nov 2017)
 # Still depends on dead kdelibs4/Qt3Support/Qt4, no KF5-based release.
 # Masked for removal in 30 days. Bug #629018
 <=dev-util/kdbg-2.9.1
@@ -105,6 +138,7 @@ x11-drivers/xf86-input-pentouch
 # Michał Górny <mgorny@gentoo.org> (25 Nov 2017)
 # Testing branch GTK+3 release. Changes API, breaks xfce-base/xfdesktop.
 # Masked until the latter sees a new release.
+>=dev-python/thunarx-python-0.4.0
 >=xfce-base/thunar-1.7
 
 # Jonas Stein <jstein@gentoo.org> (25 Nov 2017)
@@ -481,11 +515,6 @@ app-xemacs/xemacs-packages-all
 # However, any existing packages should not use this version.
 # See: https://github.com/perl5-dbi/DBD-mysql/issues/117
 =dev-perl/DBD-mysql-4.42.0
-
-# Brian Evans <grknight@gentoo.org> (21 Jul 2017)
-# Mask initial beta of PHP 7.2 for further testing
->=dev-lang/php-7.2.0_beta1
-=virtual/httpd-php-7.2
 
 # Mikhail Pukhlikov <cynede@gentoo.org> (20 Jul 2017)
 # Old mono/dotnet packages (used on GNOME2 stack)
