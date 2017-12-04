@@ -7,20 +7,21 @@ inherit autotools flag-o-matic versionator
 
 DESCRIPTION="Terminal multiplexer"
 HOMEPAGE="http://tmux.github.io/"
-SRC_URI="https://github.com/${PN}/${PN}/releases/download/${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/${PN}/${PN}/releases/download/${PV/_*}/${P/_/-}.tar.gz"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
 IUSE="debug selinux utempter vim-syntax kernel_FreeBSD kernel_linux"
 
 CDEPEND="
-	>=dev-libs/libevent-2.1.5-r4:=
+	dev-libs/libevent:0=
+	sys-libs/ncurses:0=
 	utempter? (
 		kernel_linux? ( sys-libs/libutempter )
 		kernel_FreeBSD? ( || ( >=sys-freebsd/freebsd-lib-9.0 sys-libs/libutempter ) )
 	)
-	sys-libs/ncurses:0="
+"
 DEPEND="${CDEPEND}
 	virtual/pkgconfig"
 RDEPEND="${CDEPEND}
@@ -32,13 +33,14 @@ RDEPEND="${CDEPEND}
 		)
 	)"
 
-DOCS=( CHANGES FAQ README TODO )
+DOCS=( CHANGES README TODO )
+
+S="${WORKDIR}/${P/_/-}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.3-flags.patch
+	"${FILESDIR}"/${PN}-2.4-flags.patch
 
 	# usptream fixes (can be removed with next version bump)
-	"${FILESDIR}"/${P}-screen_write_copy-fix.patch
 )
 
 src_prepare() {
@@ -55,10 +57,12 @@ src_prepare() {
 }
 
 src_configure() {
-	econf \
-		--sysconfdir="${EPREFIX}"/etc \
-		$(use_enable debug) \
+	local myeconfargs=(
+		--sysconfdir="${EPREFIX}"/etc
+		$(use_enable debug)
 		$(use_enable utempter)
+	)
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
@@ -68,11 +72,6 @@ src_install() {
 
 	dodoc example_tmux.conf
 	docompress -x /usr/share/doc/${PF}/example_tmux.conf
-
-	if use vim-syntax; then
-		insinto /usr/share/vim/vimfiles/ftdetect
-		doins "${FILESDIR}"/tmux.vim
-	fi
 }
 
 pkg_postinst() {
