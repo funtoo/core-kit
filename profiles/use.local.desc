@@ -8,6 +8,13 @@ app-admin/sudo:gcrypt - Use SHA2 from dev-libs/libgcrypt instead of sudo's inter
 app-admin/sudo:offensive - Let sudo print insults when the user types the wrong password.
 app-admin/sudo:openssl - Use SHA2 from dev-libs/openssl instead of sudo's internal SHA2.
 app-admin/sudo:sendmail - Allow sudo to send emails with sendmail.
+app-admin/syslog-ng:amqp - Enable support for AMQP destinations
+app-admin/syslog-ng:json - Enable support for JSON template formatting via dev-libs/json-c
+app-admin/syslog-ng:mongodb - Enable support for mongodb destinations
+app-admin/syslog-ng:pacct - Enable support for reading Process Accounting files (EXPERIMENTAL, Linux only)
+app-admin/syslog-ng:redis - Enable support for Redis destinations
+app-admin/syslog-ng:smtp - Enable support for SMTP destinations
+app-admin/syslog-ng:spoof-source - Enable support for spoofed source addresses
 app-arch/gzip:pic - disable optimized assembly code that is not PIC friendly
 app-arch/libarchive:bzip2 - Allow accessing bzip2-compressed archives through libbz2 (which comes with app-arch/bzip2). This only affects libarchive's native support: bsdtar will keep using bunzip2 as a filter if that's not built-in.
 app-arch/libarchive:e2fsprogs - Use file flags from sys-fs/e2fsprogs headers instead of virtual/os-headers headers
