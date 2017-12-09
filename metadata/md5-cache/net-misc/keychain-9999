@@ -1,0 +1,10 @@
+DEFINED_PHASES=install postinst unpack
+DEPEND=>=dev-vcs/git-1.8.2.1
+DESCRIPTION=manage ssh and GPG keys in a convenient and secure manner. Frontend for ssh-agent/ssh-add
+EAPI=6
+HOMEPAGE=http://www.funtoo.org/Keychain
+LICENSE=GPL-2
+RDEPEND=app-shells/bash || ( net-misc/openssh net-misc/ssh )
+SLOT=0
+_eclasses_=git-r3	cbafa3261c37c7e3af44bb16a34ea390
+_md5_=04c37aa39421a4c34ec72514acfbd5c5
