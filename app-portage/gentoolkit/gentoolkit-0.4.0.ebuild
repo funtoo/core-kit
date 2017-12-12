@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=(python{2_7,3_4,3_5} pypy)
+PYTHON_COMPAT=(python{2_7,3_4,3_5,3_6} pypy)
 PYTHON_REQ_USE="xml(+),threads(+)"
 
 inherit distutils-r1
@@ -16,7 +16,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 
 DEPEND="sys-apps/portage[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
@@ -33,16 +33,6 @@ python_prepare_all() {
 
 python_install_all() {
 	distutils-r1_python_install_all
-
-	# remove on Gentoo Prefix platforms where it's broken anyway
-	if use prefix; then
-		elog "The revdep-rebuild command is removed, the preserve-libs"
-		elog "feature of portage will handle issues."
-		rm "${ED}"/usr/bin/revdep-rebuild*
-		rm "${ED}"/usr/share/man/man1/revdep-rebuild.1
-		rm -rf "${ED}"/etc/revdep-rebuild
-		rm -rf "${ED}"/var
-	fi
 }
 
 pkg_postinst() {
@@ -52,7 +42,7 @@ pkg_postinst() {
 
 	einfo "Starting with this version, ebump, ekeyword and imlate are now"
 	einfo "part of the gentoolkit package."
-	einfo "The gentoolit-dev package is now deprecated in favor of a single"
+	einfo "The gentoolkit-dev package is now deprecated in favor of a single"
 	einfo "gentoolkit package.   The remaining tools from gentoolkit-dev"
 	einfo "are now obsolete/unused with the git based tree."
 
