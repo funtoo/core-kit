@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
@@ -28,6 +27,10 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${P/_/}
 
 src_prepare() {
+	# https://bugs.funtoo.org/browse/FL-4552
+	epatch "${FILESDIR}"/CVE-backports/${P}-CVE-2017-16548.patch
+	epatch "${FILESDIR}"/CVE-backports/${P}-CVE-2017-17433.patch
+	epatch "${FILESDIR}"/CVE-backports/${P}-CVE-2017-17434.patch
 	epatch_user
 }
 
