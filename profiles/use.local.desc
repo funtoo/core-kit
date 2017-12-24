@@ -216,9 +216,6 @@ sys-apps/hwids:pci - Install the pci.ids database
 sys-apps/hwids:udev - Install hwdb.d rules for udev
 sys-apps/hwids:usb - Install the usb.ids database
 sys-apps/iproute2:iptables - include support for iptables filtering
-sys-apps/kmod:lzma - Enable support for XZ compressed modules
-sys-apps/kmod:tools - Install module loading/unloading tools.
-sys-apps/kmod:zlib - Enable support for gzipped modules
 sys-apps/man-db:manpager - Enable manpager wrapper for colorizing output
 sys-apps/net-tools:old-output - use old ifconfig output style (useful for when new output breaks scripts)
 sys-apps/pciutils:dns - Enable support for querying the central database of PCI IDs using DNS
