@@ -10,3 +10,11 @@ sys-devel/llvm python_single_target_python2_7
 sys-fs/ecryptfs-utils python_single_target_python2_7
 sys-fs/ocfs2-tools python_single_target_python2_7
 sys-fs/traydevice python_single_target_python2_7
+sys-libs/ldb python_single_target_python2_7
+sys-libs/libieee1284 python_single_target_python2_7
+sys-libs/libsmbios python_single_target_python2_7
+sys-libs/ntdb python_single_target_python2_7
+sys-libs/openipmi python_single_target_python2_7
+sys-libs/talloc python_single_target_python2_7
+sys-libs/tdb python_single_target_python2_7
+sys-libs/tevent python_single_target_python2_7
