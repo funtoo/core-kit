@@ -384,12 +384,27 @@ sys-kernel/debian-sources:rt - Applies the CONFIG_PREEMPT_RT patch series
 sys-kernel/spl:debug-log - Enable additional diagnostics
 sys-libs/binutils-libs:64-bit-bfd - Support 64-bit targets even on 32-bit hosts (is ignored on 64-bit hosts)
 sys-libs/binutils-libs:multitarget - Enable all possible targets in libbfd
+sys-libs/compiler-rt:clang - Force building using installed clang (rather than the default CC/CXX).
 sys-libs/db:rpc - Enable rpc client/server
+sys-libs/freeipmi:nagios - Install a nagios plugin to check sensors' status.
 sys-libs/gdbm:berkdb - enable compatibility layer for UNIX-like dbm and ndbm interfaces
 sys-libs/gdbm:exporter - enable gdbmexport binary for exporting data from gdbm-1.8 databases into gdbm-1.9
 sys-libs/glibc:glibc-compat20 - Enable the glibc-compat addon
 sys-libs/glibc:glibc-omitfp - Configure glibc with --enable-omitfp which lets the build system determine when it is safe to use -fomit-frame-pointer
 sys-libs/glibc:nptlonly - Disables building the linuxthreads fallback in glibc ebuilds that support building both linuxthread and nptl
+sys-libs/gwenhywfar:fox - Use x11-libs/fox graphical toolkit
+sys-libs/libcxx:libcxxabi - Build on top of sys-libs/libcxxabi instead of gcc's libsupc++ (avoids depending on gcc).
+sys-libs/libcxx:libcxxrt - Build on top of sys-libs/libcxxrt instead of gcc's libsupc++ (avoids depending on gcc).
+sys-libs/libcxx:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependence on gcc.
+sys-libs/libcxxabi:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependency on gcc
+sys-libs/libcxxrt:libunwind - Use libunwind instead of libgcc_s for unwinding. This should allow avoiding relying on sys-devel/gcc but for now clang is setup to use libgcc_s.
+sys-libs/libhugetlbfs:perl - Install the cpupcstat tool and some perl modules
+sys-libs/libomp:hwloc - Enable CPU affinity support via hwloc
+sys-libs/libomp:ompt - Enable OpenMP Tools Interface support
+sys-libs/libselinux:pcre2 - Use dev-libs/libpcre2 for fcontext regexes
+sys-libs/libunwind:debug-frame - Adds support for DWARF .debug_frame section: Use the information from this section if available
+sys-libs/libunwind:libatomic - Use libatomic instead of builtin atomic operations
+sys-libs/musl-nscd:minimal - Only installs the header files
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
 sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
@@ -397,7 +412,15 @@ sys-libs/pam:audit - Enable support for sys-process/audit
 sys-libs/pam:berkdb - Build the pam_userdb module, that allows to authenticate users against a Berkeley DB file. Please note that enabling this USE flag will create a PAM module that links to the Berkeley DB (as provided by sys-libs/db) installed in /usr/lib and will thus not work for boot-critical services authentication.
 sys-libs/pam:cracklib - Build the pam_cracklib module, that allows to verify the chosen passwords' strength through the use of sys-libs/cracklib. Please note that simply enabling the USE flag on this package will not make use of pam_cracklib by default, you should also enable it in sys-auth/pambase as well as update your configuration files.
 sys-libs/readline:utils - Install rlfe (ReadLine Front-End) helper tool -- a wrapper program for making any stdin use readline
+sys-libs/talloc:compat - Enable extra compatibility stuff
 sys-libs/timezone-data:leaps_timezone - Install the set of "right" timezones; these timezones include leap seconds when counting seconds since the epoch (while POSIX does not) as they are based on the TAI (International Atomic Time) clock
+sys-libs/uclibc:rpc - Enable sun nis/rpc support (you should use libtirpc though)
+sys-libs/uclibc:savedconfig - Adds support for user defined configs
+sys-libs/uclibc:ssp - Force the use of ssp to be built into a hardened uclibc setup
+sys-libs/uclibc:uclibc-compat - Build uclibc with backwards compatible options
+sys-libs/uclibc:wordexp - Add support for word expansion (wordexp.h)
+sys-libs/uclibc-ng:rpc - Enable sun nis/rpc support (you should use libtirpc though)
+sys-libs/uclibc-ng:symlink-compat - Explicitly add sym links for libdl.so.0, libm.so.0, and friends for backward compatibility with sys-libs/uclibc-ng-1.0.17 and earlier
 sys-libs/zlib:minizip - include the minizip library for quick and dirty zip extraction
 sys-power/pm-utils:ntp - Install support for net-misc/ntp
 sys-process/criu:setproctitle - Make process titles of service workers to be more verbose
