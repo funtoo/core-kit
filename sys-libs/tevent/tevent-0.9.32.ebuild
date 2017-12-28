@@ -13,10 +13,10 @@ SRC_URI="https://www.samba.org/ftp/tevent/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
 IUSE="python"
 
-RDEPEND=">=sys-libs/talloc-2.1.5[${MULTILIB_USEDEP}]
+RDEPEND=">=sys-libs/talloc-2.1.9[${MULTILIB_USEDEP}]
 	python? ( ${PYTHON_DEPS} )"
 
 DEPEND="${RDEPEND}
@@ -52,4 +52,9 @@ multilib_src_install() {
 	waf-utils_src_install
 
 	multilib_is_native_abi && use python && python_domodule tevent.py
+}
+
+multilib_src_install_all() {
+	insinto /usr/include
+	doins tevent_internal.h
 }

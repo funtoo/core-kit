@@ -13,33 +13,35 @@ SRC_URI="https://www.samba.org/ftp/pub/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/${PV}"
-KEYWORDS="~alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
-IUSE="doc"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd"
+IUSE="doc +ldap +python"
 
 RDEPEND="!elibc_FreeBSD? ( dev-libs/libbsd[${MULTILIB_USEDEP}] )
 	dev-libs/popt[${MULTILIB_USEDEP}]
-	>=sys-libs/talloc-2.1.5[python,${MULTILIB_USEDEP}]
-	>=sys-libs/tevent-0.9.27[python(+),${MULTILIB_USEDEP}]
-	>=sys-libs/tdb-1.3.8[python,${MULTILIB_USEDEP}]
-	net-nds/openldap
-	!!<net-fs/samba-3.6.0[ldb]
-	!!>=net-fs/samba-4.0.0[ldb]
-	${PYTHON_DEPS}
-	"
+	>=dev-util/cmocka-1.1.1[${MULTILIB_USEDEP}]
+	>=sys-libs/talloc-2.1.10[python?,${MULTILIB_USEDEP}]
+	>=sys-libs/tevent-0.9.33[python(+)?,${MULTILIB_USEDEP}]
+	>=sys-libs/tdb-1.3.15[python?,${MULTILIB_USEDEP}]
+	python? ( ${PYTHON_DEPS} )
+	ldap? ( net-nds/openldap )
+"
 
 DEPEND="dev-libs/libxslt
 	doc? ( app-doc/doxygen )
 	virtual/pkgconfig
-	${RDEPEND}"
+	${PYTHON_DEPS}
+	${RDEPEND}
+"
 
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 WAF_BINARY="${S}/buildtools/bin/waf"
 
 MULTILIB_WRAPPED_HEADERS=( /usr/include/pyldb.h )
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.1.24-optional-python.patch
+	"${FILESDIR}"/${PN}-1.1.31-optional_packages.patch
+	"${FILESDIR}"/${PN}-1.1.31-fix_PKGCONFIGDIR-when-python-disabled.patch
 )
 
 pkg_setup() {
@@ -53,13 +55,16 @@ src_prepare() {
 
 multilib_src_configure() {
 	local myconf=(
-		--disable-rpath \
-		--disable-rpath-install --bundled-libraries=NONE \
-		--with-modulesdir="${EPREFIX}"/usr/$(get_libdir)/samba \
+		$(usex ldap '' --disable-ldap)
+		--disable-rpath
+		--disable-rpath-install --bundled-libraries=NONE
+		--with-modulesdir="${EPREFIX}"/usr/$(get_libdir)/samba
 		--builtin-libraries=NONE
 	)
 	if ! multilib_is_native_abi; then
 		myconf+=( --disable-python )
+	else
+		use python || myconf+=( --disable-python )
 	fi
 	waf-utils_src_configure "${myconf[@]}"
 }

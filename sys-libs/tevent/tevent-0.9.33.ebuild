@@ -13,10 +13,10 @@ SRC_URI="https://www.samba.org/ftp/tevent/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~arm-linux ~x86-linux"
 IUSE="python"
 
-RDEPEND=">=sys-libs/talloc-2.1.5[${MULTILIB_USEDEP}]
+RDEPEND=">=sys-libs/talloc-2.1.10[${MULTILIB_USEDEP}]
 	python? ( ${PYTHON_DEPS} )"
 
 DEPEND="${RDEPEND}
@@ -25,6 +25,10 @@ DEPEND="${RDEPEND}
 "
 # build system does not work with python3
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+PATCHES=(
+	"${FILESDIR}"/talloc-disable-python.patch
+)
 
 WAF_BINARY="${S}/buildtools/bin/waf"
 
@@ -39,6 +43,8 @@ src_prepare() {
 
 multilib_src_configure() {
 	waf-utils_src_configure \
+		--bundled-libraries=NONE \
+		--builtin-libraries=NONE \
 		$(multilib_native_usex python '' '--disable-python')
 }
 
@@ -52,4 +58,9 @@ multilib_src_install() {
 	waf-utils_src_install
 
 	multilib_is_native_abi && use python && python_domodule tevent.py
+}
+
+multilib_src_install_all() {
+	insinto /usr/include
+	doins tevent_internal.h
 }
