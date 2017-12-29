@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -24,6 +24,8 @@ LICENSE="|| ( UoI-NCSA MIT ) MIT LLVM-Grant"
 SLOT="0"
 KEYWORDS=""
 IUSE="hwloc ompt test"
+# Restrict tests to avoid hanging, https://bugs.gentoo.org/638410
+RESTRICT="test !test? ( test )"
 
 RDEPEND="hwloc? ( sys-apps/hwloc:0=[${MULTILIB_USEDEP}] )"
 # tests:
@@ -54,6 +56,7 @@ multilib_src_configure() {
 	local mycmakeargs=(
 		-DLIBOMP_LIBDIR_SUFFIX="${libdir#lib}"
 		-DLIBOMPTARGET_LIBDIR_SUFFIX="${libdir#lib}"
+
 		-DLIBOMP_USE_HWLOC=$(usex hwloc)
 		-DLIBOMP_OMPT_SUPPORT=$(usex ompt)
 		# do not install libgomp.so & libiomp5.so aliases

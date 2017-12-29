@@ -239,7 +239,7 @@ S=$(
 gentoo_urls() {
 	local devspace="HTTP~vapier/dist/URI HTTP~rhill/dist/URI
 	HTTP~zorry/patches/gcc/URI HTTP~blueness/dist/URI
-	HTTP~tamiko/distfiles/URI"
+	HTTP~tamiko/distfiles/URI HTTP~slyfox/distfiles/URI"
 	devspace=${devspace//HTTP/https:\/\/dev.gentoo.org\/}
 	echo mirror://gentoo/$1 ${devspace//URI/$1}
 }
@@ -377,9 +377,6 @@ toolchain_pkg_pretend() {
 		die "Please \`export I_PROMISE_TO_SUPPLY_PATCHES_WITH_BUGS=1\` or define it" \
 			"in your make.conf if you want to use this version."
 	fi
-
-	[[ -z ${UCLIBC_VER} ]] && [[ ${CTARGET} == *-uclibc* ]] && \
-		die "Sorry, this version does not support uClibc"
 
 	if ! use_if_iuse cxx ; then
 		use_if_iuse go && ewarn 'Go requires a C++ compiler, disabled due to USE="-cxx"'
@@ -641,6 +638,14 @@ do_gcc_PIE_patches() {
 make_gcc_hard() {
 
 	local gcc_hard_flags=""
+
+	# If we use gcc-6 or newer with pie enable to compile older gcc we need to pass -no-pie
+	# to stage1; bug 618908
+	if ! tc_version_is_at_least 6.0 && [[ $(gcc-major-version) -ge 6 ]] ; then
+		einfo "Disabling PIE in stage1 (only) ..."
+		sed -i -e "/^STAGE1_LDFLAGS/ s/$/ -no-pie/" "${S}"/Makefile.in || die
+	fi
+
 	# Gcc >= 6.X we can use configurations options to turn pie/ssp on as default
 	if tc_version_is_at_least 6.0 ; then
 		if use pie ; then
@@ -1479,7 +1484,7 @@ gcc_do_filter_flags() {
 
 		# "hppa2.0-unknown-linux-gnu" -> hppa2_0_unknown_linux_gnu
 		local VAR="CFLAGS_"${CTARGET//[-.]/_}
-		CXXFLAGS=${!VAR}
+		CXXFLAGS=${!VAR-${CFLAGS}}
 	fi
 
 	export GCJFLAGS=${GCJFLAGS:-${CFLAGS}}

@@ -1,0 +1,62 @@
+#!/sbin/runscript
+
+command="/bin/smdev"
+
+depend()
+{
+	provide dev
+	need sysfs devfs
+	before checkfs fsck
+}
+
+start()
+{
+	ebegin "Starting smdev"
+
+	local mounted=false fstab=false
+
+	mountinfo -q -f devtmpfs /dev && mounted=true
+	fstabinfo -q -t devtmpfs /dev && fstab=true
+
+	if $fstab; then
+		ebegin "Remounting /dev according to /etc/fstab"
+		if $mounted; then
+			fstabinfo --remount /dev
+		else
+			fstabinfo --mount /dev
+		fi
+		eend "$?"
+	elif ! $mounted; then
+		ebegin "Mounting /dev"
+		mount -n -t devtmpfs -o "exec,nosuid,mode=0755,size=10M" devtmpfs /dev
+		eend "$?"
+	else
+		ebegin "Using /dev mounted from kernel"
+		eend 0
+	fi
+
+	# Not provided by sysfs but needed
+	ln -snf /proc/self/fd /dev/fd
+	ln -snf fd/0 /dev/stdin
+	ln -snf fd/1 /dev/stdout
+	ln -snf fd/2 /dev/stderr
+	[ -e /proc/kcore ] && ln -snf /proc/kcore /dev/core
+
+	if [ -e /proc/sys/kernel/hotplug ]; then
+		ebegin "Setting up smdev as hotplug agent"
+		echo $command > /proc/sys/kernel/hotplug
+		eend 0
+	fi
+
+	ebegin "Loading kernel modules"
+	$command -s
+	find /sys -name 'modalias' -type f -exec cat '{}' + | sort -u | xargs modprobe -b -a 2>/dev/null
+	eend 0
+}
+
+stop()
+{
+	ebegin "Stopping smdev"
+	[ -e /proc/sys/kernel/hotplug ] && echo '' >/proc/sys/kernel/hotplug
+	eend 0
+}

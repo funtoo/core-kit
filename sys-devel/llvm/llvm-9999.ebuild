@@ -37,8 +37,9 @@ LICENSE="UoI-NCSA rc BSD public-domain
 	llvm_targets_ARM? ( LLVM-Grant )"
 SLOT="6"
 KEYWORDS=""
-IUSE="debug +doc gold libedit +libffi ncurses test
+IUSE="debug doc gold libedit +libffi ncurses test
 	kernel_Darwin ${ALL_LLVM_TARGETS[*]}"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	sys-libs/zlib:0=
@@ -57,7 +58,6 @@ DEPEND="${RDEPEND}
 	doc? ( dev-python/sphinx )
 	gold? ( sys-libs/binutils-libs )
 	libffi? ( virtual/pkgconfig )
-	test? ( $(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]") )
 	!!<dev-python/configparser-3.3.0.2
 	${PYTHON_DEPS}"
 # There are no file collisions between these versions but having :0
@@ -73,11 +73,6 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 # least intrusive of all
 CMAKE_BUILD_TYPE=RelWithDebInfo
 
-python_check_deps() {
-	! use test \
-		|| has_version "dev-python/lit[${PYTHON_USEDEP}]"
-}
-
 src_prepare() {
 	# Fix llvm-config for shared linking and sane flags
 	# https://bugs.gentoo.org/show_bug.cgi?id=565358
@@ -86,8 +81,8 @@ src_prepare() {
 	# disable use of SDK on OSX, bug #568758
 	sed -i -e 's/xcrun/false/' utils/lit/lit/util.py || die
 
-	# User patches
-	eapply_user
+	# User patches + QA
+	cmake-utils_src_prepare
 }
 
 multilib_src_configure() {
@@ -139,7 +134,6 @@ multilib_src_configure() {
 #	fi
 
 	use test && mycmakeargs+=(
-		-DLLVM_EXTERNAL_LIT="${EPREFIX}/usr/bin/lit"
 		-DLLVM_LIT_ARGS="-vv"
 	)
 

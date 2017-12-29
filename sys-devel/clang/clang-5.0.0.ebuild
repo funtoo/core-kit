@@ -27,7 +27,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 LICENSE="UoI-NCSA"
 SLOT="$(get_major_version)"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="debug default-compiler-rt default-libcxx +doc +static-analyzer
+IUSE="debug default-compiler-rt default-libcxx doc +static-analyzer
 	test xml z3 kernel_FreeBSD ${ALL_LLVM_TARGETS[*]}"
 
 RDEPEND="
@@ -101,7 +101,7 @@ src_prepare() {
 	cd - >/dev/null || die
 
 	# User patches
-	eapply_user
+	cmake-utils_src_prepare
 }
 
 multilib_src_configure() {
