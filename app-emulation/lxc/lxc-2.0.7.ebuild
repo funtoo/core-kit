@@ -1,17 +1,19 @@
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
 
-PYTHON_COMPAT=( python{3_4,3_5,3_6} )
+MY_P="${P/_/-}"
+PYTHON_COMPAT=( python{3_4,3_5} )
 DISTUTILS_OPTIONAL=1
 
 inherit autotools bash-completion-r1 distutils-r1 linux-info versionator flag-o-matic systemd
 
 DESCRIPTION="LinuX Containers userspace utilities"
 HOMEPAGE="https://linuxcontainers.org/"
-SRC_URI="https://linuxcontainers.org/downloads/lxc/${P}.tar.gz"
+SRC_URI="https://github.com/lxc/lxc/archive/${MY_P}.tar.gz"
 
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="amd64 ~arm ~arm64"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -92,6 +94,8 @@ ERROR_GRKERNSEC_SYSFS_RESTRICT="CONFIG_GRKERNSEC_SYSFS_RESTRICT:  this GRSEC fea
 
 DOCS=(AUTHORS CONTRIBUTING MAINTAINERS NEWS README doc/FAQ.txt)
 
+S="${WORKDIR}/${PN}-${MY_P}"
+
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 pkg_setup() {
@@ -119,7 +123,6 @@ src_configure() {
 	# I am not sure about the --with-rootfs-path
 	# /var/lib/lxc is probably more appropriate than
 	# /usr/lib/lxc.
-	# Note by holgersson: Why is apparmor disabled?
 	econf \
 		--localstatedir=/var \
 		--bindir=/usr/bin \
