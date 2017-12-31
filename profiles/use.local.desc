@@ -230,6 +230,9 @@ sys-apps/util-linux:kill - build the kill program
 sys-apps/util-linux:pam - build runuser helper
 sys-apps/util-linux:suid - install mount/umount as setuid so non-root users may mount/umount devices, and wall/write as setgid so non-root users can notify other users
 sys-apps/util-linux:tty-helpers - install the mesg/wall/write tools for talking to local users
+sys-auth/consolekit:cgroups - Use the kernel to track processes instead of the session cookie.
+sys-auth/consolekit:evdev - For handling VT switching with a session controller.
+sys-auth/consolekit:pm-utils - Adds support for suspend/resume using sys-power/pm-utils
 sys-auth/consolekit:policykit - Use the PolicyKit framework (sys-auth/polkit) to get authorization for suspend/shutdown.
 sys-auth/consolekit:systemd-units - Install systemd unit files to replace the modern functionality of logind in sys-apps/systemd. Not recommended.
 sys-auth/nss-mdns:search-domains - Honour search domains from /etc/resolv.conf (see bug #201948 for possible side effects)
@@ -247,14 +250,17 @@ sys-auth/polkit:elogind - Use sys-auth/elogind instead of sys-auth/consolekit fo
 sys-auth/polkit:systemd - Use sys-apps/systemd instead of sys-auth/consolekit for session tracking
 sys-block/parted:debug - Enable debugging as encouraged by upstream: [The default configuration] includes --enable-debug (by default), which contains many assertions. Obviously, these "waste" space, but in the past, they have caught potentially dangerous bugs before they would have done damage, so we think it's worth it. Also, it means we get more bug reports ;)
 sys-block/parted:device-mapper - Enable device-mapper support from sys-fs/lvm2 in parted
-sys-boot/grub:binfont - Install a pre-generated binary font
-sys-boot/grub:mkfont - Enables support for grub-mkfont
+sys-boot/grub:device-mapper - Enable support for device-mapper from sys-fs/lvm2
+sys-boot/grub:efiemu - Build and install the efiemu runtimes
+sys-boot/grub:fonts - Build and install fonts for the gfxterm module
+sys-boot/grub:libzfs - Enable support for sys-fs/zfs
+sys-boot/grub:mount - Build and install the grub-mount utility
+sys-boot/grub:multislot - Allow concurrent installation of sys-boot/grub SLOT 0 and sys-boot/grub SLOT 2 by renaming all programs.
+sys-boot/grub:themes - Build and install GRUB themes (starfield)
+sys-boot/grub:truetype - Build and install grub-mkfont conversion utility
 sys-boot/lilo:device-mapper - Enable support for device-mapper from sys-fs/lvm2
 sys-boot/lilo:minimal - Do not install the dolilo helper script
 sys-boot/lilo:pxeserial - Avoid character echo on PXE serial console
-sys-boot/plymouth:gdm - Enables smooth transition to GDM
-sys-boot/plymouth:libkms - Provides abstraction to the DRM drivers (intel, nouveau and vmwgfx at this moment)
-sys-boot/plymouth:pango - Adds support for printing text on splash screen and text prompts, e.g. for password
 sys-boot/refind:btrfs - Construire le gestionnaire EFI pour le système de fichier btrfs
 sys-boot/refind:ext2 - Construire le gestionnaire EFI pour le système de fichier ext2
 sys-boot/refind:ext4 - Construire le gestionnaire EFI pour le système de fichier ext4

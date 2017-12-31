@@ -1,34 +1,46 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit autotools eutils linux-info pam systemd
+EAPI=6
+inherit autotools libtool linux-info pam xdg-utils
 
-MY_PN=ConsoleKit
+MY_PN=ConsoleKit2
 MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="Framework for defining and tracking users, login sessions and seats"
-HOMEPAGE="https://www.freedesktop.org/wiki/Software/ConsoleKit"
-SRC_URI="https://www.freedesktop.org/software/${MY_PN}/dist/${MY_P}.tar.xz
-	https://launchpad.net/debian/+archive/primary/+files/${PN}_${PV}-4.debian.tar.gz" # for logrotate file
+HOMEPAGE="https://github.com/ConsoleKit2/ConsoleKit2 https://www.freedesktop.org/wiki/Software/ConsoleKit"
+SRC_URI="https://github.com/${MY_PN}/${MY_PN}/releases/download/${PV}/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
-IUSE="acl debug doc kernel_linux pam policykit selinux systemd-units test"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ppc ppc64 ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+IUSE="acl cgroups debug doc evdev kernel_linux pam pm-utils policykit selinux test udev"
 
-COMMON_DEPEND=">=dev-libs/dbus-glib-0.100:=
-	>=dev-libs/glib-2.38.2-r1:2=
+COMMON_DEPEND=">=dev-libs/glib-2.40:2=[dbus]
+	>=sys-devel/gettext-0.19
+	sys-apps/dbus
 	sys-libs/zlib:=
 	x11-libs/libX11:=
 	acl? (
 		sys-apps/acl:=
 		>=virtual/udev-200
 		)
+	cgroups? (
+		app-admin/cgmanager
+		>=sys-libs/libnih-1.0.2[dbus]
+		)
+	evdev? ( dev-libs/libevdev:= )
+	udev? (
+		virtual/libudev
+		x11-libs/libdrm:=
+	)
 	pam? ( virtual/pam )
-	policykit? ( >=sys-auth/polkit-0.110 )"
+	policykit? ( >=sys-auth/polkit-0.110 )
+	selinux? ( sys-libs/libselinux )"
+# pm-utils: bug 557432
 RDEPEND="${COMMON_DEPEND}
 	kernel_linux? ( sys-apps/coreutils[acl?] )
+	pm-utils? ( sys-power/pm-utils )
 	selinux? ( sec-policy/selinux-consolekit )"
 DEPEND="${COMMON_DEPEND}
 	dev-libs/libxslt
@@ -54,40 +66,37 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch \
-		"${FILESDIR}"/${PN}-cleanup_console_tags.patch \
-		"${FILESDIR}"/${PN}-shutdown-reboot-without-policies.patch \
-		"${FILESDIR}"/${PN}-udev-acl-install_to_usr.patch \
-		"${FILESDIR}"/${PN}-0.4.5-polkit-automagic.patch
+	xdg_environment_reset
 
-	if ! use systemd-units; then
-		sed -i -e '/SystemdService/d' data/org.freedesktop.ConsoleKit.service.in || die
-	fi
+	sed -i -e '/SystemdService/d' data/org.freedesktop.ConsoleKit.service.in || die
 
+	default
+	# patch needs autoreconf, so dont need libtoolize
 	eautoreconf
+	#elibtoolize # bug 593314
 }
 
 src_configure() {
-	local myconf
-	if use systemd-units; then
-		myconf="$(systemd_with_unitdir)"
-	else
-		myconf="--with-systemdsystemunitdir=/tmp"
-	fi
-
 	econf \
 		XMLTO_FLAGS='--skip-validation' \
-		--libexecdir="${EPREFIX}"/usr/lib/${MY_PN} \
+		--libexecdir="${EPREFIX}"/usr/lib/ConsoleKit \
 		--localstatedir="${EPREFIX}"/var \
 		$(use_enable pam pam-module) \
 		$(use_enable doc docbook-docs) \
 		$(use_enable test docbook-docs) \
 		$(use_enable debug) \
 		$(use_enable policykit polkit) \
+		$(use_enable evdev libevdev) \
 		$(use_enable acl udev-acl) \
+		$(use_enable cgroups libcgmanager) \
+		$(use_enable selinux libselinux) \
+		$(use_enable udev libdrm) \
+		$(use_enable udev libudev) \
+		$(use_enable test tests) \
 		--with-dbus-services="${EPREFIX}"/usr/share/dbus-1/services \
 		--with-pam-module-dir="$(getpam_mod_dir)" \
-		${myconf}
+		--with-xinitrc-dir="${EPREFIX}"/etc/X11/xinit/xinitrc.d \
+		--without-systemdsystemunitdir
 }
 
 src_install() {
@@ -96,11 +105,11 @@ src_install() {
 		htmldocdir="${EPREFIX}"/usr/share/doc/${PF}/html \
 		install
 
-	dosym /usr/lib/${MY_PN} /usr/lib/${PN}
+	dosym /usr/lib/ConsoleKit /usr/lib/${PN}
 
 	dodoc AUTHORS HACKING NEWS README TODO
 
-	newinitd "${FILESDIR}"/${PN}-0.2.rc consolekit
+	newinitd "${FILESDIR}"/${PN}-1.0.0.initd consolekit
 
 	keepdir /usr/lib/ConsoleKit/run-seat.d
 	keepdir /usr/lib/ConsoleKit/run-session.d
@@ -110,15 +119,13 @@ src_install() {
 	exeinto /etc/X11/xinit/xinitrc.d
 	newexe "${FILESDIR}"/90-consolekit-3 90-consolekit
 
-	exeinto /usr/lib/ConsoleKit/run-session.d
-	doexe "${FILESDIR}"/pam-foreground-compat.ck
+	if use kernel_linux; then
+		# bug 571524
+		exeinto /usr/lib/ConsoleKit/run-session.d
+		doexe "${FILESDIR}"/pam-foreground-compat.ck
+	fi
 
 	prune_libtool_files --all # --all for pam_ck_connector.la
 
-	use systemd-units || rm -rf "${ED}"/tmp
-
-	rm -rf "${ED}"/var/run # let the init script create the directory
-
-	insinto /etc/logrotate.d
-	newins "${WORKDIR}"/debian/${PN}.logrotate ${PN} #374513
+	rm -rf "${ED}"/var/run || die # let the init script create the directory
 }
