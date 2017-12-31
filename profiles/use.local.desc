@@ -106,6 +106,12 @@ dev-vcs/git:ppcsha1 - Make use of a bundled routine that is optimized for the PP
 dev-vcs/git:subversion - Include git-svn for dev-vcs/subversion support
 dev-vcs/git:tk - Include the 'gitk' and 'git gui' tools
 dev-vcs/git:webdav - Adds support for push'ing to HTTP/HTTPS repositories via DAV
+mail-mta/postfix:dovecot-sasl - Enable net-mail/dovecot protocol version 1 (server only) SASL implementation
+mail-mta/postfix:eai - Add support for SMTPUTF8
+mail-mta/postfix:ldap-bind - Add support for binding to LDAP backend using dev-libs/cyrus-sasl
+mail-mta/postfix:lmdb - Add support for using dev-db/lmdb for lookup tables
+mail-mta/postfix:memcached - Add support for using net-misc/memcached for lookup tables
+mail-mta/postfix:vda - Add support for virtual delivery agent quota enforcing
 net-dialup/ppp:activefilter - Enables active filter support
 net-dialup/ppp:atm - Enables ATM (Asynchronous Transfer Mode) protocol support
 net-dialup/ppp:dhcp - Installs PPP DHCP client plugin for IP address allocation by a DHCP server (see http://www.netservers.co.uk/gpl/)
