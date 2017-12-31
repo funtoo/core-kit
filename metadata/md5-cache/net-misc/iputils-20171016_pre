@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst prepare
+DEPEND=arping? ( !net-misc/arping ) rarpd? ( !net-misc/rarpd ) traceroute? ( !net-analyzer/traceroute ) !static? ( caps? ( sys-libs/libcap ) idn? ( net-dns/libidn ) ipv6? ( ssl? ( gcrypt? ( dev-libs/libgcrypt:0= ) nettle? ( dev-libs/nettle ) openssl? ( !libressl? ( dev-libs/openssl:0 ) libressl? ( dev-libs/libressl ) ) ) ) ) static? ( caps? ( sys-libs/libcap[static-libs(+)] ) idn? ( net-dns/libidn[static-libs(+)] ) ipv6? ( ssl? ( gcrypt? ( dev-libs/libgcrypt:0=[static-libs(+)] ) nettle? ( dev-libs/nettle[static-libs(+)] ) openssl? ( !libressl? ( dev-libs/openssl:0[static-libs(+)] ) libressl? ( dev-libs/libressl[static-libs(+)] ) ) ) ) ) virtual/os-headers filecaps? ( sys-libs/libcap )
+DESCRIPTION=Network monitoring tools including ping and ping6
+EAPI=6
+HOMEPAGE=https://wiki.linuxfoundation.org/networking/iputils
+IUSE=+arping caps clockdiff doc gcrypt idn ipv6 libressl nettle +openssl rarpd rdisc SECURITY_HAZARD ssl static tftpd tracepath traceroute +filecaps
+KEYWORDS=~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-linux ~x86-linux
+LICENSE=BSD GPL-2+ rdisc
+RDEPEND=arping? ( !net-misc/arping ) rarpd? ( !net-misc/rarpd ) traceroute? ( !net-analyzer/traceroute ) !static? ( caps? ( sys-libs/libcap ) idn? ( net-dns/libidn ) ipv6? ( ssl? ( gcrypt? ( dev-libs/libgcrypt:0= ) nettle? ( dev-libs/nettle ) openssl? ( !libressl? ( dev-libs/openssl:0 ) libressl? ( dev-libs/libressl ) ) ) ) )
+REQUIRED_USE=ipv6? ( ssl? ( ^^ ( gcrypt nettle openssl ) ) )
+SLOT=0
+SRC_URI=https://github.com/iputils/iputils/archive/67e7d0daf1f231cc708217e6aec2f8d5ce7aeacf.tar.gz -> iputils-20171016_pre.tar.gz https://dev.gentoo.org/~whissi/dist/iputils/iputils-manpages-20171016_pre.tar.xz
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	fcaps	e80204189039ecc03f24151c518375f0	flag-o-matic	02908f00f002f0f07c5b74783d778325	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_md5_=25a47be92cca8502682a2edc9fd4495e
