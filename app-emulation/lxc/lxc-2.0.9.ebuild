@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,18 +6,18 @@ PYTHON_COMPAT=( python3_{4,5,6} )
 DISTUTILS_OPTIONAL=1
 
 inherit autotools bash-completion-r1 distutils-r1 linux-info versionator flag-o-matic systemd readme.gentoo-r1
+
 DESCRIPTION="LinuX Containers userspace utilities"
 HOMEPAGE="https://linuxcontainers.org/"
 SRC_URI="https://linuxcontainers.org/downloads/lxc/${P}.tar.gz"
 
-KEYWORDS="amd64 ~arm ~arm64 x86"
+KEYWORDS="*"
 
 LICENSE="LGPL-3"
 SLOT="0"
 IUSE="cgmanager examples lua python seccomp selinux"
 
-RDEPEND="
-	net-libs/gnutls
+RDEPEND="net-libs/gnutls
 	sys-libs/libcap
 	cgmanager? ( app-admin/cgmanager )
 	lua? ( >=dev-lang/lua-5.1:= )
@@ -31,6 +30,7 @@ DEPEND="${RDEPEND}
 	>=sys-kernel/linux-headers-3.2"
 
 RDEPEND="${RDEPEND}
+	sys-process/criu
 	sys-apps/util-linux
 	app-misc/pax-utils
 	virtual/awk"
@@ -101,9 +101,9 @@ pkg_setup() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}"/${PN}-2.0.6-bash-completion.patch
+	eapply "${FILESDIR}"/${PN}-2.0.x-bash-completion.patch
 	#558854
-	eapply "${FILESDIR}"/${PN}-2.0.5-omit-sysconfig.patch
+	eapply "${FILESDIR}"/${PN}-2.0.x-omit-sysconfig.patch
 	eapply_user
 	eautoreconf
 }
@@ -179,11 +179,11 @@ src_install() {
 	find "${D}" -name '*.la' -delete
 
 	# Gentoo-specific additions!
-	newinitd "${FILESDIR}/${PN}.initd.5" ${PN}
+	newinitd "${FILESDIR}/${PN}.initd" ${PN}
 
 	# Remember to compare our systemd unit file with the upstream one
 	# config/init/systemd/lxc.service.in
-	systemd_newunit "${FILESDIR}"/${PN}_at.service.4 "lxc@.service"
+	systemd_newunit "${FILESDIR}"/${PN}_at.service "lxc@.service"
 
 	DOC_CONTENTS="
 	Starting from version ${PN}-1.1.0-r3, the default lxc path has been

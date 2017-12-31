@@ -31,7 +31,6 @@ sys-block
 sys-boot
 sys-cluster
 sys-devel
-sys-firmware
 sys-fs
 sys-kernel
 sys-libs
