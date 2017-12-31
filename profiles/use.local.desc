@@ -43,8 +43,6 @@ app-emulation/lxd:daemon - Build the system daemon, not just the client tool
 app-emulation/lxd:dnsmasq - Depend on dnsmasq to provide DHCP and DNS.
 app-eselect/eselect-php:fpm - Enable the FastCGI Process Manager SAPI
 app-misc/pax-utils:python - Install a more powerful/faster version of lddtree
-app-misc/screen:multiuser - Enable multiuser support (by setting correct permissions)
-app-misc/screen:nethack - Express error messages in nethack style
 app-misc/tmux:utempter - Include libutempter support
 app-shells/bash:bashlogger - Log ALL commands typed into bash; should ONLY be used in restricted environments such as honeypots
 app-shells/bash:mem-scramble - Build with custom malloc/free overwriting allocated/freed memory
@@ -223,7 +221,6 @@ sys-apps/pciutils:kmod - Enable sys-apps/kmod support for the -k switch in lspci
 sys-apps/pciutils:zlib - Support compressed pci.ids database
 sys-apps/portage:epydoc - Build html API documentation with epydoc.
 sys-apps/portage:python3 - Use python3 as Python interpreter.
-sys-apps/shadow:audit - Enable support for sys-process/audit
 sys-apps/smartmontools:minimal - Do not install the monitoring daemon and associated scripts.
 sys-apps/smartmontools:update_drivedb - Install a script to update the drivedb file.
 sys-apps/tcp-wrappers:netgroups - Support matching NIS (host) netgroup names via the @netgroup syntax (if you don't know what this means, you most likely do not need it)
