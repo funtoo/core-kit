@@ -221,6 +221,7 @@ sys-apps/pciutils:kmod - Enable sys-apps/kmod support for the -k switch in lspci
 sys-apps/pciutils:zlib - Support compressed pci.ids database
 sys-apps/portage:epydoc - Build html API documentation with epydoc.
 sys-apps/portage:python3 - Use python3 as Python interpreter.
+sys-apps/shadow:audit - Enable support for sys-process/audit
 sys-apps/smartmontools:minimal - Do not install the monitoring daemon and associated scripts.
 sys-apps/smartmontools:update_drivedb - Install a script to update the drivedb file.
 sys-apps/tcp-wrappers:netgroups - Support matching NIS (host) netgroup names via the @netgroup syntax (if you don't know what this means, you most likely do not need it)
