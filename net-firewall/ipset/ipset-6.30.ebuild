@@ -1,8 +1,9 @@
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 MODULES_OPTIONAL_USE=modules
-inherit autotools linux-info linux-mod
+inherit linux-info linux-mod
 
 DESCRIPTION="IPset tool for iptables, successor to ippool"
 HOMEPAGE="http://ipset.netfilter.org/"
@@ -10,7 +11,7 @@ SRC_URI="http://ipset.netfilter.org/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~amd64 ~arm64 ~ppc ~x86"
 
 RDEPEND=">=net-firewall/iptables-1.4.7
 	net-libs/libmnl"
@@ -18,7 +19,7 @@ DEPEND="${RDEPEND}"
 
 DOCS=( ChangeLog INSTALL README UPGRADE )
 
-# configurable from outside, e.g. /etc/make.conf
+# configurable from outside, e.g. /etc/portage/make.conf
 IP_NF_SET_MAX=${IP_NF_SET_MAX:-256}
 
 BUILD_TARGETS="modules"
@@ -59,10 +60,6 @@ pkg_setup() {
 	[[ ${build_modules} -eq 1 ]] && linux-mod_pkg_setup
 }
 
-#src_prepare() {
-#	eautoreconf
-#}
-
 src_configure() {
 	econf \
 		$(use_with modules kmod) \
@@ -89,7 +86,7 @@ src_install() {
 	default
 	prune_libtool_files
 
-	newinitd "${FILESDIR}"/ipset.initd-r3 ${PN}
+	newinitd "${FILESDIR}"/ipset.initd-r4 ${PN}
 	newconfd "${FILESDIR}"/ipset.confd ${PN}
 	keepdir /var/lib/ipset
 

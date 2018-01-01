@@ -1,6 +1,7 @@
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4
+EAPI=5
 
 inherit eutils
 
@@ -10,29 +11,27 @@ SRC_URI="http://www.rsnapshot.org/downloads/${P}.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 ppc ppc64 sparc x86"
 IUSE=""
 
 RDEPEND=">=dev-lang/perl-5.8.2
+		dev-perl/Lchown
 		>=sys-apps/util-linux-2.12-r4
 		>=sys-apps/coreutils-5.0.91-r4
 		>=net-misc/openssh-3.7.1_p2-r1
-		>=net-misc/rsync-2.6.0
-		dev-perl/Lchown"
+		>=net-misc/rsync-2.6.0"
 DEPEND="${RDEPEND}"
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
-	epatch "${FILESDIR}"/${P}-svn-fixes-1.398-1.430.patch
+src_prepare() {
+	epatch "${FILESDIR}"/${P}-cp_al.patch \
+		"${FILESDIR}"/${P}-perl518.patch
 }
 
 src_install() {
 	# Change sysconfdir to install the template file as documentation
 	# rather than in /etc.
 	emake install DESTDIR="${D}" \
-		sysconfdir="/usr/share/doc/${PF}" \
-		|| die
+		sysconfdir="${EPREFIX}/usr/share/doc/${PF}"
 
 	dodoc README AUTHORS TODO ChangeLog \
 		docs/Upgrading_from_1.1 \
