@@ -122,10 +122,9 @@ net-dialup/ppp:ipv6 - Enables support for IP version 6
 net-dialup/ppp:pam - Enables PAM (Pluggable Authentication Modules) support
 net-dialup/ppp:radius - Enables RADIUS support
 net-dns/avahi:autoipd - Build and install the IPv4LL (RFC3927) network address configuration daemon
-net-dns/avahi:bookmarks - Install the avahi-bookmarks application (requires dev-python/twisted)
+net-dns/avahi:bookmarks - Install the avahi-bookmarks application (requires dev-python/twisted-core and dev-python/twisted-web)
 net-dns/avahi:gtk3 - Build the avahi-ui-gtk3 library, and use gtk3 for the avahi utilities under USE=utils
 net-dns/avahi:howl-compat - Enable compat libraries for howl
-net-dns/avahi:introspection - Use dev-libs/gobject-introspection for introspection
 net-dns/avahi:mdnsresponder-compat - Enable compat libraries for mDNSResponder
 net-dns/avahi:utils - Install the avahi gtk+ utils avahi-discover, bssh, and bvnc
 net-dns/bind-tools:gost - Enables gost OpenSSL engine support

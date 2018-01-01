@@ -8,17 +8,16 @@ PYTHON_REQ_USE="gdbm"
 
 WANT_AUTOMAKE=1.11
 
-inherit autotools eutils flag-o-matic multilib multilib-minimal mono-env python-r1 systemd user
+inherit autotools eutils flag-o-matic multilib multilib-minimal mono-env \
+	python-r1 systemd user
 
 DESCRIPTION="System which facilitates service discovery on a local network"
 HOMEPAGE="http://avahi.org/"
-SRC_URI="https://github.com/lathiat/avahi/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-
-S="${WORKDIR}/${P}"
+SRC_URI="http://avahi.org/download/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-linux"
 IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6 kernel_linux mdnsresponder-compat mono nls python qt4 selinux test utils"
 
 REQUIRED_USE="
@@ -32,12 +31,12 @@ REQUIRED_USE="
 COMMON_DEPEND="
 	dev-libs/libdaemon
 	dev-libs/expat
-	dev-libs/glib:2[${MULTILIB_USEDEP}]
-	gdbm? ( sys-libs/gdbm[${MULTILIB_USEDEP}] )
+	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
+	gdbm? ( >=sys-libs/gdbm-1.10-r1[${MULTILIB_USEDEP}] )
 	qt4? ( dev-qt/qtcore:4[${MULTILIB_USEDEP}] )
 	gtk? ( x11-libs/gtk+:2[${MULTILIB_USEDEP}] )
 	gtk3? ( x11-libs/gtk+:3[${MULTILIB_USEDEP}] )
-	dbus? ( sys-apps/dbus[${MULTILIB_USEDEP}] )
+	dbus? ( >=sys-apps/dbus-1.6.18-r1[${MULTILIB_USEDEP}] )
 	kernel_linux? ( sys-libs/libcap )
 	introspection? ( dev-libs/gobject-introspection:= )
 	mono? (
@@ -57,10 +56,11 @@ COMMON_DEPEND="
 
 DEPEND="
 	${COMMON_DEPEND}
-	doc? ( app-doc/doxygen )
-	app-doc/xmltoman
 	dev-util/intltool
-	virtual/pkgconfig[${MULTILIB_USEDEP}]
+	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
+	doc? (
+		app-doc/doxygen
+	)
 "
 
 RDEPEND="
@@ -86,9 +86,9 @@ pkg_setup() {
 }
 
 src_prepare() {
-	if ! use ipv6; then
+	if use ipv6; then
 		sed -i \
-			-e s/use-ipv6=yes/use-ipv6=no/ \
+			-e s/use-ipv6=no/use-ipv6=yes/ \
 			avahi-daemon/avahi-daemon.conf || die
 	fi
 
@@ -97,16 +97,36 @@ src_prepare() {
 		doxygen_to_devhelp.xsl || die
 
 	# Make gtk utils optional
-	# https://github.com/lathiat/avahi/issues/24
 	epatch "${FILESDIR}"/${PN}-0.6.30-optional-gtk-utils.patch
 
+	# Fix init scripts for >=openrc-0.9.0, bug #383641
+	epatch "${FILESDIR}"/${PN}-0.6.x-openrc-0.9.x-init-scripts-fixes.patch
+
+	# install-exec-local -> install-exec-hook
+	epatch "${FILESDIR}"/${P}-install-exec-hook.patch
+
+	# Backport host-name-from-machine-id patch, bug #466134
+	epatch "${FILESDIR}"/${P}-host-name-from-machine-id.patch
+
 	# Don't install avahi-discover unless ENABLE_GTK_UTILS, bug #359575
-	# https://github.com/lathiat/avahi/issues/24
-	epatch "${FILESDIR}"/${PN}-0.6.31-fix-install-avahi-discover.patch
+	epatch "${FILESDIR}"/${P}-fix-install-avahi-discover.patch
+
+	epatch "${FILESDIR}"/${P}-so_reuseport-may-not-exist-in-running-kernel.patch
+
+	# allow building client without the daemon
+	epatch "${FILESDIR}"/${P}-build-client-without-daemon.patch
 
 	# Fix build under various locales, bug #501664
-	# https://github.com/lathiat/avahi/issues/27
-	epatch "${FILESDIR}"/${PN}-0.6.31-fix-locale-build.patch
+	epatch "${FILESDIR}"/${P}-fix-locale-build.patch
+
+	# Fix "Invalid response packet from host", bug #559408.
+	epatch "${FILESDIR}"/${P}-invalid_packet.patch
+
+	# Drop DEPRECATED flags, bug #384743
+	sed -i -e 's:-D[A-Z_]*DISABLE_DEPRECATED=1::g' avahi-ui/Makefile.am || die
+
+	# Fix references to Lennart's home directory, bug #466210
+	sed -i -e 's/\/home\/lennart\/tmp\/avahi//g' man/* || die
 
 	# Bug #525832
 	epatch_user
@@ -158,8 +178,7 @@ multilib_src_configure() {
 		--with-distro=gentoo \
 		--disable-python-dbus \
 		--disable-pygtk \
-		--enable-manpages \
-		--enable-xmltoman \
+		--disable-xmltoman \
 		--disable-monodoc \
 		--enable-glib \
 		--enable-gobject \
@@ -194,9 +213,13 @@ multilib_src_install() {
 	use bookmarks && use python && use dbus && use gtk || \
 		rm -f "${ED}"/usr/bin/avahi-bookmarks
 
-	# https://github.com/lathiat/avahi/issues/28
 	use howl-compat && dosym avahi-compat-howl.pc /usr/$(get_libdir)/pkgconfig/howl.pc
 	use mdnsresponder-compat && dosym avahi-compat-libdns_sd/dns_sd.h /usr/include/dns_sd.h
+
+	# Needed for running on systemd properly, bug #537000
+	if multilib_is_native_abi; then
+		ln -s avahi-daemon.service "${D}$(systemd_get_unitdir)"/dbus-org.freedesktop.Avahi.service || die
+	fi
 
 	if multilib_is_native_abi && use doc; then
 		dohtml -r doxygen/html/. || die

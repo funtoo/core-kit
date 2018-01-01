@@ -18,7 +18,8 @@ S="${WORKDIR}/${P}"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86"
+#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~x86"
 IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6 kernel_linux mdnsresponder-compat mono nls python qt4 selinux test utils"
 
 REQUIRED_USE="
@@ -46,12 +47,12 @@ COMMON_DEPEND="
 	)
 	python? (
 		${PYTHON_DEPS}
-		gtk? ( dev-python/pygtk )
-		dbus? ( dev-python/dbus-python )
+		gtk? ( dev-python/pygtk[${PYTHON_USEDEP}] )
+		dbus? ( dev-python/dbus-python[${PYTHON_USEDEP}] )
 	)
 	bookmarks? (
-		dev-python/twisted-core
-		dev-python/twisted-web
+		${PYTHON_DEPS}
+		>=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
 	)
 "
 
@@ -107,6 +108,9 @@ src_prepare() {
 	# Fix build under various locales, bug #501664
 	# https://github.com/lathiat/avahi/issues/27
 	epatch "${FILESDIR}"/${PN}-0.6.31-fix-locale-build.patch
+
+	# Update the init scripts for the new openrc, bug #594622
+	epatch "${FILESDIR}"/${PN}-0.6.32-openrc-0.21.7-fix-init-scripts.patch
 
 	# Bug #525832
 	epatch_user

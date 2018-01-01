@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="gdbm"
@@ -18,11 +18,11 @@ S="${WORKDIR}/${P}"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86"
-IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6 kernel_linux mdnsresponder-compat mono nls python qt4 selinux test utils"
+#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 arm ~arm64 ~hppa ia64 ~mips ppc ~ppc64 sparc x86"
+IUSE="autoipd bookmarks dbus doc gdbm gtk gtk3 howl-compat +introspection ipv6 kernel_linux mdnsresponder-compat mono nls python qt4 selinux test"
 
 REQUIRED_USE="
-	utils? ( || ( gtk gtk3 ) )
 	python? ( dbus gdbm ${PYTHON_REQUIRED_USE} )
 	mono? ( dbus )
 	howl-compat? ( dbus )
@@ -46,12 +46,12 @@ COMMON_DEPEND="
 	)
 	python? (
 		${PYTHON_DEPS}
-		gtk? ( dev-python/pygtk )
-		dbus? ( dev-python/dbus-python )
+		dbus? ( dev-python/dbus-python[${PYTHON_USEDEP}] )
+		introspection? ( dev-python/pygobject:3[${PYTHON_USEDEP}] )
 	)
 	bookmarks? (
-		dev-python/twisted-core
-		dev-python/twisted-web
+		${PYTHON_DEPS}
+		>=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
 	)
 "
 
@@ -96,20 +96,7 @@ src_prepare() {
 		-e "s:\\.\\./\\.\\./\\.\\./doc/avahi-docs/html/:../../../doc/${PF}/html/:" \
 		doxygen_to_devhelp.xsl || die
 
-	# Make gtk utils optional
-	# https://github.com/lathiat/avahi/issues/24
-	epatch "${FILESDIR}"/${PN}-0.6.30-optional-gtk-utils.patch
-
-	# Don't install avahi-discover unless ENABLE_GTK_UTILS, bug #359575
-	# https://github.com/lathiat/avahi/issues/24
-	epatch "${FILESDIR}"/${PN}-0.6.31-fix-install-avahi-discover.patch
-
-	# Fix build under various locales, bug #501664
-	# https://github.com/lathiat/avahi/issues/27
-	epatch "${FILESDIR}"/${PN}-0.6.31-fix-locale-build.patch
-
-	# Bug #525832
-	epatch_user
+	eapply_user
 
 	# Prevent .pyc files in DESTDIR
 	>py-compile
@@ -123,10 +110,7 @@ src_prepare() {
 src_configure() {
 	# those steps should be done once-per-ebuild rather than per-ABI
 	use sh && replace-flags -O? -O0
-	use python && python_export_best
-
-	# We need to unset DISPLAY, else the configure script might have problems detecting the pygtk module
-	unset DISPLAY
+	use python && python_setup
 
 	multilib-minimal_src_configure
 }
@@ -137,7 +121,7 @@ multilib_src_configure() {
 	if use python; then
 		myconf+=(
 			$(multilib_native_use_enable dbus python-dbus)
-			$(multilib_native_use_enable gtk pygtk)
+			$(multilib_native_use_enable introspection pygobject)
 		)
 	fi
 
@@ -157,7 +141,6 @@ multilib_src_configure() {
 		--localstatedir="${EPREFIX}/var" \
 		--with-distro=gentoo \
 		--disable-python-dbus \
-		--disable-pygtk \
 		--enable-manpages \
 		--enable-xmltoman \
 		--disable-monodoc \
@@ -175,11 +158,10 @@ multilib_src_configure() {
 		$(use_enable gtk3) \
 		$(use_enable nls) \
 		$(multilib_native_use_enable introspection) \
-		$(multilib_native_use_enable utils gtk-utils) \
 		--disable-qt3 \
 		$(use_enable qt4) \
 		$(use_enable gdbm) \
-		$(systemd_with_unitdir) \
+		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)" \
 		"${myconf[@]}"
 }
 
