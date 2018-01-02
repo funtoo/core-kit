@@ -191,6 +191,11 @@ net-wireless/bluez:obex - Enable OBEX transfer support.
 net-wireless/bluez:test-programs - Install tools for testing of various Bluetooth functions
 net-wireless/bluez:user-session - Allow compatibility with user-session semantics for session bus under systemd
 net-wireless/crda:gcrypt - Use libgcrypt instead of openssl for key checking
+net-wireless/hostapd:crda - Add CRDA support
+net-wireless/hostapd:logwatch - Install support files for sys-apps/logwatch
+net-wireless/hostapd:netlink - Adding support for using netlink to create VLANs
+net-wireless/hostapd:sqlite - Adding sqlite support
+net-wireless/hostapd:wps - Add support for Wi-Fi Protected Setup
 net-wireless/wpa_supplicant:ap - Add support for access point mode
 net-wireless/wpa_supplicant:eap-sim - Add support for EAP-SIM authentication algorithm
 net-wireless/wpa_supplicant:fasteap - Add support for FAST-EAP authentication algorithm
