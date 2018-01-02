@@ -13,7 +13,7 @@ LICENSE="BSD"
 
 SLOT="0/${PV}"
 
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~ppc-aix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~ppc-aix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 IUSE="debug doc examples static-libs"
 
 DEPEND="
@@ -31,9 +31,6 @@ MULTILIB_CHOST_TOOLS=(
 
 PATCHES=(
 	"${FILESDIR}/${PN}-58.1-remove-bashisms.patch"
-	"${FILESDIR}/${PN}-58.1-iterator.patch"
-	"${FILESDIR}/${PN}-58.2-CVE-2017-7867.patch"
-	"${FILESDIR}/${PN}-58.2-glibc226.patch"
 	"${FILESDIR}/${PN}-58.2-darwin.patch"
 )
 
@@ -66,12 +63,6 @@ src_prepare() {
 	sed -i \
 		-e 's:icudefs.mk:icudefs.mk Doxyfile:' \
 		configure.ac || die
-
-	# Fix compilation on Solaris due to enabling of conflicting standards
-	if [[ ${CHOST} == *-solaris* ]] ; then
-		sed -i -e '/define _XOPEN_SOURCE_EXTENDED/s/_XOPEN/no_XOPEN/' \
-			common/uposixdefs.h || die
-	fi
 
 	eautoreconf
 }
