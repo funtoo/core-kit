@@ -279,6 +279,7 @@ sys-boot/refind:iso9660 - Construire le gestionnaire EFI pour le système de fic
 sys-boot/refind:ntfs - Construire le gestionnaire EFI pour le système de fichier ntfs
 sys-boot/refind:reiserfs - Construire le gestionnaire EFI pour le système de fichier reiserfs
 sys-devel/autogen:libopts - install the libopts tarball (a few packages want this for developing)
+sys-devel/binutils:multitarget - Adds support to binutils for cross compiling (does not work with gas)
 sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
 sys-devel/clang:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
 sys-devel/clang:multitarget - Build all host targets (default: host only)

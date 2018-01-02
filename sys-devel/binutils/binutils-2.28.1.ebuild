@@ -1,3 +1,4 @@
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
@@ -6,13 +7,4 @@ PATCHVER="1.0"
 ELF2FLT_VER=""
 inherit toolchain-binutils
 
-KEYWORDS=""
-
-pkg_postinst() {
-toolchain-binutils_pkg_postinst
-# Older ebuild  were not using toolchain-binutils.eclass which has upgrade code in toolchain-binutils_pkg_postrm(), and upon removal of older binutils, profile is broken. perform upgrade here# FL-3963.
-local current_profile=$(binutils-config -c ${CTARGET})
-	if [[ ${current_profile} =~ ^${CTARGET}-2\.([0-9]|1[0-9]|2[0-7])($|\.) ]]; then
-		binutils-config ${CTARGET}-${BVER}
-	fi
-}
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd -sparc-fbsd ~x86-fbsd"
