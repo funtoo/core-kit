@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,7 +12,7 @@ SRC_URI="mirror://gnu/gdbm/${P}.tar.gz
 	exporter? ( mirror://gnu/gdbm/${EX_P}.tar.gz )"
 
 LICENSE="GPL-3"
-SLOT="0"
+SLOT="0/1.14" # new subslot (see bug #643188)
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="+berkdb exporter nls +readline static-libs"
 
@@ -21,15 +21,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/gdbm-1.13-fix-a-typo-in-gdbm.h.patch
-)
-
 EX_S="${WORKDIR}/${EX_P}"
 
 src_prepare() {
 	default
-
 	eautoreconf
 }
 
@@ -65,6 +60,8 @@ multilib_src_compile() {
 multilib_src_install_all() {
 	einstalldocs
 
-	use static-libs || find "${ED}" -name '*.la' -delete
+	if ! use static-libs ; then
+		find "${ED}" -name '*.la' -delete || die
+	fi
 	mv "${ED%/}"/usr/include/gdbm/gdbm.h "${ED%/}"/usr/include/ || die
 }
