@@ -4,10 +4,10 @@ EAPI=5
 
 inherit check-reqs eutils mount-boot
 
-SLOT=$PVR-LTS
-CKV=4.9.65
+SLOT=$PVR
+CKV=4.14.12
 KV_FULL=${PN}-${PVR}
-EXTRAVERSION=-3+deb9u2
+EXTRAVERSION=-2
 MODVER=${CKV}${EXTRAVERSION}
 KERNEL_ARCHIVE="linux_${PV}.orig.tar.xz"
 PATCH_ARCHIVE="linux_${PV}${EXTRAVERSION}.debian.tar.xz"
@@ -16,7 +16,8 @@ RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
 KEYWORDS="*"
 IUSE="binary"
-DEPEND="binary? ( >=sys-kernel/genkernel-3.4.40.7 )"
+DEPEND="binary? ( >=sys-kernel/genkernel-3.4.40.7[cryptsetup] )"
+RDEPEND="!=sys-kernel/debian-sources-4.11.11"
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 HOMEPAGE="http://www.debian.org"
 SRC_URI="mirror://funtoo/${KERNEL_ARCHIVE} mirror://funtoo/${PATCH_ARCHIVE}"
@@ -70,11 +71,14 @@ src_prepare() {
 	epatch "${FILESDIR}"/debian-sources-3.14.4-xfs-libcrc32c-fix.patch
 
 	## do not configure debian devs certs.
-	epatch "${FILESDIR}"/debian-sources-4.5.2-certs.patch
+	epatch "${FILESDIR}"/${PN}-4.5.2-certs.patch
 
 	## FL-3381. enable IKCONFIG
-	epatch "${FILESDIR}"/ikconfig.patch
-
+	epatch "${FILESDIR}"/${PN}-4.13.10-ikconfig.patch
+	
+	## FL-4424: enable legacy support for MCELOG.
+	epatch "${FILESDIR}"/${PN}-4.13.10-mcelog.patch
+	
 	local opts
 	opts="standard"
 	local myarch="amd64"
