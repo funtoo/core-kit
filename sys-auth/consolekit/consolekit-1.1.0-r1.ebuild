@@ -1,8 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit libtool linux-info pam
+inherit linux-info pam
 
 MY_PN=ConsoleKit2
 MY_P=${MY_PN}-${PV}
@@ -13,7 +12,7 @@ SRC_URI="https://github.com/${MY_PN}/${MY_PN}/releases/download/${PV}/${MY_P}.ta
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ppc ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 IUSE="acl cgroups debug doc kernel_linux pam pm-utils policykit selinux test"
 
 COMMON_DEPEND=">=dev-libs/glib-2.40:2=[dbus]
@@ -49,7 +48,7 @@ S=${WORKDIR}/${MY_P}
 
 QA_MULTILIB_PATHS="usr/lib/ConsoleKit/.*"
 
-PATCHES=( "${FILESDIR}/${P}-Remove-the-root-restriction-for-runtime-dirs.patch" )
+PATCHES=( "${FILESDIR}/1.1.0/${P}-Remove-the-root-restriction-for-runtime-dirs.patch" )
 
 pkg_setup() {
 	if use kernel_linux; then
@@ -65,7 +64,6 @@ src_prepare() {
 	sed -i -e '/SystemdService/d' data/org.freedesktop.ConsoleKit.service.in || die
 
 	default
-	elibtoolize # bug 593314
 }
 
 src_configure() {
@@ -83,7 +81,7 @@ src_configure() {
 		$(use_enable test tests) \
 		--with-dbus-services="${EPREFIX}"/usr/share/dbus-1/services \
 		--with-pam-module-dir="$(getpam_mod_dir)" \
-		--with-xinitrc-dir="${EPREFIX}"/etc/X11/xinit/xinitrc.d \
+		--with-xinitrc-dir=/etc/X11/xinit/xinitrc.d \
 		--without-systemdsystemunitdir
 }
 
@@ -97,7 +95,7 @@ src_install() {
 
 	dodoc AUTHORS HACKING NEWS README TODO
 
-	newinitd "${FILESDIR}"/${PN}-1.0.0.initd consolekit
+	newinitd "${FILESDIR}"/1.1.0/${PN}-1.0.0.initd consolekit
 
 	keepdir /usr/lib/ConsoleKit/run-seat.d
 	keepdir /usr/lib/ConsoleKit/run-session.d
@@ -105,12 +103,12 @@ src_install() {
 	keepdir /var/log/ConsoleKit
 
 	exeinto /etc/X11/xinit/xinitrc.d
-	newexe "${FILESDIR}"/90-consolekit-3 90-consolekit
+	newexe "${FILESDIR}"/1.1.0/90-consolekit-3 90-consolekit
 
 	if use kernel_linux; then
 		# bug 571524
 		exeinto /usr/lib/ConsoleKit/run-session.d
-		doexe "${FILESDIR}"/pam-foreground-compat.ck
+		doexe "${FILESDIR}"/1.1.0/pam-foreground-compat.ck
 	fi
 
 	prune_libtool_files --all # --all for pam_ck_connector.la
