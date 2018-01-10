@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=dummy ebuild for glib's SunRPC
+EAPI=6
+KEYWORDS=*
+RDEPEND=<sys-libs/glibc-2.26
+SLOT=0
+_md5_=f93ef09f24ea7e6c7543c90c81ce5262

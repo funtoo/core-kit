@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=A dummy ebuild for the glibc's libnsl
+EAPI=6
+KEYWORDS=*
+RDEPEND=<sys-libs/glibc-2.26
+SLOT=0
+_md5_=a83d3d5c10ebd7cc8e98ae95e6882e4a
