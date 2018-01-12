@@ -1,4 +1,3 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -200,7 +199,7 @@ pkg_pretend() {
 				eerror "Please make sure you have 'files' entries for"
 				eerror "'passwd:', 'group:' and 'shadow:' databases."
 				eerror "For more details see:"
-				eerror "  https://wiki.gentoo.org/wiki/Project:Toolchain/nsswitch.conf_in_glibc-2.26"
+				eerror "https://github.com/funtoo/core-kit/GLIBC_UPDATE.rst"
 				die "nsswitch.conf has no 'files' provider in '${entry}'."
 			fi
 		done
@@ -234,6 +233,9 @@ src_prepare() {
 		eapply "${WORKDIR}"/patches
 		einfo "Done."
 	fi
+	
+	# Security backports. CVE-2017-16997.
+	eapply -p1 "${FILESDIR}/2.26/CVE-2017-16997.patch"
 
 	if just_headers ; then
 		if [[ -e ports/sysdeps/mips/preconfigure ]] ; then
