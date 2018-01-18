@@ -1,18 +1,20 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
 
 AUTOTOOLS_AUTORECONF=1
 DISTUTILS_OPTIONAL=1
-PYTHON_COMPAT=( python{2_7,3_4} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 GENTOO_DEPEND_ON_PERL="no"
 
-inherit autotools-utils distutils-r1 perl-module versionator
+inherit autotools-utils distutils-r1 perl-functions versionator
+
+MY_PV="$(get_version_component_range 1-2)"
 
 DESCRIPTION="Library to support AppArmor userspace utilities"
 HOMEPAGE="http://apparmor.net/"
-SRC_URI="https://launchpad.net/apparmor/$(get_version_component_range 1-2)/${PV}/+download/apparmor-${PV}.tar.gz"
+SRC_URI="https://launchpad.net/apparmor/${MY_PV}/${PV}/+download/apparmor-${PV}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -34,10 +36,11 @@ DEPEND="${RDEPEND}
 
 S=${WORKDIR}/apparmor-${PV}/libraries/${PN}
 
+RESTRICT="test"
+
 src_prepare() {
 	rm -r m4 || die "failed to remove bundled macros"
 	epatch "${FILESDIR}"/${PN}-2.10-symbol_visibility.patch
-	epatch "${FILESDIR}"/${PN}-2.10.1-import-path.patch
 	autotools-utils_src_prepare
 	use python && distutils-r1_src_prepare
 }
@@ -75,6 +78,10 @@ src_install() {
 		perl_set_version
 		insinto "${VENDOR_ARCH}"
 		doins "${BUILD_DIR}"/swig/perl/LibAppArmor.pm
+
+		# bug 620886
+		perl_delete_localpod
+		perl_fix_packlist
 	fi
 
 	if use python ; then
