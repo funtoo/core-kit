@@ -20,9 +20,7 @@ IUSE=""
 DEPEND="
 	net-libs/libtirpc[${MULTILIB_USEDEP}]
 "
-RDEPEND="${DEPEND}
-	!<sys-libs/glibc-2.26
-"
+RDEPEND="${DEPEND} >=sys-libs/glibc-2.26"
 
 src_prepare(){
 	default

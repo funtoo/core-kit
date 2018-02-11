@@ -14,7 +14,7 @@ LICENSE="LGPL-2.1+ BSD"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 IUSE=""
 
-RDEPEND="!<sys-libs/glibc-2.26"
+RDEPEND=">=sys-libs/glibc-2.26"
 
 src_prepare(){
 	default
