@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,7 +12,7 @@ SRC_URI="mirror://kernel/linux/bluetooth/${P}.tar.xz"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/3"
-KEYWORDS="amd64 arm ~arm64 hppa ~mips ppc ppc64 x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~mips ~ppc ~ppc64 x86"
 IUSE="alsa cups doc debug deprecated extra-tools experimental +mesh +obex +readline selinux systemd test test-programs +udev user-session"
 
 # Since this release all remaining extra-tools need readline support, but this could
@@ -55,16 +55,9 @@ RDEPEND="${CDEPEND}
 DOC_CONTENTS="
 	If you want to control your bluetooth devices as a non-root user,
 	please remember to add you to plugdev group.
-
-	If you want to use rfcomm as a normal user, you need to add the user
-	to the uucp group.
 "
 
 PATCHES=(
-	# Use static group "plugdev" to not force people to become root for
-	# controlling the devices.
-	"${FILESDIR}"/bluez-plugdev.patch
-
 	# Try both udevadm paths to cover udev/systemd vs. eudev locations (#539844)
 	# http://www.spinics.net/lists/linux-bluetooth/msg58739.html
 	"${FILESDIR}"/bluez-udevadm-path.patch
@@ -76,9 +69,6 @@ PATCHES=(
 	# Fedora patches
 	# http://www.spinics.net/lists/linux-bluetooth/msg40136.html
 	"${FILESDIR}"/0001-obex-Use-GLib-helper-function-to-manipulate-paths.patch
-
-	# http://www.spinics.net/lists/linux-bluetooth/msg41264.html
-	"${FILESDIR}"/0002-autopair-Don-t-handle-the-iCade.patch
 
 	# ???
 	"${FILESDIR}"/0004-agent-Assert-possible-infinite-loop.patch
@@ -136,9 +126,11 @@ multilib_src_configure() {
 		)
 	fi
 
+	# btpclient disabled because we don't have ell library in the tree
 	econf \
 		--localstatedir=/var \
 		--disable-android \
+		--disable-btpclient \
 		--enable-datafiles \
 		--enable-experimental \
 		--enable-optimization \
@@ -150,6 +142,7 @@ multilib_src_configure() {
 		--enable-manpages \
 		--enable-monitor \
 		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)" \
+		--with-systemduserunitdir="$(systemd_get_userunitdir)" \
 		$(multilib_native_use_enable alsa midi) \
 		$(multilib_native_use_enable cups) \
 		$(multilib_native_use_enable deprecated) \
@@ -246,11 +239,14 @@ multilib_src_install_all() {
 	doins src/main.conf
 
 	newinitd "${FILESDIR}"/bluetooth-init.d-r4 bluetooth
-	newinitd "${FILESDIR}"/rfcomm-init.d-r2 rfcomm
 
 	einstalldocs
 	use doc && dodoc doc/*.txt
 	readme.gentoo_create_doc
+
+	# install custom bluetooth.conf with enhanced permissions for plugdev group.
+	insinto /etc/dbus-1/system.d
+	doins ${FILESDIR}/bluetooth.conf
 }
 
 pkg_postinst() {
