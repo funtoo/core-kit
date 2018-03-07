@@ -1,9 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit eutils qmake-utils systemd toolchain-funcs readme.gentoo-r1
+inherit eutils qmake-utils toolchain-funcs readme.gentoo-r1
 
 DESCRIPTION="IEEE 802.1X/WPA supplicant for secure wireless transfers"
 HOMEPAGE="https://w1.fi/wpa_supplicant/"
@@ -11,7 +10,7 @@ SRC_URI="https://w1.fi/releases/${P}.tar.gz"
 LICENSE="|| ( GPL-2 BSD )"
 
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="*"
 IUSE="ap dbus eap-sim eapol_test fasteap gnutls +hs2-0 libressl p2p privsep ps3 qt5 readline selinux smartcard ssl tdls uncommon-eap-types wimax wps kernel_linux kernel_FreeBSD"
 REQUIRED_USE="fasteap? ( !ssl ) smartcard? ( ssl )"
 
@@ -38,7 +37,7 @@ CDEPEND="dbus? ( sys-apps/dbus )
 			net-libs/gnutls:=
 		)
 		!gnutls? (
-			!libressl? ( dev-libs/openssl:0= )
+			!libressl? ( dev-libs/openssl:0=[-bindist] )
 			libressl? ( dev-libs/libressl:0= )
 		)
 	)
@@ -394,17 +393,12 @@ src_install() {
 		doins fi.epitest.hostap.WPASupplicant.service fi.w1.wpa_supplicant1.service
 		popd > /dev/null || die
 
-		# This unit relies on dbus support, bug 538600.
-		systemd_dounit systemd/wpa_supplicant.service
 	fi
 
 	if use eapol_test ; then
 		dobin eapol_test
 	fi
 
-	systemd_dounit "systemd/wpa_supplicant@.service"
-	systemd_dounit "systemd/wpa_supplicant-nl80211@.service"
-	systemd_dounit "systemd/wpa_supplicant-wired@.service"
 }
 
 pkg_postinst() {
@@ -415,19 +409,4 @@ pkg_postinst() {
 		ewarn "WARNING: your old configuration file ${EROOT%/}/etc/wpa_supplicant.conf"
 		ewarn "needs to be moved to ${EROOT%/}/etc/wpa_supplicant/wpa_supplicant.conf"
 	fi
-
-	# Mea culpa, feel free to remove that after some time --mgorny.
-	local fn
-	for fn in wpa_supplicant{,@wlan0}.service; do
-		if [[ -e "${EROOT%/}"/etc/systemd/system/network.target.wants/${fn} ]]
-		then
-			ebegin "Moving ${fn} to multi-user.target"
-			mv "${EROOT%/}"/etc/systemd/system/network.target.wants/${fn} \
-				"${EROOT%/}"/etc/systemd/system/multi-user.target.wants/ || die
-			eend ${?} \
-				"Please try to re-enable ${fn}"
-		fi
-	done
-
-	systemd_reenable wpa_supplicant.service
 }
