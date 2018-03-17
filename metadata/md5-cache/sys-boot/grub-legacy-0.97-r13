@@ -6,7 +6,6 @@ HOMEPAGE=http://www.gnu.org/software/grub/
 IUSE=custom-cflags +ncurses netboot static
 KEYWORDS=~*
 LICENSE=GPL-2
-PROVIDE=virtual/bootloader
 RDEPEND=ncurses? ( >=sys-libs/ncurses-5.2-r5 amd64? ( app-emulation/emul-linux-x86-baselibs ) )
 SLOT=0
 SRC_URI=mirror://gentoo/grub-0.97.tar.gz ftp://alpha.gnu.org/gnu/grub/grub-0.97.tar.gz mirror://gentoo/splash.xpm.gz mirror://gentoo/grub-0.97-patches-1.12.tar.bz2

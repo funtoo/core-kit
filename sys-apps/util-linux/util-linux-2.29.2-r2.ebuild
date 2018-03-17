@@ -6,7 +6,7 @@ EAPI="5"
 PYTHON_COMPAT=( python2_7 python3_{4,5} )
 
 inherit eutils toolchain-funcs libtool flag-o-matic bash-completion-r1 \
-	python-single-r1 multilib-minimal systemd
+	pam python-single-r1 multilib-minimal systemd
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
@@ -15,7 +15,7 @@ if [[ ${PV} == 9999 ]] ; then
 	inherit git-2 autotools
 	EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git"
 else
-	KEYWORDS="~alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-linux ~arm-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~arm-linux ~x86-linux"
 	SRC_URI="mirror://kernel/linux/utils/util-linux/v${PV:0:4}/${MY_P}.tar.xz"
 fi
 
@@ -65,11 +65,20 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}"/CVE-2018-7738.patch
+	
 	if [[ ${PV} == 9999 ]] ; then
 		po/update-potfiles
 		eautoreconf
 	fi
+	# Undo bad ncurses handling by upstream. #601530
+	sed -i -E \
+		-e '/NCURSES_/s:(ncursesw?)[56]-config:$PKG_CONFIG \1:' \
+		-e 's:(ncursesw?)[56]-config --version:$PKG_CONFIG --exists --print-errors \1:' \
+		configure || die
 	elibtoolize
+
+	epatch_user
 }
 
 lfs_fallocate_test() {
@@ -93,42 +102,48 @@ multilib_src_configure() {
 	tc-is-cross-compiler && export scanf_cv_alloc_modifier=ms
 	export ac_cv_header_security_pam_misc_h=$(multilib_native_usex pam) #485486
 	export ac_cv_header_security_pam_appl_h=$(multilib_native_usex pam) #545042
-	ECONF_SOURCE=${S} \
-	econf \
-		--enable-fs-paths-extra="${EPREFIX}/usr/sbin:${EPREFIX}/bin:${EPREFIX}/usr/bin" \
-		--docdir='${datarootdir}'/doc/${PF} \
-		$(multilib_native_use_enable nls) \
-		--enable-agetty \
-		--with-bashcompletiondir="$(get_bashcompdir)" \
-		--enable-bash-completion \
-		$(multilib_native_use_enable caps setpriv) \
-		--disable-chfn-chsh \
-		$(multilib_native_use_enable cramfs) \
-		$(multilib_native_use_enable fdformat) \
-		--with-ncurses=$(multilib_native_usex ncurses $(usex unicode auto yes) no) \
-		$(use_enable kill) \
-		--disable-login \
-		$(multilib_native_use_enable tty-helpers mesg) \
-		--disable-nologin \
-		--enable-partx \
-		$(multilib_native_use_with python) \
-		--enable-raw \
-		$(multilib_native_use_with readline) \
-		--enable-rename \
-		--disable-reset \
-		--enable-schedutils \
-		--disable-su \
-		$(multilib_native_use_enable tty-helpers wall) \
-		$(multilib_native_use_enable tty-helpers write) \
-		$(multilib_native_use_enable suid makeinstall-chown) \
-		$(multilib_native_use_enable suid makeinstall-setuid) \
-		$(use_with selinux) \
-		$(multilib_native_use_with slang) \
-		$(use_enable static-libs static) \
-		$(multilib_native_use_with systemd) \
-		--with-systemdsystemunitdir=$(multilib_native_usex systemd "$(systemd_get_unitdir)" "no") \
-		$(multilib_native_use_with udev) \
+
+	local myeconfargs=(
+		--enable-fs-paths-extra="${EPREFIX}/usr/sbin:${EPREFIX}/bin:${EPREFIX}/usr/bin"
+		--docdir='${datarootdir}'/doc/${PF}
+		$(multilib_native_use_enable nls)
+		--enable-agetty
+		--with-bashcompletiondir="$(get_bashcompdir)"
+		--enable-bash-completion
+		$(multilib_native_use_enable caps setpriv)
+		--disable-chfn-chsh
+		$(multilib_native_use_enable cramfs)
+		$(multilib_native_use_enable fdformat)
+		$(multilib_native_usex ncurses "$(use_with unicode ncursesw)" '--without-ncursesw')
+		$(multilib_native_usex ncurses "$(use_with !unicode ncurses)" '--without-ncurses')
+		$(usex ncurses '' '--without-tinfo')
+		$(use_enable unicode widechar)
+		$(use_enable kill)
+		--disable-login
+		$(multilib_native_use_enable tty-helpers mesg)
+		--disable-nologin
+		--enable-partx
+		$(multilib_native_use_with python)
+		--enable-raw
+		$(multilib_native_use_with readline)
+		--enable-rename
+		--disable-reset
+		--enable-schedutils
+		--disable-su
+		$(multilib_native_use_enable tty-helpers wall)
+		$(multilib_native_use_enable tty-helpers write)
+		$(multilib_native_use_enable suid makeinstall-chown)
+		$(multilib_native_use_enable suid makeinstall-setuid)
+		$(use_with selinux)
+		$(multilib_native_use_with slang)
+		$(use_enable static-libs static)
+		$(multilib_native_use_with systemd)
+		--with-systemdsystemunitdir=$(multilib_native_usex systemd "$(systemd_get_unitdir)" "no")
+		$(multilib_native_use_with udev)
 		$(tc-has-tls || echo --disable-tls)
+	)
+	ECONF_SOURCE=${S} \
+	econf "${myeconfargs[@]}"
 }
 
 multilib_src_compile() {
@@ -168,6 +183,11 @@ multilib_src_install_all() {
 
 	# e2fsprogs-libs didnt install .la files, and .pc work fine
 	prune_libtool_files
+
+	if use pam; then
+		newpamd "${FILESDIR}/runuser.pamd" runuser
+		newpamd "${FILESDIR}/runuser-l.pamd" runuser-l
+	fi
 }
 
 pkg_postinst() {
