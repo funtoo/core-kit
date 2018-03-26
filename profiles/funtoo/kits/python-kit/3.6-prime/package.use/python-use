@@ -5,8 +5,6 @@ dev-vcs/git python_single_target_python2_7
 net-wireless/bluez python_single_target_python2_7
 sys-apps/usbutils python_single_target_python2_7
 sys-boot/udk python_single_target_python2_7
-sys-devel/clang python_single_target_python2_7
-sys-devel/llvm python_single_target_python2_7
 sys-fs/ecryptfs-utils python_single_target_python2_7
 sys-fs/ocfs2-tools python_single_target_python2_7
 sys-fs/traydevice python_single_target_python2_7
