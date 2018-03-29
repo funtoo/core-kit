@@ -1,4 +1,4 @@
-DEFINED_PHASES=install postinst prepare setup unpack
+DEFINED_PHASES=install postinst setup unpack
 DESCRIPTION=Funtoo's configuration tool: ego, epro, edoc.
 EAPI=6
 HOMEPAGE=http://www.funtoo.org/Package:Ego
@@ -9,4 +9,4 @@ RESTRICT=mirror
 SLOT=0
 SRC_URI=https://www.github.com/funtoo/ego/tarball/2.4.0_beta1 -> ego-2.4.0_beta1.tar.gz
 _eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	python-single-r1	317a2557b4d7319a7418225f65accf77	python-utils-r1	c9de01becf9df3f8c10aeec3dc693f5d	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=a4d2043ac281116df847ba42eb27815a
+_md5_=421cfa0a017a291cca27634666b09fcb
