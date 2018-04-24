@@ -259,8 +259,14 @@ sys-auth/pambase:sha512 - Switch Linux-PAM's pam_unix module to use sha512 for p
 sys-auth/pambase:ssh - Enable pam_ssh module on system auth stack for authentication and session handling. This module will accept as password the passphrase of a private SSH key (one of ~/.ssh/id_rsa, ~/.ssh/id_dsa or ~/.ssh/identity), and will spawn an ssh-agent instance to cache the open key.
 sys-block/parted:debug - Enable debugging as encouraged by upstream: [The default configuration] includes --enable-debug (by default), which contains many assertions. Obviously, these "waste" space, but in the past, they have caught potentially dangerous bugs before they would have done damage, so we think it's worth it. Also, it means we get more bug reports ;)
 sys-block/parted:device-mapper - Enable device-mapper support from sys-fs/lvm2 in parted
-sys-boot/grub:binfont - Install a pre-generated binary font
-sys-boot/grub:mkfont - Enables support for grub-mkfont
+sys-boot/grub:device-mapper - Enable support for device-mapper from sys-fs/lvm2
+sys-boot/grub:efiemu - Build and install the efiemu runtimes
+sys-boot/grub:fonts - Build and install fonts for the gfxterm module
+sys-boot/grub:libzfs - Enable support for sys-fs/zfs
+sys-boot/grub:mount - Build and install the grub-mount utility
+sys-boot/grub:multislot - Allow concurrent installation of sys-boot/grub SLOT 0 and sys-boot/grub SLOT 2 by renaming all programs.
+sys-boot/grub:themes - Build and install GRUB themes (starfield)
+sys-boot/grub:truetype - Build and install grub-mkfont conversion utility
 sys-boot/lilo:device-mapper - Enable support for device-mapper from sys-fs/lvm2
 sys-boot/lilo:minimal - Do not install the dolilo helper script
 sys-boot/lilo:pxeserial - Avoid character echo on PXE serial console
