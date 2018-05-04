@@ -1,3 +1,6 @@
+# gcc-7.3.1
+sys-devel/gettext abi_x86_32
+
 # xorg
 
 app-arch/bzip2 abi_x86_32
