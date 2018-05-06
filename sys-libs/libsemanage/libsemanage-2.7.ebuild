@@ -1,44 +1,51 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
-PYTHON_COMPAT=( python2_7 python3_4 )
+EAPI="6"
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 
-inherit multilib python-r1 toolchain-funcs eutils multilib-minimal
+inherit multilib python-r1 toolchain-funcs multilib-minimal
 
 MY_P="${P//_/-}"
+MY_RELEASEDATE="20170804"
 
 SEPOL_VER="${PV}"
 SELNX_VER="${PV}"
 
 DESCRIPTION="SELinux kernel and policy management library"
 HOMEPAGE="https://github.com/SELinuxProject/selinux/wiki"
-SRC_URI="https://raw.githubusercontent.com/wiki/SELinuxProject/selinux/files/releases/20160223/${MY_P}.tar.gz"
+
+if [[ ${PV} == 9999 ]]; then
+	inherit git-r3
+	EGIT_REPO_URI="https://github.com/SELinuxProject/selinux.git"
+	S="${WORKDIR}/${MY_P}/${PN}"
+else
+	SRC_URI="https://raw.githubusercontent.com/wiki/SELinuxProject/selinux/files/releases/${MY_RELEASEDATE}/${MY_P}.tar.gz"
+	KEYWORDS="amd64 ~arm ~arm64 ~mips x86"
+	S="${WORKDIR}/${MY_P}"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~arm64 ~mips x86"
 IUSE="python"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND=">=sys-libs/libsepol-${SEPOL_VER}[${MULTILIB_USEDEP}]
 	>=sys-libs/libselinux-${SELNX_VER}[${MULTILIB_USEDEP}]
 	>=sys-process/audit-2.2.2[${MULTILIB_USEDEP}]
 	>=dev-libs/ustr-1.0.4-r2[${MULTILIB_USEDEP}]
-	"
+	python? ( ${PYTHON_DEPS} )"
 DEPEND="${RDEPEND}
 	sys-devel/bison
 	sys-devel/flex
 	python? (
 		>=dev-lang/swig-2.0.4-r1
 		virtual/pkgconfig
-		${PYTHON_DEPS}
 	)"
 
 # tests are not meant to be run outside of the
 # full SELinux userland repo
 RESTRICT="test"
-
-S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	echo "# Set this to true to save the linked policy." >> "${S}/src/semanage.conf"
@@ -64,9 +71,7 @@ src_prepare() {
 	echo "# decompression of modules in the module store." >> "${S}/src/semanage.conf"
 	echo "bzip-small=true" >> "${S}/src/semanage.conf"
 
-	epatch "${FILESDIR}"/${PN}-2.4-build-paths.patch
-
-	epatch_user
+	eapply_user
 
 	multilib_copy_sources
 }
@@ -80,8 +85,11 @@ multilib_src_compile() {
 
 	if multilib_is_native_abi && use python; then
 		building_py() {
-			python_export PYTHON_INCLUDEDIR PYTHON_LIBPATH
-			emake CC="$(tc-getCC)" PYINC="-I${PYTHON_INCLUDEDIR}" PYTHONLBIDIR="${PYTHON_LIBPATH}" PYPREFIX="${EPYTHON##*/}" "$@"
+			emake \
+				AR="$(tc-getAR)" \
+				CC="$(tc-getCC)" \
+				LIBDIR="${EPREFIX}/usr/$(get_libdir)" \
+				"$@"
 		}
 		python_foreach_impl building_py swigify
 		python_foreach_impl building_py pywrap
@@ -96,8 +104,11 @@ multilib_src_install() {
 
 	if multilib_is_native_abi && use python; then
 		installation_py() {
-			emake DESTDIR="${ED}" LIBDIR="${ED}/usr/$(get_libdir)" \
-				SHLIBDIR="${ED}/usr/$(get_libdir)" install-pywrap
+			emake DESTDIR="${ED}" \
+				LIBDIR="${ED}/usr/$(get_libdir)" \
+				SHLIBDIR="${ED}/usr/$(get_libdir)" \
+				LIBSEPOLA="${EPREFIX%/}/usr/$(get_libdir)/libsepol.a" \
+				install-pywrap
 			python_optimize # bug 531638
 		}
 		python_foreach_impl installation_py
