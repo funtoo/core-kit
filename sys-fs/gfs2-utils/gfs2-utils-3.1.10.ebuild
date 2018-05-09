@@ -1,17 +1,16 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 inherit autotools linux-info
 
 DESCRIPTION="GFS2 Utilities"
 HOMEPAGE="https://fedorahosted.org/cluster/wiki/HomePage"
-SRC_URI="https://fedorahosted.org/releases/${PN:0:1}/${PN:1:1}/${PN}/${P}.tar.gz"
+SRC_URI="https://releases.pagure.org/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="*"
 IUSE="debug"
 
 RDEPEND="sys-cluster/corosync
@@ -24,7 +23,7 @@ RDEPEND="sys-cluster/corosync
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${P}"
 
 src_prepare() {
 	epatch_user
