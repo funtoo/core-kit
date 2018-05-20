@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -11,15 +10,16 @@ SRC_URI="https://curl.haxx.se/download/${P}.tar.bz2"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE="adns http2 idn ipv6 kerberos ldap metalink rtmp samba ssh ssl static-libs test threads"
-IUSE+=" curl_ssl_axtls curl_ssl_gnutls curl_ssl_libressl curl_ssl_mbedtls curl_ssl_nss +curl_ssl_openssl curl_ssl_polarssl curl_ssl_winssl"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+IUSE="adns brotli http2 idn ipv6 kerberos ldap metalink rtmp samba ssh ssl static-libs test threads"
+IUSE+=" curl_ssl_axtls curl_ssl_gnutls curl_ssl_libressl curl_ssl_mbedtls curl_ssl_nss +curl_ssl_openssl curl_ssl_winssl"
 IUSE+=" elibc_Winnt"
 
 #lead to lots of false negatives, bug #285669
 RESTRICT="test"
 
 RDEPEND="ldap? ( net-nds/openldap[${MULTILIB_USEDEP}] )
+	brotli? ( app-arch/brotli:= )
 	ssl? (
 		curl_ssl_axtls? (
 			net-libs/axtls:0=[${MULTILIB_USEDEP}]
@@ -44,10 +44,6 @@ RDEPEND="ldap? ( net-nds/openldap[${MULTILIB_USEDEP}] )
 			dev-libs/nss:0[${MULTILIB_USEDEP}]
 			app-misc/ca-certificates
 		)
-		curl_ssl_polarssl? (
-			net-libs/polarssl:0=[${MULTILIB_USEDEP}]
-			app-misc/ca-certificates
-		)
 	)
 	http2? ( net-libs/nghttp2[${MULTILIB_USEDEP}] )
 	idn? ( net-dns/libidn2:0[static-libs?,${MULTILIB_USEDEP}] )
@@ -56,11 +52,7 @@ RDEPEND="ldap? ( net-nds/openldap[${MULTILIB_USEDEP}] )
 	metalink? ( >=media-libs/libmetalink-0.1.1[${MULTILIB_USEDEP}] )
 	rtmp? ( media-video/rtmpdump[${MULTILIB_USEDEP}] )
 	ssh? ( net-libs/libssh2[static-libs?,${MULTILIB_USEDEP}] )
-	sys-libs/zlib[${MULTILIB_USEDEP}]
-	abi_x86_32? (
-		!<=app-emulation/emul-linux-x86-baselibs-20140508-r13
-		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
-	)"
+	sys-libs/zlib[${MULTILIB_USEDEP}]"
 
 # Do we need to enforce the same ssl backend for curl and rtmpdump? Bug #423303
 #	rtmp? (
@@ -92,7 +84,6 @@ REQUIRED_USE="
 			curl_ssl_mbedtls
 			curl_ssl_nss
 			curl_ssl_openssl
-			curl_ssl_polarssl
 			curl_ssl_winssl
 		)
 	)"
@@ -118,11 +109,18 @@ src_prepare() {
 	eapply_user
 	eprefixify curl-config.in
 	eautoreconf
+
+	if [[ ${CHOST} == *-darwin17 ]] ; then
+		# https://bugs.gentoo.org/show_bug.cgi?id=637252
+		sed -i -e '/-Werror=partial-availability/s/Werror/Wno-error/g' \
+			configure || die
+	fi
 }
 
 multilib_src_configure() {
 	# We make use of the fact that later flags override earlier ones
 	# So start with all ssl providers off until proven otherwise
+	# TODO: in the future, we may want to add wolfssl (https://www.wolfssl.com/)
 	local myconf=()
 	myconf+=( --without-axtls --without-gnutls --without-mbedtls --without-nss --without-polarssl --without-ssl --without-winssl )
 	myconf+=( --without-ca-fallback --with-ca-bundle="${EPREFIX}"/etc/ssl/certs/ca-certificates.crt  )
@@ -142,9 +140,6 @@ multilib_src_configure() {
 		elif use curl_ssl_nss; then
 			einfo "SSL provided by nss"
 			myconf+=( --with-nss )
-		elif use curl_ssl_polarssl; then
-			einfo "SSL provided by polarssl"
-			myconf+=( --with-polarssl )
 		elif use curl_ssl_openssl; then
 			einfo "SSL provided by openssl"
 			myconf+=( --with-ssl --with-ca-path="${EPREFIX}"/etc/ssl/certs )
@@ -196,7 +191,6 @@ multilib_src_configure() {
 		--without-libpsl \
 		--enable-manual \
 		--enable-proxy \
-		--disable-soname-bump \
 		--disable-sspi \
 		$(use_enable static-libs static) \
 		$(use_enable threads threaded-resolver) \
@@ -209,8 +203,10 @@ multilib_src_configure() {
 		$(use_with metalink libmetalink) \
 		$(use_with http2 nghttp2) \
 		$(use_with rtmp librtmp) \
+		$(use_with brotli) \
 		--without-spnego \
 		--without-winidn \
+		--without-wolfssl \
 		--with-zlib \
 		"${myconf[@]}"
 

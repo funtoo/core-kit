@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit eutils systemd toolchain-funcs user
+inherit systemd toolchain-funcs user
 
 MY_PV="${PV//_alpha/a}"
 MY_PV="${MY_PV//_beta/b}"
@@ -17,7 +17,7 @@ SRC_URI="ftp://ftp.isc.org/isc/dhcp/${MY_P}.tar.gz
 
 LICENSE="ISC BSD SSLeay GPL-2" # GPL-2 only for init script
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="+client ipv6 kernel_linux ldap libressl selinux +server ssl vim-syntax"
 
 DEPEND="
@@ -30,7 +30,7 @@ DEPEND="
 	ldap? (
 		net-nds/openldap
 		ssl? (
-			!libressl? ( dev-libs/openssl:0 )
+			!libressl? ( dev-libs/openssl:0= )
 			libressl? ( dev-libs/libressl )
 		)
 	)"
@@ -53,25 +53,22 @@ PATCHES=(
 	"${FILESDIR}/${PN}-3.0-fix-perms.patch"
 
 	# Enable dhclient to equery NTP servers
-	"${FILESDIR}/${PN}-4.3.4-dhclient-ntp.patch"
-	"${FILESDIR}/${PN}-4.3.1-dhclient-resolvconf.patch"
-
-	# Stop downing the interface on Linux as that breaks link daemons
-	# such as wpa_supplicant and netplug
-	"${FILESDIR}/${PN}-3.0.3-dhclient-no-down.patch"
+	"${FILESDIR}/${PN}-4.3.6-dhclient-ntp.patch"
+	"${FILESDIR}/${PN}-4.3.6-dhclient-resolvconf.patch"
 
 	# Enable dhclient to get extra configuration from stdin
 	"${FILESDIR}/${PN}-4.2.2-dhclient-stdin-conf.patch"
-	"${FILESDIR}/${PN}-4.2.2-nogateway.patch" #265531
-	"${FILESDIR}/${PN}-4.2.4-quieter-ping.patch" #296921
+	"${FILESDIR}/${PN}-4.3.6-nogateway.patch" #265531
+	"${FILESDIR}/${PN}-4.3.6-quieter-ping.patch" #296921
 	"${FILESDIR}/${PN}-4.2.4-always-accept-4.patch" #437108
-	"${FILESDIR}/${PN}-4.2.5-iproute2-path.patch" #480636
+	"${FILESDIR}/${PN}-4.3.6-iproute2-path.patch" #480636
 	"${FILESDIR}/${PN}-4.2.5-bindtodevice-inet6.patch" #471142
 	"${FILESDIR}/${PN}-4.3.3-ldap-ipv6-client-id.patch" #559832
+	"${FILESDIR}/${PN}-4.3.6-lmdb-removal.patch" #628598
 )
 
 src_prepare() {
-	epatch "${PATCHES[@]}"
+	default
 
 	# Brand the version with Gentoo
 	sed -i \
@@ -110,24 +107,23 @@ src_prepare() {
 		# Install Japanese man pages
 		if [[ " ${LINGUAS} " == *" ja "* && -d doc/ja_JP.eucJP ]]; then
 			einfo "Installing Japanese documention"
-			cp doc/ja_JP.eucJP/dhclient* client
-			cp doc/ja_JP.eucJP/dhcp* common
+			cp doc/ja_JP.eucJP/dhclient* client || die
+			cp doc/ja_JP.eucJP/dhcp* common || die
 		fi
 	fi
 	# Now remove the non-english docs so there are no errors later
-	rm -rf doc/ja_JP.eucJP
+	rm -r doc/ja_JP.eucJP || die
 
 	# make the bind build work
-	binddir=${S}/bind
+	binddir="${S}/bind"
 	cd "${binddir}" || die
 	cat <<-EOF > bindvar.tmp
 	binddir=${binddir}
 	GMAKE=${MAKE:-gmake}
 	EOF
-	epatch "${FILESDIR}"/${PN}-4.3.4-bind-disable.patch
-	cd bind-*/
-	epatch "${FILESDIR}"/${PN}-4.2.2-bind-parallel-build.patch #380717
-	epatch "${FILESDIR}"/${PN}-4.2.2-bind-build-flags.patch
+	eapply -p2 "${FILESDIR}"/${PN}-4.3.4-bind-disable.patch
+	cd bind-*/ || die
+	eapply -p2 "${FILESDIR}"/${PN}-4.2.2-bind-parallel-build.patch #380717
 }
 
 src_configure() {
@@ -158,13 +154,15 @@ src_configure() {
 	#define _PATH_DHCRELAY6_PID  "${r}/dhcrelay6.pid"
 	EOF
 
-	econf \
-		--enable-paranoia \
-		--enable-early-chroot \
-		--sysconfdir=${e} \
-		$(use_enable ipv6 dhcpv6) \
-		$(use_with ldap) \
+	local myeconfargs=(
+		--enable-paranoia
+		--enable-early-chroot
+		--sysconfdir=${e}
+		$(use_enable ipv6 dhcpv6)
+		$(use_with ldap)
 		$(use ldap && use_with ssl ldapcrypto || echo --without-ldapcrypto)
+	)
+	econf "${myeconfargs[@]}"
 
 	# configure local bind cruft.  symtable option requires
 	# perl and we don't want to require that #383837.
@@ -186,7 +184,8 @@ src_install() {
 	default
 
 	dodoc README RELNOTES doc/{api+protocol,IANA-arp-parameters}
-	dohtml doc/References.html
+	docinto html
+	dodoc doc/References.html
 
 	if [[ -e client/dhclient ]] ; then
 		# move the client to /
