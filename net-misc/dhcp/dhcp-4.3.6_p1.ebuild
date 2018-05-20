@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -17,7 +17,7 @@ SRC_URI="ftp://ftp.isc.org/isc/dhcp/${MY_P}.tar.gz
 
 LICENSE="ISC BSD SSLeay GPL-2" # GPL-2 only for init script
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="+client ipv6 kernel_linux ldap libressl selinux +server ssl vim-syntax"
 
 DEPEND="
@@ -30,7 +30,7 @@ DEPEND="
 	ldap? (
 		net-nds/openldap
 		ssl? (
-			!libressl? ( dev-libs/openssl:0 )
+			!libressl? ( dev-libs/openssl:0= )
 			libressl? ( dev-libs/libressl )
 		)
 	)"
@@ -64,6 +64,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-4.3.6-iproute2-path.patch" #480636
 	"${FILESDIR}/${PN}-4.2.5-bindtodevice-inet6.patch" #471142
 	"${FILESDIR}/${PN}-4.3.3-ldap-ipv6-client-id.patch" #559832
+	"${FILESDIR}/${PN}-4.3.6-lmdb-removal.patch" #628598
 )
 
 src_prepare() {
