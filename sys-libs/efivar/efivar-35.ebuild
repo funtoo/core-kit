@@ -11,7 +11,7 @@ SRC_URI="https://github.com/rhinstaller/efivar/releases/download/${PV}/${P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0/1"
-KEYWORDS="amd64 ~arm64 ia64 x86"
+KEYWORDS="~amd64 ~arm64 ~ia64 ~x86"
 
 RDEPEND="dev-libs/popt"
 DEPEND="${RDEPEND}
@@ -21,11 +21,12 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	default
-	sed -i -e s/-Werror// gcc.specs || die
+	sed -i -e 's/-Werror //' gcc.specs || die
 }
 
 src_configure() {
 	tc-export CC
+	export CC_FOR_BUILD=$(tc-getBUILD_CC)
 	tc-ld-disable-gold
 	export libdir="/usr/$(get_libdir)"
 	unset LIBS # Bug 562004
