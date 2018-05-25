@@ -7,17 +7,22 @@ inherit flag-o-matic toolchain-funcs
 
 DESCRIPTION="Tools and library to manipulate EFI variables"
 HOMEPAGE="https://github.com/rhinstaller/efivar"
-SRC_URI="https://github.com/rhinstaller/efivar/releases/download/${PV}/${P}.tar.bz2"
+#SRC_URI="https://github.com/rhinstaller/efivar/releases/download/${PV}/${P}.tar.bz2"
+SRC_URI="https://github.com/rhinstaller/efivar/archive/${PV}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0/1"
-KEYWORDS="amd64 ~arm64 ia64 x86"
+KEYWORDS="~amd64 ~arm64 ~ia64 ~x86"
 
 RDEPEND="dev-libs/popt"
 DEPEND="${RDEPEND}
 	>=sys-kernel/linux-headers-3.18
 	virtual/pkgconfig
 "
+
+PATCHES=(
+	"${FILESDIR}/${P}-efi_guid_ux_capsule.patch"
+)
 
 src_prepare() {
 	default
