@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: ruby-ng.eclass
@@ -13,15 +13,7 @@
 # The Ruby eclass is designed to allow an easier installation of Ruby packages
 # and their incorporation into the Gentoo Linux system.
 #
-# Currently available targets are:
-#  * ruby19 - Ruby (MRI) 1.9.x
-#  * ruby20 - Ruby (MRI) 2.0.x
-#  * ruby21 - Ruby (MRI) 2.1.x
-#  * ruby22 - Ruby (MRI) 2.2.x
-#  * ruby23 - Ruby (MRI) 2.3.x
-#  * ruby24 - Ruby (MRI) 2.4.x
-#  * jruby  - JRuby
-#  * rbx    - Rubinius
+# Currently available targets are listed in ruby-utils.eclass
 #
 # This eclass does not define the implementation of the configure,
 # compile, test, or install phases. Instead, the default phases are
@@ -46,6 +38,7 @@
 # A String or Array of filenames of patches to apply to all implementations.
 
 # @ECLASS-VARIABLE: RUBY_OPTIONAL
+# @DEFAULT_UNSET
 # @DESCRIPTION:
 # Set the value to "yes" to make the dependency on a Ruby interpreter
 # optional and then ruby_implementations_depend() to help populate
@@ -109,6 +102,24 @@ ruby_implementation_depend() {
 	_ruby_implementation_depend $1
 }
 
+# @FUNCTION: _ruby_get_all_impls
+# @INTERNAL
+# @RETURN: list of valid values in USE_RUBY
+# Return a list of valid implementations in USE_RUBY, skipping the old
+# implementations that are no longer supported.
+_ruby_get_all_impls() {
+	local i
+	for i in ${USE_RUBY}; do
+		case ${i} in
+			# removed implementations
+			ruby19|ruby20|ruby21|ruby22|jruby)
+				;;
+			*)
+				echo ${i};;
+		esac
+	done
+}
+
 # @FUNCTION: ruby_samelib
 # @RETURN: use flag string with current ruby implementations
 # @DESCRIPTION:
@@ -118,7 +129,7 @@ ruby_implementation_depend() {
 # more complex dependencies.
 ruby_samelib() {
 	local res=
-	for _ruby_implementation in $USE_RUBY; do
+	for _ruby_implementation in $(_ruby_get_all_impls); do
 		has -${_ruby_implementation} $@ || \
 			res="${res}ruby_targets_${_ruby_implementation}?,"
 	done
@@ -159,7 +170,7 @@ ruby_implementation_command() {
 _ruby_atoms_samelib() {
 	local atoms=$(_ruby_atoms_samelib_generic "$*")
 
-	for _ruby_implementation in $USE_RUBY; do
+	for _ruby_implementation in $(_ruby_get_all_impls); do
 		echo "${atoms//RUBYTARGET/ruby_targets_${_ruby_implementation}}"
 	done
 }
@@ -243,7 +254,7 @@ ruby_add_bdepend() {
 # Gets an array of ruby use targets enabled by the user
 ruby_get_use_implementations() {
 	local i implementation
-	for implementation in ${USE_RUBY}; do
+	for implementation in $(_ruby_get_all_impls); do
 		use ruby_targets_${implementation} && i+=" ${implementation}"
 	done
 	echo $i
@@ -254,7 +265,7 @@ ruby_get_use_implementations() {
 # Gets an array of ruby use targets that the ebuild sets
 ruby_get_use_targets() {
 	local t implementation
-	for implementation in ${USE_RUBY}; do
+	for implementation in $(_ruby_get_all_impls); do
 		t+=" ruby_targets_${implementation}"
 	done
 	echo $t
@@ -278,7 +289,7 @@ ruby_get_use_targets() {
 # RDEPEND="${DEPEND}"
 ruby_implementations_depend() {
 	local depend
-	for _ruby_implementation in ${USE_RUBY}; do
+	for _ruby_implementation in $(_ruby_get_all_impls); do
 		depend="${depend}${depend+ }ruby_targets_${_ruby_implementation}? ( $(ruby_implementation_depend $_ruby_implementation) )"
 	done
 	echo "${depend}"
@@ -358,7 +369,7 @@ _ruby_invoke_environment() {
 
 _ruby_each_implementation() {
 	local invoked=no
-	for _ruby_implementation in ${USE_RUBY}; do
+	for _ruby_implementation in $(_ruby_get_all_impls); do
 		# only proceed if it's requested
 		use ruby_targets_${_ruby_implementation} || continue
 
@@ -374,7 +385,7 @@ _ruby_each_implementation() {
 
 	if [[ ${invoked} == "no" ]]; then
 		eerror "You need to select at least one compatible Ruby installation target via RUBY_TARGETS in make.conf."
-		eerror "Compatible targets for this package are: ${USE_RUBY}"
+		eerror "Compatible targets for this package are: $(_ruby_get_all_impls)"
 		eerror
 		eerror "See https://www.gentoo.org/proj/en/prog_lang/ruby/index.xml#doc_chap3 for more information."
 		eerror
