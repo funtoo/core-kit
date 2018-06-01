@@ -1,19 +1,19 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="5"
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{4,5} )
 
-inherit flag-o-matic python-any-r1 toolchain-funcs
+inherit flag-o-matic python-any-r1 toolchain-funcs eutils
 
 DESCRIPTION="Network utility to retrieve files from the WWW"
 HOMEPAGE="https://www.gnu.org/software/wget/"
-SRC_URI="mirror://gnu/wget/${P}.tar.gz"
+SRC_URI="mirror://gnu/wget/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="debug gnutls idn ipv6 libressl nls ntlm pcre +ssl static test uuid zlib"
 REQUIRED_USE=" ntlm? ( !gnutls ssl ) gnutls? ( ssl )"
 
@@ -45,12 +45,16 @@ DEPEND="${RDEPEND}
 
 DOCS=( AUTHORS MAILING-LIST NEWS README doc/sample.wgetrc )
 
+PATCHES=(
+	"${FILESDIR}"/${P}-CRLF_injection.patch
+)
+
 pkg_setup() {
 	use test && python-any-r1_pkg_setup
 }
 
 src_prepare() {
-	default
+	epatch "${PATCHES[@]}"
 
 	# revert some hack that breaks linking, bug #585924
 	if [[ ${CHOST} == *-darwin* ]] || [[ ${CHOST} == *-solaris* ]] || [[ ${CHOST} == *-uclibc* ]]; then
@@ -95,6 +99,10 @@ src_configure() {
 		$(use_with zlib)
 }
 
+src_test() {
+	emake check
+}
+
 src_install() {
 	default
 
@@ -102,6 +110,5 @@ src_install() {
 		-e "s:/usr/local/etc:${EPREFIX}/etc:g" \
 		"${ED}"/etc/wgetrc \
 		"${ED}"/usr/share/man/man1/wget.1 \
-		"${ED}"/usr/share/info/wget.info \
-		|| die
+		"${ED}"/usr/share/info/wget.info
 }
