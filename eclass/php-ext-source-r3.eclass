@@ -14,7 +14,7 @@ inherit autotools
 EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install src_test
 
 case ${EAPI} in
-	6) ;;
+	6|7) ;;
 	*)
 		die "${ECLASS} is not compatible with EAPI=${EAPI}"
 esac

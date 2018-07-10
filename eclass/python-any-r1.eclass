@@ -36,7 +36,7 @@
 # https://wiki.gentoo.org/wiki/Project:Python/python-any-r1
 
 case "${EAPI:-0}" in
-	0|1|2|3|4|5|6)
+	0|1|2|3|4|5|6|7)
 		;;
 	*)
 		die "Unsupported EAPI=${EAPI} (unknown) for ${ECLASS}"

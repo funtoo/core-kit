@@ -75,7 +75,7 @@
 
 case "${EAPI:-0}" in
 	0|1|2|3|4) die "EAPI<5 is not supported";;
-	5|6) : ;;
+	5|6|7) : ;;
 	*) die "unknown EAPI" ;;
 esac
 

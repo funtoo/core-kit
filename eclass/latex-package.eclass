@@ -54,7 +54,7 @@
 
 case ${EAPI:-0} in
 	0|1|2|3|4|5) inherit base eutils ;;
-	6) ;;
+	6|7) ;;
 	*) die "Unknown EAPI ${EAPI} for ${ECLASS}" ;;
 esac
 

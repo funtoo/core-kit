@@ -55,7 +55,7 @@ case ${EAPI} in
 		unset _wxdebug
 		unset _wxconf
 		;;
-	6)
+	6|7)
 		inherit flag-o-matic multilib
 		;;
 	*)

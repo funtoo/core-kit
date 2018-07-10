@@ -80,7 +80,7 @@ case ${EAPI} in
 	0|1)
 		die "Unsupported EAPI=${EAPI} (too old) for ruby-ng.eclass" ;;
 	2|3) ;;
-	4|5|6)
+	4|5|6|7)
 		# S is no longer automatically assigned when it doesn't exist.
 		S="${WORKDIR}"
 		;;

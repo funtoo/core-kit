@@ -10,5 +10,5 @@ RDEPEND=arping? ( !net-misc/arping ) rarpd? ( !net-misc/rarpd ) traceroute? ( !n
 REQUIRED_USE=ipv6? ( ssl? ( ^^ ( gcrypt nettle openssl ) ) )
 SLOT=0
 SRC_URI=https://github.com/iputils/iputils/archive/67e7d0daf1f231cc708217e6aec2f8d5ce7aeacf.tar.gz -> iputils-20171016_pre.tar.gz https://dev.gentoo.org/~whissi/dist/iputils/iputils-manpages-20171016_pre.tar.xz
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	fcaps	e80204189039ecc03f24151c518375f0	flag-o-matic	61cad4fb5d800b29d484b27cb033f59b	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	fcaps	e80204189039ecc03f24151c518375f0	flag-o-matic	61cad4fb5d800b29d484b27cb033f59b	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
 _md5_=25a47be92cca8502682a2edc9fd4495e

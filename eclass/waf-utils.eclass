@@ -18,7 +18,7 @@
 inherit multilib toolchain-funcs multiprocessing
 
 case ${EAPI:-0} in
-	4|5|6) EXPORT_FUNCTIONS src_configure src_compile src_install ;;
+	4|5|6|7) EXPORT_FUNCTIONS src_configure src_compile src_install ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 

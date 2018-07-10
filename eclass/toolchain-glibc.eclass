@@ -19,7 +19,7 @@ case ${EAPI:-0} in
 		src_install pkg_preinst pkg_postinst;;
 	2|3) EXPORT_FUNCTIONS pkg_setup src_unpack src_prepare src_configure \
 		src_compile src_test src_install pkg_preinst pkg_postinst;;
-	4|5|6) EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare \
+	4|5|6|7) EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare \
 		src_configure src_compile src_test src_install \
 		pkg_preinst pkg_postinst;;
 	*) die "Unsupported EAPI=${EAPI}";;

@@ -16,7 +16,7 @@
 EXPORT_FUNCTIONS src_install pkg_postinst pkg_postrm
 
 case "${EAPI:-0}" in
-	6)
+	6|7)
 		;;
 	*)
 		die "Unsupported EAPI=${EAPI} for ${ECLASS}"

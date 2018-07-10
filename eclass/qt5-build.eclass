@@ -17,7 +17,7 @@ if [[ ${CATEGORY} != dev-qt ]]; then
 fi
 
 case ${EAPI} in
-	6)	: ;;
+	6|7)	: ;;
 	*)	die "qt5-build.eclass: unsupported EAPI=${EAPI:-0}" ;;
 esac
 

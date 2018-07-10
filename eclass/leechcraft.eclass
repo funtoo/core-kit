@@ -21,7 +21,7 @@
 # Only EAPI >4 supported
 
 case ${EAPI:-0} in
-	6) ;;
+	6|7) ;;
 	*) die "EAPI not supported, bug ebuild mantainer" ;;
 esac
 

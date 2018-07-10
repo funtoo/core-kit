@@ -75,7 +75,7 @@ case ${EAPI:-0} in
 		inherit eutils
 		EXPORT_FUNCTIONS src_{unpack,prepare,configure,compile,install} \
 			pkg_{setup,postinst,postrm} ;;
-	6)
+	6|7)
 		EXPORT_FUNCTIONS src_{unpack,prepare,configure,compile,install} \
 			pkg_{setup,postinst,postrm} ;;
 	*) die "${ECLASS}: EAPI ${EAPI} not supported" ;;

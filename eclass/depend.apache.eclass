@@ -43,7 +43,7 @@ case ${EAPI:-0} in
 	0|2|3|4|5)
 		inherit multilib
 		;;
-	6)
+	6|7)
 		;;
 	*)
 		die "EAPI=${EAPI} is not supported by depend.apache.eclass"

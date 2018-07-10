@@ -26,7 +26,7 @@ inherit eutils multilib toolchain-funcs versionator
 
 GST_EXPF=""
 case "${EAPI:-0}" in
-	2|3|4|5)
+	2|3|4|5|6|7)
 		GST_EXPF="src_configure src_compile src_install"
 		;;
 	1)

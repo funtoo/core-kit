@@ -31,7 +31,7 @@ case "${EAPI:-0}" in
 		# result. Also relies on EAPI >=4 default src_install phase.
 		EXPORT_FUNCTIONS src_install pkg_postinst
 		;;
-	6)
+	6|7)
 		die "Unsupported EAPI=${EAPI} for ${ECLASS}"
 		die "Please migrate to readme.gentoo-r1.eclass and note	that"
 		die "it stops to export any ebuild phases and, then, you will"

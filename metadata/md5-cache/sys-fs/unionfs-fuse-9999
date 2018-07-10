@@ -6,5 +6,5 @@ HOMEPAGE=https://github.com/rpodgorny/unionfs-fuse
 LICENSE=BSD
 RDEPEND=sys-fs/fuse
 SLOT=0
-_eclasses_=git-r3	cbafa3261c37c7e3af44bb16a34ea390
+_eclasses_=git-r3	2ca391b22ccc49a1702a6364f4d14c05
 _md5_=3e3afd964a0f9c5159522bdb385da66d

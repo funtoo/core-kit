@@ -15,7 +15,7 @@
 
 # Check EAPI only
 case "${EAPI:-0}" in
-	6) ;;
+	6|7) ;;
 	*) die "EAPI=${EAPI:-0} is not supported" ;;
 esac
 

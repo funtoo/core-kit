@@ -29,7 +29,7 @@
 inherit eutils toolchain-funcs
 
 case ${EAPI:-0} in
-	4|5|6) EXPORT_FUNCTIONS pkg_setup ;;
+	4|5|6|7) EXPORT_FUNCTIONS pkg_setup ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 

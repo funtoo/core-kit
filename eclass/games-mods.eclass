@@ -110,7 +110,7 @@ games-mods_get_rdepend() {
 
 	case ${EAPI:-0} in
 		0|1) echo -n "${pkgs[@]}" ;;
-		[23456])
+		[234567])
 			local p
 			if [[ ${1} == "--ded" ]] ; then
 				echo -n "${DED_PKGS}"

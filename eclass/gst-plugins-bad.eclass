@@ -18,7 +18,7 @@ GST_ORG_MODULE="gst-plugins-bad"
 inherit eutils gst-plugins10
 
 case "${EAPI:-0}" in
-	1|2|3|4|5)
+	1|2|3|4|5|6|7)
 		;;
 	0)
 		die "EAPI=\"${EAPI}\" is not supported anymore"

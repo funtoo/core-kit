@@ -103,7 +103,7 @@
 inherit flag-o-matic toolchain-funcs unpacker
 
 case ${EAPI:-0} in
-	4|5|6)
+	4|5|6|7)
 	;;
 	*) die "EAPI ${EAPI} unsupported."
 	;;
