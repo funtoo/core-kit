@@ -22,7 +22,7 @@ case ${EAPI:-0} in
 	4|5) EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare \
 		src_configure src_compile src_test src_install \
 		pkg_preinst pkg_postinst;;
-	6) EXPORT_FUNCTIONS pkg_pretend;;
+	6|7) EXPORT_FUNCTIONS pkg_pretend;;
 	*) die "Unsupported EAPI=${EAPI}";;
 esac
 

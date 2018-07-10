@@ -22,7 +22,7 @@ case ${EAPI:-0} in
 		inherit eutils multiprocessing unpacker perl-functions
 		PERL_EXPF="src_unpack src_prepare src_configure src_compile src_test src_install"
 		;;
-	6)
+	6|7)
 		inherit multiprocessing perl-functions
 		PERL_EXPF="src_prepare src_configure src_compile src_test src_install"
 		;;
@@ -71,7 +71,7 @@ case ${EAPI:-0} in
 				;;
 		esac
 		;;
-	6)
+	6|7)
 		[[ ${CATEGORY} == perl-core ]] && \
 			PERL_EXPF+=" pkg_postinst pkg_postrm"
 

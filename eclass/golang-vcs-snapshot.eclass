@@ -45,7 +45,7 @@
 inherit golang-base
 
 case ${EAPI:-0} in
-	5|6) ;;
+	5|6|7) ;;
 	*) die "${ECLASS} API in EAPI ${EAPI} not yet established."
 esac
 

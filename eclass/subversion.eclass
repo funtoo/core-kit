@@ -24,7 +24,7 @@ case "${EAPI:-0}" in
 		EXPORT_FUNCTIONS src_unpack src_prepare pkg_preinst
 		DEPEND="|| ( dev-vcs/subversion[http] dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] )"
 		;;
-	6)
+	6|7)
 		EXPORT_FUNCTIONS src_unpack pkg_preinst
 		DEPEND="|| ( dev-vcs/subversion[http] dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] )"
 		;;

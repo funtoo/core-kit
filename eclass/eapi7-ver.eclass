@@ -60,7 +60,7 @@
 case ${EAPI:-0} in
 	0|1|2|3|4|5)
 		die "${ECLASS}: EAPI=${EAPI:-0} not supported";;
-	6)
+	6|7)
 		;;
 	*)
 		die "${ECLASS}: EAPI=${EAPI} unknown";;

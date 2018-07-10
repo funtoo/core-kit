@@ -105,7 +105,7 @@ RUBY_FAKEGEM_BINDIR="${RUBY_FAKEGEM_BINDIR-bin}"
 # Rails generators, or data that needs to be installed as well.
 
 case "${EAPI:-0}" in
-		0|1|2|3|4|5|6)
+		0|1|2|3|4|5|6|7)
 				;;
 		*)
 				die "Unsupported EAPI=${EAPI} (unknown) for ${ECLASS}"

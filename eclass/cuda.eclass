@@ -136,7 +136,7 @@ cuda_src_prepare() {
 case "${EAPI:-0}" in
 	0|1)
 		EXPORT_FUNCTIONS pkg_setup ;;
-	2|3|4|5|6)
+	2|3|4|5|6|7)
 		EXPORT_FUNCTIONS src_prepare ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac

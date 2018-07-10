@@ -15,7 +15,7 @@
 
 # Check EAPI only
 case "${EAPI:-0}" in
-	6) ;;
+	6|7) ;;
 	*) die "EAPI=${EAPI:-0} is not supported" ;;
 esac
 
@@ -33,7 +33,7 @@ GNOME2_LA_PUNT=${MATE_LA_PUNT:-""}
 inherit gnome2 autotools mate-desktop.org
 
 case "${EAPI:-0}" in
-	6) EXPORT_FUNCTIONS src_prepare src_configure src_install pkg_preinst pkg_postinst pkg_postrm ;;
+	6|7) EXPORT_FUNCTIONS src_prepare src_configure src_install pkg_preinst pkg_postinst pkg_postrm ;;
 	*) die "EAPI=${EAPI:-0} is not supported" ;;
 esac
 

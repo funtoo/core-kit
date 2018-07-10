@@ -12,7 +12,7 @@ if [[ -z ${_CARGO_ECLASS} ]]; then
 _CARGO_ECLASS=1
 
 case ${EAPI} in
-	6) : ;;
+	6|7) : ;;
 	*) die "EAPI=${EAPI:-0} is not supported" ;;
 esac
 

@@ -22,7 +22,7 @@ case "${EAPI:-0}" in
 	0|1|2|3|4)
 		PHP_DEPEND="dev-lang/php"
 		;;
-	5|6)
+	5|6|7)
 		# Repoman will complain about the missing slot in newer EAPIs.
 		PHP_DEPEND="dev-lang/php:*"
 		;;

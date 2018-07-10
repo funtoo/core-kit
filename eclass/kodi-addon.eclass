@@ -11,7 +11,7 @@
 inherit multilib cmake-utils
 
 case "${EAPI:-0}" in
-	4|5|6)
+	4|5|6|7)
 		EXPORT_FUNCTIONS src_configure
 		;;
 	*) die "EAPI=${EAPI} is not supported" ;;

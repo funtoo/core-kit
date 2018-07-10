@@ -40,7 +40,7 @@ case ${EAPI:-0} in
 	[0-5])
 		die "${ECLASS} is banned in EAPI ${EAPI:-0}"
 		;;
-	6)
+	6|7)
 		;;
 	*)
 		die "Unknown EAPI ${EAPI:-0}"

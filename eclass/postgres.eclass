@@ -17,7 +17,7 @@ EXPORT_FUNCTIONS pkg_setup
 
 
 case ${EAPI:-0} in
-	5|6) ;;
+	5|6|7) ;;
 	*) die "Unsupported EAPI=${EAPI} (unknown) for ${ECLASS}" ;;
 esac
 
