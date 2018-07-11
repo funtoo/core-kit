@@ -418,7 +418,6 @@ sys-libs/libblockdev:dmraid - Support for dmraid devices, also known as ATA-RAID
 sys-libs/libblockdev:kbd - Enable kernel block device support.
 sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-fs/lvm2.
 sys-libs/libhugetlbfs:perl - Install the cpupcstat tool and some perl modules
-sys-libs/libselinux:pcre2 - Use dev-libs/libpcre2 for fcontext regexes
 sys-libs/libunwind:debug-frame - Adds support for DWARF .debug_frame section: Use the information from this section if available
 sys-libs/libunwind:libatomic - Use libatomic instead of builtin atomic operations
 sys-libs/musl-nscd:minimal - Only installs the header files
