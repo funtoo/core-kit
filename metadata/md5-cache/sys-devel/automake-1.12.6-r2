@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=dev-lang/perl >=sys-devel/automake-wrapper-10 >=sys-devel/autoconf-2.69:* sys-devel/gnuconfig
 SLOT=1.12
 SRC_URI=mirror://gnu/automake/automake-1.12.6.tar.xz
-_eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	python-any-r1	bfef2831585f32e9e436679683eb192b	python-utils-r1	f724cd24574e2ef185586e338b9318c4	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	python-any-r1	bfef2831585f32e9e436679683eb192b	python-utils-r1	a453650f79ed740ee0229bc1e0f23527	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
 _md5_=323e73bb452e854fe2989774650b8d4a
