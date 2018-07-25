@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit autotools git-r3
 else
 	SRC_URI="ftp://ftp.astron.com/pub/file/${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+	KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 fi
 
 DESCRIPTION="identify a file's format by scanning binary data for patterns"
@@ -35,6 +35,7 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 	default
+	eapply "${FILESDIR}"/CVE-2018-10360.patch
 
 	[[ ${PV} == "9999" ]] && eautoreconf
 	elibtoolize
