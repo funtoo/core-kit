@@ -3,13 +3,16 @@
 
 EAPI=6
 
-inherit bash-completion-r1
+PYTHON_COMPAT=( python3_{4,5,6} )
+
+inherit bash-completion-r1 python-single-r1
 
 libbtrfs_soname=0
 
 if [[ ${PV} != 9999 ]]; then
-	MY_PV=v${PV}
-	KEYWORDS="~amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+	MY_PV="v${PV/_/-}"
+	[[ "${PV}" = *_rc* ]] || \
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
 	SRC_URI="https://www.kernel.org/pub/linux/kernel/people/kdave/${PN}/${PN}-${MY_PV}.tar.xz"
 	S="${WORKDIR}"/${PN}-${MY_PV}
 else
@@ -24,7 +27,7 @@ HOMEPAGE="https://btrfs.wiki.kernel.org"
 
 LICENSE="GPL-2"
 SLOT="0/${libbtrfs_soname}"
-IUSE="+convert reiserfs static static-libs +zstd"
+IUSE="+convert python reiserfs static static-libs +zstd"
 
 RESTRICT=test # tries to mount repared filesystems
 
@@ -39,6 +42,7 @@ RDEPEND="
 			>=sys-fs/reiserfsprogs-3.6.27
 		)
 	)
+	python? ( ${PYTHON_DEPS} )
 	zstd? ( app-arch/zstd:0= )
 "
 DEPEND="${RDEPEND}
@@ -46,6 +50,7 @@ DEPEND="${RDEPEND}
 	>=app-text/asciidoc-8.6.0
 	app-text/docbook-xml-dtd:4.5
 	app-text/xmlto
+	python? ( dev-python/setuptools[${PYTHON_USEDEP}] )
 	static? (
 		dev-libs/lzo:2[static-libs(+)]
 		sys-apps/util-linux:0[static-libs(+)]
@@ -65,6 +70,16 @@ if [[ ${PV} == 9999 ]]; then
 	DEPEND+=" sys-devel/gnuconfig"
 fi
 
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+
+PATCHES=(
+	"${FILESDIR}"/btrfs-progs-man-no-gz.patch
+)
+
+pkg_setup() {
+	use python && python-single-r1_pkg_setup
+}
+
 src_prepare() {
 	default
 	if [[ ${PV} == 9999 ]]; then
@@ -83,6 +98,8 @@ src_configure() {
 		--bindir="${EPREFIX}"/sbin
 		$(use_enable convert)
 		$(use_enable elibc_glibc backtrace)
+		$(use_enable python)
+		$(use_enable static-libs static)
 		$(use_enable zstd)
 		--with-convert=ext2$(usex reiserfs ',reiserfs' '')
 	)
@@ -95,9 +112,10 @@ src_compile() {
 
 src_install() {
 	local makeargs=(
-		$(usex static-libs '' 'libs_static=')
+		$(usex python install_python '')
 		$(usex static install-static '')
 	)
 	emake V=1 DESTDIR="${D}" install "${makeargs[@]}"
 	newbashcomp btrfs-completion btrfs
+	use python && python_optimize
 }
