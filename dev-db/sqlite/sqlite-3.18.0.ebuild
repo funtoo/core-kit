@@ -19,8 +19,7 @@ SRC_URI="doc? ( https://sqlite.org/2017/${PN}-doc-${DOC_PV}.zip )
 
 LICENSE="public-domain"
 SLOT="3"
-# no keywords until app-misc/tracker-1.12.x is added (from gnome-kit). ABI breakages. https://bugzilla.gnome.org/show_bug.cgi?id=785883
-KEYWORDS=""
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="debug doc icu +readline secure-delete static-libs tcl test tools"
 
 RDEPEND="icu? ( dev-libs/icu:0=[${MULTILIB_USEDEP}] )
@@ -50,9 +49,7 @@ pkg_setup() {
 
 src_prepare() {
 	if full_tarball; then
-		eapply -p0 "${FILESDIR}/${PN}-3.20.0-full_tarball-build.patch"
-		eapply -p0 "${FILESDIR}/${PN}-3.20.1-full_tarball-csv-unsigned_char.patch"
-		eapply -p0 "${FILESDIR}/${PN}-3.20.1-full_tarball-tests-big-endian.patch"
+		eapply -p0 "${FILESDIR}/${PN}-3.18.0-full_tarball-build.patch"
 
 		eapply_user
 
@@ -75,18 +72,6 @@ src_prepare() {
 	eautoreconf
 
 	multilib_copy_sources
-
-	preparation() {
-		pushd "${BUILD_DIR}" > /dev/null || die
-
-		if full_tarball && [[ "${ABI}" == "x86" ]]; then
-			# Disable tests broken on x86.
-			sed -e "/^for {set i 0} {\$i<1000} {incr i} {$/,/^}$/d" -i test/date.test || die "sed failed"
-		fi
-
-		popd > /dev/null || die
-	}
-	multilib_foreach_abi preparation
 }
 
 multilib_src_configure() {
