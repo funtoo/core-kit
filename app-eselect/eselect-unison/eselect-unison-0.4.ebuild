@@ -1,17 +1,16 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=0
-
-inherit eutils
+EAPI=7
 
 DESCRIPTION="unison module for eselect"
 HOMEPAGE="https://www.gentoo.org/proj/en/eselect/"
 SRC_URI=""
+S="${WORKDIR}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ppc x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~arm ~ppc ~x86 ~amd64-linux ~x86-linux"
 IUSE=""
 
 DEPEND=""
@@ -22,6 +21,5 @@ src_install() {
 	local MODULE="unison"
 	dodir ${MODULEDIR}
 	insinto ${MODULEDIR}
-	newins "${FILESDIR}/${MODULE}.eselect-${PVR}" ${MODULE}.eselect \
-		|| die "failed to install"
+	newins "${FILESDIR}/${MODULE}.eselect-${PVR}" ${MODULE}.eselect
 }
