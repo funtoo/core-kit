@@ -4,10 +4,6 @@
 
 app-admin/ego:zsh-completion - Enable ZSH completion
 app-admin/openrc-settingsd:systemd - Use the versions of dbus and polkit files provided by sys-apps/systemd
-app-admin/sudo:gcrypt - Use SHA2 from dev-libs/libgcrypt instead of sudo's internal SHA2
-app-admin/sudo:offensive - Let sudo print insults when the user types the wrong password
-app-admin/sudo:openssl - Use SHA2 from dev-libs/openssl instead of sudo's internal SHA2
-app-admin/sudo:sendmail - Allow sudo to send emails with sendmail
 app-admin/syslog-ng:amqp - Enable support for AMQP destinations
 app-admin/syslog-ng:geoip2 - Add support for geo lookup based on IPs via dev-libs/libmaxminddb
 app-admin/syslog-ng:http - Enable support for HTTP destinations
@@ -201,11 +197,6 @@ net-wireless/bluez:obex - Enable OBEX transfer support.
 net-wireless/bluez:test-programs - Install tools for testing of various Bluetooth functions
 net-wireless/bluez:user-session - Allow compatibility with user-session semantics for session bus under systemd
 net-wireless/crda:gcrypt - Use libgcrypt instead of openssl for key checking
-net-wireless/hostapd:crda - Add CRDA support
-net-wireless/hostapd:logwatch - Install support files for sys-apps/logwatch
-net-wireless/hostapd:netlink - Adding support for using netlink to create VLANs
-net-wireless/hostapd:sqlite - Adding sqlite support
-net-wireless/hostapd:wps - Add support for Wi-Fi Protected Setup
 net-wireless/wpa_supplicant:ap - Add support for access point mode
 net-wireless/wpa_supplicant:eap-sim - Add support for EAP-SIM authentication algorithm
 net-wireless/wpa_supplicant:fasteap - Add support for FAST-EAP authentication algorithm
@@ -391,12 +382,6 @@ sys-fs/squashfuse:lz4 - Enable support for lz4 compression
 sys-fs/udev:firmware-loader - Enable the userspace firmware loader (DEPRECATED, replaced by the in-kernel loader starting from 3.8)
 sys-fs/udev:gudev - Build the gobject interface library
 sys-fs/udev:kmod - Enable kernel module loading/unloading support using sys-apps/kmod
-sys-fs/udisks:cryptsetup - Enable sys-fs/cryptsetup support
-sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
-sys-fs/udisks:gptfdisk - Pull in sys-apps/gptfdisk for sgdisk command as used by partitioning functionality
-sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
-sys-fs/udisks:remote-access - Control whether connections from other clients over LAN are allowed
-sys-fs/udisks:systemd - Support sys-apps/systemd's logind
 sys-fs/zfs:kernel-builtin - Disable dependency on sys-fs/zfs-kmod under the assumption that ZFS is part of the kernel source tree
 sys-fs/zfs:rootfs - Enable dependencies required for booting off a pool containing a rootfs
 sys-fs/zfs:test-suite - Install regression test suite
