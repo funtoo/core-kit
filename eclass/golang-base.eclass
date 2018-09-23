@@ -1,9 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-# @ECLASS: golang-build.eclass
+# @ECLASS: golang-base.eclass
 # @MAINTAINER:
 # William Hubbs <williamh@gentoo.org>
+# @SUPPORTED_EAPIS: 5 6
 # @BLURB: Eclass that provides base functions for Go packages.
 # @DESCRIPTION:
 # This eclass provides base functions for software written in the Go
@@ -11,7 +12,7 @@
 # dev-lang/go.
 
 case "${EAPI:-0}" in
-	5|6|7)
+	5|6)
 		;;
 	*)
 		die "${ECLASS}: Unsupported eapi (EAPI=${EAPI})"
@@ -22,7 +23,7 @@ if [[ -z ${_GOLANG_BASE} ]]; then
 
 _GOLANG_BASE=1
 
-DEPEND=">=dev-lang/go-1.8"
+DEPEND=">=dev-lang/go-1.9"
 
 # Do not complain about CFLAGS etc since go projects do not use them.
 QA_FLAGS_IGNORED='.*'

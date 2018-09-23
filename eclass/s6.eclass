@@ -4,6 +4,7 @@
 # @ECLASS: s6.eclass
 # @MAINTAINER:
 # William Hubbs <williamh@gentoo.org>
+# @SUPPORTED_EAPIS: 5 6
 # @BLURB: helper functions to install s6 services
 # @DESCRIPTION:
 # This eclass provides helpers to install s6 services.
@@ -25,7 +26,7 @@
 # @CODE
 
 case ${EAPI:-0} in
-	5|6|7) ;;
+	5|6) ;;
 	*) die "${ECLASS}.eclass: API in EAPI ${EAPI} not yet established" ;;
 esac
 

@@ -1,9 +1,0 @@
-DEFINED_PHASES=-
-DESCRIPTION=Virtual for libelf.so.0 provider (dev-libs/libelf)
-EAPI=6
-IUSE=abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_ppc_32 abi_ppc_64 abi_s390_32 abi_s390_64
-KEYWORDS=alpha amd64 arm hppa ~mips ppc ppc64 sparc x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris
-RDEPEND=>=dev-libs/libelf-0.8.13-r2:0/0[abi_x86_32(-)?,abi_x86_64(-)?,abi_x86_x32(-)?,abi_mips_n32(-)?,abi_mips_n64(-)?,abi_mips_o32(-)?,abi_ppc_32(-)?,abi_ppc_64(-)?,abi_s390_32(-)?,abi_s390_64(-)?]
-SLOT=0/0
-_eclasses_=multibuild	293f364715a9786d81588224c129b704	multilib	97f470f374f2e94ccab04a2fb21d811e	multilib-build	d22583becf660d6476780c3ebb0925e4	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
-_md5_=f892b41560b04cac0a2ce79e324d60fd

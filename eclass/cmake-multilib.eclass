@@ -6,6 +6,7 @@
 # gx86-multilib team <multilib@gentoo.org>
 # @AUTHOR:
 # Author: Michał Górny <mgorny@gentoo.org>
+# @SUPPORTED_EAPIS: 5 6
 # @BLURB: cmake-utils wrapper for multilib builds
 # @DESCRIPTION:
 # The cmake-multilib.eclass provides a glue between cmake-utils.eclass(5)
@@ -20,7 +21,7 @@
 
 # EAPI=5 is required for meaningful MULTILIB_USEDEP.
 case ${EAPI:-0} in
-	5|6|7) ;;
+	5|6) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 

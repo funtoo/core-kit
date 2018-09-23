@@ -5,6 +5,7 @@
 # @MAINTAINER:
 # @AUTHOR:
 # Max Kalika <max@gentoo.org>
+# @SUPPORTED_EAPIS: 1 2 3 4 5 6
 # @BLURB: Eclass for SSL certificates
 # @DESCRIPTION:
 # This eclass implements a standard installation procedure for installing
@@ -17,7 +18,7 @@ case "${EAPI:-0}" in
 	0)
 		die "${ECLASS}.eclass: EAPI=0 is not supported.  Please upgrade to EAPI >= 1."
 		;;
-	1|2|3|4|5|6|7)
+	1|2|3|4|5|6)
 		;;
 	*)
 		die "${ECLASS}.eclass: EAPI=${EAPI} is not supported yet."

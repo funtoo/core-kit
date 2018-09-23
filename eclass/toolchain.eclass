@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 # Maintainer: Toolchain Ninjas <toolchain@gentoo.org>
+# @SUPPORTED_EAPIS: 5
 
 DESCRIPTION="The GNU Compiler Collection"
 HOMEPAGE="https://gcc.gnu.org/"
@@ -24,8 +25,8 @@ fi
 FEATURES=${FEATURES/multilib-strict/}
 
 case ${EAPI:-0} in
-	0|1|2|3) die "Need to upgrade to at least EAPI=4" ;;
-	4*|5*)   ;;
+	0|1|2|3|4*) die "Need to upgrade to at least EAPI=5" ;;
+	5*)   ;;
 	*)       die "I don't speak EAPI ${EAPI}." ;;
 esac
 EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare src_configure \
@@ -137,7 +138,8 @@ if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
 	[[ -n ${HTB_VER} ]] && IUSE+=" boundschecking"
 	[[ -n ${D_VER}   ]] && IUSE+=" d"
 	[[ -n ${SPECS_VER} ]] && IUSE+=" nossp"
-	tc_version_is_at_least 3 && IUSE+=" doc gcj awt hardened multilib objc"
+	tc_version_is_at_least 3 && IUSE+=" doc hardened multilib objc"
+	tc_version_is_between 3 7 && IUSE+=" awt gcj"
 	tc_version_is_at_least 3.3 && IUSE+=" pgo"
 	tc_version_is_at_least 4.0 && IUSE+=" objc-gc"
 	tc_version_is_between 4.0 4.9 && IUSE+=" mudflap"
@@ -149,9 +151,12 @@ if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
 	# versions which we dropped.  Since graphite was also experimental in
 	# the older versions, we don't want to bother supporting it.  #448024
 	tc_version_is_at_least 4.8 && IUSE+=" graphite" IUSE_DEF+=( sanitize )
-	tc_version_is_at_least 4.9 && IUSE+=" cilk +vtv"
+	tc_version_is_between 4.9 8 && IUSE+=" cilk"
+	tc_version_is_at_least 4.9 && IUSE+=" +vtv"
 	tc_version_is_at_least 5.0 && IUSE+=" jit mpx"
 	tc_version_is_at_least 6.0 && IUSE+=" +pie +ssp +pch"
+	# systemtap is a gentoo-specific switch: bug #654748
+	tc_version_is_at_least 8.0 && IUSE+=" systemtap"
 fi
 
 IUSE+=" ${IUSE_DEF[*]/#/+}"
@@ -166,7 +171,7 @@ RDEPEND="sys-libs/zlib
 tc_version_is_at_least 3 && RDEPEND+=" virtual/libiconv"
 
 if tc_version_is_at_least 4 ; then
-	GMP_MPFR_DEPS=">=dev-libs/gmp-4.3.2:0 >=dev-libs/mpfr-2.4.2:0"
+	GMP_MPFR_DEPS=">=dev-libs/gmp-4.3.2:0= >=dev-libs/mpfr-2.4.2:0="
 	if tc_version_is_at_least 4.3 ; then
 		RDEPEND+=" ${GMP_MPFR_DEPS}"
 	elif in_iuse fortran ; then
@@ -174,7 +179,7 @@ if tc_version_is_at_least 4 ; then
 	fi
 fi
 
-tc_version_is_at_least 4.5 && RDEPEND+=" >=dev-libs/mpc-0.8.1:0"
+tc_version_is_at_least 4.5 && RDEPEND+=" >=dev-libs/mpc-0.8.1:0="
 
 if in_iuse objc-gc ; then
 	if tc_version_is_at_least 7 ; then
@@ -184,12 +189,12 @@ fi
 
 if in_iuse graphite ; then
 	if tc_version_is_at_least 5.0 ; then
-		RDEPEND+=" graphite? ( >=dev-libs/isl-0.14 )"
+		RDEPEND+=" graphite? ( >=dev-libs/isl-0.14:0= )"
 	elif tc_version_is_at_least 4.8 ; then
 		RDEPEND+="
 			graphite? (
-				>=dev-libs/cloog-0.18.0
-				>=dev-libs/isl-0.11.1
+				>=dev-libs/cloog-0.18.0:0=
+				>=dev-libs/isl-0.11.1:0=
 			)"
 	fi
 fi
@@ -206,17 +211,21 @@ DEPEND="${RDEPEND}
 if in_iuse gcj ; then
 	GCJ_DEPS=">=media-libs/libart_lgpl-2.1"
 	GCJ_GTK_DEPS="
+		x11-base/xorg-proto
 		x11-libs/libXt
 		x11-libs/libX11
 		x11-libs/libXtst
-		x11-proto/xproto
-		x11-proto/xextproto
 		=x11-libs/gtk+-2*
 		virtual/pkgconfig
 	"
 	tc_version_is_at_least 3.4 && GCJ_GTK_DEPS+=" x11-libs/pango"
 	tc_version_is_at_least 4.2 && GCJ_DEPS+=" app-arch/zip app-arch/unzip"
 	DEPEND+=" gcj? ( awt? ( ${GCJ_GTK_DEPS} ) ${GCJ_DEPS} )"
+fi
+
+if in_iuse systemtap ; then
+	# gcc needs sys/sdt.h headers on target
+	DEPEND+=" systemtap? ( dev-util/systemtap )"
 fi
 
 PDEPEND=">=sys-devel/gcc-config-1.7"
@@ -301,6 +310,14 @@ gentoo_urls() {
 #			ten Brugge's bounds-checking patches. If you want to use a patch
 #			for an older gcc version with a new gcc, make sure you set
 #			HTB_GCC_VER to that version of gcc.
+#
+#	CYGWINPORTS_GITREV
+#			If set, this variable signals that we should apply additional patches
+#			maintained by upstream Cygwin developers at github/cygwinports/gcc,
+#			using the specified git commit id there.  The list of patches to
+#			apply is extracted from gcc.cygport, maintained there as well.
+#			This is done for compilers running on Cygwin, not for cross compilers
+#			with a Cygwin target.
 get_gcc_src_uri() {
 	export PATCH_GCC_VER=${PATCH_GCC_VER:-${GCC_RELEASE_VER}}
 	export UCLIBC_GCC_VER=${UCLIBC_GCC_VER:-${PATCH_GCC_VER}}
@@ -316,7 +333,11 @@ get_gcc_src_uri() {
 	elif [[ -n ${PRERELEASE} ]] ; then
 		GCC_SRC_URI="ftp://gcc.gnu.org/pub/gcc/prerelease-${PRERELEASE}/gcc-${PRERELEASE}.tar.bz2"
 	elif [[ -n ${SNAPSHOT} ]] ; then
-		GCC_SRC_URI="ftp://gcc.gnu.org/pub/gcc/snapshots/${SNAPSHOT}/gcc-${SNAPSHOT}.tar.bz2"
+		if tc_version_is_between 5.5 6 || tc_version_is_between 6.4 7 || tc_version_is_at_least 7.2 ; then
+			GCC_SRC_URI="ftp://gcc.gnu.org/pub/gcc/snapshots/${SNAPSHOT}/gcc-${SNAPSHOT}.tar.xz"
+		else
+			GCC_SRC_URI="ftp://gcc.gnu.org/pub/gcc/snapshots/${SNAPSHOT}/gcc-${SNAPSHOT}.tar.bz2"
+		fi
 	else
 		if tc_version_is_between 5.5 6 || tc_version_is_between 6.4 7 || tc_version_is_at_least 7.2 ; then
 			GCC_SRC_URI="mirror://gnu/gcc/gcc-${GCC_PV}/gcc-${GCC_RELEASE_VER}.tar.xz"
@@ -362,6 +383,11 @@ get_gcc_src_uri() {
 			GCC_SRC_URI+=" gcj? ( ftp://sourceware.org/pub/java/ecj-4.3.jar )"
 		fi
 	fi
+
+	# Cygwin patches from https://github.com/cygwinports/gcc
+	[[ -n ${CYGWINPORTS_GITREV} ]] && \
+		GCC_SRC_URI+=" elibc_Cygwin? ( https://github.com/cygwinports/gcc/archive/${CYGWINPORTS_GITREV}.tar.gz
+			-> gcc-cygwinports-${CYGWINPORTS_GITREV}.tar.gz )"
 
 	echo "${GCC_SRC_URI}"
 }
@@ -417,7 +443,11 @@ gcc_quick_unpack() {
 	elif [[ -n ${PRERELEASE} ]] ; then
 		unpack gcc-${PRERELEASE}.tar.bz2
 	elif [[ -n ${SNAPSHOT} ]] ; then
-		unpack gcc-${SNAPSHOT}.tar.bz2
+		if tc_version_is_between 5.5 6 || tc_version_is_between 6.4 7 || tc_version_is_at_least 7.2 ; then
+			unpack gcc-${SNAPSHOT}.tar.xz
+		else
+			unpack gcc-${SNAPSHOT}.tar.bz2
+		fi
 	elif [[ ${PV} != *9999* ]] ; then
 		if tc_version_is_between 5.5 6 || tc_version_is_between 6.4 7 || tc_version_is_at_least 7.2 ; then
 			unpack gcc-${GCC_RELEASE_VER}.tar.xz
@@ -465,6 +495,8 @@ gcc_quick_unpack() {
 
 	use_if_iuse boundschecking && unpack "bounds-checking-gcc-${HTB_GCC_VER}-${HTB_VER}.patch.bz2"
 
+	[[ -n ${CYGWINPORTS_GITREV} ]] && use elibc_Cygwin && unpack "gcc-cygwinports-${CYGWINPORTS_GITREV}.tar.gz"
+
 	popd > /dev/null
 }
 
@@ -489,6 +521,7 @@ toolchain_src_prepare() {
 	fi
 	do_gcc_HTB_patches
 	do_gcc_PIE_patches
+	do_gcc_CYGWINPORTS_patches
 	epatch_user
 
 	if ( tc_version_is_at_least 4.8.2 || use_if_iuse hardened ) && ! use vanilla ; then
@@ -627,6 +660,18 @@ do_gcc_PIE_patches() {
 	fi
 
 	BRANDING_GCC_PKGVERSION="${BRANDING_GCC_PKGVERSION}, pie-${PIE_VER}"
+}
+
+do_gcc_CYGWINPORTS_patches() {
+	[[ -n ${CYGWINPORTS_GITREV} ]] || return 0
+	use elibc_Cygwin || return 0
+
+	local -a patches
+	local p d="${WORKDIR}/gcc-${CYGWINPORTS_GITREV}"
+	readarray -t patches < <(sed -e '1,/PATCH_URI="/d;/"/,$d' < "${d}"/gcc.cygport)
+	for p in ${patches[*]}; do
+		epatch "${d}/${p}"
+	done
 }
 
 # configure to build with the hardened GCC specs as the default
@@ -964,7 +1009,14 @@ toolchain_src_configure() {
 		case ${CTARGET} in
 		*-linux)		 needed_libc=no-fucking-clue;;
 		*-dietlibc)		 needed_libc=dietlibc;;
-		*-elf|*-eabi)	 needed_libc=newlib;;
+		*-elf|*-eabi)
+			needed_libc=newlib
+			# Bare-metal targets don't have access to clock_gettime()
+			# arm-none-eabi example: bug #589672
+			# But we explicitly do --enable-libstdcxx-time above.
+			# Undoing it here.
+			confgcc+=( --disable-libstdcxx-time )
+			;;
 		*-freebsd*)		 needed_libc=freebsd-lib;;
 		*-gnu*)			 needed_libc=glibc;;
 		*-klibc)		 needed_libc=klibc;;
@@ -1011,7 +1063,7 @@ toolchain_src_configure() {
 			confgcc+=( --enable-shared )
 		fi
 		case ${CHOST} in
-		mingw*|*-mingw*|*-cygwin)
+		mingw*|*-mingw*)
 			confgcc+=( --enable-threads=win32 ) ;;
 		*)
 			confgcc+=( --enable-threads=posix ) ;;
@@ -1152,10 +1204,12 @@ toolchain_src_configure() {
 
 	### library options
 
-	if ! is_gcj ; then
-		confgcc+=( --disable-libgcj )
-	elif use awt ; then
-		confgcc+=( --enable-java-awt=gtk )
+	if tc_version_is_between 3.0 7.0 ; then
+		if ! is_gcj ; then
+			confgcc+=( --disable-libgcj )
+		elif use awt ; then
+			confgcc+=( --enable-java-awt=gtk )
+		fi
 	fi
 
 	if tc_version_is_at_least 4.2 ; then
@@ -1191,7 +1245,17 @@ toolchain_src_configure() {
 			if hardened_gcc_is_stable ssp; then
 				export gcc_cv_libc_provides_ssp=yes
 			fi
-			confgcc+=( --disable-libssp )
+			if use_if_iuse ssp; then
+				# On some targets USE="ssp -libssp" is an invalid
+				# configuration as target libc does not provide
+				# stack_chk_* functions. Do not disable libssp there.
+				case ${CTARGET} in
+					mingw*|*-mingw*) ewarn "Not disabling libssp" ;;
+					*) confgcc+=( --disable-libssp ) ;;
+				esac
+			else
+				confgcc+=( --disable-libssp )
+			fi
 		fi
 	fi
 
@@ -1201,6 +1265,10 @@ toolchain_src_configure() {
 
 	if in_iuse mpx ; then
 		confgcc+=( $(use_enable mpx libmpx) )
+	fi
+
+	if in_iuse systemtap ; then
+		confgcc+=( $(use_enable systemtap) )
 	fi
 
 	if in_iuse vtv ; then
@@ -1439,6 +1507,9 @@ gcc_do_filter_flags() {
 		filter-flags -f{no-,}unit-at-a-time -f{no-,}web -mno-tls-direct-seg-refs
 		filter-flags -f{no-,}stack-protector{,-all}
 		filter-flags -fvisibility-inlines-hidden -fvisibility=hidden
+	fi
+	if ! tc_version_is_at_least 4.1 ; then
+		filter-flags -fdiagnostics-show-option
 	fi
 
 	if tc_version_is_at_least 3.4 ; then
@@ -1683,9 +1754,9 @@ toolchain_src_install() {
 	S="${WORKDIR}"/build emake -j1 DESTDIR="${D}" install || die
 
 	# Punt some tools which are really only useful while building gcc
-	find "${D}" -name install-tools -prune -type d -exec rm -rf "{}" \;
+	find "${ED}" -name install-tools -prune -type d -exec rm -rf "{}" \;
 	# This one comes with binutils
-	find "${D}" -name libiberty.a -delete
+	find "${ED}" -name libiberty.a -delete
 
 	# Move the libraries to the proper location
 	gcc_movelibs
@@ -1694,7 +1765,7 @@ toolchain_src_install() {
 	if ! is_crosscompile ; then
 		local EXEEXT
 		eval $(grep ^EXEEXT= "${WORKDIR}"/build/gcc/config.log)
-		[[ -r ${D}${BINPATH}/gcc${EXEEXT} ]] || die "gcc not found in ${D}"
+		[[ -r ${D}${BINPATH}/gcc${EXEEXT} ]] || die "gcc not found in ${ED}"
 	fi
 
 	dodir /etc/env.d/gcc
@@ -1756,13 +1827,13 @@ toolchain_src_install() {
 
 	cd "${S}"
 	if is_crosscompile; then
-		rm -rf "${ED}"usr/share/{man,info}
+		rm -rf "${ED}"/usr/share/{man,info}
 		rm -rf "${D}"${DATAPATH}/{man,info}
 	else
 		if tc_version_is_at_least 3.0 ; then
 			local cxx_mandir=$(find "${WORKDIR}/build/${CTARGET}/libstdc++-v3" -name man)
 			if [[ -d ${cxx_mandir} ]] ; then
-				cp -r "${cxx_mandir}"/man? "${D}/${DATAPATH}"/man/
+				cp -r "${cxx_mandir}"/man? "${D}${DATAPATH}"/man/
 			fi
 		fi
 		has noinfo ${FEATURES} \
@@ -1773,7 +1844,7 @@ toolchain_src_install() {
 			|| prepman "${DATAPATH#${EPREFIX}}"
 	fi
 	# prune empty dirs left behind
-	find "${D}" -depth -type d -delete 2>/dev/null
+	find "${ED}" -depth -type d -delete 2>/dev/null
 
 	# install testsuite results
 	if use regression-test; then
@@ -1800,6 +1871,7 @@ toolchain_src_install() {
 	# libsupc++.la: This has no dependencies.
 	# libcc1.la: There is no static library, only dynamic.
 	# libcc1plugin.la: Same as above, and it's loaded via dlopen.
+	# libcp1plugin.la: Same as above, and it's loaded via dlopen.
 	# libgomp.la: gcc itself handles linkage (libgomp.spec).
 	# libgomp-plugin-*.la: Same as above, and it's an internal plugin only
 	# loaded via dlopen.
@@ -1812,13 +1884,14 @@ toolchain_src_install() {
 	# libvtv.la: gcc itself handles linkage correctly.
 	# lib*san.la: Sanitizer linkage is handled internally by gcc, and they
 	# do not support static linking. #487550 #546700
-	find "${D}/${LIBPATH}" \
+	find "${D}${LIBPATH}" \
 		'(' \
 			-name libstdc++.la -o \
 			-name libstdc++fs.la -o \
 			-name libsupc++.la -o \
 			-name libcc1.la -o \
 			-name libcc1plugin.la -o \
+			-name libcp1plugin.la -o \
 			-name 'libgomp.la' -o \
 			-name 'libgomp-plugin-*.la' -o \
 			-name libgfortran.la -o \
@@ -1877,7 +1950,7 @@ gcc_movelibs() {
 	# code to run on the target.
 	if tc_version_is_at_least 5 && is_crosscompile ; then
 		dodir "${HOSTLIBPATH#${EPREFIX}}"
-		mv "${ED}"usr/$(get_libdir)/libcc1* "${D}${HOSTLIBPATH}" || die
+		mv "${ED}"/usr/$(get_libdir)/libcc1* "${D}${HOSTLIBPATH}" || die
 	fi
 
 	# For all the libs that are built for CTARGET, move them into the
@@ -1927,7 +2000,7 @@ gcc_movelibs() {
 	for FROMDIR in ${removedirs} ; do
 		rmdir "${D}"${FROMDIR} >& /dev/null
 	done
-	find -depth "${D}" -type d -exec rmdir {} + >& /dev/null
+	find -depth "${ED}" -type d -exec rmdir {} + >& /dev/null
 }
 
 # make sure the libtool archives have libdir set to where they actually
@@ -2074,7 +2147,7 @@ gcc_slot_java() {
 
 toolchain_pkg_postinst() {
 	do_gcc_config
-	if [[ ${ROOT} == / && -f ${EPREFIX}/usr/share/eselect/modules/compiler-shadow.eselect ]] ; then
+	if [[ ! ${ROOT%/} && -f ${EPREFIX}/usr/share/eselect/modules/compiler-shadow.eselect ]] ; then
 		eselect compiler-shadow update all
 	fi
 
@@ -2089,17 +2162,17 @@ toolchain_pkg_postinst() {
 		echo
 
 		# Clean up old paths
-		rm -f "${EROOT}"*/rcscripts/awk/fixlafiles.awk "${EROOT}"sbin/fix_libtool_files.sh
-		rmdir "${EROOT}"*/rcscripts{/awk,} 2>/dev/null
+		rm -f "${EROOT%/}"/*/rcscripts/awk/fixlafiles.awk "${EROOT%/}"/sbin/fix_libtool_files.sh
+		rmdir "${EROOT%/}"/*/rcscripts{/awk,} 2>/dev/null
 
-		mkdir -p "${EROOT}"usr/{share/gcc-data,sbin,bin}
+		mkdir -p "${EROOT%/}"/usr/{share/gcc-data,sbin,bin}
 		# DATAPATH has EPREFIX already, use ROOT with it
-		cp "${ROOT}${DATAPATH}"/fixlafiles.awk "${EROOT}"usr/share/gcc-data/ || die
-		cp "${ROOT}${DATAPATH}"/fix_libtool_files.sh "${EROOT}"usr/sbin/ || die
+		cp "${ROOT%/}${DATAPATH}"/fixlafiles.awk "${EROOT%/}"/usr/share/gcc-data/ || die
+		cp "${ROOT%/}${DATAPATH}"/fix_libtool_files.sh "${EROOT%/}"/usr/sbin/ || die
 
 		# Since these aren't critical files and portage sucks with
 		# handling of binpkgs, don't require these to be found
-		cp "${ROOT}${DATAPATH}"/c{89,99} "${EROOT}"usr/bin/ 2>/dev/null
+		cp "${ROOT%/}${DATAPATH}"/c{89,99} "${EROOT%/}"/usr/bin/ 2>/dev/null
 	fi
 
 	if use regression-test ; then
@@ -2115,7 +2188,7 @@ toolchain_pkg_postinst() {
 }
 
 toolchain_pkg_postrm() {
-	if [[ ${ROOT} == / && -f ${EPREFIX}/usr/share/eselect/modules/compiler-shadow.eselect ]] ; then
+	if [[ ! ${ROOT%/} && -f ${EPREFIX}/usr/share/eselect/modules/compiler-shadow.eselect ]] ; then
 		eselect compiler-shadow clean all
 	fi
 
@@ -2126,16 +2199,16 @@ toolchain_pkg_postrm() {
 
 	# clean up the cruft left behind by cross-compilers
 	if is_crosscompile ; then
-		if [[ -z $(ls "${EROOT}"etc/env.d/gcc/${CTARGET}* 2>/dev/null) ]] ; then
-			rm -f "${EROOT}"etc/env.d/gcc/config-${CTARGET}
-			rm -f "${EROOT}"etc/env.d/??gcc-${CTARGET}
-			rm -f "${EROOT}"usr/bin/${CTARGET}-{gcc,{g,c}++}{,32,64}
+		if [[ -z $(ls "${EROOT%/}"/etc/env.d/gcc/${CTARGET}* 2>/dev/null) ]] ; then
+			rm -f "${EROOT%/}"/etc/env.d/gcc/config-${CTARGET}
+			rm -f "${EROOT%/}"/etc/env.d/??gcc-${CTARGET}
+			rm -f "${EROOT%/}"/usr/bin/${CTARGET}-{gcc,{g,c}++}{,32,64}
 		fi
 		return 0
 	fi
 
 	# ROOT isnt handled by the script
-	[[ ${ROOT} != "/" ]] && return 0
+	[[ ${ROOT%/} ]] && return 0
 
 	if [[ ! -e ${LIBPATH}/libstdc++.so ]] ; then
 		# make sure the profile is sane during same-slot upgrade #289403
@@ -2168,7 +2241,7 @@ do_gcc_config() {
 		[[ -n ${current_specs} ]] && use_specs=-${current_specs}
 
 		if [[ -n ${use_specs} ]] && \
-		   [[ ! -e ${ROOT}/etc/env.d/gcc/${CTARGET}-${GCC_CONFIG_VER}${use_specs} ]]
+		   [[ ! -e ${EROOT%/}/etc/env.d/gcc/${CTARGET}-${GCC_CONFIG_VER}${use_specs} ]]
 		then
 			ewarn "The currently selected specs-specific gcc config,"
 			ewarn "${current_specs}, doesn't exist anymore. This is usually"

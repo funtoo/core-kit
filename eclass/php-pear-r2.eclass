@@ -6,6 +6,7 @@
 # Gentoo PHP Team <php-bugs@gentoo.org>
 # @AUTHOR:
 # Author: Brian Evans <grknight@gentoo.org>
+# @SUPPORTED_EAPIS: 6
 # @BLURB: Provides means for an easy installation of PEAR packages.
 # @DESCRIPTION:
 # This eclass provides means for an easy installation of PEAR packages.
@@ -16,7 +17,7 @@
 EXPORT_FUNCTIONS src_install pkg_postinst pkg_postrm
 
 case "${EAPI:-0}" in
-	6|7)
+	6)
 		;;
 	*)
 		die "Unsupported EAPI=${EAPI} for ${ECLASS}"

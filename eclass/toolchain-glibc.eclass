@@ -4,6 +4,7 @@
 # @ECLASS: toolchain-glibc.eclass
 # @MAINTAINER:
 # <toolchain@gentoo.org>
+# @SUPPORTED_EAPIS: 0 1 2 3 4 5 6
 # @BLURB: Common code for sys-libs/glibc ebuilds
 # @DESCRIPTION:
 # This eclass contains the common phase functions migrated from
@@ -22,7 +23,7 @@ case ${EAPI:-0} in
 	4|5) EXPORT_FUNCTIONS pkg_pretend pkg_setup src_unpack src_prepare \
 		src_configure src_compile src_test src_install \
 		pkg_preinst pkg_postinst;;
-	6|7) EXPORT_FUNCTIONS pkg_pretend;;
+	6) EXPORT_FUNCTIONS pkg_pretend;;
 	*) die "Unsupported EAPI=${EAPI}";;
 esac
 
@@ -227,6 +228,7 @@ setup_flags() {
 	strip-flags
 	strip-unsupported-flags
 	filter-flags -m32 -m64 -mabi=*
+	filter-ldflags -Wl,-rpath=*
 
 	# Bug 492892.
 	filter-flags -frecord-gcc-switches
@@ -362,11 +364,20 @@ setup_env() {
 		# and fall back on CFLAGS.
 		local VAR=CFLAGS_${CTARGET//[-.]/_}
 		CFLAGS=${!VAR-${CFLAGS}}
+		einfo " $(printf '%15s' 'Manual CFLAGS:')   ${CFLAGS}"
 	fi
 
 	setup_flags
 
 	export ABI=${ABI:-${DEFAULT_ABI:-default}}
+
+	if use headers-only ; then
+		# Avoid mixing host's CC and target's CFLAGS_${ABI}:
+		# At this bootstrap stage we have only binutils for
+		# target but not compiler yet.
+		einfo "Skip CC ABI injection. We can't use (cross-)compiler yet."
+		return 0
+	fi
 
 	local VAR=CFLAGS_${ABI}
 	# We need to export CFLAGS with abi information in them because glibc's
@@ -375,6 +386,7 @@ setup_env() {
 	# top of each other.
 	: ${__GLIBC_CC:=$(tc-getCC ${CTARGET_OPT:-${CTARGET}})}
 	export __GLIBC_CC CC="${__GLIBC_CC} ${!VAR}"
+	einfo " $(printf '%15s' 'Manual CC:')   ${CC}"
 }
 
 foreach_abi() {
@@ -656,16 +668,7 @@ toolchain-glibc_do_src_unpack() {
 	# Check NPTL support _before_ we unpack things to save some time
 	want_nptl && check_nptl_support
 
-	if [[ -n ${EGIT_REPO_URIS} ]] ; then
-		local i d
-		for ((i=0; i<${#EGIT_REPO_URIS[@]}; ++i)) ; do
-			EGIT_REPO_URI=${EGIT_REPO_URIS[$i]}
-			EGIT_SOURCEDIR=${EGIT_SOURCEDIRS[$i]}
-			git-2_src_unpack
-		done
-	else
-		unpack_pkg
-	fi
+	unpack_pkg
 
 	cd "${S}"
 	touch locale/C-translit.h #185476 #218003

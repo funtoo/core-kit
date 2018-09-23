@@ -4,6 +4,7 @@
 # @ECLASS: gnome2.eclass
 # @MAINTAINER:
 # gnome@gentoo.org
+# @SUPPORTED_EAPIS: 4 5 6
 # @BLURB: Provides phases for Gnome/Gtk+ based packages.
 # @DESCRIPTION:
 # Exports portage base functions used by ebuilds written for packages using the
@@ -22,7 +23,7 @@ case "${EAPI:-0}" in
 	4|5)
 		EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install pkg_preinst pkg_postinst pkg_postrm
 		;;
-	6|7)
+	6)
 		EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install pkg_preinst pkg_postinst pkg_postrm
 		;;
 	*) die "EAPI=${EAPI} is not supported" ;;

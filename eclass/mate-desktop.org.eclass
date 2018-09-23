@@ -6,6 +6,7 @@
 # mate@gentoo.org
 # @AUTHOR:
 # Authors: NP-Hardass <NP-Hardass@gentoo.org> based upon the gnome.org eclass.
+# @SUPPORTED_EAPIS: 6
 # @BLURB: Helper eclass for mate-desktop.org hosted archives
 # @DESCRIPTION:
 # Provide a default SRC_URI and EGIT_REPO_URI for MATE packages as well as
@@ -13,7 +14,7 @@
 
 # EAPIs < 6 are banned.
 case "${EAPI:-0}" in
-	6|7) ;;
+	6) ;;
 	*) die "EAPI=${EAPI:-0} is not supported" ;;
 esac
 

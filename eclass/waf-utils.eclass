@@ -8,6 +8,7 @@
 # Original Author: Gilles Dartiguelongue <eva@gentoo.org>
 # Various improvements based on cmake-utils.eclass: Tomáš Chvátal <scarabeus@gentoo.org>
 # Proper prefix support: Jonathan Callen <jcallen@gentoo.org>
+# @SUPPORTED_EAPIS: 4 5 6
 # @BLURB: common ebuild functions for waf-based packages
 # @DESCRIPTION:
 # The waf-utils eclass contains functions that make creating ebuild for
@@ -18,7 +19,7 @@
 inherit multilib toolchain-funcs multiprocessing
 
 case ${EAPI:-0} in
-	4|5|6|7) EXPORT_FUNCTIONS src_configure src_compile src_install ;;
+	4|5|6) EXPORT_FUNCTIONS src_configure src_compile src_install ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
@@ -98,7 +99,7 @@ waf-utils_src_configure() {
 waf-utils_src_compile() {
 	debug-print-function ${FUNCNAME} "$@"
 	local _mywafconfig
-	[[ "${WAF_VERBOSE}" ]] && _mywafconfig="--verbose"
+	[[ ${WAF_VERBOSE} == ON ]] && _mywafconfig="--verbose"
 
 	local jobs="--jobs=$(makeopts_jobs)"
 	echo "\"${WAF_BINARY}\" build ${_mywafconfig} ${jobs}"

@@ -6,6 +6,7 @@
 # gnome@gentoo.org
 # @AUTHOR:
 # Original author: Gilles Dartiguelongue <eva@gentoo.org>
+# @SUPPORTED_EAPIS: 0 1 2 3 4 5 6
 # @BLURB: Auxiliary functions commonly used by XDG compliant packages.
 # @DESCRIPTION:
 # This eclass provides a set of auxiliary functions needed by most XDG
@@ -15,7 +16,7 @@
 #  * XDG mime information database management
 
 case "${EAPI:-0}" in
-	0|1|2|3|4|5|6|7) ;;
+	0|1|2|3|4|5|6) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 

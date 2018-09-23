@@ -4,6 +4,7 @@
 # @ECLASS: kodi-addon.eclass
 # @MAINTAINER:
 # candrews@gentoo.org
+# @SUPPORTED_EAPIS: 4 5 6
 # @BLURB: Helper for correct building and (importantly) installing Kodi addon packages.
 # @DESCRIPTION:
 # Provides a src_configure function for correct CMake configuration
@@ -11,7 +12,7 @@
 inherit multilib cmake-utils
 
 case "${EAPI:-0}" in
-	4|5|6|7)
+	4|5|6)
 		EXPORT_FUNCTIONS src_configure
 		;;
 	*) die "EAPI=${EAPI} is not supported" ;;

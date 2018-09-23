@@ -4,6 +4,7 @@
 # @ECLASS: vcs-snapshot.eclass
 # @MAINTAINER:
 # mgorny@gentoo.org
+# @SUPPORTED_EAPIS: 0 1 2 3 4 5 6
 # @BLURB: support eclass for unpacking VCS snapshot tarballs
 # @DESCRIPTION:
 # This eclass provides a convenience src_unpack() which does unpack all
@@ -39,7 +40,7 @@
 # in ${WORKDIR}/${P} and ${WORKDIR}/${P}-otherstuff respectively.
 
 case ${EAPI:-0} in
-	0|1|2|3|4|5|6|7) ;;
+	0|1|2|3|4|5|6) ;;
 	*) die "vcs-snapshot.eclass API in EAPI ${EAPI} not yet established."
 esac
 
@@ -67,7 +68,8 @@ vcs-snapshot_src_unpack() {
 				# XXX: check whether the directory structure inside is
 				# fine? i.e. if the tarball has actually a parent dir.
 				mkdir "${destdir}" || die
-				tar -C "${destdir}" -x --strip-components 1 \
+				# -o (--no-same-owner) to avoid restoring original owner
+				tar -C "${destdir}" -x -o --strip-components 1 \
 					-f "${DISTDIR}/${f}" || die
 				;;
 			*)

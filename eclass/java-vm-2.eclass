@@ -1,26 +1,27 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: java-vm-2.eclass
 # @MAINTAINER:
 # java@gentoo.org
+# @SUPPORTED_EAPIS: 5 6
 # @BLURB: Java Virtual Machine eclass
 # @DESCRIPTION:
 # This eclass provides functionality which assists with installing
 # virtual machines, and ensures that they are recognized by java-config.
 
 case ${EAPI:-0} in
-	5|6|7) ;;
+	5|6) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
-inherit fdo-mime multilib pax-utils prefix
+inherit multilib pax-utils prefix xdg-utils
 
 EXPORT_FUNCTIONS pkg_setup pkg_postinst pkg_prerm pkg_postrm
 
 RDEPEND="
 	>=dev-java/java-config-2.2.0-r3
-	>=app-eselect/eselect-java-0.2.0"
+	>=app-eselect/eselect-java-0.4.0"
 DEPEND="${RDEPEND}"
 
 export WANT_JAVA_CONFIG=2
@@ -86,7 +87,7 @@ java-vm-2_pkg_postinst() {
 		fi
 	fi
 
-	fdo-mime_desktop_database_update
+	xdg_desktop_database_update
 }
 
 
@@ -112,7 +113,7 @@ java-vm-2_pkg_prerm() {
 # Update mime database.
 
 java-vm-2_pkg_postrm() {
-	fdo-mime_desktop_database_update
+	xdg_desktop_database_update
 }
 
 

@@ -7,6 +7,7 @@
 # @AUTHOR:
 # Seemant Kulleen <seemant@gentoo.org>
 # Andreas K. Hüttel <dilfridge@gentoo.org>
+# @SUPPORTED_EAPIS: 5 6
 # @BLURB: eclass for installing Perl module distributions
 # @DESCRIPTION:
 # The perl-module eclass is designed to allow easier installation of Perl
@@ -22,7 +23,7 @@ case ${EAPI:-0} in
 		inherit eutils multiprocessing unpacker perl-functions
 		PERL_EXPF="src_unpack src_prepare src_configure src_compile src_test src_install"
 		;;
-	6|7)
+	6)
 		inherit multiprocessing perl-functions
 		PERL_EXPF="src_prepare src_configure src_compile src_test src_install"
 		;;
@@ -71,7 +72,7 @@ case ${EAPI:-0} in
 				;;
 		esac
 		;;
-	6|7)
+	6)
 		[[ ${CATEGORY} == perl-core ]] && \
 			PERL_EXPF+=" pkg_postinst pkg_postrm"
 

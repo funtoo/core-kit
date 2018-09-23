@@ -123,7 +123,7 @@ RDEPEND=">=app-text/hunspell-1.5.4:=
 	system-icu? ( >=dev-libs/icu-59.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0= )
-	system-sqlite? ( >=dev-db/sqlite-3.22.1:3[secure-delete,debug=] )
+	system-sqlite? ( >=dev-db/sqlite-3.20.1:3[secure-delete,debug=] )
 	system-libvpx? ( >=media-libs/libvpx-1.5.0:0=[postproc] )
 	system-harfbuzz? ( >=media-libs/harfbuzz-1.4.2:0= >=media-gfx/graphite2-1.3.9-r1 )
 "
@@ -164,7 +164,6 @@ fi
 DEPEND="app-arch/zip
 	app-arch/unzip
 	>=sys-devel/binutils-2.16.1
-	sys-devel/clang
 	sys-apps/findutils
 	pulseaudio? ( media-sound/pulseaudio )
 	elibc_glibc? ( || (
