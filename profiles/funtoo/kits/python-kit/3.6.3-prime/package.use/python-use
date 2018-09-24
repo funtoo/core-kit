@@ -1,27 +1,17 @@
-app-admin/ego python_single_target_b'python3_4' python_targets_b'python3_4'
-app-admin/syslog-ng python_single_target_b'python2_7' python_targets_b'python2_7'
-app-eselect/eselect-repository python_single_target_b'python3_4' python_targets_b'python3_4'
-app-misc/polychromatic python_single_target_b'python3_4' python_targets_b'python3_4'
-dev-util/boost-build python_single_target_b'python2_7' python_targets_b'python2_7'
-dev-util/itstool python_single_target_b'python2_7' python_targets_b'python2_7'
-dev-vcs/git python_single_target_b'python2_7' python_targets_b'python2_7'
-net-wireless/bluez python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-apps/pcsc-lite python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-apps/usbutils python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-apps/util-linux python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-boot/boot-update python_single_target_b'python3_4' python_targets_b'python3_4'
-sys-boot/udk python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-fs/btrfs-progs python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-fs/cryptsetup python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-fs/ecryptfs-utils python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-fs/ocfs2-tools python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-fs/traydevice python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/ldb python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/libblockdev python_single_target_b'python3_4' python_targets_b'python3_4'
-sys-libs/libieee1284 python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/libsmbios python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/ntdb python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/openipmi python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/talloc python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/tdb python_single_target_b'python2_7' python_targets_b'python2_7'
-sys-libs/tevent python_single_target_b'python2_7' python_targets_b'python2_7'
+dev-util/boost-build python_single_target_python2_7
+dev-util/itstool python_single_target_python2_7
+dev-vcs/git python_single_target_python2_7
+net-wireless/bluez python_single_target_python2_7
+sys-apps/usbutils python_single_target_python2_7
+sys-boot/udk python_single_target_python2_7
+sys-fs/ecryptfs-utils python_single_target_python2_7
+sys-fs/ocfs2-tools python_single_target_python2_7
+sys-fs/traydevice python_single_target_python2_7
+sys-libs/ldb python_single_target_python2_7
+sys-libs/libieee1284 python_single_target_python2_7
+sys-libs/libsmbios python_single_target_python2_7
+sys-libs/ntdb python_single_target_python2_7
+sys-libs/openipmi python_single_target_python2_7
+sys-libs/talloc python_single_target_python2_7
+sys-libs/tdb python_single_target_python2_7
+sys-libs/tevent python_single_target_python2_7
