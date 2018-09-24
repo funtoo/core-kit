@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile configure install postinst prepare setup test unpack
+DEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DESCRIPTION=C library for developing embedded Linux systems
+EAPI=6
+HOMEPAGE=https://uclibc-ng.org/
+IUSE=debug hardened iconv ipv6 symlink-compat headers-only savedconfig
+LICENSE=LGPL-2
+RDEPEND=!!sys-libs/uclibc iconv? ( dev-libs/libiconv )
+RESTRICT=strip
+SLOT=0
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	55aaa148741116aa54ad0d80e361818e	git-r3	918d6a744039c29af2cadc7317459765	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	portability	2b88d3ecc35035a3b8ab628b49cafb0e	savedconfig	e6948c872ff47e15a10e5ad1be15c18e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	versionator	2352c3fc97241f6a02042773c8287748
+_md5_=c6c941ce421578beb0b11a6a2418de1f

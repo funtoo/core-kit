@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install prepare setup
+DEPEND=virtual/os-headers >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=Tools for configuring the Linux kernel 802.1d Ethernet Bridge
+EAPI=6
+HOMEPAGE=http://bridge.sourceforge.net/
+IUSE=selinux kernel_linux
+KEYWORDS=~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86
+LICENSE=GPL-2
+RDEPEND=selinux? ( sec-policy/selinux-brctl )
+SLOT=0
+SRC_URI=mirror://kernel/linux/utils/net/bridge-utils/bridge-utils-1.6.tar.xz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	libtool	e32ea84bf82cf8987965b574672dba93	linux-info	915cae3d7d636732918d18827fb1c226	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_md5_=a9c6af2df1059a6a341c09b8f4645cef

@@ -1,0 +1,10 @@
+DEFINED_PHASES=compile install postinst postrm prepare unpack
+DEPEND=>=dev-vcs/git-1.8.2.1[curl] >=sys-apps/policycoreutils-2.0.82 >=sec-policy/selinux-base-policy-9999 sys-devel/m4 >=sys-apps/checkpolicy-2.0.21
+DESCRIPTION=SELinux policy for ntp
+EAPI=6
+HOMEPAGE=https://wiki.gentoo.org/wiki/Project:SELinux
+LICENSE=GPL-2
+RDEPEND=>=sys-apps/policycoreutils-2.0.82 >=sec-policy/selinux-base-policy-9999
+SLOT=0
+_eclasses_=git-r3	918d6a744039c29af2cadc7317459765	selinux-policy-2	a877fdfed4ddd74aa04c64b88cdd974c
+_md5_=37b9d936d3cd91d3834f211048090945
