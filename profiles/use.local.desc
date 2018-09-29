@@ -290,6 +290,7 @@ sys-boot/refind:ntfs - Builds the EFI binary ntfs filesystem driver
 sys-boot/refind:reiserfs - Builds the EFI binary reiserfs filesystem driver
 sys-boot/woeusb:minimal - Install only woeusb tool
 sys-devel/autogen:libopts - install the libopts tarball (a few packages want this for developing)
+sys-devel/bc:forced-sandbox - Always enable --sandbox mode for simpler/secure runtime (disables the ! command in dc)
 sys-devel/binutils:multitarget - Adds support to binutils for cross compiling (does not work with gas)
 sys-devel/gcc:d - Enable support for the D programming language
 sys-devel/gcc:default - After building, set this compiler as default using gcc-config
