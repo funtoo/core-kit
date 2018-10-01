@@ -158,7 +158,7 @@ eshopts_push() {
 		[[ $# -eq 0 ]] && return 0
 		shopt "$@" || die "${FUNCNAME}: bad options to shopt: $*"
 	else
-		estack_push eshopts "$(shopt -p -o)"
+		estack_push eshopts $-
 		[[ $# -eq 0 ]] && return 0
 		set "$@" || die "${FUNCNAME}: bad options to set: $*"
 	fi
@@ -172,7 +172,12 @@ eshopts_push() {
 eshopts_pop() {
 	local s
 	estack_pop eshopts s || die "${FUNCNAME}: unbalanced push"
-	eval "${s}" || die "${FUNCNAME}: sanity: invalid shopt options: ${s}"
+	if [[ ${s} == "shopt -"* ]] ; then
+		eval "${s}" || die "${FUNCNAME}: sanity: invalid shopt options: ${s}"
+	else
+		set +$-     || die "${FUNCNAME}: sanity: invalid shell settings: $-"
+		set -${s}   || die "${FUNCNAME}: sanity: unable to restore saved shell settings: ${s}"
+	fi
 }
 
 # @FUNCTION: eumask_push

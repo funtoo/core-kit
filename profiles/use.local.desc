@@ -310,7 +310,7 @@ sys-devel/gcc:objc-gc - Build support for the Objective C code language Garbage 
 sys-devel/gettext:cvs - When running `autopoint`, use cvs to store the internal development files; this requires cvs at runtime, but will be faster/smaller than raw archives
 sys-devel/gettext:git - When running `autopoint`, use git to store the internal development files; this requires git at runtime, but will be faster/smaller than raw archives
 sys-fs/android-file-transfer-linux:fuse - Add FUSE mount helper
-sys-fs/bees:tools - Build extra tools useful for debugging (fiemap, feiwalk, beestop)
+sys-fs/bees:tools - Build extra tools useful for debugging (fiemap, fiewalk)
 sys-fs/btrfs-progs:convert - Build ext2 conversion utility (btrfs-convert)
 sys-fs/btrfs-progs:reiserfs - Enable reiserfs support in btrfs-convert tool.
 sys-fs/btrfs-progs:static - Build static binaries in addition to the dynamic ones

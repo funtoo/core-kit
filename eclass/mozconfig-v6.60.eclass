@@ -101,7 +101,7 @@ RDEPEND=">=app-text/hunspell-1.5.4:=
 	>=x11-libs/pixman-0.19.2
 	>=dev-libs/glib-2.26:2
 	>=sys-libs/zlib-1.2.3
-	>=virtual/libffi-3.0.10
+	>=virtual/libffi-3.0.10:=
 	virtual/ffmpeg
 	x11-libs/libX11
 	x11-libs/libXcomposite
@@ -211,9 +211,6 @@ mozconfig_config() {
 	mozconfig_annotate 'system_libs' \
 		--with-system-zlib \
 		--with-system-bz2
-
-	# Stylo is only broken on x86 builds
-	use x86 && mozconfig_annotate 'Upstream bug 1341234' --disable-stylo
 
 	# Stylo is horribly broken on arm, renders GUI unusable
 	use arm && mozconfig_annotate 'breaks UI on arm' --disable-stylo

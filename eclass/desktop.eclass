@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: desktop.eclass
@@ -174,7 +174,7 @@ make_desktop_entry() {
 		icon=${icon%.*}
 	fi
 
-	cat <<-EOF > "${desktop}" || die
+	cat <<-EOF > "${desktop}"
 	[Desktop Entry]
 	Name=${name}
 	Type=Application
@@ -190,14 +190,11 @@ make_desktop_entry() {
 		ewarn "make_desktop_entry: update your 5th arg to read Path=${fields}"
 		fields="Path=${fields}"
 	fi
-	if [[ -n ${fields} ]]; then
-		printf '%b\n' "${fields}" >> "${desktop}" || die
-	fi
+	[[ -n ${fields} ]] && printf '%b\n' "${fields}" >> "${desktop}"
 
 	(
 		# wrap the env here so that the 'insinto' call
 		# doesn't corrupt the env of the caller
-		insopts -m 0644
 		insinto /usr/share/applications
 		doins "${desktop}"
 	) || die "installing desktop file failed"
@@ -219,7 +216,7 @@ make_session_desktop() {
 	local desktop=${T}/${wm:-${PN}}.desktop
 	shift 2
 
-	cat <<-EOF > "${desktop}" || die
+	cat <<-EOF > "${desktop}"
 	[Desktop Entry]
 	Name=${title}
 	Comment=This session logs you into ${title}
@@ -231,7 +228,6 @@ make_session_desktop() {
 	(
 	# wrap the env here so that the 'insinto' call
 	# doesn't corrupt the env of the caller
-	insopts -m 0644
 	insinto /usr/share/xsessions
 	doins "${desktop}"
 	)
@@ -246,16 +242,19 @@ domenu() {
 	(
 	# wrap the env here so that the 'insinto' call
 	# doesn't corrupt the env of the caller
-	local i ret=0
-	insopts -m 0644
+	local i j ret=0
 	insinto /usr/share/applications
 	for i in "$@" ; do
-		if [[ -d ${i} ]] ; then
-			doins "${i}"/*.desktop
-			((ret|=$?))
-		else
+		if [[ -f ${i} ]] ; then
 			doins "${i}"
-			((ret|=$?))
+			((ret+=$?))
+		elif [[ -d ${i} ]] ; then
+			for j in "${i}"/*.desktop ; do
+				doins "${j}"
+				((ret+=$?))
+			done
+		else
+			((++ret))
 		fi
 	done
 	exit ${ret}
@@ -270,7 +269,6 @@ newmenu() {
 	(
 	# wrap the env here so that the 'insinto' call
 	# doesn't corrupt the env of the caller
-	insopts -m 0644
 	insinto /usr/share/applications
 	newins "$@"
 	)
@@ -284,7 +282,6 @@ _iconins() {
 	(
 	# wrap the env here so that the 'insinto' call
 	# doesn't corrupt the env of the caller
-	insopts -m 0644
 	local funcname=$1; shift
 	local size dir
 	local context=apps
