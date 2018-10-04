@@ -10,4 +10,4 @@ RDEPEND=python_single_target_python3_7? ( dev-lang/python:3.7 ) python_single_ta
 SLOT=0
 SRC_URI=https://www.github.com/funtoo/ego/tarball/2.6.0 -> ego-2.6.0.tar.gz
 _eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	python-single-r1	3a0fc81f484bfdbd9c2b7448015a36e4	python-utils-r1	b5fdfa15cbe2f6299a482bf5d0c5925d	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=84712120ec544530d5cde74c1e3cf9b6
+_md5_=b66411cccd63d4a60b1b9914be4089df
