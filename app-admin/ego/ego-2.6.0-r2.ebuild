@@ -19,7 +19,8 @@ SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_T
 
 DEPEND=""
 RDEPEND="$PYTHON_DEPS
-!sys-boot/boot-update"
+!sys-boot/boot-update
+sys-boot/grub"
 PDEPEND=">=dev-python/appi-0.2[${PYTHON_USEDEP}]
 dev-python/mwparserfromhell[${PYTHON_USEDEP}]
 dev-python/requests[${PYTHON_USEDEP}]"
@@ -32,10 +33,10 @@ src_unpack() {
 src_install() {
 	exeinto /usr/share/ego/modules
 	doexe $S/modules/*.ego
-	rm $D/usr/share/modules/upgrade*
+	rm $D/usr/share/ego/modules/upgrade*
 	insinto /usr/share/ego/modules-info
 	doins $S/modules-info/*
-	rm $D/usr/share/modules-inof/upgrade*
+	rm $D/usr/share/ego/modules-info/upgrade*
 	insinto /usr/share/ego/python
 	doins -r $S/python/*
 	rm -rf $D/usr/share/ego/python/test
