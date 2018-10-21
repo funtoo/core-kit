@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit eutils flag-o-matic toolchain-funcs autotools multilib-minimal
+inherit flag-o-matic toolchain-funcs autotools multilib-minimal
 
 DESCRIPTION="International Components for Unicode"
 HOMEPAGE="http://www.icu-project.org/"
@@ -17,10 +17,12 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~s
 IUSE="debug doc examples static-libs"
 
 DEPEND="
-	virtual/pkgconfig
 	doc? (
 		app-doc/doxygen[dot]
 	)
+"
+BDEPEND="
+	virtual/pkgconfig
 "
 
 S="${WORKDIR}/${PN}/source"
@@ -102,11 +104,9 @@ multilib_src_configure() {
 		--disable-layoutex
 		$(use_enable debug)
 		$(use_enable static-libs static)
+		$(multilib_native_use_enable examples samples)
 	)
 
-	multilib_is_native_abi && myeconfargs+=(
-		$(use_enable examples samples)
-	)
 	tc-is-cross-compiler && myeconfargs+=(
 		--with-cross-build="${WORKDIR}"/host
 	)
@@ -116,12 +116,11 @@ multilib_src_configure() {
 
 	# make sure we configure with the same shell as we run icu-config
 	# with, or ECHO_N, ECHO_T and ECHO_C will be wrongly defined
-	export CONFIG_SHELL=${EPREFIX}/bin/sh
+	export CONFIG_SHELL="${EPREFIX}/bin/sh"
 	# probably have no /bin/sh in prefix-chain
-	[[ -x ${CONFIG_SHELL} ]] || CONFIG_SHELL=${BASH}
+	[[ -x ${CONFIG_SHELL} ]] || CONFIG_SHELL="${BASH}"
 
-	ECONF_SOURCE=${S} \
-	econf "${myeconfargs[@]}"
+	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
 }
 
 multilib_src_compile() {
