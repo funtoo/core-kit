@@ -12,20 +12,15 @@ SRC_URI="https://www.kernel.org/pub/linux/utils/fs/xfs/${PN}/${P}.tar.xz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="alpha amd64 ~arm arm64 hppa ~ia64 ~mips ppc ppc64 s390 sh ~sparc x86"
-IUSE="icu libedit nls readline static static-libs"
-REQUIRED_USE="static? ( static-libs )"
+IUSE="icu libedit nls readline static-libs"
 
 LIB_DEPEND=">=sys-apps/util-linux-2.17.2[static-libs(+)]
 	icu? ( dev-libs/icu:=[static-libs(+)] )
 	readline? ( sys-libs/readline:0=[static-libs(+)] )
 	!readline? ( libedit? ( dev-libs/libedit[static-libs(+)] ) )"
-RDEPEND="!static? ( ${LIB_DEPEND//\[static-libs(+)]} )
+RDEPEND="${LIB_DEPEND//\[static-libs(+)]}
 	!<sys-fs/xfsdump-3"
 DEPEND="${RDEPEND}
-	static? (
-		${LIB_DEPEND}
-		readline? ( sys-libs/ncurses:0=[static-libs] )
-	)
 	nls? ( sys-devel/gettext )"
 
 PATCHES=(
@@ -44,22 +39,12 @@ pkg_setup() {
 src_prepare() {
 	default
 
-	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
 	sed -i \
 		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
-		-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
 		include/builddefs.in || die
 	find -name Makefile -exec \
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
-
-	# TODO: Write a patch for configure.ac to use pkg-config for the uuid-part.
-	if use static && use readline ; then
-		sed -i \
-			-e 's|-lreadline|& -lncurses|' \
-			-e 's|-lblkid|& -luuid|' \
-			configure || die
-	fi
 }
 
 src_configure() {
@@ -76,12 +61,8 @@ src_configure() {
 		$(use_enable nls gettext)
 		$(use_enable readline)
 		$(usex readline --disable-editline $(use_enable libedit editline))
+		$(use_enable static-libs static)
 	)
-	if use static || use static-libs ; then
-		myconf+=( --enable-static )
-	else
-		myconf+=( --disable-static )
-	fi
 
 	econf "${myconf[@]}"
 
