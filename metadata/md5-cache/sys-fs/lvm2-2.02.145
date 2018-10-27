@@ -3,12 +3,12 @@ DEPEND=clvm? ( cman? ( =sys-cluster/cman-3* ) corosync? ( sys-cluster/corosync )
 DESCRIPTION=User-land utilities for LVM2 (device-mapper) software.
 EAPI=5
 HOMEPAGE=http://sources.redhat.com/lvm2/
-IUSE=readline +static static-libs systemd clvm cman corosync +lvm1 lvm2create_initrd openais selinux udev +thin device-mapper-only
+IUSE=readline +static static-libs systemd clvm cman corosync +lvm1 lvm2create_initrd openais selinux udev +thin device-mapper-only kernel_linux
 KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=clvm? ( cman? ( =sys-cluster/cman-3* ) corosync? ( sys-cluster/corosync ) openais? ( sys-cluster/openais ) =sys-cluster/libdlm-3* ) readline? ( sys-libs/readline ) udev? ( >=virtual/libudev-208:=[static-libs?] ) >=sys-apps/baselayout-2.2 !<sys-apps/openrc-0.11 !<sys-fs/cryptsetup-1.1.2 !!sys-fs/clvm !!sys-fs/lvm-user >=sys-apps/util-linux-2.16 lvm2create_initrd? ( sys-apps/makedev ) thin? ( >=sys-block/thin-provisioning-tools-0.3.0 )
 REQUIRED_USE=device-mapper-only? ( !clvm !cman !corosync !lvm1 !lvm2create_initrd !openais !thin ) systemd? ( udev )
 SLOT=0
 SRC_URI=ftp://sources.redhat.com/pub/lvm2/LVM2.2.02.145.tgz ftp://sources.redhat.com/pub/lvm2/old/LVM2.2.02.145.tgz
-_eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	libtool	e32ea84bf82cf8987965b574672dba93	linux-info	ca370deef9d44125d829f2eb6ebc83e0	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	udev	574b4c7244556c7ee81b2b45f80c6674	versionator	c80ccf29e90adea7c5cae94b42eb76d0
+_eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	libtool	e32ea84bf82cf8987965b574672dba93	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	udev	574b4c7244556c7ee81b2b45f80c6674
 _md5_=fb7288038d71f68a8f2b97a4533f0537

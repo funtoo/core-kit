@@ -3,7 +3,7 @@ DEPEND=dev-libs/protobuf-c dev-libs/libnl:3 net-libs/libnet:1.1 sys-libs/libcap 
 DESCRIPTION=utility to checkpoint/restore a process tree
 EAPI=6
 HOMEPAGE=http://criu.org/
-IUSE=python selinux setproctitle static-libs python_targets_python2_7
+IUSE=python selinux setproctitle static-libs kernel_linux python_targets_python2_7
 KEYWORDS=~amd64 ~arm ~arm64
 LICENSE=GPL-2
 RDEPEND=dev-libs/protobuf-c dev-libs/libnl:3 net-libs/libnet:1.1 sys-libs/libcap python? ( python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] ) selinux? ( sys-libs/libselinux ) setproctitle? ( dev-libs/libbsd ) python? ( || ( dev-python/protobuf-python[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] dev-libs/protobuf[python,python_targets_python2_7(-)?,-python_single_target_python2_7(-)] ) dev-python/ipaddr[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] )
@@ -11,5 +11,5 @@ REQUIRED_USE=python? ( || ( python_targets_python2_7 ) )
 RESTRICT=test
 SLOT=0
 SRC_URI=http://download.openvz.org/criu/criu-3.6.tar.bz2
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	linux-info	ca370deef9d44125d829f2eb6ebc83e0	ltprune	2770eed66a9b8ef944714cd0e968182e	multibuild	293f364715a9786d81588224c129b704	multilib	97f470f374f2e94ccab04a2fb21d811e	python-r1	ff5bed0d9bac3da43fe84e2179943e8e	python-utils-r1	b5fdfa15cbe2f6299a482bf5d0c5925d	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	versionator	c80ccf29e90adea7c5cae94b42eb76d0
+_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	multibuild	293f364715a9786d81588224c129b704	multilib	97f470f374f2e94ccab04a2fb21d811e	python-r1	ff5bed0d9bac3da43fe84e2179943e8e	python-utils-r1	b5fdfa15cbe2f6299a482bf5d0c5925d	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
 _md5_=0f3f358f08e1a9294a633021ee7aff9d
