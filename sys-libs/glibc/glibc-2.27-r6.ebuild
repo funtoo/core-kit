@@ -18,7 +18,7 @@ if [[ ${PV} == 9999* ]]; then
 	EGIT_REPO_URI="https://sourceware.org/git/glibc.git"
 	inherit git-r3
 else
-	KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86"
+	KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh sparc x86"
 	SRC_URI="mirror://gnu/glibc/${P}.tar.xz"
 fi
 
@@ -637,9 +637,6 @@ sanity_prechecks() {
 		ewarn "This will result in a 50% performance penalty when running with a 32bit"
 		ewarn "hypervisor, which is probably not what you want."
 	fi
-
-	use hardened && ! tc-enables-pie && \
-		ewarn "PIE hardening not applied, as your compiler doesn't default to PIE"
 
 	# Check for sanity of /etc/nsswitch.conf
 	if [[ -e ${EROOT}/etc/nsswitch.conf ]] ; then

@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile configure install postinst postrm prepare test
+DEPEND=app-crypt/rhash >=app-arch/libarchive-3.0.0:= >=dev-libs/expat-2.0.1 >=dev-libs/libuv-1.10.0:= >=net-misc/curl-7.21.5[ssl] sys-libs/zlib virtual/pkgconfig emacs? ( virtual/emacs ) ncurses? ( sys-libs/ncurses:0= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 ) system-jsoncpp? ( >=dev-libs/jsoncpp-0.6.0_rc2:0= ) doc? ( dev-python/requests dev-python/sphinx ) >=sys-apps/sed-4 test? ( !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost ) sys-devel/make
+DESCRIPTION=Cross platform Make
+EAPI=6
+HOMEPAGE=https://cmake.org/
+IUSE=doc emacs system-jsoncpp ncurses qt5 test
+LICENSE=CMake
+RDEPEND=app-crypt/rhash >=app-arch/libarchive-3.0.0:= >=dev-libs/expat-2.0.1 >=dev-libs/libuv-1.10.0:= >=net-misc/curl-7.21.5[ssl] sys-libs/zlib virtual/pkgconfig emacs? ( virtual/emacs ) ncurses? ( sys-libs/ncurses:0= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 ) system-jsoncpp? ( >=dev-libs/jsoncpp-0.6.0_rc2:0= )
+SLOT=0
+SRC_URI=https://cmake.org/files/v3.13/cmake-3.13.0-rc2.tar.gz
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	cmake-utils	f0bc1c175684130a76ab6c17f575d820	eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	elisp-common	23f47b2e1de7abf387105eddd1318738	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	55aaa148741116aa54ad0d80e361818e	gnome2-utils	c6060f4ab634aca444c4b2176b0f3877	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	virtualx	401b718cc14d43a5a7fbe062c4851ba5	xdg-utils	93b2dfbb00a09161e1e7f6360c0f7f6b
+_md5_=2a62ca11cc650f7d4e163f153ced9cd1

@@ -90,6 +90,8 @@ post_src_unpack() {
 	export GOPATH="${S}/dist"
 	rm -rf $GOPATH/src/* || die
 	go get -d -v github.com/lxc/lxd/lxd || die
+	cd ${S}/dist/src/github.com/lxc/lxd || die
+	git checkout lxd-${PV} || die
 }
 
 src_configure() {
@@ -138,7 +140,7 @@ src_install() {
 		exeinto /usr/libexec
 		doexe ${bindir}/lxd
 		dobin ${bindir}/fuidshift
-		dosbin ${bindir}/lxd-benchmark ${bindir}/lxd-p2c ${bindir}/lxc-to-lxd
+		dosbin ${bindir}/lxd-benchmark ${bindir}/lxd-p2c
 
 		# lxd uses a special bundled sqlite and dqlite -- we want to grab these, and install
 		# them to /usr/$(get_libdir)/lxd/, which is a custom path that will be referenced by

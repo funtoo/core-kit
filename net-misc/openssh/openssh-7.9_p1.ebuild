@@ -114,6 +114,7 @@ src_prepare() {
 	sed -i '/^AuthorizedKeysFile/s:^:#:' sshd_config || die
 
 	eapply "${FILESDIR}"/${PN}-7.9_p1-openssl-1.0.2-compat.patch
+	eapply "${FILESDIR}"/${PN}-7.9_p1-include-stdlib.patch
 	eapply "${FILESDIR}"/${PN}-7.8_p1-GSSAPI-dns.patch #165444 integrated into gsskex
 	eapply "${FILESDIR}"/${PN}-6.7_p1-openssl-ignore-status.patch
 	eapply "${FILESDIR}"/${PN}-7.5_p1-disable-conch-interop-tests.patch
@@ -168,6 +169,7 @@ src_prepare() {
 		popd
 
 		eapply "${hpn_patchdir}"
+		eapply "${FILESDIR}/openssh-7.9_p1-hpn-openssl-1.1.patch"
 
 		einfo "Patching Makefile.in for HPN patch set ..."
 		sed -i \

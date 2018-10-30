@@ -4,7 +4,8 @@ not using the toolchain eclass.
 The current "gold" master ebuild -- the one that contains all the most recent
 changes and new ebuilds should be based upon, is:
 
-gcc-4.9.3-r2.ebuild
+gcc-7.3.1-r2.ebuild
+...but this will be refactored and changing soon.
 
 == Introduction ==
 
@@ -17,9 +18,9 @@ Also, this gcc ebuild no longer uses toolchain.eclass which improves the maintai
 Other important notes on this ebuild:
 
 * mudflap is enabled by default.
-* lto is disabled by default.
-* test is not currently supported.
-* objc-gc is enabled by default when objc is enabled.
-* gcj is not currently supported by this ebuild.
-* graphite is not currently supported by this ebuild.
-* hardened is now supported, but we have deprecated the nopie and nossp USE flags from gentoo.
+* lto is enabled by default.
+* test is now supported and encouraged.
+* objc-gc is enabled by USE flag 'objc-gc'.
+* graphite is supported by this ebuild.
+* hardened is supported, but we use 'link_now', 'pie' & 'ssp' USE flags to control those features directly.
+* go support is not tested and may be removed in the future (breaks when pulling libffi on multilib.)
