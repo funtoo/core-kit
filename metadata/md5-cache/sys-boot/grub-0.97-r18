@@ -1,4 +1,4 @@
-DEFINED_PHASES=compile config configure install postinst postrm preinst prepare prerm pretend setup test
+DEFINED_PHASES=compile config configure install postinst postrm preinst prepare prerm setup test
 DEPEND=!static? ( ncurses? ( >=sys-libs/ncurses-5.9-r3:0=[abi_x86_32(-)] ) ) virtual/pkgconfig static? ( ncurses? ( >=sys-libs/ncurses-5.9-r3:0[static-libs(+),abi_x86_32(-)] ) ) >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
 DESCRIPTION=GNU GRUB Legacy boot loader
 EAPI=6
@@ -9,5 +9,5 @@ LICENSE=GPL-2
 RDEPEND=!static? ( ncurses? ( >=sys-libs/ncurses-5.9-r3:0=[abi_x86_32(-)] ) ) !sys-boot/grub:2[-multislot]
 SLOT=0
 SRC_URI=mirror://gentoo/grub-0.97.tar.gz mirror://gnu-alpha/grub/grub-0.97.tar.gz mirror://gentoo/splash.xpm.gz mirror://gentoo/grub-0.97-patches-1.15.tar.bz2 https://dev.gentoo.org/~whissi/dist/grub/grub-0.97-patches-1.15.tar.bz2
-_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	55aaa148741116aa54ad0d80e361818e	libtool	e32ea84bf82cf8987965b574672dba93	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	1e82d96b7a7dcb483b412497a90bb646	multilib	97f470f374f2e94ccab04a2fb21d811e	pax-utils	e85f015e815dd463b0c206d781ef45a5	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	55aaa148741116aa54ad0d80e361818e	libtool	e32ea84bf82cf8987965b574672dba93	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	ea24b511b0ad59831d0151aa634dfad2	multilib	97f470f374f2e94ccab04a2fb21d811e	pax-utils	e85f015e815dd463b0c206d781ef45a5	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
 _md5_=a3704d68dc8e49492a672fc4de4ce94e
