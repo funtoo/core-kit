@@ -1,0 +1,13 @@
+BDEPEND=!<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=prepare
+DEPEND=>=media-libs/libmtp-1.1.0 >=sys-fs/fuse-2.6:0 virtual/pkgconfig >=app-portage/elt-patches-20170317
+DESCRIPTION=A FUSE and libmtp based filesystem for accessing MTP devices
+EAPI=7
+HOMEPAGE=https://github.com/JasonFerrara/jmtpfs
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=>=media-libs/libmtp-1.1.0 >=sys-fs/fuse-2.6:0
+SLOT=0
+SRC_URI=https://github.com/JasonFerrara/jmtpfs/archive/v0.5.tar.gz -> jmtpfs-0.5.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	e32ea84bf82cf8987965b574672dba93	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_md5_=82d58a5df3c64d177714f557a248abb9
