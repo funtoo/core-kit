@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # Note: Keep version bumps in sync with dev-libs/libintl.
@@ -25,13 +24,15 @@ IUSE="acl -cvs +cxx doc emacs git java ncurses nls openmp static-libs"
 # Note: expat lacks a subslot because it is dynamically loaded at runtime.  We
 # would depend on older subslots if they were available (based on the ABIs that
 # are explicitly handled), but expat doesn't currently use subslots.
+# # Dependency on virtual/yacc needed only as long as CVE-2018-18751.patch is applied
 DEPEND=">=virtual/libiconv-0-r1[${MULTILIB_USEDEP}]
 	>=virtual/libintl-0-r2[${MULTILIB_USEDEP}]
 	>=dev-libs/libxml2-2.9.3:=
 	dev-libs/expat
 	acl? ( virtual/acl )
 	ncurses? ( sys-libs/ncurses:0= )
-	java? ( >=virtual/jdk-1.4:= )"
+	java? ( >=virtual/jdk-1.4:= )
+	virtual/yacc"
 RDEPEND="${DEPEND}
 	!git? ( cvs? ( dev-vcs/cvs ) )
 	git? ( dev-vcs/git )
@@ -53,7 +54,7 @@ src_prepare() {
 
 	epatch "${FILESDIR}"/${PN}-0.19.7-disable-libintl.patch #564168
 	epatch "${FILESDIR}"/${PN}-0.19.8.1-format-security.patch
-
+	epatch "${FILESDIR}"/CVE-2018-18751.patch #FL-5832
 	epunt_cxx
 	elibtoolize
 }
