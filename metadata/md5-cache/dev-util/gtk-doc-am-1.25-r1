@@ -9,5 +9,5 @@ RDEPEND=>=dev-lang/perl-5.18
 RESTRICT=test
 SLOT=0
 SRC_URI=mirror://gnome/sources/gtk-doc/1.25/gtk-doc-1.25.tar.xz
-_eclasses_=estack	5ac2a138d0b33354b764d84f9e835db8	gnome.org	5e4cc5af3f1b17bdee155bf02e8c2df4	versionator	2352c3fc97241f6a02042773c8287748
+_eclasses_=estack	43ddf5aaffa7a8d0482df54d25a66a1f	gnome.org	5e4cc5af3f1b17bdee155bf02e8c2df4	versionator	2352c3fc97241f6a02042773c8287748
 _md5_=4e307a968e4e3e22f28320ada6b44db8
