@@ -1,5 +1,5 @@
 DEFINED_PHASES=configure install postinst setup
-DEPEND=virtual/udev virtual/pkgconfig >=sys-apps/kmod-15[tools] app-text/asciidoc >=dev-libs/libxslt-1.1.26 app-text/docbook-xml-dtd:4.5 >=app-text/docbook-xsl-stylesheets-1.75.2 virtual/pkgconfig
+DEPEND=virtual/udev virtual/pkgconfig >=sys-apps/kmod-15[tools] app-text/asciidoc >=dev-libs/libxslt-1.1.26 app-text/docbook-xml-dtd:4.5 >=app-text/docbook-xsl-stylesheets-1.75.2 >=app-portage/elt-patches-20170317 virtual/pkgconfig
 DESCRIPTION=Generic initramfs generation tool
 EAPI=6
 HOMEPAGE=https://dracut.wiki.kernel.org
@@ -10,5 +10,5 @@ RDEPEND=virtual/udev virtual/pkgconfig >=sys-apps/kmod-15[tools] app-arch/cpio >
 RESTRICT=test
 SLOT=0
 SRC_URI=mirror://kernel/linux/utils/boot/dracut/dracut-046.tar.xz
-_eclasses_=bash-completion-r1	a819349fcf7c78405be4b3552a60a00c	eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
+_eclasses_=bash-completion-r1	a819349fcf7c78405be4b3552a60a00c	eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
 _md5_=6ed809157896f2f0fa91bf7b63798af2

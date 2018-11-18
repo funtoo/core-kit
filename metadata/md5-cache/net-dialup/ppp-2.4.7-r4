@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile install postinst prepare setup
-DEPEND=activefilter? ( net-libs/libpcap ) atm? ( net-dialup/linux-atm ) pam? ( virtual/pam ) gtk? ( x11-libs/gtk+:2 ) eap-tls? ( net-misc/curl !libressl? ( dev-libs/openssl:0 ) libressl? ( dev-libs/libressl ) )
+DEPEND=activefilter? ( net-libs/libpcap ) atm? ( net-dialup/linux-atm ) pam? ( virtual/pam ) gtk? ( x11-libs/gtk+:2 ) eap-tls? ( net-misc/curl !libressl? ( dev-libs/openssl:0 ) libressl? ( dev-libs/libressl ) ) >=app-portage/elt-patches-20170317
 DESCRIPTION=Point-to-Point Protocol (PPP)
 EAPI=5
 HOMEPAGE=https://ppp.samba.org/
@@ -10,5 +10,5 @@ PDEPEND=net-dialup/ppp-scripts
 RDEPEND=activefilter? ( net-libs/libpcap ) atm? ( net-dialup/linux-atm ) pam? ( virtual/pam ) gtk? ( x11-libs/gtk+:2 ) eap-tls? ( net-misc/curl !libressl? ( dev-libs/openssl:0 ) libressl? ( dev-libs/libressl ) )
 SLOT=0/2.4.7
 SRC_URI=https://download.samba.org/pub/ppp/ppp-2.4.7.tar.gz https://dev.gentoo.org/~polynomial-c/ppp-2.4.7-patches-5.tar.xz http://www.netservers.net.uk/gpl/ppp-dhcpc.tgz
-_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	pam	3e788d86170dfcd5b06824d898315e18	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
+_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	linux-info	953c3b1c472dcadbf62098a9301327f2	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	pam	3e788d86170dfcd5b06824d898315e18	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
 _md5_=3e602bd9c334b2bcd6e332ceaecb48a6

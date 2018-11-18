@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst postrm prepare test unpack
-DEPEND=>=app-portage/elt-patches-20170317 sys-devel/gnuconfig >=sys-devel/binutils-config-3 sys-libs/zlib test? ( dev-util/dejagnu ) nls? ( sys-devel/gettext ) sys-devel/flex virtual/yacc
+DEPEND=>=app-portage/elt-patches-20170317 >=app-portage/elt-patches-20170317 sys-devel/gnuconfig >=sys-devel/binutils-config-3 sys-libs/zlib test? ( dev-util/dejagnu ) nls? ( sys-devel/gettext ) sys-devel/flex virtual/yacc
 DESCRIPTION=Tools necessary to build programs
 EAPI=5
 HOMEPAGE=https://sourceware.org/binutils/
@@ -9,5 +9,5 @@ LICENSE=|| ( GPL-3 LGPL-3 )
 RDEPEND=>=sys-devel/binutils-config-3 sys-libs/zlib
 SLOT=2.29.1
 SRC_URI=mirror://gnu/binutils/binutils-2.29.1.tar.bz2 mirror://gentoo/binutils-2.29.1-patches-3.tar.xz https://dev.gentoo.org/~vapier/dist/binutils-2.29.1-patches-3.tar.xz https://dev.gentoo.org/~tamiko/distfiles/binutils-2.29.1-patches-3.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.29.1-patches-3.tar.xz
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	gnuconfig	b8ec1c34be4ff9dac7ad4034d277936b	libtool	e32ea84bf82cf8987965b574672dba93	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-binutils	836af54604b9fef015d2bfd165d4ca32	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	unpacker	f40f7b4bd5aa88c2a4ba7b0d1e0ded70	versionator	c80ccf29e90adea7c5cae94b42eb76d0
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	gnuconfig	b8ec1c34be4ff9dac7ad4034d277936b	libtool	e32ea84bf82cf8987965b574672dba93	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-binutils	836af54604b9fef015d2bfd165d4ca32	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	unpacker	f40f7b4bd5aa88c2a4ba7b0d1e0ded70	versionator	c80ccf29e90adea7c5cae94b42eb76d0
 _md5_=1ac32f55d611bd9b300fd87adc6c8d4f

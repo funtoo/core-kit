@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst prepare setup
-DEPEND=dbus? ( sys-apps/dbus ) kernel_linux? ( dev-libs/libnl:3 net-wireless/crda eap-sim? ( sys-apps/pcsc-lite ) ) !kernel_linux? ( net-libs/libpcap ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 ) readline? ( sys-libs/ncurses:0= sys-libs/readline:0= ) ssl? ( gnutls? ( dev-libs/libgcrypt:0= net-libs/gnutls:= ) !gnutls? ( !libressl? ( >=dev-libs/openssl-1.0.2k:0= ) libressl? ( dev-libs/libressl:0= ) ) ) !ssl? ( dev-libs/libtommath ) virtual/pkgconfig virtual/pkgconfig
+DEPEND=dbus? ( sys-apps/dbus ) kernel_linux? ( dev-libs/libnl:3 net-wireless/crda eap-sim? ( sys-apps/pcsc-lite ) ) !kernel_linux? ( net-libs/libpcap ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 ) readline? ( sys-libs/ncurses:0= sys-libs/readline:0= ) ssl? ( gnutls? ( dev-libs/libgcrypt:0= net-libs/gnutls:= ) !gnutls? ( !libressl? ( >=dev-libs/openssl-1.0.2k:0= ) libressl? ( dev-libs/libressl:0= ) ) ) !ssl? ( dev-libs/libtommath ) virtual/pkgconfig >=app-portage/elt-patches-20170317 virtual/pkgconfig
 DESCRIPTION=IEEE 802.1X/WPA supplicant for secure wireless transfers
 EAPI=6
 HOMEPAGE=https://w1.fi/wpa_supplicant/
@@ -10,5 +10,5 @@ RDEPEND=dbus? ( sys-apps/dbus ) kernel_linux? ( dev-libs/libnl:3 net-wireless/cr
 REQUIRED_USE=smartcard? ( ssl )
 SLOT=0
 SRC_URI=https://w1.fi/releases/wpa_supplicant-2.6.tar.gz
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	qmake-utils	990448b067cb3cfe1443bc25fb57239c	readme.gentoo-r1	2b27b7fcc73685ec7e0456c3b48a2fff	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	qmake-utils	990448b067cb3cfe1443bc25fb57239c	readme.gentoo-r1	2b27b7fcc73685ec7e0456c3b48a2fff	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
 _md5_=e8415cebe7c93d6b147f22978ef9d216

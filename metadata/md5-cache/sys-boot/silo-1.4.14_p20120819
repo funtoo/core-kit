@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile install postinst postrm preinst prerm unpack
-DEPEND=sys-fs/e2fsprogs sys-apps/sparc-utils
+DEPEND=sys-fs/e2fsprogs sys-apps/sparc-utils >=app-portage/elt-patches-20170317
 DESCRIPTION=SPARC/UltraSPARC Improved Loader, a boot loader for sparc
 EAPI=0
 HOMEPAGE=https://git.kernel.org/?p=linux/kernel/git/davem/silo.git;a=summary
@@ -7,5 +7,5 @@ KEYWORDS=-* sparc
 LICENSE=GPL-2
 SLOT=0
 SRC_URI=mirror://debian/pool/main/s/silo/silo_1.4.14+git20120819.orig.tar.gz mirror://debian/pool/main/s/silo/silo_1.4.14+git20120819-1.diff.gz
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	ea24b511b0ad59831d0151aa634dfad2	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	ea24b511b0ad59831d0151aa634dfad2	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
 _md5_=f3cbd837fd052dd67486a4fe62c218ad
