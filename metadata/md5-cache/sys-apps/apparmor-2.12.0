@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install prepare test
+DEPEND=~sys-libs/libapparmor-2.12.0 dev-lang/perl sys-devel/bison sys-devel/flex doc? ( dev-tex/latex2html ) virtual/pkgconfig >=app-portage/elt-patches-20170317
+DESCRIPTION=Userspace utils and init scripts for the AppArmor application security system
+EAPI=6
+HOMEPAGE=http://apparmor.net/
+IUSE=doc
+KEYWORDS=~amd64
+LICENSE=GPL-2
+RDEPEND=~sys-libs/libapparmor-2.12.0
+SLOT=0
+SRC_URI=https://launchpad.net/apparmor/2.12/2.12.0/+download/apparmor-2.12.tar.gz
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	versionator	c80ccf29e90adea7c5cae94b42eb76d0
+_md5_=057c743d1add2fbec143fd28253ee9a6
