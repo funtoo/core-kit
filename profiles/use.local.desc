@@ -166,8 +166,6 @@ net-misc/curl:ssl - Enable crypto engine support (via openssl if USE='-gnutls -n
 net-misc/dhcp:client - Install the dhclient program
 net-misc/dhcp:server - Install the dhcpd and dhcrelay programs
 net-misc/iputils:SECURITY_HAZARD - Allow non-root users to flood (ping -f). This is generally a very bad idea.
-net-misc/modemmanager:mbim - Enable MBIM modem protocol
-net-misc/modemmanager:qmi - Enable support for the QMI modem protocol used by devices with Qualcomm chipsets
 net-misc/mosh:client - Build network client
 net-misc/mosh:examples - Include example scripts
 net-misc/mosh:mosh-hardening - Enable compiler and linker options to frustrate memory corruption exploits
