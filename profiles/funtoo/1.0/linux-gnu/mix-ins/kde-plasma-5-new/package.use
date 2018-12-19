@@ -1,4 +1,5 @@
-media-libs/mesa wayland # for kwayland
+dev-libs/libgusb -vala
+
 net-dns/avahi mdnsresponder-compat
 
 # FL-5121: synchronizes qt4 USE's with gentoo
