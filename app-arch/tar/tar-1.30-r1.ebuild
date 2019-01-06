@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -12,7 +12,7 @@ SRC_URI="mirror://gnu/tar/${P}.tar.bz2
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="acl elibc_glibc minimal nls selinux static userland_GNU xattr"
 
 RDEPEND="acl? ( virtual/acl )
@@ -24,6 +24,7 @@ DEPEND="${RDEPEND}
 PATCHES=(
 	"${FILESDIR}"/${P}-fix-test-92.patch
 	"${FILESDIR}"/${P}-fix-test-117-and-118.patch
+	"${FILESDIR}"/${P}-CVE-2018-20482.patch #674210
 )
 
 src_prepare() {
@@ -40,9 +41,9 @@ src_prepare() {
 src_configure() {
 	use static && append-ldflags -static
 	local myeconfargs=(
-		--bindir="${EPREFIX}"/bin
+		--bindir="${EPREFIX%/}"/bin
 		--enable-backup-scripts
-		--libexecdir="${EPREFIX}"/usr/sbin
+		--libexecdir="${EPREFIX%/}"/usr/sbin
 		$(usex userland_GNU "" "--program-prefix=g")
 		$(use_with acl posix-acls)
 		$(use_enable nls)
@@ -74,7 +75,7 @@ src_install() {
 	mv "${ED%/}"/usr/sbin/${p}restore{,-tar} || die
 
 	if use minimal ; then
-		find "${ED}"/etc "${ED}"/*bin/ "${ED}"/usr/*bin/ \
+		find "${ED%/}"/etc "${ED%/}"/*bin/ "${ED%/}"/usr/*bin/ \
 			-type f -a '!' '(' -name tar -o -name ${p}tar ')' \
 			-delete || die
 	fi

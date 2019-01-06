@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
 PYTHON_REQ_USE="xml"
 
 inherit libtool flag-o-matic ltprune python-r1 autotools prefix multilib-minimal
@@ -12,7 +12,7 @@ HOMEPAGE="http://www.xmlsoft.org/"
 
 LICENSE="MIT"
 SLOT="2"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 s390 ~sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="debug examples icu ipv6 lzma python readline static-libs test"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -80,6 +80,21 @@ src_prepare() {
 	# Fix python detection, bug #567066
 	# https://bugzilla.gnome.org/show_bug.cgi?id=760458
 	eapply "${FILESDIR}"/${PN}-2.9.2-python-ABIFLAG.patch
+
+	# Fix python tests when building out of tree #565576
+	eapply "${FILESDIR}"/${PN}-2.9.8-out-of-tree-test.patch
+
+	# CVE-2017-8872 #618110
+	# https://bugzilla.gnome.org/show_bug.cgi?id=775200
+	eapply "${FILESDIR}"/${PN}-2.9.8-CVE-2017-8872.patch
+
+	# CVE-2018-14567
+	# https://bugzilla.gnome.org/show_bug.cgi?id=794914
+	eapply "${FILESDIR}"/${PN}-2.9.8-CVE-2018-14567.patch
+
+	# CVE-2018-14404
+	# https://gitlab.gnome.org/GNOME/libxml2/issues/5
+	eapply "${FILESDIR}"/${PN}-2.9.8-CVE-2018-14404.patch
 
 	if [[ ${CHOST} == *-darwin* ]] ; then
 		# Avoid final linking arguments for python modules
