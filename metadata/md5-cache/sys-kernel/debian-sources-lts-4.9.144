@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare prerm pretend setup
+DEPEND=binary? ( >=sys-kernel/genkernel-3.4.40.7 ) >=app-portage/elt-patches-20170317
+DESCRIPTION=Debian Sources (and optional binary kernel)
+EAPI=5
+HOMEPAGE=https://packages.debian.org/stable/kernel/linux-image-4.9.0-6-amd64
+IUSE=binary ec2 sign-modules
+LICENSE=GPL-2
+RESTRICT=binchecks strip mirror
+SLOT=4.9.144-LTS
+SRC_URI=http://http.debian.net/debian/pool/main/l/linux//linux_4.9.144.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux//linux_4.9.144-2.debian.tar.xz
+_eclasses_=check-reqs	422543dd49baab3cfb70e3219a53957a	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	ltprune	2770eed66a9b8ef944714cd0e968182e	mount-boot	ea24b511b0ad59831d0151aa634dfad2	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7
+_md5_=c888780c8e90e9f909c458cc764f23cb
