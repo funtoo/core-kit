@@ -10,7 +10,7 @@ PP="pambase-20190402"
 
 LICENSE="|| ( BSD GPL-2 )"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE="audit berkdb +cracklib debug minimal mktemp nis nls +nullok pam_krb5 pam_ssh passwdqc +pie securetty selinux +sha512 static-libs"
 
 BDEPEND="app-text/docbook-xml-dtd:4.1.2
@@ -32,7 +32,8 @@ DEPEND="
 	nls? ( >=virtual/libintl-0-r1 )"
 RDEPEND="${DEPEND}
 	!sys-auth/openpam
-	!sys-auth/pam_userdb"
+	!sys-auth/pam_userdb
+	!<sys-auth/pambase-20190426"
 PDEPEND="
 	passwdqc? ( sys-auth/pam_passwdqc )
 	mktemp? ( sys-auth/pam_mktemp )
