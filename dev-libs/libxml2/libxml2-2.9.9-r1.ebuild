@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
 PYTHON_REQ_USE="xml"
 
 inherit libtool flag-o-matic ltprune python-r1 autotools prefix multilib-minimal
@@ -22,7 +22,6 @@ XSTS_NAME_2="xmlschema2004-01-14"
 XSTS_TARBALL_1="xsts-2002-01-16.tar.gz"
 XSTS_TARBALL_2="xsts-2004-01-14.tar.gz"
 XMLCONF_TARBALL="xmlts20080827.tar.gz"
-
 
 SRC_URI="ftp://xmlsoft.org/${PN}/${PN}-${PV/_rc/-rc}.tar.gz
 	https://dev.gentoo.org/~leio/distfiles/${P}-patchset.tar.xz
@@ -48,9 +47,6 @@ S="${WORKDIR}/${PN}-${PV%_rc*}"
 
 MULTILIB_CHOST_TOOLS=(
 	/usr/bin/xml2-config
-)
-
-PATCHES=(
 )
 
 src_unpack() {

@@ -5,7 +5,7 @@ EAPI=6
 inherit flag-o-matic multilib systemd toolchain-funcs udev
 
 DESCRIPTION="Tool for running RAID systems - replacement for the raidtools"
-HOMEPAGE="http://neil.brown.name/blog/mdadm"
+HOMEPAGE="https://git.kernel.org/pub/scm/utils/mdadm/mdadm.git/"
 DEB_PF="4.1~rc1-4"
 SRC_URI="mirror://kernel/linux/utils/raid/mdadm/${P/_/-}.tar.xz
 		mirror://debian/pool/main/m/mdadm/${PN}_${DEB_PF}.debian.tar.xz"
@@ -13,7 +13,7 @@ SRC_URI="mirror://kernel/linux/utils/raid/mdadm/${P/_/-}.tar.xz
 LICENSE="GPL-2"
 SLOT="0"
 [[ "${PV}" = *_rc* ]] || \
-KEYWORDS="~alpha amd64 arm hppa ~ia64 ~mips ppc ppc64 sparc x86"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86"
 IUSE="static"
 
 DEPEND="virtual/pkgconfig

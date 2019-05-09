@@ -19,6 +19,7 @@ app-arch/libarchive:e2fsprogs - Use file flags from sys-fs/e2fsprogs headers ins
 app-arch/libarchive:lz4 - Enable support for LZ4 compression using app-arch/lz4
 app-arch/libarchive:nettle - Use dev-libs/nettle as crypto backend
 app-arch/libarchive:zlib - Allow accessing gzip-compressed archives through sys-libs/zlib. This only affects libarchive's native support: bsdtar will keep using gunzip as a filter if that's not built-in. It's also needed for supporting extraction of ZIP files.
+app-arch/libarchive:zstd - Enable support for zstd compression using app-arch/zstd
 app-arch/tar:minimal - just install `tar`
 app-arch/unzip:natspec - Use dev-libs/libnatspec to correctly decode non-ascii file names archived in Windows.
 app-arch/xz-utils:extra-filters - Build additional filters that are not used in any of the default xz presets. This includes delta and BCJ coders, additional match finders and SHA256 checks.
@@ -61,7 +62,6 @@ dev-libs/elfutils:lzma - Support automatic decompression of LZMA-compressed file
 dev-libs/elfutils:threads - Build the libraries with thread safe support
 dev-libs/elfutils:utils - Install command-line utilities (all the eu-* programs)
 dev-libs/gmp:asm - Enable use of hand optimized assembly routines (faster execution)
-dev-libs/gmp:pgo - After building gmp, run some tests against to produce faster libraries -- this option will double the compile time
 dev-libs/libevent:debug - Support runtime debug mode and malloc hooks (for programmers)
 dev-libs/libffi:pax_kernel - Use PaX emulated trampolines, for we can't use PROT_EXEC
 dev-libs/libgpg-error:common-lisp - Install common-lisp files
@@ -141,6 +141,7 @@ net-firewall/iptables:netlink - Build against libnfnetlink which enables the nfn
 net-firewall/iptables:nftables - Support nftables kernel interface
 net-firewall/iptables:pcap - Build against net-libs/libpcap which enables the nfbpf_compile util
 net-firewall/nftables:json - Enable JSON support via dev-libs/jansson
+net-firewall/nftables:modern_kernel - Install init scripts for 3.18 or higher kernels with atomic rule updates
 net-libs/gnutls:dane - Build libgnutls-dane, implementing DNS-based Authentication of Named Entities. Requires net-dns/unbound
 net-libs/gnutls:openpgp - Enable openpgp support
 net-libs/gnutls:openssl - Build openssl compatibility libraries
@@ -185,6 +186,8 @@ net-misc/openssh:livecd - Enable root password logins for live-cd environment.
 net-misc/openssh:ssh1 - Support the legacy/weak SSH1 protocol
 net-misc/openssh:ssl - Enable additional crypto algorithms via OpenSSL
 net-misc/rsync:stunnel - Provide helper scripts for using rsync via >=net-misc/stunnel-4
+net-misc/wget:ntlm - Enable support for NTLM (Windows-based) authorization
+net-misc/wget:uuid - Generate UUIDs for the WARC (Web ARChive file format) using libuuid; otherwise use a simple RNG (random number generator)
 net-wireless/bluez:btpclient - Enable BTP client
 net-wireless/bluez:deprecated - Build deprecated plugins
 net-wireless/bluez:experimental - Build experimental plugins
@@ -242,7 +245,6 @@ sys-apps/portage:python3 - Use python3 as Python interpreter.
 sys-apps/sed:forced-sandbox - Always enable --sandbox mode for simpler/secure runtime (disables e/r/w commands). Note: This may break many configure scripts, so it should be avoided on dev systems (and generally used on binpkg/final systems only).
 sys-apps/smartmontools:caps - Build against sys-libs/libcap-ng to allow smartd to drop its privileges.
 sys-apps/smartmontools:daemon - Install the monitoring daemon (smartd) and associated scripts.
-sys-apps/smartmontools:minimal - Do not install the monitoring daemon and associated scripts.
 sys-apps/smartmontools:update_drivedb - Install a script to update the drivedb file.
 sys-apps/tcp-wrappers:netgroups - Support matching NIS (host) netgroup names via the @netgroup syntax (if you don't know what this means, you most likely do not need it)
 sys-apps/util-linux:caps - build setpriv helper (run programs with diff capabilities)
@@ -291,7 +293,10 @@ sys-boot/refind:reiserfs - Builds the EFI binary reiserfs filesystem driver
 sys-boot/woeusb:minimal - Install only woeusb tool
 sys-devel/autogen:libopts - install the libopts tarball (a few packages want this for developing)
 sys-devel/bc:forced-sandbox - Always enable --sandbox mode for simpler/secure runtime (disables the ! command in dc)
+sys-devel/binutils:default-gold - Set ld to point to ld.gold instead of ld.bfd
+sys-devel/binutils:gold - Build ld.gold linker
 sys-devel/binutils:multitarget - Adds support to binutils for cross compiling (does not work with gas)
+sys-devel/binutils:plugins - Enable plugin support in tools
 sys-devel/gcc:d - Enable support for the D programming language
 sys-devel/gcc:default - After building, set this compiler as default using gcc-config
 sys-devel/gcc:fixed-point - Enable fixed-point arithmetic support for MIPS targets in gcc (Warning: significantly increases compile time!)
@@ -321,6 +326,7 @@ sys-fs/cryfs:update-check - Enable automatic checking for updates and security v
 sys-fs/cryptsetup:argon2 - Enable password hashing algorithm from app-crypt/argon2
 sys-fs/cryptsetup:gcrypt - Use dev-libs/libgcrypt crypto backend
 sys-fs/cryptsetup:kernel - Use kernel crypto backend (mainly for embedded systems)
+sys-fs/cryptsetup:luks1_default - Default to LUKS1 on disk encryption format rather than new LUKS2
 sys-fs/cryptsetup:nettle - Use dev-libs/nettle crypto backend
 sys-fs/cryptsetup:openssl - Use dev-libs/openssl crypto backend
 sys-fs/cryptsetup:pwquality - Use dev-libs/libpwquality for password quality checking
@@ -372,6 +378,7 @@ sys-fs/squashfs-tools:lz4 - Enable support for LZ4 compression using app-arch/lz
 sys-fs/squashfs-tools:xz - Enable support for XZ ("LZMA2") compression using app-arch/xz-utils
 sys-fs/squashfs-tools:zstd - Enable support for ZSTD compression using app-arch/zstd
 sys-fs/squashfuse:lz4 - Enable support for lz4 compression
+sys-fs/squashfuse:zstd - Enable support for zstd compression
 sys-fs/udev:kmod - Enable kernel module loading/unloading support using sys-apps/kmod
 sys-fs/zfs:kernel-builtin - Disable dependency on sys-fs/zfs-kmod under the assumption that ZFS is part of the kernel source tree
 sys-fs/zfs:rootfs - Enable dependencies required for booting off a pool containing a rootfs
@@ -394,6 +401,7 @@ sys-libs/glibc:gd - build memusage and memusagestat tools
 sys-libs/glibc:multiarch - enable optimizations for multiple CPU architectures (detected at runtime)
 sys-libs/glibc:nscd - Build, and enable support for, the Name Service Cache Daemon
 sys-libs/glibc:rpc - Enable obsolete RPC/NIS layers
+sys-libs/glibc:ssp - protect stack of glibc internals
 sys-libs/glibc:suid - Make internal pt_chown helper setuid -- not needed if using Linux and have /dev/pts mounted with gid=5
 sys-libs/glibc:systemtap - enable systemtap static probe points
 sys-libs/gwenhywfar:designer - Build plugins for dev-qt/designer
@@ -404,10 +412,12 @@ sys-libs/gwenhywfar:serialport - Enable support for dev-qt/qtserialport module
 sys-libs/gwenhywfar:webkit - Enable support for dev-qt/qtwebkit
 sys-libs/libblockdev:bcache - Enable block device cache support.
 sys-libs/libblockdev:cryptsetup - Enable sys-fs/cryptsetup support
+sys-libs/libblockdev:device-mapper - Enable support for device-mapper from sys-fs/lvm2
 sys-libs/libblockdev:dmraid - Support for dmraid devices, also known as ATA-RAID, or Fake RAID.
 sys-libs/libblockdev:escrow - Support for building crypto plugin with escrow device support
 sys-libs/libblockdev:kbd - Enable kernel block device support.
 sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-fs/lvm2.
+sys-libs/libblockdev:tools - Build tools
 sys-libs/libblockdev:vdo - Enable Virtual Data Optimizer support.
 sys-libs/libhugetlbfs:perl - Install the cpupcstat tool and some perl modules
 sys-libs/libunwind:debug-frame - Adds support for DWARF .debug_frame section: Use the information from this section if available

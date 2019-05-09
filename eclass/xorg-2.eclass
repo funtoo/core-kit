@@ -7,7 +7,7 @@
 # @AUTHOR:
 # Author: Tomáš Chvátal <scarabeus@gentoo.org>
 # Author: Donnie Berkholz <dberkholz@gentoo.org>
-# @SUPPORTED_EAPIS: 3 4 5
+# @SUPPORTED_EAPIS: 4 5
 # @BLURB: Reduces code duplication in the modularized X11 ebuilds.
 # @DESCRIPTION:
 # This eclass makes trivial X ebuilds possible for apps, fonts, drivers,
@@ -53,7 +53,7 @@ fi
 
 EXPORTED_FUNCTIONS="src_unpack src_compile src_install pkg_postinst pkg_postrm"
 case "${EAPI:-0}" in
-	3|4|5) EXPORTED_FUNCTIONS="${EXPORTED_FUNCTIONS} src_prepare src_configure" ;;
+	4|5) EXPORTED_FUNCTIONS="${EXPORTED_FUNCTIONS} src_prepare src_configure" ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
@@ -80,7 +80,8 @@ HOMEPAGE="https://www.x.org/wiki/ https://cgit.freedesktop.org/"
 # The subdirectory to download source from. Possible settings are app,
 # doc, data, util, driver, font, lib, proto, xserver. Set above the
 # inherit to override the default autoconfigured module.
-if [[ -z ${XORG_MODULE} ]]; then
+: ${XORG_MODULE:="auto"}
+if [[ ${XORG_MODULE} == auto ]]; then
 	case ${CATEGORY} in
 		app-doc)             XORG_MODULE=doc/     ;;
 		media-fonts)         XORG_MODULE=font/    ;;
@@ -135,8 +136,7 @@ unset EAUTORECONF_DEPEND
 
 if [[ ${FONT} == yes ]]; then
 	RDEPEND+=" media-fonts/encodings
-		x11-apps/mkfontscale
-		x11-apps/mkfontdir"
+		|| ( >=x11-apps/mkfontscale-1.2.0 ( x11-apps/mkfontscale x11-apps/mkfontdir ) )"
 	PDEPEND+=" media-fonts/font-alias"
 	DEPEND+=" >=media-fonts/font-util-1.2.0"
 
@@ -236,7 +236,7 @@ fi
 
 DOC_DEPEND="
 	doc? (
-		app-text/asciidoc
+		|| ( app-text/asciidoc dev-ruby/asciidoctor )
 		app-text/xmlto
 		app-doc/doxygen
 		app-text/docbook-xml-dtd:4.1.2
@@ -257,21 +257,9 @@ case ${XORG_DOC} in
 esac
 unset DOC_DEPEND
 
-# @ECLASS-VARIABLE: XORG_MODULE_REBUILD
-# @DESCRIPTION:
-# Describes whether a package contains modules that need to be rebuilt on
-# xorg-server upgrade. This has an effect only since EAPI=5.
-# Possible values are "yes" or "no". Default value is "yes" for packages which
-# are recognized as DRIVER by this eclass and "no" for all other packages.
-if [[ "${DRIVER}" == yes ]]; then
-	: ${XORG_MODULE_REBUILD:="yes"}
-else
-	: ${XORG_MODULE_REBUILD:="no"}
-fi
-
-if [[ ${XORG_MODULE_REBUILD} == yes ]]; then
+if [[ ${DRIVER} == yes ]]; then
 	case ${EAPI} in
-		3|4)
+		4)
 			;;
 		*)
 			RDEPEND+=" x11-base/xorg-server:="
@@ -500,7 +488,7 @@ xorg-2_src_install() {
 	fi
 
 	# Don't install libtool archives (even for modules)
-	prune_libtool_files --all
+	find "${D}" -type f -name '*.la' -delete || die
 
 	[[ -n ${FONT} ]] && remove_font_metadata
 }
@@ -530,7 +518,7 @@ xorg-2_pkg_postrm() {
 
 	if [[ -n ${FONT} ]]; then
 		# if we're doing an upgrade, postinst will do
-		if [[ ${EAPI} -lt 4 || -z ${REPLACED_BY_VERSION} ]]; then
+		if [[ -z ${REPLACED_BY_VERSION} ]]; then
 			create_fonts_scale
 			create_fonts_dir
 			font_pkg_postrm "$@"

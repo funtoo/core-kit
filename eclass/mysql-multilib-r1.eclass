@@ -1,6 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
+# @DEAD
 # @ECLASS: mysql-multilib-r1.eclass
 # @MAINTAINER:
 # Maintainers:
@@ -721,9 +722,8 @@ mysql-multilib-r1_pkg_postinst() {
 			einfo
 			elog "Be sure to edit the my.cnf file to activate your cluster settings."
 			elog "This should be done after running \"emerge --config =${CATEGORY}/${PF}\""
-			elog "The first time the cluster is activated, you should add"
-			elog "--wsrep-new-cluster to the options in /etc/conf.d/mysql for one node."
-			elog "This option should then be removed for subsequent starts."
+			elog "The first time the galera cluster is activated, the database daemon"
+			elog "should be run as \"/etc/init.d/mysql bootstrap_galera\" on the primary node."
 			einfo
 		fi
 	fi

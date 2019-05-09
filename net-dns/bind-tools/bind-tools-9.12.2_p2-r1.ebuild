@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,7 +16,7 @@ SRC_URI="https://www.isc.org/downloads/file/${MY_P}/?version=tar-gz -> ${MY_PN}-
 
 LICENSE="Apache-2.0 BSD BSD-2 GPL-2 HPND ISC MPL-2.0"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="doc gost gssapi idn ipv6 libedit libidn2 libressl readline seccomp ssl urandom xml"
 # no PKCS11 currently as it requires OpenSSL to be patched, also see bug 409687
 
@@ -27,7 +27,7 @@ REQUIRED_USE="gost? ( !libressl ssl )
 CDEPEND="
 	ssl? (
 		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:= )
+		libressl? ( dev-libs/libressl:0= )
 	)
 	gost? (
 		|| (
@@ -40,7 +40,7 @@ CDEPEND="
 	)
 	xml? ( dev-libs/libxml2 )
 	idn? ( <net-dns/idnkit-2:= )
-	libidn2? ( net-dns/libidn2 )
+	libidn2? ( net-dns/libidn2:= )
 	gssapi? ( virtual/krb5 )
 	libedit? ( dev-libs/libedit )
 	!libedit? (

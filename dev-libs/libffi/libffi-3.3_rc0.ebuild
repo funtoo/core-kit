@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -25,6 +25,7 @@ DOCS="ChangeLog* README.md"
 PATCHES=(
 	"${FILESDIR}"/${PN}-3.2.1-o-tmpfile-eacces.patch #529044
 	"${FILESDIR}"/${PN}-3.3_rc0-hppa-no-TEXTREL.patch
+	"${FILESDIR}"/${PN}-3.3_rc0-ppc-macos-go.patch
 )
 
 S=${WORKDIR}/${MY_P}
@@ -49,6 +50,7 @@ multilib_src_configure() {
 	use userland_BSD && export HOST="${CHOST}"
 	econf \
 		--includedir="${EPREFIX}"/usr/$(get_libdir)/${P}/include \
+		--disable-multi-os-directory \
 		$(use_enable static-libs static) \
 		$(use_enable pax_kernel pax_emutramp) \
 		$(use_enable debug)

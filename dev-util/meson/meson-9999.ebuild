@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,20 +9,46 @@ if [[ ${PV} = *9999* ]]; then
 	inherit git-r3
 else
 	SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x64-macos ~x64-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-linux ~x64-macos ~x64-solaris"
 fi
 
-inherit distutils-r1
+inherit distutils-r1 toolchain-funcs
 
 DESCRIPTION="Open source build system"
 HOMEPAGE="http://mesonbuild.com/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-IUSE=""
+IUSE="test"
+RESTRICT="!test? ( test )"
 
-DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
-RDEPEND="${DEPEND}"
+RDEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}
+	test? (
+		dev-libs/glib:2
+		dev-libs/gobject-introspection
+		dev-util/ninja
+		dev-vcs/git
+		virtual/pkgconfig
+	)
+"
+
+python_prepare_all() {
+	# ASAN and sandbox both want control over LD_PRELOAD
+	# https://bugs.gentoo.org/673016
+	sed -i -e 's/test_generate_gir_with_address_sanitizer/_&/' run_unittests.py || die
+
+	distutils-r1_python_prepare_all
+}
+
+src_test() {
+	tc-export PKG_CONFIG
+	if ${PKG_CONFIG} --exists Qt5Core && ! ${PKG_CONFIG} --exists Qt5Gui; then
+		ewarn "Found Qt5Core but not Qt5Gui; skipping tests"
+	else
+		distutils-r1_src_test
+	fi
+}
 
 python_test() {
 	(
