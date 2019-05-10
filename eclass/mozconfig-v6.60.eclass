@@ -112,7 +112,7 @@ RDEPEND=">=app-text/hunspell-1.5.4:=
 	x11-libs/libXt
 	system-icu? ( >=dev-libs/icu-59.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
-	system-libevent? ( >=dev-libs/libevent-2.0:0= )
+	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
 	system-sqlite? ( >=dev-db/sqlite-3.23.1:3[secure-delete,debug=] )
 	system-libvpx? (
 		>=media-libs/libvpx-1.5.0:0=[postproc]
@@ -361,8 +361,6 @@ mozconfig_config() {
 	if use clang ; then
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1423822
 		mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack
-	elif use arm ; then
-		mozconfig_annotate 'elf-hack is broken on arm' --disable-elf-hack
 	fi
 
 	# Modifications to better support ARM, bug 553364

@@ -19,7 +19,6 @@ app-arch/libarchive:e2fsprogs - Use file flags from sys-fs/e2fsprogs headers ins
 app-arch/libarchive:lz4 - Enable support for LZ4 compression using app-arch/lz4
 app-arch/libarchive:nettle - Use dev-libs/nettle as crypto backend
 app-arch/libarchive:zlib - Allow accessing gzip-compressed archives through sys-libs/zlib. This only affects libarchive's native support: bsdtar will keep using gunzip as a filter if that's not built-in. It's also needed for supporting extraction of ZIP files.
-app-arch/libarchive:zstd - Enable support for zstd compression using app-arch/zstd
 app-arch/tar:minimal - just install `tar`
 app-arch/unzip:natspec - Use dev-libs/libnatspec to correctly decode non-ascii file names archived in Windows.
 app-arch/xz-utils:extra-filters - Build additional filters that are not used in any of the default xz presets. This includes delta and BCJ coders, additional match finders and SHA256 checks.
@@ -55,6 +54,7 @@ dev-libs/boost:context - Build and install the Boost.Context (and Boost.Fiber) l
 dev-libs/boost:debug - Build and install only the debug version of the Boost libraries. Only enable this flag if you're developing against boost.
 dev-libs/boost:doc - Install the full API documentation documentation. This takes over 200MB of extra disk space.
 dev-libs/boost:nls - Build libboost_locale. This library requires compatible C library interfaces, which might not be provided by uClibc or other embedded libraries.
+dev-libs/boost:numpy - Optionally build NumPy extensions when Boost.Python is enabled
 dev-libs/boost:threads - Build multi-thread-compatible libraries instead of single-threaded only.
 dev-libs/boost:tools - Build and install the boost tools (bcp, quickbook, inspect, wave)
 dev-libs/check:subunit - Enable support for the subunit unit test protocol
@@ -143,7 +143,6 @@ net-firewall/iptables:pcap - Build against net-libs/libpcap which enables the nf
 net-firewall/nftables:json - Enable JSON support via dev-libs/jansson
 net-firewall/nftables:modern_kernel - Install init scripts for 3.18 or higher kernels with atomic rule updates
 net-libs/gnutls:dane - Build libgnutls-dane, implementing DNS-based Authentication of Named Entities. Requires net-dns/unbound
-net-libs/gnutls:openpgp - Enable openpgp support
 net-libs/gnutls:openssl - Build openssl compatibility libraries
 net-libs/gnutls:pkcs11 - Add support for PKCS#11 through app-crypt/p11-kit
 net-libs/gnutls:sslv2 - Support for the old/insecure SSLv2 protocol
@@ -201,7 +200,9 @@ net-wireless/wpa_supplicant:ap - Add support for access point mode
 net-wireless/wpa_supplicant:eap-sim - Add support for EAP-SIM authentication algorithm
 net-wireless/wpa_supplicant:eapol_test - Build and install eapol_test binary
 net-wireless/wpa_supplicant:fasteap - Add support for FAST-EAP authentication algorithm
+net-wireless/wpa_supplicant:fils - Add support for Fast Initial Link Setup (802.11ai)
 net-wireless/wpa_supplicant:hs2-0 - Add support for 802.11u and Passpoint for HotSpot 2.0
+net-wireless/wpa_supplicant:macsec - Add support for wired macsec
 net-wireless/wpa_supplicant:p2p - Add support for Wi-Fi Direct mode
 net-wireless/wpa_supplicant:privsep - Enable wpa_priv privledge separation binary
 net-wireless/wpa_supplicant:ps3 - Add support for ps3 hypervisor driven gelic wifi
@@ -278,6 +279,7 @@ sys-boot/grub:truetype - Build and install grub-mkfont conversion utility
 sys-boot/lilo:device-mapper - Enable support for device-mapper from sys-fs/lvm2
 sys-boot/lilo:minimal - Do not install the dolilo helper script
 sys-boot/lilo:pxeserial - Avoid character echo on PXE serial console
+sys-boot/netboot:bootrom - Install the bootrom binary for creation of rom files, which can be used for booting via floppy or rom.
 sys-boot/plymouth:gdm - Enables smooth transition to GDM
 sys-boot/plymouth:libkms - Provides abstraction to the DRM drivers (intel, nouveau and vmwgfx at this moment)
 sys-boot/plymouth:pango - Adds support for printing text on splash screen and text prompts, e.g. for password
@@ -297,21 +299,6 @@ sys-devel/binutils:default-gold - Set ld to point to ld.gold instead of ld.bfd
 sys-devel/binutils:gold - Build ld.gold linker
 sys-devel/binutils:multitarget - Adds support to binutils for cross compiling (does not work with gas)
 sys-devel/binutils:plugins - Enable plugin support in tools
-sys-devel/gcc:d - Enable support for the D programming language
-sys-devel/gcc:default - After building, set this compiler as default using gcc-config
-sys-devel/gcc:fixed-point - Enable fixed-point arithmetic support for MIPS targets in gcc (Warning: significantly increases compile time!)
-sys-devel/gcc:graphite - Add support for the framework for loop optimizations based on a polyhedral intermediate representation
-sys-devel/gcc:ip28 - Enable building a compiler capable of building a kernel for SGI Indigo2 Impact R10000 (IP28)
-sys-devel/gcc:ip32r10k - Enable building a compiler capable of building an experimental kernel for SGI O2 w/ R1x000 CPUs (IP32)
-sys-devel/gcc:libffi - Build the portable foreign function interface library
-sys-devel/gcc:mudflap - Add support for mudflap, a pointer use checking library
-sys-devel/gcc:n32 - Enable n32 ABI support on mips
-sys-devel/gcc:n64 - Enable n64 ABI support on mips
-sys-devel/gcc:nopie - Disable PIE support (NOT FOR GENERAL USE)
-sys-devel/gcc:nossp - Disable SSP support (NOT FOR GENERAL USE)
-sys-devel/gcc:objc - Build support for the Objective C code language
-sys-devel/gcc:objc++ - Build support for the Objective C++ language
-sys-devel/gcc:objc-gc - Build support for the Objective C code language Garbage Collector
 sys-devel/gettext:cvs - When running `autopoint`, use cvs to store the internal development files; this requires cvs at runtime, but will be faster/smaller than raw archives
 sys-devel/gettext:git - When running `autopoint`, use git to store the internal development files; this requires git at runtime, but will be faster/smaller than raw archives
 sys-fs/android-file-transfer-linux:fuse - Add FUSE mount helper
@@ -319,10 +306,17 @@ sys-fs/bees:tools - Build extra tools useful for debugging (fiemap, fiewalk)
 sys-fs/btrfs-progs:convert - Build ext2 conversion utility (btrfs-convert)
 sys-fs/btrfs-progs:reiserfs - Enable reiserfs support in btrfs-convert tool.
 sys-fs/btrfs-progs:static - Build static binaries in addition to the dynamic ones
-sys-fs/btrfs-progs:zstd - Enable zstd compression support.
 sys-fs/btrfsmaintenance:systemd - Enable systemd services and timers instead of cron timers
 sys-fs/cryfs:custom-optimization - Use user-defined compiler optimization level
 sys-fs/cryfs:update-check - Enable automatic checking for updates and security vulnerabilities
+sys-fs/cryptmount:argv0switch - Default action given by progname.
+sys-fs/cryptmount:cswap - Enable support for encrypted swap.
+sys-fs/cryptmount:fsck - Check filesystems before mounting.
+sys-fs/cryptmount:gcrypt - Support libgcrypt-encryption of keys.
+sys-fs/cryptmount:largefile - Enable support for large files.
+sys-fs/cryptmount:luks - Enable key management via LUKS
+sys-fs/cryptmount:mount - Use systemd mount/umount for operations.
+sys-fs/cryptmount:openssl - Support openssl-encryption of keys.
 sys-fs/cryptsetup:argon2 - Enable password hashing algorithm from app-crypt/argon2
 sys-fs/cryptsetup:gcrypt - Use dev-libs/libgcrypt crypto backend
 sys-fs/cryptsetup:kernel - Use kernel crypto backend (mainly for embedded systems)
@@ -376,9 +370,7 @@ sys-fs/quota:netlink - Compile daemon receiving quota messages via netlink
 sys-fs/quota:rpc - Enable quota interaction via RPC
 sys-fs/squashfs-tools:lz4 - Enable support for LZ4 compression using app-arch/lz4
 sys-fs/squashfs-tools:xz - Enable support for XZ ("LZMA2") compression using app-arch/xz-utils
-sys-fs/squashfs-tools:zstd - Enable support for ZSTD compression using app-arch/zstd
 sys-fs/squashfuse:lz4 - Enable support for lz4 compression
-sys-fs/squashfuse:zstd - Enable support for zstd compression
 sys-fs/udev:kmod - Enable kernel module loading/unloading support using sys-apps/kmod
 sys-fs/zfs:kernel-builtin - Disable dependency on sys-fs/zfs-kmod under the assumption that ZFS is part of the kernel source tree
 sys-fs/zfs:rootfs - Enable dependencies required for booting off a pool containing a rootfs

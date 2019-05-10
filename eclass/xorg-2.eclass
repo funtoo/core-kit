@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: xorg-2.eclass
@@ -61,7 +61,6 @@ esac
 EXPORT_FUNCTIONS ${EXPORTED_FUNCTIONS}
 
 IUSE=""
-HOMEPAGE="https://www.x.org/wiki/ https://cgit.freedesktop.org/"
 
 # @ECLASS-VARIABLE: XORG_EAUTORECONF
 # @DESCRIPTION:
@@ -100,8 +99,10 @@ fi
 # This variable can be used for proper directory specification
 : ${XORG_PACKAGE_NAME:=${PN}}
 
+HOMEPAGE="https://www.x.org/wiki/ https://gitlab.freedesktop.org/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME}"
+
 if [[ -n ${GIT_ECLASS} ]]; then
-	: ${EGIT_REPO_URI:="https://anongit.freedesktop.org/git/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME}.git"}
+	: ${EGIT_REPO_URI:="https://gitlab.freedesktop.org/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME}.git"}
 elif [[ -n ${XORG_BASE_INDIVIDUAL_URI} ]]; then
 	SRC_URI="${XORG_BASE_INDIVIDUAL_URI}/${XORG_MODULE}${P}.tar.bz2"
 fi
@@ -138,7 +139,8 @@ if [[ ${FONT} == yes ]]; then
 	RDEPEND+=" media-fonts/encodings
 		|| ( >=x11-apps/mkfontscale-1.2.0 ( x11-apps/mkfontscale x11-apps/mkfontdir ) )"
 	PDEPEND+=" media-fonts/font-alias"
-	DEPEND+=" >=media-fonts/font-util-1.2.0"
+	DEPEND+=" >=media-fonts/font-util-1.2.0
+		|| ( >=x11-apps/mkfontscale-1.2.0 ( x11-apps/mkfontscale x11-apps/mkfontdir ) )"
 
 	# @ECLASS-VARIABLE: FONT_DIR
 	# @DESCRIPTION:
@@ -170,7 +172,7 @@ fi
 # QA: configure: WARNING: unrecognized options: --disable-static
 : ${XORG_STATIC:="yes"}
 
-# Add static-libs useflag where usefull.
+# Add static-libs useflag where useful.
 if [[ ${XORG_STATIC} == yes \
 		&& ${FONT} != yes \
 		&& ${CATEGORY} != app-doc \
@@ -184,7 +186,11 @@ if [[ ${XORG_STATIC} == yes \
 	IUSE+=" static-libs"
 fi
 
-DEPEND+=" virtual/pkgconfig"
+if [[ ${XORG_MULTILIB} == yes ]]; then
+	DEPEND+=" virtual/pkgconfig[${MULTILIB_USEDEP}]"
+else
+	DEPEND+=" virtual/pkgconfig"
+fi
 
 # @ECLASS-VARIABLE: XORG_DRI
 # @DESCRIPTION:

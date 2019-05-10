@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{4,5,6,7}} )
+PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
 inherit autotools python-single-r1 xdg-utils
 
 MY_PV="${PV}-1"
@@ -45,7 +45,10 @@ RDEPEND="
 
 DEPEND="
 	${RDEPEND}
+"
+BDEPEND="
 	>=dev-libs/gobject-introspection-1.3.0
+	sys-devel/autoconf-archive
 	doc? ( dev-util/gtk-doc )
 "
 

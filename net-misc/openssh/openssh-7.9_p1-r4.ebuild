@@ -27,7 +27,7 @@ HOMEPAGE="https://www.openssh.com/"
 SRC_URI="mirror://openbsd/OpenSSH/portable/${PARCH}.tar.gz
 	https://dev.gentoo.org/~whissi/dist/${PN}/${PATCH_SET}.tar.xz
 	${SCTP_PATCH:+sctp? ( https://dev.gentoo.org/~whissi/dist/openssh/${SCTP_PATCH} )}
-	${HPN_VER:+hpn? ( $(printf "mirror://sourceforge/hpnssh/HPN-SSH%%20${HPN_VER/./v}%%20${HPN_PV/_}/%s\n" "${HPN_PATCHES[@]}") )}
+	${HPN_VER:+hpn? ( $(printf "mirror://sourceforge/hpnssh/HPN-SSH%%20${HPN_VER/./v}%%20${HPN_PV/_P/p}/%s\n" "${HPN_PATCHES[@]}") )}
 	${X509_PATCH:+X509? ( https://roumenpetrov.info/openssh/x509-${X509_VER}/${X509_PATCH} )}
 	"
 
@@ -300,8 +300,8 @@ src_configure() {
 		$(use_with !elibc_Cygwin hardening) #659210
 	)
 
-	# stackprotect is broken on musl x86
-	use elibc_musl && use x86 && myconf+=( --without-stackprotect )
+	# stackprotect is broken on musl x86 and ppc
+	use elibc_musl && ( use x86 || use ppc ) && myconf+=( --without-stackprotect )
 
 	# The seccomp sandbox is broken on x32, so use the older method for now. #553748
 	use amd64 && [[ ${ABI} == "x32" ]] && myconf+=( --with-sandbox=rlimit )

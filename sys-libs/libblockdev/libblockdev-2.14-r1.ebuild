@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{5,6} )
 inherit autotools python-single-r1
 
 MY_PV="${PV}-1"
@@ -42,6 +42,7 @@ CDEPEND="
 DEPEND="
 	${CDEPEND}
 	>=dev-libs/gobject-introspection-1.3.0
+	sys-devel/autoconf-archive
 	doc? ( dev-util/gtk-doc )
 "
 

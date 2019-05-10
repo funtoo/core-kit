@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{5,6} )
 inherit eapi7-ver perl-module python-r1 toolchain-funcs
 
 MY_PV="$(ver_cut 1-2)"
@@ -20,11 +20,14 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
 
-DEPEND="
+COMMON_DEPEND="
 	dev-lang/perl
 	~sys-libs/libapparmor-${PV}
 	${PYTHON_DEPS}"
-RDEPEND="${DEPEND}
+DEPEND="${COMMON_DEPEND}
+	sys-devel/gettext
+"
+RDEPEND="${COMMON_DEPEND}
 	~sys-libs/libapparmor-${PV}[perl,python]
 	~sys-apps/apparmor-${PV}
 	dev-perl/Locale-gettext
