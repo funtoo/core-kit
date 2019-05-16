@@ -9,6 +9,7 @@ app-misc
 app-portage
 app-shells
 app-text
+dev-db
 dev-lang
 dev-libs
 dev-python
