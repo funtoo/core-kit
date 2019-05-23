@@ -1,18 +1,17 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=6
 
 DESCRIPTION="Utility to select the default PostgreSQL slot"
-HOMEPAGE="http://www.gentoo.org/"
-SRC_URI=""
+HOMEPAGE="https://www.gentoo.org/"
+SRC_URI="https://dev.gentoo.org/~titanofold/${P}.tbz2"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~ppc-macos ~x86-solaris"
-IUSE=""
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 
 RDEPEND="app-admin/eselect"
-S=${WORKDIR}
+
 # All dev-db/postgresql ebuilds from 10.0 on are well supported. Earlier
 # ebuilds may present some quality of life issues.
 PDEPEND="
@@ -25,9 +24,9 @@ PDEPEND="
 
 src_install() {
 	insinto /usr/share/eselect/modules
-	doins "${FILESDIR}"/postgresql.eselect
+	doins postgresql.eselect
 
-	dosym /usr/bin/eselect /usr/bin/postgresql-config
+	dosym eselect /usr/bin/postgresql-config
 }
 
 pkg_postinst() {

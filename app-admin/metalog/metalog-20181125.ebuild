@@ -1,31 +1,35 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-inherit eutils
+EAPI=6
+inherit autotools systemd
 
 DESCRIPTION="A highly configurable replacement for syslogd/klogd"
 HOMEPAGE="https://github.com/hvisage/metalog"
-SRC_URI="${HOMEPAGE}/archive/${P}.tar.gz"
+SRC_URI="https://github.com/hvisage/${PN}/archive/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~sparc-fbsd ~x86-fbsd"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 ~riscv s390 sh sparc x86 ~x64-cygwin ~x86-fbsd"
 IUSE="unicode"
 
 RDEPEND=">=dev-libs/libpcre-3.4"
 DEPEND="${RDEPEND}
 	sys-devel/autoconf-archive
-	virtual/pkgconfig
-	app-arch/xz-utils"
+	virtual/pkgconfig"
 
-PATCHES=( "${FILESDIR}"/${PN}-0.9-metalog-conf.patch )
+S="${WORKDIR}/${PN}-${P}"
 
-S=${WORKDIR}/${PN}-${P}
+PATCHES=(
+	"${FILESDIR}"/${PN}-0.9-metalog-conf.patch
+)
+
+src_prepare() {
+	default
+	eautoreconf
+}
 
 src_configure() {
-	chmod +x autogen.sh
-	./autogen.sh || die "autogen failed"
 	econf $(use_with unicode)
 }
 
@@ -36,8 +40,9 @@ src_install() {
 	into /
 	dosbin "${FILESDIR}"/consolelog.sh
 
-	newinitd "${FILESDIR}"/metalog.initd metalog
+	newinitd "${FILESDIR}"/metalog.initd-r1 metalog
 	newconfd "${FILESDIR}"/metalog.confd metalog
+	systemd_newunit "${FILESDIR}/${PN}.service-r1" "${PN}.service"
 }
 
 pkg_preinst() {
