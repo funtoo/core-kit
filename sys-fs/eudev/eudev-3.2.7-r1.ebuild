@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -7,24 +7,23 @@ KV_min=2.6.39
 
 inherit autotools linux-info multilib multilib-minimal user
 
-if [[ ${PV} = 4.9999* ]]; then
+if [[ ${PV} = 9999* ]]; then
 	EGIT_REPO_URI="https://github.com/gentoo/eudev.git"
-	EGIT_BRANCH="eudev-4"
 	inherit git-r3
 else
 	SRC_URI="https://dev.gentoo.org/~blueness/${PN}/${P}.tar.gz"
-	#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
-	KEYWORDS=""
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
 fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
 HOMEPAGE="https://github.com/gentoo/eudev"
 
-LICENSE="LGPL-2.1 GPL-2"
+LICENSE="LGPL-2.1 MIT GPL-2"
 SLOT="0"
-IUSE="+blkid efi +hwdb +kmod selinux smack test"
+IUSE="+hwdb +kmod introspection rule-generator selinux static-libs test"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20
+	introspection? ( >=dev-libs/gobject-introspection-1.38 )
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
 	!<sys-libs/glibc-2.11
@@ -83,7 +82,7 @@ pkg_setup() {
 src_prepare() {
 	# change rules back to group uucp instead of dialout for now
 	sed -e 's/GROUP="dialout"/GROUP="uucp"/' -i rules/*.rules \
-		|| die "failed to change group dialout to uucp"
+	|| die "failed to change group dialout to uucp"
 
 	eapply_user
 	eautoreconf
@@ -101,50 +100,55 @@ multilib_src_configure() {
 		ac_cv_header_sys_capability_h=yes
 		DBUS_CFLAGS=' '
 		DBUS_LIBS=' '
-		--prefix=/
-		--libdir=/usr/$(get_libdir)
-		--includedir=/usr/include
+		--with-rootprefix=
+		--with-rootrundir=/run
+		--libdir="${EPREFIX}"/usr/$(get_libdir)
+		--with-rootlibexecdir="${EPREFIX}"/lib/udev
+		--enable-split-usr
 		--enable-manpages
 		--disable-hwdb
+		--exec-prefix="${EPREFIX}"
 	)
 
 	# Only build libudev for non-native_abi, and only install it to libdir,
 	# that means all options only apply to native_abi
 	if multilib_is_native_abi; then
 		econf_args+=(
-			$(use_enable blkid)
-			$(use_enable efi)
+			--with-rootlibdir="${EPREFIX}"/$(get_libdir)
+			$(use_enable introspection)
 			$(use_enable kmod)
+			$(use_enable static-libs static)
 			$(use_enable selinux)
-			$(use_enable smack)
+			$(use_enable rule-generator)
 		)
 	else
 		econf_args+=(
-			--disable-blkid
-			--disable-efi
+			--disable-static
+			--disable-introspection
 			--disable-kmod
 			--disable-selinux
-			--disable-smack
+			--disable-rule-generator
 		)
 	fi
 	ECONF_SOURCE="${S}" econf "${econf_args[@]}"
 }
 
-#multilib_src_compile() {
-#	if multilib_is_native_abi; then
-#		emake
-#	else
-#		emake -C src/libudev
-#	fi
-#}
+multilib_src_compile() {
+	if multilib_is_native_abi; then
+		emake
+	else
+		emake -C src/shared
+		emake -C src/libudev
+	fi
+}
 
-#multilib_src_install() {
-#	if multilib_is_native_abi; then
-#		emake DESTDIR="${D}" install
-#	else
-#		emake -C src/libudev DESTDIR="${D}" install
-#	fi
-#}
+multilib_src_install() {
+	if multilib_is_native_abi; then
+		emake DESTDIR="${D}" install
+	else
+		emake -C src/libudev DESTDIR="${D}" install
+	fi
+}
 
 multilib_src_test() {
 	# make sandbox get out of the way
@@ -165,6 +169,8 @@ multilib_src_install_all() {
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/40-gentoo.rules
+	doins "${FILESDIR}"/64-btrfs.rules
+	use rule-generator && doinitd "${FILESDIR}"/udev-postmount
 }
 
 pkg_postinst() {
@@ -212,6 +218,15 @@ pkg_postinst() {
 		ewarn "You need to restart eudev as soon as possible to make the"
 		ewarn "upgrade go into effect:"
 		ewarn "\t/etc/init.d/udev --nodeps restart"
+	fi
+
+	if use rule-generator && \
+	[[ -x $(type -P rc-update) ]] && rc-update show | grep udev-postmount | grep -qsv 'boot\|default\|sysinit'; then
+		ewarn
+		ewarn "Please add the udev-postmount init script to your default runlevel"
+		ewarn "to ensure the legacy rule-generator functionality works as reliably"
+		ewarn "as possible."
+		ewarn "\trc-update add udev-postmount default"
 	fi
 
 	elog
