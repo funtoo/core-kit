@@ -43,6 +43,7 @@ app-emulation/lxd:dnsmasq - Depend on dnsmasq to provide DHCP and DNS.
 app-eselect/eselect-php:fpm - Enable the FastCGI Process Manager SAPI
 app-misc/pax-utils:python - Install a more powerful/faster version of lddtree
 app-misc/tmux:utempter - Include libutempter support
+app-portage/portage-utils:qmanifest - Build qmanifest applet, this adds additional dependencies for GPG, OpenSSL and BLAKE2B hashing
 app-shells/bash:bashlogger - Log ALL commands typed into bash; should ONLY be used in restricted environments such as honeypots
 app-shells/bash:mem-scramble - Build with custom malloc/free overwriting allocated/freed memory
 app-shells/bash:net - Enable /dev/tcp/host/port redirection
@@ -60,6 +61,7 @@ dev-libs/elfutils:lzma - Support automatic decompression of LZMA-compressed file
 dev-libs/elfutils:threads - Build the libraries with thread safe support
 dev-libs/elfutils:utils - Install command-line utilities (all the eu-* programs)
 dev-libs/gmp:asm - Enable use of hand optimized assembly routines (faster execution)
+dev-libs/gmp:pgo - After building gmp, run some tests against to produce faster libraries -- this option will double the compile time
 dev-libs/libevent:debug - Support runtime debug mode and malloc hooks (for programmers)
 dev-libs/libffi:pax_kernel - Use PaX emulated trampolines, for we can't use PROT_EXEC
 dev-libs/libgpg-error:common-lisp - Install common-lisp files
@@ -295,6 +297,21 @@ sys-devel/binutils:default-gold - Set ld to point to ld.gold instead of ld.bfd
 sys-devel/binutils:gold - Build ld.gold linker
 sys-devel/binutils:multitarget - Adds support to binutils for cross compiling (does not work with gas)
 sys-devel/binutils:plugins - Enable plugin support in tools
+sys-devel/gcc:d - Enable support for the D programming language
+sys-devel/gcc:default - After building, set this compiler as default using gcc-config
+sys-devel/gcc:fixed-point - Enable fixed-point arithmetic support for MIPS targets in gcc (Warning: significantly increases compile time!)
+sys-devel/gcc:graphite - Add support for the framework for loop optimizations based on a polyhedral intermediate representation
+sys-devel/gcc:ip28 - Enable building a compiler capable of building a kernel for SGI Indigo2 Impact R10000 (IP28)
+sys-devel/gcc:ip32r10k - Enable building a compiler capable of building an experimental kernel for SGI O2 w/ R1x000 CPUs (IP32)
+sys-devel/gcc:libffi - Build the portable foreign function interface library
+sys-devel/gcc:mudflap - Add support for mudflap, a pointer use checking library
+sys-devel/gcc:n32 - Enable n32 ABI support on mips
+sys-devel/gcc:n64 - Enable n64 ABI support on mips
+sys-devel/gcc:nopie - Disable PIE support (NOT FOR GENERAL USE)
+sys-devel/gcc:nossp - Disable SSP support (NOT FOR GENERAL USE)
+sys-devel/gcc:objc - Build support for the Objective C code language
+sys-devel/gcc:objc++ - Build support for the Objective C++ language
+sys-devel/gcc:objc-gc - Build support for the Objective C code language Garbage Collector
 sys-devel/gettext:cvs - When running `autopoint`, use cvs to store the internal development files; this requires cvs at runtime, but will be faster/smaller than raw archives
 sys-devel/gettext:git - When running `autopoint`, use git to store the internal development files; this requires git at runtime, but will be faster/smaller than raw archives
 sys-fs/android-file-transfer-linux:fuse - Add FUSE mount helper
@@ -328,6 +345,7 @@ sys-fs/dmraid:klibc - Compile against dev-libs/klibc
 sys-fs/dmraid:led - Enable LED support
 sys-fs/dmraid:mini - Create a minimal binary suitable for early boot environments
 sys-fs/dosfstools:compat - Install symlinks for legacy names of the tools
+sys-fs/e2fsprogs:cron - Install e2scrub_all cron script
 sys-fs/e2fsprogs:fuse - Build fuse2fs, a FUSE file system client for ext2/ext3/ext4 file systems
 sys-fs/ecryptfs-utils:gpg - Enable app-crypt/gnupg key module
 sys-fs/ecryptfs-utils:openssl - Enable dev-libs/openssl key module
@@ -382,14 +400,11 @@ sys-libs/db:rpc - Enable rpc client/server
 sys-libs/freeipmi:nagios - Install a nagios plugin to check sensors' status.
 sys-libs/gdbm:berkdb - enable compatibility layer for UNIX-like dbm and ndbm interfaces
 sys-libs/gdbm:exporter - enable gdbmexport binary for exporting data from gdbm-1.8 databases into gdbm-1.9
-sys-libs/glibc:cet - Enable Intel Control-flow Enforcement Technology (needs binutils 2.29 and gcc 8)
 sys-libs/glibc:compile-locales - build *all* locales in src_install; this is generally meant for stage building only as it ignores /etc/locale.gen file and can be pretty slow
 sys-libs/glibc:debug - When USE=hardened, allow fortify/stack violations to dump core (SIGABRT) and not kill self (SIGKILL)
 sys-libs/glibc:gd - build memusage and memusagestat tools
-sys-libs/glibc:multiarch - enable optimizations for multiple CPU architectures (detected at runtime)
 sys-libs/glibc:nscd - Build, and enable support for, the Name Service Cache Daemon
 sys-libs/glibc:rpc - Enable obsolete RPC/NIS layers
-sys-libs/glibc:ssp - protect stack of glibc internals
 sys-libs/glibc:suid - Make internal pt_chown helper setuid -- not needed if using Linux and have /dev/pts mounted with gid=5
 sys-libs/glibc:systemtap - enable systemtap static probe points
 sys-libs/gwenhywfar:designer - Build plugins for dev-qt/designer

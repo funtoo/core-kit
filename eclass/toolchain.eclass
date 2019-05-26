@@ -174,6 +174,7 @@ if [[ ${PN} != "kgcc64" && ${PN} != gcc-* ]] ; then
 	tc_version_is_at_least 8.0 &&
 		IUSE+=" systemtap" TC_FEATURES+=(systemtap)
 	tc_version_is_at_least 9.0 && IUSE+=" d"
+	tc_version_is_at_least 9.1 && IUSE+=" lto"
 fi
 
 SLOT="${GCC_CONFIG_VER}"
@@ -993,6 +994,11 @@ toolchain_src_configure() {
 		confgcc+=( --enable-libstdcxx-time )
 	fi
 
+	# Build compiler using LTO
+	if tc_version_is_at_least 9.1 && use_if_iuse lto ; then
+		confgcc+=( --with-build-config=bootstrap-lto )
+	fi
+
 	# Support to disable pch when building libstdcxx
 	if tc_version_is_at_least 6.0 && ! use_if_iuse pch ; then
 		confgcc+=( --disable-libstdcxx-pch )
@@ -1105,6 +1111,9 @@ toolchain_src_configure() {
 		;;
 	*-elf|*-eabi)
 		confgcc+=( --with-newlib )
+		;;
+	*-musl*)
+		confgcc+=( --enable-__cxa_atexit )
 		;;
 	*-gnu*)
 		confgcc+=(

@@ -10,6 +10,7 @@
 =dev-vcs/git-2.21.0 python_single_target_python2_7
 =dev-vcs/git-2.21.0-r1 python_single_target_python2_7
 =dev-vcs/git-2.21.0-r2 python_single_target_python2_7
+=dev-vcs/git-2.22.0_rc1 python_single_target_python2_7
 =dev-vcs/git-9999 python_single_target_python2_7
 =dev-vcs/git-9999-r1 python_single_target_python2_7
 =dev-vcs/git-9999-r2 python_single_target_python2_7
