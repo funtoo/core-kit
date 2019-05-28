@@ -1,17 +1,16 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-
-inherit autotools ltprune multilib-minimal
+EAPI=7
+inherit autotools git-r3 multilib-minimal
 
 DESCRIPTION="Cross-platform asychronous I/O"
 HOMEPAGE="https://github.com/libuv/libuv"
-SRC_URI="${HOMEPAGE}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="${HOMEPAGE}"
 
 LICENSE="BSD BSD-2 ISC MIT"
 SLOT="0/1"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS=""
 IUSE="static-libs"
 RESTRICT="test"
 
@@ -24,6 +23,7 @@ src_prepare() {
 	echo "m4_define([UV_EXTRA_AUTOMAKE_FLAGS], [serial-tests])" \
 		> m4/libuv-extra-automake-flags.m4 || die
 
+	# upstream fails to ship a configure script
 	eautoreconf
 }
 
@@ -43,5 +43,5 @@ multilib_src_test() {
 
 multilib_src_install_all() {
 	einstalldocs
-	prune_libtool_files
+	find "${D}" -name '*.la' -delete || die
 }
