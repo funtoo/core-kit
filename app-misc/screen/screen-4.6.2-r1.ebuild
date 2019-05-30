@@ -1,21 +1,19 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-SCM=""
-[[ "${PV}" = 9999 ]] && SCM="git-r3"
-inherit autotools eutils flag-o-matic pam toolchain-funcs user ${SCM}
-unset SCM
+inherit autotools eutils flag-o-matic pam tmpfiles toolchain-funcs user
 
 DESCRIPTION="screen manager with VT100/ANSI terminal emulation"
 HOMEPAGE="https://www.gnu.org/software/screen/"
 
 if [[ "${PV}" != 9999 ]] ; then
 	SRC_URI="mirror://gnu/${PN}/${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 else
-	EGIT_REPO_URI="git://git.savannah.gnu.org/screen.git"
+	inherit git-r3
+	EGIT_REPO_URI="https://git.savannah.gnu.org/git/screen.git"
 	EGIT_CHECKOUT_DIR="${WORKDIR}/${P}" # needed for setting S later on
 	S="${WORKDIR}"/${P}/src
 fi
@@ -35,7 +33,7 @@ DEPEND="${CDEPEND}
 PATCHES=(
 	# Don't use utempter even if it is found on the system.
 	"${FILESDIR}"/${PN}-4.3.0-no-utempter.patch
-	"${FILESDIR}"/${P}-utmp-exit.patch # Fix building on uclibc, bug #562752 
+	"${FILESDIR}"/${P}-utmp-exit.patch
 )
 
 pkg_setup() {
@@ -60,9 +58,12 @@ src_prepare() {
 		doc/screen.1 \
 		|| die
 
-	if [[ ${CHOST} == *-darwin* ]] ; then
+	if [[ ${CHOST} == *-darwin* ]] || use elibc_musl ; then
 		sed -i -e '/^#define UTMPOK/s/define/undef/' acconfig.h || die
 	fi
+
+	# disable musl dummy headers for utmp[x]
+	use elibc_musl && append-cppflags "-D_UTMP_H -D_UTMPX_H"
 
 	# reconfigure
 	eautoreconf
@@ -81,6 +82,7 @@ src_configure() {
 	use debug && append-cppflags "-DDEBUG"
 
 	econf \
+		--with-socket-dir="${EPREFIX}/tmp/screen" \
 		--with-sys-screenrc="${EPREFIX}/etc/screenrc" \
 		--with-pty-mode=0620 \
 		--with-pty-group=5 \
@@ -104,7 +106,7 @@ src_install() {
 		doc/{FAQ,README.DOTSCREEN,fdpat.ps,window_to_display.ps}
 	)
 
-	default
+	emake DESTDIR="${D}" SCREEN=screen-${PV} install
 
 	local tmpfiles_perms tmpfiles_group
 
@@ -120,9 +122,7 @@ src_install() {
 		tmpfiles_group="utmp"
 	fi
 
-	dodir /etc/tmpfiles.d
-	echo "d /tmp/screen ${tmpfiles_perms} root ${tmpfiles_group}" \
-		> "${ED}"/etc/tmpfiles.d/screen.conf
+	newtmpfiles - screen.conf <<<"d /tmp/screen ${tmpfiles_perms} root ${tmpfiles_group}"
 
 	insinto /usr/share/screen
 	doins terminfo/{screencap,screeninfo.src}
@@ -131,6 +131,8 @@ src_install() {
 	doins "${FILESDIR}"/screenrc
 
 	pamd_mimic_system screen auth
+
+	dodoc "${DOCS[@]}"
 }
 
 pkg_postinst() {

@@ -42,6 +42,9 @@ app-emulation/lxd:daemon - Build the system daemon, not just the client tool
 app-emulation/lxd:dnsmasq - Depend on dnsmasq to provide DHCP and DNS.
 app-eselect/eselect-php:fpm - Enable the FastCGI Process Manager SAPI
 app-misc/pax-utils:python - Install a more powerful/faster version of lddtree
+app-misc/screen:multiuser - Enable multiuser support (by setting correct permissions)
+app-misc/screen:nethack - Express error messages in nethack style
+app-misc/screen:utmp - Include utmp support
 app-misc/tmux:utempter - Include libutempter support
 app-portage/portage-utils:qmanifest - Build qmanifest applet, this adds additional dependencies for GPG, OpenSSL and BLAKE2B hashing
 app-shells/bash:bashlogger - Log ALL commands typed into bash; should ONLY be used in restricted environments such as honeypots
@@ -64,6 +67,7 @@ dev-libs/gmp:asm - Enable use of hand optimized assembly routines (faster execut
 dev-libs/gmp:pgo - After building gmp, run some tests against to produce faster libraries -- this option will double the compile time
 dev-libs/libevent:debug - Support runtime debug mode and malloc hooks (for programmers)
 dev-libs/libffi:pax_kernel - Use PaX emulated trampolines, for we can't use PROT_EXEC
+dev-libs/libgcrypt:o-flag-munging - Enable O-flag mangling during build
 dev-libs/libgpg-error:common-lisp - Install common-lisp files
 dev-libs/libnl:doc - Install development documentation
 dev-libs/libnl:python - Install experimental dev-lang/python bindings
@@ -87,12 +91,6 @@ dev-libs/openssl:rfc3779 - Enable support for RFC 3779 (X.509 Extensions for IP 
 dev-libs/openssl:sslv2 - Support for the old/insecure SSLv2 protocol -- note: not required for TLS/https
 dev-libs/openssl:sslv3 - Support for the old/insecure SSLv3 protocol -- note: not required for TLS/https
 dev-libs/openssl:tls-heartbeat - Enable the Heartbeat Extension in TLS and DTLS
-dev-scheme/guile:debug-freelist - Include garbage collector freelist debugging code
-dev-scheme/guile:debug-malloc - Include malloc debugging code
-dev-scheme/guile:deprecated - Enable deprecated features
-dev-scheme/guile:discouraged - (implied by deprecated) enable merely discouraged features
-dev-scheme/guile:networking - Include networking interfaces
-dev-scheme/guile:regex - Include regular expression interfaces
 dev-util/cmake:server - Enable cmake-server support.
 dev-util/cmake:system-jsoncpp - Use system copy of dev-libs/jsoncpp instead of bundled one.
 dev-util/ctags:json - Enable JSON output support
@@ -231,8 +229,18 @@ sys-apps/hwids:net - Install the oui.txt and iab.txt databases
 sys-apps/hwids:pci - Install the pci.ids database
 sys-apps/hwids:udev - Install hwdb.d rules for udev
 sys-apps/hwids:usb - Install the usb.ids database
+sys-apps/iproute2:berkdb - build programs that use berkdb (just arpd)
+sys-apps/iproute2:elf - support loading eBPF programs from ELFs (e.g. LLVM's eBPF backend)
+sys-apps/iproute2:iptables - include support for iptables filtering
+sys-apps/iproute2:minimal - only install ip and tc programs, without eBPF support
+sys-apps/kmod:lzma - Enable support for XZ compressed modules
+sys-apps/kmod:tools - Install module loading/unloading tools.
+sys-apps/kmod:zlib - Enable support for gzipped modules
 sys-apps/man-db:manpager - Enable manpager wrapper for colorizing output
-sys-apps/net-tools:old-output - use old ifconfig output style (useful for when new output breaks scripts)
+sys-apps/net-tools:arp - build the arp and rarp tools (for manipulating the ARP cache)
+sys-apps/net-tools:hostname - build the hostname and dnsdomainname tools
+sys-apps/net-tools:plipconfig - build the plipconfig tool (for working with old PLIP hardware)
+sys-apps/net-tools:slattach - build the slattach tool (for working with old serial ports)
 sys-apps/pciutils:dns - Enable support for querying the central database of PCI IDs using DNS
 sys-apps/pciutils:kmod - Enable sys-apps/kmod support for the -k switch in lspci command
 sys-apps/pciutils:zlib - Support compressed pci.ids database

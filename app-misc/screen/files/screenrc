@@ -354,4 +354,3 @@ defnonblock on
 
 # Don't you want to start programs which need a DISPLAY ?
 # setenv DISPLAY ''
-term "screen-256color"

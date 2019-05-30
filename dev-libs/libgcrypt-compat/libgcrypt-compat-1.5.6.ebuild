@@ -1,29 +1,31 @@
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit autotools ltprune multilib-minimal
+inherit autotools multilib-minimal
 
-DESCRIPTION="General purpose crypto library based on the code used in GnuPG"
+MY_PN="${PN%-compat}"
+MY_P="${MY_PN}-${PV}"
+
+DESCRIPTION="Old version of libgcrypt needed by some binaries"
 HOMEPAGE="http://www.gnupg.org/"
-SRC_URI="mirror://gnupg/libgcryptr/libgcrypt-${PV}.tar.bz2"
+SRC_URI="mirror://gnupg/${MY_PN}/${MY_P}.tar.bz2"
 LICENSE="LGPL-2.1 MIT"
-SLOT="0/11" # subslot = soname major version
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~sparc-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE=""
-S="${WORKDIR}/libgcrypt-${PV}"
+SLOT="11" # soname major version
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+
 RDEPEND=">=dev-libs/libgpg-error-1.12[${MULTILIB_USEDEP}]
 	!dev-libs/libgcrypt:0/11
-	abi_x86_32? (
-		!<=app-emulation/emul-linux-x86-baselibs-20131008-r19
-		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32]
-	)"
+	!dev-libs/libgcrypt:11/11"
+
 DEPEND="${RDEPEND}"
 
+S="${WORKDIR}/${MY_P}"
+
 PATCHES=(
-	"${FILESDIR}"/libgcrypt-1.5.0-uscore.patch
-	"${FILESDIR}"/libgcrypt-multilib-syspath.patch
-	"${FILESDIR}"/libgcrypt-1.5.4-clang-arm.patch
+	"${FILESDIR}"/${MY_PN}-1.5.0-uscore.patch
+	"${FILESDIR}"/${MY_PN}-1.5.4-clang-arm.patch
 )
 
 src_prepare() {
@@ -51,12 +53,6 @@ multilib_src_configure() {
 }
 
 multilib_src_install() {
-	emake DESTDIR="${D}" install
-
-	rm -r "${ED%/}"/usr/{bin,include,lib*/*.so,share} || die
-}
-
-multilib_src_install_all() {
-	default
-	prune_libtool_files
+	emake -C src DESTDIR="${D}" install-libLTLIBRARIES
+	rm -v "${ED}"/usr/$(get_libdir)/*.{la,so} || die
 }

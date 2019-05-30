@@ -1,3 +1,4 @@
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
@@ -5,12 +6,11 @@ EAPI="5"
 inherit flag-o-matic toolchain-funcs
 
 if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="git://git.code.sf.net/p/net-tools/code"
-	EGIT_PROJECT="${PN}"
-	inherit git-2
+	EGIT_REPO_URI="https://git.code.sf.net/p/net-tools/code"
+	inherit git-r3
 else
 	SRC_URI="mirror://gentoo/${P}.tar.xz"
-	KEYWORDS="*"
+	KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~x86-linux"
 fi
 
 DESCRIPTION="Standard Linux networking tools"
@@ -91,5 +91,4 @@ src_install() {
 	# We need to use emake by hand to pass ED. #567300
 	emake DESTDIR="${ED}" install
 	dodoc README THANKS TODO
-	dosym /bin/ifconfig /sbin/ifconfig
 }
