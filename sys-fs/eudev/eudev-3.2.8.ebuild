@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -12,7 +12,7 @@ if [[ ${PV} = 9999* ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://dev.gentoo.org/~blueness/${PN}/${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
@@ -102,12 +102,14 @@ multilib_src_configure() {
 		DBUS_LIBS=' '
 		--with-rootprefix=
 		--with-rootrundir=/run
+		--exec-prefix="${EPREFIX}"
+		--bindir="${EPREFIX}"/bin
+		--includedir="${EPREFIX}"/usr/include
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
 		--with-rootlibexecdir="${EPREFIX}"/lib/udev
 		--enable-split-usr
 		--enable-manpages
 		--disable-hwdb
-		--exec-prefix="${EPREFIX}"
 	)
 
 	# Only build libudev for non-native_abi, and only install it to libdir,
@@ -188,6 +190,8 @@ pkg_postinst() {
 	# https://bugs.gentoo.org/246847
 	# https://bugs.gentoo.org/514174
 	enewgroup input
+	enewgroup kvm 78
+	enewgroup render
 
 	# REPLACING_VERSIONS should only ever have zero or 1 values but in case it doesn't,
 	# process it as a list.  We only care about the zero case (new install) or the case where

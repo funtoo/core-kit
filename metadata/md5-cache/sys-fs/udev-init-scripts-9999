@@ -1,0 +1,11 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=postinst unpack
+DESCRIPTION=udev startup scripts for openrc
+EAPI=7
+HOMEPAGE=https://www.gentoo.org
+LICENSE=GPL-2
+RDEPEND=>=virtual/udev-217 !<sys-apps/openrc-0.14
+RESTRICT=test
+SLOT=0
+_eclasses_=git-r3	0d4635eeb5a96cd5315597a47eba25c9
+_md5_=342f5ef300eccca3b740e2cfc2454b1d
