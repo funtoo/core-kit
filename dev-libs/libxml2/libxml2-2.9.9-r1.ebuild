@@ -12,8 +12,8 @@ HOMEPAGE="http://www.xmlsoft.org/"
 
 LICENSE="MIT"
 SLOT="2"
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv s390 ~sh ~sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE="debug examples icu ipv6 lzma python readline static-libs test"
+KEYWORDS="*"
+IUSE="debug -doc examples icu ipv6 lzma python readline static-libs test"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 XSTS_HOME="http://www.w3.org/XML/2004/xml-schema-test-suite"
@@ -38,7 +38,7 @@ RDEPEND="
 	readline? ( sys-libs/readline:= )
 "
 DEPEND="${RDEPEND}
-	dev-util/gtk-doc-am
+	doc? ( dev-util/gtk-doc-am )
 	virtual/pkgconfig
 	hppa? ( >=sys-devel/binutils-2.15.92.0.2 )
 "
@@ -144,6 +144,9 @@ multilib_src_configure() {
 }
 
 multilib_src_compile() {
+	if ! use doc; then
+		sed -i -e '/^SUBDIRS=/s/doc//' Makefile || die
+	fi
 	default
 	if multilib_is_native_abi && use python; then
 		local native_builddir=${BUILD_DIR}

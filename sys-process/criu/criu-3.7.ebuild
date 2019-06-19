@@ -1,20 +1,20 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit toolchain-funcs linux-info flag-o-matic python-r1 python-utils-r1
+inherit eutils toolchain-funcs linux-info flag-o-matic python-r1 python-utils-r1
 
 DESCRIPTION="utility to checkpoint/restore a process tree"
-HOMEPAGE="https://criu.org/"
-SRC_URI="https://download.openvz.org/criu/${P}.tar.bz2"
+HOMEPAGE="http://criu.org/"
+SRC_URI="http://download.openvz.org/criu/${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64"
-IUSE="doc python selinux setproctitle static-libs"
+IUSE="python selinux setproctitle static-libs"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -27,10 +27,8 @@ RDEPEND="
 	selinux? ( sys-libs/libselinux )
 	setproctitle? ( dev-libs/libbsd )"
 DEPEND="${RDEPEND}
-	doc? (
-		app-text/asciidoc
-		app-text/xmlto
-	)"
+	app-text/asciidoc
+	app-text/xmlto"
 RDEPEND="${RDEPEND}
 	python? (
 		dev-python/protobuf-python[${PYTHON_USEDEP}]
@@ -38,8 +36,7 @@ RDEPEND="${RDEPEND}
 	)"
 
 CONFIG_CHECK="~CHECKPOINT_RESTORE ~NAMESPACES ~PID_NS ~FHANDLE ~EVENTFD ~EPOLL ~INOTIFY_USER
-	~IA32_EMULATION ~UNIX_DIAG ~INET_DIAG ~INET_UDP_DIAG ~PACKET_DIAG ~NETLINK_DIAG ~TUN
-	~NETFILTER_XT_MARK"
+	~IA32_EMULATION ~UNIX_DIAG ~INET_DIAG ~INET_UDP_DIAG ~PACKET_DIAG ~NETLINK_DIAG"
 
 RESTRICT="test"
 
@@ -67,8 +64,6 @@ src_prepare() {
 			-e 's:libselinux:no_libselinux:g' \
 			-i Makefile.config || die
 	fi
-
-	use doc || sed -i 's_\(install: \)install-man _\1_g' Makefile.install
 }
 
 src_configure() {
@@ -78,7 +73,6 @@ src_configure() {
 }
 
 src_compile() {
-	local target="all $(usex doc 'docs' '')"
 	RAW_LDFLAGS="$(raw-ldflags)" emake \
 		CC="$(tc-getCC)" \
 		LD="$(tc-getLD)" \
@@ -88,7 +82,7 @@ src_compile() {
 		V=1 WERROR=0 DEBUG=0 \
 		SETPROCTITLE=$(usex setproctitle) \
 		PYCRIU=$(usex python) \
-		${target}
+		all docs
 }
 
 src_test() {
@@ -109,10 +103,9 @@ src_install() {
 		LOGROTATEDIR="${EPREFIX}"/etc/logrotate.d \
 		DESTDIR="${D}" \
 		LIBDIR="${EPREFIX}/usr/$(get_libdir)" \
-		V=1 WERROR=0 DEBUG=0 \
 		install
 
-	use doc && dodoc CREDITS README.md
+	dodoc CREDITS README.md
 
 	if use python ; then
 		cd lib
