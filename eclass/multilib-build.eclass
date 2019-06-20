@@ -127,7 +127,7 @@ _multilib_build_set_globals() {
 	local usedeps=${flags[@]/%/(-)?}
 
 	IUSE=${flags[*]}
-	MULTILIB_USEDEP=${usedeps// /,}
+	MULTILIB_USEDEP='-mgorny(-)'
 	readonly MULTILIB_USEDEP
 }
 _multilib_build_set_globals
