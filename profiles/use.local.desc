@@ -91,7 +91,6 @@ dev-libs/openssl:rfc3779 - Enable support for RFC 3779 (X.509 Extensions for IP 
 dev-libs/openssl:sslv2 - Support for the old/insecure SSLv2 protocol -- note: not required for TLS/https
 dev-libs/openssl:sslv3 - Support for the old/insecure SSLv3 protocol -- note: not required for TLS/https
 dev-libs/openssl:tls-heartbeat - Enable the Heartbeat Extension in TLS and DTLS
-dev-util/cmake:server - Enable cmake-server support.
 dev-util/cmake:system-jsoncpp - Use system copy of dev-libs/jsoncpp instead of bundled one.
 dev-util/ctags:json - Enable JSON output support
 dev-util/ctags:xml - Enable XML parsing support
@@ -184,6 +183,7 @@ net-misc/openssh:livecd - Enable root password logins for live-cd environment.
 net-misc/openssh:ssh1 - Support the legacy/weak SSH1 protocol
 net-misc/openssh:ssl - Enable additional crypto algorithms via OpenSSL
 net-misc/rsync:stunnel - Provide helper scripts for using rsync via >=net-misc/stunnel-4
+net-misc/wget:cookie_check - Enable cookie checks via net-libs/libpsl
 net-misc/wget:ntlm - Enable support for NTLM (Windows-based) authorization
 net-misc/wget:uuid - Generate UUIDs for the WARC (Web ARChive file format) using libuuid; otherwise use a simple RNG (random number generator)
 net-wireless/bluez:btpclient - Enable BTP client
@@ -191,7 +191,8 @@ net-wireless/bluez:deprecated - Build deprecated plugins
 net-wireless/bluez:experimental - Build experimental plugins
 net-wireless/bluez:extra-tools - Install tools that upstream doesn't install on purpose by default. All this tools shouldn't be used. Then, please notify upstream about you still need them to let them know the situation.
 net-wireless/bluez:mesh - Add support for Bluetooth Mesh control application and advertising bearer.
-net-wireless/bluez:obex - Enable OBEX transfer support.
+net-wireless/bluez:midi - Enable MIDI support
+net-wireless/bluez:obex - Enable OBEX transfer support
 net-wireless/bluez:test-programs - Install tools for testing of various Bluetooth functions
 net-wireless/bluez:user-session - Allow compatibility with user-session semantics for session bus under systemd
 net-wireless/crda:gcrypt - Use libgcrypt instead of openssl for key checking
@@ -255,9 +256,11 @@ sys-apps/smartmontools:caps - Build against sys-libs/libcap-ng to allow smartd t
 sys-apps/smartmontools:daemon - Install the monitoring daemon (smartd) and associated scripts.
 sys-apps/smartmontools:update_drivedb - Install a script to update the drivedb file.
 sys-apps/tcp-wrappers:netgroups - Support matching NIS (host) netgroup names via the @netgroup syntax (if you don't know what this means, you most likely do not need it)
+sys-apps/texinfo:standalone - Build standalone version that survives all Portage bugs
 sys-apps/util-linux:caps - build setpriv helper (run programs with diff capabilities)
 sys-apps/util-linux:cramfs - build mkfs/fsck helpers for cramfs filesystems
 sys-apps/util-linux:fdformat - build fdformat (floppy disk format)
+sys-apps/util-linux:hardlink - build hardlink program
 sys-apps/util-linux:kill - build the kill program
 sys-apps/util-linux:pam - build runuser helper
 sys-apps/util-linux:suid - install mount/umount as setuid so non-root users may mount/umount devices, and wall/write as setgid so non-root users can notify other users
