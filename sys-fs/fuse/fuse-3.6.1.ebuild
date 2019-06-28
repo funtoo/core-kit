@@ -12,7 +12,7 @@ SRC_URI="https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="3"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="*"
 IUSE="test"
 
 DEPEND="virtual/pkgconfig
@@ -23,6 +23,10 @@ DEPEND="virtual/pkgconfig
 RDEPEND=">=sys-fs/fuse-common-3.3.0-r1"
 
 DOCS=( AUTHORS ChangeLog.rst README.md doc/README.NFS doc/kernel.txt )
+
+PATCHES=(
+	"${FILESDIR}"/fuse-3.6.1-no-mknod-on-install.patch
+)
 
 python_check_deps() {
 	has_version "dev-python/pytest[${PYTHON_USEDEP}]"
@@ -63,9 +67,6 @@ multilib_src_install_all() {
 
 	# installed via fuse-common
 	rm -r "${ED}"/{etc,$(get_udevdir)} || die
-
-	# handled by the device manager
-	rm -r "${D}"/dev || die
 
 	# manually install man pages to respect compression
 	rm -r "${ED}"/usr/share/man || die
