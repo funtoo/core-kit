@@ -1,18 +1,18 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python3_{4,5,6} )
+PYTHON_COMPAT=( python3_{5,6,7} )
 inherit cmake-utils python-any-r1
 
 DESCRIPTION="An implementation of basic iCAL protocols"
 HOMEPAGE="https://github.com/libical/libical"
-SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="|| ( MPL-2.0 LGPL-2.1 )"
 SLOT="0/3"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x86-solaris"
+KEYWORDS="alpha amd64 arm arm64 ~hppa ia64 ~mips ppc ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x86-solaris"
 IUSE="berkdb doc examples static-libs test"
 
 # TODO: disabled until useful
@@ -21,17 +21,17 @@ IUSE="berkdb doc examples static-libs test"
 # 		dev-libs/libxml2:2
 # 	)
 # 	introspection? ( dev-libs/gobject-introspection:= )
-COMMON_DEPEND="
+DEPEND="
 	dev-libs/icu:=
 	berkdb? ( sys-libs/db:= )
 "
-DEPEND="${COMMON_DEPEND}
+BDEPEND="
 	dev-lang/perl
 	virtual/pkgconfig
 	doc? ( app-doc/doxygen )
 	test? ( ${PYTHON_DEPS} )
 "
-RDEPEND="${COMMON_DEPEND}
+RDEPEND="${DEPEND}
 	sys-libs/timezone-data
 "
 
@@ -41,8 +41,8 @@ DOCS=(
 )
 
 PATCHES=(
-	"${FILESDIR}/${PN}-3.0.1-pkgconfig-libdir.patch"
-	"${FILESDIR}/${P}-findicu-pkgconfig.patch"
+	"${FILESDIR}"/${PN}-3.0.{4,5}-pkgconfig-libdir.patch
+	"${FILESDIR}"/${P}-tests.patch
 )
 
 pkg_setup() {
@@ -74,7 +74,10 @@ src_compile() {
 }
 
 src_test() {
-	local myctestargs=( -j1 )
+	local myctestargs=(
+		-E "(icalrecurtest|icalrecurtest-r)" # bug 660282
+	)
+
 	cmake-utils_src_test
 }
 
