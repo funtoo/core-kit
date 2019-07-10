@@ -1,7 +1,6 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit toolchain-funcs flag-o-matic
 
@@ -11,8 +10,7 @@ SRC_URI="mirror://nongnu/${PN}/${P/_/-}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-[[ "${PV}" == *beta* ]] || \
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86"
+KEYWORDS="*"
 IUSE="selinux ibm static kernel_FreeBSD"
 
 CDEPEND="
@@ -31,11 +29,12 @@ S="${WORKDIR}/${P/_*}"
 PATCHES=(
 	"${FILESDIR}/${PN}-2.86-kexec.patch" #80220
 	"${FILESDIR}/${PN}-2.94_beta-shutdown-single.patch" #158615
-	"${FILESDIR}/${PN}-2.92_beta-shutdown-h.patch" #449354
+	"${FILESDIR}/${PN}-2.95_beta-shutdown-h.patch" #449354
 )
 
 src_prepare() {
 	default
+
 	sed -i \
 		-e '/^CPPFLAGS =$/d' \
 		-e '/^override CFLAGS +=/s/ -fstack-protector-strong//' \
@@ -109,7 +108,7 @@ src_install() {
 	doins "${WORKDIR}"/inittab
 
 	# dead symlink
-	rm "${ED%/}"/usr/bin/lastb || die
+	rm "${ED}"/usr/bin/lastb || die
 
 	newinitd "${FILESDIR}"/bootlogd.initd bootlogd
 }
@@ -118,7 +117,7 @@ pkg_postinst() {
 	# Reload init to fix unmounting problems of / on next reboot.
 	# This is really needed, as without the new version of init cause init
 	# not to quit properly on reboot, and causes a fsck of / on next reboot.
-	if [[ ${ROOT} == / ]] ; then
+	if [[ "${ROOT}" == "/" ]] || [[ "${ROOT}" == "" ]]; then
 		if [[ -e /dev/initctl && ! -e /run/initctl ]]; then
 			ln -s /dev/initctl /run/initctl
 		fi
@@ -130,7 +129,7 @@ pkg_postinst() {
 	elog "sys-apps/util-linux. The pidof tool has been moved to sys-process/procps."
 
 	# Required for new bootlogd service
-	if [[ ! -e "${EROOT%/}/var/log/boot" ]] ; then
-		touch "${EROOT%/}/var/log/boot"
+	if [[ ! -e "${EROOT}/var/log/boot" ]] ; then
+		touch "${EROOT}/var/log/boot"
 	fi
 }
