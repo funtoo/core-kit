@@ -1,14 +1,18 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python2_7 )
+EAPI=7
+PYTHON_COMPAT=( python2_7 python3_{5..7} )
 
 inherit cmake-multilib eutils flag-o-matic mono-env python-r1
 
 DESCRIPTION="Library for automatic proxy configuration management"
 HOMEPAGE="https://github.com/libproxy/libproxy"
-SRC_URI="https://github.com/libproxy/libproxy/archive/${PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/libproxy/libproxy/archive/${PV}.tar.gz -> ${P}.tar.gz"
+GITHUB_REPO="$PN"
+GITHUB_USER="${PN}"
+GITHUB_TAG="1e1d311ca31e69e6af08a79cf2334898f1c2dc3c"
+SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
@@ -44,17 +48,22 @@ PATCHES=(
 
 	# prevent dependency loop with networkmanager, libsoup, glib-networking; bug #467696
 	# https://github.com/libproxy/libproxy/issues/28
-	"${FILESDIR}/${PN}-0.4.11-avoid-nm-build-dep.patch"
+#	"${FILESDIR}/${PN}-0.4.11-avoid-nm-build-dep.patch"
 
 	# Gentoo's spidermonkey doesn't set Version: in mozjs18[57].pc
-	"${FILESDIR}/${PN}-0.4.12-mozjs.pc.patch"
+#	"${FILESDIR}/${PN}-0.4.12-mozjs.pc.patch"
 
 	# https://github.com/libproxy/libproxy/issues/27
 	"${FILESDIR}/${PN}-0.4.12-macosx.patch"
 
 	# bug 600254
-	"${FILESDIR}/${P}-cmake-37.patch"
+#	"${FILESDIR}/${PN}-0.4.13-cmake-37.patch"
 )
+
+src_unpack() {
+	unpack ${A}
+	mv "${WORKDIR}/${GITHUB_USER}-${PN}"-??????? "${S}" || die
+}
 
 multilib_src_configure() {
 	local mycmakeargs=(
