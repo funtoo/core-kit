@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: db.eclass
@@ -30,7 +30,7 @@ db_fix_so() {
 	# now rebuild all the correct ones
 	for ext in so a; do
 		for name in libdb libdb_{cxx,tcl,java,sql,stl}; do
-			target=`find . -maxdepth 1 -type f -name "${name}-*.${ext}" |sort -n |tail -n 1`
+			target=`find . -maxdepth 1 -type f -name "${name}-*.${ext}" |sort -V |tail -n 1`
 			[ -n "${target}" ] && ln -sf ${target//.\//} ${name}.${ext}
 		done;
 	done;
@@ -52,7 +52,7 @@ db_fix_so() {
 	# do the same for headers now
 	# but since there are only two of them, just overwrite them
 	cd "${EROOT}"/usr/include
-	target=`find . -maxdepth 1 -type d -name 'db[0-9]*' | sort -n |cut -d/ -f2- | tail -n1`
+	target=`find . -maxdepth 1 -type d -name 'db[0-9]*' | sort -V |cut -d/ -f2- | tail -n1`
 	if [ -n "${target}" ] && [ -e "${target}/db.h" ] && ( ! [[ -e db.h ]] || [[ -h db.h ]] ); then
 		einfo "Creating db.h symlinks to ${target}"
 		ln -sf "${target}"/db.h .
