@@ -405,7 +405,6 @@ sys-fs/zfs-kmod:rootfs - Install zfs-shutdown script to support exporting a pool
 sys-kernel/debian-sources:binary - Builds and installs kernel automatically
 sys-kernel/debian-sources:rt - Applies the CONFIG_PREEMPT_RT patch series
 sys-kernel/dracut:debug - Module installing additional tools like strace, file editor, ssh and more
-sys-kernel/spl:debug-log - Enable additional diagnostics
 sys-libs/binutils-libs:64-bit-bfd - Support 64-bit targets even on 32-bit hosts (is ignored on 64-bit hosts)
 sys-libs/binutils-libs:multitarget - Enable all possible targets in libbfd
 sys-libs/db:rpc - Enable rpc client/server

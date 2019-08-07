@@ -1,15 +1,23 @@
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
+PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 
-AUTOTOOLS_AUTORECONF="1"
-KEYWORDS="*"
+if [[ ${PV} == "9999" ]] ; then
+	AUTOTOOLS_AUTORECONF="1"
+	EGIT_REPO_URI="https://github.com/zfsonlinux/${PN}.git"
+	inherit git-r3
+else
+	SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${P}.tar.gz"
+	KEYWORDS="amd64"
+fi
 
-inherit flag-o-matic linux-info linux-mod autotools-utils
+inherit flag-o-matic linux-info linux-mod python-single-r1 autotools-utils
 
 DESCRIPTION="The Solaris Porting Layer provides many of the Solaris kernel APIs"
-HOMEPAGE="http://zfsonlinux.org/"
-SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${P}.tar.gz"
+HOMEPAGE="https://zfsonlinux.org/"
+
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="custom-cflags debug"
@@ -22,23 +30,17 @@ COMMON_DEPEND="
 DEPEND="${COMMON_DEPEND}"
 
 RDEPEND="${COMMON_DEPEND}
+	${PYTHON_DEPS}
 	!sys-devel/spl"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 AT_M4DIR="config"
 AUTOTOOLS_IN_SOURCE_BUILD="1"
 DOCS=( AUTHORS DISCLAIMER )
 
-GITHUB_REPO="spl"
-GITHUB_USER="zfsonlinux"
-GITHUB_TAG="${P}"
-SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz"
-
-src_unpack() {
-	unpack ${A}
-	mv "${WORKDIR}/${GITHUB_USER}-${GITHUB_REPO}"-??????? "${S}" || die
-}
-
 pkg_setup() {
+	python-single-r1_pkg_setup
 	linux-info_pkg_setup
 	CONFIG_CHECK="
 		!DEBUG_LOCK_ALLOC
@@ -46,6 +48,7 @@ pkg_setup() {
 		KALLSYMS
 		!PAX_KERNEXEC_PLUGIN_METHOD_OR
 		!PAX_SIZE_OVERFLOW
+		!TRIM_UNUSED_KSYMS
 		ZLIB_DEFLATE
 		ZLIB_INFLATE
 	"
@@ -57,7 +60,10 @@ pkg_setup() {
 	"
 
 	kernel_is ge 2 6 32 || die "Linux 2.6.32 or newer required"
-	kernel_is le 5 0 0 || die "Linux 5.0_rc3 is the latest supported version."
+
+	[ ${PV} != "9999" ] && \
+		{ kernel_is le 5 0 || die "Linux 5.0 is the latest supported version."; }
+
 	check_extra_config
 }
 
@@ -94,6 +100,8 @@ src_configure() {
 
 src_install() {
 	autotools-utils_src_install INSTALL_MOD_PATH="${INSTALL_MOD_PATH:-$EROOT}"
+	# enforce selected python implementation
+	python_fix_shebang "${ED}/bin"
 }
 
 pkg_postinst() {

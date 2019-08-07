@@ -18,4 +18,5 @@ net-wireless/bluez python_single_target_python2_7
 sys-boot/udk python_single_target_python2_7
 sys-fs/ecryptfs-utils python_single_target_python2_7
 sys-fs/traydevice python_single_target_python2_7
+sys-kernel/spl python_single_target_python2_7
 sys-libs/libieee1284 python_single_target_python2_7

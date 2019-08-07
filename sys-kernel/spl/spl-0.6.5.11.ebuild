@@ -1,52 +1,50 @@
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
 
-if [ ${PV} == "9999" ]; then
+if [[ ${PV} == "9999" ]] ; then
 	AUTOTOOLS_AUTORECONF="1"
-	EGIT_REPO_URI="https://github.com/zfsonlinux/zfs.git"
+	EGIT_REPO_URI="https://github.com/zfsonlinux/${PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV/_/-}/zfs-${PV/_/-}.tar.gz"
-	S="${WORKDIR}/zfs-0.8.0"
+	SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${P}.tar.gz"
+	KEYWORDS="amd64"
 fi
 
-inherit flag-o-matic linux-info linux-mod toolchain-funcs autotools-utils
+inherit flag-o-matic linux-info linux-mod autotools-utils
 
-DESCRIPTION="Linux ZFS kernel module for sys-fs/zfs"
-HOMEPAGE="http://zfsonlinux.org/"
+DESCRIPTION="The Solaris Porting Layer provides many of the Solaris kernel APIs"
+HOMEPAGE="https://zfsonlinux.org/"
 
-LICENSE="CDDL GPL-2+"
+LICENSE="GPL-2"
 SLOT="0"
-IUSE="custom-cflags debug +rootfs"
+IUSE="custom-cflags debug"
 RESTRICT="debug? ( strip ) test"
 
-DEPEND="
+COMMON_DEPEND="
 	dev-lang/perl
-	virtual/awk
-"
+	virtual/awk"
 
-RDEPEND="${DEPEND}
-	!sys-fs/zfs-fuse
-	!sys-kernel/spl
-"
+DEPEND="${COMMON_DEPEND}"
+
+RDEPEND="${COMMON_DEPEND}
+	!sys-devel/spl"
 
 AT_M4DIR="config"
 AUTOTOOLS_IN_SOURCE_BUILD="1"
-
-DOCS=( AUTHORS COPYRIGHT NOTICE META README.md )
+DOCS=( AUTHORS DISCLAIMER )
 
 pkg_setup() {
 	linux-info_pkg_setup
 	CONFIG_CHECK="
 		!DEBUG_LOCK_ALLOC
-		!GRKERNSEC_RANDSTRUCT
-		!PAX_KERNEXEC_PLUGIN_METHOD_OR
-		!TRIM_UNUSED_KSYMS
-		EFI_PARTITION
-		IOSCHED_NOOP
-		KALLSYMS
+		!CONFIG_REISER4_FS
 		MODULES
+		KALLSYMS
+		!PAX_KERNEXEC_PLUGIN_METHOD_OR
+		!PAX_SIZE_OVERFLOW
+		!TRIM_UNUSED_KSYMS
 		ZLIB_DEFLATE
 		ZLIB_INFLATE
 	"
@@ -57,23 +55,21 @@ pkg_setup() {
 		!DEBUG_INFO_REDUCED
 	"
 
-	use rootfs && \
-		CONFIG_CHECK="${CONFIG_CHECK}
-			BLK_DEV_INITRD
-			DEVTMPFS
-	"
-
 	kernel_is ge 2 6 32 || die "Linux 2.6.32 or newer required"
 
 	[ ${PV} != "9999" ] && \
-		{ kernel_is le 4 18 || die "Linux 4.18 is the latest supported version."; }
+		{ kernel_is le 4 12 || die "Linux 4.12 is the latest supported version."; }
 
 	check_extra_config
 }
 
 src_prepare() {
-	# Remove GPLv2-licensed ZPIOS unless we are debugging
-	use debug || sed -e 's/^subdir-m += zpios$//' -i "${S}/module/Makefile.in"
+	# Workaround for hard coded path
+	sed -i "s|/sbin/lsmod|/bin/lsmod|" "${S}/scripts/check.sh" || \
+		die "Cannot patch check.sh"
+
+	# splat is unnecessary unless we are debugging
+	use debug || { sed -e 's/^subdir-m += splat$//' -i "${S}/module/Makefile.in" || die ; }
 
 	# Set module revision number
 	[ ${PV} != "9999" ] && \
@@ -87,15 +83,14 @@ src_configure() {
 	filter-ldflags -Wl,*
 
 	set_arch_to_kernel
-	local myeconfargs=(${myeconfargs}
+	local myeconfargs=(
 		--bindir="${EPREFIX}/bin"
 		--sbindir="${EPREFIX}/sbin"
-		--with-config=kernel
+		--with-config=all
 		--with-linux="${KV_DIR}"
 		--with-linux-obj="${KV_OUT_DIR}"
 		$(use_enable debug)
 	)
-
 	autotools-utils_src_configure
 }
 
@@ -107,12 +102,12 @@ pkg_postinst() {
 	linux-mod_pkg_postinst
 
 	# Remove old modules
-	if [ -d "${EROOT}lib/modules/${KV_FULL}/addon/zfs" ]
+	if [ -d "${EROOT}lib/modules/${KV_FULL}/addon/spl" ]
 	then
-		ewarn "${PN} now installs modules in ${EROOT}lib/modules/${KV_FULL}/extra/zfs"
-		ewarn "Old modules were detected in ${EROOT}lib/modules/${KV_FULL}/addon/zfs"
+		ewarn "${PN} now installs modules in ${EROOT}lib/modules/${KV_FULL}/extra/spl"
+		ewarn "Old modules were detected in ${EROOT}lib/modules/${KV_FULL}/addon/spl"
 		ewarn "Automatically removing old modules to avoid problems."
-		rm -r "${EROOT}lib/modules/${KV_FULL}/addon/zfs" || die "Cannot remove modules"
+		rm -r "${EROOT}lib/modules/${KV_FULL}/addon/spl" || die "Cannot remove modules"
 		rmdir --ignore-fail-on-non-empty "${EROOT}lib/modules/${KV_FULL}/addon"
 	fi
 }
