@@ -1,6 +1,6 @@
---- a/Makefile
-+++ b/Makefile
-@@ -53,7 +53,6 @@ libbz2.a: $(OBJS)
+--- bzip2-1.0.8/Makefile
++++ bzip2-1.0.8/Makefile
+@@ -54,7 +54,6 @@
  
  check: test
  test: bzip2
@@ -8,7 +8,7 @@
  	./bzip2 -1  < sample1.ref > sample1.rb2
  	./bzip2 -2  < sample2.ref > sample2.rb2
  	./bzip2 -3  < sample3.ref > sample3.rb2
-@@ -66,7 +65,6 @@ test: bzip2
+@@ -67,7 +66,6 @@
  	cmp sample1.tst sample1.ref
  	cmp sample2.tst sample2.ref
  	cmp sample3.tst sample3.ref
@@ -16,7 +16,7 @@
  
  install: bzip2 bzip2recover
  	if ( test ! -d $(PREFIX)/bin ) ; then mkdir -p $(PREFIX)/bin ; fi
-@@ -115,25 +113,8 @@ clean:
+@@ -113,25 +111,8 @@
  	sample1.rb2 sample2.rb2 sample3.rb2 \
  	sample1.tst sample2.tst sample3.tst
  
@@ -44,22 +44,19 @@
  
  
  distclean: clean
---- a/Makefile-libbz2_so
-+++ b/Makefile-libbz2_so
-@@ -36,9 +36,7 @@ OBJS= blocksort.o  \
+--- bzip2-1.0.8/Makefile-libbz2_so
++++ bzip2-1.0.8/Makefile-libbz2_so
+@@ -36,24 +36,10 @@
  
  all: $(OBJS)
- 	$(CC) $(LDFLAGS) -shared -Wl,-soname -Wl,libbz2.so.1 -o libbz2.so.1.0.6 $(OBJS)
--	$(CC) $(LDFLAGS) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.6
+ 	$(CC) $(LDFLAGS) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.8 $(OBJS)
+-	$(CC) $(LDFLAGS) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.8
 -	rm -f libbz2.so.1.0
--	ln -s libbz2.so.1.0.6 libbz2.so.1.0
-+	ln -sf libbz2.so.1.0.6 libbz2.so.1.0
+-	ln -s libbz2.so.1.0.8 libbz2.so.1.0
++	ln -sf libbz2.so.1.0.8 libbz2.so.1.0
  
  clean: 
- 	rm -f $(OBJS) bzip2.o libbz2.so.1.0.6 libbz2.so.1.0 bzip2-shared
-@@ -43,17 +43,5 @@ all: $(OBJS)
- clean: 
- 	rm -f $(OBJS) bzip2.o libbz2.so.1.0.6 libbz2.so.1.0 bzip2-shared
+ 	rm -f $(OBJS) bzip2.o libbz2.so.1.0.8 libbz2.so.1.0 bzip2-shared
  
 -blocksort.o: blocksort.c
 -	$(CC) $(CFLAGS) -c blocksort.c
