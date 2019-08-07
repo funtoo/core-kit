@@ -11,7 +11,7 @@ SRC_URI="ftp://atrey.karlin.mff.cuni.cz/pub/linux/pci/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 IUSE="dns +kmod static-libs +udev zlib"
 
 # Have the sub-libs in RDEPEND with [static-libs] since, logically,
@@ -110,6 +110,9 @@ multilib_src_install_all() {
 
 	newinitd "${FILESDIR}"/init.d-pciparm pciparm
 	newconfd "${FILESDIR}"/conf.d-pciparm pciparm
+
+	# symlink for regular users, it's handy for them too (and some things (anydesk, likely others) expect it to be in user path)
+	dosym ../sbin/lspci /usr/bin/lspci
 }
 
 pkg_postinst() {
