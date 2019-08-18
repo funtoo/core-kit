@@ -28,8 +28,8 @@ done
 
 LICENSE="AGPL-3"
 SLOT="$(ver_cut 1-2)"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
-IUSE="doc java cxx tcl test"
+KEYWORDS="*"
+IUSE="doc java cxx tcl test cpu_flags_arm_v7"
 
 REQUIRED_USE="test? ( tcl )"
 
@@ -129,7 +129,8 @@ multilib_src_configure() {
 		--disable-sql
 		--disable-sql_codegen
 		--disable-sql_compat
-		$([[ ${ABI} == arm ]] && echo --with-mutex=ARM/gcc-assembly)
+		# ASM used in arm assembly requires armv7+:
+		$([[ ${ABI} == arm ]] && use cpu_flags_arm_v7 && echo --with-mutex=ARM/gcc-assembly)
 		$([[ ${ABI} == amd64 ]] && echo --with-mutex=x86/gcc-assembly)
 		$(use_enable cxx)
 		$(use_enable cxx stl)
