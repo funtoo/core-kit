@@ -1,9 +1,16 @@
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
 
-AUTOTOOLS_AUTORECONF="1"
-KEYWORDS="*"
+if [[ ${PV} == "9999" ]] ; then
+	AUTOTOOLS_AUTORECONF="1"
+	EGIT_REPO_URI="https://github.com/zfsonlinux/${PN}.git"
+	inherit git-r3
+else
+	SRC_URI="https://github.com/zfsonlinux/zfs/releases/download/zfs-${PV}/${P}.tar.gz"
+	KEYWORDS="~amd64"
+fi
 
 inherit flag-o-matic linux-info linux-mod autotools-utils
 
@@ -28,16 +35,6 @@ AT_M4DIR="config"
 AUTOTOOLS_IN_SOURCE_BUILD="1"
 DOCS=( AUTHORS DISCLAIMER )
 
-GITHUB_REPO="spl"
-GITHUB_USER="zfsonlinux"
-GITHUB_TAG="a4b19aa"
-SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz"
-
-src_unpack() {
-	unpack ${A}
-	mv "${WORKDIR}/${GITHUB_USER}-${GITHUB_REPO}"-??????? "${S}" || die
-}
-
 pkg_setup() {
 	linux-info_pkg_setup
 	CONFIG_CHECK="
@@ -57,11 +54,18 @@ pkg_setup() {
 	"
 
 	kernel_is ge 2 6 32 || die "Linux 2.6.32 or newer required"
-	kernel_is le 4 18 || die "Linux 4.18 is the latest supported version."
+
+	[ ${PV} != "9999" ] && \
+		{ kernel_is le 4 18 || die "Linux 4.18 is the latest supported version."; }
+
 	check_extra_config
 }
 
 src_prepare() {
+	# Workaround for hard coded path
+	sed -i "s|/sbin/lsmod|/bin/lsmod|" "${S}/scripts/check.sh" || \
+		die "Cannot patch check.sh"
+
 	# splat is unnecessary unless we are debugging
 	use debug || { sed -e 's/^subdir-m += splat$//' -i "${S}/module/Makefile.in" || die ; }
 
