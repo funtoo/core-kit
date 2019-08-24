@@ -3,7 +3,7 @@
 # Documentation for adding new kernels -- do not remove!
 #
 # Find latest stable kernel release for debian here:
-#   https://packages.debian.org/stable/kernel/linux-source-4.9
+#   https://packages.debian.org/unstable/kernel/
 
 EAPI=5
 
@@ -12,10 +12,11 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="4.9.168"
+DEB_PV_BASE="4.19.67"
 DEB_EXTRAVERSION=-1
 EXTRAVERSION=_p1
-# install modules to /lib/modules/${DEB_PV_BASE}-$MODULE_EXT
+
+# install modules to /lib/modules/${DEB_PV_BASE}${EXTRAVERSION}-$MODULE_EXT
 MODULE_EXT=${EXTRAVERSION}
 [ "$PR" != "r0" ] && MODULE_EXT=$MODULE_EXT-$PR
 MODULE_EXT=$MODULE_EXT-${PN}
@@ -26,12 +27,20 @@ KERNEL_ARCHIVE="linux_${DEB_PV_BASE}.orig.tar.xz"
 PATCH_ARCHIVE="linux_${DEB_PV}.debian.tar.xz"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
-KEYWORDS="*"
-IUSE="binary ec2 sign-modules"
-DEPEND="binary? ( >=sys-kernel/genkernel-3.4.40.23-r2[cryptsetup] )"
+KEYWORDS=""
+IUSE="binary bindist custom-cflags ec2 sign-modules btrfs zfs"
+REQUIRED_USE="
+	bindist? ( binary )
+	bindist? ( !custom-cflags )
+"
+DEPEND="
+	virtual/libelf
+	binary? ( >=sys-kernel/genkernel-3.4.40.7 )
+	btrfs? ( sys-fs/btrfs-progs )
+	zfs? ( sys-fs/zfs )"
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
-HOMEPAGE="https://packages.debian.org/stable/kernel/"
+HOMEPAGE="https://packages.debian.org/unstable/kernel/"
 SRC_URI="$DEB_UPSTREAM/${KERNEL_ARCHIVE} $DEB_UPSTREAM/${PATCH_ARCHIVE}"
 S="$WORKDIR/linux-${DEB_PV_BASE}"
 
@@ -114,20 +123,25 @@ src_prepare() {
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
 
 	## XFS LIBCRC kernel config fixes, FL-823
-	epatch "${FILESDIR}"/debian-sources-3.14.4-xfs-libcrc32c-fix.patch
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-xfs-libcrc32c-fix.patch
+
+	## FL-4424: enable legacy support for MCELOG.
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-mcelog.patch
 
 	## do not configure debian devs certs.
-	epatch "${FILESDIR}"/debian-sources-4.5.2-certs.patch
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-nocerts.patch
 
 	## FL-3381. enable IKCONFIG
-	epatch "${FILESDIR}"/ikconfig.patch
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-ikconfig.patch
 
 	# namespace version 3 support from upstream. See:
 	# https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=8db6c34f1dbc8e06aa016a9b829b06902c3e1340 and FL-4725.
-	epatch "${FILESDIR}"/namespace-v3-upstream.patch
+	# merged in 4.14 from what I can find
+	# epatch "${FILESDIR}"/namespace-v3-upstream.patch
 
 	# Updated driver support -- FL-6316
-	epatch "${FILESDIR}"/linux-4.20-e1000e.patch
+	# need to updated patch for 4.19
+	# epatch "${FILESDIR}"/linux-4.20-e1000e.patch
 
 	local arch featureset subarch
 	featureset="standard"
@@ -178,6 +192,10 @@ src_prepare() {
 		ewarn "parameter (to params in /etc/boot.conf, and re-run boot-update.)"
 		echo
 	fi
+	if use custom-cflags; then
+		MARCH="$(python -c "import portage; print(portage.settings[\"CFLAGS\"])" | sed 's/ /\n/g' | grep "march")"
+		sed -i -e 's/-mtune=generic/$MARCH/g' arch/x86/Makefile || die "Canna optimize this kernel anymore, captain!"
+	fi
 	# get config into good state:
 	yes "" | make oldconfig >/dev/null 2>&1 || die
 	cp .config "${T}"/config || die
@@ -206,6 +224,8 @@ src_compile() {
 		--lvm \
 		--luks \
 		--mdadm \
+		$(usex btrfs --btrfs --no-btrfs) \
+		$(usex zfs --zfs --no-zfs) \
 		--module-prefix="${WORKDIR}"/out \
 		all || die
 }
