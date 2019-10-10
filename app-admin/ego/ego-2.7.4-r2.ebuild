@@ -14,7 +14,7 @@ KEYWORDS="*"
 IUSE="zsh-completion"
 GITHUB_REPO="$PN"
 GITHUB_USER="funtoo"
-GITHUB_TAG="${PV}"
+GITHUB_TAG="${PVR}"
 SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz"
 
 DEPEND=""
@@ -54,6 +54,10 @@ src_install() {
 }
 
 pkg_postinst() {
+	if [ ! -e $ROOT/etc/boot.conf ]; then
+		einfo "Installing default /etc/boot.conf file..."
+		cp -f $ROOT/etc/boot.conf.dist $ROOT/etc/boot.conf
+	fi
 	if [ -e $ROOT/usr/share/portage/config/repos.conf ]; then
 		rm -f $ROOT/usr/share/portage/config/repos.conf
 	fi
