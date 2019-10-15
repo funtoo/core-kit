@@ -4,6 +4,14 @@
 
 app-admin/ego:zsh-completion - Enable ZSH completion
 app-admin/openrc-settingsd:systemd - Use the versions of dbus and polkit files provided by sys-apps/systemd
+app-admin/sudo:gcrypt - Use message digest functions from dev-libs/libgcrypt instead of sudo's
+app-admin/sudo:libressl - Use message digest functions from dev-libs/libressl instead of sudo's
+app-admin/sudo:offensive - Let sudo print insults when the user types the wrong password
+app-admin/sudo:openssl - Use message digest functions from dev-libs/openssl instead of sudo's
+app-admin/sudo:secure-path - Replace PATH variable with compile time secure paths
+app-admin/sudo:sendmail - Allow sudo to send emails with sendmail
+app-admin/sudo:sssd - Add System Security Services Daemon support
+app-admin/sudo:system-digest - Use message digest functions from dev-libs/libgcrypt, dev-libs/libressl or dev-libs/openssl instead of sudo's internal SHA2 implementation
 app-admin/syslog-ng:amqp - Enable support for AMQP destinations
 app-admin/syslog-ng:geoip2 - Add support for geo lookup based on IPs via dev-libs/libmaxminddb
 app-admin/syslog-ng:http - Enable support for HTTP destinations
