@@ -24,7 +24,6 @@ net-libs
 net-mail
 net-misc
 net-wireless
-sec-policy
 sys-apps
 sys-auth
 sys-block
