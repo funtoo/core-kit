@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit libtool pam multilib
+inherit libtool pam
 
 DESCRIPTION="Utilities to deal with user accounts"
 HOMEPAGE="https://github.com/shadow-maint/shadow http://pkg-shadow.alioth.debian.org/"
@@ -11,12 +11,12 @@ SRC_URI="https://github.com/shadow-maint/shadow/releases/download/${PV}/${P}.tar
 
 LICENSE="BSD GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86"
 IUSE="acl audit +cracklib nls pam selinux skey xattr"
 # Taken from the man/Makefile.am file.
 LANGS=( cs da de es fi fr hu id it ja ko pl pt_BR ru sv tr zh_CN zh_TW )
 
-RDEPEND="acl? ( sys-apps/acl:0= )
+DEPEND="acl? ( sys-apps/acl:0= )
 	audit? ( >=sys-process/audit-2.6:0= )
 	cracklib? ( >=sys-libs/cracklib-2.7-r3:0= )
 	pam? ( virtual/pam:0= )
@@ -27,14 +27,15 @@ RDEPEND="acl? ( sys-apps/acl:0= )
 	)
 	nls? ( virtual/libintl )
 	xattr? ( sys-apps/attr:0= )"
-DEPEND="${RDEPEND}
+BDEPEND="
 	app-arch/xz-utils
 	nls? ( sys-devel/gettext )"
-RDEPEND="${RDEPEND}
+RDEPEND="${DEPEND}
 	pam? ( >=sys-auth/pambase-20150213 )"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-4.1.3-dots-in-usernames.patch"
+	"${FILESDIR}/shadow-4.7-disable-subids-useradd.patch"
 )
 
 src_prepare() {
@@ -78,13 +79,13 @@ set_login_opt() {
 		comment="#"
 		sed -i \
 			-e "/^${opt}\>/s:^:#:" \
-			"${ED%/}"/etc/login.defs || die
+			"${ED}"/etc/login.defs || die
 	else
 		sed -i -r \
 			-e "/^#?${opt}\>/s:.*:${opt} ${val}:" \
-			"${ED%/}"/etc/login.defs
+			"${ED}"/etc/login.defs
 	fi
-	local res=$(grep "^${comment}${opt}\>" "${ED%/}"/etc/login.defs)
+	local res=$(grep "^${comment}${opt}\>" "${ED}"/etc/login.defs)
 	einfo "${res:-Unable to find ${opt} in /etc/login.defs}"
 }
 
@@ -96,7 +97,7 @@ src_install() {
 	#   Currently, libshadow.a is for internal use only, so if you see
 	#   -lshadow in a Makefile of some other package, it is safe to
 	#   remove it.
-	rm -f "${ED%/}"/{,usr/}$(get_libdir)/lib{misc,shadow}.{a,la}
+	rm -f "${ED}"/{,usr/}$(get_libdir)/lib{misc,shadow}.{a,la}
 
 	insinto /etc
 	if ! use pam ; then
@@ -111,7 +112,7 @@ src_install() {
 
 	# move passwd to / to help recover broke systems #64441
 	dodir /bin
-	mv "${ED%/}"/usr/bin/passwd "${ED%/}"/bin/ || die
+	mv "${ED}"/usr/bin/passwd "${ED}"/bin/ || die
 	dosym ../../bin/passwd /usr/bin/passwd
 
 	cd "${S}" || die
@@ -168,20 +169,20 @@ src_install() {
 			-e 'b exit' \
 			-e ': pamnote; i# NOTE: This setting should be configured via /etc/pam.d/ and not in this file.' \
 			-e ': exit' \
-			"${ED%/}"/etc/login.defs || die
+			"${ED}"/etc/login.defs || die
 
 		# remove manpages that pam will install for us
 		# and/or don't apply when using pam
-		find "${ED%/}"/usr/share/man \
+		find "${ED}"/usr/share/man \
 			'(' -name 'limits.5*' -o -name 'suauth.5*' ')' \
 			-delete
 
 		# Remove pam.d files provided by pambase.
-		rm "${ED%/}"/etc/pam.d/{login,passwd,su} || die
+		rm "${ED}"/etc/pam.d/{login,passwd,su} || die
 	fi
 
 	# Remove manpages that are handled by other packages
-	find "${ED%/}"/usr/share/man \
+	find "${ED}"/usr/share/man \
 		'(' -name id.1 -o -name passwd.5 -o -name getspnam.3 ')' \
 		-delete
 
