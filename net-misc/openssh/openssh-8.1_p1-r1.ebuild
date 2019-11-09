@@ -1,34 +1,41 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=7
 
 inherit user flag-o-matic multilib autotools pam systemd
 
 # Make it more portable between straight releases
 # and _p? releases.
 PARCH=${P/_}
+#HPN_PV="${PV^^}"
+HPN_PV="7.8_P1"
 
-HPN_VER="14v15-gentoo2" HPN_PATCH="${PARCH}-hpnssh${HPN_VER}.patch.xz"
-SCTP_VER="1.1" SCTP_PATCH="${PARCH}-sctp-${SCTP_VER}.patch.xz"
-X509_VER="11.3.1" X509_PATCH="${PARCH}-x509-${X509_VER}.patch.xz"
+HPN_VER="14.16"
+HPN_PATCHES=(
+	${PN}-${HPN_PV/./_}-hpn-DynWinNoneSwitch-${HPN_VER}.diff
+	${PN}-${HPN_PV/./_}-hpn-AES-CTR-${HPN_VER}.diff
+)
 
-PATCH_SET="openssh-7.7p1-patches-1.2"
+SCTP_VER="1.2" SCTP_PATCH="${PARCH}-sctp-${SCTP_VER}.patch.xz"
+X509_VER="12.3" X509_PATCH="${PARCH}+x509-${X509_VER}.diff.gz"
+
+PATCH_SET="openssh-7.9p1-patches-1.0"
 
 DESCRIPTION="Port of OpenBSD's free SSH release"
 HOMEPAGE="https://www.openssh.com/"
 SRC_URI="mirror://openbsd/OpenSSH/portable/${PARCH}.tar.gz
-	https://dev.gentoo.org/~whissi/dist/${PN}/${PATCH_SET}.tar.xz
-	${SCTP_PATCH:+sctp? ( https://dev.gentoo.org/~whissi/dist/openssh/${SCTP_PATCH} )}
-	${HPN_PATCH:+hpn? ( https://dev.gentoo.org/~whissi/dist/openssh/${HPN_PATCH} )}
-	${X509_PATCH:+X509? ( https://dev.gentoo.org/~whissi/dist/openssh/${X509_PATCH} )}
+	https://mirrors.evowise.com/gentoo/distfiles/${PARCH}.tar.gz
+	${SCTP_PATCH:+sctp? ( https://dev.gentoo.org/~chutzpah/dist/openssh/${SCTP_PATCH} )}
+	${HPN_VER:+hpn? ( $(printf "mirror://sourceforge/hpnssh/HPN-SSH%%20${HPN_VER/./v}%%20${HPN_PV/_P/p}/%s\n" "${HPN_PATCHES[@]}") )}
+	${X509_PATCH:+X509? ( https://roumenpetrov.info/openssh/x509-${X509_VER}/${X509_PATCH} )}
 	"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 # Probably want to drop ssl defaulting to on in a future version.
-IUSE="abi_mips_n32 audit bindist debug hpn kerberos kernel_linux ldns libedit libressl livecd pam +pie sctp selinux skey +ssl static test X X509"
+IUSE="abi_mips_n32 audit bindist debug hpn kerberos kernel_linux ldns libedit libressl livecd pam +pie sctp selinux +ssl static test X X509 xmss"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="ldns? ( ssl )
 	pie? ( !static )
@@ -46,10 +53,15 @@ LIB_DEPEND="
 	libedit? ( dev-libs/libedit:=[static-libs(+)] )
 	sctp? ( net-misc/lksctp-tools[static-libs(+)] )
 	selinux? ( >=sys-libs/libselinux-1.28[static-libs(+)] )
-	skey? ( >=sys-auth/skey-1.1.5-r1[static-libs(+)] )
 	ssl? (
 		!libressl? (
-			>=dev-libs/openssl-1.0.1:0=[bindist=]
+			|| (
+				(
+					>=dev-libs/openssl-1.0.1:0[bindist=]
+					<dev-libs/openssl-1.1.0:0[bindist=]
+				)
+				>=dev-libs/openssl-1.1.0g:0[bindist=]
+			)
 			dev-libs/openssl:0=[static-libs(+)]
 		)
 		libressl? ( dev-libs/libressl:0=[static-libs(+)] )
@@ -57,17 +69,18 @@ LIB_DEPEND="
 	>=sys-libs/zlib-1.2.3:=[static-libs(+)]"
 RDEPEND="
 	!static? ( ${LIB_DEPEND//\[static-libs(+)]} )
-	pam? ( virtual/pam )
+	pam? ( sys-libs/pam )
 	kerberos? ( virtual/krb5 )"
 DEPEND="${RDEPEND}
 	static? ( ${LIB_DEPEND} )
-	virtual/pkgconfig
-	virtual/os-headers
-	sys-devel/autoconf"
+	virtual/os-headers"
 RDEPEND="${RDEPEND}
 	pam? ( >=sys-auth/pambase-20081028 )
 	userland_GNU? ( virtual/shadow )
 	X? ( x11-apps/xauth )"
+BDEPEND="
+	virtual/pkgconfig
+	sys-devel/autoconf"
 
 S="${WORKDIR}/${PARCH}"
 
@@ -76,7 +89,7 @@ pkg_pretend() {
 	# than not be able to log in to their server any more
 	maybe_fail() { [[ -z ${!2} ]] && echo "$1" ; }
 	local fail="
-		$(use hpn && maybe_fail hpn HPN_PATCH)
+		$(use hpn && maybe_fail hpn HPN_VER)
 		$(use sctp && maybe_fail sctp SCTP_PATCH)
 		$(use X509 && maybe_fail X509 X509_PATCH)
 	"
@@ -90,9 +103,9 @@ pkg_pretend() {
 	fi
 
 	# Make sure people who are using tcp wrappers are notified of its removal. #531156
-	if grep -qs '^ *sshd *:' "${EROOT%/}"/etc/hosts.{allow,deny} ; then
+	if grep -qs '^ *sshd *:' "${EROOT}"/etc/hosts.{allow,deny} ; then
 		ewarn "Sorry, but openssh no longer supports tcp-wrappers, and it seems like"
-		ewarn "you're trying to use it.  Update your ${EROOT}etc/hosts.{allow,deny} please."
+		ewarn "you're trying to use it.  Update your ${EROOT}/etc/hosts.{allow,deny} please."
 	fi
 }
 
@@ -104,14 +117,24 @@ src_prepare() {
 	# don't break .ssh/authorized_keys2 for fun
 	sed -i '/^AuthorizedKeysFile/s:^:#:' sshd_config || die
 
-	eapply "${FILESDIR}"/${PN}-7.7_p1-GSSAPI-dns.patch #165444 integrated into gsskex
+	eapply "${FILESDIR}"/${PN}-7.9_p1-include-stdlib.patch
+	eapply "${FILESDIR}"/${PN}-8.1_p1-GSSAPI-dns.patch #165444 integrated into gsskex
 	eapply "${FILESDIR}"/${PN}-6.7_p1-openssl-ignore-status.patch
 	eapply "${FILESDIR}"/${PN}-7.5_p1-disable-conch-interop-tests.patch
+	eapply "${FILESDIR}"/${PN}-8.0_p1-fix-putty-tests.patch
+	eapply "${FILESDIR}"/${PN}-8.0_p1-deny-shmget-shmat-shmdt-in-preauth-privsep-child.patch
+
+	[[ -d ${WORKDIR}/patches ]] && eapply "${WORKDIR}"/patches
 
 	local PATCHSET_VERSION_MACROS=()
 
 	if use X509 ; then
+		pushd "${WORKDIR}" &>/dev/null || die
+		eapply "${FILESDIR}/${P}-X509-glue-"${X509_VER}".patch"
+		popd &>/dev/null || die
+
 		eapply "${WORKDIR}"/${X509_PATCH%.*}
+		eapply "${FILESDIR}"/${P}-X509-$(ver_cut 1-2 ${X509_VER})-tests.patch
 
 		# We need to patch package version or any X.509 sshd will reject our ssh client
 		# with "userauth_pubkey: could not parse key: string is too large [preauth]"
@@ -126,20 +149,6 @@ src_prepare() {
 			-e "/^#define SSH_PORTABLE.*/a #define SSH_X509               \"-PKIXSSH-${X509_VER}\"" \
 			"${S}"/version.h || die "Failed to sed-in X.509 patch version"
 		PATCHSET_VERSION_MACROS+=( 'SSH_X509' )
-
-		einfo "Disabling broken X.509 agent test ..."
-		sed -i \
-			-e "/^ agent$/d" \
-			"${S}"/tests/CA/config || die "Failed to disable broken X.509 agent test"
-
-		# The following patches don't apply on top of X509 patch
-		rm "${WORKDIR}"/patch/2002_all_openssh-7.7p1_upstream_bug2840.patch || die
-		rm "${WORKDIR}"/patch/2009_all_openssh-7.7p1_make-shell-tests-portable.patch || die
-		rm "${WORKDIR}"/patch/2016_all_openssh-7.7p1_implement-EMFILE-mitigation-for-ssh-agent.patch || die
-		rm "${WORKDIR}"/patch/2025_all_openssh-7.7p1_prefer-argv0-to-ssh-when-re-executing-ssh-for-proxyjump.patch || die
-	else
-		rm "${WORKDIR}"/patch/2016_all_openssh-7.7p1-X509_implement-EMFILE-mitigation-for-ssh-agent.patch || die
-		rm "${WORKDIR}"/patch/2025_all_openssh-7.7p1-X509_prefer-argv0-to-ssh-when-re-executing-ssh-for-proxyjump.patch || die
 	fi
 
 	if use sctp ; then
@@ -158,7 +167,26 @@ src_prepare() {
 	fi
 
 	if use hpn ; then
-		eapply "${WORKDIR}"/${HPN_PATCH%.*}
+		local hpn_patchdir="${T}/${P}-hpn${HPN_VER}"
+		mkdir "${hpn_patchdir}"
+		cp $(printf -- "${DISTDIR}/%s\n" "${HPN_PATCHES[@]}") "${hpn_patchdir}"
+		pushd "${hpn_patchdir}" &>/dev/null || die
+		eapply "${FILESDIR}"/${PN}-8.1_p1-hpn-glue.patch
+		if use X509; then
+			einfo "Will disable MT AES cipher due to incompatbility caused by X509 patch set"
+			# X509 and AES-CTR-MT don't get along, let's just drop it
+			rm openssh-${HPN_PV//./_}-hpn-AES-CTR-${HPN_VER}.diff || die
+			eapply "${FILESDIR}"/${PN}-8.0_p1-hpn-X509-glue.patch
+		fi
+		use sctp && eapply "${FILESDIR}"/${PN}-7.9_p1-hpn-sctp-glue.patch
+		popd &>/dev/null || die
+
+		eapply "${hpn_patchdir}"
+
+		if ! use X509; then
+			eapply "${FILESDIR}/openssh-7.9_p1-hpn-openssl-1.1.patch"
+			eapply "${FILESDIR}/openssh-8.0_p1-hpn-version.patch"
+		fi
 
 		einfo "Patching Makefile.in for HPN patch set ..."
 		sed -i \
@@ -167,7 +195,7 @@ src_prepare() {
 
 		einfo "Patching version.h to expose HPN patch set ..."
 		sed -i \
-			-e "/^#define SSH_PORTABLE/a #define SSH_HPN         \"-hpn${HPN_VER}\"" \
+			-e "/^#define SSH_PORTABLE/a #define SSH_HPN         \"-hpn${HPN_VER//./v}\"" \
 			"${S}"/version.h || die "Failed to sed-in HPN patch version"
 		PATCHSET_VERSION_MACROS+=( 'SSH_HPN' )
 
@@ -190,13 +218,6 @@ src_prepare() {
 		fi
 	fi
 
-	if use X509 || use hpn ; then
-		einfo "Patching packet.c for X509 and/or HPN patch set ..."
-		sed -i \
-			-e "s/const struct sshcipher/struct sshcipher/" \
-			"${S}"/packet.c || die "Failed to patch ssh_packet_set_connection() (packet.c)"
-	fi
-
 	if use X509 || use sctp || use hpn ; then
 		einfo "Patching sshconnect.c to use SSH_RELEASE in send_client_banner() ..."
 		sed -i \
@@ -217,8 +238,6 @@ src_prepare() {
 	sed -i \
 		-e "/#UseLogin no/d" \
 		"${S}"/sshd_config || die "Failed to remove removed UseLogin option (sshd_config)"
-
-	eapply "${WORKDIR}"/patch/*.patch
 
 	eapply_user #473004
 
@@ -250,6 +269,7 @@ src_configure() {
 
 	use debug && append-cppflags -DSANDBOX_SECCOMP_FILTER_DEBUG
 	use static && append-ldflags -static
+	use xmss && append-cflags -DWITH_XMSS
 
 	local myconf=(
 		--with-ldflags="${LDFLAGS}"
@@ -265,20 +285,19 @@ src_configure() {
 		# We apply the sctp patch conditionally, so can't pass --without-sctp
 		# unconditionally else we get unknown flag warnings.
 		$(use sctp && use_with sctp)
-		$(use_with ldns)
+		$(use_with ldns ldns "${EPREFIX%/}"/usr)
 		$(use_with libedit)
 		$(use_with pam)
 		$(use_with pie)
 		$(use_with selinux)
-		$(use_with skey)
 		$(use_with ssl openssl)
 		$(use_with ssl md5-passwords)
 		$(use_with ssl ssl-engine)
 		$(use_with !elibc_Cygwin hardening) #659210
 	)
 
-	# stackprotect is broken on musl x86
-	use elibc_musl && use x86 && myconf+=( --without-stackprotect )
+	# stackprotect is broken on musl x86 and ppc
+	use elibc_musl && ( use x86 || use ppc ) && myconf+=( --without-stackprotect )
 
 	# The seccomp sandbox is broken on x32, so use the older method for now. #553748
 	use amd64 && [[ ${ABI} == "x32" ]] && myconf+=( --with-sandbox=rlimit )
@@ -304,7 +323,7 @@ src_test() {
 	mkdir -p "${sshhome}"/.ssh
 	for t in "${tests[@]}" ; do
 		# Some tests read from stdin ...
-		HOMEDIR="${sshhome}" HOME="${sshhome}" \
+		HOMEDIR="${sshhome}" HOME="${sshhome}" SUDO="" \
 		emake -k -j1 ${t} </dev/null \
 			&& passed+=( "${t}" ) \
 			|| failed+=( "${t}" )
@@ -367,7 +386,7 @@ src_install() {
 	emake install-nokeys DESTDIR="${D}"
 	fperms 600 /etc/ssh/sshd_config
 	dobin contrib/ssh-copy-id
-	newinitd "${FILESDIR}"/sshd.initd sshd
+	newinitd "${FILESDIR}"/sshd-r1.initd sshd
 	newconfd "${FILESDIR}"/sshd-r1.confd sshd
 
 	newpamd "${FILESDIR}"/sshd.pam_include.2 sshd

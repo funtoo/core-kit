@@ -1,6 +1,19 @@
-diff -ur --exclude '.*.un*' a/openssh-7_8_P1-hpn-AES-CTR-14.16.diff b/openssh-7_8_P1-hpn-AES-CTR-14.16.diff
---- a/openssh-7_8_P1-hpn-AES-CTR-14.16.diff	2019-04-18 15:07:06.748067368 -0700
-+++ b/openssh-7_8_P1-hpn-AES-CTR-14.16.diff	2019-04-18 19:42:26.689298696 -0700
+Only in b: .openssh-7_8_P1-hpn-AES-CTR-14.16.diff.un~
+Only in b: .openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff.un~
+diff -ru a/openssh-7_8_P1-hpn-AES-CTR-14.16.diff b/openssh-7_8_P1-hpn-AES-CTR-14.16.diff
+--- a/openssh-7_8_P1-hpn-AES-CTR-14.16.diff	2019-10-10 13:48:31.513603947 -0700
++++ b/openssh-7_8_P1-hpn-AES-CTR-14.16.diff	2019-10-10 13:50:15.012495676 -0700
+@@ -17,8 +17,8 @@
+  	canohost.o channels.o cipher.o cipher-aes.o cipher-aesctr.o \
+ -	cipher-ctr.o cleanup.o \
+ +	cipher-ctr.o cleanup.o cipher-ctr-mt.o \
+- 	compat.o crc32.o fatal.o hostfile.o \
+- 	log.o match.o moduli.o nchan.o packet.o opacket.o \
++ 	compat.o fatal.o hostfile.o \
++ 	log.o match.o moduli.o nchan.o packet.o \
+  	readpass.o ttymodes.o xmalloc.o addrmatch.o \
+ diff --git a/cipher-ctr-mt.c b/cipher-ctr-mt.c
+ new file mode 100644
 @@ -998,7 +998,7 @@
  +		 * so we repoint the define to the multithreaded evp. To start the threads we
  +		 * then force a rekey
@@ -19,9 +32,9 @@ diff -ur --exclude '.*.un*' a/openssh-7_8_P1-hpn-AES-CTR-14.16.diff b/openssh-7_
  +		
  +		/* only rekey if necessary. If we don't do this gcm mode cipher breaks */
  +		if (strstr(cipher_ctx_name(cc), "ctr")) {
-diff -ur --exclude '.*.un*' a/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff b/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff
---- a/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff	2019-04-18 15:07:11.289035776 -0700
-+++ b/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff	2019-04-18 17:07:59.413376785 -0700
+diff -ru a/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff b/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff
+--- a/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff	2019-10-10 13:47:54.801642144 -0700
++++ b/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff	2019-10-10 15:58:05.085803333 -0700
 @@ -162,24 +162,24 @@
   }
   
@@ -123,6 +136,15 @@ diff -ur --exclude '.*.un*' a/openssh-7_8_P1-hpn-DynWinNoneSwitch-14.16.diff b/o
  +	int     none_switch;    /* Use none cipher */
  +	int     none_enabled;   /* Allow none to be used */
   	int	rekey_interval;
+@@ -633,7 +611,7 @@
+  	off_t i, statbytes;
+  	size_t amt, nr;
+  	int fd = -1, haderr, indx;
+--	char *last, *name, buf[2048], encname[PATH_MAX];
++-	char *last, *name, buf[PATH_MAX + 128], encname[PATH_MAX];
+ +	char *last, *name, buf[16384], encname[PATH_MAX];
+  	int len;
+  
 @@ -673,9 +651,9 @@
   	/* Portable-specific options */
   	if (options->use_pam == -1)
