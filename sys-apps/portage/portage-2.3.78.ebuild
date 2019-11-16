@@ -63,6 +63,7 @@ RDEPEND="
 			python2_7 pypy)
 	) )
 	!<app-admin/logrotate-3.8.0
+	!<app-portage/gentoolkit-0.4.6
 	!<app-portage/repoman-2.3.10"
 PDEPEND="
 	!build? (
@@ -96,7 +97,7 @@ pkg_pretend() {
 
 GITHUB_REPO="$PN-gentoo"
 GITHUB_USER="funtoo"
-GITHUB_TAG="ca54f0612ecd8ecd7a885c017d74b785eceffb81"
+GITHUB_TAG="bac24951adfacbc87bcbf22a4724f1dc7ca52f2b"
 SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz"
 
 src_unpack() {
@@ -247,6 +248,8 @@ python_install_all() {
 		esetup.py "${targets[@]}"
 	fi
 
+	systemd_dotmpfilesd "${FILESDIR}"/portage-ccache.conf
+
 	# Due to distutils/python-exec limitations
 	# these must be installed to /usr/bin.
 	local sbin_relocations='archive-conf dispatch-conf emaint env-update etc-update fixpackages regenworld'
@@ -280,16 +283,5 @@ pkg_preinst() {
 	# This is allowed to fail if the user/group are invalid for prefix users.
 	if chown portage:portage "${ED}"var/log/portage{,/elog} 2>/dev/null ; then
 		chmod g+s,ug+rwx "${ED}"var/log/portage{,/elog}
-	fi
-}
-
-pkg_postinst() {
-	if [ ! -d $ROOT/var/cache/portage ]; then
-		echo
-		ewarn "SOMEWHAT IMPORTANT:"
-		echo
-		ewarn "Default distfiles and packages directories are now in /var/cache/portage. Please adjust"
-		ewarn "your system as needed!"
-		install -d -g portage -o portage /var/cache/portage/distfiles
 	fi
 }
