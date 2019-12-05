@@ -232,6 +232,169 @@ fi
 # }
 # @CODE
 
+# @FUNCTION: distutils_enable_sphinx
+# @USAGE: <subdir> [--no-autodoc | <plugin-pkgs>...]
+# @DESCRIPTION:
+# Set up IUSE, BDEPEND, python_check_deps() and python_compile_all() for
+# building HTML docs via dev-python/sphinx.  python_compile_all() will
+# append to HTML_DOCS if docs are enabled.
+#
+# This helper is meant for the most common case, that is a single Sphinx
+# subdirectory with standard layout, building and installing HTML docs
+# behind USE=doc.  It assumes it's the only consumer of the three
+# aforementioned functions.  If you need to use a custom implemention,
+# you can't use it.
+#
+# If your package uses additional Sphinx plugins, they should be passed
+# (without PYTHON_USEDEP) as <plugin-pkgs>.  The function will take care
+# of setting appropriate any-of dep and python_check_deps().
+#
+# If no plugin packages are specified, the eclass will still utilize
+# any-r1 API to support autodoc (documenting source code).
+# If the package uses neither autodoc nor additional plugins, you should
+# pass --no-autodoc to disable this API and simplify the resulting code.
+#
+# This function must be called in global scope.  Take care not to
+# overwrite the variables set by it.  If you need to extend
+# python_compile_all(), you can call the original implementation
+# as sphinx_compile_all.
+distutils_enable_sphinx() {
+	debug-print-function ${FUNCNAME} "${@}"
+	[[ ${#} -ge 1 ]] || die "${FUNCNAME} takes at least one arg: <subdir>"
+
+	_DISTUTILS_SPHINX_SUBDIR=${1}
+	shift
+	_DISTUTILS_SPHINX_PLUGINS=( "${@}" )
+
+	local deps autodoc=1 d
+	for d; do
+		if [[ ${d} == --no-autodoc ]]; then
+			autodoc=
+		else
+			deps+="
+				${d}[\${PYTHON_USEDEP}]"
+		fi
+	done
+
+	if [[ ! ${autodoc} && -n ${deps} ]]; then
+		die "${FUNCNAME}: do not pass --no-autodoc if external plugins are used"
+	fi
+	if [[ ${autodoc} ]]; then
+		deps="$(python_gen_any_dep "
+			dev-python/sphinx[\${PYTHON_USEDEP}]
+			${deps}")"
+
+		python_check_deps() {
+			use doc || return 0
+			local p
+			for p in dev-python/sphinx "${_DISTUTILS_SPHINX_PLUGINS[@]}"; do
+				has_version "${p}[${PYTHON_USEDEP}]" || return 1
+			done
+		}
+	else
+		deps="dev-python/sphinx"
+	fi
+
+	sphinx_compile_all() {
+		use doc || return
+
+		local confpy=${_DISTUTILS_SPHINX_SUBDIR}/conf.py
+		[[ -f ${confpy} ]] ||
+			die "${confpy} not found, distutils_enable_sphinx call wrong"
+
+		if [[ ${_DISTUTILS_SPHINX_PLUGINS[0]} == --no-autodoc ]]; then
+			if grep -F -q 'sphinx.ext.autodoc' "${confpy}"; then
+				die "distutils_enable_sphinx: --no-autodoc passed but sphinx.ext.autodoc found in ${confpy}"
+			fi
+		else
+			if ! grep -F -q 'sphinx.ext.autodoc' "${confpy}"; then
+				die "distutils_enable_sphinx: sphinx.ext.autodoc not found in ${confpy}, pass --no-autodoc"
+			fi
+		fi
+
+		build_sphinx "${_DISTUTILS_SPHINX_SUBDIR}"
+	}
+	python_compile_all() { sphinx_compile_all; }
+
+	IUSE+=" doc"
+	if [[ ${EAPI} == [56] ]]; then
+		DEPEND+=" doc? ( ${deps} )"
+	else
+		BDEPEND+=" doc? ( ${deps} )"
+	fi
+
+	# we need to ensure successful return in case we're called last,
+	# otherwise Portage may wrongly assume sourcing failed
+	return 0
+}
+
+# @FUNCTION: distutils_enable_tests
+# @USAGE: <test-runner>
+# @DESCRIPTION:
+# Set up IUSE, RESTRICT, BDEPEND and python_test() for running tests
+# with the specified test runner.  Also copies the current value
+# of RDEPEND to test?-BDEPEND.  The test-runner argument must be one of:
+#
+# - nose: nosetests (dev-python/nose)
+# - pytest: dev-python/pytest
+# - setup.py: setup.py test (no deps included)
+# - unittest: for built-in Python unittest module
+#
+# This function is meant as a helper for common use cases, and it only
+# takes care of basic setup.  You still need to list additional test
+# dependencies manually.  If you have uncommon use case, you should
+# not use it and instead enable tests manually.
+#
+# This function must be called in global scope, after RDEPEND has been
+# declared.  Take care not to overwrite the variables set by it.
+distutils_enable_tests() {
+	debug-print-function ${FUNCNAME} "${@}"
+	[[ ${#} -eq 1 ]] || die "${FUNCNAME} takes exactly one argument: test-runner"
+
+	local test_deps
+	case ${1} in
+		nose)
+			test_deps="dev-python/nose[${PYTHON_USEDEP}]"
+			python_test() {
+				nosetests -v || die "Tests fail with ${EPYTHON}"
+			}
+			;;
+		pytest)
+			test_deps="dev-python/pytest[${PYTHON_USEDEP}]"
+			python_test() {
+				pytest -vv || die "Tests fail with ${EPYTHON}"
+			}
+			;;
+		setup.py)
+			python_test() {
+				esetup.py test --verbose
+			}
+			;;
+		unittest)
+			python_test() {
+				"${EPYTHON}" -m unittest discover -v ||
+					die "Tests fail with ${EPYTHON}"
+			}
+			;;
+		*)
+			die "${FUNCNAME}: unsupported argument: ${1}"
+	esac
+
+	if [[ -n ${test_deps} || -n ${RDEPEND} ]]; then
+		IUSE+=" test"
+		RESTRICT+=" !test? ( test )"
+		if [[ ${EAPI} == [56] ]]; then
+			DEPEND+=" test? ( ${test_deps} ${RDEPEND} )"
+		else
+			BDEPEND+=" test? ( ${test_deps} ${RDEPEND} )"
+		fi
+	fi
+
+	# we need to ensure successful return in case we're called last,
+	# otherwise Portage may wrongly assume sourcing failed
+	return 0
+}
+
 # @FUNCTION: esetup.py
 # @USAGE: [<args>...]
 # @DESCRIPTION:
@@ -545,7 +708,10 @@ distutils-r1_python_install() {
 
 	# python likes to compile any module it sees, which triggers sandbox
 	# failures if some packages haven't compiled their modules yet.
+	addpredict "${EPREFIX}/usr/lib/${EPYTHON}"
 	addpredict "${EPREFIX}/usr/$(get_libdir)/${EPYTHON}"
+	addpredict /usr/lib/pypy2.7
+	addpredict /usr/lib/pypy3.6
 	addpredict /usr/lib/portage/pym
 	addpredict /usr/local # bug 498232
 
@@ -589,14 +755,23 @@ distutils-r1_python_install() {
 
 	esetup.py install --root="${root}" "${args[@]}"
 
-	local forbidden_package_names=( examples test tests )
+	local forbidden_package_names=( examples test tests .pytest_cache )
 	local p
 	for p in "${forbidden_package_names[@]}"; do
 		if [[ -d ${root}$(python_get_sitedir)/${p} ]]; then
 			die "Package installs '${p}' package which is forbidden and likely a bug in the build system."
 		fi
 	done
-	if [[ -d ${root}/usr/$(get_libdir)/pypy/share ]]; then
+
+	local shopt_save=$(shopt -p nullglob)
+	shopt -s nullglob
+	local pypy_dirs=(
+		"${root}/usr/$(get_libdir)"/pypy*/share
+		"${root}/usr/lib"/pypy*/share
+	)
+	${shopt_save}
+
+	if [[ -n ${pypy_dirs} ]]; then
 		local cmd=die
 		[[ ${EAPI} == [45] ]] && cmd=eqawarn
 		"${cmd}" "Package installs 'share' in PyPy prefix, see bug #465546."
@@ -646,7 +821,11 @@ distutils-r1_run_phase() {
 	debug-print-function ${FUNCNAME} "${@}"
 
 	if [[ ${DISTUTILS_IN_SOURCE_BUILD} ]]; then
-		if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
+		# only force BUILD_DIR if implementation is explicitly enabled
+		# for building; any-r1 API may select one that is not
+		# https://bugs.gentoo.org/701506
+		if [[ ! ${DISTUTILS_SINGLE_IMPL} ]] &&
+				has "${EPYTHON/./_}" ${PYTHON_TARGETS}; then
 			cd "${BUILD_DIR}" || die
 		fi
 		local BUILD_DIR=${BUILD_DIR}/build
