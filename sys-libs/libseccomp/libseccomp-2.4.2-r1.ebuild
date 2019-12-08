@@ -1,9 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # TODO: Add python support.
 
-EAPI=6
+EAPI=7
 
 inherit multilib-minimal
 
@@ -13,12 +12,16 @@ SRC_URI="https://github.com/seccomp/libseccomp/releases/download/v${PV}/${P}.tar
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~arm ~arm64 ~hppa ~mips ~ppc ~ppc64 ~s390 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 IUSE="static-libs"
 
 # We need newer kernel headers; we don't keep strict control of the exact
 # version here, just be safe and pull in the latest stable ones. #551248
 DEPEND=">=sys-kernel/linux-headers-4.3"
+
+PATCHES=(
+	"${FILESDIR}/${P}-missing_SNR_ppoll_defs.patch"
+)
 
 src_prepare() {
 	default
@@ -36,6 +39,6 @@ multilib_src_configure() {
 }
 
 multilib_src_install_all() {
-	find "${ED}" -name libseccomp.la -delete
+	find "${ED}" -type f -name libseccomp.la -delete || die
 	einstalldocs
 }
