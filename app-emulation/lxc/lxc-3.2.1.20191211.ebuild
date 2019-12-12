@@ -6,12 +6,21 @@ inherit autotools bash-completion-r1 linux-info flag-o-matic systemd readme.gent
 
 DESCRIPTION="LinuX Containers userspace utilities"
 HOMEPAGE="https://linuxcontainers.org/"
-SRC_URI="https://linuxcontainers.org/downloads/lxc/${P}.tar.gz"
 
 KEYWORDS=""
 LICENSE="LGPL-3"
 SLOT="0"
 IUSE="apparmor examples pam python seccomp selinux +templates"
+GITHUB_REPO="$PN"
+GITHUB_USER="lxc"
+GITHUB_TAG="28a41fc269cfd074ab39e150f5f8ecfa87c83e7e"
+SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz"
+
+src_unpack() {
+	unpack ${A}
+	mv "${WORKDIR}/${GITHUB_USER}-${PN}"-??????? "${S}" || die
+}
+
 
 RDEPEND="
 	net-libs/gnutls
@@ -108,7 +117,6 @@ src_configure() {
 		--with-rootfs-path=/var/lib/lxc/rootfs
 		--with-distro=gentoo
 		--with-runtime-path=/run
-		--disable-apparmor
 		--disable-werror
 		--enable-doc
 		$(use_enable apparmor)
@@ -123,6 +131,10 @@ src_configure() {
 
 src_install() {
 	default
+
+	if use apparmor; then
+		keepdir /etc/apparmor.d/tunables/global
+	fi
 
 	mv "${ED}"/usr/share/bash-completion/completions/${PN} "${ED}"/$(get_bashcompdir)/${PN}-start || die
 	bashcomp_alias ${PN}-start \
