@@ -8,4 +8,4 @@ RDEPEND=dev-libs/glib:2 sys-fs/fuse:0
 SLOT=0
 SRC_URI=https://github.com/lxc/lxcfs/archive/lxcfs-3.1.2.tar.gz -> lxcfs-3.1.2.tar.gz
 _eclasses_=estack	43ddf5aaffa7a8d0482df54d25a66a1f	multilib	b2f01ad412baf81650c23fcf0975fa33	systemd	47c677ae1d7b69031f11f630ac09f0d1	toolchain-funcs	f164325a2cdb5b3ea39311d483988861	versionator	2352c3fc97241f6a02042773c8287748
-_md5_=1d8602d9957050e18805320de3afaa66
+_md5_=c0a3d58818e622ed1097857f134ba8bb
