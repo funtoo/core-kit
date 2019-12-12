@@ -1,6 +1,6 @@
-From 3baea661143aaddb285f1ac7c50f6e4af76c8aed Mon Sep 17 00:00:00 2001
+From 1d3a35734efa1a1778612bb60cbbb495f65d3fc0 Mon Sep 17 00:00:00 2001
 From: Robin Johnson <robbat2@gentoo.org>
-Date: Fri, 23 Mar 2018 10:05:05 +0100
+Date: Tue, 14 May 2019 08:53:06 +0200
 Subject: [PATCH] Makefile: Add NO_CVS define to disable all CVS interface
  utilities
 
@@ -14,25 +14,27 @@ Forward-ported from v2.2.2 to v2.8.4
 Forward-ported from v2.8.4 to v2.10.0
 Forward-ported from v2.10.0 to v2.12.0
 Forward-ported from v2.12.0 to v2.17.0-rc1
+Forward-ported from v2.17.0-rc1 to v2.18.0-rc1
+Forward-ported from v2.18.0-rc1 to v2.22.0-rc0
 
 Signed-off-by: Lars Wendler <polynomial-c@gentoo.org>
 ---
- Makefile                           | 50 ++++++++++++++++++++++++++++----------
+ Makefile                           | 48 ++++++++++++++++++++++--------
  t/t9200-git-cvsexportcommit.sh     |  5 ++++
- t/t9400-git-cvsserver-server.sh    |  8 +++++-
- t/t9401-git-cvsserver-crlf.sh      | 15 ++++++++----
- t/t9600-cvsimport.sh               | 41 +++++++++++++++++++------------
- t/t9601-cvsimport-vendor-branch.sh | 11 +++++++++
- t/t9602-cvsimport-branches-tags.sh | 11 +++++++++
- t/t9603-cvsimport-patchsets.sh     | 11 +++++++++
+ t/t9400-git-cvsserver-server.sh    |  8 ++++-
+ t/t9401-git-cvsserver-crlf.sh      | 15 ++++++----
+ t/t9600-cvsimport.sh               | 41 +++++++++++++++----------
+ t/t9601-cvsimport-vendor-branch.sh | 11 +++++++
+ t/t9602-cvsimport-branches-tags.sh | 11 +++++++
+ t/t9603-cvsimport-patchsets.sh     | 11 +++++++
  t/test-lib.sh                      |  1 +
- 9 files changed, 119 insertions(+), 34 deletions(-)
+ 9 files changed, 118 insertions(+), 33 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index a1d8775adb..4264475ad1 100644
+index f965509b3c..ab8b22faf1 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -312,6 +312,8 @@ all::
+@@ -327,6 +327,8 @@ all::
  # Define SANE_TEXT_GREP to "-a" if you use recent versions of GNU grep
  # and egrep that are pickier when their input contains non-ASCII data.
  #
@@ -41,15 +43,15 @@ index a1d8775adb..4264475ad1 100644
  # The TCL_PATH variable governs the location of the Tcl interpreter
  # used to optimize git-gui for your system.  Only used if NO_TCLTK
  # is not set.  Defaults to the bare 'tclsh'.
-@@ -543,6 +545,7 @@ LIB_OBJS =
- PROGRAM_OBJS =
+@@ -597,6 +599,7 @@ PROGRAM_OBJS =
  PROGRAMS =
+ EXCLUDED_PROGRAMS =
  SCRIPT_PERL =
 +SCRIPT_PERL_CVS =
  SCRIPT_PYTHON =
  SCRIPT_SH =
  SCRIPT_LIB =
-@@ -579,12 +582,13 @@ SCRIPT_LIB += git-sh-i18n
+@@ -632,31 +635,33 @@ SCRIPT_LIB += git-sh-i18n
  
  SCRIPT_PERL += git-add--interactive.perl
  SCRIPT_PERL += git-archimport.perl
@@ -65,18 +67,11 @@ index a1d8775adb..4264475ad1 100644
 +
  SCRIPT_PYTHON += git-p4.py
  
- NO_INSTALL += git-remote-testgit
-@@ -592,24 +596,26 @@ NO_INSTALL += git-remote-testgit
  # Generated files for scripts
  SCRIPT_SH_GEN = $(patsubst %.sh,%,$(SCRIPT_SH))
  SCRIPT_PERL_GEN = $(patsubst %.perl,%,$(SCRIPT_PERL))
 +SCRIPT_PERL_CVS_GEN = $(patsubst %.perl,%,$(SCRIPT_PERL_CVS))
  SCRIPT_PYTHON_GEN = $(patsubst %.py,%,$(SCRIPT_PYTHON))
- 
- SCRIPT_SH_INS = $(filter-out $(NO_INSTALL),$(SCRIPT_SH_GEN))
- SCRIPT_PERL_INS = $(filter-out $(NO_INSTALL),$(SCRIPT_PERL_GEN))
-+SCRIPT_PERL_CVS_INS = $(filter-out $(NO_INSTALL),$(SCRIPT_PERL_CVS_GEN))
- SCRIPT_PYTHON_INS = $(filter-out $(NO_INSTALL),$(SCRIPT_PYTHON_GEN))
  
  # Individual rules to allow e.g.
  # "make -C ../.. SCRIPT_PERL=contrib/foo/bar.perl build-perl-script"
@@ -88,14 +83,14 @@ index a1d8775adb..4264475ad1 100644
  build-python-script: $(SCRIPT_PYTHON_GEN)
  
  .PHONY: install-perl-script install-sh-script install-python-script
- install-sh-script: $(SCRIPT_SH_INS)
+ install-sh-script: $(SCRIPT_SH_GEN)
  	$(INSTALL) $^ '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
--install-perl-script: $(SCRIPT_PERL_INS)
-+install-perl-script: $(SCRIPT_PERL_INS) $(SCRIPT_PERL_CVS_INS)
+-install-perl-script: $(SCRIPT_PERL_GEN)
++install-perl-script: $(SCRIPT_PERL_GEN) $(SCRIPT_PERL_CVS_GEN)
  	$(INSTALL) $^ '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
- install-python-script: $(SCRIPT_PYTHON_INS)
+ install-python-script: $(SCRIPT_PYTHON_GEN)
  	$(INSTALL) $^ '$(DESTDIR_SQ)$(gitexec_instdir_SQ)'
-@@ -618,12 +624,13 @@ install-python-script: $(SCRIPT_PYTHON_INS)
+@@ -665,12 +670,13 @@ install-python-script: $(SCRIPT_PYTHON_GEN)
  clean-sh-script:
  	$(RM) $(SCRIPT_SH_GEN)
  clean-perl-script:
@@ -104,13 +99,13 @@ index a1d8775adb..4264475ad1 100644
  clean-python-script:
  	$(RM) $(SCRIPT_PYTHON_GEN)
  
- SCRIPTS = $(SCRIPT_SH_INS) \
- 	  $(SCRIPT_PERL_INS) \
-+	  $(SCRIPT_PERL_CVS_INS) \
- 	  $(SCRIPT_PYTHON_INS) \
+ SCRIPTS = $(SCRIPT_SH_GEN) \
+ 	  $(SCRIPT_PERL_GEN) \
++	  $(SCRIPT_PERL_CVS_GEN) \
+ 	  $(SCRIPT_PYTHON_GEN) \
  	  git-instaweb
  
-@@ -1972,13 +1979,26 @@ git.res: git.rc GIT-VERSION-FILE
+@@ -2189,13 +2195,27 @@ git.res: git.rc GIT-VERSION-FILE GIT-PREFIX
  	  -DGIT_VERSION="\\\"$(GIT_VERSION)\\\"" -i $< -o $@
  
  # This makes sure we depend on the NO_PERL setting itself.
@@ -120,8 +115,11 @@ index a1d8775adb..4264475ad1 100644
 +_SCRIPT_PERL_GEN =
 +_SCRIPT_PERL_NOGEN =
  
+ # Used for substitution in Perl modules. Disabled when using RUNTIME_PREFIX
+ # since the locale directory is injected.
+ perl_localedir_SQ = $(localedir_SQ)
+ 
  ifndef NO_PERL
--$(SCRIPT_PERL_GEN):
 +_SCRIPT_PERL_GEN = $(SCRIPT_PERL_GEN)
 +
 +ifndef NO_CVS
@@ -133,14 +131,19 @@ index a1d8775adb..4264475ad1 100644
 +endif # NO_CVS
 +
 +$(_SCRIPT_PERL_GEN):
- 
+ PERL_HEADER_TEMPLATE = perl/header_templates/fixed_prefix.template.pl
  PERL_DEFINES = $(PERL_PATH_SQ):$(PERLLIB_EXTRA_SQ):$(perllibdir_SQ)
--$(SCRIPT_PERL_GEN): % : %.perl GIT-PERL-DEFINES GIT-VERSION-FILE
-+$(_SCRIPT_PERL_GEN): % : %.perl GIT-PERL-DEFINES GIT-VERSION-FILE
+ 
+@@ -2216,7 +2236,7 @@ endif
+ 
+ PERL_DEFINES += $(gitexecdir) $(perllibdir) $(localedir)
+ 
+-$(SCRIPT_PERL_GEN): % : %.perl GIT-PERL-DEFINES GIT-PERL-HEADER GIT-VERSION-FILE
++$(_SCRIPT_PERL_GEN): % : %.perl GIT-PERL-DEFINES GIT-PERL-HEADER GIT-VERSION-FILE
  	$(QUIET_GEN)$(RM) $@ $@+ && \
- 	INSTLIBDIR='$(perllibdir_SQ)' && \
- 	INSTLIBDIR_EXTRA='$(PERLLIB_EXTRA_SQ)' && \
-@@ -2012,14 +2032,18 @@ git-instaweb: git-instaweb.sh GIT-SCRIPT-DEFINES
+ 	sed -e '1{' \
+ 	    -e '	s|#!.*perl|#!$(PERL_PATH_SQ)|' \
+@@ -2262,14 +2282,18 @@ git-instaweb: git-instaweb.sh GIT-SCRIPT-DEFINES
  	chmod +x $@+ && \
  	mv $@+ $@
  else # NO_PERL
@@ -162,9 +165,9 @@ index a1d8775adb..4264475ad1 100644
  
  # This makes sure we depend on the NO_PYTHON setting itself.
  $(SCRIPT_PYTHON_GEN): GIT-BUILD-OPTIONS
-@@ -2258,7 +2282,7 @@ LOCALIZED_SH = $(SCRIPT_SH)
+@@ -2518,7 +2542,7 @@ LOCALIZED_SH = $(SCRIPT_SH)
  LOCALIZED_SH += git-parse-remote.sh
- LOCALIZED_SH += git-rebase--interactive.sh
+ LOCALIZED_SH += git-rebase--preserve-merges.sh
  LOCALIZED_SH += git-sh-setup.sh
 -LOCALIZED_PERL = $(SCRIPT_PERL)
 +LOCALIZED_PERL = $(SCRIPT_PERL) $(SCRIPT_PERL_CVS)
@@ -172,7 +175,7 @@ index a1d8775adb..4264475ad1 100644
  ifdef XGETTEXT_INCLUDE_TESTS
  LOCALIZED_C += t/t0200/test.c
 diff --git a/t/t9200-git-cvsexportcommit.sh b/t/t9200-git-cvsexportcommit.sh
-index 1319415ba8..34ac8e28e2 100755
+index c5946cb0b8..223fd5409b 100755
 --- a/t/t9200-git-cvsexportcommit.sh
 +++ b/t/t9200-git-cvsexportcommit.sh
 @@ -11,6 +11,11 @@ if ! test_have_prereq PERL; then
@@ -188,7 +191,7 @@ index 1319415ba8..34ac8e28e2 100755
  if test $? -ne 1
  then
 diff --git a/t/t9400-git-cvsserver-server.sh b/t/t9400-git-cvsserver-server.sh
-index 06742748e9..51d474d94b 100755
+index a5e5dca753..ef6d9c911c 100755
 --- a/t/t9400-git-cvsserver-server.sh
 +++ b/t/t9400-git-cvsserver-server.sh
 @@ -11,9 +11,15 @@ cvs CLI client via git-cvsserver server'
@@ -239,7 +242,7 @@ index 84787eee9a..eecba88527 100755
  fi
  perl -e 'use DBI; use DBD::SQLite' >/dev/null 2>&1 || {
 diff --git a/t/t9600-cvsimport.sh b/t/t9600-cvsimport.sh
-index 804ce3850f..c53c50e432 100755
+index 251fdd66c4..596cd9d35d 100755
 --- a/t/t9600-cvsimport.sh
 +++ b/t/t9600-cvsimport.sh
 @@ -8,14 +8,25 @@ if ! test_have_prereq NOT_ROOT; then
@@ -413,7 +416,7 @@ index e1db323f54..68f097401f 100755
  
  test_expect_success PERL 'import module' '
 diff --git a/t/t9603-cvsimport-patchsets.sh b/t/t9603-cvsimport-patchsets.sh
-index c4c3c49546..9b2957d4f0 100755
+index 3e64b11eac..606980b05c 100755
 --- a/t/t9603-cvsimport-patchsets.sh
 +++ b/t/t9603-cvsimport-patchsets.sh
 @@ -14,6 +14,17 @@
@@ -435,10 +438,10 @@ index c4c3c49546..9b2957d4f0 100755
  
  test_expect_failure PERL 'import with criss cross times on revisions' '
 diff --git a/t/test-lib.sh b/t/test-lib.sh
-index 7740d511d2..9b26b78359 100644
+index 908ddb9c46..9a06440599 100644
 --- a/t/test-lib.sh
 +++ b/t/test-lib.sh
-@@ -1062,6 +1062,7 @@ case $uname_s in
+@@ -1428,6 +1428,7 @@ case $uname_s in
  esac
  
  ( COLUMNS=1 && test $COLUMNS = 1 ) && test_set_prereq COLUMNS_CAN_BE_1
@@ -447,5 +450,5 @@ index 7740d511d2..9b26b78359 100644
  test -z "$NO_PTHREADS" && test_set_prereq PTHREADS
  test -z "$NO_PYTHON" && test_set_prereq PYTHON
 -- 
-2.16.3
+2.21.0
 
