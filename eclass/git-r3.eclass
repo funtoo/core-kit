@@ -25,6 +25,8 @@ EXPORT_FUNCTIONS src_unpack
 
 if [[ ! ${_GIT_R3} ]]; then
 
+PROPERTIES+=" live"
+
 if [[ ! ${_INHERITED_BY_GIT_2} ]]; then
 	if [[ ${EAPI:-0} != [0123456] ]]; then
 		BDEPEND=">=dev-vcs/git-1.8.2.1[curl]"
