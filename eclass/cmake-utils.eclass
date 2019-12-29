@@ -42,7 +42,7 @@ _CMAKE_UTILS_ECLASS=1
 # If about to be set - needs to be set before invoking cmake-utils_src_configure.
 # You usualy do *NOT* want nor need to set it as it pulls CMake default build-type
 # specific compiler flags overriding make.conf.
-: ${CMAKE_BUILD_TYPE:=Gentoo}
+: ${CMAKE_BUILD_TYPE:=RELEASE}
 
 # @ECLASS-VARIABLE: CMAKE_IN_SOURCE_BUILD
 # @DEFAULT_UNSET
@@ -649,7 +649,7 @@ cmake-utils_src_configure() {
 	if [[ ${EAPI} != [56] ]]; then
 		cat >> "${common_config}" <<- _EOF_ || die
 			SET (CMAKE_INSTALL_DOCDIR "${EPREFIX}/usr/share/doc/${PF}" CACHE PATH "")
-			SET (BUILD_SHARED_LIBS ON CACHE BOOLEAN "")
+			SET (BUILD_SHARED_LIBS ON CACHE BOOL "add_library creates shared libraries")
 		_EOF_
 	fi
 
