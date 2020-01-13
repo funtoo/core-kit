@@ -1,4 +1,3 @@
-# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: golang-build.eclass
@@ -10,7 +9,7 @@
 # This eclass provides default  src_compile, src_test and src_install
 # functions for software written in the Go programming language.
 
-inherit golang-base
+inherit golang-base xdg-utils
 
 case "${EAPI:-0}" in
 	5|6|7)
@@ -49,6 +48,11 @@ _GOLANG_BUILD=1
 # @CODE
 # EGO_PN=github.com/user/package
 # @CODE
+
+golang-build_src_prepare() {
+	# See Funtoo Linux bug FL-6885 for why this is needed:
+	xdg_environment_reset
+}
 
 golang-build_src_compile() {
 	debug-print-function ${FUNCNAME} "$@"
