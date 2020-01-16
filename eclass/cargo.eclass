@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: cargo.eclass
@@ -12,8 +12,7 @@
 if [[ -z ${_CARGO_ECLASS} ]]; then
 _CARGO_ECLASS=1
 
-CARGO_DEPEND=""
-[[ ${CATEGORY}/${PN} != dev-util/cargo ]] && CARGO_DEPEND="virtual/cargo"
+CARGO_DEPEND="virtual/cargo"
 
 case ${EAPI} in
 	6) DEPEND="${CARGO_DEPEND}";;
@@ -23,7 +22,7 @@ esac
 
 inherit multiprocessing
 
-EXPORT_FUNCTIONS src_unpack src_compile src_install
+EXPORT_FUNCTIONS src_unpack src_compile src_install src_test
 
 IUSE="${IUSE} debug"
 
@@ -122,7 +121,7 @@ cargo_src_compile() {
 
 	export CARGO_HOME="${ECARGO_HOME}"
 
-	cargo build -j $(makeopts_jobs) $(usex debug "" --release) \
+	cargo build -j $(makeopts_jobs) $(usex debug "" --release) "$@" \
 		|| die "cargo build failed"
 }
 
@@ -132,11 +131,21 @@ cargo_src_compile() {
 cargo_src_install() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	cargo install -j $(makeopts_jobs) --root="${D}/usr" $(usex debug --debug "") \
+	cargo install --path . -j $(makeopts_jobs) --root="${D}/usr" $(usex debug --debug "") "$@" \
 		|| die "cargo install failed"
 	rm -f "${D}/usr/.crates.toml"
 
 	[ -d "${S}/man" ] && doman "${S}/man" || return 0
+}
+
+# @FUNCTION: cargo_src_test
+# @DESCRIPTION:
+# Test the package using cargo test
+cargo_src_test() {
+	debug-print-function ${FUNCNAME} "$@"
+
+	cargo test -j $(makeopts_jobs) $(usex debug "" --release) "$@" \
+		|| die "cargo test failed"
 }
 
 fi
