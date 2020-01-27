@@ -47,6 +47,13 @@ app-editors/nano:debug - Enable debug messages and assert warnings. Note that th
 app-editors/nano:justify - Enable justify/unjustify functions for text formatting.
 app-editors/nano:magic - Add magic file support (sys-apps/file) to automatically detect appropriate syntax highlighting
 app-editors/nano:minimal - Disable all fancy features, including ones that otherwise have a dedicated USE flag (such as spelling).
+app-emulation/docker:apparmor - Enable AppArmor support.
+app-emulation/docker:aufs - Enables dependencies for the "aufs" graph driver, including necessary kernel flags.
+app-emulation/docker:btrfs - Enables dependencies for the "btrfs" graph driver, including necessary kernel flags.
+app-emulation/docker:container-init - Makes the a staticly-linked init system tini available inside a container.
+app-emulation/docker:device-mapper - Enables dependencies for the "devicemapper" graph driver, including necessary kernel flags.
+app-emulation/docker:overlay - Enables dependencies for the "overlay" graph driver, including necessary kernel flags.
+app-emulation/docker:pkcs11 - Enables pkcs-11 support.
 app-emulation/lxc:cgmanager - Enable support for cgroup management using app-admin/cgmanager
 app-emulation/lxd:daemon - Build the system daemon, not just the client tool
 app-emulation/lxd:dnsmasq - Depend on dnsmasq to provide DHCP and DNS.
