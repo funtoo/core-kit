@@ -1,0 +1,14 @@
+BDEPEND=python_targets_python3_6? ( dev-lang/python:3.6 ) python_targets_python3_7? ( dev-lang/python:3.7 ) >=dev-lang/python-exec-2:=[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)]
+DEFINED_PHASES=compile configure install prepare test
+DESCRIPTION=Plugin-Oriented Programming
+EAPI=7
+HOMEPAGE=https://pypi.org/project/pop/
+IUSE=python_targets_python3_6 python_targets_python3_7
+KEYWORDS=*
+LICENSE=Apache-2.0
+RDEPEND=dev-python/pyyaml[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)] dev-python/pop[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)] dev-python/jinja[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)] dev-python/aiohttp[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)] dev-python/aiodns[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)] www-servers/tornado[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)] python_targets_python3_6? ( dev-lang/python:3.6 ) python_targets_python3_7? ( dev-lang/python:3.7 ) >=dev-lang/python-exec-2:=[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_python3_6(-),-python_single_target_python3_7(-)]
+REQUIRED_USE=|| ( python_targets_python3_6 python_targets_python3_7 )
+SLOT=0
+SRC_URI=https://files.pythonhosted.org/packages/c0/e1/74de18388f0582f6c68dad76aa2e1b59a4c6762d87db65cc3a94c03e5cb1/funtoo-metatools-0.2.tar.gz -> funtoo-metatools-0.2.tar.gz
+_eclasses_=distutils-r1	1a001b95d3bfb24277ebc93f461847da	multibuild	40fe59465edacd730c644ec2bc197809	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	ce1cd23cfdc1848e8e32743efe34f299	python-utils-r1	0ccf24dbef2b7722ad46689d6feebe37	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_md5_=ecbc214e7a4dcf08c880c64df6ab76bc
