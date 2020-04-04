@@ -7,13 +7,13 @@ inherit distutils-r1
 
 DESCRIPTION="Plugin-Oriented Programming"
 HOMEPAGE="https://pypi.org/project/pop/"
-SRC_URI="https://files.pythonhosted.org/packages/8e/c1/684ae479e79972cb85313289f9693d0e48b8d5b3c42ca435cc54e56367d3/funtoo-metatools-0.3.tar.gz -> funtoo-metatools-0.3.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/ec/f5/f8f5a542edd8be4ae8b4b2ff279a503de62a195b2e160a4645e9088b0d08/funtoo-metatools-0.3.1.tar.gz -> funtoo-metatools-0.3.1.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="*"
 IUSE=""
-S="${WORKDIR}/funtoo-metatools-0.3"
+S="${WORKDIR}/funtoo-metatools-0.3.1"
 
 RDEPEND="
 	dev-python/pyyaml[${PYTHON_USEDEP}]
