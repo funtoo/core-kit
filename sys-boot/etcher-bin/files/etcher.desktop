@@ -6,5 +6,5 @@ Type=Application
 Icon=balena-etcher-electron
 StartupWMClass=balenaEtcher
 Comment=Flash OS images to SD cards and USB drives, safely and easily.
-Categories=Utility;System;
+Categories=System;
 

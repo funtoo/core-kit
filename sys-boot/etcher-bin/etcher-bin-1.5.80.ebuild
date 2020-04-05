@@ -43,7 +43,6 @@ src_unpack() {
 }
 
 src_install() {
-	pax-utils m "${MY_EXEC}"
 	doins -r *
         dosym "${MY_INSTALL_DIR}/${MY_EXEC}" "/usr/bin/${MY_PN}" || die
         make_wrapper "${MY_PN}" "${MY_INSTALL_DIR}/${MY_EXEC}" || die
@@ -57,15 +56,14 @@ src_install() {
 	fperms 4755 "${MY_INSTALL_DIR}/chrome-sandbox" || die
 	fperms a+x "${MY_INSTALL_DIR}/${MY_EXEC}" || die
 	fperms a+x "${MY_INSTALL_DIR}/${MY_EXEC}.bin" || die
+	pax-mark m "${MY_INSTALL_DIR}/${MY_EXEC}" || die
 }
 
 pkg_postinst() {
-	xdg_icon_cache_update
-	xdg_desktop_database_update
+	xdg_pkg_postinst
 }
 
 pkg_postrm() {
-	xdg_desktop_database_update
-	xdg_icon_cache_update
+	xdg_pkg_postrm
 }
 
