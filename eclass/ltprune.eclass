@@ -4,7 +4,7 @@
 # @ECLASS: ltprune.eclass
 # @MAINTAINER:
 # Michał Górny <mgorny@gentoo.org>
-# @SUPPORTED_EAPIS: 0 1 2 3 4 5 6
+# @SUPPORTED_EAPIS: 0 1 2 3 4 5 6 7
 # @BLURB: Smart .la file pruning
 # @DESCRIPTION:
 # A function to locate and remove unnecessary .la files.
@@ -17,7 +17,7 @@
 if [[ -z ${_LTPRUNE_ECLASS} ]]; then
 
 case ${EAPI:-0} in
-	0|1|2|3|4|5|6)
+	0|1|2|3|4|5|6|7)
 		;;
 	*)
 		die "${ECLASS}: banned in EAPI=${EAPI}; use 'find' instead";;
