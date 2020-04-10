@@ -1,11 +1,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3+ )
 
 inherit distutils-r1
 
-DESCRIPTION="Plugin-Oriented Programming"
+DESCRIPTION="Funtoo's metatools, autogeneration scripts."
 HOMEPAGE="https://pypi.org/project/pop/"
 SRC_URI="https://files.pythonhosted.org/packages/b2/6f/ebd41c9096c474f1687cdc922214cb1838c504ab96de4d6099de62c1829b/funtoo-metatools-0.3.6.tar.gz -> funtoo-metatools-0.3.6.tar.gz"
 

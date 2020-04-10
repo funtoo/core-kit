@@ -1,0 +1,14 @@
+BDEPEND=python_targets_python3_7? ( dev-lang/python:3.7 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,-python_single_target_python3_7(-)]
+DEFINED_PHASES=compile configure install prepare test
+DESCRIPTION=Funtoo's franken-chroot tool.
+EAPI=7
+HOMEPAGE=https://pypi.org/project/fchroot/
+IUSE=python_targets_python3_7
+KEYWORDS=*
+LICENSE=Apache-2.0
+RDEPEND=app-emulation/qemu[static-user,qemu_user_targets_aarch64,qemu_user_targets_arm,qemu_user_targets_riscv64] dev-libs/glib[static-libs] sys-apps/attr[static-libs] sys-libs/zlib[static-libs] dev-libs/libpcre[static-libs] python_targets_python3_7? ( dev-lang/python:3.7 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,-python_single_target_python3_7(-)]
+REQUIRED_USE=|| ( python_targets_python3_7 )
+SLOT=0
+SRC_URI=https://files.pythonhosted.org/packages/f2/04/4db5e98e93207dbb9bb71725767a8d016f9aa1e70c9c7892a5c270c3eac6/fchroot-0.1.2.tar.gz -> fchroot-0.1.2.tar.gz
+_eclasses_=distutils-r1	1a001b95d3bfb24277ebc93f461847da	multibuild	40fe59465edacd730c644ec2bc197809	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	6ae4f9eb4881e5c5489344ee122e05d0	python-utils-r1	6eaf2ebfc1433cdf9317ada205aaecf6	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_md5_=cdb9a318005b21d4b441dd5502280c7e
