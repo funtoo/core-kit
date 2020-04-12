@@ -415,10 +415,6 @@ sys-fs/squashfs-tools:lz4 - Enable support for LZ4 compression using app-arch/lz
 sys-fs/squashfs-tools:xz - Enable support for XZ ("LZMA2") compression using app-arch/xz-utils
 sys-fs/squashfuse:lz4 - Enable support for lz4 compression
 sys-fs/udev:kmod - Enable kernel module loading/unloading support using sys-apps/kmod
-sys-fs/zfs:kernel-builtin - Disable dependency on sys-fs/zfs-kmod under the assumption that ZFS is part of the kernel source tree
-sys-fs/zfs:rootfs - Enable dependencies required for booting off a pool containing a rootfs
-sys-fs/zfs:test-suite - Install regression test suite
-sys-fs/zfs-kmod:rootfs - Install zfs-shutdown script to support exporting a pool containing rootfs
 sys-kernel/debian-sources:binary - Builds and installs kernel automatically
 sys-kernel/debian-sources:rt - Applies the CONFIG_PREEMPT_RT patch series
 sys-kernel/dracut:debug - Module installing additional tools like strace, file editor, ssh and more
