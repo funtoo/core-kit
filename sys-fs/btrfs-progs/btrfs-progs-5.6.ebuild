@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3+ )
 
 inherit bash-completion-r1 python-single-r1
 
@@ -12,7 +12,7 @@ libbtrfs_soname=0
 if [[ ${PV} != 9999 ]]; then
 	MY_PV="v${PV/_/-}"
 	[[ "${PV}" = *_rc* ]] || \
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+	KEYWORDS="*"
 	SRC_URI="https://www.kernel.org/pub/linux/kernel/people/kdave/${PN}/${PN}-${MY_PV}.tar.xz"
 	S="${WORKDIR}/${PN}-${MY_PV}"
 else
@@ -77,7 +77,7 @@ fi
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-5.1-LDFLAGS.patch
+	"${FILESDIR}/btrfs-progs-5.6-raid56-filesystem-usage.patch"
 )
 
 pkg_setup() {
