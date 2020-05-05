@@ -7,13 +7,13 @@ inherit distutils-r1
 
 DESCRIPTION="Funtoo's metatools, autogeneration scripts."
 HOMEPAGE="https://pypi.org/project/pop/"
-SRC_URI="https://files.pythonhosted.org/packages/70/07/ba99a3468924566e756a3c7f71661a01f5d0423b0319d413b609db49687a/funtoo-metatools-0.4.6.tar.gz -> funtoo-metatools-0.4.6.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/14/41/daeb39367712bde64086a573deb7b6b115434e0b54e0faff6c894df39b70/funtoo-metatools-0.4.7.tar.gz -> funtoo-metatools-0.4.7.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="*"
 IUSE=""
-S="${WORKDIR}/funtoo-metatools-0.4.6"
+S="${WORKDIR}/funtoo-metatools-0.4.7"
 
 RDEPEND="
 	dev-python/pyyaml[${PYTHON_USEDEP}]
