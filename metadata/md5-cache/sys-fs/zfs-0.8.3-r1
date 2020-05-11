@@ -4,12 +4,13 @@ DEPEND=kernel_linux? ( virtual/modutils ) sys-apps/sed kernel_linux? ( virtual/l
 DESCRIPTION=Userland utilities for ZFS Linux kernel module
 EAPI=7
 HOMEPAGE=https://zfsonlinux.org/
-IUSE=custom-cflags debug kernel-builtin python +rootfs test-suite static-libs kernel_linux kernel_linux kernel_linux python_targets_python3_7 split-usr
+IUSE=custom-cflags debug python +rootfs test-suite static-libs kernel_linux kernel_linux kernel_linux python_targets_python3_7 split-usr
+KEYWORDS=*
 LICENSE=BSD-2 CDDL MIT
-RDEPEND=python_targets_python3_7? ( dev-lang/python:3.7 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,-python_single_target_python3_7(-)] net-libs/libtirpc sys-apps/util-linux[static-libs?] sys-libs/zlib[static-libs(+)?] virtual/awk python? ( virtual/python-cffi[python_targets_python3_7(-)?,-python_single_target_python3_7(-)] ) !=sys-apps/grep-2.13* !kernel-builtin? ( ~sys-fs/zfs-kmod-0.8.3 ) !sys-fs/zfs-fuse !prefix? ( virtual/udev ) sys-fs/udev-init-scripts rootfs? ( app-arch/cpio app-misc/pax-utils !<sys-boot/grub-2.00-r2:2 !<sys-kernel/genkernel-3.4 !<sys-kernel/genkernel-next-67 !<sys-kernel/bliss-initramfs-7.1.0 !<sys-kernel/dracut-044-r1 ) test-suite? ( sys-apps/util-linux sys-devel/bc sys-block/parted sys-fs/lsscsi sys-fs/mdadm sys-process/procps virtual/modutils ) kernel_linux? ( virtual/modutils )
+RDEPEND=python_targets_python3_7? ( dev-lang/python:3.7 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,-python_single_target_python3_7(-)] net-libs/libtirpc sys-apps/util-linux[static-libs?] sys-libs/zlib[static-libs(+)?] virtual/awk python? ( virtual/python-cffi[python_targets_python3_7(-)?,-python_single_target_python3_7(-)] ) !=sys-apps/grep-2.13* =sys-fs/zfs-kmod-0.8.3-r1 !sys-fs/zfs-fuse !prefix? ( virtual/udev ) sys-fs/udev-init-scripts rootfs? ( app-arch/cpio app-misc/pax-utils ) test-suite? ( sys-apps/util-linux sys-devel/bc sys-block/parted sys-fs/lsscsi sys-fs/mdadm sys-process/procps virtual/modutils ) kernel_linux? ( virtual/modutils )
 REQUIRED_USE=|| ( python_targets_python3_7 )
 RESTRICT=test
 SLOT=0
 SRC_URI=https://github.com/zfsonlinux/zfs/releases/download/zfs-0.8.3/zfs-0.8.3.tar.gz
 _eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	distutils-r1	1a001b95d3bfb24277ebc93f461847da	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	linux-info	953c3b1c472dcadbf62098a9301327f2	linux-mod	6c7b3e7b9d39bd049bf23a991c16315e	multibuild	40fe59465edacd730c644ec2bc197809	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	6ae4f9eb4881e5c5489344ee122e05d0	python-utils-r1	8914c9c220fed51dbc06d700c5ce75bc	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	udev	7752f306eec7b286d00bdb47b763e7ac	usr-ldscript	766f0a506b45f02361ad1b8ca205b7e1
-_md5_=4969875aade32d34b2f1227d60919f88
+_md5_=69bc68b90253f873ed3294b0ac0eade6
