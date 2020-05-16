@@ -6,7 +6,7 @@ inherit multilib
 
 DESCRIPTION="PUEL extensions for VirtualBox"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/6.1.6/Oracle_VM_VirtualBox_Extension_Pack-6.1.6-137129.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-6.1.6-137129.tar.gz"
+SRC_URI="https://download.virtualbox.org/virtualbox/6.1.8/Oracle_VM_VirtualBox_Extension_Pack-6.1.8-137981.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-6.1.8-137981.tar.gz"
 
 LICENSE="PUEL"
 SLOT="0"
@@ -15,8 +15,8 @@ IUSE=""
 RESTRICT="mirror strip"
 
 RDEPEND="|| (
-	~app-emulation/virtualbox-6.1.6
-	~app-emulation/virtualbox-bin-6.1.6.137129 )"
+	~app-emulation/virtualbox-6.1.8
+	~app-emulation/virtualbox-bin-6.1.8.137981 )"
 
 S="${WORKDIR}"
 

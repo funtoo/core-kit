@@ -7,7 +7,7 @@ inherit flag-o-matic java-pkg-opt-2 linux-info pax-utils python-single-r1 tmpfil
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/6.1.6/VirtualBox-6.1.6.tar.bz2 -> VirtualBox-6.1.6.tar.bz2"
+SRC_URI="https://download.virtualbox.org/virtualbox/6.1.8/VirtualBox-6.1.8.tar.bz2 -> VirtualBox-6.1.8.tar.bz2"
 
 LICENSE="GPL-2 dtrace? ( CDDL )"
 SLOT="0"
@@ -15,7 +15,7 @@ KEYWORDS="*"
 IUSE="alsa debug doc dtrace headless java libressl lvm +opus pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
 
 RDEPEND="!app-emulation/virtualbox-bin
-	~app-emulation/virtualbox-modules-6.1.6
+	~app-emulation/virtualbox-modules-6.1.8
 	dev-libs/libIDL
 	>=dev-libs/libxslt-1.1.19
 	net-misc/curl
@@ -108,7 +108,7 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/VBoxNetDHCP.so
 	usr/lib/virtualbox/VBoxNetNAT.so"
 
-S="${WORKDIR}/VirtualBox-6.1.6"
+S="${WORKDIR}/VirtualBox-6.1.8"
 
 REQUIRED_USE="
 	java? ( sdk )
