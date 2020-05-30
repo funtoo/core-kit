@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -13,8 +12,8 @@ SRC_URI="http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-${PV:0:3}/${MY_P}.tar
 
 LICENSE="HPND BSD ISC"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~m68k-mint"
-IUSE="caps debug ipv6 libressl openntpd parse-clocks readline samba selinux snmp ssl +threads vim-syntax zeroconf"
+KEYWORDS="*"
+IUSE="caps debug ipv6 libressl ntp-cron openntpd parse-clocks readline samba selinux snmp ssl +threads vim-syntax zeroconf"
 
 CDEPEND="readline? ( >=sys-libs/readline-4.1:0= )
 	>=dev-libs/libevent-2.0.9:=[threads?]
@@ -129,11 +128,17 @@ src_install() {
 		fi
 		systemd_enable_ntpunit 60-ntpd ntpd.service
 	fi
+    
+    if use ntp-cron ; then
+        exeinto /etc/cron.daily
+        newexe "${FILESDIR}"/net-client.sh net-client.sh
+    fi
 
-	systemd_newunit "${FILESDIR}"/ntpdate.service-r1 ntpdate.service
-	systemd_install_serviced "${FILESDIR}"/ntpdate.service.conf
-	systemd_newunit "${FILESDIR}"/sntp.service-r2 sntp.service
-	systemd_install_serviced "${FILESDIR}"/sntp.service.conf
+    systemd_newunit "${FILESDIR}"/ntpdate.service-r1 ntpdate.service
+    systemd_install_serviced "${FILESDIR}"/ntpdate.service.conf
+    systemd_newunit "${FILESDIR}"/sntp.service-r2 sntp.service
+    systemd_install_serviced "${FILESDIR}"/sntp.service.conf
+
 }
 
 pkg_postinst() {
