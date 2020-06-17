@@ -7,7 +7,7 @@ inherit flag-o-matic java-pkg-opt-2 linux-info pax-utils python-single-r1 tmpfil
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/6.1.10/VirtualBox-6.1.10.tar.bz2 -> VirtualBox-6.1.10.tar.bz2"
+SRC_URI="https://download.virtualbox.org/virtualbox/6.1.10/VirtualBox-6.1.10.tar.bz2"
 
 LICENSE="GPL-2 dtrace? ( CDDL )"
 SLOT="0"
