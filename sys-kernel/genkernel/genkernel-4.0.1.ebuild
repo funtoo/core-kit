@@ -26,7 +26,7 @@ COMMON_URI="mirror://funtoo/dmraid-${VERSION_DMRAID}.tar.bz2
 
 GITHUB_REPO="${PN}"
 GITHUB_USER="funtoo"
-GITHUB_TAG="a2615f1e943c09122a03190a7a79ed31fa957e21"
+GITHUB_TAG="ddc5087b2912721982be67cb26140df368288c6c"
 
 inherit bash-completion-r1 eutils
 SRC_URI="https://www.github.com/${GITHUB_USER}/${GITHUB_REPO}/tarball/${GITHUB_TAG} -> ${PN}-${GITHUB_TAG}.tar.gz ${COMMON_URI}"
