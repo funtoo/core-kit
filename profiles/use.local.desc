@@ -249,10 +249,6 @@ sys-apps/dbus:user-session - Enable user-session semantics for session bus under
 sys-apps/debianutils:installkernel - Install /sbin/installkernel script (for Linux)
 sys-apps/gawk:forced-sandbox - Always enable --sandbox mode for simpler/secure runtime (disables e/r/w commands)
 sys-apps/gawk:mpfr - use mpfr for high precision arithmetic (-M / --bignum)
-sys-apps/hwids:net - Install the oui.txt and iab.txt databases
-sys-apps/hwids:pci - Install the pci.ids database
-sys-apps/hwids:udev - Install hwdb.d rules for udev
-sys-apps/hwids:usb - Install the usb.ids database
 sys-apps/iproute2:berkdb - build programs that use berkdb (just arpd)
 sys-apps/iproute2:elf - support loading eBPF programs from ELFs (e.g. LLVM's eBPF backend)
 sys-apps/iproute2:iptables - include support for iptables filtering
