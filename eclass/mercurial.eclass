@@ -1,4 +1,3 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: mercurial.eclass
@@ -17,6 +16,8 @@
 inherit eutils
 
 EXPORT_FUNCTIONS src_unpack
+
+PROPERTIES+=" live"
 
 DEPEND="dev-vcs/mercurial"
 
@@ -92,10 +93,10 @@ mercurial_fetch() {
 
 	has "${EAPI:-0}" 0 1 2 && ! use prefix && EPREFIX=
 
-	EHG_REPO_URI=${1-${EHG_REPO_URI}}
+	EHG_REPO_URI=${1:-${EHG_REPO_URI}}
 	[[ -z "${EHG_REPO_URI}" ]] && die "EHG_REPO_URI is empty"
 
-	local module="${2-$(basename "${EHG_REPO_URI}")}"
+	local module="${2:-$(basename "${EHG_REPO_URI}")}"
 	local sourcedir="${3:-${EHG_CHECKOUT_DIR:-${S}}}"
 
 	# Should be set but blank to prevent using $HOME/.hgrc
