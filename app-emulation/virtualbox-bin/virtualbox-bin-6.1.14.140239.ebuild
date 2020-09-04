@@ -8,8 +8,8 @@ inherit xdg-utils gnome2 pax-utils python-r1 udev unpacker eapi7-ver
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI=" https://download.virtualbox.org/virtualbox/6.1.12/VirtualBox-6.1.12-139181-Linux_amd64.run https://download.virtualbox.org/virtualbox/6.1.12/Oracle_VM_VirtualBox_Extension_Pack-6.1.12-139181.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-6.1.12-139181.tar.gz
-	sdk? ( https://download.virtualbox.org/virtualbox/6.1.12/VirtualBoxSDK-6.1.12-139181.zip )"
+SRC_URI=" https://download.virtualbox.org/virtualbox/6.1.14/VirtualBox-6.1.14-140239-Linux_amd64.run https://download.virtualbox.org/virtualbox/6.1.14/Oracle_VM_VirtualBox_Extension_Pack-6.1.14-140239.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-6.1.14-140239.tar.gz
+	sdk? ( https://download.virtualbox.org/virtualbox/6.1.14/VirtualBoxSDK-6.1.14-140239.zip )"
 
 LICENSE="GPL-2 PUEL"
 SLOT="0"
@@ -23,7 +23,7 @@ DEPEND="app-arch/unzip
 
 RDEPEND="!!app-emulation/virtualbox
 	!app-emulation/virtualbox-additions
-	~app-emulation/virtualbox-modules-6.1.12
+	~app-emulation/virtualbox-modules-6.1.14
 	!headless? (
 		dev-libs/glib
 		media-libs/fontconfig
@@ -59,16 +59,16 @@ QA_PREBUILT="opt/VirtualBox/*"
 PYTHON_UPDATER_IGNORE="1"
 
 src_unpack() {
-	unpack_makeself VirtualBox-6.1.12-139181-Linux_amd64.run
+	unpack_makeself VirtualBox-6.1.14-140239-Linux_amd64.run
 	unpack ./VirtualBox.tar.bz2
 
 	mkdir "${S}"/Oracle_VM_VirtualBox_Extension_Pack || die
 	pushd "${S}"/Oracle_VM_VirtualBox_Extension_Pack &>/dev/null || die
-	unpack Oracle_VM_VirtualBox_Extension_Pack-6.1.12-139181.tar.gz
+	unpack Oracle_VM_VirtualBox_Extension_Pack-6.1.14-140239.tar.gz
 	popd &>/dev/null || die
 
 	if use sdk ; then
-		unpack VirtualBoxSDK-6.1.12-139181.zip
+		unpack VirtualBoxSDK-6.1.14-140239.zip
 	fi
 }
 
