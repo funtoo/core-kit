@@ -186,11 +186,9 @@ DEPEND="app-arch/zip
 	)
 	pulseaudio? ( media-sound/pulseaudio )
 	elibc_glibc? (
-		virtual/cargo
 		virtual/rust
 	)
 	elibc_musl? (
-		virtual/cargo
 		virtual/rust
 	)
 	${RDEPEND}"
