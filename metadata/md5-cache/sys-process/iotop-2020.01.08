@@ -1,14 +1,14 @@
-BDEPEND=python_targets_python3_7? ( dev-lang/python:3.7[ncurses(+)] ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,-python_single_target_python3_7(-)]
+BDEPEND=python_targets_python3_7? ( dev-lang/python:3.7[ncurses(+)] ) python_targets_python3_9? ( dev-lang/python:3.9[ncurses(+)] ) python_targets_python3_8? ( dev-lang/python:3.8[ncurses(+)] ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] >=dev-python/setuptools-42.0.2[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)]
 DEFINED_PHASES=compile configure install prepare setup test
 DESCRIPTION=Top-like UI used to show which process is using the I/O
 EAPI=7
 HOMEPAGE=http://guichaz.free.fr/iotop/
-IUSE=python_targets_python3_7 kernel_linux
+IUSE=python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 kernel_linux
 KEYWORDS=*
 LICENSE=GPL-2
-RDEPEND=python_targets_python3_7? ( dev-lang/python:3.7[ncurses(+)] ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,-python_single_target_python3_7(-)]
-REQUIRED_USE=|| ( python_targets_python3_7 )
+RDEPEND=python_targets_python3_7? ( dev-lang/python:3.7[ncurses(+)] ) python_targets_python3_9? ( dev-lang/python:3.9[ncurses(+)] ) python_targets_python3_8? ( dev-lang/python:3.8[ncurses(+)] ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)]
+REQUIRED_USE=|| ( python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 )
 SLOT=0
 SRC_URI=https://repo.or.cz/iotop.git/snapshot/1bfb3bc70febb1ffb95146b6dcd65257228099a3.tar.gz -> iotop-2020.01.08.tar.gz
-_eclasses_=distutils-r1	1a001b95d3bfb24277ebc93f461847da	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multibuild	40fe59465edacd730c644ec2bc197809	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	6ae4f9eb4881e5c5489344ee122e05d0	python-utils-r1	8914c9c220fed51dbc06d700c5ce75bc	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_eclasses_=distutils-r1	eb92d1a6d9057e2422cc9610f79f919c	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multibuild	b2c915190b051f55a23b9354b9849847	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
 _md5_=a608ef5bfc8bfface8b100058f0eb7cd
