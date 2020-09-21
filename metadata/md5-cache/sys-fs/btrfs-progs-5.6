@@ -4,7 +4,7 @@ DEPEND=dev-libs/lzo:2= sys-apps/util-linux:0=[static-libs(+)?] sys-libs/zlib:0= 
 DESCRIPTION=Btrfs filesystem utilities
 EAPI=7
 HOMEPAGE=https://btrfs.wiki.kernel.org
-IUSE=+convert doc python reiserfs static static-libs +zstd python_targets_python3_7 python_targets_python3_9 python_targets_python3_8
+IUSE=+convert doc python reiserfs static static-libs +zstd python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_targets_python3_7 python_targets_python3_9 python_targets_python3_8
 KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=dev-libs/lzo:2= sys-apps/util-linux:0=[static-libs(+)?] sys-libs/zlib:0= convert? ( sys-fs/e2fsprogs:0= sys-libs/e2fsprogs-libs:0= reiserfs? ( >=sys-fs/reiserfsprogs-3.6.27 ) ) python? ( python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) ) zstd? ( app-arch/zstd:0= )
@@ -12,5 +12,5 @@ REQUIRED_USE=python? ( ^^ ( python_single_target_python3_7 python_single_target_
 RESTRICT=test
 SLOT=0/0
 SRC_URI=https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v5.6.tar.xz
-_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	multilib	1d91b03d42ab6308b5f4f6b598ed110e	python-single-r1	a811e2c445a5fb40db1a1eba728dca7f	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	multilib	1d91b03d42ab6308b5f4f6b598ed110e	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
 _md5_=cf4d139b27f8ff6ec0bebf70f4dd20a6

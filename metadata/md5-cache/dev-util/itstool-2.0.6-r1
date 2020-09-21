@@ -3,12 +3,12 @@ DEPEND=python_single_target_python3_7? ( dev-lang/python:3.7[xml] >=dev-lang/pyt
 DESCRIPTION=Translation tool for XML documents that uses gettext files and ITS rules
 EAPI=7
 HOMEPAGE=http://itstool.org/
-IUSE=python_targets_python3_7 python_targets_python2_7
+IUSE=python_single_target_python3_7 python_single_target_python2_7 python_targets_python3_7 python_targets_python2_7
 KEYWORDS=*
 LICENSE=GPL-3+ || ( HPND GPL-3+ )
 RDEPEND=python_single_target_python3_7? ( dev-lang/python:3.7[xml] >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7[xml] >=dev-lang/python-exec-2:=[python_targets_python2_7] ) python_single_target_python3_7? ( dev-libs/libxml2[python,python_targets_python3_7(-)] ) python_single_target_python2_7? ( dev-libs/libxml2[python,python_targets_python2_7(-)] )
 REQUIRED_USE=^^ ( python_single_target_python3_7 python_single_target_python2_7 )
 SLOT=0
 SRC_URI=http://files.itstool.org/itstool/itstool-2.0.6.tar.bz2
-_eclasses_=multilib	1d91b03d42ab6308b5f4f6b598ed110e	python-single-r1	a811e2c445a5fb40db1a1eba728dca7f	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_eclasses_=multilib	1d91b03d42ab6308b5f4f6b598ed110e	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
 _md5_=5b45c986a64770f5500dca9ea7a99797

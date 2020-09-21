@@ -3,7 +3,7 @@ DEPEND=python? ( python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.
 DESCRIPTION=A system for large project software construction, simple to use and powerful
 EAPI=7
 HOMEPAGE=https://boostorg.github.io/build/
-IUSE=examples python test python_targets_python2_7
+IUSE=examples python test python_single_target_python2_7 python_targets_python2_7
 KEYWORDS=~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris
 LICENSE=Boost-1.0
 RDEPEND=python? ( python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7] ) ) !<dev-libs/boost-1.35.0 !<=dev-util/boost-build-1.35.0-r1
@@ -11,5 +11,5 @@ REQUIRED_USE=python? ( ^^ ( python_single_target_python2_7 ) ) test? ( ^^ ( pyth
 RESTRICT=test
 SLOT=0
 SRC_URI=https://downloads.sourceforge.net/project/boost/boost/1.70.0/boost_1_70_0.tar.bz2
-_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	1d91b03d42ab6308b5f4f6b598ed110e	prefix	e51c7882b7b721e54e684f7eb143cbfe	python-single-r1	a811e2c445a5fb40db1a1eba728dca7f	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	1d91b03d42ab6308b5f4f6b598ed110e	prefix	e51c7882b7b721e54e684f7eb143cbfe	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
 _md5_=1557512f18d41bd90473489bcbab7433
