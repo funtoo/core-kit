@@ -13,7 +13,7 @@ inherit ruby-fakegem
 
 DESCRIPTION="Vagrant Cloud API Library"
 HOMEPAGE="https://github.com/hashicorp/vagrant_cloud"
-SRC_URI="https://github.com/hashicorp/vagrant_cloud/archive/v3.0.0.tar.gz -> vagrant_cloud-3.0.0.tar.gz"
+SRC_URI="https://github.com/hashicorp/vagrant_cloud/archive/v2.0.3.tar.gz -> vagrant_cloud-2.0.3.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
