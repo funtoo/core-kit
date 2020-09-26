@@ -19,6 +19,5 @@ sys-fs/pytagsfs python_single_target_python2_7
 sys-fs/rarfs python_single_target_python2_7
 sys-fs/traydevice python_single_target_python2_7
 sys-kernel/linux-headers python_single_target_python2_7
-sys-libs/libhugetlbfs python_single_target_python2_7
 sys-libs/libieee1284 python_single_target_python2_7
 sys-process/criu python_single_target_python2_7
