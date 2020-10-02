@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=configure
+DEPEND=dev-libs/json-glib dev-libs/glib:2[dbus] media-libs/fontconfig sys-fs/fuse:0 geolocation? ( >=app-misc/geoclue-2.5.2:2.0 ) screencast? ( >=media-video/pipewire-0.2.90:0/0.3 ) test? ( sys-libs/libportal ) >=sys-devel/gettext-0.18.3 virtual/pkgconfig doc? ( app-text/xmlto app-text/docbook-xml-dtd:4.3 )
+DESCRIPTION=A portal frontend service for Flatpak and possibly other containment frameworks
+EAPI=7
+HOMEPAGE=http://flatpak.org/
+IUSE=doc geolocation screencast test
+KEYWORDS=*
+LICENSE=LGPL-2.1
+RDEPEND=dev-libs/json-glib dev-libs/glib:2[dbus] media-libs/fontconfig sys-fs/fuse:0 geolocation? ( >=app-misc/geoclue-2.5.2:2.0 ) screencast? ( >=media-video/pipewire-0.2.90:0/0.3 ) test? ( sys-libs/libportal )
+SLOT=0
+SRC_URI=https://github.com/flatpak/xdg-desktop-portal/releases/download/1.8.0/xdg-desktop-portal-1.8.0.tar.xz
+_eclasses_=multilib	1d91b03d42ab6308b5f4f6b598ed110e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_md5_=ff899bf2a661169a03537b8a2b354dd3
