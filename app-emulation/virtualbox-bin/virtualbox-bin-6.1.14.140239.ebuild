@@ -8,8 +8,8 @@ inherit xdg-utils gnome2 pax-utils python-r1 udev unpacker eapi7-ver
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI=" https://download.virtualbox.org/virtualbox/6.1.14/VirtualBox-6.1.14-140239-Linux_amd64.run https://download.virtualbox.org/virtualbox/6.1.14/Oracle_VM_VirtualBox_Extension_Pack-6.1.14-140239.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-6.1.14-140239.tar.gz
-	sdk? ( https://download.virtualbox.org/virtualbox/6.1.14/VirtualBoxSDK-6.1.14-140239.zip )"
+SRC_URI=" https://download.virtualbox.org/virtualbox/6.1.14/VirtualBoxSDK-6.1.14-140239.zip https://download.virtualbox.org/virtualbox/6.1.14/VirtualBox-6.1.14-140239-Linux_amd64.run
+	sdk? ( https://download.virtualbox.org/virtualbox/6.1.14/Oracle_VM_VirtualBox_Extension_Pack-6.1.14-140239.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-6.1.14-140239.tar.gz )"
 
 LICENSE="GPL-2 PUEL"
 SLOT="0"
