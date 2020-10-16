@@ -1,10 +1,5 @@
 # Distributed under the terms of the GNU General Public License v2
 
-# Documentation for adding new kernels -- do not remove!
-#
-# Find latest stable kernel release for debian here:
-#   https://packages.debian.org/stable/kernel/
-
 EAPI=5
 
 inherit check-reqs eutils mount-boot
@@ -12,22 +7,27 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="4.19.118"
-DEB_EXTRAVERSION="-2"
-EXTRAVERSION="_p2"
+DEB_PV_BASE="4.19.146"
+DEB_EXTRAVERSION="1"
+# Debian version -1 becomes _p1 in Funtoo:
+if [ -z "$DEB_EXTRAVERSION" ]; then
+	EXTRAVERSION="-${PN}"
+else
+	EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
+fi
+# This sets the module dir in /lib/modules. This starts with the version (reversed from normal.)
+MODULE_EXT=${PVR}-${PN}
 
-# install modules to /lib/modules/${DEB_PV_BASE}${EXTRAVERSION}-$MODULE_EXT
-MODULE_EXT=${EXTRAVERSION}
-[ "$PR" != "r0" ] && MODULE_EXT=$MODULE_EXT-$PR
-MODULE_EXT=$MODULE_EXT-${PN}
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="$DEB_PV_BASE${DEB_EXTRAVERSION}"
-KERNEL_ARCHIVE="linux_${DEB_PV_BASE}.orig.tar.xz"
-PATCH_ARCHIVE="linux_${DEB_PV}.debian.tar.xz"
+DEB_PV="$DEB_PV_BASE-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
+{%- if unmasked %}
 KEYWORDS="*"
+{%- else %}
+KEYWORDS=""
+{%- endif %}
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -45,8 +45,8 @@ zfs? ( binary )
 "
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
-HOMEPAGE="https://packages.debian.org/stable/kernel/"
-SRC_URI="$DEB_UPSTREAM/${KERNEL_ARCHIVE} $DEB_UPSTREAM/${PATCH_ARCHIVE}"
+HOMEPAGE="https://packages.debian.org/unstable/kernel/"
+SRC_URI="{{artifacts|map(attribute='src_uri')|join(' ')}}"
 S="$WORKDIR/linux-${DEB_PV_BASE}"
 
 get_patch_list() {
@@ -118,7 +118,7 @@ src_prepare() {
 	# do not include debian devs certificates
 	rm -rf "${WORKDIR}"/debian/certs
 
-	sed -i -e "s:^\(EXTRAVERSION =\).*:\1 ${MODULE_EXT}:" Makefile || die
+	sed -i -e "s:^\(EXTRAVERSION =\).*:\1 ${EXTRAVERSION}:" Makefile || die
 	sed	-i -e 's:#export\tINSTALL_PATH:export\tINSTALL_PATH:' Makefile || die
 	rm -f .config >/dev/null
 	cp -a "${WORKDIR}"/debian "${T}"
@@ -127,28 +127,9 @@ src_prepare() {
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
 
-	## XFS LIBCRC kernel config fixes, FL-823
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-xfs-libcrc32c-fix.patch
-
-	## FL-4424: enable legacy support for MCELOG.
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-mcelog.patch
-
-	## do not configure debian devs certs.
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-nocerts.patch
-
-	## FL-3381. enable IKCONFIG
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-ikconfig.patch
-
-	## increase bluetooth polling patch
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/${PN}-${DEB_PV_BASE}-fix-bluetooth-polling.patch
-
-	## add support for newer AMD APUs to AMDGPU
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/amdgpu-picasso.patch
-
-	## fix for USB device enumeration for USBPre2:
-	## does not apply cleanly and may have been fixed as of 4.19.118 needs looking into
-	##epatch "${FILESDIR}/${DEB_PV_BASE}/usb-blacklist-endpoint-sound-devices-usbpre2.patch"
-
+	{%- for patch in patches %}
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/{{patch}} || die
+	{%- endfor %}
 	local arch featureset subarch
 	featureset="standard"
 	if [[ ${REAL_ARCH} == x86 ]]; then

@@ -1,10 +1,5 @@
 # Distributed under the terms of the GNU General Public License v2
 
-# Documentation for adding new kernels -- do not remove!
-#
-# Find latest stable kernel release for debian here (linux-image-4.19.0*-amd64)
-#   https://packages.debian.org/stable/kernel/
-
 EAPI=5
 
 inherit check-reqs eutils mount-boot
@@ -12,19 +7,20 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="4.19.132"
-DEB_EXTRAVERSION="-1"
-EXTRAVERSION=""
+DEB_PV_BASE="4.19.146"
+DEB_EXTRAVERSION="1"
+# Debian version -1 becomes _p1 in Funtoo:
+if [ -z "$DEB_EXTRAVERSION" ]; then
+	EXTRAVERSION="-${PN}"
+else
+	EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
+fi
+# This sets the module dir in /lib/modules. This starts with the version (reversed from normal.)
+MODULE_EXT=${PVR}-${PN}
 
-# install modules to /lib/modules/${DEB_PV_BASE}${EXTRAVERSION}-$MODULE_EXT
-MODULE_EXT=${EXTRAVERSION}
-[ "$PR" != "r0" ] && MODULE_EXT=$MODULE_EXT-$PR
-MODULE_EXT=$MODULE_EXT-${PN}
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="$DEB_PV_BASE${DEB_EXTRAVERSION}"
-KERNEL_ARCHIVE="linux_${DEB_PV_BASE}.orig.tar.xz"
-PATCH_ARCHIVE="linux_${DEB_PV}.debian.tar.xz"
+DEB_PV="$DEB_PV_BASE-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
 KEYWORDS="*"
@@ -45,8 +41,8 @@ zfs? ( binary )
 "
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
-HOMEPAGE="https://packages.debian.org/stable/kernel/"
-SRC_URI="$DEB_UPSTREAM/${KERNEL_ARCHIVE} $DEB_UPSTREAM/${PATCH_ARCHIVE}"
+HOMEPAGE="https://packages.debian.org/unstable/kernel/"
+SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_4.19.132.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_4.19.132-1.debian.tar.xz"
 S="$WORKDIR/linux-${DEB_PV_BASE}"
 
 get_patch_list() {
@@ -118,7 +114,7 @@ src_prepare() {
 	# do not include debian devs certificates
 	rm -rf "${WORKDIR}"/debian/certs
 
-	sed -i -e "s:^\(EXTRAVERSION =\).*:\1 ${MODULE_EXT}:" Makefile || die
+	sed -i -e "s:^\(EXTRAVERSION =\).*:\1 ${EXTRAVERSION}:" Makefile || die
 	sed	-i -e 's:#export\tINSTALL_PATH:export\tINSTALL_PATH:' Makefile || die
 	rm -f .config >/dev/null
 	cp -a "${WORKDIR}"/debian "${T}"
@@ -126,28 +122,12 @@ src_prepare() {
 	#make -s include/linux/version.h || die "make include/linux/version.h failed"
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-
-	## XFS LIBCRC kernel config fixes, FL-823
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/xfs-libcrc32c-fix.patch
-
-	## FL-4424: enable legacy support for MCELOG.
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/mcelog.patch
-
-	## do not configure debian devs certs.
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/nocerts.patch
-
-	## FL-3381. enable IKCONFIG
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/ikconfig.patch
-
-	## increase bluetooth polling patch
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/fix-bluetooth-polling.patch
-
-	## add support for newer AMD APUs to AMDGPU
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/amdgpu-picasso.patch
-
-	## Disable iwlwifi 802.11n RX link aggregation (buggy routers can kill WiFi)
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/iwlwifi-disable-80211n-rxagg.patch
-
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/xfs-libcrc32c-fix.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/mcelog.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/nocerts.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/ikconfig.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/fix-bluetooth-polling.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/amdgpu-picasso.patch || die
 	local arch featureset subarch
 	featureset="standard"
 	if [[ ${REAL_ARCH} == x86 ]]; then
@@ -247,6 +227,7 @@ src_install() {
 	make mrproper || die
 	cp "${T}"/config .config || die
 	cp -a "${T}"/debian debian || die
+
 
 	# if we didn't use genkernel, we're done. The kernel source tree is left in
 	# an unconfigured state - you can't compile 3rd-party modules against it yet.
