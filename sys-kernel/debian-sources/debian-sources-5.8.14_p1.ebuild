@@ -7,7 +7,7 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="4.19.146"
+DEB_PV_BASE="5.8.14"
 DEB_EXTRAVERSION="1"
 # Debian version -1 becomes _p1 in Funtoo:
 if [ -z "$DEB_EXTRAVERSION" ]; then
