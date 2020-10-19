@@ -14,8 +14,8 @@ PLOCALES="bg ca de es fr is it ko pt_PT ru sv vi zh_CN"
 DESCRIPTION="stupid content tracker: distributed VCS designed for speed and efficiency"
 HOMEPAGE="https://www.git-scm.com/"
 SRC_URI="
-https://www.kernel.org/pub/software/scm/git/git-2.28.0.tar.xz
-https://www.kernel.org/pub/software/scm/git/git-manpages-2.28.0.tar.xz"
+https://www.kernel.org/pub/software/scm/git/git-2.29.0.tar.xz
+https://www.kernel.org/pub/software/scm/git/git-manpages-2.29.0.tar.xz"
 KEYWORDS="*"
 
 LICENSE="GPL-2"
@@ -93,10 +93,6 @@ REQUIRED_USE="
 "
 
 RESTRICT="!test? ( test )"
-
-PATCHES=(
-	"${FILESDIR}"/git-2.2.0-svn-fe-linking.patch
-)
 
 pkg_setup() {
 	if use subversion && has_version "dev-vcs/subversion[dso]"; then
@@ -212,9 +208,9 @@ exportmakeopts() {
 }
 
 src_unpack() {
-	unpack git-2.28.0.tar.xz
+	unpack git-2.29.0.tar.xz
 	cd "${S}" || die
-	unpack git-manpages-2.28.0.tar.xz
+	unpack git-manpages-2.29.0.tar.xz
 	if use doc ; then
 		pushd "${S}"/Documentation &>/dev/null || die
 		unpack ${PN}-htmldocs-${DOC_VER}.tar.${SRC_URI_SUFFIX}
@@ -225,15 +221,6 @@ src_unpack() {
 
 src_prepare() {
 	default
-
-	sed -i \
-		-e 's:^\(CFLAGS[[:space:]]*=\).*$:\1 $(OPTCFLAGS) -Wall:' \
-		-e 's:^\(LDFLAGS[[:space:]]*=\).*$:\1 $(OPTLDFLAGS):' \
-		-e 's:^\(CC[[:space:]]* =\).*$:\1$(OPTCC):' \
-		-e 's:^\(AR[[:space:]]* =\).*$:\1$(OPTAR):' \
-		-e "s:\(PYTHON_PATH[[:space:]]\+=[[:space:]]\+\)\(.*\)$:\1${EPREFIX}\2:" \
-		-e "s:\(PERL_PATH[[:space:]]\+=[[:space:]]\+\)\(.*\)$:\1${EPREFIX}\2:" \
-		Makefile contrib/svn-fe/Makefile || die
 
 	# Fix docbook2texi command
 	sed -r -i 's/DOCBOOK2X_TEXI[[:space:]]*=[[:space:]]*docbook2x-texi/DOCBOOK2X_TEXI = docbook2texi.pl/' \
