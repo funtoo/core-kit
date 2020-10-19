@@ -1,12 +1,12 @@
 =app-admin/syslog-ng-3.13.2 python_single_target_python2_7
 =app-admin/syslog-ng-3.7.3 python_single_target_python2_7
+=dev-libs/jsoncpp-1.8.4 python_single_target_python2_7
 =sys-apps/usbutils-009 python_single_target_python2_7
 =sys-fs/udiskie-1.1.1 python_single_target_python2_7
 =sys-libs/openipmi-2.0.22 python_single_target_python2_7
 =sys-libs/openipmi-2.0.26 python_single_target_python2_7
 =sys-libs/openipmi-2.0.27 python_single_target_python2_7
 dev-lang/yasm python_single_target_python2_7
-dev-libs/jsoncpp python_single_target_python2_7
 dev-libs/libxslt python_single_target_python2_7
 dev-util/boost-build python_single_target_python2_7
 net-wireless/crda python_single_target_python2_7
