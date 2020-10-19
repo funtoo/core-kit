@@ -42,7 +42,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.8.14-1.debian.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.8.14.orig.tar.xz"
+SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.8.14.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.8.14-1.debian.tar.xz"
 S="$WORKDIR/linux-${DEB_PV_BASE}"
 
 get_patch_list() {
