@@ -7,5 +7,5 @@ LICENSE=GPL-2+ LGPL-2.1+ MIT SGI-B-2.0 CDDL
 RDEPEND=!app-emulation/virtualbox-bin !=app-emulation/virtualbox-9999
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://download.virtualbox.org/virtualbox/6.1.14/VBoxGuestAdditions_6.1.14.iso
-_md5_=396fac36bb88acd47317dd41b50877ef
+SRC_URI=https://download.virtualbox.org/virtualbox/6.1.16/VBoxGuestAdditions_6.1.16.iso
+_md5_=bd3b82a692599f7510272e5020e0f98a
