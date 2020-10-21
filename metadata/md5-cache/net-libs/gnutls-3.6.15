@@ -11,6 +11,6 @@ RDEPEND=>=dev-libs/libtasn1-4.9:= dev-libs/libunistring:= >=dev-libs/nettle-3.4.
 REQUIRED_USE=test-full? ( cxx dane doc examples guile idn nls openssl pkcs11 seccomp tls-heartbeat tools )
 RESTRICT=!test? ( test )
 SLOT=0/30
-SRC_URI=mirror://gnupg/gnutls/v3.6/gnutls-3.6.14.tar.xz
+SRC_URI=mirror://gnupg/gnutls/v3.6/gnutls-3.6.15.tar.xz
 _eclasses_=libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
 _md5_=41dde1b62b06536561242507f2256a5d
