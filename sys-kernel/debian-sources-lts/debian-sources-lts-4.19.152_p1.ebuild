@@ -23,7 +23,7 @@ LINUX_SRCDIR=linux-${PF}
 DEB_PV="$DEB_PV_BASE-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
