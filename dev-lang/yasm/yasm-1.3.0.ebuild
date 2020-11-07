@@ -1,7 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
 
@@ -13,7 +12,7 @@ SRC_URI="http://www.tortall.net/projects/yasm/releases/${P}.tar.gz"
 
 LICENSE="BSD-2 BSD || ( Artistic GPL-2 LGPL-2 )"
 SLOT="0"
-KEYWORDS="-* amd64 ~arm64 x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="nls python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -24,10 +23,13 @@ DEPEND="
 	${RDEPEND}
 	nls? ( sys-devel/gettext )
 	python? ( >=dev-python/cython-0.14[${PYTHON_USEDEP}] )"
+BDEPEND="${DEPEND}"
+
+pkg_setup() {
+	use python && python_setup
+}
 
 src_configure() {
-	use python && python_export_best
-
 	XMLTO=: \
 	econf \
 		$(use_enable python) \
