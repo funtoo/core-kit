@@ -7,7 +7,7 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="5.8.14"
+DEB_PV_BASE="5.9.6"
 DEB_EXTRAVERSION="1"
 # Debian version -1 becomes _p1 in Funtoo:
 if [ -z "$DEB_EXTRAVERSION" ]; then
@@ -42,7 +42,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.8.14.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.8.14-1.debian.tar.xz"
+SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.9.6.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.9.6-1.debian.tar.xz"
 S="$WORKDIR/linux-${DEB_PV_BASE}"
 
 get_patch_list() {
@@ -128,6 +128,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/ikconfig.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/fix-bluetooth-polling.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/export_kernel_fpu_functions_5_3.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/extra_cpu_optimizations.patch || die
 	local arch featureset subarch
 	featureset="standard"
 	if [[ ${REAL_ARCH} == x86 ]]; then
@@ -180,7 +181,9 @@ src_prepare() {
 	if use custom-cflags; then
 		MARCH="$(python -c "import portage; print(portage.settings[\"CFLAGS\"])" | sed 's/ /\n/g' | grep "march")"
 		if [ -n "$MARCH" ]; then
-			sed -i -e 's/-mtune=generic/$MARCH/g' arch/x86/Makefile || die "Canna optimize this kernel anymore, captain!"
+			CONFIG_MARCH="$(grep -m 1 -e "${MARCH}" -B 1 arch/x86/Makefile | sort -r | grep -m 1 -o CONFIG_\[^\)\]* )"
+			tweak_config .config CONFIG_GENERIC_CPU n && \
+				tweak_config .config "${CONFIG_MARCH}" y || die "Canna optimize this kernel anymore, captain!"
 		fi
 	fi
 	# get config into good state:

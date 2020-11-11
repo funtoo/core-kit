@@ -5,6 +5,6 @@ HOMEPAGE=https://www.virtualbox.org/
 IUSE=+additions +chm headless python vboxwebsrv rdesktop-vrdp sdk
 KEYWORDS=*
 LICENSE=GPL-2 PUEL
-RDEPEND==app-emulation/virtualbox-6.1.16.140961[additions?,chm?,headless?,python?,vboxwebsrv?,rdesktop-vrdp?,sdk?]
+RDEPEND==app-emulation/virtualbox-bin-6.1.16.140961[additions?,chm?,headless?,python?,vboxwebsrv?,rdesktop-vrdp?,sdk?]
 SLOT=0
-_md5_=423f6bf60b122831c748d9f7ac7c5107
+_md5_=bafaa26538ce309931a4a35bf627ed91

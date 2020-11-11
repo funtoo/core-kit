@@ -128,6 +128,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/ikconfig.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/fix-bluetooth-polling.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/amdgpu-picasso.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/extra_cpu_optimizations.patch || die
 	local arch featureset subarch
 	featureset="standard"
 	if [[ ${REAL_ARCH} == x86 ]]; then
@@ -180,7 +181,9 @@ src_prepare() {
 	if use custom-cflags; then
 		MARCH="$(python -c "import portage; print(portage.settings[\"CFLAGS\"])" | sed 's/ /\n/g' | grep "march")"
 		if [ -n "$MARCH" ]; then
-			sed -i -e 's/-mtune=generic/$MARCH/g' arch/x86/Makefile || die "Canna optimize this kernel anymore, captain!"
+			CONFIG_MARCH="$(grep -m 1 -e "${MARCH}" -B 1 arch/x86/Makefile | sort -r | grep -m 1 -o CONFIG_\[^\)\]* )"
+			tweak_config .config CONFIG_GENERIC_CPU n && \
+				tweak_config .config "${CONFIG_MARCH}" y || die "Canna optimize this kernel anymore, captain!"
 		fi
 	fi
 	# get config into good state:
