@@ -8,7 +8,7 @@ inherit bash-completion-r1 cmake-utils elisp-common flag-o-matic multiprocessing
 
 DESCRIPTION="Cross platform Make"
 HOMEPAGE="https://cmake.org/"
-SRC_URI="https://api.github.com/repos/Kitware/CMake/tarball/v3.18.4 -> cmake-3.18.4.tar.gz"
+SRC_URI="https://api.github.com/repos/Kitware/CMake/tarball/v3.19.0 -> cmake-3.19.0.tar.gz"
 
 LICENSE="CMake"
 SLOT="0"
