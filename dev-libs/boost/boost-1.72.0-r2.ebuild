@@ -1,22 +1,21 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( python3+ )
 
 inherit flag-o-matic multiprocessing python-r1 toolchain-funcs multilib-minimal
 
-MY_P="${PN}_$(ver_rs 1- _)"
+MY_PV="$(ver_rs 1- _)"
 MAJOR_V="$(ver_cut 1-2)"
 
 DESCRIPTION="Boost Libraries for C++"
 HOMEPAGE="https://www.boost.org/"
-SRC_URI="https://downloads.sourceforge.net/project/boost/${PN}/${PV}/${MY_P}.tar.bz2"
+SRC_URI="https://dl.bintray.com/boostorg/release/${PV}/source/boost_${MY_PV}.tar.bz2"
 
 LICENSE="Boost-1.0"
 SLOT="0/${PV}" # ${PV} instead ${MAJOR_V} due to bug 486122
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris ~x86-winnt"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~ppc-aix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris ~x86-winnt"
 IUSE="bzip2 context debug doc icu lzma +nls mpi numpy python static-libs +threads tools zlib zstd"
 REQUIRED_USE="
 	mpi? ( threads )
@@ -39,19 +38,25 @@ RDEPEND="
 	mpi? ( >=virtual/mpi-2.0-r4[${MULTILIB_USEDEP},cxx,threads] )
 	python? (
 		${PYTHON_DEPS}
-		numpy? ( >=dev-python/numpy-1.14.5[${PYTHON_USEDEP}] )
+		numpy? ( $(python_gen_cond_dep 'dev-python/numpy[${PYTHON_USEDEP}]' -3) )
 	)
 	zlib? ( sys-libs/zlib:=[${MULTILIB_USEDEP}] )
 	zstd? ( app-arch/zstd:=[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}"
 BDEPEND="=dev-util/boost-build-${MAJOR_V}*"
 
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}/${PN}_${MY_PV}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.48.0-disable_icu_rpath.patch
-	"${FILESDIR}"/${PN}-1.69.0-context-x32.patch
-	"${FILESDIR}"/${PN}-1.56.0-build-auto_index-tool.patch
+	"${FILESDIR}"/${PN}-1.71.0-disable_icu_rpath.patch
+	"${FILESDIR}"/${PN}-1.71.0-context-x32.patch
+	"${FILESDIR}"/${PN}-1.71.0-build-auto_index-tool.patch
+	# Bug 703294, incomplete Boost.Serialization refactoring
+	"${FILESDIR}"/${PN}-1.72.0-missing-serialization-split_member-include.patch
+	# Bug 703036, per python-impl Boost.MPI
+	"${FILESDIR}"/${PN}-1.72.0-boost-mpi-python.patch
+	# Bug 704128, missing include on Boost.Ranges
+	"${FILESDIR}"/${PN}-1.72.0-revert-cease-dependence-on-range.patch
 )
 
 python_bindings_needed() {
@@ -118,8 +123,8 @@ create_user-config.jam() {
 
 pkg_setup() {
 	# Bail out on unsupported build configuration, bug #456792
-	if [[ -f "${EROOT}/etc/site-config.jam" ]]; then
-		if ! grep -q 'gentoo\(debug\|release\)' "${EROOT}/etc/site-config.jam"; then
+	if [[ -f "${EROOT}"/etc/site-config.jam ]]; then
+		if ! grep -q 'gentoo\(debug\|release\)' "${EROOT}"/etc/site-config.jam; then
 			eerror "You are using custom ${EROOT}/etc/site-config.jam without defined gentoorelease/gentoodebug targets."
 			eerror "Boost can not be built in such configuration."
 			eerror "Please, either remove this file or add targets from ${EROOT}/usr/share/boost-build/site-config.jam to it."
@@ -130,11 +135,6 @@ pkg_setup() {
 
 src_prepare() {
 	default
-
-	# Do not try to build missing 'wave' tool, bug #522682
-	# Upstream bugreport - https://svn.boost.org/trac/boost/ticket/10507
-	sed -i -e 's:wave/build//wave::' tools/Jamfile.v2 || die
-
 	multilib_copy_sources
 }
 
@@ -197,11 +197,6 @@ src_configure() {
 		append-ldflags -Wl,-headerpad_max_install_names
 	fi
 
-	# bug 298489
-	if use ppc || use ppc64; then
-		[[ $(gcc-version) > 4.3 ]] && append-flags -mno-altivec
-	fi
-
 	# Use C++14 globally as of 1.62
 	append-cxxflags -std=c++14
 }
@@ -223,7 +218,24 @@ multilib_src_install_all() {
 		rm -r "${ED}"/usr/include/boost/python/numpy* || die
 	fi
 
-	if ! use python; then
+	if use python; then
+		if use mpi; then
+			move_mpi_py_into_sitedir() {
+				local pyver="${EPYTHON#python}"
+				python_moduleinto boost
+				python_domodule "${ED}"/usr/$(get_libdir)/mpi${pyver/./}.so
+				rm "${ED}"/usr/$(get_libdir)/mpi${pyver/./}* || die
+				dosym mpi${pyver/./}.so $(python_get_sitedir)/boost/mpi.so
+
+				# create a proper python package
+				touch "${D}"/$(python_get_sitedir)/boost/__init__.py || die
+				python_optimize
+			}
+			python_foreach_impl move_mpi_py_into_sitedir
+		else
+			rm -r "${ED}"/usr/include/boost/mpi/python* || die
+		fi
+	else
 		rm -r "${ED}"/usr/include/boost/{python*,mpi/python*,parameter/aux_/python,parameter/python*} || die
 	fi
 
@@ -319,7 +331,7 @@ pkg_preinst() {
 	# resorting to dirty hacks like these. Removes lingering symlinks
 	# from the slotted versions.
 	local symlink
-	for symlink in "${EROOT}/usr/include/boost" "${EROOT}/usr/share/boostbook"; do
+	for symlink in "${EROOT}"/usr/include/boost "${EROOT}"/usr/share/boostbook; do
 		if [[ -L ${symlink} ]]; then
 			rm -f "${symlink}" || die
 		fi
@@ -329,4 +341,17 @@ pkg_preinst() {
 	# for unknown reasons, causing havoc for reverse dependencies
 	# Bug: 607734
 	rm -rf "${EROOT}"/usr/include/boost-1_[3-5]? || die
+}
+
+pkg_postinst() {
+	elog "Boost.Regex is *extremely* ABI sensitive. If you get errors such as"
+	elog
+	elog "  undefined reference to \`boost::re_detail_$(ver_cut 1)0$(ver_cut 2)00::cpp_regex_traits_implementation"
+	elog "    <char>::transform_primary[abi:cxx11](char const*, char const*) const'"
+	elog
+	elog "Then you need to recompile Boost and all its reverse dependencies"
+	elog "using the same toolchain. In general, *every* change of the C++ toolchain"
+	elog "requires a complete rebuild of the boost-dependent ecosystem."
+	elog
+	elog "See for instance https://bugs.gentoo.org/638138"
 }
