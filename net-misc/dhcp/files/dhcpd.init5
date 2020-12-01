@@ -9,6 +9,9 @@ extra_commands="configtest"
 depend() {
 	need net
 	use logger dns #@slapd@
+	for iface in $DHCPD_IFACE; do
+		after $iface
+	done
 }
 
 get_var() {
@@ -89,12 +92,21 @@ start() {
 
 	local pidfile="$(get_var pid-file-name /var/run/dhcp/${SVCNAME}.pid)"
 
+	# Convert script names to interface names
+	DHCPD_IFACES_REAL=""
+	for iface in $DHCPD_IFACE; do
+		iface_single=${iface#netif.}
+		if [ $iface_single = $iface ]; then
+			iface_single=${iface#net.}
+		fi
+		DHCPD_IFACES_REAL="$DHCPD_IFACES_REAL $iface_single"
+	done
 	ebegin "Starting ${chroot:+chrooted }${SVCNAME}"
 	start-stop-daemon --start --exec /usr/sbin/dhcpd \
 		--pidfile "${chroot}/${pidfile}" \
 		-- ${DHCPD_OPTS} -q -pf "${pidfile}" -lf "${leasefile}" \
 		-user dhcp -group dhcp \
-		-chroot "${chroot:-/}" ${DHCPD_IFACE}
+		-chroot "${chroot:-/}" ${DHCPD_IFACES_REAL}
 	eend $? \
 		&& save_options dhcpd_chroot "${chroot}" \
 		&& save_options pidfile "${pidfile}"
