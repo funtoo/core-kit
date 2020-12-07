@@ -8,7 +8,7 @@ inherit udev python-any-r1
 DESCRIPTION="Hardware (PCI, USB, OUI, IAB) IDs databases"
 HOMEPAGE="https://github.com/gentoo/hwids"
 KEYWORDS="*"
-SRC_URI="https://api.github.com/repos/gentoo/hwids/tarball/hwids-20200813.1 -> hwids-20200813.1.tar.gz"
+SRC_URI="https://api.github.com/repos/gentoo/hwids/tarball/hwids-20201207 -> hwids-20201207.tar.gz"
 
 LICENSE="|| ( GPL-2 BSD ) public-domain"
 SLOT="0"
