@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -7,7 +6,7 @@ GRUB_AUTOGEN=1
 GRUB_AUTORECONF=1
 
 if [[ -n ${GRUB_AUTOGEN} ]]; then
-	PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+	PYTHON_COMPAT=( python2+ )
 	inherit python-any-r1
 fi
 
@@ -18,22 +17,16 @@ fi
 
 inherit bash-completion-r1 flag-o-matic multibuild pax-utils toolchain-funcs
 
-if [[ ${PV} != 9999 ]]; then
-	if [[ ${PV} == *_alpha* || ${PV} == *_beta* || ${PV} == *_rc* ]]; then
-		# The quote style is to work with <=bash-4.2 and >=bash-4.3 #503860
-		MY_P=${P/_/'~'}
-		SRC_URI="mirror://gnu-alpha/${PN}/${MY_P}.tar.xz"
-		S=${WORKDIR}/${MY_P}
-	else
-		SRC_URI="mirror://gnu/${PN}/${P}.tar.xz"
-		S=${WORKDIR}/${P%_*}
-	fi
-	KEYWORDS="amd64 ~arm ~arm64 ppc ppc64 x86"
+if [[ ${PV} == *_alpha* || ${PV} == *_beta* || ${PV} == *_rc* ]]; then
+	# The quote style is to work with <=bash-4.2 and >=bash-4.3 #503860
+	MY_P=${P/_/'~'}
+	SRC_URI="mirror://gnu-alpha/${PN}/${MY_P}.tar.xz"
+	S=${WORKDIR}/${MY_P}
 else
-	inherit git-r3
-	EGIT_REPO_URI="git://git.sv.gnu.org/grub.git
-		http://git.savannah.gnu.org/r/grub.git"
+	SRC_URI="mirror://gnu/${PN}/${P}.tar.xz"
+	S=${WORKDIR}/${P%_*}
 fi
+KEYWORDS="*"
 
 PATCHES=(
 	"${FILESDIR}"/gfxpayload.patch
