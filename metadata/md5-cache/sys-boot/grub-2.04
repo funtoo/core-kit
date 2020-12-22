@@ -13,4 +13,4 @@ RESTRICT=!test? ( test )
 SLOT=2/2.04
 SRC_URI=mirror://gnu/grub/grub-2.04.tar.xz fonts? ( mirror://gnu/unifont/unifont-12.1.02/unifont-12.1.02.pcf.gz ) themes? ( mirror://sourceforge/dejavu/dejavu-sans-ttf-2.37.zip )
 _eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multibuild	b2c915190b051f55a23b9354b9849847	multilib	1d91b03d42ab6308b5f4f6b598ed110e	pax-utils	db85a3c508cf82c45f24b2723791cc93	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
-_md5_=876b33618ec622d3c98875caaf80f728
+_md5_=39f69378b8e68ae25601ad916ed0f46b
