@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=compile configure install setup
+DEPEND=sys-libs/libseccomp >=dev-lang/go-1.13.0 app-crypt/gpgme dev-libs/openssl sys-apps/util-linux sys-fs/cryptsetup
+DESCRIPTION=Application containers for Linux
+EAPI=7
+HOMEPAGE=https://sylabs.io
+IUSE=examples +network +suid kernel_linux
+KEYWORDS=*
+LICENSE=BSD
+RDEPEND=sys-libs/libseccomp sys-fs/squashfs-tools
+SLOT=0
+SRC_URI=https://github.com/hpcng/singularity/releases/download/v3.7.0/singularity-3.7.0.tar.gz
+_eclasses_=linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_md5_=12cfd11e89d6ab0de7d8891b1f003373

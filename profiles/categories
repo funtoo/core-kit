@@ -16,6 +16,9 @@ dev-ruby
 dev-util
 dev-vcs
 mail-mta
+media-libs
+media-plugins
+media-sound
 net-dialup
 net-dns
 net-firewall
@@ -29,6 +32,7 @@ sys-block
 sys-boot
 sys-cluster
 sys-devel
+sys-firmware
 sys-fs
 sys-kernel
 sys-libs

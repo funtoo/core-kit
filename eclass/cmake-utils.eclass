@@ -12,6 +12,7 @@
 # @SUPPORTED_EAPIS: 5 6 7
 # @BLURB: common ebuild functions for cmake-based packages
 # @DESCRIPTION:
+# DEPRECATED: This no longer receives any changes. Everyone must port to cmake.eclass.
 # The cmake-utils eclass makes creating ebuilds for cmake-based packages much easier.
 # It provides all inherited features (DOCS, HTML_DOCS, PATCHES) along with out-of-source
 # builds (default), in-source builds and an implementation of the well-known use_enable
@@ -42,7 +43,7 @@ _CMAKE_UTILS_ECLASS=1
 # If about to be set - needs to be set before invoking cmake-utils_src_configure.
 # You usualy do *NOT* want nor need to set it as it pulls CMake default build-type
 # specific compiler flags overriding make.conf.
-: ${CMAKE_BUILD_TYPE:=RELEASE}
+: ${CMAKE_BUILD_TYPE:=Gentoo}
 
 # @ECLASS-VARIABLE: CMAKE_IN_SOURCE_BUILD
 # @DEFAULT_UNSET
@@ -338,6 +339,18 @@ cmake-utils_use_find_package() {
 	_cmake_use_me_now_inverted CMAKE_DISABLE_FIND_PACKAGE_ "$@" ;
 }
 
+# @FUNCTION: cmake_use_find_package
+# @USAGE: <USE flag> <package name>
+# @DESCRIPTION:
+# Alias for cmake-utils_use_find_package.
+cmake_use_find_package() {
+	if [[ "$#" != 2 ]] ; then
+		die "Usage: cmake_use_find_package <USE flag> <package name>"
+	fi
+
+	cmake-utils_use_find_package "$@" ;
+}
+
 # @FUNCTION: cmake-utils_use_disable
 # @USAGE: <USE flag> [flag name]
 # @DESCRIPTION:
@@ -420,10 +433,10 @@ _cmake_modify-cmakelists() {
 
 	# Comment out all set (<some_should_be_user_defined_variable> value)
 	find "${CMAKE_USE_DIR}" -name CMakeLists.txt -exec sed \
-		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_BUILD_TYPE[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
+		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_BUILD_TYPE\([[:space:]].*)\|)\)/I{s/^/#_cmake_modify_IGNORE /g}' \
 		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_COLOR_MAKEFILE[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
 		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_INSTALL_PREFIX[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
-		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_VERBOSE_MAKEFILE[[:space:]].*)/I{s/^/#G_cmake_modify_IGNORE /g}' \
+		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_VERBOSE_MAKEFILE[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
 		-i {} + || die "${LINENO}: failed to disable hardcoded settings"
 	local x
 	for x in $(find "${CMAKE_USE_DIR}" -name CMakeLists.txt -exec grep -l "^#_cmake_modify_IGNORE" {} +;); do
@@ -612,7 +625,7 @@ cmake-utils_src_configure() {
 		fi
 	fi
 
-	if [[ ${EPREFIX} ]]; then
+	if use prefix-guest; then
 		cat >> "${build_rules}" <<- _EOF_ || die
 			# in Prefix we need rpath and must ensure cmake gets our default linker path
 			# right ... except for Darwin hosts
@@ -644,12 +657,18 @@ cmake-utils_src_configure() {
 		SET (CMAKE_INSTALL_MANDIR "${EPREFIX}/usr/share/man" CACHE PATH "")
 		SET (CMAKE_USER_MAKE_RULES_OVERRIDE "${build_rules}" CACHE FILEPATH "Gentoo override rules")
 	_EOF_
+
+	# See bug 689410
+	if [[ "${ARCH}" == riscv ]]; then
+		echo 'SET (CMAKE_FIND_LIBRARY_CUSTOM_LIB_SUFFIX '"${libdir#lib}"' CACHE STRING "library search suffix" FORCE)' >> "${common_config}" || die
+	fi
+
 	[[ "${NOCOLOR}" = true || "${NOCOLOR}" = yes ]] && echo 'SET (CMAKE_COLOR_MAKEFILE OFF CACHE BOOL "pretty colors during make" FORCE)' >> "${common_config}"
 
 	if [[ ${EAPI} != [56] ]]; then
 		cat >> "${common_config}" <<- _EOF_ || die
 			SET (CMAKE_INSTALL_DOCDIR "${EPREFIX}/usr/share/doc/${PF}" CACHE PATH "")
-			SET (BUILD_SHARED_LIBS ON CACHE BOOL "add_library creates shared libraries")
+			SET (BUILD_SHARED_LIBS ON CACHE BOOL "")
 		_EOF_
 	fi
 
