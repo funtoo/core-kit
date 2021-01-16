@@ -18,13 +18,12 @@ RDEPEND="virtual/linux-sources"
 
 DESCRIPTION="Linux 5.10.7, with Con Kolivas' MuQSS scheduler and patchset"
 
-CK_URI="http://ck.kolivas.org/patches/5.0/5.10/5.10-ck1/patch-5.10-ck1.xz"
-
 K_BRANCH_ID="5.10"
 
-SRC_URI="${KERNEL_URI}
-	${ARCH_URI}
-	${CK_URI}
+SRC_URI="
+	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.tar.xz
+	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.10.7.xz
+	http://ck.kolivas.org/patches/5.0/5.10/5.10-ck1/patch-5.10-ck1.xz
 	"
 
 UNIPATCH_LIST="
