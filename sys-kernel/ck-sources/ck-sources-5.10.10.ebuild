@@ -16,13 +16,13 @@ detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux 5.10.9, with Con Kolivas' MuQSS scheduler and patchset"
+DESCRIPTION="Linux 5.10.10, with Con Kolivas' MuQSS scheduler and patchset"
 
 K_BRANCH_ID="5.10"
 
 SRC_URI="
 	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.tar.xz
-	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.10.9.xz
+	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.10.10.xz
 	http://ck.kolivas.org/patches/5.0/5.10/5.10-ck1/patch-5.10-ck1.xz
 	"
 

@@ -10,7 +10,7 @@ inherit distutils-r1 eutils linux-info
 
 DESCRIPTION="CLI curses based monitoring tool"
 HOMEPAGE="https://github.com/nicolargo/glances"
-SRC_URI="https://github.com/nicolargo/glances/archive/v3.1.5.tar.gz -> glances-3.1.5.tar.gz"
+SRC_URI="https://github.com/nicolargo/glances/archive/v3.1.6.tar.gz -> glances-3.1.6.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
