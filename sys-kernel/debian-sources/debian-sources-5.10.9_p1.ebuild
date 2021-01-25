@@ -7,8 +7,8 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="4.19.160"
-DEB_EXTRAVERSION="2"
+DEB_PV_BASE="5.10.9"
+DEB_EXTRAVERSION="1"
 # Debian version -1 becomes _p1 in Funtoo:
 if [ -z "$DEB_EXTRAVERSION" ]; then
 	EXTRAVERSION="-${PN}"
@@ -23,7 +23,7 @@ LINUX_SRCDIR=linux-${PF}
 DEB_PV="$DEB_PV_BASE-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -42,7 +42,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_4.19.160.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_4.19.160-2.debian.tar.xz"
+SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.10.9.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.10.9-1.debian.tar.xz"
 S="$WORKDIR/linux-${DEB_PV_BASE}"
 
 get_patch_list() {
@@ -127,7 +127,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/nocerts.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/ikconfig.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/fix-bluetooth-polling.patch || die
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/amdgpu-picasso.patch || die
+	epatch "${FILESDIR}"/${DEB_PV_BASE}/export_kernel_fpu_functions_5_3.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/extra_cpu_optimizations.patch || die
 	local arch featureset subarch
 	featureset="standard"
