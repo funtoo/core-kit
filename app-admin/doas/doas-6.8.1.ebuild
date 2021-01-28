@@ -9,7 +9,7 @@ DESCRIPTION="Run commands as super user or another user, alternative to sudo fro
 MY_PN=OpenDoas
 MY_P=${MY_PN}-${PV}
 HOMEPAGE="https://github.com/Duncaen/OpenDoas"
-SRC_URI="https://github.com/Duncaen/OpenDoas/archive/v6.8.tar.gz -> ${MY_P}.tar.gz"
+SRC_URI="https://github.com/Duncaen/OpenDoas/archive/v6.8.1.tar.gz -> ${MY_P}.tar.gz"
 S="${WORKDIR}"/${MY_P}
 
 LICENSE="ISC"
