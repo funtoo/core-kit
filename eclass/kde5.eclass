@@ -295,11 +295,14 @@ _calculate_src_uri() {
 
 	case ${PN} in
 		kdelibs4support | \
+		kdesignerplugin | \
+		kdewebkit | \
 		khtml | \
 		kjs | \
 		kjsembed | \
 		kmediaplayer | \
-		kross)
+		kross | \
+		kxmlrpcclient)
 			_kmname="portingAids/${_kmname}"
 			;;
 	esac
@@ -308,11 +311,11 @@ _calculate_src_uri() {
 		kde-apps)
 			case ${PV} in
 				??.?.[6-9]? | ??.??.[6-9]? )
-					SRC_URI="mirror://kde/unstable/applications/${PV}/src/${_kmname}-${PV}.tar.xz"
+					SRC_URI="mirror://kde/unstable/release-service/${PV}/src/${_kmname}-${PV}.tar.xz"
 					RESTRICT+=" mirror"
 					;;
 				*)
-					SRC_URI="mirror://kde/stable/applications/${PV}/src/${_kmname}-${PV}.tar.xz" ;;
+					SRC_URI="mirror://kde/stable/release-service/${PV}/src/${_kmname}-${PV}.tar.xz" ;;
 			esac
 			;;
 		kde-frameworks)
