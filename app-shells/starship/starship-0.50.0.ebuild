@@ -141,7 +141,7 @@ serde_derive-1.0.123
 serde_json-1.0.61
 serde_urlencoded-0.6.1
 sha-1-0.8.2
-shadow-rs-0.5.23
+shadow-rs-0.5.24
 shell-words-1.0.0
 starship_module_config_derive-0.1.2
 strsim-0.8.0
@@ -192,7 +192,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.49.0 -> starship-v0.49.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.50.0 -> starship-v0.50.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
