@@ -127,7 +127,6 @@ src_prepare() {
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/nocerts.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/ikconfig.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/fix-bluetooth-polling.patch || die
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/export_kernel_fpu_functions_5_3.patch || die
 	epatch "${FILESDIR}"/${DEB_PV_BASE}/extra_cpu_optimizations.patch || die
 	local arch featureset subarch
 	featureset="standard"
