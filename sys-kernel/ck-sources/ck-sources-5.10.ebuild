@@ -8,7 +8,7 @@ HOMEPAGE="http://kernel.kolivas.org/"
 
 K_SECURITY_UNSUPPORTED="1"
 
-CK_EXTRAVERSION="ck{{ck_extraversion}}"
+CK_EXTRAVERSION="ck1"
 
 inherit kernel-2
 detect_version
@@ -16,16 +16,13 @@ detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux {{version}}, with Con Kolivas' MuQSS scheduler and patchset"
+DESCRIPTION="Linux 5.10, with Con Kolivas' MuQSS scheduler and patchset"
 
-K_BRANCH_ID="{{branch_id}}"
+K_BRANCH_ID="5.10"
 
 SRC_URI="
-	{{artifacts[0].src_uri}}
-	{{artifacts[1].src_uri}}
-{%- if artifacts|length > 2 %}
-	{{artifacts[2].src_uri}}
-{%- endif %}
+	http://ck.kolivas.org/patches/5.0/5.10/5.10-ck1/patch-5.10-ck1.xz
+	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.10.tar.xz
 	"
 
 UNIPATCH_LIST="
