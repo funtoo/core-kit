@@ -34,7 +34,6 @@ sys-fs/pytagsfs python_single_target_python2_7
 sys-fs/rarfs python_single_target_python2_7
 sys-fs/traydevice python_single_target_python2_7
 sys-kernel/aufs-sources python_single_target_python2_7
-sys-kernel/ck-sources python_single_target_python2_7
 sys-kernel/gentoo-sources python_single_target_python2_7
 sys-kernel/git-sources python_single_target_python2_7
 sys-kernel/linux-headers python_single_target_python2_7
