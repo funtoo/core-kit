@@ -8,7 +8,7 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE=""
-SRC_URI="https://files.pythonhosted.org/packages/5b/72/ded1f0c1578c4f5637735795d09e4652133d073fbacc22614e463e4edfea/funtoo-powerbus-0.2.0.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/80/8a/9f0f75cd946023da04d4e2c506576a9afd297d15da63c41daa0ae240a3a6/funtoo-powerbus-0.2.2.tar.gz"
 
 DEPEND="
 	x11-libs/libXScrnSaver
