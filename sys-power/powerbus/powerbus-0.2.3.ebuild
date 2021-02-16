@@ -8,17 +8,16 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE=""
-SRC_URI="https://files.pythonhosted.org/packages/80/8a/9f0f75cd946023da04d4e2c506576a9afd297d15da63c41daa0ae240a3a6/funtoo-powerbus-0.2.2.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/d8/e5/d509517d9bdd4a1df762608768ae5736c3423ed283093fe2bcc06a99c79a/funtoo-powerbus-0.2.3.tar.gz"
 
 DEPEND="
-	x11-libs/libXScrnSaver
-	x11-libs/libXext
-	x11-libs/libX11"
+	>=dev-python/subpop-0.4.1[$PYTHON_USEDEP]"
 RDEPEND="
 	sys-apps/dbus
 	dev-python/dbus-next[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
 	>=dev-python/subpop-0.4[${PYTHON_USEDEP}]
+	dev-python/pymongo[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]
 	dev-python/pyzmq[${PYTHON_USEDEP}]"
 
