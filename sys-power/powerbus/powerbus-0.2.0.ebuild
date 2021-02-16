@@ -11,7 +11,7 @@ HOMEPAGE=""
 SRC_URI="https://files.pythonhosted.org/packages/5b/72/ded1f0c1578c4f5637735795d09e4652133d073fbacc22614e463e4edfea/funtoo-powerbus-0.2.0.tar.gz"
 
 DEPEND="
-	x11-libs/libXscrnSaver
+	x11-libs/libXScrnSaver
 	x11-libs/libXext
 	x11-libs/libX11"
 RDEPEND="
