@@ -19,6 +19,7 @@ RDEPEND="
 	dev-python/dbus-next[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]
 	>=dev-python/subpop-0.4[${PYTHON_USEDEP}]
+	dev-python/pyyaml[${PYTHON_USEDEP}]
 	dev-python/pyzmq[${PYTHON_USEDEP}]"
 
 IUSE=""
