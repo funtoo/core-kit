@@ -8,7 +8,7 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE=""
-SRC_URI="https://files.pythonhosted.org/packages/d8/e5/d509517d9bdd4a1df762608768ae5736c3423ed283093fe2bcc06a99c79a/funtoo-powerbus-0.2.3.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/d4/0e/68ccf8642b34ad64b13722d57297806d731d317d7dc3918215049e01a7d9/funtoo-powerbus-0.2.4.tar.gz"
 
 DEPEND="
 	>=dev-python/subpop-0.4.1[$PYTHON_USEDEP]"
