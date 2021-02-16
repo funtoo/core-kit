@@ -11,6 +11,9 @@ HOMEPAGE=""
 SRC_URI="https://files.pythonhosted.org/packages/d4/0e/68ccf8642b34ad64b13722d57297806d731d317d7dc3918215049e01a7d9/funtoo-powerbus-0.2.4.tar.gz"
 
 DEPEND="
+	x11-libs/libXScrnSaver
+	x11-libs/libXext
+	x11-libs/libX11
 	>=dev-python/subpop-0.4.1[$PYTHON_USEDEP]"
 RDEPEND="
 	sys-apps/dbus
