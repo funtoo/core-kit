@@ -22,7 +22,7 @@ RDEPEND="
 	>=dev-python/subpop-0.4[${PYTHON_USEDEP}]
 	dev-python/pymongo[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]
-	dev-python/pyzmq[${PYTHON_USEDEP}]"
+	dev-python/aiohttp[${PYTHON_USEDEP}]"
 
 IUSE=""
 SLOT="0"
