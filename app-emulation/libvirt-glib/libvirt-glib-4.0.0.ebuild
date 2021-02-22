@@ -7,7 +7,7 @@ inherit gnome2 vala
 
 DESCRIPTION="GLib and GObject mappings for libvirt"
 HOMEPAGE="http://libvirt.org"
-SRC_URI="ftp://libvirt.org/libvirt/glib/${P}.tar.gz"
+SRC_URI="https://libvirt.org/sources/glib/libvirt-glib-4.0.0.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
