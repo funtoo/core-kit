@@ -4,7 +4,7 @@ EAPI=7
 
 inherit flag-o-matic
 
-SRC_URI="https://www.nano-editor.org/dist/latest/nano-5.5.tar.gz"
+SRC_URI="https://www.nano-editor.org/dist/latest/nano-5.6.tar.gz"
 KEYWORDS="*"
 
 
