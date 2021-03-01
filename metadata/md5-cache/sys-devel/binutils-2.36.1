@@ -5,6 +5,7 @@ DESCRIPTION=Tools necessary to build programs
 EAPI=7
 HOMEPAGE=https://sourceware.org/binutils/
 IUSE=cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla
+KEYWORDS=*
 LICENSE=GPL-3+
 RDEPEND=>=sys-devel/binutils-config-3 sys-libs/zlib
 REQUIRED_USE=default-gold? ( gold )
@@ -12,4 +13,4 @@ RESTRICT=!test? ( test )
 SLOT=2.36
 SRC_URI=mirror://gnu/binutils/binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-1.tar.xz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	gnuconfig	b8ec1c34be4ff9dac7ad4034d277936b	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
-_md5_=3c0fe058bb74aee2973a838098ddd35f
+_md5_=91b0e61641718b7329e0c079ec714fe9
