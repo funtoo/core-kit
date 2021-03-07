@@ -8,22 +8,25 @@ SRC_URI="mirror://gnupg/libksba/${P}.tar.bz2"
 
 LICENSE="LGPL-3+ GPL-2+ GPL-3"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="static-libs"
 
 RDEPEND=">=dev-libs/libgpg-error-1.8"
 DEPEND="${RDEPEND}"
+BDEPEND="sys-devel/bison"
 
 src_configure() {
-	econf \
-		$(use_enable static-libs static) \
-		GPG_ERROR_CONFIG="${EROOT}/usr/bin/${CHOST}-gpg-error-config" \
-		LIBGCRYPT_CONFIG="${EROOT}/usr/bin/${CHOST}-libgcrypt-config" \
-		$("${S}/configure" --help | grep -- '--without-.*-prefix' | sed -e 's/^ *\([^ ]*\) .*/\1/g')
+	local myeconfargs=(
+		$(use_enable static-libs static)
+		GPG_ERROR_CONFIG="${EROOT}/usr/bin/gpg-error-config"
+		LIBGCRYPT_CONFIG="${EROOT}/usr/bin/libgcrypt-config"
+		$("${S}/configure" --help | grep -o -- '--without-.*-prefix')
+	)
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
 	default
 	# ppl need to use lib*-config for --cflags and --libs
-	find "${D}" -name '*.la' -delete || die
+	find "${ED}" -type f -name '*.la' -delete || die
 }

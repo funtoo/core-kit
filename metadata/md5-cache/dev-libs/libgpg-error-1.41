@@ -1,0 +1,13 @@
+BDEPEND=nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure prepare
+DEPEND=nls? ( >=virtual/libintl-0-r1 )
+DESCRIPTION=Contains error handling functions used by GnuPG software
+EAPI=7
+HOMEPAGE=https://www.gnupg.org/related_software/libgpg-error
+IUSE=common-lisp nls static-libs
+LICENSE=GPL-2 LGPL-2.1
+RDEPEND=nls? ( >=virtual/libintl-0-r1 )
+SLOT=0
+SRC_URI=mirror://gnupg/libgpg-error/libgpg-error-1.41.tar.bz2
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_md5_=e2ccefecf4ecbcc9afc91b0fbbb8c9e3
