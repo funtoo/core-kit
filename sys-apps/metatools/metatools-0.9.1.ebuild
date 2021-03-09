@@ -27,4 +27,4 @@ SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
 
-S="${WORKDIR}/funtoo-metatools-${PV}"
+S="${WORKDIR}/funtoo-metatools-0.9.1"

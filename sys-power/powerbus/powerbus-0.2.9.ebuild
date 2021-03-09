@@ -29,7 +29,7 @@ SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
 
-S="${WORKDIR}/funtoo-powerbus-${PV}"
+S="${WORKDIR}/funtoo-powerbus-0.2.9"
 
 src_compile() {
 	distutils-r1_src_compile
