@@ -193,7 +193,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.3 -> procs-v0.11.3.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.3 -> procs-0.11.3.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
