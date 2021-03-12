@@ -1,59 +1,49 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3+ )
 
-inherit autotools elisp-common python-single-r1 systemd user
+inherit autotools elisp-common python-single-r1 user
 
-if [[ ${PV#9999} != ${PV} ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/gluster/glusterfs.git"
-else
-	SRC_URI="https://download.gluster.org/pub/gluster/${PN}/$(ver_cut '1-2')/${PV}/${P}.tar.gz"
-	KEYWORDS="amd64 ~arm ~arm64 ppc ppc64 x86"
-fi
+SRC_URI="https://download.gluster.org/pub/gluster/${PN}/$(ver_cut 1)/${PV}/${P}.tar.gz"
+KEYWORDS="*"
 
 DESCRIPTION="GlusterFS is a powerful network/cluster filesystem"
-HOMEPAGE="https://www.gluster.org/"
+HOMEPAGE="https://www.gluster.org/ https://github.com/gluster/glusterfs/"
 
 LICENSE="|| ( GPL-2 LGPL-3+ )"
-SLOT="0"
-IUSE="bd-xlator crypt-xlator debug emacs +fuse +georeplication glupy infiniband ipv6 libressl +libtirpc qemu-block rsyslog static-libs +syslog systemtap test +tiering vim-syntax +xml"
+SLOT="0/${PV%%.*}"
+IUSE="debug emacs +fuse +georeplication ipv6 libressl +libtirpc rsyslog static-libs +syslog test +xml"
 
-REQUIRED_USE="georeplication? ( ${PYTHON_REQUIRED_USE} )
-	glupy? ( ${PYTHON_REQUIRED_USE} )
+REQUIRED_USE="georeplication? ( ${PYTHON_REQUIRED_USE} xml )
 	ipv6? ( libtirpc )"
 
 # the tests must be run as root
 RESTRICT="test"
 
 # sys-apps/util-linux is required for libuuid
-RDEPEND="bd-xlator? ( sys-fs/lvm2 )
-	!elibc_glibc? ( sys-libs/argp-standalone )
-	emacs? ( virtual/emacs )
-	fuse? ( >=sys-fs/fuse-2.7.0:0 )
-	georeplication? ( ${PYTHON_DEPS} )
-	infiniband? ( sys-fabric/libibverbs:* sys-fabric/librdmacm:* )
-	libtirpc? ( net-libs/libtirpc:= )
-	!libtirpc? ( elibc_glibc? ( sys-libs/glibc[rpc(-)] ) )
-	qemu-block? ( dev-libs/glib:2 )
-	systemtap? ( dev-util/systemtap )
-	tiering? ( dev-db/sqlite:3 )
-	xml? ( dev-libs/libxml2 )
-	sys-libs/readline:=
+RDEPEND="
 	dev-libs/libaio
-	!libressl? ( dev-libs/openssl:=[-bindist] )
-	libressl? ( dev-libs/libressl:= )
 	dev-libs/userspace-rcu:=
 	net-libs/rpcsvc-proto
-	sys-apps/util-linux"
-DEPEND="${RDEPEND}
-	virtual/acl
-	virtual/pkgconfig
+	sys-apps/util-linux
+	sys-libs/readline:=
+	emacs? ( >=app-editors/emacs-23.1:* )
+	fuse? ( >=sys-fs/fuse-2.7.0:0 )
+	georeplication? ( ${PYTHON_DEPS} )
+	xml? ( dev-libs/libxml2 )
+	!elibc_glibc? ( sys-libs/argp-standalone )
+	libtirpc? ( net-libs/libtirpc:= )
+	!libtirpc? ( elibc_glibc? ( sys-libs/glibc[rpc(-)] ) )
+	!libressl? ( dev-libs/openssl:=[-bindist] )
+	libressl? ( dev-libs/libressl:= )
+"
+DEPEND="
+	${RDEPEND}
 	sys-devel/bison
 	sys-devel/flex
+	virtual/acl
 	test? ( >=dev-util/cmocka-1.0.1
 		app-benchmarks/dbench
 		dev-vcs/git
@@ -61,14 +51,13 @@ DEPEND="${RDEPEND}
 		virtual/perl-Test-Harness
 		dev-libs/yajl
 		sys-fs/xfsprogs
-		sys-apps/attr )"
+		sys-apps/attr )
+"
+BDEPEND="
+	virtual/pkgconfig
+"
 
 SITEFILE="50${PN}-mode-gentoo.el"
-
-PATCHES=(
-	"${FILESDIR}/${PN}-3.12.2-poisoned-sysmacros.patch"
-	"${FILESDIR}/${PN}-4.1.0-silent_rules.patch"
-)
 
 DOCS=( AUTHORS ChangeLog NEWS README.md THANKS )
 
@@ -78,7 +67,7 @@ DOCS=( AUTHORS ChangeLog NEWS README.md THANKS )
 #   glibc or if argp-standalone is installed.
 
 pkg_setup() {
-	python_setup "python2*"
+	python_setup "python3*"
 	python-single-r1_pkg_setup
 
 	# Needed for statedumps
@@ -91,8 +80,8 @@ src_prepare() {
 	default
 
 	# build rpc-transport and xlators only once as shared libs
-	find rpc/rpc-transport xlators -name Makefile.am |
-		xargs sed -i 's|.*$(top_srcdir).*\.sym|\0 -shared|' || die
+	find rpc/rpc-transport xlators -name Makefile.am -exec \
+		sed -i 's|.*$(top_srcdir).*\.sym|\0 -shared|' {} + || die
 
 	# fix execution permissions
 	chmod +x libglusterfs/src/gen-defaults.py || die
@@ -102,27 +91,17 @@ src_prepare() {
 
 src_configure() {
 	econf \
-		--disable-dependency-tracking \
-		--disable-silent-rules \
 		--disable-fusermount \
 		$(use_enable debug) \
-		$(use_enable bd-xlator) \
-		$(use_enable crypt-xlator) \
 		$(use_enable fuse fuse-client) \
 		$(use_enable georeplication) \
-		$(use_enable glupy) \
-		$(use_enable infiniband ibverbs) \
-		$(use_enable qemu-block) \
 		$(use_enable static-libs static) \
 		$(use_enable syslog) \
-		$(use_enable systemtap) \
 		$(use_enable test cmocka) \
-		$(use_enable tiering) \
 		$(use_enable xml xml-output) \
 		$(use libtirpc || echo --without-libtirpc) \
 		$(use ipv6 && echo --with-ipv6-default) \
 		--with-tmpfilesdir="${EPREFIX}"/etc/tmpfiles.d \
-		--docdir="${EPREFIX}"/usr/share/doc/${PF} \
 		--localstatedir="${EPREFIX}"/var
 }
 
@@ -152,10 +131,8 @@ src_install() {
 		elisp-site-file-install "${FILESDIR}/${SITEFILE}"
 	fi
 
-	if use vim-syntax ; then
-		insinto /usr/share/vim/vimfiles/ftdetect; doins "${FILESDIR}"/${PN}.vim
-		insinto /usr/share/vim/vimfiles/syntax; doins extras/${PN}.vim
-	fi
+	insinto /usr/share/vim/vimfiles/ftdetect; doins "${FILESDIR}"/${PN}.vim
+	insinto /usr/share/vim/vimfiles/syntax; doins extras/${PN}.vim
 
 	# insert some other tools which might be useful
 	insinto /usr/share/glusterfs/scripts
@@ -167,13 +144,6 @@ src_install() {
 	# correct permissions on installed scripts
 	# fperms 0755 /usr/share/glusterfs/scripts/*.sh
 	chmod 0755 "${ED}"/usr/share/glusterfs/scripts/*.sh || die
-
-	if use georeplication ; then
-		# move the gsync-sync-gfid tool to a binary path
-		# and set a symlink to be compliant with all other distros
-		mv "${ED}"/usr/{share/glusterfs/scripts/gsync-sync-gfid,libexec/glusterfs/} || die
-		dosym ../../../libexec/glusterfs/gsync-sync-gfid /usr/share/glusterfs/scripts/gsync-sync-gfid
-	fi
 
 	newinitd "${FILESDIR}/${PN}-r1.initd" glusterfsd
 	newinitd "${FILESDIR}/glusterd-r3.initd" glusterd
@@ -188,8 +158,7 @@ src_install() {
 		find "${D}" -type f -name '*.la' -delete || die
 	fi
 
-	# fix all shebang for python2 #560750
-	python_fix_shebang "${ED}"
+	python_optimize "${ED}"
 }
 
 src_test() {
