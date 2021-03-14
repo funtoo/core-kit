@@ -27,6 +27,7 @@ EGO_SUM=(
 	"golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod"
 	"golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897"
 	"golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897/go.mod"
+	"golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3"
 	"golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod"
 	"golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a/go.mod"
 	"golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9"
@@ -42,12 +43,13 @@ EGO_SUM=(
 	"golang.org/x/text v0.3.0/go.mod"
 	"golang.org/x/text v0.3.3"
 	"golang.org/x/text v0.3.3/go.mod"
+	"golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e"
 	"golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod"
 )
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/archive/0.25.1.tar.gz -> fzf-0.25.1.tar.gz
+SRC_URI="https://github.com/junegunn/fzf/archive/0.26.0.tar.gz -> fzf-0.26.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT BSD-with-disclosure"

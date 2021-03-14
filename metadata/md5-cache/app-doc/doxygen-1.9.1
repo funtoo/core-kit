@@ -1,0 +1,16 @@
+BDEPEND=dev-util/ninja >=dev-util/cmake-3.9.6
+DEFINED_PHASES=compile configure install prepare setup test unpack
+DEPEND=sys-devel/flex sys-devel/bison doc? ( || ( dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 ) ) app-text/ghostscript-gpl dev-lang/perl media-libs/libpng:0= virtual/libiconv clang? ( >=sys-devel/clang-4.0.0:= ) dot? ( media-gfx/graphviz media-libs/freetype ) doxysearch? ( dev-libs/xapian:= ) latex? ( dev-texlive/texlive-bibtexextra dev-texlive/texlive-fontsextra dev-texlive/texlive-fontutils dev-texlive/texlive-latex dev-texlive/texlive-latexextra ) qt5? ( dev-qt/qtgui:5 dev-qt/qtwidgets:5 dev-qt/qtxml:5 ) sqlite? ( dev-db/sqlite:3 )
+DESCRIPTION=Documentation system for most programming languages
+EAPI=7
+HOMEPAGE=https://www.doxygen.nl/
+IUSE=clang debug doc dot doxysearch latex qt5 sqlite userland_GNU
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=app-text/ghostscript-gpl dev-lang/perl media-libs/libpng:0= virtual/libiconv clang? ( >=sys-devel/clang-4.0.0:= ) dot? ( media-gfx/graphviz media-libs/freetype ) doxysearch? ( dev-libs/xapian:= ) latex? ( dev-texlive/texlive-bibtexextra dev-texlive/texlive-fontsextra dev-texlive/texlive-fontutils dev-texlive/texlive-latex dev-texlive/texlive-latexextra ) qt5? ( dev-qt/qtgui:5 dev-qt/qtwidgets:5 dev-qt/qtxml:5 ) sqlite? ( dev-db/sqlite:3 )
+REQUIRED_USE=doc? ( latex )
+RESTRICT=test
+SLOT=0
+SRC_URI=https://api.github.com/repos/doxygen/doxygen/tarball/Release_1_9_1 -> doxygen-1.9.1.tar.gz
+_eclasses_=cmake-utils	77cd39e6009811bf97a59d91ffd5b54f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=d07faf0e784f3563975ed06ae23d7f7b
