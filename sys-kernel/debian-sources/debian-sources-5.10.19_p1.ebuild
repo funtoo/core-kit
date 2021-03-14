@@ -7,8 +7,8 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="4.19.160"
-DEB_EXTRAVERSION="2"
+DEB_PV_BASE="5.10.19"
+DEB_EXTRAVERSION="1"
 # Debian version -1 becomes _p1 in Funtoo:
 EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
 
@@ -20,7 +20,7 @@ LINUX_SRCDIR=linux-${PF}
 DEB_PV="$DEB_PV_BASE-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -39,8 +39,8 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_4.19.160.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_4.19.160-2.debian.tar.xz"
-S="$WORKDIR/linux-4.19.160"
+SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.10.19.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.10.19-1.debian.tar.xz"
+S="$WORKDIR/linux-5.10.19"
 
 get_patch_list() {
 	[[ -z "${1}" ]] && die "No patch series file specified"

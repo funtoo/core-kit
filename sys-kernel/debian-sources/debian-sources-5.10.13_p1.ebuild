@@ -10,11 +10,8 @@ KV_FULL=${PN}-${PVR}
 DEB_PV_BASE="5.10.13"
 DEB_EXTRAVERSION="1"
 # Debian version -1 becomes _p1 in Funtoo:
-if [ -z "$DEB_EXTRAVERSION" ]; then
-	EXTRAVERSION="-${PN}"
-else
-	EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
-fi
+EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
+
 # This sets the module dir in /lib/modules. This starts with the version (reversed from normal.)
 MODULE_EXT=${PVR}-${PN}
 
@@ -23,7 +20,7 @@ LINUX_SRCDIR=linux-${PF}
 DEB_PV="$DEB_PV_BASE-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -43,7 +40,7 @@ DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
 SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.10.13.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.10.13-1.debian.tar.xz"
-S="$WORKDIR/linux-${DEB_PV_BASE}"
+S="$WORKDIR/linux-5.10.13"
 
 get_patch_list() {
 	[[ -z "${1}" ]] && die "No patch series file specified"
