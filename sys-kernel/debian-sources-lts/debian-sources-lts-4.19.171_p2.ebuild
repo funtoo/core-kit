@@ -7,7 +7,6 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_PV_BASE="4.19.171"
 DEB_EXTRAVERSION="2"
 # Debian version -1 becomes _p1 in Funtoo:
 EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
@@ -17,10 +16,10 @@ MODULE_EXT=${PVR}-${PN}
 
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="$DEB_PV_BASE-${DEB_EXTRAVERSION}"
+DEB_PV="4.19.171-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip mirror"
 LICENSE="GPL-2"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -119,12 +118,36 @@ src_prepare() {
 	#make -s include/linux/version.h || die "make include/linux/version.h failed"
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/xfs-libcrc32c-fix.patch || die
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/mcelog.patch || die
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/nocerts.patch || die
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/ikconfig.patch || die
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/fix-bluetooth-polling.patch || die
-	epatch "${FILESDIR}"/${DEB_PV_BASE}/extra_cpu_optimizations.patch || die
+	if [ -e "${FILESDIR}/4.19.171/xfs-libcrc32c-fix.patch" ]; then
+	    epatch "${FILESDIR}"/4.19.171/xfs-libcrc32c-fix.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/xfs-libcrc32c-fix.patch || die
+	fi
+	if [ -e "${FILESDIR}/4.19.171/mcelog.patch" ]; then
+	    epatch "${FILESDIR}"/4.19.171/mcelog.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/mcelog.patch || die
+	fi
+	if [ -e "${FILESDIR}/4.19.171/nocerts.patch" ]; then
+	    epatch "${FILESDIR}"/4.19.171/nocerts.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/nocerts.patch || die
+	fi
+	if [ -e "${FILESDIR}/4.19.171/ikconfig.patch" ]; then
+	    epatch "${FILESDIR}"/4.19.171/ikconfig.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
+	fi
+	if [ -e "${FILESDIR}/4.19.171/fix-bluetooth-polling.patch" ]; then
+	    epatch "${FILESDIR}"/4.19.171/fix-bluetooth-polling.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/fix-bluetooth-polling.patch || die
+	fi
+	if [ -e "${FILESDIR}/4.19.171/extra_cpu_optimizations.patch" ]; then
+	    epatch "${FILESDIR}"/4.19.171/extra_cpu_optimizations.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
+	fi
 	local arch featureset subarch
 	featureset="standard"
 	if [[ ${REAL_ARCH} == x86 ]]; then
