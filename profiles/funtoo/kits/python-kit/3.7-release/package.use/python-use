@@ -14,6 +14,11 @@
 =sys-libs/openipmi-2.0.22 python_single_target_python2_7
 =sys-libs/openipmi-2.0.26 python_single_target_python2_7
 =sys-libs/openipmi-2.0.27 python_single_target_python2_7
+=sys-process/criu-2.5-r1 python_single_target_python2_7
+=sys-process/criu-3.11 python_single_target_python2_7
+=sys-process/criu-3.6 python_single_target_python2_7
+=sys-process/criu-3.7 python_single_target_python2_7
+=sys-process/criu-3.9 python_single_target_python2_7
 app-admin/packagekit-base python_single_target_python2_7
 app-emulation/xen-tools python_single_target_python2_7
 app-misc/byobu python_single_target_python2_7
@@ -44,4 +49,3 @@ sys-kernel/vanilla-sources python_single_target_python2_7
 sys-kernel/xbox-sources python_single_target_python2_7
 sys-kernel/zen-sources python_single_target_python2_7
 sys-libs/libieee1284 python_single_target_python2_7
-sys-process/criu python_single_target_python2_7
