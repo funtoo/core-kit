@@ -1,15 +1,9 @@
-# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-if [[ ${PV} == 9999* ]] ; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/zsh-users/zsh-completions.git"
-else
-	SRC_URI="https://github.com/zsh-users/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="amd64 ~arm ~sparc ~x86"
-fi
+SRC_URI="{{artifacts[0].src_uri}}"
+KEYWORDS="*"
 
 DESCRIPTION="Additional completion definitions for Zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-completions"
@@ -18,6 +12,14 @@ LICENSE="BSD"
 SLOT="0"
 
 RDEPEND="app-shells/zsh"
+
+src_prepare() {
+	{% for name in removal_list %}
+	rm -rf src/{{name}}
+	{% endfor %}
+
+	default
+}
 
 src_install() {
 	insinto /usr/share/zsh/site-functions
