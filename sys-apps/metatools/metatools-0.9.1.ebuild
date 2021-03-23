@@ -3,12 +3,12 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3+ )
-
 inherit distutils-r1
 
 DESCRIPTION="Funtoo's metatools -- autogeneration framework."
 HOMEPAGE=""
-SRC_URI="https://files.pythonhosted.org/packages/9e/03/bda88fd989682bc5a107151e9a3cd340d08f9896eebbb942f92eede60092/funtoo-metatools-0.9.1.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/9e/03/bda88fd989682bc5a107151e9a3cd340d08f9896eebbb942f92eede60092/funtoo-metatools-0.9.1.tar.gz
+"
 
 DEPEND=""
 RDEPEND="
