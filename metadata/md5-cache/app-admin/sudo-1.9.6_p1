@@ -11,5 +11,5 @@ RDEPEND=sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:= ) ldap? ( >=net-nds/openl
 REQUIRED_USE=?? ( pam skey ) ?? ( gcrypt ssl )
 SLOT=0
 SRC_URI=https://www.sudo.ws/sudo/dist/sudo-1.9.6p1.tar.gz -> sudo-1.9.6_p1.tar.gz
-_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	pam	756a09f72c4cdbb55f2694c95f1e0860	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	pam	756a09f72c4cdbb55f2694c95f1e0860	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=e525bd5d4f0df0de5875a0b09372abe2

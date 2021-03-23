@@ -12,5 +12,5 @@ REQUIRED_USE=test-full? ( cxx dane doc examples guile idn nls openssl pkcs11 sec
 RESTRICT=!test? ( test )
 SLOT=0/30
 SRC_URI=mirror://gnupg/gnutls/v3.6/gnutls-3.6.15.tar.xz
-_eclasses_=libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_eclasses_=libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=41dde1b62b06536561242507f2256a5d

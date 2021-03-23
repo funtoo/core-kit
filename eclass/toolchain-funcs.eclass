@@ -1,4 +1,4 @@
-# Copyright 2002-2019 Gentoo Authors
+# Copyright 2002-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: toolchain-funcs.eclass
@@ -73,6 +73,10 @@ tc-getCXX() { tc-getPROG CXX g++ "$@"; }
 # @USAGE: [toolchain prefix]
 # @RETURN: name of the linker
 tc-getLD() { tc-getPROG LD ld "$@"; }
+# @FUNCTION: tc-getSTRINGS
+# @USAGE: [toolchain prefix]
+# @RETURN: name of the strings program
+tc-getSTRINGS() { tc-getPROG STRINGS strings "$@"; }
 # @FUNCTION: tc-getSTRIP
 # @USAGE: [toolchain prefix]
 # @RETURN: name of the strip program
@@ -83,8 +87,12 @@ tc-getSTRIP() { tc-getPROG STRIP strip "$@"; }
 tc-getNM() { tc-getPROG NM nm "$@"; }
 # @FUNCTION: tc-getRANLIB
 # @USAGE: [toolchain prefix]
-# @RETURN: name of the archiver indexer
+# @RETURN: name of the archive indexer
 tc-getRANLIB() { tc-getPROG RANLIB ranlib "$@"; }
+# @FUNCTION: tc-getREADELF
+# @USAGE: [toolchain prefix]
+# @RETURN: name of the ELF reader
+tc-getREADELF() { tc-getPROG READELF readelf "$@"; }
 # @FUNCTION: tc-getOBJCOPY
 # @USAGE: [toolchain prefix]
 # @RETURN: name of the object copier
@@ -146,6 +154,10 @@ tc-getBUILD_CXX() { tc-getBUILD_PROG CXX g++ "$@"; }
 # @USAGE: [toolchain prefix]
 # @RETURN: name of the linker for building binaries to run on the build machine
 tc-getBUILD_LD() { tc-getBUILD_PROG LD ld "$@"; }
+# @FUNCTION: tc-getBUILD_STRINGS
+# @USAGE: [toolchain prefix]
+# @RETURN: name of the strings program for building binaries to run on the build machine
+tc-getBUILD_STRINGS() { tc-getBUILD_PROG STRINGS strings "$@"; }
 # @FUNCTION: tc-getBUILD_STRIP
 # @USAGE: [toolchain prefix]
 # @RETURN: name of the strip program for building binaries to run on the build machine
@@ -156,8 +168,12 @@ tc-getBUILD_STRIP() { tc-getBUILD_PROG STRIP strip "$@"; }
 tc-getBUILD_NM() { tc-getBUILD_PROG NM nm "$@"; }
 # @FUNCTION: tc-getBUILD_RANLIB
 # @USAGE: [toolchain prefix]
-# @RETURN: name of the archiver indexer for building binaries to run on the build machine
+# @RETURN: name of the archive indexer for building binaries to run on the build machine
 tc-getBUILD_RANLIB() { tc-getBUILD_PROG RANLIB ranlib "$@"; }
+# @FUNCTION: tc-getBUILD_READELF
+# @USAGE: [toolchain prefix]
+# @RETURN: name of the ELF reader for building binaries to run on the build machine
+tc-getBUILD_READELF() { tc-getBUILD_PROG READELF readelf "$@"; }
 # @FUNCTION: tc-getBUILD_OBJCOPY
 # @USAGE: [toolchain prefix]
 # @RETURN: name of the object copier for building binaries to run on the build machine
@@ -207,14 +223,13 @@ tc-cpp-is-true() {
 	local CONDITION=${1}
 	shift
 
-	local RESULT=$($(tc-getTARGET_CPP) "${@}" -P - <<-EOF 2>/dev/null
-			#if ${CONDITION}
-			true
-			#endif
-		EOF
-	)
-
-	[[ ${RESULT} == true ]]
+	$(tc-getTARGET_CPP) "${@}" -P - <<-EOF >/dev/null 2>&1
+		#if ${CONDITION}
+		true
+		#else
+		#error false
+		#endif
+	EOF
 }
 
 # @FUNCTION: tc-detect-is-softfloat
@@ -377,6 +392,7 @@ tc-env_build() {
 	NM=$(tc-getBUILD_NM) \
 	PKG_CONFIG=$(tc-getBUILD_PKG_CONFIG) \
 	RANLIB=$(tc-getBUILD_RANLIB) \
+	READELF=$(tc-getBUILD_READELF) \
 	"$@"
 }
 
@@ -453,18 +469,57 @@ tc-ld-is-gold() {
 	return 1
 }
 
+# @FUNCTION: tc-ld-is-lld
+# @USAGE: [toolchain prefix]
+# @DESCRIPTION:
+# Return true if the current linker is set to lld.
+tc-ld-is-lld() {
+	local out
+
+	# First check the linker directly.
+	out=$($(tc-getLD "$@") --version 2>&1)
+	if [[ ${out} == *"LLD"* ]] ; then
+		return 0
+	fi
+
+	# Then see if they're selecting lld via compiler flags.
+	# Note: We're assuming they're using LDFLAGS to hold the
+	# options and not CFLAGS/CXXFLAGS.
+	local base="${T}/test-tc-lld"
+	cat <<-EOF > "${base}.c"
+	int main() { return 0; }
+	EOF
+	out=$($(tc-getCC "$@") ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} -Wl,--version "${base}.c" -o "${base}" 2>&1)
+	rm -f "${base}"*
+	if [[ ${out} == *"LLD"* ]] ; then
+		return 0
+	fi
+
+	# No lld here!
+	return 1
+}
+
 # @FUNCTION: tc-ld-disable-gold
 # @USAGE: [toolchain prefix]
 # @DESCRIPTION:
 # If the gold linker is currently selected, configure the compilation
 # settings so that we use the older bfd linker instead.
 tc-ld-disable-gold() {
-	if ! tc-ld-is-gold "$@" ; then
-		# They aren't using gold, so nothing to do!
+	tc-ld-is-gold "$@" && tc-ld-force-bfd "$@"
+}
+
+# @FUNCTION: tc-ld-force-bfd
+# @USAGE: [toolchain prefix]
+# @DESCRIPTION:
+# If the gold or lld linker is currently selected, configure the compilation
+# settings so that we use the bfd linker instead.
+tc-ld-force-bfd() {
+	if ! tc-ld-is-gold "$@" && ! tc-ld-is-lld "$@" ; then
+		# They aren't using gold or lld, so nothing to do!
 		return
 	fi
 
-	ewarn "Forcing usage of the BFD linker instead of GOLD"
+	ewarn "Forcing usage of the BFD linker"
 
 	# Set up LD to point directly to bfd if it's available.
 	# We need to extract the first word in case there are flags appended
@@ -474,7 +529,7 @@ tc-ld-disable-gold() {
 	local path_ld=$(which "${bfd_ld}" 2>/dev/null)
 	[[ -e ${path_ld} ]] && export LD=${bfd_ld}
 
-	# Set up LDFLAGS to select gold based on the gcc / clang version.
+	# Set up LDFLAGS to select bfd based on the gcc / clang version.
 	local fallback="true"
 	if tc-is-gcc; then
 		local major=$(gcc-major-version "$@")
@@ -502,7 +557,7 @@ tc-ld-disable-gold() {
 			ln -sf "${path_ld}" "${d}"/ld
 			export LDFLAGS="${LDFLAGS} -B${d}"
 		else
-			die "unable to locate a BFD linker to bypass gold"
+			die "unable to locate a BFD linker"
 		fi
 	fi
 }
@@ -619,7 +674,7 @@ ninj() { [[ ${type} == "kern" ]] && echo $1 || echo $2 ; }
 		mips*)		echo mips;;
 		nios2*)		echo nios2;;
 		nios*)		echo nios;;
-		or1k|or32*)	echo openrisc;;
+		or1k*|or32*)	echo openrisc;;
 		powerpc*)
 			# Starting with linux-2.6.15, the 'ppc' and 'ppc64' trees
 			# have been unified into simply 'powerpc', but until 2.6.16,
@@ -950,18 +1005,11 @@ tc-enables-ssp-all() {
 # @FUNCTION: gen_usr_ldscript
 # @USAGE: [-a] <list of libs to create linker scripts for>
 # @DESCRIPTION:
-# This function generate linker scripts in /usr/lib for dynamic
-# libs in /lib.  This is to fix linking problems when you have
-# the .so in /lib, and the .a in /usr/lib.  What happens is that
-# in some cases when linking dynamic, the .a in /usr/lib is used
-# instead of the .so in /lib due to gcc/libtool tweaking ld's
-# library search path.  This causes many builds to fail.
-# See bug #4411 for more info.
-#
-# Note that you should in general use the unversioned name of
-# the library (libfoo.so), as ldconfig should usually update it
-# correctly to point to the latest version of the library present.
+# This function is deprecated. Use the version from
+# usr-ldscript.eclass instead.
 gen_usr_ldscript() {
+	ewarn "${FUNCNAME}: Please migrate to usr-ldscript.eclass"
+
 	local lib libdir=$(get_libdir) output_format="" auto=false suffix=$(get_libname)
 	[[ -z ${ED+set} ]] && local ED=${D%/}${EPREFIX}/
 
