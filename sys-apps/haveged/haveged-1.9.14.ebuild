@@ -1,31 +1,30 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit systemd
 
 DESCRIPTION="A simple entropy daemon using the HAVEGE algorithm"
 HOMEPAGE="http://www.issihosts.com/haveged/"
-SRC_URI="https://github.com/jirka-h/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/jirka-h/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/jirka-h/haveged/archive/refs/tags/v1.9.14.tar.gz -> haveged-1.9.14.tar.gz"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~x86"
-IUSE="selinux static-libs"
+KEYWORDS="*"
+IUSE="selinux static-libs threads"
 
 RDEPEND="
 	!<sys-apps/openrc-0.11.8
 	selinux? ( sec-policy/selinux-entropyd )
 "
 
-# threads are broken right now, but eventually
-# we should add $(use_enable threads)
 src_configure() {
-	econf \
-		$(use_enable static-libs static) \
-		--bindir=/usr/sbin \
-		--enable-nistest \
-		--disable-threads
+	local myeconfargs=(
+		$(use_enable static-libs static)
+		$(use_enable threads)
+		--bindir=/usr/sbin
+		--enable-nistest
+	)
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
@@ -35,7 +34,8 @@ src_install() {
 	newinitd "${FILESDIR}"/haveged-init.d.3 haveged
 	newconfd "${FILESDIR}"/haveged-conf.d haveged
 
-	systemd_newunit "${FILESDIR}"/service.gentoo ${PN}.service
 	insinto /etc
 	doins "${FILESDIR}"/haveged.conf
+
+	find "${ED}" -type f -name "*.la" -delete || die
 }
