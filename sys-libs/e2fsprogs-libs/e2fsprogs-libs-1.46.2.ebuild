@@ -1,21 +1,19 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit toolchain-funcs multilib-minimal
+inherit toolchain-funcs usr-ldscript
 
 MY_PN=${PN%-libs}
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="e2fsprogs libraries (common error and subsystem)"
 HOMEPAGE="http://e2fsprogs.sourceforge.net/"
-SRC_URI="mirror://sourceforge/e2fsprogs/${MY_P}.tar.xz
-	mirror://kernel/linux/kernel/people/tytso/e2fsprogs/v${PV}/${MY_P}.tar.xz"
+SRC_URI="https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.2/e2fsprogs-1.46.2.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~m68k-mint ~x86-solaris"
+KEYWORDS="*"
 IUSE="static-libs"
 
 RDEPEND="!sys-libs/com_err
@@ -35,7 +33,7 @@ src_prepare() {
 	cp doc/RelNotes/v${PV}.txt ChangeLog || die "Failed to copy Release Notes"
 }
 
-multilib_src_configure() {
+src_configure() {
 	local myconf=(
 		--enable-elf-shlibs
 		$(tc-has-tls || echo --disable-tls)
@@ -57,24 +55,22 @@ multilib_src_configure() {
 	econf "${myconf[@]}"
 }
 
-multilib_src_compile() {
-	emake -C lib/et V=1 || die "Failed to build libcom"
+src_compile() {
+	emake -C lib/et V=1
 
-	emake -C lib/ss V=1 || die "Failed to build libss"
+	emake -C lib/ss V=1
 }
 
-multilib_src_test() {
-	if multilib_is_native_abi; then
-		emake -C lib/et V=1 check || die "Failed to test libcom"
+src_test() {
+	emake -C lib/et V=1 check
 
-		emake -C lib/ss V=1 check || die "Failed to test libss"
-	fi
+	emake -C lib/ss V=1 check
 }
 
-multilib_src_install() {
-	emake -C lib/et V=1 DESTDIR="${D}" install || die "Failed to install libcom"
+src_install() {
+	emake -C lib/et V=1 DESTDIR="${D}" install
 
-	emake -C lib/ss V=1 DESTDIR="${D}" install || die "Failed to install libss"
+	emake -C lib/ss V=1 DESTDIR="${D}" install
 
 	# We call "gen_usr_ldscript -a" to ensure libs are present in /lib to support
 	# split /usr (e.g. "e2fsck" from sys-fs/e2fsprogs is installed in /sbin and
@@ -84,9 +80,7 @@ multilib_src_install() {
 	if ! use static-libs ; then
 		find "${ED}" -name '*.a' -delete || die
 	fi
-}
 
-multilib_src_install_all() {
 	# Package installs same header twice -- use symlink instead
 	dosym et/com_err.h /usr/include/com_err.h
 
