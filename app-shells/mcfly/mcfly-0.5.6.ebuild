@@ -72,7 +72,7 @@ inherit cargo
 
 DESCRIPTION="Context-aware bash history search replacement (ctrl-r)"
 HOMEPAGE="https://github.com/cantino/mcfly"
-SRC_URI="https://api.github.com/repos/cantino/mcfly/tarball/v0.5.5 -> mcfly-0.5.5.tar.gz
+SRC_URI="https://api.github.com/repos/cantino/mcfly/tarball/v0.5.6 -> mcfly-0.5.6.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT Unlicense"
