@@ -143,6 +143,11 @@ src_prepare() {
 	else
 	    epatch "${FILESDIR}"/latest/fix-bluetooth-polling.patch || die
 	fi
+	if [ -e "${FILESDIR}/4.19.160/amdgpu-picasso.patch" ]; then
+	    epatch "${FILESDIR}"/4.19.160/amdgpu-picasso.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/amdgpu-picasso.patch || die
+	fi
 	if [ -e "${FILESDIR}/4.19.160/extra_cpu_optimizations.patch" ]; then
 	    epatch "${FILESDIR}"/4.19.160/extra_cpu_optimizations.patch || die
 	else
