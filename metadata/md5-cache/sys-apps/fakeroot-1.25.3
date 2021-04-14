@@ -1,0 +1,14 @@
+BDEPEND=app-text/po4a >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=compile configure install prepare
+DEPEND=sys-libs/libcap acl? ( sys-apps/acl ) test? ( app-arch/sharutils )
+DESCRIPTION=A fake root environment by means of LD_PRELOAD and SysV IPC (or TCP) trickery
+EAPI=7
+HOMEPAGE=https://packages.qa.debian.org/f/fakeroot.html
+IUSE=acl debug test
+KEYWORDS=*
+LICENSE=GPL-3
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=mirror://debian/pool/main/f/fakeroot/fakeroot_1.25.3.orig.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=8f9457d5e5d9127b9199ccc53c1619cb
