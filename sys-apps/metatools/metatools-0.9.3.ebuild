@@ -7,7 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION="Funtoo's metatools -- autogeneration framework."
 HOMEPAGE=""
-SRC_URI="https://files.pythonhosted.org/packages/9e/03/bda88fd989682bc5a107151e9a3cd340d08f9896eebbb942f92eede60092/funtoo-metatools-0.9.1.tar.gz
+SRC_URI="https://files.pythonhosted.org/packages/73/67/75e4c0c6df032c266abd474594f5ef0c4ace105f099c93785248eec3b686/funtoo-metatools-0.9.3.tar.gz
 "
 
 DEPEND=""
@@ -18,6 +18,9 @@ RDEPEND="
 	dev-python/beautifulsoup[${PYTHON_USEDEP}]
 	dev-python/dict-toolbox[${PYTHON_USEDEP}]
 	dev-python/jinja[${PYTHON_USEDEP}]
+	dev-python/packaging[${PYTHON_USEDEP}]
+	dev-python/pymongo[${PYTHON_USEDEP}]
+	>dev-python/subpop-0.4.2[${PYTHON_USEDEP}]
 	dev-python/toml[${PYTHON_USEDEP}]
 	www-servers/tornado[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]"
@@ -27,4 +30,4 @@ SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
 
-S="${WORKDIR}/funtoo-metatools-0.9.1"
+S="${WORKDIR}/funtoo-metatools-0.9.3"
