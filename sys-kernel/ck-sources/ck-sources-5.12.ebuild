@@ -16,13 +16,13 @@ detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux 5.11, with Con Kolivas' MuQSS scheduler and patchset"
+DESCRIPTION="Linux 5.12, with Con Kolivas' MuQSS scheduler and patchset"
 
-K_BRANCH_ID="5.11"
+K_BRANCH_ID="5.12"
 
 SRC_URI="
-	http://ck.kolivas.org/patches/5.0/5.11/5.11-ck1/patch-5.11-ck1.xz
-	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.11.tar.xz
+	http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
+	https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.12.tar.xz
 	"
 
 UNIPATCH_LIST="
