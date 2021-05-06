@@ -6,7 +6,7 @@ CRATES="
 addr2line-0.14.1
 adler-1.0.2
 ansi_term-0.11.0
-anyhow-1.0.38
+anyhow-1.0.40
 arrayref-0.3.6
 arrayvec-0.5.2
 atty-0.2.14
@@ -17,7 +17,7 @@ base64-0.9.3
 base64-0.13.0
 bitflags-1.2.1
 blake2b_simd-0.5.11
-byte-unit-4.0.10
+byte-unit-4.0.11
 byteorder-1.4.3
 bytes-0.5.6
 bytes-1.0.1
@@ -26,16 +26,17 @@ cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
 clap-2.33.3
-console-0.14.0
+console-0.14.1
 constant_time_eq-0.1.5
 crc32fast-1.2.1
 crossbeam-utils-0.8.3
 crossterm-0.18.2
 crossterm_winapi-0.6.2
-directories-3.0.1
+directories-3.0.2
 dirs-1.0.5
-dirs-sys-0.3.5
+dirs-sys-0.3.6
 dockworker-0.0.22
+either-1.6.1
 encode_unicode-0.3.6
 errno-0.2.7
 errno-dragonfly-0.1.1
@@ -59,6 +60,7 @@ futures-util-0.3.13
 gcc-0.3.55
 getch-0.2.1
 getrandom-0.1.16
+getrandom-0.2.2
 gimli-0.23.0
 h2-0.2.7
 hashbrown-0.9.1
@@ -80,7 +82,7 @@ itoa-0.4.7
 kernel32-sys-0.2.2
 language-tags-0.2.2
 lazy_static-1.4.0
-libc-0.2.88
+libc-0.2.94
 libproc-0.9.1
 lock_api-0.4.2
 log-0.4.14
@@ -123,6 +125,7 @@ quote-1.0.9
 redox_syscall-0.1.57
 redox_syscall-0.2.5
 redox_users-0.3.5
+redox_users-0.4.0
 regex-1.4.4
 regex-syntax-0.6.23
 rust-argon2-0.8.3
@@ -130,8 +133,8 @@ rustc-demangle-0.1.18
 ryu-1.0.5
 safemem-0.3.3
 scopeguard-1.1.0
-serde-1.0.124
-serde_derive-1.0.124
+serde-1.0.125
+serde_derive-1.0.125
 serde_json-1.0.64
 signal-hook-0.1.17
 signal-hook-registry-1.3.0
@@ -178,7 +181,7 @@ void-1.0.2
 want-0.3.0
 wasi-0.9.0+wasi-snapshot-preview1
 wasi-0.10.0+wasi-snapshot-preview1
-which-4.0.2
+which-4.1.0
 winapi-0.2.8
 winapi-0.3.9
 winapi-build-0.1.1
@@ -192,7 +195,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.4 -> procs-0.11.4.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.5 -> procs-0.11.5.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
