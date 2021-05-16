@@ -23,7 +23,7 @@ block-0.1.6
 block-buffer-0.7.3
 block-padding-0.1.5
 byte-tools-0.3.1
-byte-unit-4.0.11
+byte-unit-4.0.12
 byteorder-1.4.3
 bytes-1.0.1
 cache-padded-1.1.1
@@ -59,21 +59,21 @@ foreign-types-0.3.2
 foreign-types-shared-0.1.1
 form_urlencoded-1.0.1
 funty-1.1.0
-futures-0.3.14
-futures-channel-0.3.14
-futures-core-0.3.14
-futures-executor-0.3.14
-futures-io-0.3.14
+futures-0.3.15
+futures-channel-0.3.15
+futures-core-0.3.15
+futures-executor-0.3.15
+futures-io-0.3.15
 futures-lite-1.11.3
-futures-macro-0.3.14
-futures-sink-0.3.14
-futures-task-0.3.14
-futures-util-0.3.14
+futures-macro-0.3.15
+futures-sink-0.3.15
+futures-task-0.3.15
+futures-util-0.3.15
 generic-array-0.12.4
 gethostname-0.2.1
 getrandom-0.1.16
 getrandom-0.2.2
-git2-0.13.18
+git2-0.13.19
 hashbrown-0.9.1
 hermit-abi-0.1.18
 http-0.2.4
@@ -87,7 +87,7 @@ lazy_static-1.4.0
 lazycell-1.3.0
 lexical-core-0.7.6
 libc-0.2.94
-libgit2-sys-0.12.19+1.1.0
+libgit2-sys-0.12.20+1.1.0
 libz-sys-1.1.3
 linked-hash-map-0.5.4
 log-0.4.14
@@ -104,7 +104,7 @@ nix-0.17.0
 nix-0.19.1
 nix-0.20.0
 nom-6.1.2
-notify-rust-4.4.0
+notify-rust-4.5.2
 num-integer-0.1.44
 num-traits-0.2.14
 num_cpus-1.13.0
@@ -115,11 +115,11 @@ once_cell-1.7.2
 opaque-debug-0.2.3
 open-1.7.0
 openssl-0.10.34
-openssl-probe-0.1.2
+openssl-probe-0.1.4
 openssl-src-111.15.0+1.1.1k
-openssl-sys-0.9.62
+openssl-sys-0.9.63
 ordered-multimap-0.3.1
-os_info-3.0.4
+os_info-3.0.5
 parking-2.0.0
 path-slash-0.1.4
 percent-encoding-2.1.0
@@ -148,11 +148,11 @@ rand_hc-0.3.0
 rayon-1.5.0
 rayon-core-1.9.0
 redox_syscall-0.1.57
-redox_syscall-0.2.7
+redox_syscall-0.2.8
 redox_users-0.3.5
 redox_users-0.4.0
-regex-1.5.2
-regex-syntax-0.6.24
+regex-1.5.4
+regex-syntax-0.6.25
 remove_dir_all-0.5.3
 rust-argon2-0.8.3
 rust-ini-0.17.0
@@ -164,10 +164,10 @@ security-framework-2.2.0
 security-framework-sys-2.2.0
 semver-0.11.0
 semver-parser-0.10.2
-serde-1.0.125
-serde_derive-1.0.125
+serde-1.0.126
+serde_derive-1.0.126
 serde_json-1.0.64
-serde_repr-0.1.6
+serde_repr-0.1.7
 serde_urlencoded-0.6.1
 sha-1-0.8.2
 shadow-rs-0.5.25
@@ -180,7 +180,7 @@ strsim-0.10.0
 strum-0.8.0
 strum_macros-0.8.0
 syn-0.11.11
-syn-1.0.71
+syn-1.0.72
 synom-0.11.3
 sys-info-0.9.0
 tap-1.0.1
@@ -200,13 +200,13 @@ unicode-width-0.1.8
 unicode-xid-0.0.4
 unicode-xid-0.2.2
 uom-0.30.0
-url-2.2.1
-urlencoding-1.1.1
+url-2.2.2
+urlencoding-1.3.2
 utf8-width-0.1.5
 vcpkg-0.2.12
 vec_map-0.8.2
 version_check-0.9.3
-versions-3.0.0
+versions-3.0.1
 void-1.0.2
 waker-fn-1.1.0
 wasi-0.9.0+wasi-snapshot-preview1
@@ -232,7 +232,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.53.0 -> starship-v0.53.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.54.0 -> starship-v0.54.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
