@@ -17,7 +17,7 @@ base64-0.9.3
 base64-0.13.0
 bitflags-1.2.1
 blake2b_simd-0.5.11
-byte-unit-4.0.11
+byte-unit-4.0.12
 byteorder-1.4.3
 bytes-0.5.6
 bytes-1.0.1
@@ -30,8 +30,8 @@ console-0.14.1
 constant_time_eq-0.1.5
 crc32fast-1.2.1
 crossbeam-utils-0.8.3
-crossterm-0.18.2
-crossterm_winapi-0.6.2
+crossterm-0.19.0
+crossterm_winapi-0.7.0
 directories-3.0.2
 dirs-1.0.5
 dirs-sys-0.3.6
@@ -133,8 +133,8 @@ rustc-demangle-0.1.18
 ryu-1.0.5
 safemem-0.3.3
 scopeguard-1.1.0
-serde-1.0.125
-serde_derive-1.0.125
+serde-1.0.126
+serde_derive-1.0.126
 serde_json-1.0.64
 signal-hook-0.1.17
 signal-hook-registry-1.3.0
@@ -147,7 +147,7 @@ structopt-derive-0.4.14
 syn-1.0.63
 synstructure-0.12.4
 tar-0.4.33
-termbg-0.2.0
+termbg-0.2.2
 terminal_size-0.1.16
 termios-0.2.2
 textwrap-0.11.0
@@ -195,7 +195,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.5 -> procs-0.11.5.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.6 -> procs-0.11.6.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
