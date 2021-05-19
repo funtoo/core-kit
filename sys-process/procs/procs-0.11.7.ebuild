@@ -147,7 +147,7 @@ structopt-derive-0.4.14
 syn-1.0.63
 synstructure-0.12.4
 tar-0.4.33
-termbg-0.2.2
+termbg-0.2.3
 terminal_size-0.1.16
 termios-0.2.2
 textwrap-0.11.0
@@ -195,7 +195,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.6 -> procs-0.11.6.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.7 -> procs-0.11.7.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
