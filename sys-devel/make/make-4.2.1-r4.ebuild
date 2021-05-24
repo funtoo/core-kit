@@ -1,28 +1,39 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI="6"
 
 inherit flag-o-matic
 
 DESCRIPTION="Standard tool to compile source trees"
 HOMEPAGE="https://www.gnu.org/software/make/make.html"
-SRC_URI="https://ftp.gnu.org/gnu/make/make-4.3.tar.gz"
+SRC_URI="mirror://gnu//make/${P}.tar.bz2"
 
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="*"
 IUSE="guile nls static"
 
-DEPEND="guile? ( >=dev-scheme/guile-1.8:= )"
-BDEPEND="nls? ( sys-devel/gettext )"
-RDEPEND="${DEPEND}
+CDEPEND="guile? ( >=dev-scheme/guile-1.8:= )"
+DEPEND="${CDEPEND}
+	nls? ( sys-devel/gettext )"
+RDEPEND="${CDEPEND}
 	nls? ( virtual/libintl )"
 
+PATCHES=(
+	"${FILESDIR}"/${PN}-3.82-darwin-library_search-dylib.patch
+	"${FILESDIR}"/${PN}-4.2-default-cxx.patch
+	"${FILESDIR}"/${PN}-4.2.1-perl526.patch
+	"${FILESDIR}"/${PN}-4.2.1-glob-internals.patch
+	"${FILESDIR}"/${PN}-4.2.1-pselect-non-blocking.patch
+)
+
 src_prepare() {
-	# sources were moved into src directory
-	cd src || die
-	sed -i -e 's/"g++"/"c++"/' default.c || die
 	default
+	# These patches require special handling as they modify configure.ac
+	# which in turn triggers maintainer-mode when being applied the
+	# usual way.
+	eapply -Z "${FILESDIR}"/${PN}-4.2.1-glob-v2.patch \
+		"${FILESDIR}"/${P}-guile-2.2.patch
 }
 
 src_configure() {
