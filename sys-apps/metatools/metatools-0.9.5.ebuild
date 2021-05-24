@@ -17,7 +17,7 @@ RDEPEND="
 	dev-python/aiohttp[${PYTHON_USEDEP}]
 	dev-python/beautifulsoup[${PYTHON_USEDEP}]
 	dev-python/dict-toolbox[${PYTHON_USEDEP}]
-	dev-python/jinja[${PYTHON_USEDEP}]
+	>=dev-python/jinja-3[${PYTHON_USEDEP}]
 	dev-python/packaging[${PYTHON_USEDEP}]
 	dev-python/pymongo[${PYTHON_USEDEP}]
 	>dev-python/subpop-0.4.2[${PYTHON_USEDEP}]
