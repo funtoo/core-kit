@@ -6,7 +6,7 @@ inherit linux-info toolchain-funcs
 
 DESCRIPTION="Application containers for Linux"
 HOMEPAGE="https://sylabs.io"
-SRC_URI="https://github.com/hpcng/singularity/releases/download/v3.7.3/singularity-3.7.3.tar.gz"
+SRC_URI="https://github.com/hpcng/singularity/releases/download/v3.7.4/singularity-3.7.4.tar.gz"
 
 SLOT="0"
 LICENSE="BSD"
