@@ -9,6 +9,15 @@ ansi_term-0.11.0
 anyhow-1.0.40
 arrayref-0.3.6
 arrayvec-0.5.2
+async-channel-1.6.1
+async-executor-1.4.1
+async-global-executor-2.0.2
+async-io-1.4.1
+async-lock-2.4.0
+async-mutex-1.4.0
+async-std-1.9.0
+async-task-4.0.3
+atomic-waker-1.0.0
 atty-0.2.14
 autocfg-1.0.1
 backtrace-0.3.56
@@ -17,21 +26,26 @@ base64-0.9.3
 base64-0.13.0
 bitflags-1.2.1
 blake2b_simd-0.5.11
+blocking-1.0.2
+bumpalo-3.6.1
 byte-unit-4.0.12
 byteorder-1.4.3
 bytes-0.5.6
 bytes-1.0.1
+cache-padded-1.1.1
 cc-1.0.67
 cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
 clap-2.33.3
+concurrent-queue-1.2.2
 console-0.14.1
 constant_time_eq-0.1.5
 crc32fast-1.2.1
 crossbeam-utils-0.8.3
 crossterm-0.19.0
 crossterm_winapi-0.7.0
+ctor-0.1.20
 directories-3.0.2
 dirs-1.0.5
 dirs-sys-0.3.6
@@ -40,8 +54,10 @@ either-1.6.1
 encode_unicode-0.3.6
 errno-0.2.7
 errno-dragonfly-0.1.1
+event-listener-2.5.1
 failure-0.1.8
 failure_derive-0.1.8
+fastrand-1.4.1
 filetime-0.2.14
 flate2-1.0.20
 fnv-1.0.7
@@ -53,6 +69,7 @@ futures-channel-0.3.13
 futures-core-0.3.13
 futures-executor-0.3.13
 futures-io-0.3.13
+futures-lite-1.11.3
 futures-macro-0.3.13
 futures-sink-0.3.13
 futures-task-0.3.13
@@ -62,6 +79,7 @@ getch-0.2.1
 getrandom-0.1.16
 getrandom-0.2.2
 gimli-0.23.0
+gloo-timers-0.2.1
 h2-0.2.7
 hashbrown-0.9.1
 heck-0.3.2
@@ -79,10 +97,12 @@ indexmap-1.6.2
 instant-0.1.9
 iovec-0.1.4
 itoa-0.4.7
+js-sys-0.3.51
 kernel32-sys-0.2.2
+kv-log-macro-1.0.7
 language-tags-0.2.2
 lazy_static-1.4.0
-libc-0.2.94
+libc-0.2.95
 libproc-0.9.1
 lock_api-0.4.2
 log-0.4.14
@@ -104,7 +124,9 @@ num-integer-0.1.44
 num-traits-0.2.14
 num_cpus-1.13.0
 object-0.23.0
+once_cell-1.7.2
 pager-0.16.0
+parking-2.0.0
 parking_lot-0.11.1
 parking_lot_core-0.8.3
 percent-encoding-2.1.0
@@ -115,6 +137,7 @@ pin-project-internal-1.0.5
 pin-project-lite-0.1.12
 pin-project-lite-0.2.6
 pin-utils-0.1.0
+polling-2.0.3
 proc-macro-error-1.0.4
 proc-macro-error-attr-1.0.4
 proc-macro-hack-0.5.19
@@ -141,13 +164,14 @@ signal-hook-registry-1.3.0
 slab-0.4.2
 smallvec-1.6.1
 socket2-0.3.19
+socket2-0.4.0
 strsim-0.8.0
 structopt-0.3.21
 structopt-derive-0.4.14
-syn-1.0.63
+syn-1.0.67
 synstructure-0.12.4
 tar-0.4.33
-termbg-0.2.3
+termbg-0.3.0
 terminal_size-0.1.16
 termios-0.2.2
 textwrap-0.11.0
@@ -175,12 +199,22 @@ unix_socket-0.5.0
 url-2.2.1
 users-0.11.0
 utf8-width-0.1.4
+value-bag-1.0.0-alpha.7
 vec_map-0.8.2
 version_check-0.9.2
 void-1.0.2
+waker-fn-1.1.0
 want-0.3.0
 wasi-0.9.0+wasi-snapshot-preview1
 wasi-0.10.0+wasi-snapshot-preview1
+wasm-bindgen-0.2.74
+wasm-bindgen-backend-0.2.74
+wasm-bindgen-futures-0.4.24
+wasm-bindgen-macro-0.2.74
+wasm-bindgen-macro-support-0.2.74
+wasm-bindgen-shared-0.2.74
+web-sys-0.3.51
+wepoll-sys-3.0.1
 which-4.1.0
 winapi-0.2.8
 winapi-0.3.9
@@ -195,7 +229,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.7 -> procs-0.11.7.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.8 -> procs-0.11.8.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
