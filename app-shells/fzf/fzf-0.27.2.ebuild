@@ -45,7 +45,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/archive/0.27.1.tar.gz -> fzf-0.27.1.tar.gz
+SRC_URI="https://github.com/junegunn/fzf/archive/0.27.2.tar.gz -> fzf-0.27.2.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT BSD-with-disclosure"
