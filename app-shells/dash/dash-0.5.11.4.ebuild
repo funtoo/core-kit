@@ -6,7 +6,7 @@ inherit flag-o-matic toolchain-funcs
 
 DESCRIPTION="Debian Almquist Shell"
 HOMEPAGE="http://gondor.apana.org.au/~herbert/dash/"
-SRC_URI="http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.11.3.tar.gz"
+SRC_URI="http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.11.4.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
