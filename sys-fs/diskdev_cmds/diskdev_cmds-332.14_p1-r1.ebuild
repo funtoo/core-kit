@@ -1,9 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=0
+EAPI=7
 
-inherit eutils
+inherit toolchain-funcs
 
 MY_PV=${PV%_p*}
 
@@ -13,22 +12,23 @@ SRC_URI="http://darwinsource.opendarwin.org/tarballs/apsl/diskdev_cmds-${MY_PV}.
 		 mirror://gentoo/diskdev_cmds-${PV}.patch.bz2"
 LICENSE="APSL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ppc ~ppc64 x86"
-IUSE=""
-DEPEND="dev-libs/openssl"
+KEYWORDS="*"
+DEPEND="dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
-	epatch "${WORKDIR}"/diskdev_cmds-${PV}.patch
-	epatch "${FILESDIR}"/diskdev_cmds-respect-cflags.patch
-}
+PATCHES=(
+	"${WORKDIR}"/diskdev_cmds-${PV}.patch
+	"${FILESDIR}"/${PN}-respect-cflags.patch
+	"${FILESDIR}"/${P}-AR.patch
+	"${FILESDIR}"/${P}-no-sysctl.patch
+	"${FILESDIR}"/${P}-ldflags.patch
+	"${FILESDIR}"/${P}-musl.patch
+)
 
 src_compile() {
-	emake -f Makefile.lnx || die "emake failed"
+	emake -f Makefile.lnx AR="$(tc-getAR)" CC="$(tc-getCC)" || die "emake failed"
 }
 
 src_install() {
