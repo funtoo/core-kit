@@ -73,7 +73,7 @@ generic-array-0.12.4
 gethostname-0.2.1
 getrandom-0.1.16
 getrandom-0.2.2
-git2-0.13.19
+git2-0.13.20
 hashbrown-0.9.1
 hermit-abi-0.1.18
 http-0.2.4
@@ -86,8 +86,8 @@ jobserver-0.1.22
 lazy_static-1.4.0
 lazycell-1.3.0
 lexical-core-0.7.6
-libc-0.2.94
-libgit2-sys-0.12.20+1.1.0
+libc-0.2.95
+libgit2-sys-0.12.21+1.1.0
 libz-sys-1.1.3
 linked-hash-map-0.5.4
 log-0.4.14
@@ -102,7 +102,7 @@ native-tls-0.2.7
 nb-connect-1.2.0
 nix-0.17.0
 nix-0.19.1
-nix-0.20.0
+nix-0.21.0
 nom-6.1.2
 notify-rust-4.5.2
 num-integer-0.1.44
@@ -111,7 +111,7 @@ num_cpus-1.13.0
 objc-0.2.7
 objc-foundation-0.1.1
 objc_id-0.1.1
-once_cell-1.7.2
+once_cell-1.8.0
 opaque-debug-0.2.3
 open-1.7.0
 openssl-0.10.34
@@ -119,7 +119,7 @@ openssl-probe-0.1.4
 openssl-src-111.15.0+1.1.1k
 openssl-sys-0.9.63
 ordered-multimap-0.3.1
-os_info-3.0.5
+os_info-3.0.6
 parking-2.0.0
 path-slash-0.1.4
 percent-encoding-2.1.0
@@ -141,12 +141,12 @@ quick-xml-0.22.0
 quote-0.3.15
 quote-1.0.9
 radium-0.5.3
-rand-0.8.3
+rand-0.8.4
 rand_chacha-0.3.0
 rand_core-0.6.2
 rand_hc-0.3.0
-rayon-1.5.0
-rayon-core-1.9.0
+rayon-1.5.1
+rayon-core-1.9.1
 redox_syscall-0.1.57
 redox_syscall-0.2.8
 redox_users-0.3.5
@@ -162,8 +162,7 @@ scoped-tls-1.0.0
 scopeguard-1.1.0
 security-framework-2.2.0
 security-framework-sys-2.2.0
-semver-0.11.0
-semver-parser-0.10.2
+semver-1.0.3
 serde-1.0.126
 serde_derive-1.0.126
 serde_json-1.0.64
@@ -201,12 +200,12 @@ unicode-xid-0.0.4
 unicode-xid-0.2.2
 uom-0.30.0
 url-2.2.2
-urlencoding-1.3.2
+urlencoding-1.3.3
 utf8-width-0.1.5
 vcpkg-0.2.12
 vec_map-0.8.2
 version_check-0.9.3
-versions-3.0.1
+versions-3.0.2
 void-1.0.2
 waker-fn-1.1.0
 wasi-0.9.0+wasi-snapshot-preview1
@@ -232,7 +231,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.54.0 -> starship-v0.54.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.55.0 -> starship-v0.55.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
