@@ -6,7 +6,7 @@ CRATES="
 addr2line-0.14.1
 adler-1.0.2
 ansi_term-0.11.0
-anyhow-1.0.40
+anyhow-1.0.41
 arrayref-0.3.6
 arrayvec-0.5.2
 async-channel-1.6.1
@@ -49,7 +49,7 @@ ctor-0.1.20
 directories-3.0.2
 dirs-1.0.5
 dirs-sys-0.3.6
-dockworker-0.0.22
+dockworker-0.0.23
 either-1.6.1
 encode_unicode-0.3.6
 errno-0.2.7
@@ -91,7 +91,6 @@ httparse-1.3.5
 httpdate-0.3.2
 hyper-0.13.10
 hyperlocal-0.7.0
-hyperx-1.3.0
 idna-0.2.2
 indexmap-1.6.2
 instant-0.1.9
@@ -100,9 +99,8 @@ itoa-0.4.7
 js-sys-0.3.51
 kernel32-sys-0.2.2
 kv-log-macro-1.0.7
-language-tags-0.2.2
 lazy_static-1.4.0
-libc-0.2.95
+libc-0.2.97
 libproc-0.9.1
 lock_api-0.4.2
 log-0.4.14
@@ -189,7 +187,6 @@ tracing-0.1.25
 tracing-core-0.1.17
 tracing-futures-0.2.5
 try-lock-0.2.3
-unicase-2.6.0
 unicode-bidi-0.3.4
 unicode-normalization-0.1.17
 unicode-segmentation-1.7.1
@@ -229,7 +226,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.8 -> procs-0.11.8.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.9 -> procs-0.11.9.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
