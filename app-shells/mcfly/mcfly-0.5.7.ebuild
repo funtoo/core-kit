@@ -16,6 +16,7 @@ bstr-0.2.12
 byteorder-1.3.4
 cc-1.0.52
 cfg-if-0.1.10
+chrono-0.4.19
 clap-2.33.0
 constant_time_eq-0.1.5
 crossbeam-utils-0.7.2
@@ -26,6 +27,7 @@ dirs-sys-0.3.4
 either-1.6.1
 getrandom-0.1.14
 hermit-abi-0.1.12
+humantime-2.1.0
 itertools-0.9.0
 itoa-0.4.5
 lazy_static-1.4.0
@@ -34,6 +36,8 @@ libsqlite3-sys-0.10.0
 linked-hash-map-0.5.3
 lru-cache-0.1.2
 memchr-2.3.3
+num-integer-0.1.44
+num-traits-0.2.14
 numtoa-0.1.0
 pkg-config-0.3.17
 ppv-lite86-0.2.6
@@ -72,7 +76,7 @@ inherit cargo
 
 DESCRIPTION="Context-aware bash history search replacement (ctrl-r)"
 HOMEPAGE="https://github.com/cantino/mcfly"
-SRC_URI="https://api.github.com/repos/cantino/mcfly/tarball/v0.5.6 -> mcfly-0.5.6.tar.gz
+SRC_URI="https://api.github.com/repos/cantino/mcfly/tarball/v0.5.7 -> mcfly-0.5.7.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT Unlicense"
