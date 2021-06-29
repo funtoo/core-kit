@@ -5,8 +5,8 @@ EAPI=7
 PYTHON_COMPAT=( python3+ )
 inherit distutils-r1
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="Funtoo Power Management Framework"
+HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/funtoo-powerbus/browse https://pypi.org/project/funtoo-powerbus/"
 SRC_URI="https://files.pythonhosted.org/packages/97/76/207c0b9604d9c946bb20808dcc4d5b77085879f41f90d1f134137ded077d/funtoo-powerbus-0.2.9.tar.gz
 "
 
