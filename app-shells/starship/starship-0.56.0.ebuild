@@ -43,21 +43,25 @@ crossbeam-deque-0.8.0
 crossbeam-epoch-0.9.4
 crossbeam-utils-0.8.4
 derivative-2.2.0
+difference-2.0.0
 digest-0.8.1
+directories-next-2.0.0
 dirs-1.0.5
-dirs-next-2.0.0
 dirs-sys-next-0.1.2
 dlv-list-0.2.3
+downcast-0.10.0
 dtoa-0.4.8
 either-1.6.1
 enumflags2-0.6.4
 enumflags2_derive-0.6.4
 fake-simd-0.1.2
 fastrand-1.4.1
+float-cmp-0.8.0
 fnv-1.0.7
 foreign-types-0.3.2
 foreign-types-shared-0.1.1
 form_urlencoded-1.0.1
+fragile-1.0.0
 funty-1.1.0
 futures-0.3.15
 futures-channel-0.3.15
@@ -75,10 +79,11 @@ getrandom-0.1.16
 getrandom-0.2.2
 git2-0.13.20
 hashbrown-0.9.1
+hashbrown-0.11.2
 hermit-abi-0.1.18
 http-0.2.4
 idna-0.2.3
-indexmap-1.6.2
+indexmap-1.7.0
 instant-0.1.9
 itertools-0.10.0
 itoa-0.4.7
@@ -98,12 +103,15 @@ maplit-1.0.2
 matches-0.1.8
 memchr-2.4.0
 memoffset-0.6.3
+mockall-0.10.2
+mockall_derive-0.10.2
 native-tls-0.2.7
 nb-connect-1.2.0
 nix-0.17.0
 nix-0.19.1
 nix-0.21.0
 nom-6.1.2
+normalize-line-endings-0.3.0
 notify-rust-4.5.2
 num-integer-0.1.44
 num-traits-0.2.14
@@ -132,6 +140,9 @@ pin-utils-0.1.0
 pkg-config-0.3.19
 polling-2.0.3
 ppv-lite86-0.2.10
+predicates-1.0.8
+predicates-core-1.0.2
+predicates-tree-1.0.2
 proc-macro-crate-0.1.5
 proc-macro-hack-0.5.19
 proc-macro-nested-0.1.7
@@ -169,7 +180,7 @@ serde_json-1.0.64
 serde_repr-0.1.7
 serde_urlencoded-0.6.1
 sha-1-0.8.2
-shadow-rs-0.5.25
+shadow-rs-0.6.2
 shell-words-1.0.0
 slab-0.4.3
 socket2-0.4.0
@@ -190,11 +201,12 @@ time-0.1.44
 tinyvec-1.2.0
 tinyvec_macros-0.1.0
 toml-0.5.8
+treeline-0.1.0
 typenum-1.13.0
 ucd-trie-0.1.3
 unicode-bidi-0.3.5
 unicode-normalization-0.1.17
-unicode-segmentation-1.7.1
+unicode-segmentation-1.8.0
 unicode-width-0.1.8
 unicode-xid-0.0.4
 unicode-xid-0.2.2
@@ -231,7 +243,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.55.0 -> starship-v0.55.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.56.0 -> starship-v0.56.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
