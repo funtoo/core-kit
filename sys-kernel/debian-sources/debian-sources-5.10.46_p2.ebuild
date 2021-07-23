@@ -38,7 +38,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="http://http.debian.net/debian/pool/main/l/linux/linux_5.10.46.orig.tar.xz http://http.debian.net/debian/pool/main/l/linux/linux_5.10.46-2.debian.tar.xz"
+SRC_URI="https://http.debian.net/debian/pool/main/l/linux/linux_5.10.46.orig.tar.xz https://http.debian.net/debian/pool/main/l/linux/linux_5.10.46-2.debian.tar.xz"
 S="$WORKDIR/linux-5.10.46"
 
 get_patch_list() {
