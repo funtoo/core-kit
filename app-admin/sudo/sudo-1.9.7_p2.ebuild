@@ -10,7 +10,7 @@ DESCRIPTION="Allows users or groups to run commands as other users"
 HOMEPAGE="https://www.sudo.ws/"
 
 KEYWORDS="*"
-SRC_URI="https://www.sudo.ws/sudo/dist/sudo-1.9.7p1.tar.gz -> sudo-1.9.7_p1.tar.gz"
+SRC_URI="https://www.sudo.ws/sudo/dist/sudo-1.9.7p2.tar.gz -> sudo-1.9.7_p2.tar.gz"
 # Basic license is ISC-style as-is, some files are released under
 # 3-clause BSD license
 LICENSE="ISC BSD"
