@@ -57,6 +57,7 @@ app-admin/collectd -collectd_plugins_mqtt
 
 # Thomas Deutschmann <whissi@gentoo.org> (26 Aug 2016)
 # Enable numa support on supported architectures
+dev-db/mysql -numa
 dev-db/percona-server -numa
 
 # Brian Evans <grknight@gentoo.org> (18 Aug 2016)
@@ -104,10 +105,6 @@ net-im/telepathy-connection-managers -steam
 # Jeroen Roovers <jer@gentoo.org> (31 Jan 2015)
 # >x11-drivers/nvidia-drivers-346 on x86 has no UVM support (bug #534156)
 >x11-drivers/nvidia-drivers-346 uvm
-
-# Tim Harder <radhermit@gentoo.org> (11 Oct 2014)
-# Unmask skype support for unstable keywords
-net-im/bitlbee -skype
 
 # Mike Frysinger <vapier@gentoo.org> (04 Aug 2014)
 # Unmask flashrom drivers that only work on x86 due to in/out asm insns #454024

@@ -1,8 +1,11 @@
-# QA-25: enable xa USE in media-libs/mesa, needed for certain video cards.
-media-libs/mesa xa
+# FL-7442: reasonable default for desktop systems
+app-crypt/pinentry gnome-keyring
 
-# QA-25: enable both gtk2 and gtk3 flags, as riequired by nvidia-drivers
-x11-drivers/nvidia-drivers gtk2 gtk3
+# enable widgets and gui support in PyQt5:
+dev-python/PyQt5 widgets gui
 
-# FL-1700: enable amdcccle:
-x11-drivers/ati-drivers qt4
+# gnome-base/librsvg requires this:
+media-libs/gd fontconfig
+
+# Relatively sane defaults for app-editors/emacs
+app-editors/emacs gtk harfbuzz sound toolkit-scroll-bars xft

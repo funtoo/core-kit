@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install prepare setup test
+DEPEND=python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_8? ( dev-lang/python:3.8 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] dev-libs/protobuf-c dev-libs/libnl:3 net-libs/libnet:1.1 sys-libs/libcap selinux? ( sys-libs/libselinux ) setproctitle? ( dev-libs/libbsd ) doc? ( app-text/asciidoc app-text/xmlto )
+DESCRIPTION=utility to checkpoint/restore a process tree
+EAPI=7
+HOMEPAGE=https://criu.org/
+IUSE=doc selinux setproctitle static-libs kernel_linux python_targets_python3_7 python_targets_python3_9 python_targets_python3_8
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_8? ( dev-lang/python:3.8 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] dev-libs/protobuf-c dev-libs/libnl:3 net-libs/libnet:1.1 sys-libs/libcap selinux? ( sys-libs/libselinux ) setproctitle? ( dev-libs/libbsd ) dev-python/protobuf-python[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)]
+REQUIRED_USE=|| ( python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 )
+RESTRICT=test
+SLOT=0
+SRC_URI=https://download.openvz.org/criu/criu-3.15.tar.bz2
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=d29acd1304d249c11c67ae14324e1ece

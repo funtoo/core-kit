@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install prepare
+DEPEND=app-arch/xz-utils lz4? ( app-arch/lz4 )
+DESCRIPTION=zstd fast compression library
+EAPI=7
+HOMEPAGE=https://facebook.github.io/zstd/
+IUSE=lz4 static-libs +threads
+KEYWORDS=*
+LICENSE=|| ( BSD GPL-2 )
+RDEPEND=app-arch/xz-utils lz4? ( app-arch/lz4 )
+SLOT=0/1
+SRC_URI=https://github.com/facebook/zstd/releases/download/v1.5.0/zstd-1.5.0.tar.gz -> zstd-1.5.0.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=88b7db0c8e01c000c7e1de3307f03751

@@ -1,0 +1,10 @@
+DEFINED_PHASES=compile prepare test
+DESCRIPTION=Sorts files on FAT16/32 partitions, ideal for basic audio players
+EAPI=7
+HOMEPAGE=http://fatsort.sourceforge.net/
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+SLOT=0
+SRC_URI=mirror://sourceforge/fatsort/fatsort-1.5.0.456.tar.xz
+_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=a67448bfdcbdcdd765c5c3450c83bc38

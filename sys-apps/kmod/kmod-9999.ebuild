@@ -1,15 +1,15 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
+PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
 
-inherit bash-completion-r1 eutils multilib python-r1
+inherit bash-completion-r1 multilib python-r1
 
 if [[ ${PV} == 9999* ]]; then
-	EGIT_REPO_URI="git://git.kernel.org/pub/scm/utils/kernel/${PN}/${PN}.git"
-	inherit autotools git-2
+	EGIT_REPO_URI="https://git.kernel.org/pub/scm/utils/kernel/${PN}/${PN}.git"
+	inherit autotools git-r3
 else
 	SRC_URI="mirror://kernel/linux/utils/kernel/kmod/${P}.tar.xz"
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
@@ -21,7 +21,7 @@ HOMEPAGE="https://git.kernel.org/?p=utils/kernel/kmod/kmod.git"
 
 LICENSE="LGPL-2"
 SLOT="0"
-IUSE="debug doc lzma python static-libs +tools zlib"
+IUSE="debug doc lzma python ssl static-libs +tools zlib"
 
 # Upstream does not support running the test suite with custom configure flags.
 # I was also told that the test suite is intended for kmod developers.
@@ -36,6 +36,7 @@ RDEPEND="!sys-apps/module-init-tools
 	!<sys-apps/systemd-216-r3
 	lzma? ( >=app-arch/xz-utils-5.0.4-r1 )
 	python? ( ${PYTHON_DEPS} )
+	ssl? ( >=dev-libs/openssl-1.1.0:0= )
 	zlib? ( >=sys-libs/zlib-1.2.6 )" #427130
 DEPEND="${RDEPEND}
 	doc? ( dev-util/gtk-doc )
@@ -55,7 +56,9 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 DOCS="NEWS README TODO"
 
 src_prepare() {
-	if [ ! -e configure ]; then
+	default
+
+	if [[ ! -e configure ]] ; then
 		if use doc; then
 			gtkdocize --copy --docdir libkmod/docs || die
 		else
@@ -75,15 +78,16 @@ src_prepare() {
 src_configure() {
 	local myeconfargs=(
 		--bindir="${EPREFIX}/bin"
-		--with-rootlibdir="${EPREFIX}/$(get_libdir)"
 		--enable-shared
-		$(use_enable static-libs static)
-		$(use_enable tools)
+		--with-bashcompletiondir="$(get_bashcompdir)"
+		--with-rootlibdir="${EPREFIX}/$(get_libdir)"
 		$(use_enable debug)
 		$(use_enable doc gtk-doc)
+		$(use_enable static-libs static)
+		$(use_enable tools)
 		$(use_with lzma xz)
+		$(use_with ssl openssl)
 		$(use_with zlib)
-		--with-bashcompletiondir="$(get_bashcompdir)"
 	)
 
 	local ECONF_SOURCE="${S}"
@@ -136,7 +140,7 @@ src_install() {
 		python_foreach_impl python_install
 	fi
 
-	prune_libtool_files --modules
+	find "${ED}" -name "*.la" -delete || die
 
 	if use tools; then
 		local bincmd sbincmd

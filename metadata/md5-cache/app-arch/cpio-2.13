@@ -1,0 +1,10 @@
+DEFINED_PHASES=configure
+DESCRIPTION=A file archival tool which can also read and write tar files
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/cpio/cpio.html
+IUSE=nls
+KEYWORDS=*
+LICENSE=GPL-3
+SLOT=0
+SRC_URI=mirror://gnu/cpio/cpio-2.13.tar.bz2
+_md5_=9314286da87be3f4746ae24bed5e86a3

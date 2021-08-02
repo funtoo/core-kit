@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: ruby-single.eclass
@@ -7,6 +7,7 @@
 # @AUTHOR:
 # Author: Hans de Graaff <graaff@gentoo.org>
 # Based on python-single-r1 by: Michał Górny <mgorny@gentoo.org>
+# @SUPPORTED_EAPIS: 4 5 6 7
 # @BLURB: An eclass for Ruby packages not installed for multiple implementations.
 # @DESCRIPTION:
 # An eclass for packages which don't support being installed for
@@ -25,7 +26,7 @@ case "${EAPI:-0}" in
 	0|1|2|3)
 		die "Unsupported EAPI=${EAPI:-0} (too old) for ${ECLASS}"
 		;;
-	4|5|6)
+	4|5|6|7)
 		;;
 	*)
 		die "Unsupported EAPI=${EAPI} (unknown) for ${ECLASS}"
@@ -46,6 +47,7 @@ inherit ruby-utils
 
 
 # @ECLASS-VARIABLE: RUBY_DEPS
+# @DEFAULT_UNSET
 # @DESCRIPTION:
 #
 # This is an eclass-generated Ruby dependency string for all
@@ -71,11 +73,21 @@ inherit ruby-utils
 
 _ruby_single_implementations_depend() {
 	local depend
-	for _ruby_implementation in ${RUBY_TARGETS_PREFERENCE}; do
-		if [[ ${USE_RUBY} =~ ${_ruby_implementation} ]]; then
-			depend="${depend} $(_ruby_implementation_depend $_ruby_implementation)"
-		fi
+	local found_one=0
+	# If ebuild doesn't enable one of our rubies explicitly in USE_RUBY, we will fall back to BACKUP_RUBY:
+	local BACKUP_RUBY=ruby26
+	for _ruby_implementation in ruby27 ruby26; do
+		# ^^ outer loop because it defines the ordering with 'preferred' version coming first.
+		for ruse in ${USE_RUBY}; do
+			if [[ "${ruse}" == "${_ruby_implementation}" ]]; then
+				found_one=1
+				depend="${depend} $(_ruby_implementation_depend $_ruby_implementation)"
+			fi
+		done
 	done
+	if [ "$found_one" == "0" ]; then
+		depend="${depend} $(_ruby_implementation_depend $BACKUP_RUBY)"
+	fi
 	echo "|| ( ${depend} ) virtual/rubygems"
 }
 

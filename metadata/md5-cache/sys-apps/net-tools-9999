@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install setup unpack
+DEPEND=selinux? ( sys-libs/libselinux ) selinux? ( virtual/pkgconfig ) app-arch/xz-utils nls? ( sys-devel/gettext ) >=dev-vcs/git-1.8.2.1[curl]
+DESCRIPTION=Standard Linux networking tools
+EAPI=6
+HOMEPAGE=http://net-tools.sourceforge.net/
+IUSE=+arp +hostname ipv6 nis nls plipconfig selinux slattach static
+LICENSE=GPL-2
+PROPERTIES=live
+RDEPEND=selinux? ( sys-libs/libselinux ) hostname? ( !sys-apps/coreutils[hostname] ) !<sys-apps/openrc-0.9.9.3
+REQUIRED_USE=nis? ( hostname )
+SLOT=0
+_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	git-r3	7dcb8a92f5a091f13e82494fa317ca4b	ltprune	22f9f14d105434e9c400ccac3bbb64ae	multilib	d410501a125f99ffb560b0c523cd3d1e	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
+_md5_=1cbac0b1c00c166ed0f6dc9d19702188

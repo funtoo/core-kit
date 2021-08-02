@@ -1,11 +1,12 @@
 DEFINED_PHASES=configure install prepare test unpack
-DEPEND=sys-devel/gnuconfig >=sys-devel/autoconf-2.69 >=sys-devel/automake-1.13 dev-libs/libltdl:0 app-arch/xz-utils sys-apps/help2man >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=dev-vcs/git-1.8.2.1
+DEPEND=sys-devel/gnuconfig >=sys-devel/autoconf-2.69 >=sys-devel/automake-1.13 dev-libs/libltdl:0 !<sys-apps/sandbox-2.10-r4 app-arch/xz-utils sys-apps/help2man >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=app-portage/elt-patches-20170317 >=dev-vcs/git-1.8.2.1[curl]
 DESCRIPTION=A shared library tool for developers
-EAPI=5
+EAPI=6
 HOMEPAGE=https://www.gnu.org/software/libtool/
 IUSE=vanilla
 LICENSE=GPL-2
-RDEPEND=sys-devel/gnuconfig >=sys-devel/autoconf-2.69 >=sys-devel/automake-1.13 dev-libs/libltdl:0
+PROPERTIES=live
+RDEPEND=sys-devel/gnuconfig >=sys-devel/autoconf-2.69 >=sys-devel/automake-1.13 dev-libs/libltdl:0 !<sys-apps/sandbox-2.10-r4
 SLOT=2
-_eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	git-r3	52a888802d25387c2c74cb845d1219bc	libtool	e32ea84bf82cf8987965b574672dba93	multilib	97f470f374f2e94ccab04a2fb21d811e	prefix	7b6fb2fc216b101b5d97d171925a847c	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	unpacker	f40f7b4bd5aa88c2a4ba7b0d1e0ded70
-_md5_=a8b63fb9979c77aed3d0e0cf6a96e187
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	epunt-cxx	e99babeaa7d98c1caaa6a61a79902210	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	git-r3	7dcb8a92f5a091f13e82494fa317ca4b	libtool	f143db5a74ccd9ca28c1234deffede96	ltprune	22f9f14d105434e9c400ccac3bbb64ae	multilib	d410501a125f99ffb560b0c523cd3d1e	prefix	e51c7882b7b721e54e684f7eb143cbfe	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	unpacker	3cd8bad0d31e525cd26be1bfa4e61631	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
+_md5_=ab42b440535e7d58d643388d89d91d81

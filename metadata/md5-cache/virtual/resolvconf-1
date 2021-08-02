@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual to select between different resolvconf providers
+EAPI=7
+KEYWORDS=*
+RDEPEND=net-dns/openresolv
+SLOT=0
+_md5_=3a3e98dac57a29cac6c92a49d69d4425

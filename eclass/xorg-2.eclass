@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # @ECLASS: xorg-2.eclass
 # @MAINTAINER:
@@ -8,6 +7,7 @@
 # @AUTHOR:
 # Author: Tomáš Chvátal <scarabeus@gentoo.org>
 # Author: Donnie Berkholz <dberkholz@gentoo.org>
+# @SUPPORTED_EAPIS: 4 5
 # @BLURB: Reduces code duplication in the modularized X11 ebuilds.
 # @DESCRIPTION:
 # This eclass makes trivial X ebuilds possible for apps, fonts, drivers,
@@ -20,20 +20,24 @@
 # with the other X packages, you don't need to set SRC_URI. Pretty much
 # everything else should be automatic.
 
-if [[ ${PV} == *9999* ]] || [[ -n "${EGIT_COMMIT}${EGIT_BRANCH}" ]]; then
+GIT_ECLASS=""
+if [[ ${PV} == *9999* ]]; then
 	GIT_ECLASS="git-r3"
 	XORG_EAUTORECONF="yes"
 fi
 
 # If we're a font package, but not the font.alias one
 FONT_ECLASS=""
-if [[ ${PN} == font* \
-	&& ${CATEGORY} = media-fonts \
-	&& ${PN} != font-alias \
-	&& ${PN} != font-util ]]; then
-	# Activate font code in the rest of the eclass
-	FONT="yes"
-	FONT_ECLASS="font"
+if [[ ${CATEGORY} = media-fonts ]]; then
+	case ${PN} in
+	font-alias|font-util)
+		;;
+	font*)
+		# Activate font code in the rest of the eclass
+		FONT="yes"
+		FONT_ECLASS="font"
+		;;
+	esac
 fi
 
 # @ECLASS-VARIABLE: XORG_MULTILIB
@@ -52,7 +56,7 @@ fi
 
 EXPORTED_FUNCTIONS="src_unpack src_compile src_install pkg_postinst pkg_postrm"
 case "${EAPI:-0}" in
-	3|4|5) EXPORTED_FUNCTIONS="${EXPORTED_FUNCTIONS} src_prepare src_configure" ;;
+	4|5) EXPORTED_FUNCTIONS="${EXPORTED_FUNCTIONS} src_prepare src_configure" ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
@@ -60,7 +64,6 @@ esac
 EXPORT_FUNCTIONS ${EXPORTED_FUNCTIONS}
 
 IUSE=""
-HOMEPAGE="https://www.x.org/wiki/"
 
 # @ECLASS-VARIABLE: XORG_EAUTORECONF
 # @DESCRIPTION:
@@ -79,7 +82,8 @@ HOMEPAGE="https://www.x.org/wiki/"
 # The subdirectory to download source from. Possible settings are app,
 # doc, data, util, driver, font, lib, proto, xserver. Set above the
 # inherit to override the default autoconfigured module.
-if [[ -z ${XORG_MODULE} ]]; then
+: ${XORG_MODULE:="auto"}
+if [[ ${XORG_MODULE} == auto ]]; then
 	case ${CATEGORY} in
 		app-doc)             XORG_MODULE=doc/     ;;
 		media-fonts)         XORG_MODULE=font/    ;;
@@ -87,7 +91,6 @@ if [[ -z ${XORG_MODULE} ]]; then
 		x11-misc|x11-themes) XORG_MODULE=util/    ;;
 		x11-base)            XORG_MODULE=xserver/ ;;
 		x11-drivers)         XORG_MODULE=driver/  ;;
-		x11-proto)           XORG_MODULE=proto/   ;;
 		x11-libs)            XORG_MODULE=lib/     ;;
 		*)                   XORG_MODULE=         ;;
 	esac
@@ -99,8 +102,10 @@ fi
 # This variable can be used for proper directory specification
 : ${XORG_PACKAGE_NAME:=${PN}}
 
+HOMEPAGE="https://www.x.org/wiki/ https://gitlab.freedesktop.org/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME}"
+
 if [[ -n ${GIT_ECLASS} ]]; then
-	: ${EGIT_REPO_URI:="git://anongit.freedesktop.org/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME} http://anongit.freedesktop.org/git/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME}"}
+	: ${EGIT_REPO_URI:="https://gitlab.freedesktop.org/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME}.git"}
 elif [[ -n ${XORG_BASE_INDIVIDUAL_URI} ]]; then
 	SRC_URI="${XORG_BASE_INDIVIDUAL_URI}/${XORG_MODULE}${P}.tar.bz2"
 fi
@@ -135,10 +140,10 @@ unset EAUTORECONF_DEPEND
 
 if [[ ${FONT} == yes ]]; then
 	RDEPEND+=" media-fonts/encodings
-		x11-apps/mkfontscale
-		x11-apps/mkfontdir"
+		>=x11-apps/mkfontscale-1.2.0"
 	PDEPEND+=" media-fonts/font-alias"
-	DEPEND+=" >=media-fonts/font-util-1.2.0"
+	DEPEND+=" >=media-fonts/font-util-1.2.0
+		>=x11-apps/mkfontscale-1.2.0"
 
 	# @ECLASS-VARIABLE: FONT_DIR
 	# @DESCRIPTION:
@@ -157,7 +162,7 @@ if [[ ${FONT} == yes ]]; then
 	# Set up configure options, wrapped so ebuilds can override if need be
 	[[ -z ${FONT_OPTIONS} ]] && FONT_OPTIONS="--with-fontdir=\"${EPREFIX}/usr/share/fonts/${FONT_DIR}\""
 
-	[[ ${PN##*-} = misc || ${PN##*-} = 75dpi || ${PN##*-} = 100dpi || ${PN##*-} = cyrillic ]] && IUSE+=" nls"
+	[[ ${PN} = font-misc-misc || ${PN} = font-schumacher-misc || ${PN##*-} = 75dpi || ${PN##*-} = 100dpi || ${PN##*-} = cyrillic ]] && IUSE+=" nls"
 fi
 
 # If we're a driver package, then enable DRIVER case
@@ -170,12 +175,11 @@ fi
 # QA: configure: WARNING: unrecognized options: --disable-static
 : ${XORG_STATIC:="yes"}
 
-# Add static-libs useflag where usefull.
+# Add static-libs useflag where useful.
 if [[ ${XORG_STATIC} == yes \
 		&& ${FONT} != yes \
 		&& ${CATEGORY} != app-doc \
 		&& ${CATEGORY} != x11-apps \
-		&& ${CATEGORY} != x11-proto \
 		&& ${CATEGORY} != x11-drivers \
 		&& ${CATEGORY} != media-fonts \
 		&& ${PN} != util-macros \
@@ -185,7 +189,11 @@ if [[ ${XORG_STATIC} == yes \
 	IUSE+=" static-libs"
 fi
 
-DEPEND+=" virtual/pkgconfig"
+if [[ ${XORG_MULTILIB} == yes ]]; then
+	DEPEND+=" virtual/pkgconfig[${MULTILIB_USEDEP}]"
+else
+	DEPEND+=" virtual/pkgconfig"
+fi
 
 # @ECLASS-VARIABLE: XORG_DRI
 # @DESCRIPTION:
@@ -199,26 +207,18 @@ DRI_COMMON_DEPEND="
 	x11-base/xorg-server[-minimal]
 	x11-libs/libdrm
 "
-DRI_DEPEND="
-	x11-proto/xf86driproto
-	x11-proto/glproto
-	x11-proto/dri2proto
-"
 case ${XORG_DRI} in
 	no)
 		;;
 	always)
 		COMMON_DEPEND+=" ${DRI_COMMON_DEPEND}"
-		DEPEND+=" ${DRI_DEPEND}"
 		;;
 	*)
 		COMMON_DEPEND+=" ${XORG_DRI}? ( ${DRI_COMMON_DEPEND} )"
-		DEPEND+=" ${XORG_DRI}? ( ${DRI_DEPEND} )"
 		IUSE+=" ${XORG_DRI}"
 		;;
 esac
-unset DRI_DEPEND
-unset DRI_COMMONDEPEND
+unset DRI_COMMON_DEPEND
 
 if [[ -n "${DRIVER}" ]]; then
 	COMMON_DEPEND+="
@@ -226,26 +226,13 @@ if [[ -n "${DRIVER}" ]]; then
 	"
 fi
 if [[ -n "${DRIVER}" && ${PN} == xf86-input-* ]]; then
-	DEPEND+="
-		x11-proto/inputproto
-		x11-proto/kbproto
-		x11-proto/xproto
-	"
+	DEPEND+=" x11-base/xorg-proto"
 fi
 if [[ -n "${DRIVER}" && ${PN} == xf86-video-* ]]; then
 	COMMON_DEPEND+="
 		x11-libs/libpciaccess
 	"
-	# we also needs some protos and libs in all cases
-	DEPEND+="
-		x11-proto/fontsproto
-		x11-proto/randrproto
-		x11-proto/renderproto
-		x11-proto/videoproto
-		x11-proto/xextproto
-		x11-proto/xineramaproto
-		x11-proto/xproto
-	"
+	DEPEND+=" x11-base/xorg-proto"
 fi
 
 # @ECLASS-VARIABLE: XORG_DOC
@@ -258,7 +245,7 @@ fi
 
 DOC_DEPEND="
 	doc? (
-		app-text/asciidoc
+		|| ( app-text/asciidoc dev-ruby/asciidoctor )
 		app-text/xmlto
 		app-doc/doxygen
 		app-text/docbook-xml-dtd:4.1.2
@@ -279,21 +266,9 @@ case ${XORG_DOC} in
 esac
 unset DOC_DEPEND
 
-# @ECLASS-VARIABLE: XORG_MODULE_REBUILD
-# @DESCRIPTION:
-# Describes whether a package contains modules that need to be rebuilt on
-# xorg-server upgrade. This has an effect only since EAPI=5.
-# Possible values are "yes" or "no". Default value is "yes" for packages which
-# are recognized as DRIVER by this eclass and "no" for all other packages.
-if [[ "${DRIVER}" == yes ]]; then
-	: ${XORG_MODULE_REBUILD:="yes"}
-else
-	: ${XORG_MODULE_REBUILD:="no"}
-fi
-
-if [[ ${XORG_MODULE_REBUILD} == yes ]]; then
+if [[ ${DRIVER} == yes ]]; then
 	case ${EAPI} in
-		3|4)
+		4)
 			;;
 		*)
 			RDEPEND+=" x11-base/xorg-server:="
@@ -304,10 +279,6 @@ fi
 DEPEND+=" ${COMMON_DEPEND}"
 RDEPEND+=" ${COMMON_DEPEND}"
 unset COMMON_DEPEND
-
-if [[ ${XORG_MULTILIB} == yes ]]; then
-	RDEPEND+=" abi_x86_32? ( !app-emulation/emul-linux-x86-xlibs[-abi_x86_32(-)] )"
-fi
 
 debug-print "${LINENO} ${ECLASS} ${FUNCNAME}: DEPEND=${DEPEND}"
 debug-print "${LINENO} ${ECLASS} ${FUNCNAME}: RDEPEND=${RDEPEND}"
@@ -391,7 +362,8 @@ xorg-2_font_configure() {
 	if has nls ${IUSE//+} && ! use nls; then
 		if grep -q -s "disable-all-encodings" ${ECONF_SOURCE:-.}/configure; then
 			FONT_OPTIONS+="
-				--disable-all-encodings"
+				--disable-all-encodings
+				--enable-iso8859-1"
 		else
 			FONT_OPTIONS+="
 				--disable-iso8859-2
@@ -508,12 +480,6 @@ xorg-2_src_install() {
 
 	local install_args=( docdir="${EPREFIX}/usr/share/doc/${PF}" )
 
-	if [[ ${CATEGORY} == x11-proto ]]; then
-		install_args+=(
-			${PN/proto/}docdir="${EPREFIX}/usr/share/doc/${PF}"
-		)
-	fi
-
 	if [[ ${XORG_MULTILIB} == yes ]]; then
 		autotools-multilib_src_install "${install_args[@]}"
 	else
@@ -531,7 +497,7 @@ xorg-2_src_install() {
 	fi
 
 	# Don't install libtool archives (even for modules)
-	prune_libtool_files --all
+	find "${D}" -type f -name '*.la' -delete || die
 
 	[[ -n ${FONT} ]] && remove_font_metadata
 }
@@ -547,6 +513,8 @@ xorg-2_pkg_postinst() {
 		create_fonts_scale
 		create_fonts_dir
 		font_pkg_postinst "$@"
+
+		ewarn "Installed fonts changed. Run 'xset fp rehash' if you are using non-fontconfig applications."
 	fi
 }
 
@@ -559,7 +527,7 @@ xorg-2_pkg_postrm() {
 
 	if [[ -n ${FONT} ]]; then
 		# if we're doing an upgrade, postinst will do
-		if [[ ${EAPI} -lt 4 || -z ${REPLACED_BY_VERSION} ]]; then
+		if [[ -z ${REPLACED_BY_VERSION} ]]; then
 			create_fonts_scale
 			create_fonts_dir
 			font_pkg_postrm "$@"

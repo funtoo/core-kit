@@ -15,6 +15,8 @@
 *dev-libs/mpc
 *dev-vcs/git
 *net-dns/openresolv
+*net-libs/libnsl
+*net-libs/rpcsvc-proto
 *net-misc/bridge-utils
 *net-misc/dhcpcd
 *net-misc/ifenslave
@@ -57,7 +59,9 @@
 *sys-devel/patch
 *sys-fs/e2fsprogs
 *sys-fs/xfsprogs
+*sys-fs/dosfstools
 *sys-libs/ncurses
+*sys-libs/pam
 *sys-libs/readline
 *sys-libs/zlib
 *sys-process/procps

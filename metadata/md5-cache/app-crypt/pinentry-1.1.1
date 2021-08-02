@@ -1,0 +1,14 @@
+BDEPEND=sys-devel/gettext virtual/pkgconfig >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install postinst postrm prepare
+DEPEND=>=app-eselect/eselect-pinentry-0.7.2 >=dev-libs/libassuan-2.1 >=dev-libs/libgcrypt-1.6.3 >=dev-libs/libgpg-error-1.17 caps? ( sys-libs/libcap ) efl? ( dev-libs/efl[X] ) gnome-keyring? ( app-crypt/libsecret ) ncurses? ( sys-libs/ncurses:0= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 )
+DESCRIPTION=Simple passphrase entry dialogs which utilize the Assuan protocol
+EAPI=7
+HOMEPAGE=https://gnupg.org/aegypten2
+IUSE=caps efl emacs gnome-keyring gtk ncurses qt5
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=>=app-eselect/eselect-pinentry-0.7.2 >=dev-libs/libassuan-2.1 >=dev-libs/libgcrypt-1.6.3 >=dev-libs/libgpg-error-1.17 caps? ( sys-libs/libcap ) efl? ( dev-libs/efl[X] ) gnome-keyring? ( app-crypt/libsecret ) ncurses? ( sys-libs/ncurses:0= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 ) gtk? ( app-crypt/gcr )
+SLOT=0
+SRC_URI=mirror://gnupg/pinentry/pinentry-1.1.1.tar.bz2
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	qmake-utils	bdf97e69a34b864d6d545f4ec3143ff7	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=adb90035d736f33ac39eb707cd1938fe

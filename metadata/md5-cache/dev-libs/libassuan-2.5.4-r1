@@ -1,0 +1,13 @@
+BDEPEND=>=app-portage/elt-patches-20170815
+DEFINED_PHASES=configure install prepare
+DEPEND=>=dev-libs/libgpg-error-1.8
+DESCRIPTION=IPC library used by GnuPG and GPGME
+EAPI=7
+HOMEPAGE=http://www.gnupg.org/related_software/libassuan/index.en.html
+KEYWORDS=*
+LICENSE=GPL-3 LGPL-2.1
+RDEPEND=>=dev-libs/libgpg-error-1.8
+SLOT=0
+SRC_URI=mirror://gnupg/libassuan/libassuan-2.5.4.tar.bz2
+_eclasses_=libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=b8cc996e9d0882a3b559132d9574d8a6

@@ -1,0 +1,32 @@
+--- vboxdrv/SUPDrvIDC.h
++++ vboxdrv/SUPDrvIDC.h
+@@ -160,7 +160,7 @@ typedef struct SUPDRVIDCREQGETSYM
+         {
+             /** The symbol address. */
+             PFNRT           pfnSymbol;
+-        } Out;
++        } __no_const Out;
+     } u;
+ } SUPDRVIDCREQGETSYM;
+ /** Pointer to a SUPDRV IDC get symbol request. */
+--- vboxnetflt/include/VBox/intnet.h
++++ vboxnetflt/include/VBox/intnet.h
+@@ -783,7 +783,7 @@ typedef struct INTNETTRUNKFACTORY
+     DECLR0CALLBACKMEMBER(int, pfnCreateAndConnect,(struct INTNETTRUNKFACTORY *pIfFactory, const char *pszName,
+                                                    PINTNETTRUNKSWPORT pSwitchPort, uint32_t fFlags,
+                                                    PINTNETTRUNKIFPORT *ppIfPort));
+-} INTNETTRUNKFACTORY;
++} __no_const INTNETTRUNKFACTORY;
+ /** Pointer to the trunk factory. */
+ typedef INTNETTRUNKFACTORY *PINTNETTRUNKFACTORY;
+ 
+--- vboxnetflt/linux/VBoxNetFlt-linux.c
++++ vboxnetflt/linux/VBoxNetFlt-linux.c
+@@ -840,7 +840,7 @@ typedef struct ethtool_ops OVR_OPSTYPE;
+ 
+ # else /* LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 29) */
+ 
+-typedef struct net_device_ops OVR_OPSTYPE;
++typedef net_device_ops_no_const OVR_OPSTYPE;
+ # define OVR_OPS  netdev_ops
+ # define OVR_XMIT pOrgOps->ndo_start_xmit

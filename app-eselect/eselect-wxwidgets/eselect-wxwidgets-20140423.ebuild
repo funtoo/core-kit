@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
@@ -9,17 +9,18 @@ WXWRAP_VER=1.4
 
 DESCRIPTION="Eselect module and wrappers for wxWidgets"
 HOMEPAGE="https://www.gentoo.org"
-SRC_URI="https://dev.gentoo.org/~junghans/dist/${P}.tar.xz"
+SRC_URI="https://dev.gentoo.org/~junghans/dist/${P}.tar.xz
+	https://dev.gentoo.org/~mgorny/dist/${PN}-files.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x86-solaris"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x86-solaris"
 IUSE=""
 
 RDEPEND="app-admin/eselect"
 
 src_prepare() {
-	cp "${FILESDIR}"/{wx-config,wxrc}-${WXWRAP_VER} . || die
+	cp "${WORKDIR}"/eselect-wxwidgets-files/{wx-config,wxrc}-${WXWRAP_VER} . || die
 	sed \
 		-e "/^LIBDIR=/s:lib:$(get_libdir):" \
 		-e "/^EPREFIX=/s:'':'${EPREFIX}':" \
@@ -31,7 +32,7 @@ src_install() {
 	doins wxwidgets.eselect
 
 	insinto /usr/share/aclocal
-	newins "${FILESDIR}"/wxwin.m4-3.0 wxwin.m4
+	newins "${WORKDIR}"/eselect-wxwidgets-files/wxwin.m4-3.0 wxwin.m4
 
 	newbin wx-config-${WXWRAP_VER} wx-config
 	newbin wxrc-${WXWRAP_VER} wxrc

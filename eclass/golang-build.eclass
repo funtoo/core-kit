@@ -1,18 +1,18 @@
-# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: golang-build.eclass
 # @MAINTAINER:
 # William Hubbs <williamh@gentoo.org>
+# @SUPPORTED_EAPIS: 5 6 7
 # @BLURB: Eclass for compiling go packages.
 # @DESCRIPTION:
 # This eclass provides default  src_compile, src_test and src_install
 # functions for software written in the Go programming language.
 
-inherit golang-base
+inherit golang-base xdg-utils
 
 case "${EAPI:-0}" in
-	5|6)
+	5|6|7)
 		;;
 	*)
 		die "${ECLASS}: Unsupported eapi (EAPI=${EAPI})"
@@ -49,11 +49,17 @@ _GOLANG_BUILD=1
 # EGO_PN=github.com/user/package
 # @CODE
 
+golang-build_src_prepare() {
+	# See Funtoo Linux bug FL-6885 for why this is needed:
+	xdg_environment_reset
+}
+
 golang-build_src_compile() {
 	debug-print-function ${FUNCNAME} "$@"
 
 	ego_pn_check
 	set -- env GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+		GOCACHE="${T}/go-cache" \
 		go build -v -work -x ${EGO_BUILD_FLAGS} "${EGO_PN}"
 	echo "$@"
 	"$@" || die

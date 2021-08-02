@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install prepare test
+DEPEND=wxwidgets? ( x11-libs/wxGTK:3.0[X] ) abi_x86_x32? ( >=dev-lang/yasm-1.2.0-r1 ) amd64? ( dev-lang/yasm ) x86? ( dev-lang/nasm )
+DESCRIPTION=Port of 7-Zip archiver for Unix
+EAPI=6
+HOMEPAGE=http://p7zip.sourceforge.net/
+IUSE=abi_x86_x32 doc kde +pch rar static wxwidgets
+KEYWORDS=alpha amd64 ~arm arm64 hppa ia64 ppc ppc64 ~s390 sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris
+LICENSE=LGPL-2.1 rar? ( unRAR )
+RDEPEND=wxwidgets? ( x11-libs/wxGTK:3.0[X] )
+REQUIRED_USE=kde? ( wxwidgets )
+SLOT=0
+SRC_URI=mirror://sourceforge/p7zip/p7zip_16.02_src_all.tar.bz2
+_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	ltprune	22f9f14d105434e9c400ccac3bbb64ae	multilib	d410501a125f99ffb560b0c523cd3d1e	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf	wxwidgets	e1e6e1eb5b3d911b3abd712f611e2312
+_md5_=1360d34f9deeba2a93bb5204146455c0

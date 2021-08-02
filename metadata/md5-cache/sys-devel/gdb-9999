@@ -1,0 +1,14 @@
+BDEPEND=app-arch/xz-utils sys-apps/texinfo client? ( virtual/yacc test? ( dev-util/dejagnu ) nls? ( sys-devel/gettext ) ) >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure install postinst prepare setup unpack
+DEPEND=server? ( !dev-util/gdbserver ) client? ( dev-libs/mpfr:0= >=sys-libs/ncurses-5.2-r2:0= sys-libs/readline:0= lzma? ( app-arch/xz-utils ) python? ( python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7] ) ) xml? ( dev-libs/expat ) sys-libs/zlib ) source-highlight? ( dev-util/source-highlight )
+DESCRIPTION=GNU debugger
+EAPI=7
+HOMEPAGE=https://sourceware.org/gdb/
+IUSE=+client lzma multitarget nls +python +server source-highlight test vanilla xml python_single_target_python3_7 python_single_target_python2_7 python_targets_python3_7 python_targets_python2_7
+LICENSE=GPL-2 LGPL-2
+PROPERTIES=live
+RDEPEND=server? ( !dev-util/gdbserver ) client? ( dev-libs/mpfr:0= >=sys-libs/ncurses-5.2-r2:0= sys-libs/readline:0= lzma? ( app-arch/xz-utils ) python? ( python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7] ) ) xml? ( dev-libs/expat ) sys-libs/zlib ) source-highlight? ( dev-util/source-highlight )
+REQUIRED_USE=python? ( ^^ ( python_single_target_python3_7 python_single_target_python2_7 ) ) || ( client server )
+SLOT=0
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	git-r3	7dcb8a92f5a091f13e82494fa317ca4b	multilib	d410501a125f99ffb560b0c523cd3d1e	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=26101365c947ea8fab8c18aa2ad925bc

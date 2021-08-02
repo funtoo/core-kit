@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-# @ECLASS: golang-build.eclass
+# @ECLASS: golang-base.eclass
 # @MAINTAINER:
 # William Hubbs <williamh@gentoo.org>
+# @SUPPORTED_EAPIS: 5 6 7
 # @BLURB: Eclass that provides base functions for Go packages.
 # @DESCRIPTION:
 # This eclass provides base functions for software written in the Go
@@ -11,7 +11,7 @@
 # dev-lang/go.
 
 case "${EAPI:-0}" in
-	5|6)
+	5|6|7)
 		;;
 	*)
 		die "${ECLASS}: Unsupported eapi (EAPI=${EAPI})"
@@ -22,12 +22,21 @@ if [[ -z ${_GOLANG_BASE} ]]; then
 
 _GOLANG_BASE=1
 
-DEPEND=">=dev-lang/go-1.8"
+GO_DEPEND=">=dev-lang/go-1.10"
+if [[ ${EAPI:-0} == [56] ]]; then
+	DEPEND="${GO_DEPEND}"
+else
+	BDEPEND="${GO_DEPEND}"
+fi
 
 # Do not complain about CFLAGS etc since go projects do not use them.
 QA_FLAGS_IGNORED='.*'
 
-STRIP_MASK="*.a"
+# Upstream does not support stripping go packages
+RESTRICT="strip"
+
+# force GO111MODULE to be auto for bug https://bugs.gentoo.org/771129
+export GO111MODULE=auto
 
 # @ECLASS-VARIABLE: EGO_PN
 # @REQUIRED

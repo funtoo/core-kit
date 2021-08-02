@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: waf-utils.eclass
@@ -8,6 +8,7 @@
 # Original Author: Gilles Dartiguelongue <eva@gentoo.org>
 # Various improvements based on cmake-utils.eclass: Tomáš Chvátal <scarabeus@gentoo.org>
 # Proper prefix support: Jonathan Callen <jcallen@gentoo.org>
+# @SUPPORTED_EAPIS: 4 5 6 7
 # @BLURB: common ebuild functions for waf-based packages
 # @DESCRIPTION:
 # The waf-utils eclass contains functions that make creating ebuild for
@@ -18,7 +19,7 @@
 inherit multilib toolchain-funcs multiprocessing
 
 case ${EAPI:-0} in
-	4|5|6) EXPORT_FUNCTIONS src_configure src_compile src_install ;;
+	4|5|6|7) EXPORT_FUNCTIONS src_configure src_compile src_install ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
@@ -68,28 +69,39 @@ waf-utils_src_configure() {
 
 	[[ ${fail} ]] && die "Invalid use of waf-utils.eclass"
 
-	local libdir=()
-
 	# @ECLASS-VARIABLE: WAF_BINARY
 	# @DESCRIPTION:
 	# Eclass can use different waf executable. Usually it is located in "${S}/waf".
 	: ${WAF_BINARY:="${S}/waf"}
 
-	# @ECLASS-VARIABLE: NO_WAF_LIBDIR
-	# @DEFAULT_UNSET
-	# @DESCRIPTION:
-	# Variable specifying that you don't want to set the libdir for waf script.
-	# Some scripts does not allow setting it at all and die if they find it.
-	[[ -z ${NO_WAF_LIBDIR} ]] && libdir=(--libdir="${EPREFIX}/usr/$(get_libdir)")
+	local conf_args=()
+
+	local waf_help=$("${WAF_BINARY}" --help 2>/dev/null)
+	if [[ ${waf_help} == *--docdir* ]]; then
+		conf_args+=( --docdir="${EPREFIX}"/usr/share/doc/${PF} )
+	fi
+	if [[ ${waf_help} == *--htmldir* ]]; then
+		conf_args+=( --htmldir="${EPREFIX}"/usr/share/doc/${PF}/html )
+	fi
+	if [[ ${waf_help} == *--libdir* ]]; then
+		conf_args+=( --libdir="${EPREFIX}/usr/$(get_libdir)" )
+	fi
 
 	tc-export AR CC CPP CXX RANLIB
-	echo "CCFLAGS=\"${CFLAGS}\" LINKFLAGS=\"${CFLAGS} ${LDFLAGS}\" \"${WAF_BINARY}\" --prefix=${EPREFIX}/usr ${libdir[@]} $@ configure"
 
-	CCFLAGS="${CFLAGS}" LINKFLAGS="${CFLAGS} ${LDFLAGS}" "${WAF_BINARY}" \
-		"--prefix=${EPREFIX}/usr" \
-		"${libdir[@]}" \
-		"$@" \
-		configure || die "configure failed"
+	local CMD=(
+		CCFLAGS="${CFLAGS}"
+		LINKFLAGS="${CFLAGS} ${LDFLAGS}"
+		PKGCONFIG="$(tc-getPKG_CONFIG)"
+		"${WAF_BINARY}"
+		"--prefix=${EPREFIX}/usr"
+		"${conf_args[@]}"
+		"${@}"
+		configure
+	)
+
+	echo "${CMD[@]@Q}" >&2
+	env "${CMD[@]}" || die "configure failed"
 }
 
 # @FUNCTION: waf-utils_src_compile
@@ -98,11 +110,11 @@ waf-utils_src_configure() {
 waf-utils_src_compile() {
 	debug-print-function ${FUNCNAME} "$@"
 	local _mywafconfig
-	[[ "${WAF_VERBOSE}" ]] && _mywafconfig="--verbose"
+	[[ ${WAF_VERBOSE} == ON ]] && _mywafconfig="--verbose"
 
 	local jobs="--jobs=$(makeopts_jobs)"
-	echo "\"${WAF_BINARY}\" build ${_mywafconfig} ${jobs}"
-	"${WAF_BINARY}" ${_mywafconfig} ${jobs} || die "build failed"
+	echo "\"${WAF_BINARY}\" build ${_mywafconfig} ${jobs} ${*}"
+	"${WAF_BINARY}" ${_mywafconfig} ${jobs} "${@}" || die "build failed"
 }
 
 # @FUNCTION: waf-utils_src_install
@@ -111,8 +123,8 @@ waf-utils_src_compile() {
 waf-utils_src_install() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	echo "\"${WAF_BINARY}\" --destdir=\"${D}\" install"
-	"${WAF_BINARY}" --destdir="${D}" install  || die "Make install failed"
+	echo "\"${WAF_BINARY}\" --destdir=\"${D}\" ${*} install"
+	"${WAF_BINARY}" --destdir="${D}" "${@}" install  || die "Make install failed"
 
 	# Manual document installation
 	einstalldocs

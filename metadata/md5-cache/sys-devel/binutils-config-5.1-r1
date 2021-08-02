@@ -1,0 +1,10 @@
+DEFINED_PHASES=install preinst
+DESCRIPTION=Utility to change the binutils version being used
+EAPI=6
+HOMEPAGE=https://www.gentoo.org/
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=sys-apps/gentoo-functions !<app-admin/eselect-1.4.5
+SLOT=0
+_eclasses_=prefix	e51c7882b7b721e54e684f7eb143cbfe
+_md5_=fb55880a6a3d8f21b64f3218198095bd

@@ -1,0 +1,15 @@
+BDEPEND=doc? ( dev-python/requests dev-python/sphinx ) sys-devel/make test? ( !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost )
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
+DEPEND=>=app-arch/libarchive-3.3.3:= app-crypt/rhash >=dev-libs/expat-2.0.1 >=dev-libs/jsoncpp-1.9.2-r2:0= >=dev-libs/libuv-1.10.0:= >=net-misc/curl-7.21.5[ssl] sys-libs/zlib virtual/pkgconfig emacs? ( app-editors/emacs ) ncurses? ( sys-libs/ncurses:0= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 ) dev-util/desktop-file-utils x11-misc/shared-mime-info
+DESCRIPTION=Cross platform Make
+EAPI=7
+HOMEPAGE=https://cmake.org/
+IUSE=doc emacs ncurses qt5 test test
+KEYWORDS=*
+LICENSE=CMake
+RDEPEND=>=app-arch/libarchive-3.3.3:= app-crypt/rhash >=dev-libs/expat-2.0.1 >=dev-libs/jsoncpp-1.9.2-r2:0= >=dev-libs/libuv-1.10.0:= >=net-misc/curl-7.21.5[ssl] sys-libs/zlib virtual/pkgconfig emacs? ( app-editors/emacs ) ncurses? ( sys-libs/ncurses:0= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://api.github.com/repos/Kitware/CMake/tarball/v3.19.7 -> cmake-3.19.7.tar.gz
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	cmake-utils	77cd39e6009811bf97a59d91ffd5b54f	elisp-common	23f47b2e1de7abf387105eddd1318738	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	virtualx	401b718cc14d43a5a7fbe062c4851ba5	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=5ce6a37683fee35cf89d0cdc5530df15

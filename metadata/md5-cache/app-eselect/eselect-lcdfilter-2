@@ -1,6 +1,6 @@
-DEFINED_PHASES=install postinst unpack
+DEFINED_PHASES=install unpack
 DESCRIPTION=Eselect module to choose Freetype infinality-enhanced LCD filtering settings
-EAPI=5
+EAPI=6
 HOMEPAGE=https://github.com/yngwin/eselect-lcdfilter
 KEYWORDS=~amd64 ~x86
 LICENSE=GPL-2
@@ -8,5 +8,5 @@ PDEPEND=media-libs/freetype[infinality]
 RDEPEND=app-admin/eselect
 SLOT=0
 SRC_URI=https://github.com/yngwin/eselect-lcdfilter/tarball/v2 -> eselect-lcdfilter-2.tar.gz
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	readme.gentoo	589f4c6d735919e293942dd66311dc40	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	vcs-snapshot	03289f51c769cf409d200d2d628cdd6e
-_md5_=1faa612595e4aa348dadb1cb1ef0464b
+_eclasses_=readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190	vcs-snapshot	b1abf460a493fc59ebb25de0df3f09dd
+_md5_=d542143bc173cdcc5fdc7de55a88a02d

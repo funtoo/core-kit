@@ -3,7 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 depend() {
-	before cron portmap
+	before cron portmap ntpd
 	after net
 	use dns logger
 }

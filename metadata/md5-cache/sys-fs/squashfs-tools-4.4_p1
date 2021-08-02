@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install
+DEPEND=sys-libs/zlib lz4? ( app-arch/lz4 ) lzma? ( app-arch/xz-utils ) lzo? ( dev-libs/lzo ) xattr? ( sys-apps/attr ) zstd? ( app-arch/zstd )
+DESCRIPTION=tools to create and extract Squashfs filesystems
+EAPI=7
+HOMEPAGE=https://github.com/plougher/squashfs-tools/
+IUSE=debug lz4 +lzma lzo xattr zstd
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=sys-libs/zlib lz4? ( app-arch/lz4 ) lzma? ( app-arch/xz-utils ) lzo? ( dev-libs/lzo ) xattr? ( sys-apps/attr ) zstd? ( app-arch/zstd )
+SLOT=0
+SRC_URI=https://github.com/plougher/squashfs-tools/archive/4.4-git.1.tar.gz -> squashfs-tools-4.4-git.1.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=a9eaf89967a024491f177b48d1f76314

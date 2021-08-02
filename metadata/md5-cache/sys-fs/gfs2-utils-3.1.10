@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install prepare setup
+DEPEND=sys-cluster/corosync sys-cluster/openais sys-cluster/liblogthread sys-cluster/libccs sys-cluster/libfence sys-cluster/libdlm sys-libs/ncurses virtual/pkgconfig >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=GFS2 Utilities
+EAPI=6
+HOMEPAGE=https://pagure.io/gfs2-utils
+IUSE=debug kernel_linux
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=sys-cluster/corosync sys-cluster/openais sys-cluster/liblogthread sys-cluster/libccs sys-cluster/libfence sys-cluster/libdlm sys-libs/ncurses
+SLOT=0
+SRC_URI=https://releases.pagure.org/gfs2-utils/gfs2-utils-3.1.10.tar.bz2
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=e1e1b5ad100ec37d103c9cb534d9e80c

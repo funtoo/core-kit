@@ -1,7 +1,0 @@
-dev-util/boost-build python_single_target_python2_7
-dev-util/itstool python_single_target_python2_7
-dev-vcs/git python_single_target_python2_7
-net-wireless/bluez python_single_target_python2_7
-sys-apps/usbutils python_single_target_python2_7
-sys-devel/llvm python_single_target_python2_7
-sys-fs/cryptsetup python_single_target_python2_7

@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install test unpack
+DEPEND=dev-go/go-sqlite3 dev-lang/go dev-libs/go-fuse >=dev-lang/go-1.10
+DESCRIPTION=Files tagger and virtual tag-based filesystem
+EAPI=6
+HOMEPAGE=https://github.com/oniony/TMSU/wiki
+IUSE=test zsh-completion
+KEYWORDS=~amd64
+LICENSE=GPL-3+
+RDEPEND=zsh-completion? ( app-shells/zsh )
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/oniony/TMSU/archive/v0.6.1.tar.gz -> tmsu-0.6.1.tar.gz
+_eclasses_=golang-base	e62ea82a4485a73fb191120f7aad958e	golang-build	2ecd6011551701f98dd49a0341318936	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=3ca20d7277f52566bb2eea2cf1fc89d3

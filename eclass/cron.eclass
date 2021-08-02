@@ -1,9 +1,9 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: cron.eclass
 # @MAINTAINER:
-# cron-bugs@gentoo.org
+# maintainer-needed@gentoo.org
 # @AUTHOR:
 # Original Author: Aaron Walker <ka0ttic@gentoo.org>
 # @BLURB: Some functions for cron
@@ -155,6 +155,6 @@ cron_pkg_postinst() {
 
 	einfo "You may wish to read the Gentoo Linux Cron Guide, which can be"
 	einfo "found online at:"
-	einfo "    https://www.gentoo.org/doc/en/cron-guide.xml"
+	einfo "    https://wiki.gentoo.org/wiki/Cron"
 	echo
 }

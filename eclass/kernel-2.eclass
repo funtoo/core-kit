@@ -1,13 +1,14 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: kernel-2.eclass
-# @MAINTAINER: 
+# @MAINTAINER:
 # Gentoo Kernel project <kernel@gentoo.org>
-# @AUTHOR: 
+# @AUTHOR:
 # John Mylchreest <johnm@gentoo.org>
 # Mike Pagano <mpagano@gentoo.org>
 # <so many, many others, please add yourself>
+# @SUPPORTED_EAPIS: 2 3 4 5 6
 # @BLURB: Eclass for kernel packages
 # @DESCRIPTION:
 # This is the kernel.eclass rewrite for a clean base regarding the 2.6
@@ -24,25 +25,25 @@
 # this is useful for things like wolk. IE:
 # EXTRAVERSION would be something like : -wolk-4.19-r1
 
-# @ECLASS-VARIABLE:  K_NOSETEXTRAVERSION	
+# @ECLASS-VARIABLE:  K_NOSETEXTRAVERSION
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # if this is set then EXTRAVERSION will not be
 # automatically set within the kernel Makefile
 
-# @ECLASS-VARIABLE: K_NOUSENAME			
+# @ECLASS-VARIABLE: K_NOUSENAME
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # if this is set then EXTRAVERSION will not include the
 # first part of ${PN} in EXTRAVERSION
 
-# @ECLASS-VARIABLE: K_NOUSEPR				
+# @ECLASS-VARIABLE: K_NOUSEPR
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # if this is set then EXTRAVERSION will not include the
 # anything based on ${PR}.
 
-# @ECLASS-VARIABLE: K_PREPATCHED			
+# @ECLASS-VARIABLE: K_PREPATCHED
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # if the patchset is prepatched (ie: mm-sources,
@@ -50,72 +51,72 @@
 # the patchset version for
 # and not use it as a true package revision
 
-# @ECLASS-VARIABLE:  K_EXTRAEINFO			
+# @ECLASS-VARIABLE:  K_EXTRAEINFO
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # this is a new-line seperated list of einfo displays in
 # postinst and can be used to carry additional postinst
 # messages
 
-# @ECLASS-VARIABLE:  K_EXTRAELOG			
+# @ECLASS-VARIABLE:  K_EXTRAELOG
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # same as K_EXTRAEINFO except using elog instead of einfo
 
-# @ECLASS-VARIABLE:  K_EXTRAEWARN			
+# @ECLASS-VARIABLE:  K_EXTRAEWARN
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # same as K_EXTRAEINFO except using ewarn instead of einfo
 
-# @ECLASS-VARIABLE:  K_SYMLINK				
+# @ECLASS-VARIABLE:  K_SYMLINK
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # if this is set, then forcably create symlink anyway
 
-# @ECLASS-VARIABLE:  K_BASE_VER			
+# @ECLASS-VARIABLE:  K_BASE_VER
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # for git-sources, declare the base version this patch is
 # based off of.
 
-# @ECLASS-VARIABLE:  K_DEFCONFIG			
+# @ECLASS-VARIABLE:  K_DEFCONFIG
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # Allow specifying a different defconfig target.
 # If length zero, defaults to "defconfig".
 
-# @ECLASS-VARIABLE:  K_WANT_GENPATCHES		
+# @ECLASS-VARIABLE:  K_WANT_GENPATCHES
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # Apply genpatches to kernel source. Provide any
 # combination of "base", "extras" or "experimental".
 
-# @ECLASS-VARIABLE:  K_EXP_GENPATCHES_PULL	
+# @ECLASS-VARIABLE:  K_EXP_GENPATCHES_PULL
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # If set, we pull "experimental" regardless of the USE FLAG
 # but expect the ebuild maintainer to use K_EXP_GENPATCHES_LIST.
 
-# @ECLASS-VARIABLE:  K_EXP_GENPATCHES_NOUSE	
+# @ECLASS-VARIABLE:  K_EXP_GENPATCHES_NOUSE
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # If set, no USE flag will be provided for "experimental";
 # as a result the user cannot choose to apply those patches.
 
-# @ECLASS-VARIABLE:  K_EXP_GENPATCHES_LIST	
+# @ECLASS-VARIABLE:  K_EXP_GENPATCHES_LIST
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # A list of patches to pick from "experimental" to apply when
 # the USE flag is unset and K_EXP_GENPATCHES_PULL is set.
 
-# @ECLASS-VARIABLE:  K_FROM_GIT 
+# @ECLASS-VARIABLE:  K_FROM_GIT
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# If set, this variable signals that the kernel sources derives 
-# from a git tree and special handling will be applied so that 
+# If set, this variable signals that the kernel sources derives
+# from a git tree and special handling will be applied so that
 # any patches that are applied will actually apply.
 
-# @ECLASS-VARIABLE:  K_GENPATCHES_VER		
+# @ECLASS-VARIABLE:  K_GENPATCHES_VER
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # The version of the genpatches tarball(s) to apply.
@@ -128,45 +129,45 @@
 # If set, this kernel is unsupported by Gentoo Security
 # to the current eclass maintainer :)
 
-# @ECLASS-VARIABLE:  K_DEBLOB_AVAILABLE	
+# @ECLASS-VARIABLE:  K_DEBLOB_AVAILABLE
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # A value of "0" will disable all of the optional deblob
 # code. If empty, will be set to "1" if deblobbing is
 # possible. Test ONLY for "1".
 
-# @ECLASS-VARIABLE:  K_DEBLOB_TAG     		
+# @ECLASS-VARIABLE:  K_DEBLOB_TAG
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # This will be the version of deblob script. It's a upstream SVN tag
 # such asw -gnu or -gnu1.
 
-# @ECLASS-VARIABLE:  K_PREDEBLOBBED		
+# @ECLASS-VARIABLE:  K_PREDEBLOBBED
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # This kernel was already deblobbed elsewhere.
 # If false, either optional deblobbing will be available
-# or the license will note the inclusion of freedist code.
+# or the license will note the inclusion of linux-firmware code.
 
-# @ECLASS-VARIABLE:  K_LONGTERM			
+# @ECLASS-VARIABLE:  K_LONGTERM
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # If set, the eclass will search for the kernel source
 # in the long term directories on the upstream servers
 # as the location has been changed by upstream
 
-# @ECLASS-VARIABLE:  H_SUPPORTEDARCH		
+# @ECLASS-VARIABLE:  H_SUPPORTEDARCH
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # this should be a space separated list of ARCH's which
 # can be supported by the headers ebuild
 
-# @ECLASS-VARIABLE:  UNIPATCH_LIST			
+# @ECLASS-VARIABLE:  UNIPATCH_LIST
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # space delimetered list of patches to be applied to the kernel
 
-# @ECLASS-VARIABLE:  UNIPATCH_EXCLUDE		
+# @ECLASS-VARIABLE:  UNIPATCH_EXCLUDE
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # An addition var to support exlusion based completely
@@ -174,13 +175,13 @@
 # this should _NOT_ be used from the ebuild as this is
 # reserved for end users passing excludes from the cli
 
-# @ECLASS-VARIABLE:  UNIPATCH_DOCS			
+# @ECLASS-VARIABLE:  UNIPATCH_DOCS
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # space delimemeted list of docs to be installed to
 # the doc dir
 
-# @ECLASS-VARIABLE:  UNIPATCH_STRICTORDER	
+# @ECLASS-VARIABLE:  UNIPATCH_STRICTORDER
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # if this is set places patches into directories of
@@ -192,11 +193,10 @@
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 
-inherit eutils toolchain-funcs versionator multilib python-any-r1
+inherit toolchain-funcs python-any-r1
+[[ ${EAPI:-0} == [012345] ]] && inherit epatch
+[[ ${EAPI:-0} == [0123456] ]] && inherit estack eapi7-ver
 case ${EAPI:-0} in
-	0|1)
-		EXPORT_FUNCTIONS src_{unpack,compile,install,test} \
-			pkg_{setup,preinst,postinst,postrm} ;;
 	2|3|4|5|6)
 		EXPORT_FUNCTIONS src_{unpack,prepare,compile,install,test} \
 			pkg_{setup,preinst,postinst,postrm} ;;
@@ -216,8 +216,6 @@ fi
 HOMEPAGE="https://www.kernel.org/ https://www.gentoo.org/ ${HOMEPAGE}"
 : ${LICENSE:="GPL-2"}
 
-has "${EAPI:-0}" 0 1 2 && ED=${D} EPREFIX= EROOT=${ROOT}
-
 # This is the latest KV_PATCH of the deblob tool available from the
 # libre-sources upstream. If you bump this, you MUST regenerate the Manifests
 # for ALL kernel-2 consumer packages where deblob is available.
@@ -232,7 +230,7 @@ RESTRICT="binchecks strip"
 
 # @FUNCTION: debug-print-kernel2-variables
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # this function exists only to help debug kernel-2.eclass
 # if you are adding new functionality in, put a call to it
 # at the start of src_unpack, or during SRC_URI/dep generation.
@@ -305,7 +303,7 @@ handle_genpatches() {
 
 # @FUNCTION: detect_version
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # this function will detect and set
 # - OKV: Original Kernel Version (2.6.0/2.6.0-test11)
 # - KV: Kernel Version (2.6.0-gentoo/2.6.0-test11-gentoo-r1)
@@ -326,7 +324,7 @@ detect_version() {
 	OKV=${OKV/-r*}
 	OKV=${OKV/_p*}
 
-	KV_MAJOR=$(get_version_component_range 1 ${OKV})
+	KV_MAJOR=$(ver_cut 1 ${OKV})
 	# handle if OKV is X.Y or X.Y.Z (e.g. 3.0 or 3.0.1)
 	local OKV_ARRAY
 	IFS="." read -r -a OKV_ARRAY <<<"${OKV}"
@@ -334,17 +332,17 @@ detect_version() {
 	# if KV_MAJOR >= 3, then we have no more KV_MINOR
 	#if [[ ${KV_MAJOR} -lt 3 ]]; then
 	if [[ ${#OKV_ARRAY[@]} -ge 3 ]]; then
-		KV_MINOR=$(get_version_component_range 2 ${OKV})
-		KV_PATCH=$(get_version_component_range 3 ${OKV})
+		KV_MINOR=$(ver_cut 2 ${OKV})
+		KV_PATCH=$(ver_cut 3 ${OKV})
 		if [[ ${KV_MAJOR}${KV_MINOR}${KV_PATCH} -ge 269 ]]; then
-	        KV_EXTRA=$(get_version_component_range 4- ${OKV})
-	        KV_EXTRA=${KV_EXTRA/[-_]*}
+			KV_EXTRA=$(ver_cut 4- ${OKV})
+			KV_EXTRA=${KV_EXTRA/[-_]*}
 		else
-			KV_PATCH=$(get_version_component_range 3- ${OKV})
+			KV_PATCH=$(ver_cut 3- ${OKV})
 		fi
 	else
-		KV_PATCH=$(get_version_component_range 2 ${OKV})
-		KV_EXTRA=$(get_version_component_range 3- ${OKV})
+		KV_PATCH=$(ver_cut 2 ${OKV})
+		KV_EXTRA=$(ver_cut 3- ${OKV})
 		KV_EXTRA=${KV_EXTRA/[-_]*}
 	fi
 
@@ -506,10 +504,20 @@ detect_version() {
 		OKV_DICT=(["2"]="${KV_MAJOR}.$((${KV_PATCH_ARR} - 1))" ["3"]="2.6.39" ["4"]="3.19")
 
 		if [[ ${RELEASETYPE} == -rc ]] || [[ ${RELEASETYPE} == -pre ]]; then
+
 			OKV=${K_BASE_VER:-$OKV_DICT["${KV_MAJOR}"]}
-			KERNEL_URI="${KERNEL_BASE_URI}/testing/patch-${CKV//_/-}.xz
-						${KERNEL_BASE_URI}/linux-${OKV}.tar.xz"
-			UNIPATCH_LIST_DEFAULT="${DISTDIR}/patch-${CKV//_/-}.xz"
+
+			# as of 12/5/2017, the rc patch is no longer offered as a compressed
+			# file, and no longer is it mirrored on kernel.org
+			if ver_test "${KV_MAJOR}.${KV_PATCH}" -ge "4.12"; then
+				KERNEL_URI="https://git.kernel.org/torvalds/p/v${KV_FULL}/v${OKV} -> patch-${KV_FULL}.patch
+							${KERNEL_BASE_URI}/linux-${OKV}.tar.xz"
+				UNIPATCH_LIST_DEFAULT="${DISTDIR}/patch-${CKV//_/-}.patch"
+			else
+				KERNEL_URI="${KERNEL_BASE_URI}/testing/patch-${CKV//_/-}.xz
+							${KERNEL_BASE_URI}/linux-${OKV}.tar.xz"
+				UNIPATCH_LIST_DEFAULT="${DISTDIR}/patch-${CKV//_/-}.xz"
+			fi
 		fi
 
 		if [[ ${RELEASETYPE} == -git ]]; then
@@ -537,7 +545,7 @@ detect_version() {
 
 # @FUNCTION: kernel_is
 # @USAGE: <conditional version | version>
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # user for comparing kernel versions
 # or just identifying a version
 # e.g kernel_is 2 4
@@ -571,16 +579,16 @@ kernel_is() {
 
 # @FUNCTION: kernel_is_2_4
 # @USAGE:
-# @DESCRIPTION: 
-# return true if kernel is version 2.4 
+# @DESCRIPTION:
+# return true if kernel is version 2.4
 kernel_is_2_4() {
 	kernel_is 2 4
 }
 
 # @FUNCTION: kernel_is_2_6
 # @USAGE:
-# @DESCRIPTION: 
-# return true if kernel is version 2.6 
+# @DESCRIPTION:
+# return true if kernel is version 2.6
 kernel_is_2_6() {
 	kernel_is 2 6 || kernel_is 2 5
 }
@@ -592,10 +600,13 @@ if [[ ${ETYPE} == sources ]]; then
 		>=sys-devel/binutils-2.11.90.0.31
 	)"
 	RDEPEND="!build? (
-		>=sys-libs/ncurses-5.2
-		sys-devel/make
 		dev-lang/perl
 		sys-devel/bc
+		sys-devel/bison
+		sys-devel/flex
+		sys-devel/make
+		>=sys-libs/ncurses-5.2
+		virtual/libelf
 	)"
 
 	SLOT="${PVR}"
@@ -613,8 +624,9 @@ if [[ ${ETYPE} == sources ]]; then
 			IUSE="${IUSE} deblob"
 
 			# Reflect that kernels contain firmware blobs unless otherwise
-			# stripped
-			LICENSE="${LICENSE} !deblob? ( freedist )"
+			# stripped. Starting with version 4.14, the whole firmware
+			# tree has been dropped from the kernel.
+			kernel_is lt 4 14 && LICENSE+=" !deblob? ( linux-firmware )"
 
 			DEPEND+=" deblob? ( ${PYTHON_DEPS} )"
 
@@ -632,14 +644,9 @@ if [[ ${ETYPE} == sources ]]; then
 			K_DEBLOB_TAG=${K_DEBLOB_TAG:--gnu}
 			DEBLOB_A="deblob-${DEBLOB_PV}"
 			DEBLOB_CHECK_A="deblob-check-${DEBLOB_PV}"
-			DEBLOB_HOMEPAGE="http://www.fsfla.org/svn/fsfla/software/linux-libre/releases/tags"
+			DEBLOB_HOMEPAGE="https://www.fsfla.org/svn/fsfla/software/linux-libre/releases/tags/"
 			DEBLOB_URI_PATH="${DEBLOB_PV}${K_DEBLOB_TAG}"
-			if ! has "${EAPI:-0}" 0 1 ; then
-				DEBLOB_CHECK_URI="${DEBLOB_HOMEPAGE}/${DEBLOB_URI_PATH}/deblob-check -> ${DEBLOB_CHECK_A}"
-			else
-				DEBLOB_CHECK_URI="mirror://gentoo/${DEBLOB_CHECK_A}"
-			fi
-
+			DEBLOB_CHECK_URI="${DEBLOB_HOMEPAGE}/${DEBLOB_URI_PATH}/deblob-check -> ${DEBLOB_CHECK_A}"
 			DEBLOB_URI="${DEBLOB_HOMEPAGE}/${DEBLOB_URI_PATH}/${DEBLOB_A}"
 			HOMEPAGE="${HOMEPAGE} ${DEBLOB_HOMEPAGE}"
 
@@ -648,16 +655,16 @@ if [[ ${ETYPE} == sources ]]; then
 					${DEBLOB_URI}
 					${DEBLOB_CHECK_URI}
 				)"
-		else
-			# We have no way to deblob older kernels, so just mark them as
-			# tainted with non-libre materials.
-			LICENSE="${LICENSE} freedist"
+		elif kernel_is lt 4 14; then
+			# Deblobbing is not available, so just mark kernels older
+			# than 4.14 as tainted with non-libre materials.
+			LICENSE+=" linux-firmware"
 		fi
 	fi
 
 elif [[ ${ETYPE} == headers ]]; then
 	DESCRIPTION="Linux system headers"
-	IUSE="crosscompile_opts_headers-only"
+	IUSE="headers-only"
 
 	# Since we should NOT honour KBUILD_OUTPUT in headers
 	# lets unset it here.
@@ -670,7 +677,7 @@ fi
 
 # @FUNCTION: kernel_header_destdir
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # return header destination directory
 kernel_header_destdir() {
 	[[ ${CTARGET} == ${CHOST} ]] \
@@ -680,15 +687,15 @@ kernel_header_destdir() {
 
 # @FUNCTION: cross_pre_c_headers
 # @USAGE:
-# @DESCRIPTION: 
-# set use if necessary for cross compile support 
+# @DESCRIPTION:
+# set use if necessary for cross compile support
 cross_pre_c_headers() {
-	use crosscompile_opts_headers-only && [[ ${CHOST} != ${CTARGET} ]]
+	use headers-only && [[ ${CHOST} != ${CTARGET} ]]
 }
 
 # @FUNCTION: env_setup_xmakeopts
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # set the ARCH/CROSS_COMPILE when cross compiling
 
 env_setup_xmakeopts() {
@@ -708,7 +715,7 @@ env_setup_xmakeopts() {
 
 # @FUNCTION: unpack_2_4
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # unpack and generate .config for 2.4 kernels
 
 unpack_2_4() {
@@ -722,7 +729,7 @@ unpack_2_4() {
 
 # @FUNCTION: unpack_2_6
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # unpack and generate .config for 2.6 kernels
 
 unpack_2_6() {
@@ -738,7 +745,6 @@ unpack_2_6() {
 		touch .config
 		eerror "make defconfig failed."
 		eerror "assuming you dont have any headers installed yet and continuing"
-		epause 5
 	fi
 
 	make -s include/linux/version.h ${xmakeopts} 2>/dev/null \
@@ -748,8 +754,8 @@ unpack_2_6() {
 
 # @FUNCTION: universal_unpack
 # @USAGE:
-# @DESCRIPTION: 
-# unpack kernel sources 
+# @DESCRIPTION:
+# unpack kernel sources
 
 universal_unpack() {
 	debug-print "Inside universal_unpack"
@@ -792,8 +798,8 @@ universal_unpack() {
 
 # @FUNCTION: unpack_set_extraversion
 # @USAGE:
-# @DESCRIPTION: 
-# handle EXTRAVERSION 
+# @DESCRIPTION:
+# handle EXTRAVERSION
 
 unpack_set_extraversion() {
 	cd "${S}"
@@ -803,7 +809,7 @@ unpack_set_extraversion() {
 
 # @FUNCTION: unpack_fix_install_path
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # Should be done after patches have been applied
 # Otherwise patches that modify the same area of Makefile will fail
 
@@ -816,7 +822,7 @@ unpack_fix_install_path() {
 
 # @FUNCTION: compile_headers
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # header compilation
 
 compile_headers() {
@@ -873,7 +879,7 @@ compile_headers() {
 
 # @FUNCTION: compile_headers_tweak_config
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # some targets can be very very picky, so let's finesse the
 # .config based upon any info we may have
 
@@ -893,7 +899,7 @@ compile_headers_tweak_config() {
 
 # @FUNCTION: install_universal
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # Fix permissions in tarball
 
 install_universal() {
@@ -905,8 +911,8 @@ install_universal() {
 
 # @FUNCTION: install_headers
 # @USAGE:
-# @DESCRIPTION: 
-# Install headers 
+# @DESCRIPTION:
+# Install headers
 
 install_headers() {
 	local ddir=$(kernel_header_destdir)
@@ -945,8 +951,8 @@ install_headers() {
 
 # @FUNCTION: install_sources
 # @USAGE:
-# @DESCRIPTION: 
-# Install sources 
+# @DESCRIPTION:
+# Install sources
 
 install_sources() {
 	local file
@@ -977,8 +983,8 @@ install_sources() {
 
 # @FUNCTION: preinst_headers
 # @USAGE:
-# @DESCRIPTION: 
-# Headers preinst steps 
+# @DESCRIPTION:
+# Headers preinst steps
 
 preinst_headers() {
 	local ddir=$(kernel_header_destdir)
@@ -988,7 +994,7 @@ preinst_headers() {
 
 # @FUNCTION: postinst_sources
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # Sources post installation function.
 # see inline comments
 
@@ -1065,9 +1071,9 @@ postinst_sources() {
 	fi
 
 	# warn sparc users that they need to do cross-compiling with >= 2.6.25(bug #214765)
-	KV_MAJOR=$(get_version_component_range 1 ${OKV})
-	KV_MINOR=$(get_version_component_range 2 ${OKV})
-	KV_PATCH=$(get_version_component_range 3 ${OKV})
+	KV_MAJOR=$(ver_cut 1 ${OKV})
+	KV_MINOR=$(ver_cut 2 ${OKV})
+	KV_PATCH=$(ver_cut 3 ${OKV})
 	if [[ "$(tc-arch)" = "sparc" ]]; then
 		if [[ $(gcc-major-version) -lt 4 && $(gcc-minor-version) -lt 4 ]]; then
 			if [[ ${KV_MAJOR} -ge 3 || ${KV_MAJOR}.${KV_MINOR}.${KV_PATCH} > 2.6.24 ]] ; then
@@ -1089,7 +1095,7 @@ postinst_sources() {
 
 # @FUNCTION: setup_headers
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # Determine if ${PN} supports arch
 
 setup_headers() {
@@ -1109,8 +1115,8 @@ setup_headers() {
 
 # @FUNCTION: unipatch
 # @USAGE: <list of patches to apply>
-# @DESCRIPTION: 
-# Universal function that will apply patches to source 
+# @DESCRIPTION:
+# Universal function that will apply patches to source
 
 unipatch() {
 	local i x y z extention PIPE_CMD UNIPATCH_DROP KPATCH_DIR PATCH_DEPTH ELINE
@@ -1128,7 +1134,7 @@ unipatch() {
 	# We're gonna need it when doing patches with a predefined patchlevel
 	eshopts_push -s extglob
 
-	# This function will unpack all passed tarballs, add any passed patches, 
+	# This function will unpack all passed tarballs, add any passed patches,
 	# and remove any passed patchnumbers
 	# usage can be either via an env var or by params
 	# although due to the nature we pass this within this eclass
@@ -1221,19 +1227,23 @@ unipatch() {
 			UNIPATCH_LIST_GENPATCHES+=" ${DISTDIR}/${tarball}"
 			debug-print "genpatches tarball: $tarball"
 
-			# check gcc version < 4.9.X uses patch 5000 and = 4.9.X uses patch 5010
-			if [[ $(gcc-major-version) -eq 4 ]] && [[ $(gcc-minor-version) -ne 9 ]]; then
-				# drop 5000_enable-additional-cpu-optimizations-for-gcc-4.9.patch
-				if [[ $UNIPATCH_DROP != *"5010_enable-additional-cpu-optimizations-for-gcc-4.9.patch"* ]]; then
+			local GCC_MAJOR_VER=$(gcc-major-version)
+			local GCC_MINOR_VER=$(gcc-minor-version)
+
+			# optimization patch for gcc < 8.X and kernel > 4.13
+			if [[ ${GCC_MAJOR_VER} -lt 8 ]] && [[ ${GCC_MAJOR_VER} -gt 4 ]]; then
+				if kernel_is ge 4 13 ; then
+					UNIPATCH_DROP+=" 5011_enable-cpu-optimizations-for-gcc8.patch"
+				fi
+			# optimization patch for gcc >= 8 and kernel ge 4.13
+			elif [[ "${GCC_MAJOR_VER}" -ge 8 ]]; then
+				if kernel_is ge 4 13; then
+					# support old kernels for a period. For now, remove as all gcc versions required are masked
+					UNIPATCH_DROP+=" 5010_enable-additional-cpu-optimizations-for-gcc.patch"
 					UNIPATCH_DROP+=" 5010_enable-additional-cpu-optimizations-for-gcc-4.9.patch"
 				fi
-			else
-				if [[ $UNIPATCH_DROP != *"5000_enable-additional-cpu-optimizations-for-gcc.patch"* ]]; then
-					#drop 5000_enable-additional-cpu-optimizations-for-gcc.patch
-					UNIPATCH_DROP+=" 5000_enable-additional-cpu-optimizations-for-gcc.patch"
-				fi
 			fi
- 		fi
+		fi
 	done
 
 	#populate KPATCH_DIRS so we know where to look to remove the excludes
@@ -1247,12 +1257,14 @@ unipatch() {
 	# bug #272676
 	if [[ "$(tc-arch)" = "sparc" || "$(tc-arch)" = "sparc64" ]]; then
 		if [[ ${KV_MAJOR} -ge 3 || ${KV_MAJOR}.${KV_MINOR}.${KV_PATCH} > 2.6.28 ]]; then
-			UNIPATCH_DROP="${UNIPATCH_DROP} *_fbcondecor-0.9.6.patch"
-			echo
-			ewarn "fbcondecor currently prevents sparc/sparc64 from booting"
-			ewarn "for kernel versions >= 2.6.29. Removing fbcondecor patch."
-			ewarn "See https://bugs.gentoo.org/show_bug.cgi?id=272676 for details"
-			echo
+			if [[ ! -z ${K_WANT_GENPATCHES} ]] ; then
+				UNIPATCH_DROP="${UNIPATCH_DROP} *_fbcondecor*.patch"
+				echo
+				ewarn "fbcondecor currently prevents sparc/sparc64 from booting"
+				ewarn "for kernel versions >= 2.6.29. Removing fbcondecor patch."
+				ewarn "See https://bugs.gentoo.org/show_bug.cgi?id=272676 for details"
+				echo
+			fi
 		fi
 	fi
 
@@ -1366,7 +1378,7 @@ unipatch() {
 
 # @FUNCTION: getfilevar
 # @USAGE: <variable> <configfile>
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # pulled from linux-info
 
 getfilevar() {
@@ -1393,14 +1405,14 @@ getfilevar() {
 
 # @FUNCTION: detect_arch
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # This function sets ARCH_URI and ARCH_PATCH
 # with the neccessary info for the arch sepecific compatibility
 # patchsets.
 
 detect_arch() {
 
-	local ALL_ARCH LOOP_ARCH COMPAT_URI i
+	local ALL_ARCH LOOP_ARCH LOOP_ARCH_L COMPAT_URI i TC_ARCH_KERNEL
 
 	# COMPAT_URI is the contents of ${ARCH}_URI
 	# ARCH_URI is the URI for all the ${ARCH}_URI patches
@@ -1408,26 +1420,31 @@ detect_arch() {
 
 	ARCH_URI=""
 	ARCH_PATCH=""
+	TC_ARCH_KERNEL=""
 	ALL_ARCH="ALPHA AMD64 ARM HPPA IA64 M68K MIPS PPC PPC64 S390 SH SPARC X86"
 
 	for LOOP_ARCH in ${ALL_ARCH}; do
 		COMPAT_URI="${LOOP_ARCH}_URI"
 		COMPAT_URI="${!COMPAT_URI}"
 
-		[[ -n ${COMPAT_URI} ]] && \
-			ARCH_URI="${ARCH_URI} $(echo ${LOOP_ARCH} | tr '[:upper:]' '[:lower:]')? ( ${COMPAT_URI} )"
+		declare -l LOOP_ARCH_L=${LOOP_ARCH}
 
-		if [[ ${LOOP_ARCH} == "$(echo $(tc-arch-kernel) | tr '[:lower:]' '[:upper:]')" ]]; 	then
+		[[ -n ${COMPAT_URI} ]] && \
+			ARCH_URI="${ARCH_URI} ${LOOP_ARCH_L}? ( ${COMPAT_URI} )"
+
+		declare -u TC_ARCH_KERNEL=$(tc-arch-kernel)
+		if [[ ${LOOP_ARCH} == ${TC_ARCH_KERNEL} ]]; then
 			for i in ${COMPAT_URI}; do
 				ARCH_PATCH="${ARCH_PATCH} ${DISTDIR}/${i/*\//}"
 			done
 		fi
+
 	done
 }
 
 # @FUNCTION: headers___fix
 # @USAGE:
-# @DESCRIPTION: 
+# @DESCRIPTION:
 # Voodoo to partially fix broken upstream headers.
 # note: do not put inline/asm/volatile together (breaks "inline asm volatile")
 
@@ -1441,10 +1458,10 @@ headers___fix() {
 		"$@"
 }
 
-# @FUNCTION: kernel-2_src_unpack() 
+# @FUNCTION: kernel-2_src_unpack
 # @USAGE:
-# @DESCRIPTION: 
-# unpack sources, handle genpatches, deblob 
+# @DESCRIPTION:
+# unpack sources, handle genpatches, deblob
 
 kernel-2_src_unpack() {
 	universal_unpack
@@ -1460,10 +1477,6 @@ kernel-2_src_unpack() {
 	# allow ebuilds to massage the source tree after patching but before
 	# we run misc `make` functions below
 	[[ $(type -t kernel-2_hook_premake) == "function" ]] && kernel-2_hook_premake
-
-	case ${EAPI:-0} in
-		0|1) kernel-2_src_prepare ;;
-	esac
 
 	debug-print "Doing unpack_set_extraversion"
 
@@ -1506,7 +1519,7 @@ kernel-2_src_unpack() {
 # @FUNCTION: kernel-2_src_prepare
 # @USAGE:
 # @DESCRIPTION:
-# Apply any user patches 
+# Apply any user patches
 
 kernel-2_src_prepare() {
 
@@ -1522,7 +1535,7 @@ kernel-2_src_prepare() {
 # @FUNCTION: kernel-2_src_compile
 # @USAGE:
 # @DESCRIPTION:
-# conpile headers or run deblob script 
+# conpile headers or run deblob script
 
 kernel-2_src_compile() {
 	cd "${S}"
@@ -1548,7 +1561,7 @@ kernel-2_src_test() { :; }
 
 # @FUNCTION: kernel-2_pkg_preinst
 # @DESCRIPTION:
-# if ETYPE = headers, call preinst_headers 
+# if ETYPE = headers, call preinst_headers
 
 kernel-2_pkg_preinst() {
 	[[ ${ETYPE} == headers ]] && preinst_headers
@@ -1568,7 +1581,7 @@ kernel-2_src_install() {
 # @FUNCTION: kernel-2_pkg_postinst
 # @USAGE:
 # @DESCRIPTION:
-# call postinst_sources for ETYPE = sources 
+# call postinst_sources for ETYPE = sources
 
 kernel-2_pkg_postinst() {
 	[[ ${ETYPE} == sources ]] && postinst_sources
@@ -1578,7 +1591,7 @@ kernel-2_pkg_postinst() {
 # @USAGE:
 # @DESCRIPTION:
 # check for supported kernel version, die if ETYPE is unknown, call setup_headers
-# if necessary 
+# if necessary
 
 kernel-2_pkg_setup() {
 	if kernel_is 2 4; then
@@ -1591,7 +1604,6 @@ kernel-2_pkg_setup() {
 			ewarn "Also be aware that bugreports about gcc-4 not working"
 			ewarn "with linux-2.4 based ebuilds will be closed as INVALID!"
 			echo
-			epause 10
 		fi
 	fi
 

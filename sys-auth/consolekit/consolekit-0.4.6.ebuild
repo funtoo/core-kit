@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sys-auth/consolekit/consolekit-0.4.6.ebuild,v 1.19 2015/03/03 09:53:46 dlan Exp $
 
 EAPI=5
 inherit autotools eutils linux-info pam systemd
@@ -9,13 +8,13 @@ MY_PN=ConsoleKit
 MY_P=${MY_PN}-${PV}
 
 DESCRIPTION="Framework for defining and tracking users, login sessions and seats"
-HOMEPAGE="http://www.freedesktop.org/wiki/Software/ConsoleKit"
-SRC_URI="http://www.freedesktop.org/software/${MY_PN}/dist/${MY_P}.tar.xz
-	mirror://debian/pool/main/${PN:0:1}/${PN}/${PN}_${PV}-4.debian.tar.gz" # for logrotate file
+HOMEPAGE="https://www.freedesktop.org/wiki/Software/ConsoleKit"
+SRC_URI="https://www.freedesktop.org/software/${MY_PN}/dist/${MY_P}.tar.xz
+	https://launchpad.net/debian/+archive/primary/+files/${PN}_${PV}-4.debian.tar.gz" # for logrotate file
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~ia64-linux ~x86-linux"
+KEYWORDS="alpha amd64 arm ~arm64 ~hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 IUSE="acl debug doc kernel_linux pam policykit selinux systemd-units test"
 
 COMMON_DEPEND=">=dev-libs/dbus-glib-0.100:=
@@ -46,7 +45,7 @@ QA_MULTILIB_PATHS="usr/lib/ConsoleKit/.*"
 
 pkg_setup() {
 	if use kernel_linux; then
-		# This is from http://bugs.gentoo.org/376939
+		# This is from https://bugs.gentoo.org/376939
 		use acl && CONFIG_CHECK="~TMPFS_POSIX_ACL"
 		# This is required to get login-session-id string with pam_ck_connector.so
 		use pam && CONFIG_CHECK+=" ~AUDITSYSCALL"

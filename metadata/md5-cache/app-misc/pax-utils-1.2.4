@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install setup test unpack
+DEPEND=caps? ( >=sys-libs/libcap-2.24 ) python? ( python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7] ) python_single_target_python3_7? ( dev-python/pyelftools[python_targets_python3_7(-)] ) python_single_target_python3_9? ( dev-python/pyelftools[python_targets_python3_9(-)] ) python_single_target_python3_8? ( dev-python/pyelftools[python_targets_python3_8(-)] ) python_single_target_python2_7? ( dev-python/pyelftools[python_targets_python2_7(-)] ) ) seccomp? ( sys-libs/libseccomp ) caps? ( virtual/pkgconfig ) seccomp? ( virtual/pkgconfig ) app-arch/xz-utils
+DESCRIPTION=ELF utils that can check files for security relevant properties
+EAPI=7
+HOMEPAGE=https://wiki.gentoo.org/index.php?title=Project:Hardened/PaX_Utilities
+IUSE=caps debug python seccomp python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_single_target_python2_7 python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python2_7
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=caps? ( >=sys-libs/libcap-2.24 ) python? ( python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7] ) python_single_target_python3_7? ( dev-python/pyelftools[python_targets_python3_7(-)] ) python_single_target_python3_9? ( dev-python/pyelftools[python_targets_python3_9(-)] ) python_single_target_python3_8? ( dev-python/pyelftools[python_targets_python3_8(-)] ) python_single_target_python2_7? ( dev-python/pyelftools[python_targets_python2_7(-)] ) ) seccomp? ( sys-libs/libseccomp )
+REQUIRED_USE=python? ( ^^ ( python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_single_target_python2_7 ) )
+SLOT=0
+SRC_URI=mirror://gentoo/pax-utils-1.2.4.tar.xz https://dev.gentoo.org/~slyfox/distfiles/pax-utils-1.2.4.tar.xz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	multilib	d410501a125f99ffb560b0c523cd3d1e	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	unpacker	3cd8bad0d31e525cd26be1bfa4e61631
+_md5_=69cfad0d9a9ddf9229dc70f9a2e1c30e

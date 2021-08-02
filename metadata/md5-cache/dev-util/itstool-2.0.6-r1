@@ -1,0 +1,14 @@
+DEFINED_PHASES=prepare setup
+DEPEND=python_single_target_python3_7? ( dev-lang/python:3.7[xml] >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7[xml] >=dev-lang/python-exec-2:=[python_targets_python2_7] ) python_single_target_python3_7? ( dev-libs/libxml2[python,python_targets_python3_7(-)] ) python_single_target_python2_7? ( dev-libs/libxml2[python,python_targets_python2_7(-)] )
+DESCRIPTION=Translation tool for XML documents that uses gettext files and ITS rules
+EAPI=7
+HOMEPAGE=http://itstool.org/
+IUSE=python_single_target_python3_7 python_single_target_python2_7 python_targets_python3_7 python_targets_python2_7
+KEYWORDS=*
+LICENSE=GPL-3+ || ( HPND GPL-3+ )
+RDEPEND=python_single_target_python3_7? ( dev-lang/python:3.7[xml] >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7[xml] >=dev-lang/python-exec-2:=[python_targets_python2_7] ) python_single_target_python3_7? ( dev-libs/libxml2[python,python_targets_python3_7(-)] ) python_single_target_python2_7? ( dev-libs/libxml2[python,python_targets_python2_7(-)] )
+REQUIRED_USE=^^ ( python_single_target_python3_7 python_single_target_python2_7 )
+SLOT=0
+SRC_URI=http://files.itstool.org/itstool/itstool-2.0.6.tar.bz2
+_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=5b45c986a64770f5500dca9ea7a99797

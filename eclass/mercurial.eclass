@@ -1,4 +1,3 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: mercurial.eclass
@@ -17,6 +16,8 @@
 inherit eutils
 
 EXPORT_FUNCTIONS src_unpack
+
+PROPERTIES+=" live"
 
 DEPEND="dev-vcs/mercurial"
 
@@ -57,15 +58,19 @@ DEPEND="dev-vcs/mercurial"
 : ${EHG_QUIET:="OFF"}
 [[ "${EHG_QUIET}" == "ON" ]] && EHG_QUIET_CMD_OPT="--quiet"
 
+# @ECLASS-VARIABLE: EHG_CONFIG
+# @DESCRIPTION:
+# Extra config option to hand to hg clone/pull
+
 # @ECLASS-VARIABLE: EHG_CLONE_CMD
 # @DESCRIPTION:
 # Command used to perform initial repository clone.
-[[ -z "${EHG_CLONE_CMD}" ]] && EHG_CLONE_CMD="hg clone ${EHG_QUIET_CMD_OPT} --pull --noupdate"
+[[ -z "${EHG_CLONE_CMD}" ]] && EHG_CLONE_CMD="hg clone ${EHG_CONFIG:+--config ${EHG_CONFIG}} ${EHG_QUIET_CMD_OPT} --pull --noupdate"
 
 # @ECLASS-VARIABLE: EHG_PULL_CMD
 # @DESCRIPTION:
 # Command used to update repository.
-[[ -z "${EHG_PULL_CMD}" ]] && EHG_PULL_CMD="hg pull ${EHG_QUIET_CMD_OPT}"
+[[ -z "${EHG_PULL_CMD}" ]] && EHG_PULL_CMD="hg pull ${EHG_CONFIG:+--config ${EHG_CONFIG}} ${EHG_QUIET_CMD_OPT}"
 
 # @ECLASS-VARIABLE: EHG_OFFLINE
 # @DESCRIPTION:
@@ -88,10 +93,10 @@ mercurial_fetch() {
 
 	has "${EAPI:-0}" 0 1 2 && ! use prefix && EPREFIX=
 
-	EHG_REPO_URI=${1-${EHG_REPO_URI}}
+	EHG_REPO_URI=${1:-${EHG_REPO_URI}}
 	[[ -z "${EHG_REPO_URI}" ]] && die "EHG_REPO_URI is empty"
 
-	local module="${2-$(basename "${EHG_REPO_URI}")}"
+	local module="${2:-$(basename "${EHG_REPO_URI}")}"
 	local sourcedir="${3:-${EHG_CHECKOUT_DIR:-${S}}}"
 
 	# Should be set but blank to prevent using $HOME/.hgrc
@@ -134,6 +139,7 @@ mercurial_fetch() {
 	hg clone \
 		${EHG_QUIET_CMD_OPT} \
 		--updaterev="${EHG_REVISION}" \
+		${EHG_CONFIG:+--config ${EHG_CONFIG}} \
 		"${EHG_STORE_DIR}/${EHG_PROJECT}/${module}" \
 		"${sourcedir}" || die "hg clone failed"
 	# An exact revision helps a lot for testing purposes, so have some output...

@@ -1,0 +1,11 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install postinst postrm preinst prerm unpack
+DESCRIPTION=Raspberry Pi (all versions) bootloader and GPU firmware
+EAPI=7
+HOMEPAGE=https://github.com/raspberrypi/firmware
+LICENSE=GPL-2 raspberrypi-videocore-bin
+PROPERTIES=live
+RESTRICT=binchecks strip
+SLOT=0
+_eclasses_=git-r3	7dcb8a92f5a091f13e82494fa317ca4b	mount-boot	4e916386c166c23418f8bea81a5f131e	readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190
+_md5_=1091afe6b016e986baee0187656ca95b

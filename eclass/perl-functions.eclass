@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: perl-functions.eclass
@@ -8,6 +8,7 @@
 # Seemant Kulleen <seemant@gentoo.org>
 # Andreas K. Huettel <dilfridge@gentoo.org>
 # Kent Fredric <kentnl@gentoo.org>
+# @SUPPORTED_EAPIS: 5 6 7
 # @BLURB: helper functions eclass for perl modules
 # @DESCRIPTION:
 # The perl-functions eclass is designed to allow easier installation of perl
@@ -18,7 +19,7 @@
 [[ ${CATEGORY} == "perl-core" ]] && inherit alternatives
 
 case "${EAPI:-0}" in
-	5|6)
+	5|6|7)
 		;;
 	*)
 		die "EAPI=${EAPI} is not supported by perl-functions.eclass"

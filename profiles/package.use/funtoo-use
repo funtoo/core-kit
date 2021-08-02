@@ -1,3 +1,32 @@
+# firefox stuff:
+www-client/firefox system-sqlite
+dev-db/sqlite secure-delete
+
+# In 1.4 testing, this was required for libreoffice
+dev-libs/xmlsec nss
+media-gfx/fontforge cairo
+
+# Break a circular dependency
+media-gfx/graphviz -svg
+
+# Break another circular dependency
+net-libs/libsoup -vala
+
+# Make chromium happy re: nodejs
+net-libs/nodejs inspector
+
+# Use gentoo's upstream zeromq but set this so pyzmq can be merged cleanly.
+net-libs/zeromq drafts
+
+# FL-5241: enable *both* gtk and gtk3 USE flags for libcanberra. A good default for the applcations that are gtk2 still and for the gtk3 based gui too.
+media-libs/libcanberra gtk gtk3
+
+# git-2.15 and above require dev-libs/pcre with jit USE enabled. FL-5220:
+>=dev-libs/libpcre2-10.30 jit
+
+# enable gtk USE by default for virt-manager. FL-5196
+app-emulation/virt-manager gtk
+
 # FL-3512: workaround mutt default USE's. Stick to tokyocabinet as per upstream default.
 mail-client/mutt tokyocabinet -berkdb -gdbm
 
@@ -25,7 +54,7 @@ x11-terms/rxvt-unicode xft
 # FL-1805: enable json USE in syslog-ng, required for correct work
 app-admin/syslog-ng json
 
-# FL-1711 enable most filesystem support in gparted 
+# FL-1711 enable most filesystem support in gparted
 sys-block/gparted fat hfs jfs ntfs xfs reiserfs btrfs
 
 # FL-1685 enable extraengine for dev-db/mariadb, work-arounds for clean emerge
@@ -33,8 +62,8 @@ dev-db/mariadb extraengine
 
 # FL-1286, disable gstream USE flag for tumbler, with both ffmpeg and gstreamer flags enabled tumbler suffers from memory leaks, freezes.
 # Using ffmpeg only reported making tumbler to work much better
-xfce-extra/tumbler -gstreamer 
- 
+xfce-extra/tumbler -gstreamer
+
 # FL-1131, qemu, set usb and usbredir USE flag enabled by default
 app-emulation/qemu usb usbredir
 
@@ -45,11 +74,11 @@ media-libs/mesa gbm
 
 # FL-934, force opengl USE flag to have clean emerge of xvba-video and x11-libs/libva
 x11-libs/libva opengl
- 
+
 # FL-897
 # force upnp and video USE flag in media-libs/mediatreamer, required for clean net-voip/linphone emerge
 media-libs/mediastreamer upnp video
- 
+
 # FL-792, enable xattr USE flag in rsync, required for vzmigrate
 net-misc/rsync xattr
 
@@ -68,7 +97,7 @@ virtual/python-json external
 
 # FL-408 blender requires dev-cpp/glog built with gflags USE flag
 dev-cpp/glog gflags
- 
+
 # FL-562 set webkit USe flag turned on for app-misc/recoll as it required for successfull package build
 app-misc/recoll webkit
 
@@ -80,6 +109,8 @@ net-fs/cifs-utils upcall
 
 # FL-426, set introspection flag to gupnp-igd, it's a hard dep
 net-libs/gupnp-igd introspection
+# FL-6563: gupnp-igd is not very actively maintained, and requires older versions of gupnp, etc. Workaround:
+net-libs/libnice -upnp
 
 # FL-370, set sasl USE flag to openldap
 net-nds/openldap sasl
@@ -106,5 +137,4 @@ sys-fs/mdadm static
 x11-libs/libdrm libkms
 
 # FL-278, wpa_supplicant needs dbus for clean networkmanager emerge, let's set it here
-net-wireless/wpa_supplicant dbus 
- 
+net-wireless/wpa_supplicant dbus
