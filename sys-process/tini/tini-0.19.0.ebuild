@@ -2,20 +2,20 @@
 
 EAPI=7
 
-inherit cmake-utils flag-o-matic
+inherit cmake flag-o-matic
 
-GIT_COMMIT=fec3683b971d9c3ef73f284f176672c44b448662
+GIT_COMMIT=de40ad007797e0dcd8b7126f27bb87401d224240
 DESCRIPTION="A tiny but valid init for containers"
 HOMEPAGE="https://github.com/krallin/tini"
 SRC_URI="https://github.com/krallin/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="+args +static"
 
 src_prepare() {
-	cmake-utils_src_prepare
+	cmake_src_prepare
 
 	local sed_args=(
 		# Do not strip binary
@@ -40,19 +40,19 @@ src_configure() {
 	local mycmakeargs=()
 	use args || mycmakeargs+=(-DMINIMAL=ON)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 src_compile() {
 	append-cflags -DPR_SET_CHILD_SUBREAPER=36 -DPR_GET_CHILD_SUBREAPER=37
-	cmake-utils_src_compile
+	cmake_src_compile
 }
 
 src_install() {
-	cmake-utils_src_install
+	cmake_src_install
 	if use static; then
-		mv "${ED%/}"/usr/bin/{${PN}-static,${PN}} || die
+		mv "${ED}"/usr/bin/{${PN}-static,${PN}} || die
 	else
-		rm "${ED%/}"/usr/bin/${PN}-static || die
+		rm "${ED}"/usr/bin/${PN}-static || die
 	fi
 }
