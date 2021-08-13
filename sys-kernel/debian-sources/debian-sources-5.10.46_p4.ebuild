@@ -17,7 +17,7 @@ MODULE_EXT=${PVR}-${PN}
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
 DEB_PV="5.10.46-${DEB_EXTRAVERSION}"
-RESTRICT="binchecks strip mirror"
+RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS=""
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
