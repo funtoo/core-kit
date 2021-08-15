@@ -38,7 +38,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_4.19.194.orig.tar.xz https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_4.19.194-3.debian.tar.xz"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_4.19.194.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_4.19.194-3.debian.tar.xz"
 S="$WORKDIR/linux-4.19.194"
 
 get_patch_list() {
