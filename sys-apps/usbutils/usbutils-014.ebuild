@@ -1,28 +1,28 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python2_7 )
+EAPI=7
+PYTHON_COMPAT=( python3+ )
 
-inherit python-single-r1
+inherit autotools python-single-r1
 
 DESCRIPTION="USB enumeration utilities"
 HOMEPAGE="https://www.kernel.org/pub/linux/utils/usb/usbutils/
 	https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usbutils.git/"
-SRC_URI="mirror://kernel/linux/utils/usb/${PN}/${P}.tar.xz"
+SRC_URI="https://api.github.com/repos/gregkh/usbutils/tarball/refs/tags/v014 -> usbutils-014.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 IUSE="python"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
-CDEPEND="virtual/libusb:1=
+DEPEND="virtual/libusb:1=
 	virtual/libudev:="
-DEPEND="${CDEPEND}
+BDEPEND="
 	app-arch/xz-utils
-	virtual/pkgconfig"
-RDEPEND="${CDEPEND}
+	virtual/pkgconfig
+	python? ( ${PYTHON_DEPS} )"
+RDEPEND="${DEPEND}
 	sys-apps/hwids
 	python? ( ${PYTHON_DEPS} )"
 
@@ -32,18 +32,28 @@ pkg_setup() {
 
 src_prepare() {
 	default
+	eautoreconf
 	use python && python_fix_shebang lsusb.py.in
 }
 
+post_src_unpack() {
+	mv ${WORKDIR}/gregkh-usbutils-* ${S} || die
+}
+
 src_configure() {
-	econf \
-		--datarootdir="${EPREFIX}/usr/share" \
+	local myeconfargs=(
+		--datarootdir="${EPREFIX}/usr/share"
 		--datadir="${EPREFIX}/usr/share/misc"
+	)
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
 	default
 	newdoc usbhid-dump/NEWS NEWS.usbhid-dump
+	dobin usbreset # noinst_PROGRAMS, but installed by other distros
 
-	use python || rm -f "${ED}"/usr/bin/lsusb.py
+	if ! use python ; then
+		rm -f "${ED}"/usr/bin/lsusb.py || die
+	fi
 }
