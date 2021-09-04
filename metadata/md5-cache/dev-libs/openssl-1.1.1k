@@ -11,6 +11,6 @@ PDEPEND=app-misc/ca-certificates
 RDEPEND=>=app-misc/c_rehash-1.7-r1 zlib? ( >=sys-libs/zlib-1.2.8-r1[static-libs(+)?,-mgorny(-)] ) !<net-misc/openssh-8.0_p1-r3
 RESTRICT=!bindist? ( bindist ) !test? ( test )
 SLOT=0/1.1.1k
-SRC_URI=mirror://openssl/source/openssl-1.1.1k.tar.gz bindist? ( mirror://gentoo/openssl-1.1.1i-bindist-1.0.tar.xz https://dev.gentoo.org/~whissi/dist/openssl/openssl-1.1.1i-bindist-1.0.tar.xz )
+SRC_URI=https://www.openssl.org/source/openssl-1.1.1k.tar.gz bindist? ( mirror://gentoo/openssl-1.1.1i-bindist-1.0.tar.xz https://dev.gentoo.org/~whissi/dist/openssl/openssl-1.1.1i-bindist-1.0.tar.xz )
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=c24132c42a0c070ffc8000920d26314d
+_md5_=0a20b7c10e296c536a3439b02cc484e6
