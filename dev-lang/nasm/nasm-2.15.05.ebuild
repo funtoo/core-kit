@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,16 +5,17 @@ EAPI=7
 inherit flag-o-matic
 
 DESCRIPTION="groovy little assembler"
-HOMEPAGE="https://www.nasm.us/"
-SRC_URI="https://www.nasm.us/pub/nasm/releasebuilds/${PV/_}/${P/_}.tar.xz"
+HOMEPAGE="https://www.nasm.us"
+SRC_URI="https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/nasm-2.15.05.tar.xz"
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="amd64 ~ia64 ~ppc64 x86 ~x64-cygwin ~amd64-fbsd ~amd64-linux ~x86-linux ~x64-macos"
+KEYWORDS="*"
 IUSE="doc"
 
 RDEPEND=""
 DEPEND=""
+
 # [fonts note] doc/psfonts.ph defines ordered list of font preference.
 # Currently 'media-fonts/source-pro' is most preferred and is able to
 # satisfy all 6 font flavours: tilt, chapter, head, etc.
@@ -30,15 +30,9 @@ BDEPEND="
 	)
 "
 
-S=${WORKDIR}/${P/_}
-
-PATCHES=(
-	"${FILESDIR}"/${PN}-2.13.03-bsd-cp-doc.patch
-)
-
-src_configure() {
-	strip-flags
+src_prepare() {
 	default
+	sed -i -e 's/^CP_UF[ \t]\+=.*/CP_UF = cp -f/' doc/Makefile.in
 }
 
 src_compile() {
