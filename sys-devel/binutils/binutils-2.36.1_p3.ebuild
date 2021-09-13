@@ -10,21 +10,16 @@ LICENSE="GPL-3+"
 IUSE="64-bit-bfd cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla"
 REQUIRED_USE="default-gold? ( gold )"
 
-SRC_URI="{{artifacts.values()|map(attribute='src_uri')|join(' ')}}"
+SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz"
 SLOT=$(ver_cut 1-2)
 
-S="${WORKDIR}/binutils-{{upstream_version}}"
+S="${WORKDIR}/binutils-2.36.1"
 
-{% if unmasked -%}
 KEYWORDS="*"
-{% else -%}
-KEYWORDS=""
-{% endif -%}
-
 RDEPEND="
 !sys-devel/binutils-config
-!<sys-libs/binutils-libs-{{version_and_rev}}
-!<sys-devel/binutils-{{version_and_rev}}
+!<sys-libs/binutils-libs-2.36.1_p3
+!<sys-devel/binutils-2.36.1_p3
 sys-libs/zlib"
 DEPEND="${RDEPEND}"
 BDEPEND="
@@ -37,22 +32,22 @@ BDEPEND="
 	sys-devel/flex
 	virtual/yacc
 "
-PDEPEND="=sys-libs/binutils-libs-{{version_and_rev}}"
+PDEPEND="=sys-libs/binutils-libs-2.36.1_p3"
 
 RESTRICT="!test? ( test )"
 
 MY_BUILDDIR=${WORKDIR}/build
 
 src_unpack() {
-	unpack binutils-{{upstream_version}}.tar.xz
+	unpack binutils-2.36.1.tar.xz
 	cd "${WORKDIR}" || die
-	unpack {{artifacts['patches'].final_name}}
+	unpack binutils-2.36.1-patches-3.tar.xz
 	mkdir -p "${MY_BUILDDIR}" || die
 }
 
 src_prepare() {
 	if ! use vanilla; then
-		einfo "Applying binutils patchset {{artifacts['patches'].final_name}}"
+		einfo "Applying binutils patchset binutils-2.36.1-patches-3.tar.xz"
 		eapply "${WORKDIR}/patch"
 		einfo "Done."
 	fi
@@ -117,8 +112,8 @@ src_configure() {
 		--enable-install-libiberty
 		--enable-textrel-check=warning
 		--disable-werror
-		--with-bugurl="{{bugs_url}}"
-		--with-pkgversion="{{pkg_blurb}}"
+		--with-bugurl="https://bugs.funtoo.org/"
+		--with-pkgversion="Funtoo {version} patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz"
 		--with-system-zlib
 		--without-zlib
 		# Strip out broken static link flags.
