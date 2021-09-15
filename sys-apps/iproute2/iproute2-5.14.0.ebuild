@@ -2,10 +2,10 @@
 
 EAPI=7
 
-inherit toolchain-funcs flag-o-matic multilib
+inherit toolchain-funcs flag-o-matic
 
-SRC_URI="https://www.kernel.org/pub/linux/utils/net/${PN}/${P}.tar.xz"
-KEYWORDS=""
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.14.0.tar.xz"
+KEYWORDS="*"
 
 DESCRIPTION="kernel routing and traffic control utilities"
 HOMEPAGE="https://wiki.linuxfoundation.org/networking/iproute2"
@@ -17,12 +17,12 @@ IUSE="atm berkdb bpf caps elf +iptables ipv6 libbsd minimal selinux"
 # We could make libmnl optional, but it's tiny, so eh
 RDEPEND="
 	!net-misc/arpd
-	!minimal? ( net-libs/libmnl )
+	!minimal? ( net-libs/libmnl:= )
 	atm? ( net-dialup/linux-atm )
 	berkdb? ( sys-libs/db:= )
-	bpf? ( dev-libs/libbpf )
+	bpf? ( dev-libs/libbpf:= )
 	caps? ( sys-libs/libcap )
-	elf? ( virtual/libelf )
+	elf? ( virtual/libelf:= )
 	iptables? ( >=net-firewall/iptables-1.4.20:= )
 	libbsd? ( dev-libs/libbsd )
 	selinux? ( sys-libs/libselinux )
@@ -40,15 +40,21 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-3.1.0-mtu.patch # gentoo bug 291907
-	"${FILESDIR}"/${PN}-5.11.0-configure-nomagic.patch # gentoo bug 643722
+	"${FILESDIR}"/${PN}-3.1.0-mtu.patch #291907
+	"${FILESDIR}"/${PN}-5.12.0-configure-nomagic.patch # bug 643722
+	#"${FILESDIR}"/${PN}-5.1.0-portability.patch
 	"${FILESDIR}"/${PN}-5.7.0-mix-signal.h-include.patch
 )
+
+doecho() {
+	echo "${@}"
+	"${@}" || die
+}
 
 src_prepare() {
 	if ! use ipv6 ; then
 		PATCHES+=(
-			"${FILESDIR}"/${PN}-4.20.0-no-ipv6.patch # gentoo bug 326849
+			"${FILESDIR}"/${PN}-4.20.0-no-ipv6.patch #326849
 		)
 	fi
 
@@ -56,7 +62,7 @@ src_prepare() {
 
 	# Fix version if necessary
 	local versionfile="include/version.h"
-	if ! grep -Fq "${PV}" ${versionfile} ; then
+	if [[ "${PV}" != 9999 ]] && ! grep -Fq "${PV}" ${versionfile} ; then
 		einfo "Fixing version string"
 		sed "s@\"[[:digit:]\.]\+\"@\"${PV}\"@" \
 			-i ${versionfile} || die
@@ -95,8 +101,8 @@ src_configure() {
 	popd >/dev/null
 
 	# run "configure" script first which will create "config.mk"...
-	LIBBPF_FORCE="$(usex bpf on off)" \
-	econf
+	# Using econf breaks since 5.14.0 (a9c3d70d902a0473ee5c13336317006a52ce8242)
+	doecho ./configure --libbpf_force $(usex bpf on off)
 
 	# ...now switch on/off requested features via USE flags
 	# this is only useful if the test did not set other things, per bug #643722
