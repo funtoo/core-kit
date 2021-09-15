@@ -1,35 +1,35 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( python3+ )
 DISTUTILS_OPTIONAL=1
 
-inherit distutils-r1 libtool multilib-minimal toolchain-funcs
+inherit distutils-r1 libtool usr-ldscript
 
 MY_P=${P/_}
 DESCRIPTION="Password Checking Library"
 HOMEPAGE="https://github.com/cracklib/cracklib/"
-SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}.tar.bz2"
+SRC_URI="https://github.com/cracklib/cracklib/releases/download/v2.9.7/cracklib-2.9.7.tar.gz https://github.com/cracklib/cracklib/releases/download/v2.9.7/cracklib-words-2.9.7.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~m68k-mint"
+KEYWORDS="*"
 IUSE="nls python static-libs zlib"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )
-	zlib? ( >=sys-libs/zlib-1.2.8-r1:=[${MULTILIB_USEDEP}] )"
+	zlib? ( >=sys-libs/zlib-1.2.8-r1:= )"
 DEPEND="${RDEPEND}
+	nls? ( virtual/libintl )
 	python? (
 		dev-python/setuptools[${PYTHON_USEDEP}]
 	)"
+BDEPEND="nls? ( sys-devel/gettext )"
 
 S="${WORKDIR}/${MY_P}"
 
 do_python() {
-	multilib_is_native_abi || return 0
 	use python || return 0
 	pushd python > /dev/null || die
 	distutils-r1_src_${EBUILD_PHASE}
@@ -51,7 +51,7 @@ src_prepare() {
 	do_python
 }
 
-multilib_src_configure() {
+src_configure() {
 	local myeconfargs=(
 		# use /usr/lib so that the dictionary is shared between ABIs
 		--with-default-dict='/usr/lib/cracklib_dict'
@@ -64,12 +64,12 @@ multilib_src_configure() {
 	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
 }
 
-multilib_src_compile() {
+src_compile() {
 	default
 	do_python
 }
 
-multilib_src_test() {
+rc_test() {
 	# Make sure we load the freshly built library
 	LD_LIBRARY_PATH="${BUILD_DIR}/lib/.libs" do_python
 }
@@ -78,27 +78,26 @@ python_test() {
 	${EPYTHON} -m unittest test_cracklib || die "Tests fail with ${EPYTHON}"
 }
 
-multilib_src_install() {
+src_install() {
 	default
 	# move shared libs to /
 	gen_usr_ldscript -a crack
 
 	do_python
-}
-
-multilib_src_install_all() {
 	einstalldocs
-	find "${ED}" -name "*.la" -delete || die
-	rm -r "${ED%/}"/usr/share/cracklib || die
+	find "${ED}" -type f -name "*.la" -delete || die
+	rm -r "${ED}"/usr/share/cracklib || die
 
 	insinto /usr/share/dict
 	doins dicts/cracklib-small
+	insinto /usr/share/dict
+	newins ${WORKDIR}/cracklib-words-${PV} cracklib-words
 }
 
 pkg_postinst() {
-	if [[ ${ROOT} == "/" ]] ; then
+	if [[ -n "${ROOT}" ]] && create-cracklib-dict -h >&/dev/null ; then
 		ebegin "Regenerating cracklib dictionary"
-		create-cracklib-dict "${EPREFIX}"/usr/share/dict/* > /dev/null
+		create-cracklib-dict /usr/share/dict/* >/dev/null
 		eend $?
 	fi
 }
