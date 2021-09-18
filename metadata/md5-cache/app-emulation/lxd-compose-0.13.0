@@ -6,4 +6,4 @@ KEYWORDS=*
 LICENSE=GPL3
 SLOT=0
 SRC_URI=https://github.com/MottainaiCI/lxd-compose/releases/download/v0.13.0/lxd-compose-v0.13.0-source.tar.gz -> lxd-compose-0.13.0.tar.gz
-_md5_=011a167646a13012532137811d402dcf
+_md5_=76c59f195ce8841521c6e089e6753d30
