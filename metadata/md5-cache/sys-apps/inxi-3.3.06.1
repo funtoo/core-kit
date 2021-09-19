@@ -1,0 +1,11 @@
+DEFINED_PHASES=install
+DESCRIPTION=The CLI inxi collects and prints hardware and system information
+EAPI=7
+HOMEPAGE=https://github.com/smxi/inxi
+IUSE=bluetooth hddtemp opengl
+KEYWORDS=*
+LICENSE=GPL-3+
+RDEPEND=dev-lang/perl sys-apps/pciutils sys-apps/usbutils bluetooth? ( net-wireless/bluez ) hddtemp? ( app-admin/hddtemp ) opengl? ( x11-apps/mesa-progs )
+SLOT=0
+SRC_URI=https://api.github.com/repos/smxi/inxi/tarball/refs/tags/3.3.06-1 -> inxi-3.3.06.1.tar.gz
+_md5_=989b43fb4a818af2a59986ea2eba48a7
