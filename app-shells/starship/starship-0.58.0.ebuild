@@ -26,7 +26,7 @@ byte-unit-4.0.12
 byteorder-1.4.3
 bytes-1.1.0
 cache-padded-1.1.1
-cc-1.0.69
+cc-1.0.70
 cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
@@ -61,21 +61,21 @@ foreign-types-0.3.2
 foreign-types-shared-0.1.1
 form_urlencoded-1.0.1
 fragile-1.0.0
-futures-0.3.16
-futures-channel-0.3.16
-futures-core-0.3.16
-futures-executor-0.3.16
-futures-io-0.3.16
+futures-0.3.17
+futures-channel-0.3.17
+futures-core-0.3.17
+futures-executor-0.3.17
+futures-io-0.3.17
 futures-lite-1.12.0
-futures-macro-0.3.16
-futures-sink-0.3.16
-futures-task-0.3.16
-futures-util-0.3.16
+futures-macro-0.3.17
+futures-sink-0.3.17
+futures-task-0.3.17
+futures-util-0.3.17
 generic-array-0.12.4
 gethostname-0.2.1
 getrandom-0.1.16
 getrandom-0.2.3
-git2-0.13.21
+git2-0.13.22
 hashbrown-0.9.1
 hashbrown-0.11.2
 hermit-abi-0.1.19
@@ -88,8 +88,8 @@ itoa-0.4.8
 jobserver-0.1.24
 lazy_static-1.4.0
 lazycell-1.3.0
-libc-0.2.101
-libgit2-sys-0.12.22+1.1.0
+libc-0.2.102
+libgit2-sys-0.12.23+1.2.0
 libz-sys-1.1.3
 linked-hash-map-0.5.4
 log-0.4.14
@@ -100,7 +100,7 @@ maplit-1.0.2
 matches-0.1.9
 memchr-2.4.1
 memoffset-0.6.4
-minimal-lexical-0.1.2
+minimal-lexical-0.1.3
 mockall-0.10.2
 mockall_derive-0.10.2
 native-tls-0.2.8
@@ -110,7 +110,7 @@ nix-0.19.1
 nix-0.22.1
 nom-7.0.0
 normalize-line-endings-0.3.0
-notify-rust-4.5.2
+notify-rust-4.5.3
 num-integer-0.1.44
 num-traits-0.2.14
 num_cpus-1.13.0
@@ -143,10 +143,10 @@ predicates-1.0.8
 predicates-core-1.0.2
 predicates-tree-1.0.3
 proc-macro-crate-0.1.5
-proc-macro-crate-1.0.0
+proc-macro-crate-1.1.0
 proc-macro-hack-0.5.19
 proc-macro-nested-0.1.7
-proc-macro2-1.0.28
+proc-macro2-1.0.29
 process_control-3.1.0
 quick-xml-0.22.0
 quote-0.3.15
@@ -171,43 +171,43 @@ schannel-0.1.19
 scoped-tls-1.0.0
 scopeguard-1.1.0
 security-framework-2.3.1
-security-framework-sys-2.4.0
+security-framework-sys-2.4.2
 semver-1.0.4
-serde-1.0.129
-serde_derive-1.0.129
-serde_json-1.0.66
+serde-1.0.130
+serde_derive-1.0.130
+serde_json-1.0.68
 serde_repr-0.1.7
 serde_urlencoded-0.6.1
 sha-1-0.8.2
 shadow-rs-0.7.1
 shell-words-1.0.0
 slab-0.4.4
-socket2-0.4.1
+socket2-0.4.2
 static_assertions-1.1.0
 strsim-0.8.0
 strsim-0.10.0
 strum-0.8.0
 strum_macros-0.8.0
 syn-0.11.11
-syn-1.0.75
+syn-1.0.76
 synom-0.11.3
 sys-info-0.9.0
 tempfile-3.2.0
 term_size-0.3.2
 textwrap-0.11.0
-thiserror-1.0.26
-thiserror-impl-1.0.26
+thiserror-1.0.29
+thiserror-impl-1.0.29
 time-0.1.44
-tinyvec-1.3.1
+tinyvec-1.4.0
 tinyvec_macros-0.1.0
 toml-0.5.8
 treeline-0.1.0
-typenum-1.13.0
+typenum-1.14.0
 ucd-trie-0.1.3
 unicode-bidi-0.3.6
 unicode-normalization-0.1.19
 unicode-segmentation-1.8.0
-unicode-width-0.1.8
+unicode-width-0.1.9
 unicode-xid-0.0.4
 unicode-xid-0.2.2
 uom-0.30.0
@@ -242,7 +242,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.57.0 -> starship-v0.57.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v0.58.0 -> starship-v0.58.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
