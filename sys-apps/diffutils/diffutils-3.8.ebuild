@@ -6,11 +6,11 @@ inherit flag-o-matic
 
 DESCRIPTION="Tools to make diffs and compare files"
 HOMEPAGE="https://www.gnu.org/software/diffutils/"
-SRC_URI="https://ftp.gnu.org/gnu/diffutils//diffutils-3.7.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/diffutils//diffutils-3.8.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="next"
 IUSE="nls static"
 
 BDEPEND="

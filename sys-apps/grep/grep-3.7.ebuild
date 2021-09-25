@@ -6,11 +6,11 @@ inherit flag-o-matic
 
 DESCRIPTION="GNU regular expression matcher"
 HOMEPAGE="https://www.gnu.org/software/grep/"
-SRC_URI="{{artifacts[0].src_uri}}"
+SRC_URI="https://ftp.gnu.org/gnu/grep//grep-3.7.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="{{keywords}}"
+KEYWORDS="next"
 IUSE="nls pcre static"
 
 LIB_DEPEND="pcre? ( >=dev-libs/libpcre-7.8-r1[static-libs(+)] )"
