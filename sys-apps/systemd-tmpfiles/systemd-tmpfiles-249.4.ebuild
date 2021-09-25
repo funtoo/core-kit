@@ -69,7 +69,7 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
-			-Ddebug=false
+		-Ddebug=false
 		-Dstrip=false
 		-Dwerror=false
 		-Db_asneeded=false
