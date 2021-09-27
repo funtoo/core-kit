@@ -110,6 +110,9 @@ src_prepare() {
 	# do not include debian devs certificates
 	rm -rf "${WORKDIR}"/debian/certs
 
+	# remove references to debian uefi certs
+	sed -i -e 's|\${CURDIR}\/debian\/certs\/debian-uefi-certs\.pem||g' "${WORKDIR}"/debian/rules.gen
+
 	sed -i -e "s:^\(EXTRAVERSION =\).*:\1 ${EXTRAVERSION}:" Makefile || die
 	sed	-i -e 's:#export\tINSTALL_PATH:export\tINSTALL_PATH:' Makefile || die
 	rm -f .config >/dev/null
@@ -127,11 +130,6 @@ src_prepare() {
 	    epatch "${FILESDIR}"/5.14.6/mcelog.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/mcelog.patch || die
-	fi
-	if [ -e "${FILESDIR}/5.14.6/nocerts.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.6/nocerts.patch || die
-	else
-	    epatch "${FILESDIR}"/latest/nocerts.patch || die
 	fi
 	if [ -e "${FILESDIR}/5.14.6/ikconfig.patch" ]; then
 	    epatch "${FILESDIR}"/5.14.6/ikconfig.patch || die
