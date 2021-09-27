@@ -126,6 +126,31 @@ src_prepare() {
 	else
 	    epatch "${FILESDIR}"/latest/nocerts.patch || die
 	fi
+	if [ -e "${FILESDIR}/5.10.46/xfs-libcrc32c-fix.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.46/xfs-libcrc32c-fix.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/xfs-libcrc32c-fix.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.46/mcelog.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.46/mcelog.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/mcelog.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.46/ikconfig.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.46/ikconfig.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.46/fix-bluetooth-polling.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.46/fix-bluetooth-polling.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/fix-bluetooth-polling.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.46/extra_cpu_optimizations.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.46/extra_cpu_optimizations.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
+	fi
 	local arch featureset subarch
 	featureset="standard"
 	if [[ ${REAL_ARCH} == x86 ]]; then
