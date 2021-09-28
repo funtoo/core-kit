@@ -7,7 +7,7 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_EXTRAVERSION="2"
+DEB_EXTRAVERSION="3"
 # Debian version -1 becomes _p1 in Funtoo:
 EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
 
@@ -38,7 +38,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.6.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.6-2.debian.tar.xz"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.6.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.6-3.debian.tar.xz"
 S="$WORKDIR/linux-5.14.6"
 
 get_patch_list() {
