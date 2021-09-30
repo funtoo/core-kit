@@ -8,23 +8,24 @@ HOMEPAGE="http://kernel.kolivas.org/"
 
 K_SECURITY_UNSUPPORTED="1"
 
-OKV="{{base_ver}}"
-KV="{{base_ver}}"
+OKV="5.12.9"
+KV="5.12.9"
 
 inherit kernel-2
 detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux {{base_ver}}-ck{{ck_ver}}, with Con Kolivas' MuQSS scheduler and patchset"
+DESCRIPTION="Linux 5.12.9-ck1, with Con Kolivas' MuQSS scheduler and patchset"
 
-SRC_URI="{%- for key, value in artifacts.items() %}
-{{value.src_uri}}
-{%- endfor %}"
+SRC_URI="
+https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.12.9.xz
+http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
+https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.12.tar.xz"
 
 UNIPATCH_LIST="
-	${DISTDIR}/{{artifacts["korg_patch"].final_name}}
-	${DISTDIR}/{{artifacts["ck_patch"].final_name}}
+	${DISTDIR}/patch-5.12.9.xz
+	${DISTDIR}/patch-5.12-ck1.xz
 "
 
 UNIPATCH_STRICTORDER="yes"
