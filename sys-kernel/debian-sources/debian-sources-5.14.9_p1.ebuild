@@ -7,7 +7,7 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_EXTRAVERSION="3"
+DEB_EXTRAVERSION="1"
 # Debian version -1 becomes _p1 in Funtoo:
 EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
 
@@ -16,7 +16,7 @@ MODULE_EXT=${PVR}-${PN}
 
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="5.14.6-${DEB_EXTRAVERSION}"
+DEB_PV="5.14.9-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS=""
@@ -38,8 +38,8 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.6.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.6-3.debian.tar.xz"
-S="$WORKDIR/linux-5.14.6"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.9.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.9-1.debian.tar.xz"
+S="$WORKDIR/linux-5.14.9"
 
 get_patch_list() {
 	[[ -z "${1}" ]] && die "No patch series file specified"
@@ -121,28 +121,28 @@ src_prepare() {
 	#make -s include/linux/version.h || die "make include/linux/version.h failed"
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-	if [ -e "${FILESDIR}/5.14.6/xfs-libcrc32c-fix.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.6/xfs-libcrc32c-fix.patch || die
+	if [ -e "${FILESDIR}/5.14.9/xfs-libcrc32c-fix.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.9/xfs-libcrc32c-fix.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/xfs-libcrc32c-fix.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.6/mcelog.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.6/mcelog.patch || die
+	if [ -e "${FILESDIR}/5.14.9/mcelog.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.9/mcelog.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/mcelog.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.6/ikconfig.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.6/ikconfig.patch || die
+	if [ -e "${FILESDIR}/5.14.9/ikconfig.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.9/ikconfig.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.6/fix-bluetooth-polling.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.6/fix-bluetooth-polling.patch || die
+	if [ -e "${FILESDIR}/5.14.9/fix-bluetooth-polling.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.9/fix-bluetooth-polling.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/fix-bluetooth-polling.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.6/extra_cpu_optimizations.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.6/extra_cpu_optimizations.patch || die
+	if [ -e "${FILESDIR}/5.14.9/extra_cpu_optimizations.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.9/extra_cpu_optimizations.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
 	fi
