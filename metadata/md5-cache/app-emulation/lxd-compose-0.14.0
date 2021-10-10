@@ -5,5 +5,5 @@ HOMEPAGE=https://github.com/MottainaiCI/lxd-compose https://mottainaici.github.i
 KEYWORDS=*
 LICENSE=GPL3
 SLOT=0
-SRC_URI=https://github.com/MottainaiCI/lxd-compose/releases/download/v0.13.2/lxd-compose-v0.13.2-source.tar.gz -> lxd-compose-0.13.2.tar.gz
-_md5_=b1e7abc6501e0ab36dcaaa946766a077
+SRC_URI=https://github.com/MottainaiCI/lxd-compose/releases/download/v0.14.0/lxd-compose-v0.14.0-source.tar.gz -> lxd-compose-0.14.0.tar.gz
+_md5_=dd06a9791d3751a8de01248c5b68f5b1
