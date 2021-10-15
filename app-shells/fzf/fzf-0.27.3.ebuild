@@ -15,14 +15,13 @@ EGO_SUM=(
 	"github.com/lucasb-eyer/go-colorful v1.0.3/go.mod"
 	"github.com/lucasb-eyer/go-colorful v1.2.0"
 	"github.com/lucasb-eyer/go-colorful v1.2.0/go.mod"
-	"github.com/mattn/go-isatty v0.0.12"
-	"github.com/mattn/go-isatty v0.0.12/go.mod"
+	"github.com/mattn/go-isatty v0.0.14"
+	"github.com/mattn/go-isatty v0.0.14/go.mod"
 	"github.com/mattn/go-runewidth v0.0.7/go.mod"
-	"github.com/mattn/go-runewidth v0.0.12"
-	"github.com/mattn/go-runewidth v0.0.12/go.mod"
-	"github.com/mattn/go-shellwords v1.0.11"
-	"github.com/mattn/go-shellwords v1.0.11/go.mod"
-	"github.com/rivo/uniseg v0.1.0/go.mod"
+	"github.com/mattn/go-runewidth v0.0.13"
+	"github.com/mattn/go-runewidth v0.0.13/go.mod"
+	"github.com/mattn/go-shellwords v1.0.12"
+	"github.com/mattn/go-shellwords v1.0.12/go.mod"
 	"github.com/rivo/uniseg v0.2.0"
 	"github.com/rivo/uniseg v0.2.0/go.mod"
 	"github.com/saracen/walker v0.1.2"
@@ -31,10 +30,9 @@ EGO_SUM=(
 	"golang.org/x/sync v0.0.0-20210220032951-036812b2e83c"
 	"golang.org/x/sync v0.0.0-20210220032951-036812b2e83c/go.mod"
 	"golang.org/x/sys v0.0.0-20190626150813-e07cf5db2756/go.mod"
-	"golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod"
 	"golang.org/x/sys v0.0.0-20201119102817-f84b799fce68/go.mod"
-	"golang.org/x/sys v0.0.0-20210403161142-5e06dd20ab57"
-	"golang.org/x/sys v0.0.0-20210403161142-5e06dd20ab57/go.mod"
+	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c"
+	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod"
 	"golang.org/x/term v0.0.0-20210317153231-de623e64d2a6"
 	"golang.org/x/term v0.0.0-20210317153231-de623e64d2a6/go.mod"
 	"golang.org/x/text v0.3.0/go.mod"
@@ -45,7 +43,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/archive/0.27.2.tar.gz -> fzf-0.27.2.tar.gz
+SRC_URI="https://github.com/junegunn/fzf/archive/0.27.3.tar.gz -> fzf-0.27.3.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT BSD-with-disclosure"
