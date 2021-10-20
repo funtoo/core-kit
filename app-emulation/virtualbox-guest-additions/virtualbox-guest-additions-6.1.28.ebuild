@@ -6,7 +6,7 @@ inherit linux-mod user toolchain-funcs
 
 DESCRIPTION="VirtualBox kernel modules and user-space tools for Gentoo guests"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/6.1.26/VirtualBox-6.1.26.tar.bz2"
+SRC_URI="https://download.virtualbox.org/virtualbox/6.1.28/VirtualBox-6.1.28.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -39,7 +39,7 @@ DEPEND="
 BUILD_TARGETS="all"
 BUILD_TARGET_ARCH="${ARCH}"
 
-S="${WORKDIR}/VirtualBox-6.1.26"
+S="${WORKDIR}/VirtualBox-6.1.28"
 VBOX_MOD_SRC_DIR="${S}/out/linux.${ARCH}/release/bin/additions/src"
 
 pkg_setup() {
