@@ -7,7 +7,7 @@ inherit check-reqs eutils mount-boot
 SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
-DEB_EXTRAVERSION="{{deb_extraversion}}"
+DEB_EXTRAVERSION="1"
 # Debian version -1 becomes _p1 in Funtoo:
 EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
 
@@ -16,14 +16,10 @@ MODULE_EXT=${PVR}-${PN}
 
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="{{linux_version}}-${DEB_EXTRAVERSION}"
+DEB_PV="5.10.70-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
-{%- if unmasked %}
-KEYWORDS="*"
-{%- else %}
 KEYWORDS="next"
-{%- endif %}
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -42,8 +38,8 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="{{artifacts|map(attribute='src_uri')|join(' ')}}"
-S="$WORKDIR/linux-{{linux_version}}"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.10.70.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.10.70-1.debian.tar.xz"
+S="$WORKDIR/linux-5.10.70"
 
 get_patch_list() {
 	[[ -z "${1}" ]] && die "No patch series file specified"
@@ -125,14 +121,41 @@ src_prepare() {
 	#make -s include/linux/version.h || die "make include/linux/version.h failed"
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-
-	{%- for patch in patches %}
-	if [ -e "${FILESDIR}/{{linux_version}}/{{patch}}" ]; then
-	    epatch "${FILESDIR}"/{{linux_version}}/{{patch}} || die
+	if [ -e "${FILESDIR}/5.10.70/xfs-libcrc32c-fix.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.70/xfs-libcrc32c-fix.patch || die
 	else
-	    epatch "${FILESDIR}"/latest/{{patch}} || die
+	    epatch "${FILESDIR}"/latest/xfs-libcrc32c-fix.patch || die
 	fi
-	{%- endfor %}
+	if [ -e "${FILESDIR}/5.10.70/mcelog.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.70/mcelog.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/mcelog.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.70/nocerts.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.70/nocerts.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/nocerts.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.70/ikconfig.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.70/ikconfig.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.70/fix-bluetooth-polling.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.70/fix-bluetooth-polling.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/fix-bluetooth-polling.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.70/amdgpu-picasso.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.70/amdgpu-picasso.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/amdgpu-picasso.patch || die
+	fi
+	if [ -e "${FILESDIR}/5.10.70/extra_cpu_optimizations.patch" ]; then
+	    epatch "${FILESDIR}"/5.10.70/extra_cpu_optimizations.patch || die
+	else
+	    epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
+	fi
 	local arch featureset subarch
 	featureset="standard"
 	if [[ ${REAL_ARCH} == x86 ]]; then
