@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="The CLI inxi collects and prints hardware and system information"
 HOMEPAGE="https://github.com/smxi/inxi"
-SRC_URI="https://api.github.com/repos/smxi/inxi/tarball/refs/tags/3.3.07-1 -> inxi-3.3.07.1.tar.gz"
+SRC_URI="https://api.github.com/repos/smxi/inxi/tarball/refs/tags/3.3.08-1 -> inxi-3.3.08.1.tar.gz"
 
 LICENSE="GPL-3+"
 SLOT="0"
