@@ -74,11 +74,11 @@ src_configure() {
 		-Dwerror=false
 		-Db_coverage=false
 		-Db_lto=false
-		-Db_asneeded=false
 		-Db_ndebug=false
+		-Db_pie=false
 		-Db_pch=false
 		-Db_staticpic=false
-		-Db_pie=false
+		-Db_asneeded=false
 		-Db_lundef=false
 		-Dbuild.cpp_rtti=false
 		-Dbuild.cpp_debugstl=false
