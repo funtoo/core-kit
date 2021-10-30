@@ -141,16 +141,6 @@ src_prepare() {
 	else
 	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.10.70/fix-bluetooth-polling.patch" ]; then
-	    epatch "${FILESDIR}"/5.10.70/fix-bluetooth-polling.patch || die
-	else
-	    epatch "${FILESDIR}"/latest/fix-bluetooth-polling.patch || die
-	fi
-	if [ -e "${FILESDIR}/5.10.70/amdgpu-picasso.patch" ]; then
-	    epatch "${FILESDIR}"/5.10.70/amdgpu-picasso.patch || die
-	else
-	    epatch "${FILESDIR}"/latest/amdgpu-picasso.patch || die
-	fi
 	if [ -e "${FILESDIR}/5.10.70/extra_cpu_optimizations.patch" ]; then
 	    epatch "${FILESDIR}"/5.10.70/extra_cpu_optimizations.patch || die
 	else
