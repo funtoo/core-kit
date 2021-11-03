@@ -8,7 +8,7 @@ inherit meson python-any-r1
 
 DESCRIPTION="C++ JSON reader and writer"
 HOMEPAGE="https://github.com/open-source-parsers/jsoncpp"
-SRC_URI="https://api.github.com/repos/open-source-parsers/jsoncpp/tarball/1.9.4 -> jsoncpp-1.9.4.tar.gz"
+SRC_URI="https://api.github.com/repos/open-source-parsers/jsoncpp/tarball/1.9.5 -> jsoncpp-1.9.5.tar.gz"
 
 LICENSE="|| ( public-domain MIT )"
 SLOT="0/24"
