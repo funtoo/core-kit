@@ -72,12 +72,12 @@ src_configure() {
 		-Ddebug=false
 		-Dstrip=false
 		-Dwerror=false
-		-Db_pie=false
-		-Db_ndebug=false
-		-Db_lundef=false
 		-Db_coverage=false
-		-Db_staticpic=false
+		-Db_ndebug=false
 		-Db_lto=false
+		-Db_lundef=false
+		-Db_staticpic=false
+		-Db_pie=false
 		-Db_asneeded=false
 		-Db_pch=false
 		-Dbuild.cpp_rtti=false
