@@ -16,7 +16,7 @@ MODULE_EXT=${PVR}-${PN}
 
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="5.14.12-${DEB_EXTRAVERSION}"
+DEB_PV="5.14.16-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="next"
@@ -38,8 +38,8 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.12.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.12-1.debian.tar.xz"
-S="$WORKDIR/linux-5.14.12"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.16.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.14.16-1.debian.tar.xz"
+S="$WORKDIR/linux-5.14.16"
 
 get_patch_list() {
 	[[ -z "${1}" ]] && die "No patch series file specified"
@@ -121,28 +121,28 @@ src_prepare() {
 	#make -s include/linux/version.h || die "make include/linux/version.h failed"
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-	if [ -e "${FILESDIR}/5.14.12/xfs-libcrc32c-fix.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.12/xfs-libcrc32c-fix.patch || die
+	if [ -e "${FILESDIR}/5.14.16/xfs-libcrc32c-fix.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.16/xfs-libcrc32c-fix.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/xfs-libcrc32c-fix.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.12/mcelog.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.12/mcelog.patch || die
+	if [ -e "${FILESDIR}/5.14.16/mcelog.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.16/mcelog.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/mcelog.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.12/ikconfig.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.12/ikconfig.patch || die
+	if [ -e "${FILESDIR}/5.14.16/ikconfig.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.16/ikconfig.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.12/fix-bluetooth-polling.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.12/fix-bluetooth-polling.patch || die
+	if [ -e "${FILESDIR}/5.14.16/fix-bluetooth-polling.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.16/fix-bluetooth-polling.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/fix-bluetooth-polling.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.14.12/extra_cpu_optimizations.patch" ]; then
-	    epatch "${FILESDIR}"/5.14.12/extra_cpu_optimizations.patch || die
+	if [ -e "${FILESDIR}/5.14.16/extra_cpu_optimizations.patch" ]; then
+	    epatch "${FILESDIR}"/5.14.16/extra_cpu_optimizations.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
 	fi
