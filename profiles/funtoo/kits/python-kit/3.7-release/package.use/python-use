@@ -8,6 +8,7 @@
 =app-portage/elogv-0.7.6.4 python_single_target_python2_7
 =app-portage/elogv-0.7.6.5 python_single_target_python2_7
 =app-portage/elogv-0.7.6.6 python_single_target_python2_7
+=net-wireless/crda-3.18-r3 python_single_target_python2_7
 =sys-devel/gdb-7.9.1 python_single_target_python2_7
 =sys-fs/udiskie-1.1.1 python_single_target_python2_7
 =sys-libs/openipmi-2.0.22 python_single_target_python2_7
@@ -19,7 +20,6 @@ app-misc/byobu python_single_target_python2_7
 app-portage/cpuid2cpuflags python_single_target_python2_7
 app-portage/porthole python_single_target_python2_7
 dev-lang/yasm python_single_target_python2_7
-net-wireless/crda python_single_target_python2_7
 sys-apps/etckeeper python_single_target_python2_7
 sys-apps/pacman python_single_target_python2_7
 sys-boot/udk python_single_target_python2_7
