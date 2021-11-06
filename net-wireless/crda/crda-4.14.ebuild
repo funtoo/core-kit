@@ -1,18 +1,17 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3+ )
 inherit toolchain-funcs python-any-r1 udev
 
 DESCRIPTION="Central Regulatory Domain Agent for wireless networks"
 HOMEPAGE="https://wireless.wiki.kernel.org/en/developers/regulatory/crda"
-SRC_URI="http://linuxwireless.org/download/crda/${P}.tar.xz
-	mirror://kernel/software/network/crda/${P}.tar.xz"
+SRC_URI="https://git.kernel.org/pub/scm/linux/kernel/git/mcgrof/crda.git/snapshot/${P}.tar.gz"
 
 LICENSE="ISC"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 ia64 ~mips ppc ppc64 sparc x86"
+KEYWORDS="*"
 IUSE="gcrypt libressl"
 
 RDEPEND="!gcrypt? (
@@ -22,23 +21,25 @@ RDEPEND="!gcrypt? (
 	gcrypt? ( dev-libs/libgcrypt:0= )
 	dev-libs/libnl:3
 	net-wireless/wireless-regdb"
-DEPEND="${RDEPEND}
-	${PYTHON_DEPS}
+DEPEND="${RDEPEND}"
+BDEPEND="${PYTHON_DEPS}
 	$(python_gen_any_dep 'dev-python/m2crypto[${PYTHON_USEDEP}]')
 	virtual/pkgconfig"
 
 python_check_deps() {
-	has_version --host-root "dev-python/m2crypto[${PYTHON_USEDEP}]"
+	has_version -b "dev-python/m2crypto[${PYTHON_USEDEP}]"
 }
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-3.18-no-ldconfig.patch
-	"${FILESDIR}"/${PN}-3.18-no-werror.patch
-	"${FILESDIR}"/${PN}-3.18-cflags.patch
-	"${FILESDIR}"/${PN}-3.18-libreg-link.patch #542436
-	"${FILESDIR}"/${PN}-3.18-openssl-1.1.0-compatibility.patch #652428
-	"${FILESDIR}"/${PN}-3.18-libressl.patch
-	"${FILESDIR}"/${PN}-3.18-ldflags.patch
+	"${FILESDIR}"/${PN}-no-ldconfig.patch
+	"${FILESDIR}"/${PN}-no-werror.patch
+	"${FILESDIR}"/${PN}-cflags.patch
+	"${FILESDIR}"/${PN}-libreg-link.patch #542436
+	"${FILESDIR}"/${PN}-4.14-python-3.patch
+	"${FILESDIR}"/${PN}-4.14-openssl-1.1.0-compatibility.patch #652428
+	"${FILESDIR}"/${PN}-libressl.patch
+	"${FILESDIR}"/${PN}-ldflags.patch
+	"${FILESDIR}"/${PN}-4.14-do-not-compress-doc.patch
 )
 
 src_prepare() {
