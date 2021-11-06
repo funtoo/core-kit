@@ -1,0 +1,13 @@
+BDEPEND=>=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=prepare
+DEPEND==sys-libs/zlib-1.2*
+DESCRIPTION=Portable and efficient API to determine the call-chain of a program
+EAPI=7
+HOMEPAGE=https://github.com/libunwind/libunwind
+KEYWORDS=next
+LICENSE=MIT
+RDEPEND==sys-libs/zlib-1.2*
+SLOT=0
+SRC_URI=https://github.com/libunwind/libunwind/releases/download/v1.6.0-rc2/libunwind-1.6.0-rc2.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=e0b81816126f9fb58162f63d47943e50
