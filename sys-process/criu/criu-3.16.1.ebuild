@@ -8,7 +8,7 @@ inherit toolchain-funcs linux-info flag-o-matic python-r1
 
 DESCRIPTION="utility to checkpoint/restore a process tree"
 HOMEPAGE="https://criu.org/"
-SRC_URI="https://download.openvz.org/criu/${P}.tar.bz2"
+SRC_URI="https://github.com/checkpoint-restore/criu/archive/v3.16.1/4a1731891e91e62f15c40c361aff2a8a54d91bb3.tar.gz -> criu-3.16.1-4a17318.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -39,12 +39,6 @@ CONFIG_CHECK="~CHECKPOINT_RESTORE ~NAMESPACES ~PID_NS ~FHANDLE ~EVENTFD ~EPOLL ~
 
 # root access required for tests
 RESTRICT="test"
-
-PATCHES=(
-	"${FILESDIR}"/${PN}-2.2-flags.patch
-	"${FILESDIR}"/${PN}-2.3-no-git.patch
-	"${FILESDIR}"/${PN}-3.12-automagic-libbsd.patch
-)
 
 criu_arch() {
 	# criu infers the arch from $(uname -m).  We never want this to happen.
