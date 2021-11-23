@@ -6,7 +6,7 @@ inherit bash-completion-r1 toolchain-funcs xdg-utils
 
 DESCRIPTION="The missing terminal file browser for X"
 HOMEPAGE="https://github.com/jarun/nnn"
-SRC_URI="https://api.github.com/repos/jarun/nnn/tarball/v4.3 -> nnn-4.3.tar.gz"
+SRC_URI="https://api.github.com/repos/jarun/nnn/tarball/v4.4 -> nnn-4.4.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"
