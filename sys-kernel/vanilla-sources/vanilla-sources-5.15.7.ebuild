@@ -14,9 +14,9 @@ detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux 5.15.6"
+DESCRIPTION="Linux 5.15.7"
 
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.15.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.15.6.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.15.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.15.7.xz"
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
