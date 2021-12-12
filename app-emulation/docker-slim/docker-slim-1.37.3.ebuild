@@ -95,6 +95,8 @@ EGO_SUM=(
 	"github.com/antchfx/xpath v1.1.8"
 	"github.com/antchfx/xpath v1.1.8/go.mod"
 	"github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod"
+	"github.com/armon/go-radix v1.0.0"
+	"github.com/armon/go-radix v1.0.0/go.mod"
 	"github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a/go.mod"
 	"github.com/aws/aws-sdk-go v1.15.11/go.mod"
 	"github.com/aws/aws-sdk-go v1.34.9/go.mod"
@@ -1096,7 +1098,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://api.github.com/repos/docker-slim/docker-slim/tarball/1.37.2 -> docker-slim-1.37.2.tar.gz
+SRC_URI="https://api.github.com/repos/docker-slim/docker-slim/tarball/1.37.3 -> docker-slim-1.37.3.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 DESCRIPTION="Make your containers better, smaller, more secure and do less to get there"
