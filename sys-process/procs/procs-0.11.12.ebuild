@@ -64,16 +64,16 @@ fnv-1.0.7
 form_urlencoded-1.0.1
 fuchsia-zircon-0.3.3
 fuchsia-zircon-sys-0.3.3
-futures-0.3.18
+futures-0.3.17
 futures-channel-0.3.18
 futures-core-0.3.18
-futures-executor-0.3.18
+futures-executor-0.3.17
 futures-io-0.3.18
 futures-lite-1.12.0
-futures-macro-0.3.18
+futures-macro-0.3.17
 futures-sink-0.3.18
 futures-task-0.3.18
-futures-util-0.3.18
+futures-util-0.3.17
 getch-0.2.1
 getrandom-0.1.16
 getrandom-0.2.3
@@ -122,7 +122,7 @@ num-integer-0.1.44
 num-traits-0.2.14
 num_cpus-1.13.0
 object-0.27.1
-once_cell-1.8.0
+once_cell-1.9.0
 pager-0.16.0
 parking-2.0.0
 parking_lot-0.11.2
@@ -138,7 +138,9 @@ pin-utils-0.1.0
 polling-2.2.0
 proc-macro-error-1.0.4
 proc-macro-error-attr-1.0.4
-proc-macro2-1.0.33
+proc-macro-hack-0.5.19
+proc-macro-nested-0.1.7
+proc-macro2-1.0.34
 procfs-0.12.0
 quote-1.0.10
 redox_syscall-0.1.57
@@ -166,7 +168,7 @@ structopt-0.3.25
 structopt-derive-0.4.18
 syn-1.0.82
 synstructure-0.12.6
-tar-0.4.37
+tar-0.4.38
 termbg-0.3.0
 terminal_size-0.1.17
 termios-0.2.2
@@ -224,7 +226,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.11 -> procs-0.11.11.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.12 -> procs-0.11.12.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
