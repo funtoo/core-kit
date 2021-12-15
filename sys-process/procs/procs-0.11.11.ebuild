@@ -3,10 +3,10 @@
 EAPI=7
 
 CRATES="
-addr2line-0.16.0
+addr2line-0.17.0
 adler-1.0.2
-ansi_term-0.11.0
-anyhow-1.0.44
+ansi_term-0.12.1
+anyhow-1.0.51
 arrayref-0.3.6
 arrayvec-0.5.2
 async-channel-1.6.1
@@ -20,28 +20,28 @@ async-task-4.0.3
 atomic-waker-1.0.0
 atty-0.2.14
 autocfg-1.0.1
-backtrace-0.3.61
+backtrace-0.3.63
 backtrace-sys-0.1.23
 base64-0.9.3
 base64-0.13.0
 bitflags-1.3.2
 blake2b_simd-0.5.11
-blocking-1.0.2
-bumpalo-3.7.1
-byte-unit-4.0.12
+blocking-1.1.0
+bumpalo-3.8.0
+byte-unit-4.0.13
 byteorder-1.4.3
 bytes-0.5.6
 bytes-1.1.0
 cache-padded-1.1.1
-cc-1.0.71
+cc-1.0.72
 cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
-clap-2.33.3
+clap-2.34.0
 concurrent-queue-1.2.2
 console-0.15.0
 constant_time_eq-0.1.5
-crc32fast-1.2.1
+crc32fast-1.3.0
 crossbeam-utils-0.8.5
 crossterm-0.19.0
 crossterm_winapi-0.7.0
@@ -52,7 +52,7 @@ dirs-sys-0.3.6
 dockworker-0.0.23
 either-1.6.1
 encode_unicode-0.3.6
-errno-0.2.7
+errno-0.2.8
 errno-dragonfly-0.1.2
 event-listener-2.5.1
 failure-0.1.8
@@ -64,21 +64,21 @@ fnv-1.0.7
 form_urlencoded-1.0.1
 fuchsia-zircon-0.3.3
 fuchsia-zircon-sys-0.3.3
-futures-0.3.17
-futures-channel-0.3.17
-futures-core-0.3.17
-futures-executor-0.3.17
-futures-io-0.3.17
+futures-0.3.18
+futures-channel-0.3.18
+futures-core-0.3.18
+futures-executor-0.3.18
+futures-io-0.3.18
 futures-lite-1.12.0
-futures-macro-0.3.17
-futures-sink-0.3.17
-futures-task-0.3.17
-futures-util-0.3.17
+futures-macro-0.3.18
+futures-sink-0.3.18
+futures-task-0.3.18
+futures-util-0.3.18
 getch-0.2.1
 getrandom-0.1.16
 getrandom-0.2.3
-gimli-0.25.0
-gloo-timers-0.2.1
+gimli-0.26.1
+gloo-timers-0.2.2
 h2-0.2.7
 hashbrown-0.11.2
 heck-0.3.3
@@ -95,11 +95,12 @@ indexmap-1.7.0
 instant-0.1.12
 iovec-0.1.4
 itoa-0.4.8
+itoa-1.0.1
 js-sys-0.3.55
 kernel32-sys-0.2.2
 kv-log-macro-1.0.7
 lazy_static-1.4.0
-libc-0.2.104
+libc-0.2.112
 libproc-0.10.0
 lock_api-0.4.5
 log-0.4.14
@@ -120,7 +121,7 @@ ntapi-0.3.6
 num-integer-0.1.44
 num-traits-0.2.14
 num_cpus-1.13.0
-object-0.26.2
+object-0.27.1
 once_cell-1.8.0
 pager-0.16.0
 parking-2.0.0
@@ -134,13 +135,11 @@ pin-project-internal-1.0.8
 pin-project-lite-0.1.12
 pin-project-lite-0.2.7
 pin-utils-0.1.0
-polling-2.1.0
+polling-2.2.0
 proc-macro-error-1.0.4
 proc-macro-error-attr-1.0.4
-proc-macro-hack-0.5.19
-proc-macro-nested-0.1.7
-proc-macro2-1.0.30
-procfs-0.11.0
+proc-macro2-1.0.33
+procfs-0.12.0
 quote-1.0.10
 redox_syscall-0.1.57
 redox_syscall-0.2.10
@@ -150,12 +149,12 @@ regex-1.5.4
 regex-syntax-0.6.25
 rust-argon2-0.8.3
 rustc-demangle-0.1.21
-ryu-1.0.5
+ryu-1.0.9
 safemem-0.3.3
 scopeguard-1.1.0
-serde-1.0.130
-serde_derive-1.0.130
-serde_json-1.0.68
+serde-1.0.131
+serde_derive-1.0.131
+serde_json-1.0.73
 signal-hook-0.1.17
 signal-hook-registry-1.4.0
 slab-0.4.5
@@ -165,7 +164,7 @@ socket2-0.4.2
 strsim-0.8.0
 structopt-0.3.25
 structopt-derive-0.4.18
-syn-1.0.80
+syn-1.0.82
 synstructure-0.12.6
 tar-0.4.37
 termbg-0.3.0
@@ -175,7 +174,7 @@ textwrap-0.11.0
 thiserror-1.0.30
 thiserror-impl-1.0.30
 time-0.1.43
-tinyvec-1.5.0
+tinyvec-1.5.1
 tinyvec_macros-0.1.0
 tokio-0.2.25
 tokio-macros-0.2.6
@@ -195,7 +194,7 @@ unix_socket-0.5.0
 url-2.2.2
 users-0.11.0
 utf8-width-0.1.5
-value-bag-1.0.0-alpha.7
+value-bag-1.0.0-alpha.8
 vec_map-0.8.2
 version_check-0.9.3
 void-1.0.2
@@ -225,7 +224,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.10 -> procs-0.11.10.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.11 -> procs-0.11.11.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
