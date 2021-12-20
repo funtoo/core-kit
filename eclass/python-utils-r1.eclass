@@ -39,7 +39,7 @@ inherit toolchain-funcs
 _PYTHON_ALL_IMPLS=(
 	pypy3
 	python2_7
-	python3_6 python3_7 python3_8 python3_9
+	python3_6 python3_7 python3_8 python3_9 python3_10
 )
 readonly _PYTHON_ALL_IMPLS
 
@@ -169,13 +169,16 @@ _python_set_impls() {
 				supp['python3_7']=1
 				supp['python3_8']=1
 				supp['python3_9']=1
+				supp['python3_10']=1
 				;;
 			python3_8+)
 				supp['python3_8']=1
 				supp['python3_9']=1
+				supp['python3_10']=1
 				;;
 			python3_9+)
 				supp['python3_9']=1
+				supp['python3_10']=1
 				;;
 
 			# Below, new special setting that will enable python2 and
