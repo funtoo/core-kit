@@ -250,7 +250,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.1.0 -> starship-v1.1.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.1.1 -> starship-v1.1.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
