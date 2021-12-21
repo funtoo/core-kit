@@ -5,7 +5,6 @@ EAPI=7
 CRATES="
 ahash-0.4.7
 aho-corasick-0.7.18
-ansi_term-0.11.0
 ansi_term-0.12.1
 arrayref-0.3.6
 arrayvec-0.5.2
@@ -18,7 +17,7 @@ bitflags-1.3.2
 blake2b_simd-0.5.11
 block-0.1.6
 block-buffer-0.7.3
-block-buffer-0.9.0
+block-buffer-0.10.0
 block-padding-0.1.5
 byte-tools-0.3.1
 byte-unit-4.0.13
@@ -29,7 +28,7 @@ cc-1.0.70
 cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
-clap-2.33.3
+clap-2.34.0
 combine-4.6.1
 concurrent-queue-1.2.2
 constant_time_eq-0.1.5
@@ -42,21 +41,22 @@ crossbeam-channel-0.5.1
 crossbeam-deque-0.8.1
 crossbeam-epoch-0.9.5
 crossbeam-utils-0.8.5
+crypto-common-0.1.0
 derivative-2.2.0
-difference-2.0.0
+difflib-0.4.0
 digest-0.8.1
-digest-0.9.0
+digest-0.10.0
 directories-next-2.0.0
 dirs-1.0.5
 dirs-sys-next-0.1.2
 dlv-list-0.2.3
-downcast-0.10.0
+downcast-0.11.0
 either-1.6.1
 enumflags2-0.6.4
 enumflags2_derive-0.6.4
 fake-simd-0.1.2
 fastrand-1.5.0
-float-cmp-0.8.0
+float-cmp-0.9.0
 fnv-1.0.7
 foreign-types-0.3.2
 foreign-types-shared-0.1.1
@@ -77,7 +77,7 @@ generic-array-0.14.4
 gethostname-0.2.1
 getrandom-0.1.16
 getrandom-0.2.3
-git2-0.13.23
+git2-0.13.25
 hashbrown-0.9.1
 hashbrown-0.11.2
 heck-0.3.3
@@ -86,14 +86,16 @@ http-0.2.4
 idna-0.2.3
 indexmap-1.7.0
 instant-0.1.10
+is_debug-1.0.1
 itertools-0.10.1
 itoa-0.4.8
+itoa-1.0.1
 jobserver-0.1.24
 kstring-1.0.5
 lazy_static-1.4.0
 lazycell-1.3.0
 libc-0.2.102
-libgit2-sys-0.12.24+1.3.0
+libgit2-sys-0.12.26+1.3.0
 libz-sys-1.1.3
 linked-hash-map-0.5.4
 log-0.4.14
@@ -105,12 +107,12 @@ matches-0.1.9
 memchr-2.4.1
 memoffset-0.6.4
 minimal-lexical-0.1.3
-mockall-0.10.2
-mockall_derive-0.10.2
+mockall-0.11.0
+mockall_derive-0.11.0
 native-tls-0.2.8
 nb-connect-1.2.0
 nix-0.17.0
-nix-0.23.0
+nix-0.23.1
 nom-7.0.0
 normalize-line-endings-0.3.0
 notify-rust-4.5.5
@@ -120,16 +122,15 @@ num_cpus-1.13.0
 objc-0.2.7
 objc-foundation-0.1.1
 objc_id-0.1.1
-once_cell-1.8.0
+once_cell-1.9.0
 opaque-debug-0.2.3
-opaque-debug-0.3.0
-open-2.0.1
+open-2.0.2
 openssl-0.10.36
 openssl-probe-0.1.4
 openssl-src-111.16.0+1.1.1l
 openssl-sys-0.9.66
 ordered-multimap-0.3.1
-os_info-3.0.7
+os_info-3.0.8
 parking-2.0.0
 path-slash-0.1.4
 pathdiff-0.2.0
@@ -143,7 +144,7 @@ pin-utils-0.1.0
 pkg-config-0.3.19
 polling-2.1.0
 ppv-lite86-0.2.10
-predicates-1.0.8
+predicates-2.1.0
 predicates-core-1.0.2
 predicates-tree-1.0.3
 proc-macro-crate-0.1.5
@@ -176,14 +177,14 @@ scopeguard-1.1.0
 security-framework-2.3.1
 security-framework-sys-2.4.2
 semver-1.0.4
-serde-1.0.130
-serde_derive-1.0.130
-serde_json-1.0.69
+serde-1.0.132
+serde_derive-1.0.132
+serde_json-1.0.73
 serde_repr-0.1.7
 serde_urlencoded-0.7.0
 sha-1-0.8.2
-sha-1-0.9.8
-shadow-rs-0.7.2
+sha-1-0.10.0
+shadow-rs-0.8.1
 shell-words-1.0.0
 slab-0.4.4
 socket2-0.4.2
@@ -204,7 +205,7 @@ time-0.1.44
 tinyvec-1.4.0
 tinyvec_macros-0.1.0
 toml-0.5.8
-toml_edit-0.6.0
+toml_edit-0.12.0
 treeline-0.1.0
 typenum-1.14.0
 ucd-trie-0.1.3
@@ -249,7 +250,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.0.0 -> starship-v1.0.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.1.0 -> starship-v1.1.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
