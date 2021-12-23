@@ -7,7 +7,7 @@ inherit flag-o-matic meson python-any-r1
 
 DESCRIPTION="Creates, deletes and cleans up volatile and temporary files and directories"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/systemd"
-SRC_URI="https://api.github.com/repos/systemd/systemd-stable/tarball/refs/tags/v249.7 -> systemd-stable-249.7.tar.gz"
+SRC_URI="https://api.github.com/repos/systemd/systemd-stable/tarball/refs/tags/v250 -> systemd-stable-250.tar.gz"
 
 LICENSE="BSD-2 GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0"
@@ -72,14 +72,14 @@ src_configure() {
 		-Ddebug=false
 		-Dstrip=false
 		-Dwerror=false
-		-Db_lundef=false
-		-Db_pch=false
-		-Db_ndebug=false
-		-Db_lto=false
 		-Db_coverage=false
+		-Db_ndebug=false
+		-Db_lundef=false
 		-Db_asneeded=false
-		-Db_staticpic=false
+		-Db_pch=false
+		-Db_lto=false
 		-Db_pie=false
+		-Db_staticpic=false
 		-Dbuild.cpp_rtti=false
 		-Dbuild.cpp_debugstl=false
 		-Dcpp_rtti=false
@@ -90,6 +90,7 @@ src_configure() {
 		-Dlink-systemctl-shared=false
 		-Dlink-networkd-shared=false
 		-Dlink-timesyncd-shared=false
+		-Dlink-boot-shared=false
 		-Dstatic-libsystemd=false
 		-Dstatic-libudev=false
 		-Dstandalone-binaries=false
@@ -165,6 +166,7 @@ src_configure() {
 		-Dpwquality=false
 		-Dmicrohttpd=false
 		-Dlibcryptsetup=false
+		-Dlibcryptsetup-plugins=false
 		-Dlibcurl=false
 		-Didn=false
 		-Dlibidn2=false
@@ -192,6 +194,7 @@ src_configure() {
 		-Dslow-tests=false
 		-Dfuzz-tests=false
 		-Dinstall-tests=false
+		-Durlify=false
 		-Dfexecve=false
 		-Doss-fuzz=false
 		-Dllvm-fuzz=false
