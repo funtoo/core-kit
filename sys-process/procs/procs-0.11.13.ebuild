@@ -6,7 +6,7 @@ CRATES="
 addr2line-0.17.0
 adler-1.0.2
 ansi_term-0.12.1
-anyhow-1.0.51
+anyhow-1.0.52
 arrayref-0.3.6
 arrayvec-0.5.2
 async-channel-1.6.1
@@ -32,7 +32,7 @@ byte-unit-4.0.13
 byteorder-1.4.3
 bytes-0.5.6
 bytes-1.1.0
-cache-padded-1.1.1
+cache-padded-1.2.0
 cc-1.0.72
 cfg-if-0.1.10
 cfg-if-1.0.0
@@ -57,23 +57,23 @@ errno-dragonfly-0.1.2
 event-listener-2.5.1
 failure-0.1.8
 failure_derive-0.1.8
-fastrand-1.5.0
+fastrand-1.6.0
 filetime-0.2.15
 flate2-1.0.22
 fnv-1.0.7
 form_urlencoded-1.0.1
 fuchsia-zircon-0.3.3
 fuchsia-zircon-sys-0.3.3
-futures-0.3.17
-futures-channel-0.3.18
-futures-core-0.3.18
-futures-executor-0.3.17
-futures-io-0.3.18
+futures-0.3.19
+futures-channel-0.3.19
+futures-core-0.3.19
+futures-executor-0.3.19
+futures-io-0.3.19
 futures-lite-1.12.0
-futures-macro-0.3.17
-futures-sink-0.3.18
-futures-task-0.3.18
-futures-util-0.3.17
+futures-macro-0.3.19
+futures-sink-0.3.19
+futures-task-0.3.19
+futures-util-0.3.19
 getch-0.2.1
 getrandom-0.1.16
 getrandom-0.2.3
@@ -120,7 +120,7 @@ nix-0.15.0
 ntapi-0.3.6
 num-integer-0.1.44
 num-traits-0.2.14
-num_cpus-1.13.0
+num_cpus-1.13.1
 object-0.27.1
 once_cell-1.9.0
 pager-0.16.0
@@ -138,8 +138,6 @@ pin-utils-0.1.0
 polling-2.2.0
 proc-macro-error-1.0.4
 proc-macro-error-attr-1.0.4
-proc-macro-hack-0.5.19
-proc-macro-nested-0.1.7
 proc-macro2-1.0.34
 procfs-0.12.0
 quote-1.0.10
@@ -154,8 +152,8 @@ rustc-demangle-0.1.21
 ryu-1.0.9
 safemem-0.3.3
 scopeguard-1.1.0
-serde-1.0.131
-serde_derive-1.0.131
+serde-1.0.132
+serde_derive-1.0.132
 serde_json-1.0.73
 signal-hook-0.1.17
 signal-hook-registry-1.4.0
@@ -166,7 +164,7 @@ socket2-0.4.2
 strsim-0.8.0
 structopt-0.3.25
 structopt-derive-0.4.18
-syn-1.0.82
+syn-1.0.83
 synstructure-0.12.6
 tar-0.4.38
 termbg-0.3.0
@@ -226,7 +224,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.12 -> procs-0.11.12.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.13 -> procs-0.11.13.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
