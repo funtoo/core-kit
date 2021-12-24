@@ -2,7 +2,7 @@
 
 EAPI=5
 
-inherit check-reqs eutils mount-boot
+inherit check-reqs eutils ego
 
 SLOT=$PF
 CKV=${PV}
@@ -19,7 +19,7 @@ LINUX_SRCDIR=linux-${PF}
 DEB_PV="5.15.5-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -303,7 +303,6 @@ pkg_postinst() {
 	if [ -e ${ROOT}lib/modules ]; then
 		depmod -a $DEP_PV
 	fi
-	if [ -e /etc/boot.conf ]; then
-		ego boot update
-	fi
+
+	ego_pkg_postinst
 }
