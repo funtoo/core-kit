@@ -17,7 +17,7 @@ inherit eutils toolchain-funcs flag-o-matic
 
 DESCRIPTION="A minimal libc subset for use with initramfs"
 HOMEPAGE="http://www.zytor.com/mailman/listinfo/klibc/ https://www.kernel.org/pub/linux/libs/klibc/"
-SRC_URI="https://git.kernel.org/pub/scm/libs/klibc/klibc.git/snapshot/klibc-2.0.9.tar.gz https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.tar.xz"
+SRC_URI="https://git.kernel.org/pub/scm/libs/klibc/klibc.git/snapshot/klibc-2.0.10.tar.gz https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.tar.xz"
 
 LICENSE="|| ( GPL-2 LGPL-2 )"
 KEYWORDS="*"
