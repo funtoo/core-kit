@@ -5,7 +5,7 @@ EAPI=7
 DESCRIPTION="A simple entropy daemon using the HAVEGE algorithm"
 HOMEPAGE="http://www.issihosts.com/haveged/"
 #SRC_URI="https://github.com/jirka-h/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI="https://github.com/jirka-h/haveged/archive/refs/tags/v1.9.15.tar.gz -> haveged-1.9.15.tar.gz"
+SRC_URI="https://github.com/jirka-h/haveged/archive/refs/tags/v1.9.16.tar.gz -> haveged-1.9.16.tar.gz"
 
 LICENSE="GPL-3+"
 SLOT="0"
