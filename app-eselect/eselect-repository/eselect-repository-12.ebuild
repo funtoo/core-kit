@@ -7,7 +7,7 @@ inherit python-single-r1
 
 DESCRIPTION="Manage repos.conf via eselect"
 HOMEPAGE="https://github.com/mgorny/eselect-repository"
-SRC_URI="https://api.github.com/repos/mgorny/eselect-repository/tarball/refs/tags/v11 -> eselect-repository-v11.tar.gz"
+SRC_URI="https://api.github.com/repos/mgorny/eselect-repository/tarball/refs/tags/v12 -> eselect-repository-v12.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"
