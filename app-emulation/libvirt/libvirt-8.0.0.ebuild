@@ -10,7 +10,7 @@ SRC_URI="https://libvirt.org/sources/${P}.tar.xz"
 
 DESCRIPTION="C toolkit to manipulate virtual machines"
 HOMEPAGE="https://www.libvirt.org/"
-SRC_URI="https://libvirt.org/sources/libvirt-7.10.0.tar.xz"
+SRC_URI="https://libvirt.org/sources/libvirt-8.0.0.tar.xz"
 
 SLOT="0/${PV}"
 LICENSE="LGPL-2.1"
