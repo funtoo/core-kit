@@ -510,7 +510,7 @@ go-module_set_globals
 
 DESCRIPTION="a simple but powerful password manager for the terminal"
 HOMEPAGE="https://www.gopass.pw/"
-SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.13.0 -> gopass-1.13.0.tar.gz
+SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.13.1 -> gopass-1.13.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT Apache-2.0 BSD MPL-2.0 BSD-2"

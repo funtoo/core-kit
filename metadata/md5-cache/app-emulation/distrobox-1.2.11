@@ -1,0 +1,11 @@
+DEFINED_PHASES=install
+DEPEND=app-emulation/docker
+DESCRIPTION=Use any linux distribution inside your terminal
+EAPI=7
+HOMEPAGE=https://distrobox.privatedns.org/ https://github.com/89luca89/distrobox
+KEYWORDS=*
+LICENSE=GPLv3
+RDEPEND=app-emulation/docker
+SLOT=0
+SRC_URI=https://github.com/89luca89/distrobox/tarball/462cfe90806412e751af7acdab5b400bf3ff1382 -> distrobox-1.2.11-462cfe9.tar.gz
+_md5_=4f9632c4da4fce5519d2f3bad609fa7e
