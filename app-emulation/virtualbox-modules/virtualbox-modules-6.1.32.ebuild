@@ -6,7 +6,7 @@ inherit linux-mod user
 
 DESCRIPTION="Kernel Modules for Virtualbox"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-Linux_amd64.run"
+SRC_URI="https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Linux_amd64.run"
 
 LICENSE="GPL-2"
 SLOT="0"
