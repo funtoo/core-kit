@@ -5,7 +5,6 @@ EAPI=7
 CRATES="
 addr2line-0.17.0
 adler-1.0.2
-ansi_term-0.12.1
 anyhow-1.0.52
 arrayref-0.3.6
 arrayvec-0.5.2
@@ -37,7 +36,9 @@ cc-1.0.72
 cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
-clap-2.34.0
+clap-3.0.9
+clap_complete-3.0.4
+clap_derive-3.0.6
 concurrent-queue-1.2.2
 console-0.15.0
 constant_time_eq-0.1.5
@@ -74,14 +75,14 @@ futures-macro-0.3.19
 futures-sink-0.3.19
 futures-task-0.3.19
 futures-util-0.3.19
-getch-0.2.1
+getch-0.3.1
 getrandom-0.1.16
 getrandom-0.2.3
 gimli-0.26.1
 gloo-timers-0.2.2
 h2-0.2.7
 hashbrown-0.11.2
-heck-0.3.3
+heck-0.4.0
 hermit-abi-0.1.19
 hex-0.4.3
 http-0.2.5
@@ -123,6 +124,7 @@ num-traits-0.2.14
 num_cpus-1.13.1
 object-0.27.1
 once_cell-1.9.0
+os_str_bytes-6.0.0
 pager-0.16.0
 parking-2.0.0
 parking_lot-0.11.2
@@ -152,8 +154,8 @@ rustc-demangle-0.1.21
 ryu-1.0.9
 safemem-0.3.3
 scopeguard-1.1.0
-serde-1.0.132
-serde_derive-1.0.132
+serde-1.0.133
+serde_derive-1.0.133
 serde_json-1.0.73
 signal-hook-0.1.17
 signal-hook-registry-1.4.0
@@ -161,16 +163,15 @@ slab-0.4.5
 smallvec-1.7.0
 socket2-0.3.19
 socket2-0.4.2
-strsim-0.8.0
-structopt-0.3.25
-structopt-derive-0.4.18
+strsim-0.10.0
 syn-1.0.83
 synstructure-0.12.6
 tar-0.4.38
 termbg-0.3.0
+termcolor-1.1.2
 terminal_size-0.1.17
-termios-0.2.2
-textwrap-0.11.0
+termios-0.3.3
+textwrap-0.14.2
 thiserror-1.0.30
 thiserror-impl-1.0.30
 time-0.1.43
@@ -187,7 +188,6 @@ tracing-futures-0.2.5
 try-lock-0.2.3
 unicode-bidi-0.3.7
 unicode-normalization-0.1.19
-unicode-segmentation-1.8.0
 unicode-width-0.1.9
 unicode-xid-0.2.2
 unix_socket-0.5.0
@@ -195,7 +195,6 @@ url-2.2.2
 users-0.11.0
 utf8-width-0.1.5
 value-bag-1.0.0-alpha.8
-vec_map-0.8.2
 version_check-0.9.3
 void-1.0.2
 waker-fn-1.1.0
@@ -215,6 +214,7 @@ winapi-0.2.8
 winapi-0.3.9
 winapi-build-0.1.1
 winapi-i686-pc-windows-gnu-0.4.0
+winapi-util-0.1.5
 winapi-x86_64-pc-windows-gnu-0.4.0
 ws2_32-sys-0.2.1
 xattr-0.2.2
@@ -224,7 +224,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.11.13 -> procs-0.11.13.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.12.0 -> procs-0.12.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
