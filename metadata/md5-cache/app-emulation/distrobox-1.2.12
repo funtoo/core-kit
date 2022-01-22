@@ -7,5 +7,5 @@ KEYWORDS=*
 LICENSE=GPLv3
 RDEPEND=app-emulation/docker
 SLOT=0
-SRC_URI=https://github.com/89luca89/distrobox/tarball/462cfe90806412e751af7acdab5b400bf3ff1382 -> distrobox-1.2.11-462cfe9.tar.gz
-_md5_=4f9632c4da4fce5519d2f3bad609fa7e
+SRC_URI=https://github.com/89luca89/distrobox/tarball/e3b1252e7c68add1c04a10b68ed22cdd948816d0 -> distrobox-1.2.12-e3b1252.tar.gz
+_md5_=16eeb6a5e3126bd1b488b056d91d2944
