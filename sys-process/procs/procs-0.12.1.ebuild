@@ -5,7 +5,7 @@ EAPI=7
 CRATES="
 addr2line-0.17.0
 adler-1.0.2
-anyhow-1.0.52
+anyhow-1.0.53
 arrayref-0.3.6
 arrayvec-0.5.2
 async-channel-1.6.1
@@ -36,8 +36,8 @@ cc-1.0.72
 cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
-clap-3.0.9
-clap_complete-3.0.4
+clap-3.0.12
+clap_complete-3.0.5
 clap_derive-3.0.6
 concurrent-queue-1.2.2
 console-0.15.0
@@ -101,7 +101,7 @@ js-sys-0.3.55
 kernel32-sys-0.2.2
 kv-log-macro-1.0.7
 lazy_static-1.4.0
-libc-0.2.112
+libc-0.2.114
 libproc-0.10.0
 lock_api-0.4.5
 log-0.4.14
@@ -154,8 +154,8 @@ rustc-demangle-0.1.21
 ryu-1.0.9
 safemem-0.3.3
 scopeguard-1.1.0
-serde-1.0.133
-serde_derive-1.0.133
+serde-1.0.136
+serde_derive-1.0.136
 serde_json-1.0.73
 signal-hook-0.1.17
 signal-hook-registry-1.4.0
@@ -167,7 +167,7 @@ strsim-0.10.0
 syn-1.0.83
 synstructure-0.12.6
 tar-0.4.38
-termbg-0.3.0
+termbg-0.4.0
 termcolor-1.1.2
 terminal_size-0.1.17
 termios-0.3.3
@@ -209,7 +209,7 @@ wasm-bindgen-macro-support-0.2.78
 wasm-bindgen-shared-0.2.78
 web-sys-0.3.55
 wepoll-ffi-0.1.2
-which-4.2.2
+which-4.2.4
 winapi-0.2.8
 winapi-0.3.9
 winapi-build-0.1.1
@@ -224,7 +224,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.12.0 -> procs-0.12.0.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.12.1 -> procs-0.12.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
