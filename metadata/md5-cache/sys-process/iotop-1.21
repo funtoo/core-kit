@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=sys-libs/ncurses:=
 SLOT=0
-SRC_URI=https://github.com/Tomas-M/iotop/releases/download/v1.20/iotop-1.20.tar.xz
+SRC_URI=https://github.com/Tomas-M/iotop/releases/download/v1.21/iotop-1.21.tar.xz
 _eclasses_=fcaps	9445d60c1eb084a91c38ef4c070b2f16	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=01c3ba414c37fb21277353712d03922d
+_md5_=385bf1e6e74ceaecf5b46149e66575a7
