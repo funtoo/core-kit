@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Deploy a complex environment to an LXD Cluster or LXD standalone installation"
 HOMEPAGE="https://github.com/MottainaiCI/lxd-compose https://mottainaici.github.io/lxd-compose-docs"
-SRC_URI="https://github.com/MottainaiCI/lxd-compose/releases/download/v0.16.4/lxd-compose-v0.16.4-source.tar.gz -> lxd-compose-0.16.4.tar.gz"
+SRC_URI="https://github.com/MottainaiCI/lxd-compose/releases/download/v0.16.5/lxd-compose-v0.16.5-source.tar.gz -> lxd-compose-0.16.5.tar.gz"
 
 LICENSE="GPL3"
 SLOT="0"
