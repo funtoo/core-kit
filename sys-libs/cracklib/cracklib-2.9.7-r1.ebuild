@@ -67,6 +67,8 @@ src_configure() {
 src_compile() {
 	default
 	do_python
+	# Remove entries longer than 40 characters -- there are a few weird ones in the file:
+	sed -i -e '/^.\{40\}./d' ${WORKDIR}/cracklib-words-${PV} || die
 }
 
 rc_test() {
@@ -95,9 +97,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	if [[ -n "${ROOT}" ]] && create-cracklib-dict -h >&/dev/null ; then
-		ebegin "Regenerating cracklib dictionary"
-		create-cracklib-dict /usr/share/dict/* >/dev/null
-		eend $?
-	fi
+	ebegin "Regenerating cracklib dictionary"
+	${EROOT}/usr/sbin/cracklib-format ${EROOT}/usr/share/dict/* | ${EROOT}/usr/sbin/cracklib-packer ${ROOT}/usr/lib
+	eend $?
 }
