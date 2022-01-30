@@ -12,7 +12,7 @@ SRC_URI="https://files.pythonhosted.org/packages/5c/a1/6303852929d0b2f9b4c3f1224
 
 DEPEND=""
 RDEPEND="
-	dev-db/monogdb
+	dev-db/mongodb
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 	dev-python/aiodns[${PYTHON_USEDEP}]
 	dev-python/aiohttp[${PYTHON_USEDEP}]
