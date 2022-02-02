@@ -1,0 +1,15 @@
+BDEPEND=app-arch/xz-utils nls? ( sys-devel/gettext )
+DEFINED_PHASES=compile configure prepare setup
+DEPEND=selinux? ( sys-libs/libselinux ) nls? ( virtual/libintl ) test? ( || ( >=dev-lang/python-2.7.5-r2:2.7 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 ) )
+DESCRIPTION=GNU utilities for finding files
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/findutils/
+IUSE=nls selinux static test
+KEYWORDS=next
+LICENSE=GPL-3+
+RDEPEND=selinux? ( sys-libs/libselinux ) nls? ( virtual/libintl )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://ftp.gnu.org/gnu/findutils//findutils-4.9.0.tar.xz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	8b6048ab112e99353b21b318b9074eb6	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=21a638d311b06e251c0e7b75f3a1c26e
