@@ -1,0 +1,15 @@
+BDEPEND=nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20170815
+DEFINED_PHASES=configure install prepare
+DEPEND=sys-libs/zlib
+DESCRIPTION=Core binutils libraries (libbfd, libopcodes, libiberty) for external packages
+EAPI=7
+HOMEPAGE=https://sourceware.org/binutils/
+IUSE=64-bit-bfd cet multitarget nls static-libs
+KEYWORDS=*
+LICENSE=|| ( GPL-3 LGPL-3 )
+PDEPEND==sys-devel/binutils-2.36.1-r1
+RDEPEND=sys-libs/zlib >=sys-devel/binutils-config-5
+SLOT=0/2.36.1
+SRC_URI=mirror://gnu/binutils/binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-1.tar.xz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=0764fabaae8e437320beacda2dee5089
