@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Use any linux distribution inside your terminal"
 HOMEPAGE="https://distrobox.privatedns.org/ https://github.com/89luca89/distrobox"
-SRC_URI="https://github.com/89luca89/distrobox/tarball/e3b1252e7c68add1c04a10b68ed22cdd948816d0 -> distrobox-1.2.12-e3b1252.tar.gz"
+SRC_URI="https://github.com/89luca89/distrobox/tarball/88abba68c6badf83de1ebe5fecb3318d82f7a16b -> distrobox-1.2.13-88abba6.tar.gz"
 
 LICENSE="GPLv3"
 SLOT="0"
