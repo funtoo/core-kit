@@ -4,7 +4,7 @@ EAPI="7"
 
 DESCRIPTION="NCurses Disk Usage"
 HOMEPAGE="https://dev.yorhel.nl/ncdu/"
-SRC_URI="https://dev.yorhel.nl/download/ncdu-1.16.tar.gz"
+SRC_URI="https://dev.yorhel.nl/download/ncdu-2.1.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -13,5 +13,10 @@ KEYWORDS="*"
 BDEPEND="virtual/pkgconfig"
 
 DEPEND="sys-libs/ncurses:=[unicode(+)]"
+BDEPEND="dev-lang/zig-bin"
 
 RDEPEND="${DEPEND}"
+
+src_install() {
+	emake PREFIX="${ED}"/usr install
+}
