@@ -11,9 +11,8 @@ DESCRIPTION="Userland utilities for ZFS Linux kernel module"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
 MY_P="${P/_rc/-rc}"
-SRC_URI="https://github.com/openzfs/${PN}/releases/download/${MY_P}/${MY_P}.tar.gz"
+SRC_URI="https://github.com/openzfs/zfs/releases/download/zfs-2.0.7/zfs-2.0.7.tar.gz -> zfs-2.0.7.tar.gz"
 KEYWORDS="*"
-S="${WORKDIR}/${P%_rc?}"
 
 LICENSE="BSD-2 CDDL MIT"
 # just libzfs soname major for now.
