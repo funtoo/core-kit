@@ -1,4 +1,4 @@
-BDEPEND=>=app-portage/elt-patches-20170815
+BDEPEND=>=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
 DEFINED_PHASES=compile configure install prepare test
 DEPEND=acl? ( virtual/acl[-mgorny(-)] ) blake2? ( app-crypt/libb2[-mgorny(-)] ) bzip2? ( app-arch/bzip2[-mgorny(-)] ) expat? ( dev-libs/expat[-mgorny(-)] ) !expat? ( dev-libs/libxml2[-mgorny(-)] ) iconv? ( virtual/libiconv[-mgorny(-)] ) kernel_linux? ( xattr? ( sys-apps/attr[-mgorny(-)] ) ) !libressl? ( dev-libs/openssl:0=[-mgorny(-)] ) libressl? ( dev-libs/libressl:0=[-mgorny(-)] ) lz4? ( >=app-arch/lz4-0_p131:0=[-mgorny(-)] ) lzma? ( app-arch/xz-utils[-mgorny(-)] ) lzo? ( >=dev-libs/lzo-2[-mgorny(-)] ) nettle? ( dev-libs/nettle:0=[-mgorny(-)] ) zlib? ( sys-libs/zlib[-mgorny(-)] ) zstd? ( app-arch/zstd[-mgorny(-)] ) kernel_linux? ( virtual/os-headers e2fsprogs? ( sys-fs/e2fsprogs ) )
 DESCRIPTION=Multi-format archive and compression library
@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=BSD BSD-2 BSD-4 public-domain
 RDEPEND=acl? ( virtual/acl[-mgorny(-)] ) blake2? ( app-crypt/libb2[-mgorny(-)] ) bzip2? ( app-arch/bzip2[-mgorny(-)] ) expat? ( dev-libs/expat[-mgorny(-)] ) !expat? ( dev-libs/libxml2[-mgorny(-)] ) iconv? ( virtual/libiconv[-mgorny(-)] ) kernel_linux? ( xattr? ( sys-apps/attr[-mgorny(-)] ) ) !libressl? ( dev-libs/openssl:0=[-mgorny(-)] ) libressl? ( dev-libs/libressl:0=[-mgorny(-)] ) lz4? ( >=app-arch/lz4-0_p131:0=[-mgorny(-)] ) lzma? ( app-arch/xz-utils[-mgorny(-)] ) lzo? ( >=dev-libs/lzo-2[-mgorny(-)] ) nettle? ( dev-libs/nettle:0=[-mgorny(-)] ) zlib? ( sys-libs/zlib[-mgorny(-)] ) zstd? ( app-arch/zstd[-mgorny(-)] )
 SLOT=0/13
-SRC_URI=https://www.libarchive.org/downloads/libarchive-3.5.1.tar.gz
-_eclasses_=libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=f4aef688ba5592faad6ae967912d5b67
+SRC_URI=https://github.com/libarchive/libarchive/tarball/9147def1da7ad1bdd47b3559eb1bfeeb0e0f374b -> libarchive-3.6.0-9147def.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=41bbe580581fa483adb714d0cccee2bc
