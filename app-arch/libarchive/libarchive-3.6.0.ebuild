@@ -1,11 +1,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit libtool multilib-minimal toolchain-funcs
+inherit autotools libtool multilib-minimal toolchain-funcs
 
 DESCRIPTION="Multi-format archive and compression library"
 HOMEPAGE="https://www.libarchive.org/"
-SRC_URI="https://www.libarchive.org/downloads/${P}.tar.gz"
+SRC_URI="https://github.com/libarchive/libarchive/tarball/9147def1da7ad1bdd47b3559eb1bfeeb0e0f374b -> libarchive-3.6.0-9147def.tar.gz"
 
 LICENSE="BSD BSD-2 BSD-4 public-domain"
 SLOT="0/13"
@@ -38,12 +38,19 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-3.3.3-libressl.patch
-	"${FILESDIR}"/${PN}-3.5.0-darwin-strnlen.patch  # drop on next release
 )
 
+post_src_unpack() {
+	if [ ! -d "${S}" ]; then
+		mv libarchive-libarchive* "${S}"
+	fi
+}
+
 src_prepare() {
-	default
+	eautoreconf	# required since autogen downloads a tagged snapshot rather
+	eautomake
 	elibtoolize  # is required for Solaris sol2_ld linker fix
+	default
 }
 
 multilib_src_configure() {
@@ -138,4 +145,3 @@ multilib_src_install_all() {
 	cd "${S}" || die
 	einstalldocs
 }
-
