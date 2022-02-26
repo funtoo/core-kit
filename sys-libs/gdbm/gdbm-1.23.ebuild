@@ -1,17 +1,16 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit autotools flag-o-matic multilib multilib-minimal
+inherit autotools multilib-minimal
 
 DESCRIPTION="Standard GNU database libraries"
 HOMEPAGE="https://www.gnu.org/software/gdbm/"
-SRC_URI="mirror://gnu/gdbm/${P}.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/gdbm//gdbm-1.23.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0/6" # libgdbm.so version
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="+berkdb nls +readline static-libs"
 
 DEPEND="
@@ -44,5 +43,5 @@ multilib_src_install_all() {
 	if ! use static-libs ; then
 		find "${ED}" -name '*.la' -delete || die
 	fi
-	mv "${ED%/}"/usr/include/gdbm/gdbm.h "${ED%/}"/usr/include/ || die
+	mv "${ED}"/usr/include/gdbm/gdbm.h "${ED}"/usr/include/ || die
 }
