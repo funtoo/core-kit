@@ -1,7 +1,7 @@
 BDEPEND=virtual/awk virtual/pkgconfig nls? ( sys-devel/gettext ) python? ( dev-python/setuptools[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] ) >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 virtual/pkgconfig
 DEFINED_PHASES=compile configure install postinst prepare setup
 DEPEND=net-libs/libtirpc[static-libs?] sys-apps/util-linux[static-libs?] sys-libs/zlib[static-libs(+)?] virtual/awk virtual/libudev[static-libs(-)?] libressl? ( dev-libs/libressl:0=[static-libs?] ) !libressl? ( dev-libs/openssl:0=[static-libs?] ) !minimal? ( python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_8? ( dev-lang/python:3.8 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] ) pam? ( sys-libs/pam ) python? ( virtual/python-cffi[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] )
-DESCRIPTION=Userland utilities for ZFS Linux kernel module
+DESCRIPTION=OpenZFS on Linux and FreeBSD
 EAPI=7
 HOMEPAGE=https://github.com/openzfs/zfs
 IUSE=custom-cflags debug kernel-builtin libressl minimal nls pam python +rootfs test-suite static-libs python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 kernel_linux +split-usr
@@ -13,4 +13,4 @@ RESTRICT=test
 SLOT=0/4
 SRC_URI=https://github.com/openzfs/zfs/releases/download/zfs-2.0.7/zfs-2.0.7.tar.gz -> zfs-2.0.7.tar.gz
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	distutils-r1	d8e145fbbe57f3a15ae504741fb95f66	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	pam	756a09f72c4cdbb55f2694c95f1e0860	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	udev	7752f306eec7b286d00bdb47b763e7ac	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
-_md5_=ca2d258cfe3abe9bd4cbe6f2119cd187
+_md5_=450a6b755de8737dd2144c9559e3a762
