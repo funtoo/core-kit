@@ -2,7 +2,7 @@
 
 EAPI=7
 
-DESCRIPTION="Use any linux distribution inside your terminal"
+DESCRIPTION="Use any linux distribution inside your terminal. Enable both backward and forward compatibility with software and freedom to use whatever distribution you’re more comfortable with."
 HOMEPAGE="https://distrobox.privatedns.org/ https://github.com/89luca89/distrobox"
 SRC_URI="https://github.com/89luca89/distrobox/tarball/88abba68c6badf83de1ebe5fecb3318d82f7a16b -> distrobox-1.2.13-88abba6.tar.gz"
 

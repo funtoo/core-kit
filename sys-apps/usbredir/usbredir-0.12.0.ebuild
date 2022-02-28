@@ -6,7 +6,7 @@ inherit flag-o-matic meson
 
 MY_PV=${PV/_p*/}
 
-DESCRIPTION="TCP daemon and set of libraries for usbredir protocol (redirecting USB traffic)"
+DESCRIPTION="usbredir libraries and utilities"
 HOMEPAGE="https://www.spice-space.org/usbredir.html"
 SRC_URI="https://github.com/freedesktop/spice-usbredir/tarball/bc64f5e23eeb6cf144649de3a85fe85d1347c52d -> spice-usbredir-0.12.0-bc64f5e.tar.gz"
 
