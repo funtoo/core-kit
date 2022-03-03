@@ -226,10 +226,8 @@ BDEPEND="
 	dev-lang/perl
 	sys-apps/texinfo
 	virtual/pkgconfig
-	doc? (
-		dev-python/sphinx[${PYTHON_USEDEP}]
-		dev-python/sphinx_rtd_theme[${PYTHON_USEDEP}]
-	)
+	dev-python/sphinx[${PYTHON_USEDEP}]
+	dev-python/sphinx_rtd_theme[${PYTHON_USEDEP}]
 	gtk? ( nls? ( sys-devel/gettext ) )
 	test? (
 		dev-libs/glib[utils]
