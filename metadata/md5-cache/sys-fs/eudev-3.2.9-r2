@@ -4,13 +4,13 @@ DEPEND=>=sys-apps/util-linux-2.20 introspection? ( >=dev-libs/gobject-introspect
 DESCRIPTION=Linux dynamic and persistent device naming support (aka userspace devfs)
 EAPI=7
 HOMEPAGE=https://github.com/gentoo/eudev
-IUSE=+hwdb +kmod introspection rule-generator selinux static-libs test user kernel_linux
+IUSE=+hwdb +kmod introspection +rule-generator selinux static-libs test user kernel_linux
 KEYWORDS=*
 LICENSE=LGPL-2.1 MIT GPL-2
-PDEPEND=>=sys-fs/udev-init-scripts-26 hwdb? ( >=sys-apps/hwids-20140304[udev] )
+PDEPEND=hwdb? ( >=sys-apps/hwids-20140304[udev] )
 RDEPEND=>=sys-apps/util-linux-2.20 introspection? ( >=dev-libs/gobject-introspection-1.38 ) kmod? ( >=sys-apps/kmod-16 ) selinux? ( >=sys-libs/libselinux-2.1.9 ) !<sys-libs/glibc-2.11 !sys-apps/gentoo-systemd-integration !sys-apps/systemd !<sys-fs/lvm2-2.02.103 !<sec-policy/selinux-base-2.20120725-r10 !sys-fs/udev !sys-apps/systemd
 RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://dev.gentoo.org/~blueness/eudev/eudev-3.2.9.tar.gz
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	e68863263b1e8611dacf381bec5c8b2b
-_md5_=b7f6afa8daf14f651887fa9d3fa157f5
+_md5_=dc521b7391b350f1c756c0094468f2c9
