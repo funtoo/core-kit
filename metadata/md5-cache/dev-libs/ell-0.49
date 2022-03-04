@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install setup test
+DEPEND=test? ( sys-apps/dbus )
+DESCRIPTION=Embedded Linux Library provides core, low-level functionality for system daemons
+EAPI=7
+HOMEPAGE=https://01.org/ell
+IUSE=pie test kernel_linux abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_s390_32 abi_s390_64
+KEYWORDS=*
+LICENSE=LGPL-2.1
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://mirrors.edge.kernel.org/pub/linux/libs/ell/ell-0.49.tar.xz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=4bc7b0eda9ca2104a62170db64582d05
