@@ -1,0 +1,12 @@
+DEFINED_PHASES=configure prepare
+DEPEND=app-arch/xz-utils sys-apps/texinfo nls? ( >=sys-devel/gettext-0.10.35 )
+DESCRIPTION=Tools to deal with shar archives
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/sharutils/
+IUSE=nls
+KEYWORDS=*
+LICENSE=GPL-3
+SLOT=0
+SRC_URI=mirror://gnu/sharutils/sharutils-4.15.2.tar.xz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=d3472424194dd7de61b2f912982db8ef
