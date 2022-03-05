@@ -17,7 +17,7 @@ MYRST2MAN="RST2MAN=:"
 DEPEND="
 	sys-apps/dbus
 	client? ( sys-libs/readline:0= )
-	dev-libs/ell-0.49
+	~dev-libs/ell-0.49
 "
 
 RDEPEND="
