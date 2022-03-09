@@ -159,7 +159,7 @@ redox_syscall-0.1.57
 redox_syscall-0.2.10
 redox_users-0.3.5
 redox_users-0.4.0
-regex-1.5.4
+regex-1.5.5
 regex-syntax-0.6.25
 remove_dir_all-0.5.3
 rust-argon2-0.8.3
@@ -248,7 +248,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.4.0 -> starship-v1.4.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.4.1 -> starship-v1.4.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
