@@ -2,14 +2,13 @@
 
 EAPI=7
 
-SRC_URI="https://github.com/nghttp2/nghttp2/releases/download/v${PV}/${P}.tar.xz"
-KEYWORDS="*"
-
 DESCRIPTION="HTTP/2 C Library"
 HOMEPAGE="https://nghttp2.org/"
+SRC_URI="{{artifacts[0].src_uri}}"
 
 LICENSE="MIT"
 SLOT="0/1.14" # <C++>.<C> SONAMEs
+KEYWORDS="*"
 IUSE="cxx debug hpack-tools jemalloc libressl static-libs test +threads utils xml"
 
 SSL_DEPEND="
@@ -19,7 +18,7 @@ SSL_DEPEND="
 RDEPEND="
 	cxx? (
 		${SSL_DEPEND}
-		dev-libs/boost:=[threads]
+		dev-libs/boost:=[threads(+)]
 	)
 	hpack-tools? ( >=dev-libs/jansson-2.5 )
 	jemalloc? ( dev-libs/jemalloc )
