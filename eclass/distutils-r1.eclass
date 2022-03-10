@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: distutils-r1.eclass
@@ -7,7 +7,8 @@
 # @AUTHOR:
 # Author: Michał Górny <mgorny@gentoo.org>
 # Based on the work of: Krzysztof Pawlik <nelchael@gentoo.org>
-# @SUPPORTED_EAPIS: 5 6 7
+# @SUPPORTED_EAPIS: 5 6 7 8
+# @PROVIDES: python-r1 python-single-r1
 # @BLURB: A simple eclass to build Python packages using distutils.
 # @DESCRIPTION:
 # A simple eclass providing functions to build Python packages using
@@ -33,8 +34,8 @@
 # functions, you should consider calling the defaults (and especially
 # distutils-r1_python_prepare_all).
 #
-# Please note that distutils-r1 sets RDEPEND and DEPEND unconditionally
-# for you.
+# Please note that distutils-r1 sets RDEPEND and BDEPEND (or DEPEND
+# in earlier EAPIs) unconditionally for you.
 #
 # Also, please note that distutils-r1 will always inherit python-r1
 # as well. Thus, all the variables defined and documented there are
@@ -44,10 +45,10 @@
 # https://dev.gentoo.org/~mgorny/python-guide/
 
 case "${EAPI:-0}" in
-	0|1|2|3|4)
+	[0-4])
 		die "Unsupported EAPI=${EAPI:-0} (too old) for ${ECLASS}"
 		;;
-	5|6|7)
+	[5-8])
 		;;
 	*)
 		die "Unsupported EAPI=${EAPI} (unknown) for ${ECLASS}"
@@ -88,7 +89,7 @@ esac
 # - rdepend -- add it to BDEPEND+RDEPEND (when using entry_points)
 # - pyproject.toml -- use pyproject2setuptools to install a project
 #                     using pyproject.toml (flit, poetry...)
-# - manual -- do not add the depedency and suppress the checks
+# - manual -- do not add the dependency and suppress the checks
 #             (assumes you will take care of doing it correctly)
 #
 # This variable is effective only if DISTUTILS_OPTIONAL is disabled.
@@ -97,8 +98,7 @@ esac
 
 if [[ ! ${_DISTUTILS_R1} ]]; then
 
-[[ ${EAPI} == [456] ]] && inherit eutils
-[[ ${EAPI} == [56] ]] && inherit xdg-utils
+[[ ${EAPI} == [56] ]] && inherit eutils xdg-utils
 inherit multiprocessing toolchain-funcs
 
 if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
@@ -122,7 +122,7 @@ _distutils_set_globals() {
 	case ${DISTUTILS_USE_SETUPTOOLS} in
 		no|manual)
 			;;
-		bdepend|autostub)
+		bdepend|autostub|pyproject.toml)
 			bdep+=" ${setuptools_dep}"
 			;;
 		rdepend)
@@ -199,26 +199,6 @@ unset -f _distutils_set_globals
 # HTML_DOCS=( doc/html/. )
 # @CODE
 
-# @ECLASS-VARIABLE: EXAMPLES
-# @DEFAULT_UNSET
-# @DESCRIPTION:
-# OBSOLETE: this variable is deprecated and banned in EAPI 6
-#
-# An array containing examples installed into 'examples' doc
-# subdirectory. The files and directories listed there must exist
-# in the directory from which distutils-r1_python_install_all() is run
-# (${S} by default).
-#
-# The 'examples' subdirectory will be marked not to be compressed
-# automatically.
-#
-# If unset, no examples will be installed.
-#
-# Example:
-# @CODE
-# EXAMPLES=( examples/. demos/. )
-# @CODE
-
 # @ECLASS-VARIABLE: DISTUTILS_IN_SOURCE_BUILD
 # @DEFAULT_UNSET
 # @DESCRIPTION:
@@ -266,15 +246,16 @@ unset -f _distutils_set_globals
 # }
 # @CODE
 
-# @ECLASS-VARIABLE: mydistutilsargs
+# @ECLASS-VARIABLE: DISTUTILS_ARGS
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# An array containing options to be passed to setup.py.
+# An array containing options to be passed to setup.py.  They are passed
+# before the default arguments, i.e. before the first command.
 #
 # Example:
 # @CODE
 # python_configure_all() {
-# 	mydistutilsargs=( --enable-my-hidden-option )
+# 	DISTUTILS_ARGS=( --enable-my-hidden-option )
 # }
 # @CODE
 
@@ -313,22 +294,25 @@ distutils_enable_sphinx() {
 	_DISTUTILS_SPHINX_PLUGINS=( "${@}" )
 
 	local deps autodoc=1 d
+	deps="dev-python/sphinx[\${PYTHON_USEDEP}]"
 	for d; do
 		if [[ ${d} == --no-autodoc ]]; then
 			autodoc=
 		else
 			deps+="
 				${d}[\${PYTHON_USEDEP}]"
+			if [[ ! ${autodoc} ]]; then
+				die "${FUNCNAME}: do not pass --no-autodoc if external plugins are used"
+			fi
 		fi
 	done
 
-	if [[ ! ${autodoc} && -n ${deps} ]]; then
-		die "${FUNCNAME}: do not pass --no-autodoc if external plugins are used"
-	fi
 	if [[ ${autodoc} ]]; then
-		deps="$(python_gen_any_dep "
-			dev-python/sphinx[\${PYTHON_USEDEP}]
-			${deps}")"
+		if [[ ${DISTUTILS_SINGLE_IMPL} ]]; then
+			deps="$(python_gen_cond_dep "${deps}")"
+		else
+			deps="$(python_gen_any_dep "${deps}")"
+		fi
 
 		python_check_deps() {
 			use doc || return 0
@@ -375,7 +359,7 @@ distutils_enable_sphinx() {
 }
 
 # @FUNCTION: distutils_enable_tests
-# @USAGE: <test-runner>
+# @USAGE: [--install] <test-runner>
 # @DESCRIPTION:
 # Set up IUSE, RESTRICT, BDEPEND and python_test() for running tests
 # with the specified test runner.  Also copies the current value
@@ -386,6 +370,10 @@ distutils_enable_sphinx() {
 # - setup.py: setup.py test (no deps included)
 # - unittest: for built-in Python unittest module
 #
+# Additionally, if --install is passed as the first parameter,
+# 'distutils_install_for_testing --via-root' is called before running
+# the test suite.
+#
 # This function is meant as a helper for common use cases, and it only
 # takes care of basic setup.  You still need to list additional test
 # dependencies manually.  If you have uncommon use case, you should
@@ -395,37 +383,35 @@ distutils_enable_sphinx() {
 # declared.  Take care not to overwrite the variables set by it.
 distutils_enable_tests() {
 	debug-print-function ${FUNCNAME} "${@}"
-	[[ ${#} -eq 1 ]] || die "${FUNCNAME} takes exactly one argument: test-runner"
 
+	_DISTUTILS_TEST_INSTALL=
+	case ${1} in
+		--install)
+			_DISTUTILS_TEST_INSTALL=1
+			shift
+			;;
+	esac
+
+	[[ ${#} -eq 1 ]] || die "${FUNCNAME} takes exactly one argument: test-runner"
 	local test_pkg
 	case ${1} in
 		nose)
 			test_pkg=">=dev-python/nose-1.3.7-r4"
-			python_test() {
-				nosetests -v || die "Tests fail with ${EPYTHON}"
-			}
 			;;
 		pytest)
 			test_pkg=">=dev-python/pytest-4.5.0"
-			python_test() {
-				pytest -vv || die "Tests fail with ${EPYTHON}"
-			}
 			;;
 		setup.py)
-			python_test() {
-				nonfatal esetup.py test --verbose ||
-					die "Tests fail with ${EPYTHON}"
-			}
 			;;
 		unittest)
-			python_test() {
-				"${EPYTHON}" -m unittest discover -v ||
-					die "Tests fail with ${EPYTHON}"
-			}
+			test_pkg="dev-python/unittest-or-fail"
 			;;
 		*)
 			die "${FUNCNAME}: unsupported argument: ${1}"
 	esac
+
+	_DISTUTILS_TEST_RUNNER=${1}
+	python_test() { distutils-r1_python_test; }
 
 	local test_deps=${RDEPEND}
 	if [[ -n ${test_pkg} ]]; then
@@ -433,7 +419,7 @@ distutils_enable_tests() {
 			test_deps+=" ${test_pkg}[${PYTHON_USEDEP}]"
 		else
 			test_deps+=" $(python_gen_cond_dep "
-				${test_pkg}[\${PYTHON_MULTI_USEDEP}]
+				${test_pkg}[\${PYTHON_USEDEP}]
 			")"
 		fi
 	fi
@@ -452,47 +438,6 @@ distutils_enable_tests() {
 	return 0
 }
 
-# @FUNCTION: _distutils-r1_verify_use_setuptools
-# @INTERNAL
-# @DESCRIPTION:
-# Check setup.py for signs that DISTUTILS_USE_SETUPTOOLS have been set
-# incorrectly.
-_distutils_verify_use_setuptools() {
-	[[ ${DISTUTILS_OPTIONAL} ]] && return
-	[[ ${DISTUTILS_USE_SETUPTOOLS} == manual ]] && return
-	[[ ${DISTUTILS_USE_SETUPTOOLS} == pyproject.toml ]] && return
-	[[ ${DISTUTILS_USE_SETUPTOOLS} == autostub ]] && return
-	# ok, those are cheap greps.  we can try to improve them if we hit
-	# false positives.
-	local expected=no
-	if [[ ${CATEGORY}/${PN} == dev-python/setuptools ]]; then
-		# as a special case, setuptools provides itself ;-)
-		:
-	elif grep -E -q -s '(from|import)\s+setuptools' setup.py; then
-		if grep -E -q -s 'entry_points\s*=' setup.py; then
-			expected=rdepend
-		elif grep -F -q -s '[options.entry_points]' setup.cfg; then
-			expected=rdepend
-		elif grep -F -q -s '[entry_points]' setup.cfg; then  # pbr
-			expected=rdepend
-		else
-			expected=bdepend
-		fi
-	fi
-
-	if [[ ${DISTUTILS_USE_SETUPTOOLS} != ${expected} ]]; then
-		if [[ ! ${_DISTUTILS_SETUPTOOLS_WARNED} ]]; then
-			_DISTUTILS_SETUPTOOLS_WARNED=1
-			local def=
-			[[ ${DISTUTILS_USE_SETUPTOOLS} == bdepend ]] && def=' (default?)'
-
-			eqawarn "DISTUTILS_USE_SETUPTOOLS value is probably incorrect"
-			eqawarn "  value:    DISTUTILS_USE_SETUPTOOLS=${DISTUTILS_USE_SETUPTOOLS}${def}"
-			eqawarn "  expected: DISTUTILS_USE_SETUPTOOLS=${expected}"
-		fi
-	fi
-}
-
 # @FUNCTION: esetup.py
 # @USAGE: [<args>...]
 # @DESCRIPTION:
@@ -500,8 +445,9 @@ _distutils_verify_use_setuptools() {
 # (if ${EPYTHON} is set; fallback 'python' otherwise).
 #
 # setup.py will be passed the following, in order:
-# 1. ${mydistutilsargs[@]}
-# 2. additional arguments passed to the esetup.py function.
+# 1. ${DISTUTILS_ARGS[@]}
+# 2. ${mydistutilsargs[@]} (deprecated)
+# 3. additional arguments passed to the esetup.py function.
 #
 # Please note that setup.py will respect defaults (unless overridden
 # via command-line options) from setup.cfg that is created
@@ -511,13 +457,15 @@ _distutils_verify_use_setuptools() {
 esetup.py() {
 	debug-print-function ${FUNCNAME} "${@}"
 
+	[[ -n ${EPYTHON} ]] || die "EPYTHON unset, invalid call context"
+
 	local die_args=()
-	[[ ${EAPI} != [45] ]] && die_args+=( -n )
+	[[ ${EAPI} != 5 ]] && die_args+=( -n )
 
 	[[ ${BUILD_DIR} ]] && _distutils-r1_create_setup_cfg
-	_distutils_verify_use_setuptools
 
-	set -- "${EPYTHON:-python}" setup.py "${mydistutilsargs[@]}" "${@}"
+	set -- "${EPYTHON}" setup.py "${DISTUTILS_ARGS[@]}" \
+		"${mydistutilsargs[@]}" "${@}"
 
 	echo "${@}" >&2
 	"${@}" || die "${die_args[@]}"
@@ -531,7 +479,7 @@ esetup.py() {
 }
 
 # @FUNCTION: distutils_install_for_testing
-# @USAGE: [<args>...]
+# @USAGE: [--via-root|--via-home|--via-venv] [<args>...]
 # @DESCRIPTION:
 # Install the package into a temporary location for running tests.
 # Update PYTHONPATH appropriately and set TEST_DIR to the test
@@ -542,34 +490,92 @@ esetup.py() {
 # namespaces (and therefore proper install needs to be done to enforce
 # PYTHONPATH) or tests rely on the results of install command.
 # For most of the packages, tests built in BUILD_DIR are good enough.
+#
+# The function supports three install modes.  These are:
+#
+# --via-root (the default) that uses 'setup.py install --root=...'
+# combined with PYTHONPATH and is recommended for the majority
+# of packages.
+#
+# --via-venv that creates a (non-isolated) venv and installs the package
+# into it via 'setup.py install'.  This mode does not use PYTHONPATH
+# but requires python to be called via PATH.  It may solve a few corner
+# cases that --via-root do not support.
+#
+# --via-home that uses 'setup.py install --home=...'.  This is
+# a historical mode that was mostly broken by setuptools 50.3.0+.
+# If your package does not work with the other two modes but works with
+# this one, please report a bug.
+#
+# Please note that in order to test the solution properly you need
+# to unmerge the package first.
 distutils_install_for_testing() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	# A few notes:
-	# 1) because of namespaces, we can't use 'install --root',
-	# 2) 'install --home' is terribly broken on pypy, so we need
+	# A few notes about --via-home mode:
+	# 1) 'install --home' is terribly broken on pypy, so we need
 	#    to override --install-lib and --install-scripts,
-	# 3) non-root 'install' complains about PYTHONPATH and missing dirs,
+	# 2) non-root 'install' complains about PYTHONPATH and missing dirs,
 	#    so we need to set it properly and mkdir them,
-	# 4) it runs a bunch of commands which write random files to cwd,
+	# 3) it runs a bunch of commands which write random files to cwd,
 	#    in order to avoid that, we add the necessary path overrides
 	#    in _distutils-r1_create_setup_cfg.
 
+	local install_method=root
+	case ${1} in
+		--via-home)
+			[[ ${EAPI} == [567] ]] || die "${*} is banned in EAPI ${EAPI}"
+			install_method=home
+			shift
+			;;
+		--via-root)
+			install_method=root
+			shift
+			;;
+		--via-venv)
+			install_method=venv
+			shift
+			;;
+	esac
+
 	TEST_DIR=${BUILD_DIR}/test
-	local bindir=${TEST_DIR}/scripts
-	local libdir=${TEST_DIR}/lib
-	PATH=${bindir}:${PATH}
-	PYTHONPATH=${libdir}:${PYTHONPATH}
+	local add_args=()
 
-	local add_args=(
-		install
-			--home="${TEST_DIR}"
-			--install-lib="${libdir}"
-			--install-scripts="${bindir}"
-	)
+	if [[ ${install_method} == venv ]]; then
+		"${EPYTHON}" -m venv --system-site-packages --without-pip \
+			"${TEST_DIR}" || die
 
-	mkdir -p "${libdir}" || die
-	esetup.py "${add_args[@]}" "${@}"
+		# we only do the minimal necessary subset of activate script
+		PATH=${TEST_DIR}/bin:${PATH}
+		# unset PYTHONPATH in order to prevent BUILD_DIR from overriding
+		# venv packages
+		unset PYTHONPATH
+	else
+		local bindir=${TEST_DIR}/scripts
+		local libdir=${TEST_DIR}/lib
+		PATH=${bindir}:${PATH}
+		PYTHONPATH=${libdir}:${PYTHONPATH}
+
+		case ${install_method} in
+			home)
+				add_args=(
+					--home="${TEST_DIR}"
+					--install-lib="${libdir}"
+					--install-scripts="${bindir}"
+				)
+				mkdir -p "${libdir}" || die
+				;;
+			root)
+				add_args=(
+					--root="${TEST_DIR}"
+					--install-lib=lib
+					--install-scripts=scripts
+				)
+				;;
+		esac
+	fi
+
+	esetup.py install "${add_args[@]}" "${@}"
 }
 
 # @FUNCTION: _distutils-r1_disable_ez_setup
@@ -593,7 +599,7 @@ _distutils-r1_disable_ez_setup() {
 # Generate setup.py for pyproject.toml if requested.
 _distutils-r1_handle_pyproject_toml() {
 	if [[ ! -f setup.py && -f pyproject.toml ]]; then
-		if [ "$DISTUTILS_USE_SETUPTOOLS" = "autostub" ]; then
+		if [[ ${DISTUTILS_USE_SETUPTOOLS} == "autostub" ]]; then
 			cat > setup.py <<EOF || die
 #!/usr/bin/env python
 import setuptools
@@ -616,6 +622,20 @@ EOF
 	fi
 }
 
+# @FUNCTION: _distutils-r1_check_all_phase_mismatch
+# @DESCRIPTION:
+# Verify whether *_all phase impls is not called from from non-*_all
+# subphase.
+_distutils-r1_check_all_phase_mismatch() {
+	if has "python_${EBUILD_PHASE}" "${FUNCNAME[@]}"; then
+		eqawarn "QA Notice: distutils-r1_python_${EBUILD_PHASE}_all called"
+		eqawarn "from python_${EBUILD_PHASE}.  Did you mean to use"
+		eqawarn "python_${EBUILD_PHASE}_all()?"
+		[[ ${EAPI} != [567] ]] &&
+			die "distutils-r1_python_${EBUILD_PHASE}_all called from python_${EBUILD_PHASE}."
+	fi
+}
+
 # @FUNCTION: distutils-r1_python_prepare_all
 # @DESCRIPTION:
 # The default python_prepare_all(). It applies the patches from PATCHES
@@ -626,14 +646,10 @@ EOF
 # distutils patches and/or quirks.
 distutils-r1_python_prepare_all() {
 	debug-print-function ${FUNCNAME} "${@}"
+	_distutils-r1_check_all_phase_mismatch
 
 	if [[ ! ${DISTUTILS_OPTIONAL} ]]; then
-		if [[ ${EAPI} != [45] ]]; then
-			default
-		else
-			[[ ${PATCHES} ]] && epatch "${PATCHES[@]}"
-			epatch_user
-		fi
+		default
 	fi
 
 	# by default, use in-source build if python_prepare() is used
@@ -655,24 +671,6 @@ distutils-r1_python_prepare_all() {
 	_DISTUTILS_DEFAULT_CALLED=1
 }
 
-# @FUNCTION: distutils-r1_python_prepare
-# @DESCRIPTION:
-# The default python_prepare(). A no-op.
-distutils-r1_python_prepare() {
-	debug-print-function ${FUNCNAME} "${@}"
-
-	[[ ${EAPI} == [45] ]] || die "${FUNCNAME} is banned in EAPI 6 (it was a no-op)"
-}
-
-# @FUNCTION: distutils-r1_python_configure
-# @DESCRIPTION:
-# The default python_configure(). A no-op.
-distutils-r1_python_configure() {
-	debug-print-function ${FUNCNAME} "${@}"
-
-	[[ ${EAPI} == [45] ]] || die "${FUNCNAME} is banned in EAPI 6 (it was a no-op)"
-}
-
 # @FUNCTION: _distutils-r1_create_setup_cfg
 # @INTERNAL
 # @DESCRIPTION:
@@ -681,7 +679,7 @@ distutils-r1_python_configure() {
 _distutils-r1_create_setup_cfg() {
 	cat > "${HOME}"/.pydistutils.cfg <<-_EOF_ || die
 		[build]
-		build-base = ${BUILD_DIR}
+		build_base = ${BUILD_DIR}
 
 		# using a single directory for them helps us export
 		# ${PYTHONPATH} and ebuilds find the sources independently
@@ -690,16 +688,20 @@ _distutils-r1_create_setup_cfg() {
 		# note: due to some packages (wxpython) relying on separate
 		# platlib & purelib dirs, we do not set --build-lib (which
 		# can not be overridden with --build-*lib)
-		build-platlib = %(build-base)s/lib
-		build-purelib = %(build-base)s/lib
+		build_platlib = %(build_base)s/lib
+		build_purelib = %(build_base)s/lib
 
 		# make the ebuild writer lives easier
-		build-scripts = %(build-base)s/scripts
+		build_scripts = %(build_base)s/scripts
 
 		# this is needed by distutils_install_for_testing since
 		# setuptools like to create .egg files for install --home.
 		[bdist_egg]
-		dist-dir = ${BUILD_DIR}/dist
+		dist_dir = ${BUILD_DIR}/dist
+
+		# avoid packing up eggs in a zip as it often breaks test suites
+		[options]
+		zip_safe = False
 	_EOF_
 
 	# we can't refer to ${D} before src_install()
@@ -716,7 +718,7 @@ _distutils-r1_create_setup_cfg() {
 
 		if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
 			cat >> "${HOME}"/.pydistutils.cfg <<-_EOF_ || die
-				install-scripts = $(python_get_scriptdir)
+				install_scripts = $(python_get_scriptdir)
 			_EOF_
 		fi
 	fi
@@ -751,8 +753,8 @@ distutils-r1_python_compile() {
 	local build_args=()
 	# distutils is parallel-capable since py3.5
 	# to avoid breaking stable ebuilds, enable it only if either:
-	# a. we're dealing with EAPI 7
-	# b. we're dealing with Python 3.7 or PyPy3
+	# a. we're dealing with EAPI>=7
+	# b. we're dealing with Python>=3.7 or PyPy3
 	if python_is_python3 && [[ ${EPYTHON} != python3.4 ]]; then
 		if [[ ${EAPI} != [56] || ${EPYTHON} != python3.[56] ]]; then
 			local jobs=$(makeopts_jobs "${MAKEOPTS}" INF)
@@ -768,24 +770,23 @@ distutils-r1_python_compile() {
 }
 
 # @FUNCTION: _distutils-r1_wrap_scripts
-# @USAGE: <path> <bindir>
+# @USAGE: <bindir>
 # @INTERNAL
 # @DESCRIPTION:
 # Moves and wraps all installed scripts/executables as necessary.
 _distutils-r1_wrap_scripts() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	[[ ${#} -eq 2 ]] || die "usage: ${FUNCNAME} <path> <bindir>"
-	local path=${1}
-	local bindir=${2}
+	[[ ${#} -eq 1 ]] || die "usage: ${FUNCNAME} <bindir>"
+	local bindir=${1}
 
 	local scriptdir=$(python_get_scriptdir)
 	local f python_files=() non_python_files=()
 
-	if [[ -d ${path}${scriptdir} ]]; then
-		for f in "${path}${scriptdir}"/*; do
+	if [[ -d ${D%/}${scriptdir} ]]; then
+		for f in "${D%/}${scriptdir}"/*; do
 			[[ -d ${f} ]] && die "Unexpected directory: ${f}"
-			debug-print "${FUNCNAME}: found executable at ${f#${path}/}"
+			debug-print "${FUNCNAME}: found executable at ${f#${D%/}/}"
 
 			local shebang
 			read -r shebang < "${f}"
@@ -797,23 +798,67 @@ _distutils-r1_wrap_scripts() {
 				non_python_files+=( "${f}" )
 			fi
 
-			mkdir -p "${path}${bindir}" || die
+			mkdir -p "${D%/}${bindir}" || die
 		done
 
 		for f in "${python_files[@]}"; do
 			local basename=${f##*/}
 
 			debug-print "${FUNCNAME}: installing wrapper at ${bindir}/${basename}"
-			_python_ln_rel "${path}${EPREFIX}"/usr/lib/python-exec/python-exec2 \
-				"${path}${bindir}/${basename}" || die
+			local dosym=dosym
+			[[ ${EAPI} == [567] ]] && dosym=dosym8
+			"${dosym}" -r /usr/lib/python-exec/python-exec2 \
+				"${bindir#${EPREFIX}}/${basename}"
 		done
 
 		for f in "${non_python_files[@]}"; do
 			local basename=${f##*/}
 
-			debug-print "${FUNCNAME}: moving ${f#${path}/} to ${bindir}/${basename}"
-			mv "${f}" "${path}${bindir}/${basename}" || die
+			debug-print "${FUNCNAME}: moving ${f#${D%/}/} to ${bindir}/${basename}"
+			mv "${f}" "${D%/}${bindir}/${basename}" || die
 		done
+	fi
+}
+
+# @FUNCTION: distutils-r1_python_test
+# @USAGE: [additional-args...]
+# @DESCRIPTION:
+# The python_test() implementation used by distutils_enable_tests.
+# Runs tests using the specified test runner, possibly installing them
+# first.
+#
+# This function is used only if distutils_enable_tests is called.
+distutils-r1_python_test() {
+	debug-print-function ${FUNCNAME} "${@}"
+
+	if [[ -z ${_DISTUTILS_TEST_RUNNER} ]]; then
+		die "${FUNCNAME} can be only used after calling distutils_enable_tests"
+	fi
+
+	if [[ ${_DISTUTILS_TEST_INSTALL} ]]; then
+		distutils_install_for_testing
+	fi
+
+	case ${_DISTUTILS_TEST_RUNNER} in
+		nose)
+			nosetests -v "${@}"
+			;;
+		pytest)
+			epytest
+			;;
+		setup.py)
+			nonfatal esetup.py test --verbose
+			;;
+		unittest)
+			eunittest
+			;;
+		*)
+			die "Mis-synced test runner between ${FUNCNAME} and distutils_enable_testing"
+			;;
+	esac
+
+	if [[ ${?} -ne 0 ]]; then
+		die "Tests failed with ${EPYTHON}"
 	fi
 }
 
@@ -829,7 +874,19 @@ _distutils-r1_wrap_scripts() {
 distutils-r1_python_install() {
 	debug-print-function ${FUNCNAME} "${@}"
 
-	local args=( "${@}" )
+	local root=${D%/}/_${EPYTHON}
+	[[ ${DISTUTILS_SINGLE_IMPL} ]] && root=${D%/}
+
+	# inline DISTUTILS_ARGS logic from esetup.py in order to make
+	# argv overwriting easier
+	local args=(
+		"${DISTUTILS_ARGS[@]}"
+		"${mydistutilsargs[@]}"
+		install --skip-build --root="${root}" "${args[@]}"
+		"${@}"
+	)
+	local DISTUTILS_ARGS=()
+	local mydistutilsargs=()
 
 	# enable compilation for the install phase.
 	local -x PYTHONDONTWRITEBYTECODE=
@@ -838,52 +895,44 @@ distutils-r1_python_install() {
 	# failures if some packages haven't compiled their modules yet.
 	addpredict "${EPREFIX}/usr/lib/${EPYTHON}"
 	addpredict "${EPREFIX}/usr/$(get_libdir)/${EPYTHON}"
-	addpredict /usr/lib/pypy2.7
 	addpredict /usr/lib/pypy3.6
+	addpredict /usr/lib/pypy3.7
 	addpredict /usr/lib/portage/pym
 	addpredict /usr/local # bug 498232
 
 	if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
 		# user may override --install-scripts
 		# note: this is poor but distutils argv parsing is dumb
-		local mydistutilsargs=( "${mydistutilsargs[@]}" )
 		local scriptdir=${EPREFIX}/usr/bin
 
-		# construct a list of mydistutilsargs[0] args[0] args[1]...
-		local arg arg_vars
-		[[ ${mydistutilsargs[@]} ]] && eval arg_vars+=(
-			'mydistutilsargs['{0..$(( ${#mydistutilsargs[@]} - 1 ))}']'
-		)
-		[[ ${args[@]} ]] && eval arg_vars+=(
-			'args['{0..$(( ${#args[@]} - 1 ))}']'
-		)
-
-		set -- "${arg_vars[@]}"
+		# rewrite all the arguments
+		set -- "${args[@]}"
+		args=()
 		while [[ ${@} ]]; do
-			local arg_var=${1}
+			local a=${1}
 			shift
-			local a=${!arg_var}
 
-			case "${a}" in
+			case ${a} in
 				--install-scripts=*)
 					scriptdir=${a#--install-scripts=}
-					unset "${arg_var}"
 					;;
 				--install-scripts)
-					scriptdir=${!1}
-					unset "${arg_var}" "${1}"
+					scriptdir=${1}
 					shift
+					;;
+				*)
+					args+=( "${a}" )
 					;;
 			esac
 		done
 	fi
 
-	local root=${D%/}/_${EPYTHON}
-	[[ ${DISTUTILS_SINGLE_IMPL} ]] && root=${D%/}
+	esetup.py "${args[@]}"
 
-	esetup.py install --skip-build --root="${root}" "${args[@]}"
-
-	local forbidden_package_names=( examples test tests .pytest_cache )
+	local forbidden_package_names=(
+		examples test tests
+		.pytest_cache .hypothesis
+	)
 	local p
 	for p in "${forbidden_package_names[@]}"; do
 		if [[ -d ${root}$(python_get_sitedir)/${p} ]]; then
@@ -904,8 +953,8 @@ distutils-r1_python_install() {
 	fi
 
 	if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
-		_distutils-r1_wrap_scripts "${root}" "${scriptdir}"
 		multibuild_merge_root "${root}" "${D%/}"
+		_distutils-r1_wrap_scripts "${scriptdir}"
 	fi
 }
 
@@ -914,18 +963,9 @@ distutils-r1_python_install() {
 # The default python_install_all(). It installs the documentation.
 distutils-r1_python_install_all() {
 	debug-print-function ${FUNCNAME} "${@}"
+	_distutils-r1_check_all_phase_mismatch
 
 	einstalldocs
-
-	if declare -p EXAMPLES &>/dev/null; then
-		[[ ${EAPI} != [45] ]] && die "EXAMPLES are banned in EAPI ${EAPI}"
-
-		(
-			docinto examples
-			dodoc -r "${EXAMPLES[@]}"
-		)
-		docompress -x "/usr/share/doc/${PF}/examples"
-	fi
 }
 
 # @FUNCTION: distutils-r1_run_phase
@@ -1057,7 +1097,7 @@ distutils-r1_src_prepare() {
 
 	if [[ ! ${_DISTUTILS_DEFAULT_CALLED} ]]; then
 		local cmd=die
-		[[ ${EAPI} == [45] ]] && cmd=eqawarn
+		[[ ${EAPI} == 5 ]] && cmd=eqawarn
 
 		"${cmd}" "QA: python_prepare_all() didn't call distutils-r1_python_prepare_all"
 	fi
@@ -1160,40 +1200,6 @@ distutils-r1_src_install() {
 	fi
 
 	_distutils-r1_check_namespace_pth
-}
-
-# -- distutils.eclass functions --
-
-distutils_get_intermediate_installation_image() {
-	die "${FUNCNAME}() is invalid for distutils-r1"
-}
-
-distutils_src_unpack() {
-	die "${FUNCNAME}() is invalid for distutils-r1, and you don't want it in EAPI ${EAPI} anyway"
-}
-
-distutils_src_prepare() {
-	die "${FUNCNAME}() is invalid for distutils-r1, you probably want: ${FUNCNAME/_/-r1_}"
-}
-
-distutils_src_compile() {
-	die "${FUNCNAME}() is invalid for distutils-r1, you probably want: ${FUNCNAME/_/-r1_}"
-}
-
-distutils_src_test() {
-	die "${FUNCNAME}() is invalid for distutils-r1, you probably want: ${FUNCNAME/_/-r1_}"
-}
-
-distutils_src_install() {
-	die "${FUNCNAME}() is invalid for distutils-r1, you probably want: ${FUNCNAME/_/-r1_}"
-}
-
-distutils_pkg_postinst() {
-	die "${FUNCNAME}() is invalid for distutils-r1, and pkg_postinst is unnecessary"
-}
-
-distutils_pkg_postrm() {
-	die "${FUNCNAME}() is invalid for distutils-r1, and pkg_postrm is unnecessary"
 }
 
 _DISTUTILS_R1=1
