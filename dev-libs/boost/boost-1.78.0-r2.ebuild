@@ -11,16 +11,14 @@ MAJOR_V="$(ver_cut 1-2)"
 
 DESCRIPTION="Boost Libraries for C++"
 HOMEPAGE="https://www.boost.org/"
-SRC_URI="https://dl.bintray.com/boostorg/release/${PV}/source/boost_${MY_PV}.tar.bz2"
+SRC_URI="https://boostorg.jfrog.io/artifactory/main/release/${PV}/source/boost_${MY_PV}.tar.bz2"
+S="${WORKDIR}/${PN}_${MY_PV}"
 
 LICENSE="Boost-1.0"
 SLOT="0/${PV}" # ${PV} instead ${MAJOR_V} due to bug 486122
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~ppc-aix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris ~x86-winnt"
-IUSE="bzip2 context debug doc icu lzma +nls mpi numpy python static-libs +threads tools zlib zstd"
-REQUIRED_USE="
-	mpi? ( threads )
-	python? ( ${PYTHON_REQUIRED_USE} )"
-
+KEYWORDS="*"
+IUSE="bzip2 context debug doc icu lzma +nls mpi numpy python tools zlib zstd"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 # the tests will never fail because these are not intended as sanity
 # tests at all. They are more a way for upstream to check their own code
 # on new compilers. Since they would either be completely unreliable
@@ -31,6 +29,7 @@ RESTRICT="test"
 RDEPEND="
 	!app-admin/eselect-boost
 	!dev-libs/boost-numpy
+	!<dev-libs/leatherman-1.12.0-r1
 	bzip2? ( app-arch/bzip2:=[${MULTILIB_USEDEP}] )
 	icu? ( >=dev-libs/icu-3.6:=[${MULTILIB_USEDEP}] )
 	!icu? ( virtual/libiconv[${MULTILIB_USEDEP}] )
@@ -38,25 +37,22 @@ RDEPEND="
 	mpi? ( >=virtual/mpi-2.0-r4[${MULTILIB_USEDEP},cxx,threads] )
 	python? (
 		${PYTHON_DEPS}
-		numpy? ( $(python_gen_cond_dep 'dev-python/numpy[${PYTHON_USEDEP}]' -3) )
+		numpy? ( dev-python/numpy[${PYTHON_USEDEP}] )
 	)
 	zlib? ( sys-libs/zlib:=[${MULTILIB_USEDEP}] )
 	zstd? ( app-arch/zstd:=[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}"
-BDEPEND="=dev-util/boost-build-${MAJOR_V}*"
-
-S="${WORKDIR}/${PN}_${MY_PV}"
+#BDEPEND=">=dev-util/boost-build-${MAJOR_V}"
+BDEPEND=">=dev-util/boost-build-1.78.0-r1"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-disable_icu_rpath.patch
 	"${FILESDIR}"/${PN}-1.71.0-context-x32.patch
 	"${FILESDIR}"/${PN}-1.71.0-build-auto_index-tool.patch
-	# Bug 703294, incomplete Boost.Serialization refactoring
-	"${FILESDIR}"/${PN}-1.72.0-missing-serialization-split_member-include.patch
-	# Bug 703036, per python-impl Boost.MPI
-	"${FILESDIR}"/${PN}-1.72.0-boost-mpi-python.patch
-	# Bug 704128, missing include on Boost.Ranges
-	"${FILESDIR}"/${PN}-1.72.0-revert-cease-dependence-on-range.patch
+	# Boost.MPI's __init__.py doesn't work on Py3
+	"${FILESDIR}"/${PN}-1.73-boost-mpi-python-PEP-328.patch
+	"${FILESDIR}"/${PN}-1.74-CVE-2012-2677.patch
+	"${FILESDIR}"/${PN}-1.78.0-interprocess-musl-include.patch
 )
 
 python_bindings_needed() {
@@ -90,7 +86,7 @@ create_user-config.jam() {
 	fi
 
 	cat > "${user_config_jam}" <<- __EOF__ || die
-		using ${compiler} : ${compiler_version} : ${compiler_executable} : <cflags>"${CFLAGS}" <cxxflags>"${CXXFLAGS}" <linkflags>"${LDFLAGS}" ;
+		using ${compiler} : ${compiler_version} : ${compiler_executable} : <cflags>"${CFLAGS}" <cxxflags>"${CXXFLAGS}" <linkflags>"${LDFLAGS}" <archiver>"$(tc-getAR)" <ranlib>"$(tc-getRANLIB)" ;
 		${mpi_configuration}
 	__EOF__
 
@@ -167,22 +163,16 @@ src_configure() {
 		-d+2
 		pch=off
 		$(usex icu "-sICU_PATH=${ESYSROOT}/usr" '--disable-icu boost.locale.icu=off')
-		$(usex mpi '' '--without-mpi')
-		$(usex nls '' '--without-locale')
-		$(usex context '' '--without-context --without-coroutine --without-fiber')
-		$(usex threads '' '--without-thread')
+		$(usex mpi "" --without-mpi)
+		$(usex nls "" --without-locale)
+		$(usex context "" '--without-context --without-coroutine --without-fiber')
 		--without-stacktrace
-		--boost-build="${BROOT}"/usr/share/boost-build
-		--prefix="${ED}/usr"
+		--boost-build="${BROOT}"/usr/share/boost-build/src
 		--layout=system
-		# CMake has issues working with multiple python impls,
-		# disable cmake config generation for the time being
-		# https://github.com/boostorg/python/issues/262#issuecomment-483069294
-		--no-cmake-config
 		# building with threading=single is currently not possible
 		# https://svn.boost.org/trac/boost/ticket/7105
 		threading=multi
-		link=$(usex static-libs shared,static shared)
+		link=shared
 		# this seems to be the only way to disable compression algorithms
 		# https://www.boost.org/doc/libs/1_70_0/libs/iostreams/doc/installation.html#boost-build
 		-sNO_BZIP2=$(usex bzip2 0 1)
@@ -202,89 +192,26 @@ src_configure() {
 }
 
 multilib_src_compile() {
-	ejam "${OPTIONS[@]}" || die
+	ejam \
+		--prefix="${EPREFIX}"/usr \
+		"${OPTIONS[@]}" || die
 
 	if tools_needed; then
 		pushd tools >/dev/null || die
 		ejam \
+			--prefix="${EPREFIX}"/usr \
 			"${OPTIONS[@]}" \
 			|| die "Building of Boost tools failed"
 		popd >/dev/null || die
 	fi
 }
 
-multilib_src_install_all() {
-	if ! use numpy; then
-		rm -r "${ED}"/usr/include/boost/python/numpy* || die
-	fi
-
-	if use python; then
-		if use mpi; then
-			move_mpi_py_into_sitedir() {
-				local pyver="${EPYTHON#python}"
-				python_moduleinto boost
-				python_domodule "${ED}"/usr/$(get_libdir)/mpi${pyver/./}.so
-				rm "${ED}"/usr/$(get_libdir)/mpi${pyver/./}* || die
-				dosym mpi${pyver/./}.so $(python_get_sitedir)/boost/mpi.so
-
-				# create a proper python package
-				touch "${D}"/$(python_get_sitedir)/boost/__init__.py || die
-				python_optimize
-			}
-			python_foreach_impl move_mpi_py_into_sitedir
-		else
-			rm -r "${ED}"/usr/include/boost/mpi/python* || die
-		fi
-	else
-		rm -r "${ED}"/usr/include/boost/{python*,mpi/python*,parameter/aux_/python,parameter/python*} || die
-	fi
-
-	if ! use nls; then
-		rm -r "${ED}"/usr/include/boost/locale || die
-	fi
-
-	if ! use context; then
-		rm -r "${ED}"/usr/include/boost/context || die
-		rm -r "${ED}"/usr/include/boost/coroutine{,2} || die
-		rm "${ED}"/usr/include/boost/asio/spawn.hpp || die
-	fi
-
-	if use doc; then
-		# find extraneous files that shouldn't be installed
-		# as part of the documentation and remove them.
-		find libs/*/* \( -iname 'test' -o -iname 'src' \) -exec rm -rf '{}' + || die
-		find doc \( -name 'Jamfile.v2' -o -name 'build' -o -name '*.manifest' \) -exec rm -rf '{}' + || die
-		find tools \( -name 'Jamfile.v2' -o -name 'src' -o -name '*.cpp' -o -name '*.hpp' \) -exec rm -rf '{}' + || die
-
-		docinto html
-		dodoc *.{htm,html,png,css}
-		dodoc -r doc libs more tools
-
-		# To avoid broken links
-		dodoc LICENSE_1_0.txt
-
-		dosym ../../../../include/boost /usr/share/doc/${PF}/html/boost
-	fi
-}
-
 multilib_src_install() {
 	ejam \
-		"${OPTIONS[@]}" \
-		--includedir="${ED}/usr/include" \
-		--libdir="${ED}/usr/$(get_libdir)" \
-		install || die "Installation of Boost libraries failed"
-
-	pushd "${ED}/usr/$(get_libdir)" >/dev/null || die
-
-	local ext=$(get_libname)
-	if use threads; then
-		local f
-		for f in *${ext}; do
-			dosym ${f} /usr/$(get_libdir)/${f/${ext}/-mt${ext}}
-		done
-	fi
-
-	popd >/dev/null || die
+		--prefix="${ED}"/usr \
+		--includedir="${ED}"/usr/include \
+		--libdir="${ED}"/usr/$(get_libdir) \
+		"${OPTIONS[@]}" install || die "Installation of Boost libraries failed"
 
 	if tools_needed; then
 		dobin dist/bin/*
@@ -326,8 +253,60 @@ multilib_src_install() {
 	fi
 }
 
+multilib_src_install_all() {
+	if ! use numpy; then
+		rm -r "${ED}"/usr/include/boost/python/numpy* || die
+	fi
+
+	if use python; then
+		if use mpi; then
+			move_mpi_py_into_sitedir() {
+				python_moduleinto boost
+				python_domodule "${S}"/libs/mpi/build/__init__.py
+
+				python_domodule "${ED}"/usr/$(get_libdir)/boost-${EPYTHON}/mpi.so
+				rm -r "${ED}"/usr/$(get_libdir)/boost-${EPYTHON} || die
+
+				python_optimize
+			}
+			python_foreach_impl move_mpi_py_into_sitedir
+		else
+			rm -r "${ED}"/usr/include/boost/mpi/python* || die
+		fi
+	else
+		rm -r "${ED}"/usr/include/boost/{python*,mpi/python*,parameter/aux_/python,parameter/python*} || die
+	fi
+
+	if ! use nls; then
+		rm -r "${ED}"/usr/include/boost/locale || die
+	fi
+
+	if ! use context; then
+		rm -r "${ED}"/usr/include/boost/context || die
+		rm -r "${ED}"/usr/include/boost/coroutine{,2} || die
+		rm "${ED}"/usr/include/boost/asio/spawn.hpp || die
+	fi
+
+	if use doc; then
+		# find extraneous files that shouldn't be installed
+		# as part of the documentation and remove them.
+		find libs/*/* \( -iname 'test' -o -iname 'src' \) -exec rm -rf '{}' + || die
+		find doc \( -name 'Jamfile.v2' -o -name 'build' -o -name '*.manifest' \) -exec rm -rf '{}' + || die
+		find tools \( -name 'Jamfile.v2' -o -name 'src' -o -name '*.cpp' -o -name '*.hpp' \) -exec rm -rf '{}' + || die
+
+		docinto html
+		dodoc *.{htm,html,png,css}
+		dodoc -r doc libs more tools
+
+		# To avoid broken links
+		dodoc LICENSE_1_0.txt
+
+		dosym ../../../../include/boost /usr/share/doc/${PF}/html/boost
+	fi
+}
+
 pkg_preinst() {
-	# Yai for having symlinks that are nigh-impossible to remove without
+	# Yay for having symlinks that are nigh-impossible to remove without
 	# resorting to dirty hacks like these. Removes lingering symlinks
 	# from the slotted versions.
 	local symlink
@@ -351,7 +330,7 @@ pkg_postinst() {
 	elog
 	elog "Then you need to recompile Boost and all its reverse dependencies"
 	elog "using the same toolchain. In general, *every* change of the C++ toolchain"
-	elog "requires a complete rebuild of the boost-dependent ecosystem."
+	elog "requires a complete rebuild of the Boost-dependent ecosystem."
 	elog
 	elog "See for instance https://bugs.gentoo.org/638138"
 }
