@@ -17,7 +17,6 @@ app-admin/packagekit-base python_single_target_python2_7
 app-emulation/xen-tools python_single_target_python2_7
 app-misc/byobu python_single_target_python2_7
 app-portage/cpuid2cpuflags python_single_target_python2_7
-app-portage/porthole python_single_target_python2_7
 sys-apps/etckeeper python_single_target_python2_7
 sys-apps/pacman python_single_target_python2_7
 sys-boot/udk python_single_target_python2_7
