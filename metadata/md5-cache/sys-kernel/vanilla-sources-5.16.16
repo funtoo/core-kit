@@ -1,6 +1,6 @@
 DEFINED_PHASES=compile install postinst postrm preinst prepare setup test unpack
 DEPEND=!build? ( sys-apps/sed >=sys-devel/binutils-2.11.90.0.31 )
-DESCRIPTION=Linux 5.16.15
+DESCRIPTION=Linux 5.16.16
 EAPI=6
 HOMEPAGE=https://www.kernel.org/ https://www.gentoo.org/ http://kernel.org/
 IUSE=symlink build
@@ -8,7 +8,7 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=virtual/linux-sources !build? ( dev-lang/perl sys-devel/bc sys-devel/bison sys-devel/flex sys-devel/make >=sys-libs/ncurses-5.2 virtual/libelf )
 RESTRICT=binchecks strip
-SLOT=5.16.15
-SRC_URI=https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.16.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.16.15.xz
+SLOT=5.16.16
+SRC_URI=https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.16.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.16.16.xz
 _eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	estack	43ddf5aaffa7a8d0482df54d25a66a1f	kernel-2	12a17088d0306f0e3d3c97d58534409e	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	c6ddaeb7a3e68d2564fa886420d0ae41	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=5461c8c0adc8f1a69f4f929e5124c868
+_md5_=24e654a4b986c6d736c6d56c001bba2e
