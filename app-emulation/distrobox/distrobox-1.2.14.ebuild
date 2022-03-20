@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Use any linux distribution inside your terminal. Enable both backward and forward compatibility with software and freedom to use whatever distribution you’re more comfortable with."
 HOMEPAGE="https://distrobox.privatedns.org/ https://github.com/89luca89/distrobox"
-SRC_URI="https://github.com/89luca89/distrobox/tarball/88abba68c6badf83de1ebe5fecb3318d82f7a16b -> distrobox-1.2.13-88abba6.tar.gz"
+SRC_URI="https://github.com/89luca89/distrobox/tarball/72035630a5665ffe5a66148de38797312a4f8ab8 -> distrobox-1.2.14-7203563.tar.gz"
 
 LICENSE="GPLv3"
 SLOT="0"
