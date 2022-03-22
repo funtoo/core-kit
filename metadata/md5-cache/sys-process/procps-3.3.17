@@ -10,6 +10,6 @@ LICENSE=GPL-2
 RDEPEND=elogind? ( sys-auth/elogind ) ncurses? ( >=sys-libs/ncurses-5.7-r7:=[unicode(+)?] ) selinux? ( sys-libs/libselinux[-mgorny(-)] ) systemd? ( sys-apps/systemd[-mgorny(-)] ) kill? ( !sys-apps/coreutils[kill] !sys-apps/util-linux[kill] )
 RESTRICT=!test? ( test )
 SLOT=0/8
-SRC_URI=mirror://sourceforge/procps-ng/procps-ng-4.0.0.tar.xz
+SRC_URI=mirror://sourceforge/procps-ng/procps-ng-3.3.17.tar.xz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
 _md5_=31e5f6e83782c46891378d0c641ff6c6
