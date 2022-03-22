@@ -3,7 +3,7 @@
 EAPI=7
 
 inherit autotools
-SRC_URI="https://github.com/legionus/kbd/archive/refs/tags/v2.4.0.tar.gz -> kbd-2.4.0.tar.gz"
+SRC_URI="https://github.com/legionus/kbd/archive/refs/tags/v2.5-rc1.tar.gz -> kbd-2.5-rc1.tar.gz"
 
 DESCRIPTION="Keyboard and console utilities"
 HOMEPAGE="http://kbd-project.org/"
