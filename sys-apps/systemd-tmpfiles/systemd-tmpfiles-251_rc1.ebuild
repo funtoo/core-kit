@@ -7,7 +7,7 @@ inherit flag-o-matic meson python-any-r1
 
 DESCRIPTION="Creates, deletes and cleans up volatile and temporary files and directories"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/systemd"
-SRC_URI="https://api.github.com/repos/systemd/systemd-stable/tarball/refs/tags/v251-rc1 -> systemd-stable-251-rc1.tar.gz"
+SRC_URI="https://api.github.com/repos/systemd/systemd-stable/tarball/refs/tags/v251-rc1 -> systemd-stable-251_rc1.tar.gz"
 
 LICENSE="BSD-2 GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0"
@@ -72,14 +72,14 @@ src_configure() {
 		-Ddebug=false
 		-Dstrip=false
 		-Dwerror=false
-		-Db_pie=false
-		-Db_lto=false
-		-Db_ndebug=false
 		-Db_coverage=false
+		-Db_ndebug=false
 		-Db_pch=false
-		-Db_lundef=false
 		-Db_staticpic=false
+		-Db_pie=false
 		-Db_asneeded=false
+		-Db_lundef=false
+		-Db_lto=false
 		-Dbuild.cpp_rtti=false
 		-Dbuild.cpp_debugstl=false
 		-Dcpp_rtti=false
