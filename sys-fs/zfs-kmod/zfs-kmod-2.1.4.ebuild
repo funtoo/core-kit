@@ -8,7 +8,7 @@ DESCRIPTION="Linux ZFS kernel module for sys-fs/zfs"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
 MY_PV="${PV/_rc/-rc}"
-SRC_URI="https://github.com/openzfs/zfs/releases/download/zfs-2.0.7/zfs-2.0.7.tar.gz -> zfs-2.0.7.tar.gz"
+SRC_URI="https://github.com/openzfs/zfs/releases/download/zfs-2.1.4/zfs-2.1.4.tar.gz -> zfs-2.1.4.tar.gz"
 KEYWORDS="*"
 ZFS_KERNEL_COMPAT="5.16"
 
@@ -115,9 +115,8 @@ src_install() {
 	set_arch_to_kernel
 
 	myemakeargs+=(
-		DEPMOD="/bin/true"
+		DEPMOD=:
 		DESTDIR="${D}"
-		INSTALL_MOD_PATH="${INSTALL_MOD_PATH:-$EROOT}"
 	)
 
 	emake "${myemakeargs[@]}" install
