@@ -1,0 +1,14 @@
+BDEPEND=>=app-portage/elt-patches-20170815
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=minizip? ( !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 )
+DESCRIPTION=Standard (de)compression library
+EAPI=7
+HOMEPAGE=https://zlib.net/
+IUSE=minizip static-libs abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_s390_32 abi_s390_64
+KEYWORDS=*
+LICENSE=ZLIB
+RDEPEND=abi_x86_32? ( !<=app-emulation/emul-linux-x86-baselibs-20130224 !app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)] ) !<dev-libs/libxml2-2.7.7
+SLOT=0
+SRC_URI=https://zlib.net/current/zlib-1.2.12.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=e5cc36f02f0f073310733c6264658c44
