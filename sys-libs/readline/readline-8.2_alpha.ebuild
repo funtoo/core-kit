@@ -14,7 +14,7 @@ SRC_URI="https://ftp.gnu.org/gnu/readline/readline-8.2-alpha.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0/8"  # subslot matches SONAME major
-KEYWORDS="next"
+KEYWORDS=""
 IUSE="static-libs +unicode utils"
 
 RDEPEND=">=sys-libs/ncurses-5.9-r3:=[static-libs?,unicode(+)?,${MULTILIB_USEDEP}]"
