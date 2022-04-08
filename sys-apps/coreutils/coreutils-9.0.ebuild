@@ -1,43 +1,42 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
-
-inherit eutils flag-o-matic python-any-r1 toolchain-funcs
+PYTHON_COMPAT=( python3+ )
+inherit flag-o-matic python-any-r1 toolchain-funcs
 
 PATCH="${PN}-8.30-patches-01"
 DESCRIPTION="Standard GNU utilities (chmod, cp, dd, ls, sort, tr, head, wc, who,...)"
 HOMEPAGE="https://www.gnu.org/software/coreutils/"
-SRC_URI="mirror://gnu/${PN}/${P}.tar.xz
-	mirror://gentoo/${PATCH}.tar.xz
-	https://dev.gentoo.org/~polynomial-c/dist/${PATCH}.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/coreutils//coreutils-9.0.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~x86-linux"
-IUSE="acl caps gmp hostname kill multicall nls selinux +split-usr static test userland_BSD vanilla xattr"
+KEYWORDS="*"
+IUSE="acl caps gmp hostname kill multicall nls selinux +split-usr static test vanilla xattr"
+RESTRICT="!test? ( test )"
 
 LIB_DEPEND="acl? ( sys-apps/acl[static-libs] )
 	caps? ( sys-libs/libcap )
 	gmp? ( dev-libs/gmp:=[static-libs] )
-	xattr? ( !userland_BSD? ( sys-apps/attr[static-libs] ) )"
+	xattr? ( sys-apps/attr[static-libs] )"
 RDEPEND="!static? ( ${LIB_DEPEND//\[static-libs]} )
 	selinux? ( sys-libs/libselinux )
 	nls? ( virtual/libintl )"
-DEPEND="${RDEPEND}
+DEPEND="
+	${RDEPEND}
 	static? ( ${LIB_DEPEND} )
+"
+BDEPEND="
 	app-arch/xz-utils
+	dev-lang/perl
 	test? (
 		dev-lang/perl
 		dev-perl/Expect
-		!userland_BSD? (
-			dev-util/strace
-		)
+		dev-util/strace
 		${PYTHON_DEPS}
-		$(python_gen_any_dep 'dev-python/pyinotify[${PYTHON_USEDEP}]')
-	)"
+	)
+"
 RDEPEND+="
 	hostname? ( !sys-apps/net-tools[hostname] )
 	kill? (
@@ -53,6 +52,11 @@ RDEPEND+="
 	!<app-forensics/tct-1.18-r1
 	!<net-fs/netatalk-2.0.3-r4"
 
+PATCHES=(
+	# Upstream patches
+	"${FILESDIR}"/${PN}-9.0-fix-chmod-symlink-exit.patch
+)
+
 pkg_setup() {
 	if use test ; then
 		python-any-r1_pkg_setup
@@ -60,32 +64,32 @@ pkg_setup() {
 }
 
 src_prepare() {
-	if ! use vanilla ; then
-		eapply "${WORKDIR}"/patch/*.patch
-	fi
-
-	eapply_user
+	default
 
 	# Since we've patched many .c files, the make process will try to
 	# re-build the manpages by running `./bin --help`.  When doing a
 	# cross-compile, we can't do that since 'bin' isn't a native bin.
+	#
 	# Also, it's not like we changed the usage on any of these things,
 	# so let's just update the timestamps and skip the help2man step.
 	set -- man/*.x
-	touch ${@/%x/1}
+	touch ${@/%x/1} || die
 
-	# Avoid perl dep for compiled in dircolors default #348642
+	# Avoid perl dep for compiled in dircolors default (bug #348642)
 	if ! has_version dev-lang/perl ; then
-		touch src/dircolors.h
-		touch ${@/%x/1}
+		touch src/dircolors.h || die
+		touch ${@/%x/1} || die
 	fi
 }
 
 src_configure() {
 	local myconf=(
-		--with-packager="Gentoo"
+		--with-packager="Funtoo"
 		--with-packager-version="${PVR} (p${PATCH_VER:-0})"
 		--with-packager-bug-reports="https://bugs.gentoo.org/"
+		# kill/uptime - procps
+		# groups/su   - shadow
+		# hostname    - net-tools
 		--enable-install-program="arch,$(usev hostname),$(usev kill)"
 		--enable-no-install-program="groups,$(usev !hostname),$(usev !kill),su,uptime"
 		--enable-largefile
@@ -94,20 +98,34 @@ src_configure() {
 		$(use_enable acl)
 		$(use_enable multicall single-binary)
 		$(use_enable xattr)
-		$(use_with gmp)
+		$(use_with gmp libgmp)
 	)
-	if tc-is-cross-compiler && [[ ${CHOST} == *linux* ]] ; then
-		export fu_cv_sys_stat_statfs2_bsize=yes #311569
-		export gl_cv_func_realpath_works=yes #416629
+
+	if use gmp ; then
+		myconf+=( --with-libgmp-prefix="${ESYSROOT}"/usr )
 	fi
 
-	export gl_cv_func_mknod_works=yes #409919
-	use static && append-ldflags -static && sed -i '/elf_sys=yes/s:yes:no:' configure #321821
-	use selinux || export ac_cv_{header_selinux_{context,flash,selinux}_h,search_setfilecon}=no #301782
-	use userland_BSD && myconf+=( -program-prefix=g --program-transform-name=s/stat/nustat/ )
-	# kill/uptime - procps
-	# groups/su   - shadow
-	# hostname    - net-tools
+	if tc-is-cross-compiler && [[ ${CHOST} == *linux* ]] ; then
+		# bug #311569
+		export fu_cv_sys_stat_statfs2_bsize=yes
+		# bug #416629
+		export gl_cv_func_realpath_works=yes
+	fi
+
+	# bug #409919
+	export gl_cv_func_mknod_works=yes
+
+	if use static ; then
+		append-ldflags -static
+		# bug #321821
+		sed -i '/elf_sys=yes/s:yes:no:' configure || die
+	fi
+
+	if ! use selinux ; then
+		# bug #301782
+		export ac_cv_{header_selinux_{context,flash,selinux}_h,search_setfilecon}=no
+	fi
+
 	econf "${myconf[@]}"
 }
 
@@ -123,12 +141,13 @@ src_test() {
 
 	# Non-root tests will fail if the full path isn't
 	# accessible to non-root users
-	chmod -R go-w "${WORKDIR}"
-	chmod a+rx "${WORKDIR}"
+	chmod -R go-w "${WORKDIR}" || die
+	chmod a+rx "${WORKDIR}" || die
 
-	# coreutils tests like to do `mount` and such with temp dirs
-	# so make sure /etc/mtab is writable #265725
-	# make sure /dev/loop* can be mounted #269758
+	# coreutils tests like to do `mount` and such with temp dirs,
+	# so make sure:
+	# - /etc/mtab is writable (bug #265725)
+	# - /dev/loop* can be mounted (bug #269758)
 	mkdir -p "${T}"/mount-wrappers || die
 	mkwrap() {
 		local w ww
@@ -138,7 +157,7 @@ src_test() {
 				#!${EPREFIX}/bin/sh
 				exec env SANDBOX_WRITE="\${SANDBOX_WRITE}:/etc/mtab:/dev/loop" $(type -P ${w}) "\$@"
 			EOF
-			chmod a+rx "${ww}"
+			chmod a+rx "${ww}" || die
 		done
 	}
 	mkwrap mount umount
@@ -156,50 +175,42 @@ src_install() {
 	insinto /etc
 	newins src/dircolors.hin DIR_COLORS
 
-	if [[ ${USERLAND} == "GNU" ]] ; then
-		cd "${ED%/}"/usr/bin || die
+	if use split-usr ; then
+		cd "${ED}"/usr/bin || die
 		dodir /bin
-		# move critical binaries into /bin (required by FHS)
+
+		# Move critical binaries into /bin (required by FHS)
 		local fhs="cat chgrp chmod chown cp date dd df echo false ln ls
 		           mkdir mknod mv pwd rm rmdir stty sync true uname"
-		mv ${fhs} ../../bin/ || die "could not move fhs bins"
-		if use hostname; then
+		mv ${fhs} ../../bin/ || die "Could not move FHS bins!"
+
+		if use hostname ; then
 			mv hostname ../../bin/ || die
 		fi
-		if use kill; then
+
+		if use kill ; then
 			mv kill ../../bin/ || die
 		fi
-		if use split-usr ; then
-			# move critical binaries into /bin (common scripts)
-			local com="basename chroot cut dir dirname du env expr head mkfifo
-			           mktemp readlink seq sleep sort tail touch tr tty vdir wc yes"
-			mv ${com} ../../bin/ || die "could not move common bins"
-			# create a symlink for uname in /usr/bin/ since autotools require it
-			local x
-			for x in ${com} uname ; do
-				dosym ../../bin/${x} /usr/bin/${x}
-			done
-		fi
-	else
-		# For now, drop the man pages, collides with the ones of the system.
-		rm -rf "${ED%/}"/usr/share/man
-	fi
 
+		# Move critical binaries into /bin (common scripts)
+		# (Why are these required for booting?)
+		local com="basename chroot cut dir dirname du env expr head mkfifo
+		           mktemp readlink seq sleep sort tail touch tr tty vdir wc yes"
+		mv ${com} ../../bin/ || die "Could not move common bins!"
+
+		# Create a symlink for uname in /usr/bin/ since autotools require it.
+		# (Other than uname, we need to figure out why we are
+		# creating symlinks for these in /usr/bin instead of leaving
+		# the files there in the first place...)
+		local x
+		for x in ${com} uname ; do
+			dosym ../../bin/${x} /usr/bin/${x}
+		done
+	fi
 }
 
 pkg_postinst() {
 	ewarn "Make sure you run 'hash -r' in your active shells."
 	ewarn "You should also re-source your shell settings for LS_COLORS"
 	ewarn "  changes, such as: source /etc/profile"
-
-	# Help out users using experimental filesystems
-	if grep -qs btrfs "${EROOT%/}"/etc/fstab /proc/mounts ; then
-		case $(uname -r) in
-		2.6.[12][0-9]|2.6.3[0-7]*)
-			ewarn "You are running a system with a buggy btrfs driver."
-			ewarn "Please upgrade your kernel to avoid silent corruption."
-			ewarn "See: https://bugs.gentoo.org/353907"
-			;;
-		esac
-	fi
 }
