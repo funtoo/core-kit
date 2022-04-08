@@ -5,7 +5,7 @@ inherit autotools libtool multilib-minimal toolchain-funcs
 
 DESCRIPTION="Multi-format archive and compression library"
 HOMEPAGE="https://www.libarchive.org/"
-SRC_URI="https://github.com/libarchive/libarchive/tarball/9147def1da7ad1bdd47b3559eb1bfeeb0e0f374b -> libarchive-3.6.0-9147def.tar.gz"
+SRC_URI="https://github.com/libarchive/libarchive/tarball/6c3301111caa75c76e1b2acb1afb2d71341932ef -> libarchive-3.6.1-6c33011.tar.gz"
 
 LICENSE="BSD BSD-2 BSD-4 public-domain"
 SLOT="0/13"
