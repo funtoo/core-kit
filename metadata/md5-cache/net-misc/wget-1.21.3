@@ -1,0 +1,16 @@
+BDEPEND=app-arch/xz-utils dev-lang/perl sys-apps/texinfo virtual/pkgconfig nls? ( sys-devel/gettext ) test? ( || ( dev-lang/python:3.10 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 ) dev-perl/HTTP-Daemon dev-perl/HTTP-Message dev-perl/IO-Socket-SSL )
+DEFINED_PHASES=configure prepare setup
+DEPEND=!static? ( cookie-check? ( net-libs/libpsl ) idn? ( >=net-dns/libidn2-0.14:= ) metalink? ( app-crypt/gpgme media-libs/libmetalink ) pcre? ( dev-libs/libpcre2 ) ssl? ( gnutls? ( net-libs/gnutls:= ) !gnutls? ( dev-libs/openssl:= ) ) uuid? ( sys-apps/util-linux ) zlib? ( sys-libs/zlib ) ) static? ( cookie-check? ( net-libs/libpsl ) idn? ( >=net-dns/libidn2-0.14:=[static-libs(+)] ) metalink? ( app-crypt/gpgme media-libs/libmetalink ) pcre? ( dev-libs/libpcre2[static-libs(+)] ) ssl? ( gnutls? ( net-libs/gnutls:=[static-libs(+)] ) !gnutls? ( dev-libs/openssl:=[static-libs(+)] ) ) uuid? ( sys-apps/util-linux[static-libs(+)] ) zlib? ( sys-libs/zlib[static-libs(+)] ) )
+DESCRIPTION=Network utility to retrieve files from the WWW
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/wget/
+IUSE=cookie-check debug gnutls idn ipv6 metalink nls ntlm pcre +ssl static test uuid zlib
+KEYWORDS=*
+LICENSE=GPL-3
+RDEPEND=!static? ( cookie-check? ( net-libs/libpsl ) idn? ( >=net-dns/libidn2-0.14:= ) metalink? ( app-crypt/gpgme media-libs/libmetalink ) pcre? ( dev-libs/libpcre2 ) ssl? ( gnutls? ( net-libs/gnutls:= ) !gnutls? ( dev-libs/openssl:= ) ) uuid? ( sys-apps/util-linux ) zlib? ( sys-libs/zlib ) )
+REQUIRED_USE=ntlm? ( !gnutls ssl ) gnutls? ( ssl )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://ftp.gnu.org/gnu/wget//wget-1.21.3.tar.gz
+_eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	c6ddaeb7a3e68d2564fa886420d0ae41	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=2323b9ae610da8de409113752b49d090
