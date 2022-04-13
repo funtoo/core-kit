@@ -8,6 +8,6 @@ IUSE=static-libs +unicode utils abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 a
 LICENSE=GPL-3
 RDEPEND=>=sys-libs/ncurses-5.9-r3:=[static-libs?,unicode(+)?,-mgorny(-)]
 SLOT=0/8
-SRC_URI=https://ftp.gnu.org/gnu/readline/readline-8.2-alpha.tar.gz
+SRC_URI=https://ftp.gnu.org/gnu/readline/readline-8.2-beta.tar.gz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
-_md5_=6cb020b3097b67220310ce9b145c0d3c
+_md5_=884ead720673350cb556f5365b3fb9e7

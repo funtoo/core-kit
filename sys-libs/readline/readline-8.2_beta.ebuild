@@ -9,7 +9,7 @@ MY_P=${PN}-${PV/_/-}
 S="${WORKDIR}"/${MY_P}
 DESCRIPTION="Another cute console display library"
 HOMEPAGE="https://tiswww.case.edu/php/chet/readline/rltop.html"
-SRC_URI="https://ftp.gnu.org/gnu/readline/readline-8.2-alpha.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/readline/readline-8.2-beta.tar.gz"
 
 
 LICENSE="GPL-3"

@@ -9,14 +9,14 @@ MY_P="${PN}-${PV/_/-}"
 S="${WORKDIR}/${MY_P}"
 DESCRIPTION="The standard GNU Bourne again shell"
 HOMEPAGE="http://tiswww.case.edu/php/chet/bash/bashtop.html"
-SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2-alpha.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2-beta.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 IUSE="afs bashlogger examples mem-scramble +net nls plugins +readline"
 
-READLINE_VER="8.1" # The version of readline this bash normally ships with.
+READLINE_VER="8.2" # The version of readline this bash normally ships with.
 
 DEPEND="
 	>=sys-libs/ncurses-5.2-r2:0=
