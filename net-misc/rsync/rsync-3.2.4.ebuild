@@ -9,7 +9,7 @@ DESCRIPTION="File transfer program to keep remote files into sync"
 HOMEPAGE="https://rsync.samba.org/"
 SRC_DIR="src"
 KEYWORDS="*"
-SRC_URI="https://github.com/WayneD/rsync/tarball/cc832943160fb2cbaeaf45942b724828399edd37 -> rsync-3.2.4-cc83294.tar.gz"
+SRC_URI="https://github.com/WayneD/rsync/tarball/0ac7ebceef70417355f25daf9e2fd94e84c49749 -> rsync-3.2.4-0ac7ebc.tar.gz"
 S="${WORKDIR}/${P/_/}"
 
 LICENSE="GPL-3"
