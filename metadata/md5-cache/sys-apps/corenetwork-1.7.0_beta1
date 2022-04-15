@@ -2,9 +2,9 @@ DEFINED_PHASES=install unpack
 DESCRIPTION=Funtoo's networking scripts.
 EAPI=6
 HOMEPAGE=http://www.funtoo.org/Networking
-KEYWORDS=*
+KEYWORDS=next
 LICENSE=BSD-2
 RDEPEND=sys-apps/openrc !<=sys-apps/openrc-0.12.4-r4
 SLOT=0
-SRC_URI=https://www.github.com/funtoo/corenetwork/tarball/1.6.3 -> corenetwork-1.6.3.tar.gz
-_md5_=471668ff9ea5e335879f64a6fcdac8ac
+SRC_URI=https://github.com/funtoo/corenetwork/tarball/1.7.0_beta1 -> corenetwork-1.7.0_beta1.tar.gz
+_md5_=6e8f3f2d4d2ec86df7cff56309921b83
