@@ -1,14 +1,14 @@
 BDEPEND=python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_8? ( dev-lang/python:3.8 ) python_targets_python3_10? ( dev-lang/python:3.10 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,python_targets_python3_10(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-),-python_single_target_python3_10(-)] >=dev-python/setuptools-42.0.2[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,python_targets_python3_10(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-),-python_single_target_python3_10(-)]
 DEFINED_PHASES=compile configure install prepare test
-DESCRIPTION=Funtoo's franken-chroot tool.
+DESCRIPTION=Funtoo franken-chroot tool.
 EAPI=7
-HOMEPAGE=https://pypi.org/project/fchroot/
+HOMEPAGE=https://code.funtoo.org/bitbucket/users/drobbins/repos/fchroot/browse https://pypi.org/project/fchroot/
 IUSE=python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python3_10
 KEYWORDS=*
 LICENSE=Apache-2.0
 RDEPEND=app-emulation/qemu[static-user,qemu_user_targets_aarch64,qemu_user_targets_arm,qemu_user_targets_riscv64,qemu_user_targets_ppc64] dev-libs/glib[static-libs] sys-apps/attr[static-libs] sys-libs/zlib[static-libs] dev-libs/libpcre[static-libs] python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_8? ( dev-lang/python:3.8 ) python_targets_python3_10? ( dev-lang/python:3.10 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,python_targets_python3_10(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-),-python_single_target_python3_10(-)]
 REQUIRED_USE=|| ( python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python3_10 )
 SLOT=0
-SRC_URI=https://files.pythonhosted.org/packages/d6/4b/7607a0b153545f4e4e6489490bbac7bd37bf59baa527851022706584ced1/fchroot-0.2.2.tar.gz
+SRC_URI=https://files.pythonhosted.org/packages/6b/5c/5e7049ef25ba0406f171c7d0704ff81eadf2f457223dd42052d5e564fc09/fchroot-0.3.0.tar.gz
 _eclasses_=distutils-r1	99f25357716a44b67680afc3b47219f2	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	c6ddaeb7a3e68d2564fa886420d0ae41	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=27dd234295d2e73224e9d60a2297a6ff
+_md5_=392324a4bc510fa19fe6a5b95988d4bf
