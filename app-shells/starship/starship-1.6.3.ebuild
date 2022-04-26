@@ -33,9 +33,10 @@ cc-1.0.73
 cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
-clap-3.1.8
-clap_complete-3.1.1
+clap-3.1.12
+clap_complete-3.1.2
 clap_derive-3.1.7
+clap_lex-0.1.1
 combine-4.6.3
 concurrent-queue-1.2.2
 const_format-0.2.22
@@ -119,6 +120,7 @@ minimal-lexical-0.2.1
 mockall-0.11.0
 mockall_derive-0.11.0
 nix-0.23.1
+nix-0.24.1
 nom-5.1.2
 nom-7.1.1
 normalize-line-endings-0.3.0
@@ -230,7 +232,7 @@ time-0.1.44
 time-0.3.9
 tinyvec-1.5.1
 tinyvec_macros-0.1.0
-toml-0.5.8
+toml-0.5.9
 toml_edit-0.14.2
 typenum-1.15.0
 ucd-trie-0.1.3
@@ -247,8 +249,8 @@ utf8-width-0.1.6
 utf8parse-0.2.0
 vcpkg-0.2.15
 version_check-0.9.4
-versions-4.0.0
-vtparse-0.6.0
+versions-4.1.0
+vtparse-0.6.1
 waker-fn-1.1.0
 wasi-0.9.0+wasi-snapshot-preview1
 wasi-0.10.0+wasi-snapshot-preview1
@@ -259,6 +261,7 @@ winapi-i686-pc-windows-gnu-0.4.0
 winapi-util-0.1.5
 winapi-x86_64-pc-windows-gnu-0.4.0
 windows-0.24.0
+windows-0.35.0
 windows-sys-0.35.0
 windows_aarch64_msvc-0.35.0
 windows_i686_gnu-0.24.0
@@ -284,7 +287,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.6.2 -> starship-v1.6.2.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.6.3 -> starship-v1.6.3.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
