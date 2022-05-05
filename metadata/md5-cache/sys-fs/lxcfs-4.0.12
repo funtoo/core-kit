@@ -1,0 +1,14 @@
+BDEPEND=sys-apps/help2man >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install prepare test
+DEPEND=sys-fs/fuse:3
+DESCRIPTION=FUSE filesystem for LXC
+EAPI=7
+HOMEPAGE=https://linuxcontainers.org/lxcfs/introduction/ https://github.com/lxc/lxcfs/
+KEYWORDS=*
+LICENSE=Apache-2.0 LGPL-2+
+RDEPEND=sys-fs/fuse:3
+RESTRICT=test
+SLOT=0
+SRC_URI=https://linuxcontainers.org/downloads/lxcfs/lxcfs-4.0.12.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=fc20de03766ce7bda65eea644fb3a75a
