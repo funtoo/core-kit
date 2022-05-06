@@ -8,7 +8,7 @@ inherit cmake-utils eutils python-any-r1
 
 DESCRIPTION="Documentation system for most programming languages"
 HOMEPAGE=""https://www.doxygen.nl/
-SRC_URI="https://api.github.com/repos/doxygen/doxygen/tarball/refs/tags/Release_1_9_3 -> doxygen-1.9.3.tar.gz"
+SRC_URI="https://api.github.com/repos/doxygen/doxygen/tarball/refs/tags/Release_1_9_4 -> doxygen-1.9.4.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 
