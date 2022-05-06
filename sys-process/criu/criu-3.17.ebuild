@@ -8,7 +8,7 @@ inherit toolchain-funcs linux-info flag-o-matic python-r1
 
 DESCRIPTION="utility to checkpoint/restore a process tree"
 HOMEPAGE="https://criu.org/"
-SRC_URI="https://api.github.com/repos/checkpoint-restore/criu/tarball/4a1731891e91e62f15c40c361aff2a8a54d91bb3 -> criu-3.16.1-4a17318.tar.gz"
+SRC_URI="https://api.github.com/repos/checkpoint-restore/criu/tarball/4f8f295e57e68740699479d12c1ad251e6dd859f -> criu-3.17-4f8f295.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
