@@ -16,7 +16,7 @@ MODULE_EXT=${PVR}-${PN}
 
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="5.16.12-${DEB_EXTRAVERSION}"
+DEB_PV="5.16.18-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="*"
@@ -38,8 +38,8 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.12.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.12-1.debian.tar.xz"
-S="$WORKDIR/linux-5.16.12"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.18.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.18-1.debian.tar.xz"
+S="$WORKDIR/linux-5.16.18"
 
 get_patch_list() {
 	[[ -z "${1}" ]] && die "No patch series file specified"
@@ -121,23 +121,23 @@ src_prepare() {
 	#make -s include/linux/version.h || die "make include/linux/version.h failed"
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-	if [ -e "${FILESDIR}/5.16.12/xfs-libcrc32c-fix.patch" ]; then
-	    epatch "${FILESDIR}"/5.16.12/xfs-libcrc32c-fix.patch || die
+	if [ -e "${FILESDIR}/5.16.18/xfs-libcrc32c-fix.patch" ]; then
+	    epatch "${FILESDIR}"/5.16.18/xfs-libcrc32c-fix.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/xfs-libcrc32c-fix.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.16.12/mcelog.patch" ]; then
-	    epatch "${FILESDIR}"/5.16.12/mcelog.patch || die
+	if [ -e "${FILESDIR}/5.16.18/mcelog.patch" ]; then
+	    epatch "${FILESDIR}"/5.16.18/mcelog.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/mcelog.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.16.12/ikconfig.patch" ]; then
-	    epatch "${FILESDIR}"/5.16.12/ikconfig.patch || die
+	if [ -e "${FILESDIR}/5.16.18/ikconfig.patch" ]; then
+	    epatch "${FILESDIR}"/5.16.18/ikconfig.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.16.12/extra_cpu_optimizations.patch" ]; then
-	    epatch "${FILESDIR}"/5.16.12/extra_cpu_optimizations.patch || die
+	if [ -e "${FILESDIR}/5.16.18/extra_cpu_optimizations.patch" ]; then
+	    epatch "${FILESDIR}"/5.16.18/extra_cpu_optimizations.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
 	fi
