@@ -1,15 +1,15 @@
 BDEPEND=>=dev-lang/go-1.18 >=sys-kernel/linux-headers-4.15 nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-lang/go-1.10
 DEFINED_PHASES=compile configure install postinst prepare setup
-DEPEND=app-arch/xz-utils || ( >=app-emulation/lxc-3.0.0[apparmor?,seccomp] >=app-emulation/lxc-4.0.6[apparmor?] ) dev-lang/tcl dev-libs/libuv dev-libs/lzo >=dev-util/xdelta-3.0 net-dns/dnsmasq[dhcp,ipv6?]
+DEPEND=app-arch/xz-utils app-arch/lz4 || ( >=app-emulation/lxc-3.0.0[apparmor?,seccomp] >=app-emulation/lxc-4.0.6[apparmor?] ) dev-lang/tcl dev-libs/libuv dev-libs/lzo >=dev-util/xdelta-3.0 net-dns/dnsmasq[dhcp,ipv6?]
 DESCRIPTION=Fast, dense and secure container management
 EAPI=7
 HOMEPAGE=https://linuxcontainers.org/lxd/introduction/ https://github.com/lxc/lxd
 IUSE=apparmor ipv6 nls kernel_linux
 KEYWORDS=*
 LICENSE=Apache-2.0 BSD BSD-2 LGPL-3 MIT MPL-2.0
-RDEPEND=app-arch/xz-utils || ( >=app-emulation/lxc-3.0.0[apparmor?,seccomp] >=app-emulation/lxc-4.0.6[apparmor?] ) dev-lang/tcl dev-libs/libuv dev-libs/lzo >=dev-util/xdelta-3.0 net-dns/dnsmasq[dhcp,ipv6?] net-firewall/ebtables net-firewall/iptables[ipv6?] sys-apps/iproute2[ipv6?] sys-fs/fuse:* sys-fs/lxcfs sys-fs/squashfs-tools[lzma] virtual/acl
+RDEPEND=app-arch/xz-utils app-arch/lz4 || ( >=app-emulation/lxc-3.0.0[apparmor?,seccomp] >=app-emulation/lxc-4.0.6[apparmor?] ) dev-lang/tcl dev-libs/libuv dev-libs/lzo >=dev-util/xdelta-3.0 net-dns/dnsmasq[dhcp,ipv6?] net-firewall/ebtables net-firewall/iptables[ipv6?] sys-apps/iproute2[ipv6?] sys-fs/fuse:* sys-fs/lxcfs sys-fs/squashfs-tools[lzma] virtual/acl
 RESTRICT=test
 SLOT=0
 SRC_URI=https://linuxcontainers.org/downloads/lxd/lxd-5.0.0.tar.gz
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	golang-base	e62ea82a4485a73fb191120f7aad958e	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	e68863263b1e8611dacf381bec5c8b2b
-_md5_=7ae882c3cd0c8f6ccb9b9348e4a5d13d
+_md5_=4367c6946cadd0d2e5db4a43dd821d51
