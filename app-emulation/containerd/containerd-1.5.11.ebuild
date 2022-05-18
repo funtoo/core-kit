@@ -55,7 +55,7 @@ src_compile() {
 	myemakeargs=(
 		BUILDTAGS="${options[*]}"
 		LDFLAGS="$(usex hardened '-extldflags -fno-PIC' '')"
-		REVISION="${GIT_REVISION}"
+		REVISION="3df54a852345ae127d1fa3092b95168e4a88e2f8"
 		VERSION=v${PV}
 	)
 
