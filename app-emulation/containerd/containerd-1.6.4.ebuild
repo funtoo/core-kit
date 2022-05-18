@@ -1,12 +1,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-GIT_REVISION=3df54a852345ae127d1fa3092b95168e4a88e2f8
 inherit go-module systemd
 
 DESCRIPTION="A daemon to control runC"
 HOMEPAGE="https://containerd.io/"
-SRC_URI="https://github.com/containerd/containerd/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/containerd/containerd/tarball/212e8b6fa2f44b9c21b2798135fc6fb7c53efc16 -> containerd-1.6.4-212e8b6.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
