@@ -32,6 +32,12 @@ BDEPEND="
 # upstream does not recommend stripping binary
 RESTRICT+=" strip test"
 
+post_src_unpack() {
+	if [ ! -d "${S}" ]; then
+		mv containerd-containerd* "${S}" || die
+	fi
+}
+
 src_prepare() {
 	default
 	sed -i \
