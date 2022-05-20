@@ -49,7 +49,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://api.github.com/repos/kubernetes-sigs/kind/tarball/v0.13.0 -> kind-0.13.0.tar.gz
+SRC_URI="https://api.github.com/repos/kubernetes-sigs/kind/tarball/v0.14.0 -> kind-0.14.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 DESCRIPTION="Tool for running local Kubernetes clusters using Docker container nodes"
