@@ -1,4 +1,7 @@
-#from archlinux arm sdcard image
+# For more options and information see
+# http://rpf.io/configtxt
+# Some settings may impact device functionality. See link above for details
+
 # uncomment if you get no picture on HDMI for a default "safe" mode
 #hdmi_safe=1
 
@@ -39,43 +42,24 @@
 #uncomment to overclock the arm. 700 MHz is the default.
 #arm_freq=800
 
-# for more options see http://elinux.org/RPi_config.txt
+# Uncomment some or all of these to enable the optional hardware interfaces
+#dtparam=i2c_arm=on
+#dtparam=i2s=on
+#dtparam=spi=on
 
-## Some over clocking settings, govenor already set to ondemand
+# Uncomment this to enable infrared communication.
+#dtoverlay=gpio-ir,gpio_pin=17
+#dtoverlay=gpio-ir-tx,gpio_pin=18
 
-##None
-#arm_freq=700
-#core_freq=250
-#sdram_freq=400
-#over_voltage=0
+# Additional overlays and parameters are documented /boot/overlays/README
 
-##Modest
-#arm_freq=800
-#core_freq=300
-#sdram_freq=400
-#over_voltage=0
+# Enable audio (loads snd_bcm2835)
+dtparam=audio=on
 
-##Medium
-#arm_freq=900
-#core_freq=333
-#sdram_freq=450
-#over_voltage=2
+[pi4]
+# Enable DRM VC4 V3D driver on top of the dispmanx display stack
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
 
-##High
-#arm_freq=950
-#core_freq=450
-#sdram_freq=450
-#over_voltage=6
-
-##Turbo
-#arm_freq=1000
-#core_freq=500
-#sdram_freq=500
-#over_voltage=6
-
-gpu_mem_512=316
-gpu_mem_256=128
-cma_lwm=16
-cma_hwm=32
-cma_offline_start=16
-
+[all]
+#dtoverlay=vc4-fkms-v3d
