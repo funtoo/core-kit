@@ -11,7 +11,7 @@ libbtrfs_soname=0
 MY_PV="v${PV/_/-}"
 [[ "${PV}" = *_rc* ]] || \
 KEYWORDS="*"
-SRC_URI="https://www.kernel.org/pub/linux/kernel/people/kdave/${PN}/${PN}-${MY_PV}.tar.xz"
+SRC_URI="{{artifacts[0].src_uri}}"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 DESCRIPTION="Btrfs filesystem utilities"
