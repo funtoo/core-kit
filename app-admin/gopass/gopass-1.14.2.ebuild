@@ -49,6 +49,8 @@ EGO_SUM=(
 	"github.com/!burnt!sushi/xgb v0.0.0-20160522181843-27f122750802/go.mod"
 	"github.com/!proton!mail/go-crypto v0.0.0-20220407094043-a94812496cf5"
 	"github.com/!proton!mail/go-crypto v0.0.0-20220407094043-a94812496cf5/go.mod"
+	"github.com/antzucaro/matchr v0.0.0-20210222213004-b04723ef80f0"
+	"github.com/antzucaro/matchr v0.0.0-20210222213004-b04723ef80f0/go.mod"
 	"github.com/atotto/clipboard v0.1.4"
 	"github.com/atotto/clipboard v0.1.4/go.mod"
 	"github.com/blang/semver/v4 v4.0.0"
@@ -226,8 +228,8 @@ EGO_SUM=(
 	"github.com/stretchr/testify v1.7.1/go.mod"
 	"github.com/twpayne/go-pinentry v0.2.0"
 	"github.com/twpayne/go-pinentry v0.2.0/go.mod"
-	"github.com/urfave/cli/v2 v2.5.1"
-	"github.com/urfave/cli/v2 v2.5.1/go.mod"
+	"github.com/urfave/cli/v2 v2.7.1"
+	"github.com/urfave/cli/v2 v2.7.1/go.mod"
 	"github.com/xrash/smetrics v0.0.0-20170218160415-a3153f7040e9/go.mod"
 	"github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673"
 	"github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673/go.mod"
@@ -544,7 +546,7 @@ go-module_set_globals
 
 DESCRIPTION="a simple but powerful password manager for the terminal"
 HOMEPAGE="https://www.gopass.pw/"
-SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.14.1 -> gopass-1.14.1.tar.gz
+SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.14.2 -> gopass-1.14.2.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT Apache-2.0 BSD MPL-2.0 BSD-2"
