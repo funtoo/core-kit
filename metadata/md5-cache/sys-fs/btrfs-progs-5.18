@@ -11,6 +11,6 @@ RDEPEND=dev-libs/lzo:2= sys-apps/util-linux:0=[static-libs(+)?] sys-libs/zlib:0=
 REQUIRED_USE=python? ( ^^ ( python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 ) )
 RESTRICT=test
 SLOT=0/0
-SRC_URI=https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v5.17.tar.xz -> btrfs-progs-v5.17.tar.xz
+SRC_URI=https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v5.18.tar.xz -> btrfs-progs-v5.18.tar.xz
 _eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	multilib	d410501a125f99ffb560b0c523cd3d1e	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=a51bec0282ce4103d79751c4be7d50ee
+_md5_=a423500bdcafaa7ac2e233c7c679da38
