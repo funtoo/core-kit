@@ -39,9 +39,9 @@ cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.19
 clang-sys-1.3.1
-clap-3.1.15
-clap_complete-3.1.3
-clap_derive-3.1.7
+clap-3.1.18
+clap_complete-3.1.4
+clap_derive-3.1.18
 clap_lex-0.2.0
 concurrent-queue-1.2.2
 console-0.15.0
@@ -107,7 +107,7 @@ kernel32-sys-0.2.2
 kv-log-macro-1.0.7
 lazy_static-1.4.0
 lazycell-1.3.0
-libc-0.2.125
+libc-0.2.126
 libloading-0.7.3
 libproc-0.12.0
 lock_api-0.4.7
@@ -179,7 +179,7 @@ strsim-0.10.0
 syn-1.0.92
 synstructure-0.12.6
 tar-0.4.38
-termbg-0.4.0
+termbg-0.4.1
 termcolor-1.1.3
 terminal_size-0.1.17
 termios-0.3.3
@@ -236,7 +236,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.12.2 -> procs-0.12.2.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.12.3 -> procs-0.12.3.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
