@@ -18,6 +18,7 @@ RDEPEND="
 	dev-python/httpx[${PYTHON_USEDEP}]
 	>=dev-python/jinja-3[${PYTHON_USEDEP}]
 	dev-python/packaging[${PYTHON_USEDEP}]
+	dev-python/psutil[${PYTHON_USEDEP}]
 	dev-python/pymongo[${PYTHON_USEDEP}]
 	dev-python/toml[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
