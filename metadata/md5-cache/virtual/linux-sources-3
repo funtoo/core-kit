@@ -3,6 +3,6 @@ DESCRIPTION=Virtual for Linux kernel sources
 EAPI=7
 IUSE=firmware
 KEYWORDS=*
-RDEPEND=firmware? ( sys-kernel/linux-firmware ) || ( >=sys-kernel/dummy-sources >=sys-kernel/debian-sources >=sys-kernel/debian-sources-lts >=sys-kernel/gentoo-sources >=sys-kernel/ck-sources >=sys-kernel/vanilla-sources )
+RDEPEND=firmware? ( sys-kernel/linux-firmware ) || ( sys-kernel/dummy-sources sys-kernel/debian-sources sys-kernel/debian-sources-lts sys-kernel/gentoo-sources sys-kernel/ck-sources sys-kernel/vanilla-sources )
 SLOT=0
-_md5_=359ac06512bdb9d61e207a60e8db5b6a
+_md5_=7d59fc811c6ee06f4c7c0842f59f8dca
