@@ -37,10 +37,10 @@ BDEPEND="
 "
 DEPEND="
 	>=dev-libs/glib-2.28:2[${MULTILIB_USEDEP}]
-	btpclient? ( ~dev-libs/ell-0.50 )
+	btpclient? ( ~dev-libs/ell-0.51 )
 	cups? ( net-print/cups:= )
 	mesh? (
-		~dev-libs/ell-0.50
+		~dev-libs/ell-0.51
 		>=dev-libs/json-c-0.13:=
 		sys-libs/readline:0=
 	)
