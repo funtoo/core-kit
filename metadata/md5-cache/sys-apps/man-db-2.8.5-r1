@@ -1,5 +1,5 @@
 DEFINED_PHASES=configure install postinst preinst setup
-DEPEND=!sys-apps/man >=dev-libs/libpipeline-1.5.0 sys-apps/groff berkdb? ( sys-libs/db:= ) gdbm? ( sys-libs/gdbm:= ) !berkdb? ( !gdbm? ( sys-libs/gdbm:= ) ) seccomp? ( sys-libs/libseccomp ) zlib? ( sys-libs/zlib ) app-arch/xz-utils virtual/pkgconfig nls? ( >=app-text/po4a-0.45 sys-devel/gettext ) virtual/pkgconfig
+DEPEND=!sys-apps/man >=dev-libs/libpipeline-1.5.0 sys-apps/groff berkdb? ( sys-libs/db:= ) gdbm? ( sys-libs/gdbm:= ) !berkdb? ( !gdbm? ( sys-libs/gdbm:= ) ) seccomp? ( sys-libs/libseccomp ) zlib? ( sys-libs/zlib ) app-arch/xz-utils virtual/pkgconfig nls? ( >=app-text/po4a-0.45 sys-devel/gettext ) sys-apps/shadow virtual/pkgconfig
 DESCRIPTION=a man replacement that utilizes berkdb instead of flat files
 EAPI=6
 HOMEPAGE=http://www.nongnu.org/man-db/
@@ -10,5 +10,5 @@ PDEPEND=manpager? ( app-text/manpager )
 RDEPEND=!sys-apps/man >=dev-libs/libpipeline-1.5.0 sys-apps/groff berkdb? ( sys-libs/db:= ) gdbm? ( sys-libs/gdbm:= ) !berkdb? ( !gdbm? ( sys-libs/gdbm:= ) ) seccomp? ( sys-libs/libseccomp ) zlib? ( sys-libs/zlib ) selinux? ( sec-policy/selinux-mandb )
 SLOT=0
 SRC_URI=mirror://nongnu/man-db/man-db-2.8.5.tar.xz
-_eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	e68863263b1e8611dacf381bec5c8b2b
+_eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
 _md5_=007b5fa5ec284fd6bec3c5eecdebf440

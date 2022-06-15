@@ -1,6 +1,6 @@
 BDEPEND=python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7[xml] ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] >=dev-python/setuptools-42.0.2[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] virtual/pkgconfig
 DEFINED_PHASES=compile configure install postinst preinst prepare test
-DEPEND=dev-python/setuptools[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] doc? ( dev-python/sphinx[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] ) test? ( dev-python/meld3[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] dev-python/setuptools[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] dev-python/mock[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] )
+DEPEND=dev-python/setuptools[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] doc? ( dev-python/sphinx[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] ) test? ( dev-python/meld3[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] dev-python/setuptools[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] dev-python/mock[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] ) sys-apps/shadow
 DESCRIPTION=A system for controlling process state under UNIX
 EAPI=7
 HOMEPAGE=http://supervisord.org/ https://pypi.org/project/supervisor/
@@ -11,5 +11,5 @@ RDEPEND=dev-python/meld3[python_targets_python2_7(-)?,-python_single_target_pyth
 REQUIRED_USE=|| ( python_targets_python2_7 )
 SLOT=0
 SRC_URI=mirror://pypi/s/supervisor/supervisor-3.3.5.tar.gz
-_eclasses_=distutils-r1	99f25357716a44b67680afc3b47219f2	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	c6ddaeb7a3e68d2564fa886420d0ae41	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	e68863263b1e8611dacf381bec5c8b2b
+_eclasses_=distutils-r1	99f25357716a44b67680afc3b47219f2	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	c6ddaeb7a3e68d2564fa886420d0ae41	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
 _md5_=04461cbbdaba11c1b70bbd9519376b33
