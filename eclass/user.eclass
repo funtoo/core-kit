@@ -13,6 +13,8 @@
 if [[ -z ${_USER_ECLASS} ]]; then
 _USER_ECLASS=1
 
+DEPEND="sys-apps/shadow"
+
 # @FUNCTION: _assert_pkg_ebuild_phase
 # @INTERNAL
 # @USAGE: <calling func name>
