@@ -1,7 +1,6 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit flag-o-matic toolchain-funcs
 
@@ -11,24 +10,28 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 sparc x86 ~amd64-linux ~x86-linux"
-IUSE="kernel_linux ncurses static"
+KEYWORDS="*"
+IUSE="ncurses static"
 
 # libuuid from util-linux is required.
 RDEPEND="!static? (
 		dev-libs/popt
-		ncurses? ( >=sys-libs/ncurses-5.7-r7:0=[unicode] )
+		ncurses? ( sys-libs/ncurses:=[unicode(+)] )
 		kernel_linux? ( sys-apps/util-linux )
 	)"
 DEPEND="
 	${RDEPEND}
 	static? (
 		dev-libs/popt[static-libs(+)]
-		ncurses? ( >=sys-libs/ncurses-5.7-r7:0=[unicode,static-libs(+)] )
+		ncurses? ( sys-libs/ncurses:=[unicode(+),static-libs(+)] )
 		kernel_linux? ( sys-apps/util-linux[static-libs(+)] )
 	)
 	virtual/pkgconfig
 "
+
+PATCHES=(
+	"${FILESDIR}/${P}-libuuid.patch" #844073
+)
 
 src_prepare() {
 	default
@@ -37,7 +40,7 @@ src_prepare() {
 
 	if ! use ncurses ; then
 		sed -i \
-			-e '/^all:/s:cgdisk::' \
+			-e '/^all:/s: cgdisk::' \
 			Makefile || die
 	fi
 
