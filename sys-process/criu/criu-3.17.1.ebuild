@@ -8,7 +8,7 @@ inherit toolchain-funcs linux-info flag-o-matic python-r1
 
 DESCRIPTION="Checkpoint and Restore in Userspace is a utility to checkpoint/restore Linux tasks"
 HOMEPAGE="https://criu.org/"
-SRC_URI="https://github.com/checkpoint-restore/criu/tarball/4f8f295e57e68740699479d12c1ad251e6dd859f -> criu-3.17-4f8f295.tar.gz"
+SRC_URI="https://github.com/checkpoint-restore/criu/tarball/d46f40f4ff0c724e0b9f0f8a2e8c043806897e94 -> criu-3.17.1-d46f40f.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
