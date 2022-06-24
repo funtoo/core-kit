@@ -1,0 +1,9 @@
+DEFINED_PHASES=-
+DESCRIPTION=GNU Autoconf Macro Archive
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/autoconf-archive/
+KEYWORDS=*
+LICENSE=GPL-3
+SLOT=0
+SRC_URI=mirror://gnu/autoconf-archive/autoconf-archive-2021.02.19.tar.xz
+_md5_=67afba9643a765d8ad75fb901929c50a
