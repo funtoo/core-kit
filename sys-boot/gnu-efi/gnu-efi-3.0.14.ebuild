@@ -1,4 +1,3 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,7 +6,8 @@ inherit flag-o-matic toolchain-funcs
 
 DESCRIPTION="Library for build EFI Applications"
 HOMEPAGE="http://gnu-efi.sourceforge.net/"
-SRC_URI="mirror://sourceforge/gnu-efi/${P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/gnu-efi/gnu-efi/gnu-efi-3.0.14.tar.bz2"
+
 
 # inc/, lib/ dirs (README.efilib)
 # - BSD-2
@@ -16,7 +16,7 @@ SRC_URI="mirror://sourceforge/gnu-efi/${P}.tar.bz2"
 # - GPL-2+ : setjmp_ia32.S
 LICENSE="GPL-2+ BSD BSD-2"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~arm ~arm64 ia64 ~x86"
+KEYWORDS="*"
 IUSE="abi_x86_32 abi_x86_64 -custom-cflags"
 
 DEPEND="sys-apps/pciutils"
@@ -26,11 +26,6 @@ RDEPEND=""
 # so doing these QA checks on them doesn't make sense.
 QA_EXECSTACK="usr/*/lib*efi.a:* usr/*/crt*.o"
 RESTRICT="strip"
-
-PATCHES=(
-	"${FILESDIR}"/${P}-ia64-gnu-hash.patch
-	"${FILESDIR}"/${P}-ia64-setjmp.patch
-)
 
 src_prepare() {
 	sed -i -e "s/-Werror//" Make.defaults || die

@@ -1,0 +1,13 @@
+BDEPEND=virtual/pkgconfig >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=prepare
+DEPEND=dev-libs/openssl:= sys-apps/keyutils:= sys-libs/efivar:=
+DESCRIPTION=The utility to manipulate machines owner keys which managed in shim
+EAPI=7
+HOMEPAGE=https://github.com/lcp/mokutil
+KEYWORDS=*
+LICENSE=GPL-3
+RDEPEND=dev-libs/openssl:= sys-apps/keyutils:= sys-libs/efivar:=
+SLOT=0
+SRC_URI=https://github.com/lcp/mokutil/tarball/b4d8693f04bcf43986aba061845947534b384152 -> mokutil-0.6.0-b4d8693.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=1c98399cdb902d9bcaf687444d522ec9
