@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,7 +6,8 @@ inherit flag-o-matic toolchain-funcs
 
 DESCRIPTION="Library for build EFI Applications"
 HOMEPAGE="http://gnu-efi.sourceforge.net/"
-SRC_URI="mirror://sourceforge/gnu-efi/${P}.tar.bz2"
+SRC_URI="{{artifacts[0].src_uri}}"
+
 
 # inc/, lib/ dirs (README.efilib)
 # - BSD-2
@@ -16,9 +16,7 @@ SRC_URI="mirror://sourceforge/gnu-efi/${P}.tar.bz2"
 # - GPL-2+ : setjmp_ia32.S
 LICENSE="GPL-2+ BSD BSD-2"
 SLOT="0"
-# IA64 build is broken in setjmp code:
-# https://sourceforge.net/p/gnu-efi/bugs/9/
-KEYWORDS="-* ~amd64 ~arm ~arm64 -ia64 ~x86"
+KEYWORDS="*"
 IUSE="abi_x86_32 abi_x86_64 -custom-cflags"
 
 DEPEND="sys-apps/pciutils"
