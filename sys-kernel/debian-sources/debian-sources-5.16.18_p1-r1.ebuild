@@ -8,6 +8,8 @@ SLOT=$PF
 CKV=${PV}
 KV_FULL=${PN}-${PVR}
 DEB_EXTRAVERSION="1"
+# Account for version revisions
+[[ ${PR} != "r0" ]] && DEB_EXTRAVERSION+="-${PR}"
 # Debian version -1 becomes _p1 in Funtoo:
 EXTRAVERSION="_p${DEB_EXTRAVERSION}-${PN}"
 
@@ -312,7 +314,7 @@ pkg_postinst() {
 	fi
 
 	if [ -e ${ROOT}lib/modules ]; then
-		depmod -a $DEP_PV
+		depmod -a $DEB_PV
 	fi
 
 	ego_pkg_postinst
