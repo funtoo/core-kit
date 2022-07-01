@@ -10,7 +10,7 @@ inherit autotools lua-single perl-module python-single-r1 toolchain-funcs
 DESCRIPTION="Red Hat Package Management Utils"
 HOMEPAGE="https://rpm.org
 	https://github.com/rpm-software-management/rpm"
-SRC_URI="http://ftp.rpm.org/releases/rpm-4.17.x//rpm-4.17.0.tar.bz2"
+SRC_URI="http://ftp.rpm.org/releases/rpm-4.17.x//rpm-4.17.1.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="0"
