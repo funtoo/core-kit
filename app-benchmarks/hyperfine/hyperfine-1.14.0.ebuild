@@ -110,7 +110,6 @@ DESCRIPTION="A command-line benchmarking tool"
 HOMEPAGE="https://github.com/sharkdp/hyperfine"
 SRC_URI="https://api.github.com/repos/sharkdp/hyperfine/tarball/v1.14.0 -> hyperfine-1.14.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
-RESTRICT="mirror"
 LICENSE="Apache-2.0 MIT"
 SLOT="0"
 KEYWORDS="*"
