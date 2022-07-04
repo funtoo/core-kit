@@ -6,7 +6,7 @@ inherit autotools golang-base bash-completion-r1 linux-info user
 
 DESCRIPTION="Fast, dense and secure container management"
 HOMEPAGE="https://linuxcontainers.org/lxd/introduction/ https://github.com/lxc/lxd"
-SRC_URI="https://linuxcontainers.org/downloads/${PN}/${P}.tar.gz"
+SRC_URI="https://linuxcontainers.org/downloads/lxd/lxd-5.0.0.tar.gz"
 
 # Needs to include licenses for all bundled programs and libraries.
 LICENSE="Apache-2.0 BSD BSD-2 LGPL-3 MIT MPL-2.0"
@@ -16,10 +16,7 @@ IUSE="apparmor ipv6 nls"
 
 DEPEND="app-arch/xz-utils
 	app-arch/lz4
-	|| (
-		>=app-emulation/lxc-3.0.0[apparmor?,seccomp]
-		>=app-emulation/lxc-4.0.6[apparmor?]
-	)
+	>=app-emulation/lxc-4.0.6[apparmor?]
 	dev-lang/tcl
 	dev-libs/libuv
 	dev-libs/lzo
@@ -162,8 +159,8 @@ src_install() {
 	newbashcomp scripts/bash/lxd-client lxc
 	bashcomp_alias lxc lxd.lxc
 
-	newinitd "${FILESDIR}"/${PV}/lxd.initd lxd || die
-	newconfd "${FILESDIR}"/${PV}/lxd.confd lxd || die
+	newinitd "${FILESDIR}"/5.x/lxd.initd lxd || die
+	newconfd "${FILESDIR}"/5.x/lxd.confd lxd || die
 
 	local dodoc_opts=-r
 	dodoc -r AUTHORS doc/**
