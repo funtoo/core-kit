@@ -9,5 +9,5 @@ LICENSE=Apache-2.0
 RDEPEND=emacs? ( virtual/emacs ) vim-syntax? ( || ( app-editors/vim app-editors/gvim ) ) !<net-irc/ninja-1.5.9_pre14-r1
 SLOT=0
 SRC_URI=https://github.com/Kitware/ninja/archive/v1.8.2.g3bbbe.kitware.dyndep-1.jobserver-1.tar.gz -> ninja-1.8.2.g3bbbe.kitware.dyndep-1.jobserver-1.tar.gz
-_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	elisp-common	23f47b2e1de7abf387105eddd1318738	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	c6ddaeb7a3e68d2564fa886420d0ae41	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	elisp-common	23f47b2e1de7abf387105eddd1318738	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	116c0e643beeb6fc359101546f38b362	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=e6bcd9296297a8096ec955c90cca0821
