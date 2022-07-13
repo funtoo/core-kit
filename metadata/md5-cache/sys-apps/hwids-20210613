@@ -9,5 +9,5 @@ LICENSE=|| ( GPL-2 BSD ) public-domain
 RDEPEND=udev? ( virtual/udev ) !<sys-apps/pciutils-3.1.9-r2 !<sys-apps/usbutils-005-r1
 SLOT=0
 SRC_URI=https://api.github.com/repos/gentoo/hwids/tarball/refs/tags/hwids-20210613 -> hwids-20210613.tar.gz
-_eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	62a980ca9c5f570cad01b65ab90228ca	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	udev	7752f306eec7b286d00bdb47b763e7ac
+_eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	32393cac272daca4c136cc44e6005b67	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	udev	7752f306eec7b286d00bdb47b763e7ac
 _md5_=5b07c35e1d86d4be1f83839f3ddb76b6

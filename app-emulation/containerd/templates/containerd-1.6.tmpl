@@ -5,7 +5,7 @@ inherit go-module systemd
 
 DESCRIPTION="A daemon to control runC"
 HOMEPAGE="https://containerd.io/"
-SRC_URI="https://github.com/containerd/containerd/tarball/3df54a852345ae127d1fa3092b95168e4a88e2f8 -> containerd-1.5.11-3df54a8.tar.gz"
+SRC_URI="{{artifacts[0].src_uri}}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -20,7 +20,7 @@ DEPEND="
 # recommended version of runc is found at https://github.com/containerd/containerd/tree/release/1.5/script/setup
 RDEPEND="
 	${DEPEND}
-	~app-emulation/runc-1.1.1
+	~app-emulation/runc-1.1.3
 "
 
 BDEPEND="
@@ -34,7 +34,7 @@ RESTRICT+=" strip test"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv containerd-containerd* "${S}" || die
+		mv {{ github_user }}-{{ github_repo }}* "${S}" || die
 	fi
 }
 
@@ -46,6 +46,12 @@ src_prepare() {
 	sed -i \
 		-e "s:/usr/local:/usr:" \
 		containerd.service || die
+
+		# Force "vendor" mode, because "readonly" does not work in sandbox
+		sed -i \
+		-e "s:-mod=readonly:-mod=vendor:" \
+		Makefile || die
+
 }
 
 src_compile() {
@@ -61,7 +67,7 @@ src_compile() {
 	myemakeargs=(
 		BUILDTAGS="${options[*]}"
 		LDFLAGS="$(usex hardened '-extldflags -fno-PIC' '')"
-		REVISION="3df54a852345ae127d1fa3092b95168e4a88e2f8"
+		REVISION="{{sha}}"
 		VERSION=v${PV}
 	)
 
