@@ -6,7 +6,7 @@ inherit autotools bash-completion-r1 flag-o-matic tmpfiles
 
 DESCRIPTION="Search and query ebuilds"
 HOMEPAGE="https://github.com/vaeth/eix/"
-SRC_URI="https://github.com/vaeth/eix/releases/download/v0.36.4/eix-0.36.4.tar.xz"
+SRC_URI="https://github.com/vaeth/eix/releases/download/v0.36.4/eix-0.36.4.tar.xz -> eix-0.36.4.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

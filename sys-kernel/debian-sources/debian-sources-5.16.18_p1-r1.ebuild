@@ -41,7 +41,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.18.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.18-1.debian.tar.xz"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.18.orig.tar.xz -> linux_5.16.18.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.16.18-1.debian.tar.xz -> linux_5.16.18-1.debian.tar.xz"
 S="$WORKDIR/linux-5.16.18"
 
 get_patch_list() {

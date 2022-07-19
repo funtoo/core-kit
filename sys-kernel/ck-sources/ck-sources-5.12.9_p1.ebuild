@@ -19,9 +19,9 @@ RDEPEND="virtual/linux-sources"
 DESCRIPTION="Linux 5.12.9-ck1, with Con Kolivas' MuQSS scheduler and patchset"
 
 SRC_URI="
-https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.12.9.xz
-http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz
-https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.12.tar.xz"
+https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/patch-5.12.9.xz -> patch-5.12.9.xz
+http://ck.kolivas.org/patches/5.0/5.12/5.12-ck1/patch-5.12-ck1.xz -> patch-5.12-ck1.xz
+https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.12.tar.xz -> linux-5.12.tar.xz"
 
 UNIPATCH_LIST="
 	${DISTDIR}/patch-5.12.9.xz

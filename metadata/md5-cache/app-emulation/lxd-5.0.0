@@ -10,6 +10,6 @@ LICENSE=Apache-2.0 BSD BSD-2 LGPL-3 MIT MPL-2.0
 RDEPEND=app-arch/xz-utils app-arch/lz4 >=app-emulation/lxc-4.0.6[apparmor?] dev-lang/tcl dev-libs/libuv dev-libs/lzo >=dev-util/xdelta-3.0 net-dns/dnsmasq[dhcp,ipv6?] net-firewall/ebtables net-firewall/iptables[ipv6?] sys-apps/iproute2[ipv6?] sys-fs/fuse:* sys-fs/lxcfs sys-fs/squashfs-tools[lzma] virtual/acl
 RESTRICT=test
 SLOT=0
-SRC_URI=https://linuxcontainers.org/downloads/lxd/lxd-5.0.0.tar.gz
+SRC_URI=https://linuxcontainers.org/downloads/lxd/lxd-5.0.0.tar.gz -> lxd-5.0.0.tar.gz
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	golang-base	e62ea82a4485a73fb191120f7aad958e	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
-_md5_=66cc3ffe32cd779710a0e5483284af3a
+_md5_=9eba57033c84747d956f5e7d95c702b1

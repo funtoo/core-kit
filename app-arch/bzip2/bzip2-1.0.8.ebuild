@@ -9,7 +9,7 @@ inherit toolchain-funcs multilib-minimal usr-ldscript
 
 DESCRIPTION="Freely available, patent free, high-quality data compressor."
 HOMEPAGE="https://sourceware.org/bzip2/"
-SRC_URI="https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz"
+SRC_URI="https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz -> bzip2-1.0.8.tar.gz"
 
 LICENSE="BZIP2"
 SLOT="0/1"

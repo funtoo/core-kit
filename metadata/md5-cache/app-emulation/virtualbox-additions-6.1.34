@@ -6,5 +6,5 @@ KEYWORDS=*
 LICENSE=GPL-2+ LGPL-2.1+ MIT SGI-B-2.0 CDDL
 RDEPEND=!app-emulation/virtualbox-bin !=app-emulation/virtualbox-9999
 SLOT=0
-SRC_URI=https://download.virtualbox.org/virtualbox/6.1.34/VBoxGuestAdditions_6.1.34.iso
-_md5_=48c208bc33fe45323237d959d04c6951
+SRC_URI=https://download.virtualbox.org/virtualbox/6.1.34/VBoxGuestAdditions_6.1.34.iso -> VBoxGuestAdditions_6.1.34.iso
+_md5_=8255639b81346240e63cb27cf7d6c7e9

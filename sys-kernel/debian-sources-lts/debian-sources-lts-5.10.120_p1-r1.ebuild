@@ -41,7 +41,7 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_5.10.120.orig.tar.xz https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_5.10.120-1.debian.tar.xz"
+SRC_URI="https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_5.10.120.orig.tar.xz -> linux_5.10.120.orig.tar.xz https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_5.10.120-1.debian.tar.xz -> linux_5.10.120-1.debian.tar.xz"
 S="$WORKDIR/linux-5.10.120"
 
 get_patch_list() {
