@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=!net-misc/arpd !minimal? ( net-libs/libmnl:= ) atm? ( net-dialup/linux-atm ) berkdb? ( sys-libs/db:= ) bpf? ( dev-libs/libbpf:= ) caps? ( sys-libs/libcap ) elf? ( virtual/libelf:= ) iptables? ( >=net-firewall/iptables-1.4.20:= ) libbsd? ( dev-libs/libbsd ) selinux? ( sys-libs/libselinux )
 SLOT=0
-SRC_URI=https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.18.0.tar.xz
+SRC_URI=https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-5.18.0.tar.xz -> iproute2-5.18.0.tar.xz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=a573db676d7d10fdf2a5c3b17594ae7d
+_md5_=47af21b4b55440bdf8e7fa81cbd6c80f

@@ -11,6 +11,6 @@ RDEPEND=virtual/libc:= audit? ( >=sys-process/audit-2.6:= ) caps? ( sys-libs/lib
 REQUIRED_USE=python? ( || ( python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python3_10 ) ) su? ( pam )
 RESTRICT=test
 SLOT=0
-SRC_URI=https://www.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.tar.xz
+SRC_URI=https://www.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.tar.xz -> util-linux-2.38.tar.xz
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	pam	756a09f72c4cdbb55f2694c95f1e0860	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	32393cac272daca4c136cc44e6005b67	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
-_md5_=f99ba2da8902af5231b3ca2099c3139a
+_md5_=2b15d0c3dc6cbddadae3a54c41686f9c

@@ -9,7 +9,7 @@ MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="e2fsprogs libraries (common error and subsystem)"
 HOMEPAGE="http://e2fsprogs.sourceforge.net/"
-SRC_URI="https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.5/e2fsprogs-1.46.5.tar.xz"
+SRC_URI="https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v1.46.5/e2fsprogs-1.46.5.tar.xz -> e2fsprogs-1.46.5.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -2,7 +2,7 @@
 
 EAPI=7
 
-SRC_URI="https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.34.0.tar.gz"
+SRC_URI="https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.34.0.tar.gz -> 0.34.0.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Additional completion definitions for Zsh"

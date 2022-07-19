@@ -7,6 +7,6 @@ IUSE=afs bashlogger examples mem-scramble +net nls plugins +readline
 LICENSE=GPL-3
 RDEPEND=>=sys-libs/ncurses-5.2-r2:0= nls? ( virtual/libintl ) readline? ( >=sys-libs/readline-8.2:0= )
 SLOT=0
-SRC_URI=https://ftp.gnu.org/gnu/bash/bash-5.2-rc1.tar.gz
+SRC_URI=https://ftp.gnu.org/gnu/bash/bash-5.2-rc1.tar.gz -> bash-5.2-rc1.tar.gz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=6571ec88e1a3f20b697ea8e7c3cd6106
+_md5_=2072c21dd6d0d57a08d5615bc73c8827

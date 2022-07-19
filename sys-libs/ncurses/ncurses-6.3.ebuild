@@ -9,7 +9,7 @@ MY_P="${PN}-${MY_PV}"
 DESCRIPTION="console display library"
 HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncurses/"
 SRC_URI="
-	https://invisible-mirror.net/archives/ncurses/ncurses-6.3.tar.gz
+	https://invisible-mirror.net/archives/ncurses/ncurses-6.3.tar.gz -> ncurses-6.3.tar.gz
 "
 
 LICENSE="MIT"

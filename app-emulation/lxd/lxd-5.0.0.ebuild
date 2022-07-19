@@ -6,7 +6,7 @@ inherit autotools golang-base bash-completion-r1 linux-info user
 
 DESCRIPTION="Fast, dense and secure container management"
 HOMEPAGE="https://linuxcontainers.org/lxd/introduction/ https://github.com/lxc/lxd"
-SRC_URI="https://linuxcontainers.org/downloads/lxd/lxd-5.0.0.tar.gz"
+SRC_URI="https://linuxcontainers.org/downloads/lxd/lxd-5.0.0.tar.gz -> lxd-5.0.0.tar.gz"
 
 # Needs to include licenses for all bundled programs and libraries.
 LICENSE="Apache-2.0 BSD BSD-2 LGPL-3 MIT MPL-2.0"

@@ -8,7 +8,7 @@ inherit flag-o-matic python-any-r1
 
 DESCRIPTION="GNU utilities for finding files"
 HOMEPAGE="https://www.gnu.org/software/findutils/"
-SRC_URI="https://ftp.gnu.org/gnu/findutils//findutils-4.8.0.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/findutils//findutils-4.8.0.tar.xz -> findutils-4.8.0.tar.xz"
 
 LICENSE="GPL-3+"
 SLOT="0"

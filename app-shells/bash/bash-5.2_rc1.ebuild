@@ -9,7 +9,7 @@ MY_P="${PN}-${PV/_/-}"
 S="${WORKDIR}/${MY_P}"
 DESCRIPTION="The standard GNU Bourne again shell"
 HOMEPAGE="http://tiswww.case.edu/php/chet/bash/bashtop.html"
-SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2-rc1.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2-rc1.tar.gz -> bash-5.2-rc1.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

@@ -6,9 +6,9 @@ inherit autotools flag-o-matic prefix
 
 KEYWORDS="*"
 SRC_URI="
-	https://www.zsh.org/pub/zsh-5.9.tar.xz
+	https://www.zsh.org/pub/zsh-5.9.tar.xz -> zsh-5.9.tar.xz
 	doc? (
-		https://www.zsh.org/pub/zsh-5.9-doc.tar.xz
+		https://www.zsh.org/pub/zsh-5.9-doc.tar.xz -> zsh-5.9-doc.tar.xz
 	)"
 
 DESCRIPTION="UNIX Shell similar to the Korn shell"

@@ -10,7 +10,7 @@ LICENSE="GPL-3+"
 IUSE="64-bit-bfd cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla"
 REQUIRED_USE="default-gold? ( gold )"
 
-SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz -> binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz -> binutils-2.36.1-patches-3.tar.xz"
 SLOT=$(ver_cut 1-2)
 
 S="${WORKDIR}/binutils-2.36.1"

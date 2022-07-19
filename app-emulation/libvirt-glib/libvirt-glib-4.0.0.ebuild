@@ -7,7 +7,7 @@ inherit gnome3 meson vala
 
 DESCRIPTION="GLib and GObject mappings for libvirt"
 HOMEPAGE="http://libvirt.org"
-SRC_URI="https://libvirt.org/sources/glib/libvirt-glib-4.0.0.tar.xz"
+SRC_URI="https://libvirt.org/sources/glib/libvirt-glib-4.0.0.tar.xz -> libvirt-glib-4.0.0.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
