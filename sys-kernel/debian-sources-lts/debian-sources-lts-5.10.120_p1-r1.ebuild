@@ -22,7 +22,7 @@ DEB_PV="5.10.120-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="*"
-IUSE="binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
+IUSE="acpi-ec binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
 	binary? ( >=sys-kernel/genkernel-4 )
@@ -164,6 +164,10 @@ src_prepare() {
 	chmod +x config-extract || die
 	./config-extract ${arch} ${featureset} ${subarch} || die
 	setno_config .config CONFIG_DEBUG
+	if acpi-ec; then
+		# most fan control tools require this
+		tweak_config .config CONFIG_ACPI_EC_DEBUGFS m
+	fi
 	if use ec2; then
 		setyes_config .config CONFIG_BLK_DEV_NVME
 		setyes_config .config CONFIG_XEN_BLKDEV_FRONTEND
