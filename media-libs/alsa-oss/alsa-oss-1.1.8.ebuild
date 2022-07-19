@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="Advanced Linux Sound Architecture OSS compatibility layer"
 HOMEPAGE="https://alsa-project.org/"
-SRC_URI="https://www.alsa-project.org/files/pub/oss-lib/alsa-oss-1.1.8.tar.bz2"
+SRC_URI="https://www.alsa-project.org/files/pub/oss-lib/alsa-oss-1.1.8.tar.bz2 -> alsa-oss-1.1.8.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

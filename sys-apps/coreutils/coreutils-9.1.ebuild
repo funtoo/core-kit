@@ -2,7 +2,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2+ )
+PYTHON_COMPAT=( python3+ )
 inherit flag-o-matic python-any-r1 toolchain-funcs
 
 DESCRIPTION="Standard GNU utilities (chmod, cp, dd, ls, sort, tr, head, wc, who,...)"
