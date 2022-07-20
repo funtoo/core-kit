@@ -7,7 +7,7 @@ MY_P=${MY_PN}_${PV}
 
 DESCRIPTION="CD image containing guest additions for VirtualBox"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/6.1.34/VBoxGuestAdditions_6.1.34.iso -> VBoxGuestAdditions_6.1.34.iso"
+SRC_URI="https://download.virtualbox.org/virtualbox/6.1.36/VBoxGuestAdditions_6.1.36.iso -> VBoxGuestAdditions_6.1.36.iso"
 
 LICENSE="GPL-2+ LGPL-2.1+ MIT SGI-B-2.0 CDDL"
 SLOT="0"
