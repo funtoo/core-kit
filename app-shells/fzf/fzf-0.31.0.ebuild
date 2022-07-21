@@ -30,20 +30,21 @@ EGO_SUM=(
 	"golang.org/x/sync v0.0.0-20210220032951-036812b2e83c"
 	"golang.org/x/sync v0.0.0-20210220032951-036812b2e83c/go.mod"
 	"golang.org/x/sys v0.0.0-20190626150813-e07cf5db2756/go.mod"
-	"golang.org/x/sys v0.0.0-20201119102817-f84b799fce68/go.mod"
-	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c"
+	"golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1/go.mod"
 	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod"
-	"golang.org/x/term v0.0.0-20210317153231-de623e64d2a6"
-	"golang.org/x/term v0.0.0-20210317153231-de623e64d2a6/go.mod"
+	"golang.org/x/sys v0.0.0-20220406163625-3f8b81556e12"
+	"golang.org/x/sys v0.0.0-20220406163625-3f8b81556e12/go.mod"
+	"golang.org/x/term v0.0.0-20210927222741-03fcf44c2211"
+	"golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod"
 	"golang.org/x/text v0.3.0/go.mod"
-	"golang.org/x/text v0.3.6"
-	"golang.org/x/text v0.3.6/go.mod"
+	"golang.org/x/text v0.3.7"
+	"golang.org/x/text v0.3.7/go.mod"
 	"golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod"
 )
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/archive/0.30.0.tar.gz -> fzf-0.30.0.tar.gz
+SRC_URI="https://github.com/junegunn/fzf/archive/0.31.0.tar.gz -> fzf-0.31.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT BSD-with-disclosure"
