@@ -1,20 +1,26 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 inherit autotools libtool
 
-DESCRIPTION="YAML 1.1 parser and emitter written in C"
+DESCRIPTION="A C library for parsing and emitting YAML"
 HOMEPAGE="https://github.com/yaml/libyaml"
-SRC_URI="https://github.com/yaml/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/yaml/libyaml/tarball/2c891fc7a770e8ba2fec34fc6b545c672beb37e6 -> libyaml-0.2.5-2c891fc.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="doc static-libs test"
+RESTRICT="!test? ( test )"
 
-DEPEND="doc? ( app-doc/doxygen )"
+BDEPEND="doc? ( app-doc/doxygen )"
+
+post_src_unpack() {
+	if [ ! -d "${S}" ] ; then
+		mv ${WORKDIR}/yaml-* ${S} || die
+	fi
+}
 
 src_prepare() {
 	default
@@ -24,7 +30,7 @@ src_prepare() {
 		sed -i -e 's: tests::g' Makefile* || die
 	fi
 
-	elibtoolize  # for FreeMiNT
+	elibtoolize
 	eautoreconf
 }
 
