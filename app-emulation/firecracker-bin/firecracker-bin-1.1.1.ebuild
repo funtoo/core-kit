@@ -8,10 +8,10 @@ DESCRIPTION="Secure and fast microVMs for serverless computing (static build)"
 HOMEPAGE="https://firecracker-microvm.github.io https://github.com/firecracker-microvm/firecracker"
 SRC_URI="
 	amd64? (
-		https://github.com/firecracker-microvm/firecracker/releases/download/v1.1.0/firecracker-v1.1.0-x86_64.tgz -> firecracker-v1.1.0-x86_64.tgz
+		https://github.com/firecracker-microvm/firecracker/releases/download/v1.1.1/firecracker-v1.1.1-x86_64.tgz -> firecracker-v1.1.1-x86_64.tgz
 	)
 	arm64? (
-		https://github.com/firecracker-microvm/firecracker/releases/download/v1.1.0/firecracker-v1.1.0-aarch64.tgz -> firecracker-v1.1.0-aarch64.tgz
+		https://github.com/firecracker-microvm/firecracker/releases/download/v1.1.1/firecracker-v1.1.1-aarch64.tgz -> firecracker-v1.1.1-aarch64.tgz
 	)"
 
 LICENSE="|| ( Apache-2.0 BSD-3 )"
