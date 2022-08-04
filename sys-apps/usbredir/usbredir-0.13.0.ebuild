@@ -8,7 +8,7 @@ MY_PV=${PV/_p*/}
 
 DESCRIPTION="usbredir libraries and utilities"
 HOMEPAGE="https://www.spice-space.org/usbredir.html"
-SRC_URI="https://github.com/freedesktop/spice-usbredir/tarball/bc64f5e23eeb6cf144649de3a85fe85d1347c52d -> spice-usbredir-0.12.0-bc64f5e.tar.gz"
+SRC_URI="https://github.com/freedesktop/spice-usbredir/tarball/5fc0e1c43194d948545941d408f4c10d084eb6ed -> spice-usbredir-0.13.0-5fc0e1c.tar.gz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
