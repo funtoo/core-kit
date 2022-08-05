@@ -11,7 +11,7 @@ inherit gnome2 distutils-r1 optfeature
 DESCRIPTION="A graphical tool for administering virtual machines"
 HOMEPAGE="https://virt-manager.org https://github.com/virt-manager/virt-manager"
 
-SRC_URI="https://github.com/virt-manager/virt-manager/tarball/e924dfb3895f4005422849c53065a7c687894c39 -> virt-manager-4.0.0-e924dfb.tar.gz"
+SRC_URI="https://github.com/virt-manager/virt-manager/tarball/8ca7c91697110ae0c1e730fc03237a06d28c5ced -> virt-manager-4.1.0-8ca7c91.tar.gz"
 KEYWORDS="*"
 
 LICENSE="GPL-2"
