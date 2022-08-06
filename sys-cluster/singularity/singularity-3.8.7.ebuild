@@ -6,7 +6,7 @@ inherit linux-info toolchain-funcs
 
 DESCRIPTION="Application containers for Linux"
 HOMEPAGE="https://sylabs.io"
-SRC_URI="https://github.com/apptainer/singularity/tarball/c6dcd5c795baadb583e9916b0fb4b6129b69743b -> singularity-3.8.7-c6dcd5c.tar.gz"
+SRC_URI="https://github.com/apptainer/singularity/releases/download/v3.8.7/singularity-3.8.7.tar.gz -> singularity-3.8.7.tar.gz"
 
 SLOT="0"
 LICENSE="BSD"
