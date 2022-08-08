@@ -6,7 +6,7 @@ inherit flag-o-matic toolchain-funcs
 
 DESCRIPTION="Library for build EFI Applications"
 HOMEPAGE="http://gnu-efi.sourceforge.net/"
-SRC_URI="https://downloads.sourceforge.net/gnu-efi/gnu-efi/gnu-efi-3.0.14.tar.bz2 -> gnu-efi-3.0.14.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/gnu-efi/gnu-efi/gnu-efi-3.0.15.tar.bz2 -> gnu-efi-3.0.15.tar.bz2"
 
 
 # inc/, lib/ dirs (README.efilib)
