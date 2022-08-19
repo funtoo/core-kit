@@ -104,33 +104,33 @@ generic-array-0.14.5
 gethostname-0.2.3
 getrandom-0.1.16
 getrandom-0.2.7
-git-actor-0.11.0
-git-attributes-0.3.0
-git-bitmap-0.1.0
+git-actor-0.11.1
+git-attributes-0.3.1
+git-bitmap-0.1.1
 git-chunk-0.3.0
-git-config-0.6.0
-git-date-0.0.2
-git-diff-0.17.0
-git-discover-0.3.0
+git-config-0.6.1
+git-date-0.0.3
+git-diff-0.17.1
+git-discover-0.4.0
 git-features-0.22.1
 git-glob-0.3.1
 git-hash-0.9.7
-git-index-0.4.0
+git-index-0.4.1
 git-lock-2.1.0
-git-object-0.20.0
-git-odb-0.31.0
-git-pack-0.21.0
+git-object-0.20.1
+git-odb-0.31.1
+git-pack-0.21.1
 git-path-0.4.0
 git-quote-0.2.0
-git-ref-0.15.0
-git-repository-0.20.0
-git-revision-0.3.0
+git-ref-0.15.1
+git-repository-0.21.0
+git-revision-0.4.0
 git-sec-0.3.0
 git-tempfile-2.0.2
-git-traverse-0.16.0
-git-url-0.7.0
+git-traverse-0.16.1
+git-url-0.7.1
 git-validate-0.5.4
-git-worktree-0.4.0
+git-worktree-0.4.1
 guess_host_triple-0.1.3
 hash_hasher-2.0.3
 hashbrown-0.12.1
@@ -148,7 +148,7 @@ io-close-0.3.7
 io-lifetimes-0.7.2
 is_debug-1.0.1
 itertools-0.10.3
-itoa-1.0.2
+itoa-1.0.3
 js-sys-0.3.58
 jwalk-0.6.0
 lazy_static-1.4.0
@@ -186,7 +186,7 @@ num_threads-0.1.6
 objc-0.2.7
 objc-foundation-0.1.1
 objc_id-0.1.1
-once_cell-1.13.0
+once_cell-1.13.1
 opaque-debug-0.3.0
 open-3.0.2
 ordered-float-2.10.0
@@ -264,6 +264,7 @@ serde_json-1.0.83
 serde_repr-0.1.8
 sha-1-0.10.0
 sha1-0.6.1
+sha1-asm-0.5.1
 sha1_smol-1.0.0
 sha2-0.9.9
 shadow-rs-0.16.2
@@ -291,10 +292,11 @@ termios-0.3.3
 termtree-0.2.4
 termwiz-0.15.0
 textwrap-0.15.0
-thiserror-1.0.31
-thiserror-impl-1.0.31
+thiserror-1.0.32
+thiserror-impl-1.0.32
 time-0.1.44
 time-0.3.11
+time-macros-0.2.4
 tinyvec-1.6.0
 tinyvec_macros-0.1.0
 toml-0.5.9
@@ -380,7 +382,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.10.1 -> starship-v1.10.1.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.10.2 -> starship-v1.10.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"

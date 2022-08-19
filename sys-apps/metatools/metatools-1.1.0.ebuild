@@ -7,7 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/funtoo-metatools/browse https://pypi.org/project/funtoo-metatools/"
-SRC_URI="https://files.pythonhosted.org/packages/e2/8a/35dcbf182b3f62b4def1eb0e0fcbe4392bc263020fd9b22195a269ce8805/funtoo-metatools-1.0.5.tar.gz -> funtoo-metatools-1.0.5.tar.gz
+SRC_URI="https://files.pythonhosted.org/packages/a5/e6/dd8d1b438e183132fe089db567bf2c38eb25320c68ebab21a7896dec1fec/funtoo-metatools-1.1.0.tar.gz -> funtoo-metatools-1.1.0.tar.gz
 "
 
 DEPEND=">=dev-python/subpop-2.0.0[${PYTHON_USEDEP}]"
@@ -28,4 +28,4 @@ IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
-S="${WORKDIR}/funtoo-metatools-1.0.5"
+S="${WORKDIR}/funtoo-metatools-1.1.0"
