@@ -59,7 +59,6 @@ busybox_config_enabled() {
 # patches go here!
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.26.2-bb.patch
-	"${FILESDIR}"/${P}-glibc-2.31.patch
 	# "${FILESDIR}"/${P}-*.patch
 )
 
