@@ -1,0 +1,14 @@
+BDEPEND=dev-perl/Pod-Parser amd64? ( dev-lang/nasm ) x86? ( dev-lang/nasm ) >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install prepare
+DEPEND=app-arch/bzip2 app-arch/lz4 dev-libs/lzo sys-libs/zlib
+DESCRIPTION=Long Range ZIP or Lzma RZIP optimized for compressing large files
+EAPI=7
+HOMEPAGE=https://github.com/ckolivas/lrzip
+IUSE=static-libs
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=app-arch/bzip2 app-arch/lz4 dev-libs/lzo sys-libs/zlib
+SLOT=0
+SRC_URI=https://github.com/ckolivas/lrzip/archive/v0.651.tar.gz -> lrzip-0.651.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=d33e306d3a8b89ba2b604abf89884b92
