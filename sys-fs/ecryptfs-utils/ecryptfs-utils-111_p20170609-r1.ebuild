@@ -1,46 +1,56 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python2_7 )
+EAPI=7
 
-inherit flag-o-matic pam python-single-r1 linux-info autotools
+inherit autotools flag-o-matic linux-info pam
 
+MY_PN=${PN/-utils//}
 DESCRIPTION="eCryptfs userspace utilities"
-HOMEPAGE="https://launchpad.net/ecryptfs"
-SRC_URI="https://launchpad.net/ecryptfs/trunk/${PV}/+download/${PN}_${PV}.orig.tar.gz"
+HOMEPAGE="https://www.ecryptfs.org/"
+SRC_URI="https://dev.gentoo.org/~bkohler/dist/${P}.tar.gz"
+S="${WORKDIR}/~${MY_PN}/${MY_PN}/trunk/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
-IUSE="doc gpg gtk openssl pam pkcs11 python suid tpm"
+KEYWORDS="*"
+IUSE="doc gpg gtk nls openssl pam pkcs11 suid tpm"
 
-RDEPEND=">=sys-apps/keyutils-1.0
-	>=dev-libs/libgcrypt-1.2.0:0
+BDEPEND="
+	>=dev-util/intltool-0.41.0
+	sys-devel/gettext
+	virtual/pkgconfig
+"
+RDEPEND="
+	>=dev-libs/libgcrypt-1.2.0:0=
 	dev-libs/nss
-	gpg? ( app-crypt/gpgme )
+	>=sys-apps/keyutils-1.5.11-r1:=
+	sys-process/lsof
+	gpg? ( app-crypt/gpgme:= )
 	gtk? ( x11-libs/gtk+:2 )
-	openssl? ( >=dev-libs/openssl-0.9.7 )
+	openssl? ( >=dev-libs/openssl-0.9.7:= )
 	pam? ( sys-libs/pam )
 	pkcs11? (
-		>=dev-libs/openssl-0.9.7
+		>=dev-libs/openssl-0.9.7:=
 		>=dev-libs/pkcs11-helper-1.04
 	)
-	python? ( ${PYTHON_DEPS} )
 	tpm? ( app-crypt/trousers )"
-DEPEND="${RDEPEND}
-	virtual/pkgconfig
-	sys-devel/gettext
-	>=dev-util/intltool-0.41.0
-	python? ( dev-lang/swig )"
+DEPEND="
+	${RDEPEND}
+	dev-libs/glib:2
+"
 
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+PATCHES=(
+	"${FILESDIR}/${PN}-111-musl-fix.patch"
+)
 
 pkg_setup() {
-	use python && python-single-r1_pkg_setup
-
 	CONFIG_CHECK="~ECRYPT_FS"
 	linux-info_pkg_setup
+}
+
+src_prepare() {
+	default
+	eautoreconf
 }
 
 src_configure() {
@@ -49,22 +59,19 @@ src_configure() {
 	econf \
 		--enable-nss \
 		--with-pamdir=$(getpam_mod_dir) \
+		--disable-pywrap \
 		$(use_enable doc docs) \
 		$(use_enable gpg) \
 		$(use_enable gtk gui) \
+		$(use_enable nls) \
 		$(use_enable openssl) \
 		$(use_enable pam) \
 		$(use_enable pkcs11 pkcs11-helper) \
-		$(use_enable python pywrap) \
 		$(use_enable tpm tspi)
 }
 
-src_install(){
+src_install() {
 	emake DESTDIR="${D}" install
-
-	if use python; then
-		echo "ecryptfs-utils" > "${D}$(python_get_sitedir)/ecryptfs-utils.pth" || die
-	fi
 
 	use suid && fperms u+s /sbin/mount.ecryptfs_private
 
