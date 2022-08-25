@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig >=dev-util/meson-0.61.0 man? ( app-text/docbook2X ) >=dev-util/meson-0.48.2 >=dev-util/ninja-1.7.2 virtual/pkgconfig
+DEFINED_PHASES=compile configure install postinst setup test unpack
+DEPEND=sys-libs/libcap apparmor? ( sys-libs/libapparmor ) caps? ( sys-libs/libcap[static-libs] ) io-uring? ( >=sys-libs/liburing-2:= ) pam? ( sys-libs/pam ) seccomp? ( sys-libs/libseccomp ) selinux? ( sys-libs/libselinux ) ssl? ( dev-libs/openssl:0= ) systemd? ( sys-apps/systemd:= ) sys-kernel/linux-headers apparmor? ( sys-apps/apparmor )
+DESCRIPTION=A userspace interface for the Linux kernel containment features
+EAPI=7
+HOMEPAGE=https://linuxcontainers.org/ https://github.com/lxc/lxc
+IUSE=apparmor +caps examples io-uring man pam seccomp selinux +ssl systemd +tools kernel_linux
+KEYWORDS=*
+LICENSE=GPL-2 LGPL-2.1 LGPL-3
+RDEPEND=sys-libs/libcap apparmor? ( sys-libs/libapparmor ) caps? ( sys-libs/libcap[static-libs] ) io-uring? ( >=sys-libs/liburing-2:= ) pam? ( sys-libs/pam ) seccomp? ( sys-libs/libseccomp ) selinux? ( sys-libs/libselinux ) ssl? ( dev-libs/openssl:0= ) systemd? ( sys-apps/systemd:= )
+SLOT=0
+SRC_URI=https://github.com/lxc/lxc/tarball/0539095ac7130559093360c81cff8979f0de88e6 -> lxc-5.0.1-0539095.tar.gz
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	meson	2fbe03e3b496f82fd941bcdb9d351c91	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	optfeature	8e0c2c8d30c10832f241f5e76ef3f0c7	python-utils-r1	32393cac272daca4c136cc44e6005b67	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=e29e47b27d3d9a1ca1a9922ef196ea85
