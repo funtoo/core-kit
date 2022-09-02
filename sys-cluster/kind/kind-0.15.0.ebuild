@@ -17,11 +17,6 @@ EGO_SUM=(
 	"github.com/inconshreveable/mousetrap v1.0.0"
 	"github.com/inconshreveable/mousetrap v1.0.0/go.mod"
 	"github.com/jessevdk/go-flags v1.4.0/go.mod"
-	"github.com/kr/pretty v0.1.0"
-	"github.com/kr/pretty v0.1.0/go.mod"
-	"github.com/kr/pty v1.1.1/go.mod"
-	"github.com/kr/text v0.1.0"
-	"github.com/kr/text v0.1.0/go.mod"
 	"github.com/mattn/go-isatty v0.0.14"
 	"github.com/mattn/go-isatty v0.0.14/go.mod"
 	"github.com/pelletier/go-toml v1.9.4"
@@ -36,20 +31,19 @@ EGO_SUM=(
 	"github.com/spf13/pflag v1.0.5/go.mod"
 	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c"
 	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod"
+	"gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405"
 	"gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod"
-	"gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127"
-	"gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod"
 	"gopkg.in/yaml.v2 v2.4.0"
 	"gopkg.in/yaml.v2 v2.4.0/go.mod"
-	"gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b"
-	"gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod"
+	"gopkg.in/yaml.v3 v3.0.1"
+	"gopkg.in/yaml.v3 v3.0.1/go.mod"
 	"sigs.k8s.io/yaml v1.3.0"
 	"sigs.k8s.io/yaml v1.3.0/go.mod"
 )
 
 go-module_set_globals
 
-SRC_URI="https://api.github.com/repos/kubernetes-sigs/kind/tarball/v0.14.0 -> kind-0.14.0.tar.gz
+SRC_URI="https://api.github.com/repos/kubernetes-sigs/kind/tarball/v0.15.0 -> kind-0.15.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 DESCRIPTION="Tool for running local Kubernetes clusters using Docker container nodes"
