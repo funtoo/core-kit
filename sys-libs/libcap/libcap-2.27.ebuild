@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -6,14 +5,14 @@ EAPI=6
 inherit multilib multilib-minimal toolchain-funcs pam
 
 DESCRIPTION="POSIX 1003.1e capabilities"
-HOMEPAGE="http://www.friedhoff.org/posixfilecaps.html"
+HOMEPAGE="https://sites.google.com/site/fullycapable/"
 SRC_URI="mirror://kernel/linux/libs/security/linux-privs/libcap2/${P}.tar.xz"
 
 # it's available under either of the licenses
 LICENSE="|| ( GPL-2 BSD )"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux"
-IUSE="pam static-libs"
+KEYWORDS="*"
+IUSE="pam +static-libs"
 
 # While the build system optionally uses gperf, we don't DEPEND on it because
 # the build automatically falls back when it's unavailable.  #604802
