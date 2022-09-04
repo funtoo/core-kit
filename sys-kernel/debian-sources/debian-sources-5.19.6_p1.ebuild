@@ -21,7 +21,7 @@ LINUX_SRCDIR=linux-${PF}
 DEB_PV="5.19.6-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
-KEYWORDS="next"
+KEYWORDS=""
 IUSE="acpi-ec binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
