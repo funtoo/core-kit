@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare prerm pretend setup
+DEPEND=virtual/libelf binary? ( >=sys-kernel/genkernel-4 ) btrfs? ( sys-fs/btrfs-progs sys-kernel/genkernel[btrfs] ) zfs? ( sys-fs/zfs ) luks? ( sys-kernel/genkernel[cryptsetup] )
+DESCRIPTION=Debian Sources (and optional binary kernel)
+EAPI=5
+HOMEPAGE=https://packages.debian.org/unstable/kernel/
+IUSE=acpi-ec binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs
+KEYWORDS=*
+LICENSE=GPL-2
+REQUIRED_USE=btrfs? ( binary ) custom-cflags? ( binary ) logo? ( binary ) luks? ( binary ) lvm? ( binary ) sign-modules? ( binary ) zfs? ( binary )
+RESTRICT=binchecks strip
+SLOT=debian-sources-lts-5.10.120_p1-r1
+SRC_URI=https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_5.10.120.orig.tar.xz -> linux_5.10.120.orig.tar.xz https://security.debian.org/debian-security/pool/updates/main/l/linux/linux_5.10.120-1.debian.tar.xz -> linux_5.10.120-1.debian.tar.xz
+_eclasses_=check-reqs	2c6f909675083dce8430b648bf737cb0	desktop	b1d22ac8bdd4679ab79c71aca235009d	ego	770e172d5c3e0d501d27925a01b44cbc	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	ltprune	22f9f14d105434e9c400ccac3bbb64ae	mount-boot	4e916386c166c23418f8bea81a5f131e	multilib	d410501a125f99ffb560b0c523cd3d1e	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
+_md5_=b7259ef66ce865889d6b6aad6548fa7d
