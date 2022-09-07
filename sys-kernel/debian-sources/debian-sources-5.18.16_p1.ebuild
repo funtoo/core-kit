@@ -23,6 +23,12 @@ RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="*"
 IUSE="acpi-ec binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
+RDEPEND="
+	|| (
+		<sys-apps/gawk-5.2.0
+		>=sys-apps/gawk-5.2.1
+	)
+"
 DEPEND="
 	virtual/libelf
 	binary? ( >=sys-kernel/genkernel-4 )
