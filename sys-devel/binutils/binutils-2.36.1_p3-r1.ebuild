@@ -18,8 +18,8 @@ S="${WORKDIR}/binutils-2.36.1"
 KEYWORDS="*"
 RDEPEND="
 !sys-devel/binutils-config
-!<sys-libs/binutils-libs-2.36.1_p3
-!<sys-devel/binutils-2.36.1_p3
+!<sys-libs/binutils-libs-2.36.1_p3-r1
+!<sys-devel/binutils-2.36.1_p3-r1
 sys-libs/zlib"
 DEPEND="${RDEPEND}"
 BDEPEND="
@@ -32,7 +32,11 @@ BDEPEND="
 	sys-devel/flex
 	virtual/yacc
 "
-PDEPEND="=sys-libs/binutils-libs-2.36.1_p3"
+PDEPEND="=sys-libs/binutils-libs-2.36.1_p3-r1"
+
+PATCHES=(
+	"${FILESDIR}"/binutils-2.36.1-cve-2021-45078.patch
+)
 
 RESTRICT="!test? ( test )"
 
