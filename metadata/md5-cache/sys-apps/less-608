@@ -1,4 +1,4 @@
-DEFINED_PHASES=configure install
+DEFINED_PHASES=configure install prepare
 DEPEND=>=app-misc/editor-wrapper-3 >=sys-libs/ncurses-5.2:0= pcre? ( dev-libs/libpcre2 )
 DESCRIPTION=Excellent text file viewer
 EAPI=7
@@ -8,5 +8,5 @@ KEYWORDS=*
 LICENSE=|| ( GPL-3 BSD-2 )
 RDEPEND=>=app-misc/editor-wrapper-3 >=sys-libs/ncurses-5.2:0= pcre? ( dev-libs/libpcre2 )
 SLOT=0
-SRC_URI=https://www.greenwoodsoftware.com/less/less-608.tar.gz -> less-608.tar.gz
-_md5_=95ea74219f9d9e54d13d5bfa8b07e4ce
+SRC_URI=https://github.com/gwsw/less/tarball/22e4af5cccbfab633000c7d610f868a868ad6e1a -> less-608-22e4af5.tar.gz
+_md5_=7b6859c33d8846a64ea07a55f9482cc7
