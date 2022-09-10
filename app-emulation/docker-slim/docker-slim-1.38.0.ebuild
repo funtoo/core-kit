@@ -780,8 +780,6 @@ EGO_SUM=(
 	"github.com/prometheus/procfs v0.2.0/go.mod"
 	"github.com/prometheus/procfs v0.6.0/go.mod"
 	"github.com/prometheus/tsdb v0.7.1/go.mod"
-	"github.com/robertkrimen/otto v0.0.0-20211024170158-b87d35c0b86f"
-	"github.com/robertkrimen/otto v0.0.0-20211024170158-b87d35c0b86f/go.mod"
 	"github.com/rogpeppe/fastuuid v0.0.0-20150106093220-6724a57986af/go.mod"
 	"github.com/rogpeppe/fastuuid v1.2.0/go.mod"
 	"github.com/rogpeppe/go-internal v1.3.0/go.mod"
@@ -840,8 +838,9 @@ EGO_SUM=(
 	"github.com/stretchr/testify v1.4.0/go.mod"
 	"github.com/stretchr/testify v1.5.1/go.mod"
 	"github.com/stretchr/testify v1.6.1/go.mod"
-	"github.com/stretchr/testify v1.7.0"
 	"github.com/stretchr/testify v1.7.0/go.mod"
+	"github.com/stretchr/testify v1.7.1"
+	"github.com/stretchr/testify v1.7.1/go.mod"
 	"github.com/subosito/gotenv v1.2.0/go.mod"
 	"github.com/syndtr/gocapability v0.0.0-20170704070218-db04d3cc01c8/go.mod"
 	"github.com/syndtr/gocapability v0.0.0-20180916011248-d98352740cb2/go.mod"
@@ -1417,10 +1416,7 @@ EGO_SUM=(
 	"gopkg.in/inf.v0 v0.9.1/go.mod"
 	"gopkg.in/ini.v1 v1.66.2/go.mod"
 	"gopkg.in/natefinch/lumberjack.v2 v2.0.0/go.mod"
-	"gopkg.in/readline.v1 v1.0.0-20160726135117-62c6fe619375/go.mod"
 	"gopkg.in/resty.v1 v1.12.0/go.mod"
-	"gopkg.in/sourcemap.v1 v1.0.5"
-	"gopkg.in/sourcemap.v1 v1.0.5/go.mod"
 	"gopkg.in/square/go-jose.v2 v2.2.2/go.mod"
 	"gopkg.in/square/go-jose.v2 v2.3.1/go.mod"
 	"gopkg.in/square/go-jose.v2 v2.5.1/go.mod"
@@ -1488,7 +1484,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://api.github.com/repos/docker-slim/docker-slim/tarball/1.37.5 -> docker-slim-1.37.5.tar.gz
+SRC_URI="https://api.github.com/repos/docker-slim/docker-slim/tarball/1.38.0 -> docker-slim-1.38.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 DESCRIPTION="Make your containers better, smaller, more secure and do less to get there"
