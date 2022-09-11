@@ -10,11 +10,59 @@ DESCRIPTION="console display library"
 HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncurses/"
 SRC_URI="
 	https://invisible-mirror.net/archives/ncurses/ncurses-6.3.tar.gz -> ncurses-6.3.tar.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211026.patch.gz -> ncurses-6.3-20211026.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211030.patch.gz -> ncurses-6.3-20211030.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211106.patch.gz -> ncurses-6.3-20211106.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211113.patch.gz -> ncurses-6.3-20211113.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211115.patch.gz -> ncurses-6.3-20211115.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211120.patch.gz -> ncurses-6.3-20211120.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211127.patch.gz -> ncurses-6.3-20211127.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211204.patch.gz -> ncurses-6.3-20211204.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211211.patch.gz -> ncurses-6.3-20211211.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211219.patch.gz -> ncurses-6.3-20211219.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20211225.patch.gz -> ncurses-6.3-20211225.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220101.patch.gz -> ncurses-6.3-20220101.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220115.patch.gz -> ncurses-6.3-20220115.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220122.patch.gz -> ncurses-6.3-20220122.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220129.patch.gz -> ncurses-6.3-20220129.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220205.patch.gz -> ncurses-6.3-20220205.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220212.patch.gz -> ncurses-6.3-20220212.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220219.patch.gz -> ncurses-6.3-20220219.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220226.patch.gz -> ncurses-6.3-20220226.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220305.patch.gz -> ncurses-6.3-20220305.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220312.patch.gz -> ncurses-6.3-20220312.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220319.patch.gz -> ncurses-6.3-20220319.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220326.patch.gz -> ncurses-6.3-20220326.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220402.patch.gz -> ncurses-6.3-20220402.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220409.patch.gz -> ncurses-6.3-20220409.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220416.patch.gz -> ncurses-6.3-20220416.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220423.patch.gz -> ncurses-6.3-20220423.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220430.patch.gz -> ncurses-6.3-20220430.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220501.patch.gz -> ncurses-6.3-20220501.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220507.patch.gz -> ncurses-6.3-20220507.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220514.patch.gz -> ncurses-6.3-20220514.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220521.patch.gz -> ncurses-6.3-20220521.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220529.patch.gz -> ncurses-6.3-20220529.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220604.patch.gz -> ncurses-6.3-20220604.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220612.patch.gz -> ncurses-6.3-20220612.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220618.patch.gz -> ncurses-6.3-20220618.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220625.patch.gz -> ncurses-6.3-20220625.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220703.patch.gz -> ncurses-6.3-20220703.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220709.patch.gz -> ncurses-6.3-20220709.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220716.patch.gz -> ncurses-6.3-20220716.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220724.patch.gz -> ncurses-6.3-20220724.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220729.patch.gz -> ncurses-6.3-20220729.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220806.patch.gz -> ncurses-6.3-20220806.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220813.patch.gz -> ncurses-6.3-20220813.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220820.patch.gz -> ncurses-6.3-20220820.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220827.patch.gz -> ncurses-6.3-20220827.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220903.patch.gz -> ncurses-6.3-20220903.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20220910.patch.gz -> ncurses-6.3-20220910.patch.gz
 "
 
 LICENSE="MIT"
 SLOT="0/6" # The subslot reflects the SONAME.
-KEYWORDS="*"
+KEYWORDS="next"
 IUSE="ada +cxx debug doc gpm minimal profile static-libs test tinfo trace +unicode"
 RESTRICT="!test? ( test )"
 
@@ -29,12 +77,59 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
+	"${WORKDIR}"/ncurses-6.3-20211026.patch
+	"${WORKDIR}"/ncurses-6.3-20211030.patch
+	"${WORKDIR}"/ncurses-6.3-20211106.patch
+	"${WORKDIR}"/ncurses-6.3-20211113.patch
+	"${WORKDIR}"/ncurses-6.3-20211115.patch
+	"${WORKDIR}"/ncurses-6.3-20211120.patch
+	"${WORKDIR}"/ncurses-6.3-20211127.patch
+	"${WORKDIR}"/ncurses-6.3-20211204.patch
+	"${WORKDIR}"/ncurses-6.3-20211211.patch
+	"${WORKDIR}"/ncurses-6.3-20211219.patch
+	"${WORKDIR}"/ncurses-6.3-20211225.patch
+	"${WORKDIR}"/ncurses-6.3-20220101.patch
+	"${WORKDIR}"/ncurses-6.3-20220115.patch
+	"${WORKDIR}"/ncurses-6.3-20220122.patch
+	"${WORKDIR}"/ncurses-6.3-20220129.patch
+	"${WORKDIR}"/ncurses-6.3-20220205.patch
+	"${WORKDIR}"/ncurses-6.3-20220212.patch
+	"${WORKDIR}"/ncurses-6.3-20220219.patch
+	"${WORKDIR}"/ncurses-6.3-20220226.patch
+	"${WORKDIR}"/ncurses-6.3-20220305.patch
+	"${WORKDIR}"/ncurses-6.3-20220312.patch
+	"${WORKDIR}"/ncurses-6.3-20220319.patch
+	"${WORKDIR}"/ncurses-6.3-20220326.patch
+	"${WORKDIR}"/ncurses-6.3-20220402.patch
+	"${WORKDIR}"/ncurses-6.3-20220409.patch
+	"${WORKDIR}"/ncurses-6.3-20220416.patch
+	"${WORKDIR}"/ncurses-6.3-20220423.patch
+	"${WORKDIR}"/ncurses-6.3-20220430.patch
+	"${WORKDIR}"/ncurses-6.3-20220501.patch
+	"${WORKDIR}"/ncurses-6.3-20220507.patch
+	"${WORKDIR}"/ncurses-6.3-20220514.patch
+	"${WORKDIR}"/ncurses-6.3-20220521.patch
+	"${WORKDIR}"/ncurses-6.3-20220529.patch
+	"${WORKDIR}"/ncurses-6.3-20220604.patch
+	"${WORKDIR}"/ncurses-6.3-20220612.patch
+	"${WORKDIR}"/ncurses-6.3-20220618.patch
+	"${WORKDIR}"/ncurses-6.3-20220625.patch
+	"${WORKDIR}"/ncurses-6.3-20220703.patch
+	"${WORKDIR}"/ncurses-6.3-20220709.patch
+	"${WORKDIR}"/ncurses-6.3-20220716.patch
+	"${WORKDIR}"/ncurses-6.3-20220724.patch
+	"${WORKDIR}"/ncurses-6.3-20220729.patch
+	"${WORKDIR}"/ncurses-6.3-20220806.patch
+	"${WORKDIR}"/ncurses-6.3-20220813.patch
+	"${WORKDIR}"/ncurses-6.3-20220820.patch
+	"${WORKDIR}"/ncurses-6.3-20220827.patch
+	"${WORKDIR}"/ncurses-6.3-20220903.patch
+	"${WORKDIR}"/ncurses-6.3-20220910.patch
 	"${FILESDIR}/${PN}-5.7-nongnu.patch"
 	"${FILESDIR}/${PN}-6.0-rxvt-unicode-9.15.patch" #192083 #383871
 	"${FILESDIR}/${PN}-6.0-pkg-config.patch"
 	"${FILESDIR}/${PN}-6.0-ticlib.patch" #557360
 	"${FILESDIR}/${PN}-6.2_p20210123-cppflags-cross.patch" #601426
-	
 )
 
 src_configure() {
