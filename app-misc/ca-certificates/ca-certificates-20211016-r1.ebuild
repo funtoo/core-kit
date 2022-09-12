@@ -15,16 +15,16 @@ SLOT="0"
 KEYWORDS="*"
 IUSE=""
 
-# c_rehash: we run `c_rehash`
 # debianutils: we run `run-parts`
-CDEPEND="app-misc/c_rehash
+# app-misc/c_rehash is deprecated by https://bugs.funtoo.org/browse/FL-10434
+CDEPEND="!app-misc/c_rehash
 	sys-apps/debianutils"
 
 BDEPEND="${CDEPEND}"
 DEPEND=""
 RDEPEND="${CDEPEND} ${DEPEND}"
 
-DEB_VER="20211016"
+DEB_VER="20211016-r1"
 
 S=${WORKDIR}
 
@@ -52,7 +52,6 @@ src_prepare() {
 	sed -i \
 		-e '/="$ROOT/s:ROOT:ROOT'"${EPREFIX}"':' \
 		-e '/RELPATH="\.\./s:"$:'"${relp}"'":' \
-		-e 's/openssl rehash/c_rehash/' \
 		usr/sbin/update-ca-certificates || die
 }
 
