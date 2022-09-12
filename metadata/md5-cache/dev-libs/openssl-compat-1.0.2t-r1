@@ -12,4 +12,4 @@ RESTRICT=!bindist? ( bindist ) test
 SLOT=1.0.0
 SRC_URI=mirror://openssl/source/openssl-1.0.2t.tar.gz bindist? ( mirror://gentoo/openssl-1.0.2t-bindist-1.0.tar.xz https://dev.gentoo.org/~whissi/dist/openssl/openssl-1.0.2t-bindist-1.0.tar.xz ) !vanilla? ( mirror://gentoo/openssl-1.0.2-patches-1.5.tar.xz https://dev.gentoo.org/~chutzpah/dist/openssl/openssl-1.0.2-patches-1.5.tar.xz https://dev.gentoo.org/~whissi/dist/openssl/openssl-1.0.2-patches-1.5.tar.xz https://dev.gentoo.org/~polynomial-c/dist/openssl-1.0.2-patches-1.5.tar.xz )
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=74decf334aaed94a79cb58419a104616
+_md5_=f072d299c59802f68c15d3a741e4a08d
