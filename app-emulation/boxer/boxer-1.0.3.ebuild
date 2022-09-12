@@ -7,7 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/funtoo-boxer/browse https://pypi.org/project/funtoo-boxer/"
-SRC_URI="https://files.pythonhosted.org/packages/19/00/129a4dc3120e27ac8eb617ad0fe61d0f5f3b65e07930e0cd7287c1626b84/funtoo-boxer-1.0.2.tar.gz -> funtoo-boxer-1.0.2.tar.gz
+SRC_URI="https://files.pythonhosted.org/packages/51/54/a7ccf2a3a3858e83425528fcfc22bbcc0d243efdf054d823211d36f050b5/funtoo-boxer-1.0.3.tar.gz -> funtoo-boxer-1.0.3.tar.gz
 "
 
 DEPEND=">=dev-python/subpop-2.0.0[${PYTHON_USEDEP}]"
@@ -20,4 +20,4 @@ IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
-S="${WORKDIR}/funtoo-boxer-1.0.2"
+S="${WORKDIR}/funtoo-boxer-1.0.3"
