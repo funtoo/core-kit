@@ -6,7 +6,7 @@ DISTUTILS_OPTIONAL=1
 
 inherit distutils-r1 libtool toolchain-funcs
 
-SRC_URI="http://ftp.astron.com/pub/file/file-5.42.tar.gz -> file-5.42.tar.gz"
+SRC_URI="http://ftp.astron.com/pub/file/file-5.43.tar.gz -> file-5.43.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Identify a file's format by scanning binary data for patterns"
