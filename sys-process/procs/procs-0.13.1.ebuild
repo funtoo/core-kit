@@ -4,8 +4,9 @@ EAPI=7
 
 CRATES="
 adler-1.0.2
-anyhow-1.0.58
-async-channel-1.6.1
+android_system_properties-0.1.5
+anyhow-1.0.65
+async-channel-1.7.1
 async-executor-1.4.1
 async-global-executor-2.2.0
 async-io-1.7.0
@@ -22,20 +23,21 @@ blocking-1.2.0
 bumpalo-3.10.0
 byte-unit-4.0.14
 byteorder-1.4.3
-bytes-1.2.0
+bytes-1.2.1
 cache-padded-1.2.0
 cc-1.0.73
 cexpr-0.6.0
 cfg-if-0.1.10
 cfg-if-1.0.0
-chrono-0.4.19
+chrono-0.4.22
 clang-sys-1.3.3
-clap-3.2.15
-clap_complete-3.2.3
-clap_derive-3.2.15
+clap-3.2.22
+clap_complete-3.2.5
+clap_derive-3.2.18
 clap_lex-0.2.4
 concurrent-queue-1.2.4
 console-0.15.1
+core-foundation-sys-0.8.3
 crc32fast-1.3.2
 crossbeam-utils-0.8.11
 crossterm-0.19.0
@@ -79,16 +81,17 @@ httparse-1.7.1
 httpdate-1.0.2
 hyper-0.14.20
 hyperlocal-0.8.0
+iana-time-zone-0.1.47
 idna-0.2.3
 indexmap-1.9.1
 instant-0.1.12
 io-lifetimes-0.7.2
-itoa-1.0.2
+itoa-1.0.3
 js-sys-0.3.59
 kv-log-macro-1.0.7
 lazy_static-1.4.0
 lazycell-1.3.0
-libc-0.2.126
+libc-0.2.132
 libloading-0.7.3
 libproc-0.12.0
 linux-raw-sys-0.0.46
@@ -105,12 +108,13 @@ mio-0.8.4
 miow-0.3.7
 named_pipe-0.4.1
 nix-0.24.2
+nix-0.25.0
 nom-7.1.1
 ntapi-0.3.7
 num-integer-0.1.45
 num-traits-0.2.15
 num_cpus-1.13.1
-once_cell-1.13.0
+once_cell-1.14.0
 os_str_bytes-6.2.0
 pager-0.16.0
 parking-2.0.0
@@ -127,20 +131,20 @@ pin-utils-0.1.0
 polling-2.2.0
 proc-macro-error-1.0.4
 proc-macro-error-attr-1.0.4
-proc-macro2-1.0.42
-procfs-0.13.2
-quote-1.0.20
+proc-macro2-1.0.43
+procfs-0.14.1
+quote-1.0.21
 redox_syscall-0.2.16
 redox_users-0.4.3
 regex-1.6.0
 regex-syntax-0.6.27
 rustc-hash-1.1.0
 rustix-0.35.7
-ryu-1.0.10
+ryu-1.0.11
 scopeguard-1.1.0
-serde-1.0.140
-serde_derive-1.0.140
-serde_json-1.0.82
+serde-1.0.144
+serde_derive-1.0.144
+serde_json-1.0.83
 shlex-1.1.0
 signal-hook-0.1.17
 signal-hook-registry-1.4.0
@@ -148,15 +152,15 @@ slab-0.4.7
 smallvec-1.9.0
 socket2-0.4.4
 strsim-0.10.0
-syn-1.0.98
+syn-1.0.99
 tar-0.4.38
 termbg-0.4.1
 termcolor-1.1.3
 terminal_size-0.1.17
 termios-0.3.3
-textwrap-0.15.0
-thiserror-1.0.31
-thiserror-impl-1.0.31
+textwrap-0.15.1
+thiserror-1.0.32
+thiserror-impl-1.0.32
 time-0.1.44
 tinyvec-1.6.0
 tinyvec_macros-0.1.0
@@ -164,13 +168,13 @@ tokio-1.20.1
 tokio-macros-1.8.0
 toml-0.5.9
 tower-service-0.3.2
-tracing-0.1.35
-tracing-core-0.1.28
+tracing-0.1.36
+tracing-core-0.1.29
 try-lock-0.2.3
 unicode-bidi-0.3.8
-unicode-ident-1.0.2
+unicode-ident-1.0.3
 unicode-normalization-0.1.21
-unicode-width-0.1.9
+unicode-width-0.1.10
 unix_socket-0.5.0
 url-2.2.2
 users-0.11.0
@@ -189,7 +193,7 @@ wasm-bindgen-macro-support-0.2.82
 wasm-bindgen-shared-0.2.82
 web-sys-0.3.59
 wepoll-ffi-0.1.2
-which-4.2.5
+which-4.3.0
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
 winapi-util-0.1.5
@@ -207,7 +211,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.13.0 -> procs-0.13.0.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.13.1 -> procs-0.13.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
