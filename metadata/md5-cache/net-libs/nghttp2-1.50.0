@@ -8,5 +8,5 @@ KEYWORDS=*
 LICENSE=MIT
 RDEPEND=cxx? ( !libressl? ( >=dev-libs/openssl-1.0.2:0=[-bindist] ) libressl? ( dev-libs/libressl:= ) dev-libs/boost:=[threads(+)] ) hpack-tools? ( >=dev-libs/jansson-2.5 ) jemalloc? ( dev-libs/jemalloc ) utils? ( !libressl? ( >=dev-libs/openssl-1.0.2:0=[-bindist] ) libressl? ( dev-libs/libressl:= ) >=dev-libs/libev-4.15 >=sys-libs/zlib-1.2.3 net-dns/c-ares:= ) xml? ( >=dev-libs/libxml2-2.7.7:2 )
 SLOT=0/1.14
-SRC_URI=https://github.com/nghttp2/nghttp2/releases/download/v1.49.0/nghttp2-1.49.0.tar.xz -> nghttp2-1.49.0.tar.xz
-_md5_=b0566b9bdde846eab460cba7eef36bfd
+SRC_URI=https://github.com/nghttp2/nghttp2/releases/download/v1.50.0/nghttp2-1.50.0.tar.xz -> nghttp2-1.50.0.tar.xz
+_md5_=d964e0a1e29f7b4f261ba474eef92ac5
