@@ -9,11 +9,11 @@ MY_P="${PN}-${PV/_/-}"
 S="${WORKDIR}/${MY_P}"
 DESCRIPTION="The standard GNU Bourne again shell"
 HOMEPAGE="http://tiswww.case.edu/php/chet/bash/bashtop.html"
-SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2-rc4.tar.gz -> bash-5.2-rc4.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2.tar.gz -> bash-5.2.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE="afs bashlogger examples mem-scramble +net nls plugins +readline"
 
 READLINE_VER="8.2" # The version of readline this bash normally ships with.
@@ -55,6 +55,10 @@ src_prepare() {
 	[[ ${PLEVEL} -gt 0 ]] && eapply -p0 $(patches -s)
 
 	# Clean out local libs so we know we use system ones w/releases.
+	
+	rm -rf lib/{readline,termcap}/* || die
+	touch lib/{readline,termcap}/Makefile.in || die # for config.status
+	sed -ri -e 's:\$[{(](RL|HIST)_LIBSRC[)}]/[[:alpha:]_-]*\.h::g' Makefile.in || die
 	
 
 	# Prefixify hardcoded path names. No-op for non-prefix.
@@ -113,6 +117,9 @@ src_configure() {
 	# is at least what's in the DEPEND up above.
 	export ac_cv_rl_version=${READLINE_VER%%_*}
 
+	
+	# Use system readline only with released versions.
+	myconf+=( --with-installed-readline=. )
 	
 
 	if use plugins ; then
