@@ -203,8 +203,8 @@ EGO_SUM=(
 	"golang.org/x/sys v0.0.0-20220728004956-3c1f35247d10/go.mod"
 	"golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod"
 	"golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8/go.mod"
-	"golang.org/x/sys v0.0.0-20220927170352-d9d178bc13c6"
-	"golang.org/x/sys v0.0.0-20220927170352-d9d178bc13c6/go.mod"
+	"golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec"
+	"golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec/go.mod"
 	"golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod"
 	"golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod"
 	"golang.org/x/term v0.0.0-20220919170432-7a66f970e087"
@@ -246,7 +246,7 @@ go-module_set_globals
 
 DESCRIPTION="a simple but powerful password manager for the terminal"
 HOMEPAGE="https://www.gopass.pw/"
-SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.14.8 -> gopass-1.14.8.tar.gz
+SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.14.9 -> gopass-1.14.9.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT Apache-2.0 BSD MPL-2.0 BSD-2"
