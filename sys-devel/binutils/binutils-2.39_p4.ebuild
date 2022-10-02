@@ -10,16 +10,16 @@ LICENSE="GPL-3+"
 IUSE="64-bit-bfd cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla"
 REQUIRED_USE="default-gold? ( gold )"
 
-SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz -> binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz -> binutils-2.36.1-patches-3.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.39.tar.xz -> binutils-2.39.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-4.tar.xz -> binutils-2.39-patches-4.tar.xz"
 SLOT=$(ver_cut 1-2)
 
-S="${WORKDIR}/binutils-2.36.1"
+S="${WORKDIR}/binutils-2.39"
 
-KEYWORDS="*"
+KEYWORDS=""
 RDEPEND="
 !sys-devel/binutils-config
-!<sys-libs/binutils-libs-2.36.1_p3-r1
-!<sys-devel/binutils-2.36.1_p3-r1
+!<sys-libs/binutils-libs-2.39_p4
+!<sys-devel/binutils-2.39_p4
 sys-libs/zlib"
 DEPEND="${RDEPEND}"
 BDEPEND="
@@ -32,10 +32,9 @@ BDEPEND="
 	sys-devel/flex
 	virtual/yacc
 "
-PDEPEND="=sys-libs/binutils-libs-2.36.1_p3-r1"
+PDEPEND="=sys-libs/binutils-libs-2.39_p4"
 
 PATCHES=(
-"${FILESDIR}"/binutils-2.36.1-cve-2021-45078.patch
 )
 
 RESTRICT="!test? ( test )"
@@ -43,15 +42,15 @@ RESTRICT="!test? ( test )"
 MY_BUILDDIR=${WORKDIR}/build
 
 src_unpack() {
-	unpack binutils-2.36.1.tar.xz
+	unpack binutils-2.39.tar.xz
 	cd "${WORKDIR}" || die
-	unpack binutils-2.36.1-patches-3.tar.xz
+	unpack binutils-2.39-patches-4.tar.xz
 	mkdir -p "${MY_BUILDDIR}" || die
 }
 
 src_prepare() {
 	if ! use vanilla; then
-		einfo "Applying binutils patchset binutils-2.36.1-patches-3.tar.xz"
+		einfo "Applying binutils patchset binutils-2.39-patches-4.tar.xz"
 		eapply "${WORKDIR}/patch"
 		einfo "Done."
 	fi
@@ -117,7 +116,7 @@ src_configure() {
 		--enable-textrel-check=warning
 		--disable-werror
 		--with-bugurl="https://bugs.funtoo.org/"
-		--with-pkgversion="Funtoo {version} patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz"
+		--with-pkgversion="Funtoo {version} patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-4.tar.xz"
 		--with-system-zlib
 		--without-zlib
 		# Strip out broken static link flags.

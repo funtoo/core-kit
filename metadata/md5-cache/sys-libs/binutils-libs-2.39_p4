@@ -1,7 +1,6 @@
 DEFINED_PHASES=-
 DESCRIPTION=Core binutils libraries (libbfd, libopcodes, libiberty) -- skeleton package
 EAPI=7
-KEYWORDS=*
-RDEPEND==sys-devel/binutils-2.36.1_p3-r1
+RDEPEND==sys-devel/binutils-2.39_p4
 SLOT=0
-_md5_=b456a70f42f6b3abc683b46c850a2621
+_md5_=e4480f1815c9ea0de356997eca019555

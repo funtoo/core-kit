@@ -1,17 +1,16 @@
 BDEPEND=doc? ( sys-apps/texinfo ) test? ( dev-util/dejagnu sys-devel/bc ) nls? ( sys-devel/gettext ) sys-devel/flex virtual/yacc >=app-portage/elt-patches-20170815
 DEFINED_PHASES=compile configure install preinst prepare test unpack
-DEPEND=!sys-devel/binutils-config !<sys-libs/binutils-libs-2.36.1_p3-r1 !<sys-devel/binutils-2.36.1_p3-r1 sys-libs/zlib sys-devel/gnuconfig
+DEPEND=!sys-devel/binutils-config !<sys-libs/binutils-libs-2.39_p4 !<sys-devel/binutils-2.39_p4 sys-libs/zlib sys-devel/gnuconfig
 DESCRIPTION=Tools necessary to build programs
 EAPI=7
 HOMEPAGE=https://sourceware.org/binutils/
 IUSE=64-bit-bfd cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla
-KEYWORDS=*
 LICENSE=GPL-3+
-PDEPEND==sys-libs/binutils-libs-2.36.1_p3-r1
-RDEPEND=!sys-devel/binutils-config !<sys-libs/binutils-libs-2.36.1_p3-r1 !<sys-devel/binutils-2.36.1_p3-r1 sys-libs/zlib
+PDEPEND==sys-libs/binutils-libs-2.39_p4
+RDEPEND=!sys-devel/binutils-config !<sys-libs/binutils-libs-2.39_p4 !<sys-devel/binutils-2.39_p4 sys-libs/zlib
 REQUIRED_USE=default-gold? ( gold )
 RESTRICT=!test? ( test )
-SLOT=2.36
-SRC_URI=https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz -> binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz -> binutils-2.36.1-patches-3.tar.xz
+SLOT=2.39
+SRC_URI=https://ftp.gnu.org/gnu/binutils/binutils-2.39.tar.xz -> binutils-2.39.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-4.tar.xz -> binutils-2.39-patches-4.tar.xz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	gnuconfig	b8ec1c34be4ff9dac7ad4034d277936b	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=270f4a2a4f03232ef82e6ff7c8ea202e
+_md5_=4c28861cf573b7e8adc8007cfae8f834

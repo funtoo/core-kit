@@ -3,7 +3,7 @@
 EAPI=7
 
 DESCRIPTION="Core binutils libraries (libbfd, libopcodes, libiberty) -- skeleton package"
-RDEPEND="=sys-devel/binutils-2.36.1_p3-r1"
+RDEPEND="=sys-devel/binutils-2.39_p4"
 SLOT=0
 
-KEYWORDS="*"
+KEYWORDS=""

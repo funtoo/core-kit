@@ -7,11 +7,11 @@ CMAKE_REMOVE_MODULES_LIST=( none )
 inherit bash-completion-r1 cmake elisp-common flag-o-matic multiprocessing \
 	toolchain-funcs virtualx xdg-utils
 
-DESCRIPTION="{{ desc }}"
-HOMEPAGE="{{ homepage }}"
+DESCRIPTION="Cross platform Make"
+HOMEPAGE="https://cmake.org/"
 
 MY_P="${P/_/-}"
-SRC_URI="{{ artifacts[0].src_uri }}"
+SRC_URI="https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1.tar.gz -> cmake-3.24.1.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="CMake"
@@ -47,14 +47,14 @@ BDEPEND+="
 "
 
 SITEFILE="50${PN}-gentoo.el"
-
-{%- if patches|length %}
 PATCHES=(
-{%- for patch in patches %}
-	"${FILESDIR}"/${PN}-{{ patch }}
-{%- endfor %}
+	"${FILESDIR}"/${PN}-3.14.0_rc3-prefix-dirs.patch
+	"${FILESDIR}"/${PN}-3.17.0_rc1-FindBLAS.patch
+	"${FILESDIR}"/${PN}-3.5.2-FindQt4.patch
+	"${FILESDIR}"/${PN}-2.8.10.2-FindPythonLibs.patch
+	"${FILESDIR}"/${PN}-3.9.0_rc2-FindPythonInterp.patch
+	"${FILESDIR}"/${PN}-3.18.0-filter_distcc_warning.patch
 )
-{%- endif %}
 
 cmake_src_bootstrap() {
 	# disable running of cmake in bootstrap command
