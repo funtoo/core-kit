@@ -6,7 +6,7 @@ inherit autotools flag-o-matic
 
 DESCRIPTION="Utilities and libraries for NUMA systems"
 HOMEPAGE="https://github.com/numactl/numactl"
-SRC_URI="https://github.com/numactl/numactl/releases/download/v2.0.14/numactl-2.0.14.tar.gz -> numactl-2.0.14.tar.gz"
+SRC_URI="https://github.com/numactl/numactl/releases/download/v2.0.16/numactl-2.0.16.tar.gz -> numactl-2.0.16.tar.gz"
 # ARM lacks the __NR_migrate_pages syscall.
 KEYWORDS="* -arm"
 
