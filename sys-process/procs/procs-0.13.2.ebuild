@@ -36,7 +36,7 @@ clap_complete-3.2.5
 clap_derive-3.2.18
 clap_lex-0.2.4
 concurrent-queue-1.2.4
-console-0.15.1
+console-0.15.2
 core-foundation-sys-0.8.3
 crc32fast-1.3.2
 crossbeam-utils-0.8.11
@@ -91,7 +91,7 @@ js-sys-0.3.59
 kv-log-macro-1.0.7
 lazy_static-1.4.0
 lazycell-1.3.0
-libc-0.2.132
+libc-0.2.134
 libloading-0.7.3
 libproc-0.12.0
 linux-raw-sys-0.0.46
@@ -114,9 +114,9 @@ ntapi-0.3.7
 num-integer-0.1.45
 num-traits-0.2.15
 num_cpus-1.13.1
-once_cell-1.14.0
+once_cell-1.15.0
 os_str_bytes-6.2.0
-pager-0.16.0
+pager-0.16.1
 parking-2.0.0
 parking_lot-0.11.2
 parking_lot-0.12.1
@@ -142,8 +142,8 @@ rustc-hash-1.1.0
 rustix-0.35.7
 ryu-1.0.11
 scopeguard-1.1.0
-serde-1.0.144
-serde_derive-1.0.144
+serde-1.0.145
+serde_derive-1.0.145
 serde_json-1.0.83
 shlex-1.1.0
 signal-hook-0.1.17
@@ -211,7 +211,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.13.1 -> procs-0.13.1.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.13.2 -> procs-0.13.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
