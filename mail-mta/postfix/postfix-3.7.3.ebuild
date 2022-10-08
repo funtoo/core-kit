@@ -8,7 +8,7 @@ RC_VER="2.7"
 
 DESCRIPTION="A fast and secure drop-in replacement for sendmail"
 HOMEPAGE="http://www.postfix.org/"
-SRC_URI="http://cdn.postfix.johnriley.me/mirrors/postfix-release/official/postfix-3.7.2.tar.gz -> postfix-3.7.2.tar.gz"
+SRC_URI="http://cdn.postfix.johnriley.me/mirrors/postfix-release/official/postfix-3.7.3.tar.gz -> postfix-3.7.3.tar.gz"
 
 LICENSE="|| ( IBM EPL-2.0 )"
 SLOT="0"
