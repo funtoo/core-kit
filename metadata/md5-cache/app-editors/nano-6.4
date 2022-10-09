@@ -1,14 +1,14 @@
 BDEPEND=nls? ( sys-devel/gettext ) virtual/pkgconfig
 DEFINED_PHASES=configure install prepare
-DEPEND=!static? ( >=sys-libs/ncurses-5.9-r1:0=[unicode?] sys-libs/ncurses:0= magic? ( sys-apps/file ) nls? ( virtual/libintl ) ) static? ( >=sys-libs/ncurses-5.9-r1:0=[unicode?] sys-libs/ncurses:0=[static-libs(+)] magic? ( sys-apps/file[static-libs(+)] ) nls? ( virtual/libintl ) )
+DEPEND=!static? ( sys-libs/ncurses:0= sys-libs/ncurses:0= magic? ( sys-apps/file ) nls? ( virtual/libintl ) ) static? ( sys-libs/ncurses:0= sys-libs/ncurses:0=[static-libs(+)] magic? ( sys-apps/file[static-libs(+)] ) nls? ( virtual/libintl ) )
 DESCRIPTION=GNU GPL'd Pico clone with more functionality
 EAPI=7
 HOMEPAGE=https://www.nano-editor.org/
 IUSE=debug justify +magic minimal ncurses nls +spell static unicode
 KEYWORDS=*
 LICENSE=GPL-3
-RDEPEND=!static? ( >=sys-libs/ncurses-5.9-r1:0=[unicode?] sys-libs/ncurses:0= magic? ( sys-apps/file ) nls? ( virtual/libintl ) )
+RDEPEND=!static? ( sys-libs/ncurses:0= sys-libs/ncurses:0= magic? ( sys-apps/file ) nls? ( virtual/libintl ) )
 SLOT=0
 SRC_URI=https://www.nano-editor.org/dist/latest/nano-6.4.tar.gz -> nano-6.4.tar.gz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=a94f995dfc15223845c168e9abd06d17
+_md5_=5e619a20d77be3873abda469b734b73f
