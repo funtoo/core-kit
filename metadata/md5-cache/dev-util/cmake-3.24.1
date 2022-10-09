@@ -1,4 +1,4 @@
-BDEPEND=doc? ( dev-python/requests dev-python/sphinx ) test? ( app-arch/libarchive[zstd] ) dev-util/ninja test? ( !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost )
+BDEPEND=doc? ( dev-python/requests dev-python/sphinx ) test? ( app-arch/libarchive[zstd] ) sys-devel/make test? ( !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost )
 DEFINED_PHASES=compile configure install postinst postrm prepare test
 DEPEND=>=app-arch/libarchive-3.3.3:= app-crypt/rhash >=dev-libs/expat-2.0.1 >=dev-libs/jsoncpp-1.9.2-r2:0= >=dev-libs/libuv-1.10.0:= >=net-misc/curl-7.21.5[ssl] sys-libs/zlib virtual/pkgconfig emacs? ( >=app-editors/emacs-23.1:* ) ncurses? ( sys-libs/ncurses:0= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 )
 DESCRIPTION=Cross platform Make
@@ -12,4 +12,4 @@ RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1.tar.gz -> cmake-3.24.1.tar.gz
 _eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	cmake	ac7cb516f6a288b6a82bc0649ce49878	elisp-common	23f47b2e1de7abf387105eddd1318738	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	virtualx	401b718cc14d43a5a7fbe062c4851ba5	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=25264f2f5ef244c59435279985f971aa
+_md5_=998fb8e5a2ebf97a4629c9cfe149e6e2
