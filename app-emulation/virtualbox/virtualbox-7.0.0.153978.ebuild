@@ -10,4 +10,4 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="+additions +chm headless python vboxwebsrv rdesktop-vrdp sdk"
 
-RDEPEND="=app-emulation/virtualbox-bin-6.1.38.153438[additions?,chm?,headless?,python?,vboxwebsrv?,rdesktop-vrdp?,sdk?]"
+RDEPEND="=app-emulation/virtualbox-bin-7.0.0.153978[additions?,chm?,headless?,python?,vboxwebsrv?,rdesktop-vrdp?,sdk?]"
