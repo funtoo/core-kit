@@ -7,7 +7,7 @@ inherit autotools toolchain-funcs multilib multilib-minimal
 
 DESCRIPTION="Standard (de)compression library"
 HOMEPAGE="https://zlib.net/"
-SRC_URI="https://zlib.net/current/zlib-1.2.12.tar.gz -> zlib-1.2.12.tar.gz"
+SRC_URI="https://zlib.net/current/zlib-1.2.13.tar.gz -> zlib-1.2.13.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
@@ -22,7 +22,6 @@ RDEPEND="abi_x86_32? (
 	!<dev-libs/libxml2-2.7.7" #309623
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.2.11-minizip-drop-crypt-header.patch
-	"${FILESDIR}"/${PN}-1.2.12-fix-crc-calculation.patch
 )
 src_prepare() {
 	default
