@@ -91,7 +91,7 @@ js-sys-0.3.59
 kv-log-macro-1.0.7
 lazy_static-1.4.0
 lazycell-1.3.0
-libc-0.2.134
+libc-0.2.135
 libloading-0.7.3
 libproc-0.12.0
 linux-raw-sys-0.0.46
@@ -211,7 +211,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.13.2 -> procs-0.13.2.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.13.3 -> procs-0.13.3.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
