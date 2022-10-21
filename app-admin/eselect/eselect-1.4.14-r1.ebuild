@@ -1,17 +1,16 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-EGIT_REPO_URI="https://anongit.gentoo.org/git/proj/eselect.git"
-
-inherit autotools git-r3 bash-completion-r1
+inherit autotools bash-completion-r1
 
 DESCRIPTION="Gentoo's multi-purpose configuration and management tool"
 HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Eselect"
+SRC_URI="https://dev.gentoo.org/~ulm/eselect/${P}.tar.xz"
 
 LICENSE="GPL-2+ || ( GPL-2+ CC-BY-SA-3.0 )"
 SLOT="0"
+KEYWORDS="*"
 IUSE="doc emacs vim-syntax"
 
 RDEPEND="sys-apps/sed
@@ -29,8 +28,11 @@ RDEPEND="${RDEPEND}
 PDEPEND="emacs? ( app-emacs/eselect-mode )
 	vim-syntax? ( app-vim/eselect-syntax )"
 
-src_prepare() {
+PATCHES="${FILESDIR}/${PN}-canonical-bash-path.patch"
+
+src_prepare(){
 	default
+
 	eautoreconf
 }
 
