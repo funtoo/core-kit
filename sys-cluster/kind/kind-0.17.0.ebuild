@@ -14,11 +14,18 @@ EGO_SUM=(
 	"github.com/davecgh/go-spew v1.1.1/go.mod"
 	"github.com/evanphx/json-patch/v5 v5.6.0"
 	"github.com/evanphx/json-patch/v5 v5.6.0/go.mod"
+	"github.com/google/safetext v0.0.0-20220905092116-b49f7bc46da2"
+	"github.com/google/safetext v0.0.0-20220905092116-b49f7bc46da2/go.mod"
 	"github.com/inconshreveable/mousetrap v1.0.0"
 	"github.com/inconshreveable/mousetrap v1.0.0/go.mod"
 	"github.com/jessevdk/go-flags v1.4.0/go.mod"
+	"github.com/kr/pty v1.1.1/go.mod"
+	"github.com/kr/text v0.1.0"
+	"github.com/kr/text v0.1.0/go.mod"
 	"github.com/mattn/go-isatty v0.0.14"
 	"github.com/mattn/go-isatty v0.0.14/go.mod"
+	"github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e"
+	"github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod"
 	"github.com/pelletier/go-toml v1.9.4"
 	"github.com/pelletier/go-toml v1.9.4/go.mod"
 	"github.com/pkg/errors v0.8.1/go.mod"
@@ -31,8 +38,9 @@ EGO_SUM=(
 	"github.com/spf13/pflag v1.0.5/go.mod"
 	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c"
 	"golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c/go.mod"
-	"gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405"
 	"gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod"
+	"gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b"
+	"gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b/go.mod"
 	"gopkg.in/yaml.v2 v2.4.0"
 	"gopkg.in/yaml.v2 v2.4.0/go.mod"
 	"gopkg.in/yaml.v3 v3.0.1"
@@ -43,7 +51,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://api.github.com/repos/kubernetes-sigs/kind/tarball/v0.16.0 -> kind-0.16.0.tar.gz
+SRC_URI="https://api.github.com/repos/kubernetes-sigs/kind/tarball/v0.17.0 -> kind-0.17.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 DESCRIPTION="Tool for running local Kubernetes clusters using Docker container nodes"
