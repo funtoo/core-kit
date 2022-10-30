@@ -64,6 +64,7 @@ SRC_URI="
 	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20221008.patch.gz -> ncurses-6.3-20221008.patch.gz
 	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20221015.patch.gz -> ncurses-6.3-20221015.patch.gz
 	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20221023.patch.gz -> ncurses-6.3-20221023.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.3/ncurses-6.3-20221029.patch.gz -> ncurses-6.3-20221029.patch.gz
 "
 
 LICENSE="MIT"
@@ -137,6 +138,7 @@ PATCHES=(
 	"${WORKDIR}"/ncurses-6.3-20221008.patch
 	"${WORKDIR}"/ncurses-6.3-20221015.patch
 	"${WORKDIR}"/ncurses-6.3-20221023.patch
+	"${WORKDIR}"/ncurses-6.3-20221029.patch
 	"${FILESDIR}/${PN}-5.7-nongnu.patch"
 	"${FILESDIR}/${PN}-6.0-rxvt-unicode-9.15.patch" #192083 #383871
 	"${FILESDIR}/${PN}-6.0-pkg-config.patch"
