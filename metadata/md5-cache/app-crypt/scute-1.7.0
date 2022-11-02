@@ -1,0 +1,12 @@
+BDEPEND=app-crypt/pinentry app-crypt/gnupg[smartcard] sys-apps/texinfo
+DEFINED_PHASES=configure install unpack
+DEPEND=dev-libs/libgpg-error dev-libs/libassuan
+DESCRIPTION=A PKCS \#11 module for OpenPGP smartcards
+EAPI=7
+HOMEPAGE=http://www.scute.org/
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=dev-libs/libgpg-error dev-libs/libassuan app-crypt/pinentry app-crypt/gnupg[smartcard]
+SLOT=0
+SRC_URI=https://gnupg.org/ftp/gcrypt/scute/scute-1.7.0.tar.bz2 -> scute-1.7.0.tar.bz2 https://dev.gentoo.org/~soap/distfiles/scute-1.7.0-manual-eps-images.tar.xz -> scute-1.7.0-manual-eps-images.tar.xz
+_md5_=c36639fe98d55d13bea9c485522a14b2

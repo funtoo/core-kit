@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig doc? ( sys-apps/texinfo ) nls? ( sys-devel/gettext )
+DEFINED_PHASES=compile configure install test
+DEPEND=dev-libs/libassuan dev-libs/libgcrypt dev-libs/libgpg-error dev-libs/libksba dev-libs/npth >=net-misc/curl-7.10 sys-libs/zlib bzip2? ( app-arch/bzip2 ) ldap? ( net-nds/openldap:= ) readline? ( sys-libs/readline:0= ) smartcard? ( usb? ( virtual/libusb:1 ) ) tofu? ( >=dev-db/sqlite-3.27 ) tpm? ( >=app-crypt/tpm2-tss-2.4.0:= ) ssl? ( >=net-libs/gnutls-3.0:0= )
+DESCRIPTION=The GNU Privacy Guard, a GPL OpenPGP implementation
+EAPI=7
+HOMEPAGE=https://gnupg.org/
+IUSE=bzip2 doc ldap nls readline selinux +smartcard ssl test +tofu tpm tools usb user-socket wks-server
+KEYWORDS=*
+LICENSE=GPL-3+
+RDEPEND=dev-libs/libassuan dev-libs/libgcrypt dev-libs/libgpg-error dev-libs/libksba dev-libs/npth >=net-misc/curl-7.10 sys-libs/zlib bzip2? ( app-arch/bzip2 ) ldap? ( net-nds/openldap:= ) readline? ( sys-libs/readline:0= ) smartcard? ( usb? ( virtual/libusb:1 ) ) tofu? ( >=dev-db/sqlite-3.27 ) tpm? ( >=app-crypt/tpm2-tss-2.4.0:= ) ssl? ( >=net-libs/gnutls-3.0:0= ) app-crypt/pinentry nls? ( virtual/libintl ) selinux? ( sec-policy/selinux-gpg ) wks-server? ( virtual/mta )
+REQUIRED_USE=test? ( tofu )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.3.7.tar.bz2 -> gnupg-2.3.7.tar.bz2
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=e275f5aec1b9e48dcdd7b7ac7d22cd2c

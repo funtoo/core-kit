@@ -1,0 +1,10 @@
+DEFINED_PHASES=postinst
+DESCRIPTION=Eselect module for management of multiple Rust versions
+EAPI=7
+HOMEPAGE=https://wiki.gentoo.org/wiki/Project:Rust
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=>=app-admin/eselect-1.2.3
+SLOT=0
+SRC_URI=https://dev.gentoo.org/~whissi/dist/eselect-rust/eselect-rust-20200419.tar.bz2
+_md5_=c45c36b73b498337a00c5cae9fb4d1c7
