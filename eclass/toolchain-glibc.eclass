@@ -568,7 +568,7 @@ toolchain-glibc_pkg_pretend() {
 				"${EROOT}"/lib* \
 				"${EROOT}"/usr/*bin/ \
 				"${EROOT}"/usr/lib* | \
-				egrep -v \
+				grep -E -v \
 					-e "^${EROOT}/lib.*/(libc|ld)-2.*.so$" \
 					-e "^${EROOT}/sbin/(ldconfig|sln)$"
 		)

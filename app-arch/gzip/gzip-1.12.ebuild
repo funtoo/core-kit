@@ -10,7 +10,8 @@ SRC_URI="https://ftp.gnu.org/gnu/gzip//gzip-1.12.tar.xz -> gzip-1.12.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="next"
+#KEYWORDS="next"
+KEYWORDS="*"
 IUSE="pic static"
 
 src_prepare() {

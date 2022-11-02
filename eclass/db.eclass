@@ -188,7 +188,7 @@ db_src_test() {
 		echo "run_parallel $(makeopts_jobs) run_std" >> testrunner.tcl
 
 		tclsh testrunner.tcl
-		egrep -qs '^FAIL' ALL.OUT* && die "Some tests failed, please see ${S}/ALL.OUT*"
+		grep -E -qs '^FAIL' ALL.OUT* && die "Some tests failed, please see ${S}/ALL.OUT*"
 	else
 		eerror "You must have USE=tcl to run the sys-libs/db testsuite."
 	fi

@@ -7,5 +7,5 @@ LICENSE=GPL-2 raspberrypi-videocore-bin
 RESTRICT=binchecks strip
 SLOT=0
 SRC_URI=https://github.com/raspberrypi/firmware/archive/1.20220331.tar.gz -> raspberrypi-firmware-1.20220331.tar.gz
-_eclasses_=mount-boot	4e916386c166c23418f8bea81a5f131e	readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190
+_eclasses_=mount-boot	6aaf58c4a4a0f44626a2bf5483de6e7e	readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190
 _md5_=cb382df20e05aaa379133442a4140a36

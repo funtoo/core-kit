@@ -12,5 +12,5 @@ REQUIRED_USE=^^ ( gcrypt kernel nettle openssl ) static? ( !gcrypt !ssh !fips ) 
 RESTRICT=!test? ( test )
 SLOT=0/8
 SRC_URI=https://github.com/mbroz/cryptsetup/tarball/75111d382ba95e5038db81dbf92e9244026718d8 -> cryptsetup-2.5.0-75111d3.tar.gz
-_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=86a16182021d0dc7d7d6aedc93962b75

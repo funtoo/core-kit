@@ -17,7 +17,7 @@ SLOT="0/8"  # subslot matches SONAME major
 KEYWORDS="*"
 IUSE="static-libs +unicode utils"
 
-RDEPEND=">=sys-libs/ncurses-5.9-r3:=[static-libs?,unicode(+)?,${MULTILIB_USEDEP}]"
+RDEPEND=">=sys-libs/ncurses-5.9-r3:=[static-libs?,${MULTILIB_USEDEP}]"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 

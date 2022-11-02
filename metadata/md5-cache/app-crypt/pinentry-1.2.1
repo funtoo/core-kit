@@ -1,0 +1,14 @@
+BDEPEND=sys-devel/gettext virtual/pkgconfig >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install postinst postrm prepare
+DEPEND=dev-libs/libassuan dev-libs/libgcrypt dev-libs/libgpg-error efl? ( dev-libs/efl[X] ) gnome-keyring? ( app-crypt/libsecret ) ncurses? ( sys-libs/ncurses:= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 )
+DESCRIPTION=Simple passphrase entry dialogs which utilize the Assuan protocol
+EAPI=7
+HOMEPAGE=https://gnupg.org/aegypten2
+IUSE=caps efl emacs gnome-keyring gtk ncurses qt5
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=dev-libs/libassuan dev-libs/libgcrypt dev-libs/libgpg-error efl? ( dev-libs/efl[X] ) gnome-keyring? ( app-crypt/libsecret ) ncurses? ( sys-libs/ncurses:= ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 ) gtk? ( app-crypt/gcr:0[gtk] )
+SLOT=0
+SRC_URI=https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.1.tar.bz2 -> pinentry-1.2.1.tar.bz2
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	estack	43ddf5aaffa7a8d0482df54d25a66a1f	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	qmake-utils	bdf97e69a34b864d6d545f4ec3143ff7	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=ea96a16decc7f98fe125ec3522e410b8

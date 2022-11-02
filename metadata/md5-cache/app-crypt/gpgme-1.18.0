@@ -1,0 +1,16 @@
+BDEPEND=python? ( dev-lang/swig ) >=app-portage/elt-patches-20170815
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=app-crypt/gnupg dev-libs/libassuan dev-libs/libgpg-error python? ( python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_8? ( dev-lang/python:3.8 ) python_targets_python3_10? ( dev-lang/python:3.10 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,python_targets_python3_10(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-),-python_single_target_python3_10(-)] ) qt5? ( dev-qt/qtcore:5 ) test? ( qt5? ( dev-qt/qttest:5 ) )
+DESCRIPTION=GnuPG Made Easy is a library for making GnuPG easier to use
+EAPI=7
+HOMEPAGE=https://www.gnupg.org/related_software/gpgme
+IUSE=common-lisp static-libs +cxx python qt5 test python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python3_10
+KEYWORDS=*
+LICENSE=GPL-2 LGPL-2.1
+RDEPEND=app-crypt/gnupg dev-libs/libassuan dev-libs/libgpg-error python? ( python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_8? ( dev-lang/python:3.8 ) python_targets_python3_10? ( dev-lang/python:3.10 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,python_targets_python3_10(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-),-python_single_target_python3_10(-)] ) qt5? ( dev-qt/qtcore:5 )
+REQUIRED_USE=qt5? ( cxx ) python? ( || ( python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python3_10 ) )
+RESTRICT=!test? ( test )
+SLOT=1/11.27.15.1
+SRC_URI=https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.18.0.tar.bz2 -> gpgme-1.18.0.tar.bz2
+_eclasses_=distutils-r1	bbe679c4da8bee76a1dc996c0ae6dffa	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	32393cac272daca4c136cc44e6005b67	qmake-utils	bdf97e69a34b864d6d545f4ec3143ff7	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=1d7b28f5b8af7e9e106e4b4ed7cfce17

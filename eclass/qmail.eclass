@@ -507,7 +507,7 @@ qmail_tcprules_config() {
 		line="${ip}${tcpstring}"
 		for proto in smtp qmtp qmqp; do
 			f="${EROOT}${TCPRULES_DIR}/tcp.qmail-${proto}"
-			egrep -qs "${line}" "${f}" || echo "${line}" >> "${f}"
+			grep -E -qs "${line}" "${f}" || echo "${line}" >> "${f}"
 		done
 	done
 }
