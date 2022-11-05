@@ -10,7 +10,7 @@ DESCRIPTION="Allows users or groups to run commands as other users"
 HOMEPAGE="https://www.sudo.ws/"
 
 KEYWORDS="*"
-SRC_URI="https://www.sudo.ws/sudo/dist/sudo-1.9.9.tar.gz -> sudo-1.9.9.tar.gz"
+SRC_URI="https://github.com/sudo-project/sudo/tarball/7a103879a054ec428dd8ed9b4cee8077102900ec -> sudo-1.9.12.1-7a10387.tar.gz"
 # Basic license is ISC-style as-is, some files are released under
 # 3-clause BSD license
 LICENSE="ISC BSD"
@@ -109,6 +109,10 @@ set_secure_path() {
 	rmpath '*/gcc-bin/*' '*/gnat-gcc-bin/*' '*/gnat-gcc/*'
 
 	einfo "... done"
+}
+
+post_src_unpack() {
+	mv ${WORKDIR}/* ${S} || die
 }
 
 src_configure() {
