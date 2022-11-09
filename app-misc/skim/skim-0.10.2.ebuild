@@ -115,7 +115,7 @@ inherit cargo
 
 DESCRIPTION="Command-line fuzzy finder"
 HOMEPAGE="https://github.com/lotabout/skim"
-SRC_URI="https://api.github.com/repos/lotabout/skim/tarball/v0.10.1 -> skim-0.10.1.tar.gz
+SRC_URI="https://api.github.com/repos/lotabout/skim/tarball/v0.10.2 -> skim-0.10.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 MIT MPL-2.0 Unlicense"
