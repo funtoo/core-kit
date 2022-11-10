@@ -6,7 +6,7 @@ inherit desktop eutils unpacker pax-utils xdg
 
 MY_PN="${PN/-bin}"
 MY_INSTALL_DIR="/opt/balenaEtcher"
-MY_EXEC="balena-${MY_PN}-electron"
+MY_EXEC="balena-${MY_PN}"
 DESCRIPTION="Flash OS images to SD cards & USB drives, safely and easily."
 HOMEPAGE="https://etcher.io/"
 SRC_URI="https://github.com/balena-io/etcher/releases/download/v1.9.0/balena-etcher_1.9.0_amd64.deb -> etcher-bin-1.9.0.deb"

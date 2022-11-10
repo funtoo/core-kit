@@ -10,4 +10,4 @@ RESTRICT=strip
 SLOT=0
 SRC_URI=https://github.com/balena-io/etcher/releases/download/v1.9.0/balena-etcher_1.9.0_amd64.deb -> etcher-bin-1.9.0.deb
 _eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	pax-utils	db85a3c508cf82c45f24b2723791cc93	unpacker	1cae8d330d7e2eb64488d3a858fdee0b	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=c62eb0ccb3f0795a06a969aea78a91e2
+_md5_=7a3a0de6c46e2e3f73407c86f36d6c7a
