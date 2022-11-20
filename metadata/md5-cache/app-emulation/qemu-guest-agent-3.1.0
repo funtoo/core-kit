@@ -1,6 +1,6 @@
 BDEPEND=virtual/pkgconfig virtual/pkgconfig
 DEFINED_PHASES=compile configure install postinst setup
-DEPEND=dev-libs/glib || ( dev-lang/python:3.10 >=dev-lang/python-2.7.5-r2:2.7 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 )
+DEPEND=dev-libs/glib || ( >=dev-lang/python-2.7.5-r2:2.7 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 dev-lang/python:3.10 )
 DESCRIPTION=QEMU Guest Agent (qemu-ga) for use when running inside a VM
 EAPI=7
 HOMEPAGE=https://wiki.qemu.org/Features/GuestAgent
