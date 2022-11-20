@@ -3,11 +3,11 @@ DEPEND=dev-lang/perl virtual/awk kernel_linux? ( virtual/modutils ) sys-apps/sed
 DESCRIPTION=The Solaris Porting Layer provides many of the Solaris kernel APIs
 EAPI=5
 HOMEPAGE=https://zfsonlinux.org/
-IUSE=custom-cflags debug kernel_linux kernel_linux kernel_linux python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_single_target_python2_7 python_single_target_python3_10 python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python2_7 python_targets_python3_10
+IUSE=custom-cflags debug kernel_linux kernel_linux kernel_linux python_single_target_python3_10 python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_single_target_python2_7 python_targets_python3_10 python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 python_targets_python2_7
 KEYWORDS=amd64
 LICENSE=GPL-2
-RDEPEND=dev-lang/perl virtual/awk python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7] ) python_single_target_python3_10? ( dev-lang/python:3.10 >=dev-lang/python-exec-2:=[python_targets_python3_10] ) !sys-devel/spl kernel_linux? ( virtual/modutils )
-REQUIRED_USE=^^ ( python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_single_target_python2_7 python_single_target_python3_10 )
+RDEPEND=dev-lang/perl virtual/awk python_single_target_python3_10? ( dev-lang/python:3.10 >=dev-lang/python-exec-2:=[python_targets_python3_10] ) python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) python_single_target_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 >=dev-lang/python-exec-2:=[python_targets_python2_7] ) !sys-devel/spl kernel_linux? ( virtual/modutils )
+REQUIRED_USE=^^ ( python_single_target_python3_10 python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_single_target_python2_7 )
 RESTRICT=debug? ( strip ) test
 SLOT=0
 SRC_URI=https://github.com/zfsonlinux/zfs/releases/download/zfs-0.7.13/spl-0.7.13.tar.gz
