@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst preinst prepare pretend setup test unpack
-DEPEND=nscd? ( selinux? ( audit? ( sys-process/audit ) caps? ( sys-libs/libcap ) ) ) suid? ( caps? ( sys-libs/libcap ) ) selinux? ( sys-libs/libselinux ) systemtap? ( dev-util/systemtap ) || ( dev-lang/python:3.10 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 ) >=app-misc/pax-utils-0.1.10 sys-devel/bison !<sys-apps/sandbox-1.6 !<sys-apps/portage-2.1.2 !<sys-devel/bison-2.7 !<sys-devel/make-4 doc? ( sys-apps/texinfo ) test? ( >=net-dns/libidn2-2.0.5 ) >=sys-devel/binutils-2.24 >=sys-devel/gcc-6 virtual/os-headers sys-devel/gnuconfig virtual/pkgconfig
+DEPEND=nscd? ( selinux? ( audit? ( sys-process/audit ) caps? ( sys-libs/libcap ) ) ) suid? ( caps? ( sys-libs/libcap ) ) selinux? ( sys-libs/libselinux ) systemtap? ( dev-util/systemtap ) || ( dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 dev-lang/python:3.10 ) >=app-misc/pax-utils-0.1.10 sys-devel/bison !<sys-apps/sandbox-1.6 !<sys-apps/portage-2.1.2 !<sys-devel/bison-2.7 !<sys-devel/make-4 doc? ( sys-apps/texinfo ) test? ( >=net-dns/libidn2-2.0.5 ) >=sys-devel/binutils-2.24 >=sys-devel/gcc-6 virtual/os-headers sys-devel/gnuconfig virtual/pkgconfig
 DESCRIPTION=GNU libc C library
 EAPI=6
 HOMEPAGE=https://www.gnu.org/software/libc/
