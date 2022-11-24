@@ -1,14 +1,14 @@
 BDEPEND=app-arch/xz-utils virtual/pkgconfig nls? ( sys-devel/gettext )
 DEFINED_PHASES=configure prepare
-DEPEND=!static? ( pcre? ( >=dev-libs/libpcre-7.8-r1 ) ) nls? ( virtual/libintl ) virtual/libiconv static? ( pcre? ( >=dev-libs/libpcre-7.8-r1[static-libs(+)] ) )
+DEPEND=!static? ( pcre? ( dev-libs/libpcre2 ) ) nls? ( virtual/libintl ) virtual/libiconv static? ( pcre? ( dev-libs/libpcre2[static-libs(+)] ) )
 DESCRIPTION=GNU regular expression matcher
 EAPI=7
 HOMEPAGE=https://www.gnu.org/software/grep/
 IUSE=nls pcre static
 KEYWORDS=next
 LICENSE=GPL-3
-RDEPEND=!static? ( pcre? ( >=dev-libs/libpcre-7.8-r1 ) ) nls? ( virtual/libintl ) virtual/libiconv
+RDEPEND=!static? ( pcre? ( dev-libs/libpcre2 ) ) nls? ( virtual/libintl ) virtual/libiconv
 SLOT=0
 SRC_URI=https://ftp.gnu.org/gnu/grep//grep-3.8.tar.xz -> grep-3.8.tar.xz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=7085af40771d100baf69dd1081110ef3
+_md5_=a77ab1cee6695bf0ad2ab4da1ea179f9
