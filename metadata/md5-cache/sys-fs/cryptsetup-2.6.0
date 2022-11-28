@@ -10,7 +10,7 @@ LICENSE=GPL-2+
 RDEPEND=static-libs? ( dev-libs/json-c:=[static-libs(+)] dev-libs/popt[static-libs(+)] >=sys-apps/util-linux-2.31-r1[static-libs(+)] argon2? ( app-crypt/argon2:=[static-libs(+)] ) gcrypt? ( dev-libs/libgcrypt:0=[static-libs(+)] dev-libs/libgpg-error[static-libs(+)] ) nettle? ( >=dev-libs/nettle-2.4[static-libs(+)] ) openssl? ( dev-libs/openssl:0=[static-libs(+)] ) pwquality? ( dev-libs/libpwquality[static-libs(+)] ) ssh? ( net-libs/libssh[static-libs(+)] ) sys-fs/lvm2[static-libs(+)] ) dev-libs/json-c:= dev-libs/popt >=sys-apps/util-linux-2.31-r1 argon2? ( app-crypt/argon2:= ) gcrypt? ( dev-libs/libgcrypt:0= dev-libs/libgpg-error ) nettle? ( >=dev-libs/nettle-2.4 ) openssl? ( dev-libs/openssl:0= ) pwquality? ( dev-libs/libpwquality ) ssh? ( net-libs/libssh ) sys-fs/lvm2 udev? ( virtual/libudev:= ) virtual/tmpfiles
 REQUIRED_USE=^^ ( gcrypt kernel nettle openssl ) static? ( !gcrypt !ssh !fips ) fips? ( !kernel !nettle )
 RESTRICT=!test? ( test )
-SLOT=0/8
-SRC_URI=https://github.com/mbroz/cryptsetup/tarball/75111d382ba95e5038db81dbf92e9244026718d8 -> cryptsetup-2.5.0-75111d3.tar.gz
+SLOT=0/9
+SRC_URI=https://github.com/mbroz/cryptsetup/tarball/b08212ea45c524ccd30785fa937590107e275acd -> cryptsetup-2.6.0-b08212e.tar.gz
 _eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=86a16182021d0dc7d7d6aedc93962b75
+_md5_=1b8d4d33247c9492f11442a10f0061ba

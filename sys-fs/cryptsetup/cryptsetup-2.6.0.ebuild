@@ -6,10 +6,10 @@ inherit linux-info tmpfiles autotools
 
 DESCRIPTION="Tool to setup encrypted devices with dm-crypt"
 HOMEPAGE="https://gitlab.com/cryptsetup/cryptsetup/blob/master/README.md"
-SRC_URI="https://github.com/mbroz/cryptsetup/tarball/75111d382ba95e5038db81dbf92e9244026718d8 -> cryptsetup-2.5.0-75111d3.tar.gz"
+SRC_URI="https://github.com/mbroz/cryptsetup/tarball/b08212ea45c524ccd30785fa937590107e275acd -> cryptsetup-2.6.0-b08212e.tar.gz"
 
 LICENSE="GPL-2+"
-SLOT="0/8" # libcryptsetup.so version
+SLOT="0/9" # libcryptsetup.so version
 KEYWORDS="*"
 
 CRYPTO_BACKENDS="gcrypt kernel nettle +openssl"
