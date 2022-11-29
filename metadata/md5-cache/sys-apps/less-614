@@ -8,5 +8,5 @@ KEYWORDS=*
 LICENSE=|| ( GPL-3 BSD-2 )
 RDEPEND=>=app-misc/editor-wrapper-3 >=sys-libs/ncurses-5.2:0= pcre? ( dev-libs/libpcre2 ) sys-apps/groff
 SLOT=0
-SRC_URI=https://github.com/gwsw/less/tarball/7b4da16e59e544815ea0e50b46c34d7c5acd9a8c -> less-612-7b4da16.tar.gz
-_md5_=62b40c5684e2a887b446f3d8e99252ca
+SRC_URI=https://github.com/gwsw/less/tarball/fc472e76045050e691f2854964d634ff02fe3b61 -> less-614-fc472e7.tar.gz
+_md5_=abd53423b82cee85a3b877d0806f7279
