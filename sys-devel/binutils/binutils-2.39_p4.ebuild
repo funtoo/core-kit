@@ -7,7 +7,17 @@ inherit eutils libtool flag-o-matic gnuconfig multilib toolchain-funcs
 DESCRIPTION="Tools necessary to build programs"
 HOMEPAGE="https://sourceware.org/binutils/"
 LICENSE="GPL-3+"
-IUSE="64-bit-bfd cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla"
+# Proposition: consider disabling gold for binutils-2.39 and greater
+# Related Bug: https://bugs.funtoo.org/browse/FL-10758
+# GNU Gold is considered to be suffering from upstream bitrot: https://en.wikipedia.org/wiki/Gold_(linker)
+# GNU Gold is a project of Google and they sadly have decided to move onto other linkers
+# It currently has no official upstream maintainer due to Google abandoning it
+# GNU Gold has considerable less upstream commit activity than the main GNU bfd (ld) linker
+# Upstream GNU gold commits: https://sourceware.org/git/?p=binutils-gdb.git;a=history;f=gold;hb=HEAD
+# Setting the gold USE flag to match sys-devel/binutils-2.36.1_p3-r1 for now, which is forcing it on by default
+# The future Funtoo toolchain development efforts can collectively consider this GNU Gold deprecation proposal
+IUSE="cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla"
+IUSE+="pgo"
 REQUIRED_USE="default-gold? ( gold )"
 
 SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.39.tar.xz -> binutils-2.39.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-4.tar.xz -> binutils-2.39-patches-4.tar.xz"
@@ -22,6 +32,8 @@ RDEPEND="
 !<sys-devel/binutils-2.39_p4
 sys-libs/zlib"
 DEPEND="${RDEPEND}"
+# See https://bugs.funtoo.org/browse/FL-10753 for complete
+# details on why dev-libs/isl was added for building binutils 2.39
 BDEPEND="
 	doc? ( sys-apps/texinfo )
 	test? (
@@ -29,6 +41,10 @@ BDEPEND="
 		sys-devel/bc
 	)
 	nls? ( sys-devel/gettext )
+	dev-libs/isl
+	dev-libs/mpc
+	dev-libs/mpfr
+	dev-libs/gmp
 	sys-devel/flex
 	virtual/yacc
 "
@@ -62,6 +78,11 @@ src_prepare() {
 }
 
 src_configure() {
+	# See https://www.gnu.org/software/make/manual/html_node/Parallel-Output.html
+	# Avoid really confusing logs from subconfigure spam, makes logs far
+	# more legible.
+	MAKEOPTS="--output-sync=line ${MAKEOPTS}"
+
 	strip-linguas -u */po
 
 	# Keep things sane
@@ -101,6 +122,12 @@ src_configure() {
 		myconf+=( --enable-default-hash-style=gnu )
 	fi
 
+	if use vanilla ; then
+		PKG_VERSION="Funtoo"
+	else
+		PKG_VERSION="Funtoo 2.39_p4 patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-4.tar.xz"
+	fi
+
 	myconf+=(
 		--prefix=/usr
 		--host=${CHOST}
@@ -116,16 +143,25 @@ src_configure() {
 		--enable-textrel-check=warning
 		--disable-werror
 		--with-bugurl="https://bugs.funtoo.org/"
-		--with-pkgversion="Funtoo {version} patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-4.tar.xz"
+		--with-pkgversion="${PKG_VERSION}"
 		--with-system-zlib
 		--without-zlib
 		# Strip out broken static link flags.
 		# https://gcc.gnu.org/PR56750
 		--without-stage1-ldflags
 		--without-debuginfod
+		--enable-new-dtags
+		--disable-jansson
+		--disable-{gdb,libdecnumber,readline,sim}
+		# Avoid automagic dev-libs/msgpack dep, bug #865875
+		--without-msgpack
 		${EXTRA_ECONF}
 	)
 
+	if use pgo ; then
+		myconf+=( $(use_enable pgo pgo-build lto) )
+		export BUILD_CFLAGS="${CFLAGS}"
+	fi
 	echo ./configure "${myconf[@]}"
 	"${S}"/configure "${myconf[@]}" || die
 

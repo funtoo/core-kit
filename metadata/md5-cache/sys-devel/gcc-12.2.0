@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install postinst postrm prepare setup test unpack
+DEPEND=sys-libs/zlib[static-libs] nls? ( sys-devel/gettext[static-libs] ) virtual/libiconv objc-gc? ( >=dev-libs/boehm-gc-7.6[static-libs] ) >=sys-devel/bison-1.875 >=sys-devel/flex-2.5.4 >=sys-devel/binutils-2.36.1_p3 elibc_glibc? ( >=sys-libs/glibc-2.8 ) test? ( dev-util/dejagnu sys-devel/autogen ) >=dev-vcs/git-1.8.2.1[curl]
+DESCRIPTION=The GNU Compiler Collection
+EAPI=6
+IUSE=ada +cxx d go +fortran objc objc++ objc-gc test doc nls vanilla multilib openmp altivec graphite pch generic_host jit bootstrap bootstrap-lean bootstrap-profiled bootstrap-lto bootstrap-O3 libssp +ssp +pie +vtv link_now ssp_all +stack_clash_protection sanitize dev_extra_warnings checking_no stage1_checking_no checking_release stage1_checking_release checking_yes stage1_checking_yes checking_all stage1_checking_all checking_assert stage1_checking_assert checking_runtime stage1_checking_runtime checking_misc stage1_checking_misc checking_tree stage1_checking_tree checking_gc stage1_checking_gc checking_rtlflag stage1_checking_rtlflag checking_df stage1_checking_df checking_fold stage1_checking_fold checking_gcac stage1_checking_gcac checking_rtl stage1_checking_rtl checking_extra stage1_checking_extra checking_valgrind stage1_checking_valgrind abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_s390_32 abi_s390_64
+LICENSE=GPL-3+ LGPL-3+ || ( GPL-3+ libgcc libstdc++ gcc-runtime-library-exception-3.1 ) FDL-1.3+
+PDEPEND=>=sys-devel/gcc-config-1.5 >=sys-devel/libtool-2.4.3 dev-cpp/tbb elibc_glibc? ( >=sys-libs/glibc-2.8 )
+PROPERTIES=live
+RDEPEND=sys-libs/zlib[static-libs] nls? ( sys-devel/gettext[static-libs] ) virtual/libiconv objc-gc? ( >=dev-libs/boehm-gc-7.6[static-libs] )
+REQUIRED_USE=bootstrap-profiled? ( bootstrap ) bootstrap-lean? ( bootstrap ) bootstrap-lto? ( bootstrap ) bootstrap-O3? ( bootstrap ) !bootstrap? ( !bootstrap-lean !bootstrap-profiled !bootstrap-lto !bootstrap-O3 )
+RESTRICT=strip
+SLOT=12.2.0
+SRC_URI=https://ftpmirror.gnu.org/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.xz mirror://gnu/gmp/gmp-6.2.1.tar.xz http://www.mpfr.org/mpfr-4.1.0/mpfr-4.1.0.tar.xz http://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz graphite? ( http://www.bastoul.net/cloog/pages/download/count.php3?url=./cloog-0.18.4.tar.gz http://isl.gforge.inria.fr/isl-0.20.tar.xz ) ada? ( amd64? ( mirror://funtoo/gcc/gnat-gpl-2017-x86_64-linux-bin.tar.gz ) x86? ( mirror://funtoo/gcc/gnat-gpl-2014-x86-linux-bin.tar.gz ) )
+_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	cb17fbe94a2c43cbc0f8e76abf15479a	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	git-r3	7dcb8a92f5a091f13e82494fa317ca4b	ltprune	22f9f14d105434e9c400ccac3bbb64ae	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	pax-utils	db85a3c508cf82c45f24b2723791cc93	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-enable	9a16ec40c9a85f4629019843d3d885be	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf
+_md5_=6e360d69cc421feedf87c558bc2e5c23
