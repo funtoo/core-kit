@@ -112,8 +112,6 @@ EGO_SUM=(
 	"github.com/mattn/go-runewidth v0.0.7/go.mod"
 	"github.com/mattn/go-tty v0.0.4"
 	"github.com/mattn/go-tty v0.0.4/go.mod"
-	"github.com/mitchellh/go-homedir v1.1.0"
-	"github.com/mitchellh/go-homedir v1.1.0/go.mod"
 	"github.com/mitchellh/go-ps v1.0.0"
 	"github.com/mitchellh/go-ps v1.0.0/go.mod"
 	"github.com/muesli/crunchy v0.4.0"
@@ -172,8 +170,8 @@ EGO_SUM=(
 	"golang.org/x/crypto v0.0.0-20220919173607-35f4265a4bc0/go.mod"
 	"golang.org/x/crypto v0.3.0"
 	"golang.org/x/crypto v0.3.0/go.mod"
-	"golang.org/x/exp v0.0.0-20221114191408-850992195362"
-	"golang.org/x/exp v0.0.0-20221114191408-850992195362/go.mod"
+	"golang.org/x/exp v0.0.0-20221126150942-6ab00d035af9"
+	"golang.org/x/exp v0.0.0-20221126150942-6ab00d035af9/go.mod"
 	"golang.org/x/net v0.0.0-20190311183353-d8887717615a/go.mod"
 	"golang.org/x/net v0.0.0-20190603091049-60506f45cf65/go.mod"
 	"golang.org/x/net v0.0.0-20210226172049-e18ecbb05110/go.mod"
@@ -246,7 +244,7 @@ go-module_set_globals
 
 DESCRIPTION="a simple but powerful password manager for the terminal"
 HOMEPAGE="https://www.gopass.pw/"
-SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.14.11 -> gopass-1.14.11.tar.gz
+SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.15.0 -> gopass-1.15.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT Apache-2.0 BSD MPL-2.0 BSD-2"
