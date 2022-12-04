@@ -6,7 +6,7 @@ inherit flag-o-matic autotools prefix
 
 DESCRIPTION="Enhanced version of the Berkeley C shell (csh)"
 HOMEPAGE="https://www.tcsh.org/"
-SRC_URI="https://astron.com/pub/tcsh/tcsh-6.24.04.tar.gz -> tcsh-6.24.04.tar.gz"
+SRC_URI="https://astron.com/pub/tcsh/tcsh-6.24.05.tar.gz -> tcsh-6.24.05.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
