@@ -10,7 +10,7 @@ SRC_URI="https://ftp.gnu.org/gnu/grep//grep-3.8.tar.xz -> grep-3.8.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="nls pcre static"
 
 LIB_DEPEND="pcre? ( dev-libs/libpcre2[static-libs(+)] )"
