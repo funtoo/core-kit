@@ -12,4 +12,4 @@ RESTRICT=test
 SLOT=0
 SRC_URI=https://astron.com/pub/tcsh/tcsh-6.24.05.tar.gz -> tcsh-6.24.05.tar.gz
 _eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=89c10603773aefe2e219ec3e904849bb
+_md5_=15b90001199dedddd9b6615fd817e86f
