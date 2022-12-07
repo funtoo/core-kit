@@ -1,7 +1,6 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit eutils qmake-utils systemd toolchain-funcs readme.gentoo-r1
 
@@ -9,13 +8,8 @@ DESCRIPTION="IEEE 802.1X/WPA supplicant for secure wireless transfers"
 HOMEPAGE="https://w1.fi/wpa_supplicant/"
 LICENSE="|| ( GPL-2 BSD )"
 
-if [ "${PV}" = "9999" ]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://w1.fi/hostap.git"
-else
-	KEYWORDS="*"
-	SRC_URI="https://w1.fi/releases/${P}.tar.gz"
-fi
+KEYWORDS="*"
+SRC_URI="{{ artifacts[0].src_uri }}"
 
 SLOT="0"
 IUSE="ap bindist dbus eap-sim eapol_test fasteap +fils +hs2-0 libressl macsec p2p privsep ps3 qt5 readline selinux smartcard tdls uncommon-eap-types wimax wps kernel_linux kernel_FreeBSD"
@@ -370,10 +364,6 @@ src_install() {
 		wpa_supplicant.conf
 
 	newdoc .config build-config
-
-	if [ "${PV}" != "9999" ]; then
-		doman doc/docbook/*.{5,8}
-	fi
 
 	if use qt5 ; then
 		into /usr
