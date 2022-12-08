@@ -14,9 +14,9 @@ detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux 6.0.11"
+DESCRIPTION="Linux 6.0.12"
 
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.0.tar.xz -> linux-6.0.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/patch-6.0.11.xz -> patch-6.0.11.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.0.tar.xz -> linux-6.0.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/patch-6.0.12.xz -> patch-6.0.12.xz"
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
