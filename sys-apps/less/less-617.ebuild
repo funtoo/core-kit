@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Excellent text file viewer"
 HOMEPAGE="http://www.greenwoodsoftware.com/less/"
-SRC_URI="https://github.com/gwsw/less/tarball/d531742a45872d6825ef3ad139cf95f305230ecc -> less-615-d531742.tar.gz"
+SRC_URI="https://github.com/gwsw/less/tarball/8c4997e1b736ea05c3af295837aa5b36b2bdec06 -> less-617-8c4997e.tar.gz"
 
 LICENSE="|| ( GPL-3 BSD-2 )"
 SLOT="0"
