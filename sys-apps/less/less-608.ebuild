@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Excellent text file viewer"
 HOMEPAGE="http://www.greenwoodsoftware.com/less/"
-SRC_URI="https://github.com/gwsw/less/tarball/8c4997e1b736ea05c3af295837aa5b36b2bdec06 -> less-617-8c4997e.tar.gz"
+SRC_URI="https://www.greenwoodsoftware.com/less/less-608.tar.gz -> less-608.tar.gz"
 
 LICENSE="|| ( GPL-3 BSD-2 )"
 SLOT="0"
@@ -16,17 +16,6 @@ DEPEND=">=app-misc/editor-wrapper-3
 	pcre? ( dev-libs/libpcre2 )
 	sys-apps/groff"
 RDEPEND="${DEPEND}"
-
-post_src_unpack() {
-	if [ ! -d "${S}" ]; then
-		mv gwsw-less* "${S}"
-	fi
-}
-
-src_prepare() {
-	default
-	make -f Makefile.aut distfiles || die
-}
 
 src_configure() {
 	export ac_cv_lib_ncursesw_initscr=$(usex unicode)
