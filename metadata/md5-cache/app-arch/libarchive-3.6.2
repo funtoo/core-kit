@@ -1,14 +1,14 @@
 BDEPEND=>=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
 DEFINED_PHASES=compile configure install prepare test
-DEPEND=acl? ( virtual/acl[-mgorny(-)] ) blake2? ( app-crypt/libb2[-mgorny(-)] ) bzip2? ( app-arch/bzip2[-mgorny(-)] ) expat? ( dev-libs/expat[-mgorny(-)] ) !expat? ( dev-libs/libxml2[-mgorny(-)] ) iconv? ( virtual/libiconv[-mgorny(-)] ) kernel_linux? ( xattr? ( sys-apps/attr[-mgorny(-)] ) ) !libressl? ( dev-libs/openssl:0=[-mgorny(-)] ) libressl? ( dev-libs/libressl:0=[-mgorny(-)] ) lz4? ( >=app-arch/lz4-0_p131:0=[-mgorny(-)] ) lzma? ( app-arch/xz-utils[-mgorny(-)] ) lzo? ( >=dev-libs/lzo-2[-mgorny(-)] ) nettle? ( dev-libs/nettle:0=[-mgorny(-)] ) zlib? ( sys-libs/zlib[-mgorny(-)] ) zstd? ( app-arch/zstd[-mgorny(-)] ) kernel_linux? ( virtual/os-headers e2fsprogs? ( sys-fs/e2fsprogs ) )
+DEPEND=acl? ( virtual/acl ) blake2? ( app-crypt/libb2 ) bzip2? ( app-arch/bzip2 ) expat? ( dev-libs/expat ) !expat? ( dev-libs/libxml2 ) iconv? ( virtual/libiconv ) kernel_linux? ( xattr? ( sys-apps/attr ) ) !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) lz4? ( >=app-arch/lz4-0_p131:0= ) lzma? ( app-arch/xz-utils ) lzo? ( >=dev-libs/lzo-2 ) nettle? ( dev-libs/nettle:0= ) zlib? ( sys-libs/zlib ) zstd? ( app-arch/zstd ) kernel_linux? ( virtual/os-headers e2fsprogs? ( sys-fs/e2fsprogs ) )
 DESCRIPTION=Multi-format archive and compression library
 EAPI=7
 HOMEPAGE=https://www.libarchive.org/
-IUSE=acl blake2 +bzip2 +e2fsprogs expat +iconv kernel_linux libressl lz4 +lzma lzo nettle static-libs +threads xattr +zlib zstd abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_s390_32 abi_s390_64
+IUSE=acl blake2 +bzip2 +e2fsprogs expat +iconv kernel_linux libressl lz4 +lzma lzo nettle static-libs +threads xattr +zlib zstd
 KEYWORDS=*
 LICENSE=BSD BSD-2 BSD-4 public-domain
-RDEPEND=acl? ( virtual/acl[-mgorny(-)] ) blake2? ( app-crypt/libb2[-mgorny(-)] ) bzip2? ( app-arch/bzip2[-mgorny(-)] ) expat? ( dev-libs/expat[-mgorny(-)] ) !expat? ( dev-libs/libxml2[-mgorny(-)] ) iconv? ( virtual/libiconv[-mgorny(-)] ) kernel_linux? ( xattr? ( sys-apps/attr[-mgorny(-)] ) ) !libressl? ( dev-libs/openssl:0=[-mgorny(-)] ) libressl? ( dev-libs/libressl:0=[-mgorny(-)] ) lz4? ( >=app-arch/lz4-0_p131:0=[-mgorny(-)] ) lzma? ( app-arch/xz-utils[-mgorny(-)] ) lzo? ( >=dev-libs/lzo-2[-mgorny(-)] ) nettle? ( dev-libs/nettle:0=[-mgorny(-)] ) zlib? ( sys-libs/zlib[-mgorny(-)] ) zstd? ( app-arch/zstd[-mgorny(-)] )
+RDEPEND=acl? ( virtual/acl ) blake2? ( app-crypt/libb2 ) bzip2? ( app-arch/bzip2 ) expat? ( dev-libs/expat ) !expat? ( dev-libs/libxml2 ) iconv? ( virtual/libiconv ) kernel_linux? ( xattr? ( sys-apps/attr ) ) !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) lz4? ( >=app-arch/lz4-0_p131:0= ) lzma? ( app-arch/xz-utils ) lzo? ( >=dev-libs/lzo-2 ) nettle? ( dev-libs/nettle:0= ) zlib? ( sys-libs/zlib ) zstd? ( app-arch/zstd )
 SLOT=0/13
 SRC_URI=https://github.com/libarchive/libarchive/tarball/ba80276ccc3c941c4918ec6e2460059f0c525c43 -> libarchive-3.6.2-ba80276.tar.gz
-_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=2d4eb19dbe20a7624cc049bed6fb360f
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=129f3e8f9376094d041d0039692d3bf3

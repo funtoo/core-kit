@@ -4,7 +4,7 @@ EAPI=7
 
 inherit toolchain-funcs flag-o-matic
 
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-v6.1.0.tar.xz -> iproute2-v6.1.0.tar.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.1.0.tar.xz -> iproute2-6.1.0.tar.xz"
 KEYWORDS="*"
 
 DESCRIPTION="kernel routing and traffic control utilities"
@@ -45,12 +45,6 @@ PATCHES=(
 	#"${FILESDIR}"/${PN}-5.1.0-portability.patch
 	"${FILESDIR}"/${PN}-5.7.0-mix-signal.h-include.patch
 )
-
-
-src_unpack() {
-    unpack ${A}
-	mv "${WORKDIR}"/iproute2-* "${S}"
-}
 
 doecho() {
 	echo "${@}"
