@@ -8,6 +8,6 @@ HOMEPAGE="https://www.virtualbox.org/"
 LICENSE="GPL-2 PUEL"
 SLOT="0"
 KEYWORDS="*"
-IUSE="+additions +chm headless python vboxwebsrv rdesktop-vrdp sdk"
+IUSE="+additions doc headless python vboxwebsrv rdesktop-vrdp sdk"
 
-RDEPEND="=app-emulation/virtualbox-bin-7.0.4.154605[additions?,chm?,headless?,python?,vboxwebsrv?,rdesktop-vrdp?,sdk?]"
+RDEPEND="=app-emulation/virtualbox-bin-7.0.4.154605[additions?,doc?,headless?,python?,vboxwebsrv?,rdesktop-vrdp?,sdk?]"
