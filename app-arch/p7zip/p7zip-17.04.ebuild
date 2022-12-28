@@ -21,7 +21,7 @@ DEPEND="dev-lang/yasm"
 DOCS=( ChangeLog README TODO )
 
 post_src_unpack() {
-	mv "${WORKDIR}"/jinfeihan57-p7zip-* "${S}" || die
+	mv "${WORKDIR}"/p7zip-* "${S}" || die
 }
 
 src_prepare() {
