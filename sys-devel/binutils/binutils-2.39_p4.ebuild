@@ -30,6 +30,10 @@ RDEPEND="
 !sys-devel/binutils-config
 !<sys-libs/binutils-libs-2.39_p4
 !<sys-devel/binutils-2.39_p4
+dev-libs/isl
+dev-libs/mpc
+dev-libs/mpfr
+dev-libs/gmp
 sys-libs/zlib"
 DEPEND="${RDEPEND}"
 # See https://bugs.funtoo.org/browse/FL-10753 for complete
@@ -41,10 +45,6 @@ BDEPEND="
 		sys-devel/bc
 	)
 	nls? ( sys-devel/gettext )
-	dev-libs/isl
-	dev-libs/mpc
-	dev-libs/mpfr
-	dev-libs/gmp
 	sys-devel/flex
 	virtual/yacc
 "
