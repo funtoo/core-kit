@@ -5,7 +5,7 @@ inherit autotools ltprune
 
 DESCRIPTION="A system-independent library for user-level network packet capture"
 
-SRC_URI="https://github.com/the-tcpdump-group/libpcap/tarball/c7642e2cc0c5bd65754685b160d25dc23c76c6bd -> libpcap-1.10.1-c7642e2.tar.gz"
+SRC_URI="https://github.com/the-tcpdump-group/libpcap/tarball/c46306b7898229747609636c4bdd48ae2bdbab8a -> libpcap-1.10.2-c46306b.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -28,11 +28,6 @@ BDEPEND="
 "
 
 S=${WORKDIR}/${PN}-${P/_}
-
-PATCHES=(
-	"${FILESDIR}"/${PN}-1.9.1-pcap-config.patch
-	"${FILESDIR}"/${PN}-1.10.0-usbmon.patch
-)
 
 post_src_unpack() {
         if [ ! -d "${S}" ]; then
