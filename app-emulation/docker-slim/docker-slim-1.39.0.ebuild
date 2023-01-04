@@ -1608,7 +1608,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://api.github.com/repos/docker-slim/docker-slim/tarball/1.39.0 -> docker-slim-1.39.0.tar.gz
+SRC_URI="https://api.github.com/repos/slimtoolkit/slim/tarball/1.39.0 -> docker-slim-1.39.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 DESCRIPTION="Make your containers better, smaller, more secure and do less to get there"
