@@ -10,5 +10,5 @@ LICENSE=MIT
 RDEPEND=app-text/sgml-common >=app-text/opensp-1.5.1
 SLOT=0
 SRC_URI=mirror://sourceforge/openjade/openjade-1.3.2.tar.gz
-_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	sgml-catalog	a1731744d7cca1d14638e0e054ceea6e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	sgml-catalog	a1731744d7cca1d14638e0e054ceea6e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=0ab12fce33758ff5d7aff7b9e5129b37

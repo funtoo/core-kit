@@ -10,5 +10,5 @@ LICENSE=ISC
 RDEPEND=dev-libs/libevent:0= sys-libs/ncurses:0= utempter? ( sys-libs/libutempter ) selinux? ( sec-policy/selinux-screen ) vim-syntax? ( app-vim/vim-tmux )
 SLOT=0
 SRC_URI=https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz -> tmux-3.3a.tar.gz
-_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=4f3db0fe65a5ce8a2f76d2610d7ade9e

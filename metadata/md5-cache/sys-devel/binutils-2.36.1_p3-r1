@@ -13,5 +13,5 @@ REQUIRED_USE=default-gold? ( gold )
 RESTRICT=!test? ( test )
 SLOT=2.36
 SRC_URI=https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz -> binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz -> binutils-2.36.1-patches-3.tar.xz
-_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	gnuconfig	b8ec1c34be4ff9dac7ad4034d277936b	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	gnuconfig	b8ec1c34be4ff9dac7ad4034d277936b	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=3b93540b9336bf870aa56e24097890c7
