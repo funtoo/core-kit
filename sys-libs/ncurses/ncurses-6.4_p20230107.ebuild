@@ -11,6 +11,7 @@ HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncu
 SRC_URI="
 	https://invisible-mirror.net/archives/ncurses/ncurses-6.4.tar.gz -> ncurses-6.4.tar.gz
 	https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20221231.patch.gz -> ncurses-6.4-20221231.patch.gz
+	https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230107.patch.gz -> ncurses-6.4-20230107.patch.gz
 "
 
 LICENSE="MIT"
@@ -32,6 +33,7 @@ S="${WORKDIR}/${MY_P}"
 PATCHES=(
     # Intermediate commenting out the application of upstream patches. See https://bugs.funtoo.org/browse/FL-10888
 	#"${WORKDIR}"/ncurses-6.4-20221231.patch
+	#"${WORKDIR}"/ncurses-6.4-20230107.patch
 	#
 	"${FILESDIR}/${PN}-5.7-nongnu.patch"
 	"${FILESDIR}/${PN}-6.0-rxvt-unicode-9.15.patch" #192083 #383871
