@@ -5,7 +5,7 @@ inherit autotools ltprune
 
 DESCRIPTION="A system-independent library for user-level network packet capture"
 
-SRC_URI="https://github.com/the-tcpdump-group/libpcap/tarball/c46306b7898229747609636c4bdd48ae2bdbab8a -> libpcap-1.10.2-c46306b.tar.gz"
+SRC_URI="https://github.com/the-tcpdump-group/libpcap/tarball/95691ebe7564afa3faa5c6ba0dbd17e351be455a -> libpcap-1.10.3-95691eb.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
