@@ -7,7 +7,7 @@ inherit autotools flag-o-matic pam tmpfiles
 DESCRIPTION="screen manager with VT100/ANSI terminal emulation"
 HOMEPAGE="https://www.gnu.org/software/screen/"
 
-SRC_URI="https://ftp.gnu.org/gnu/screen//screen-4.9.0.tar.gz -> screen-4.9.0.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/screen/screen-4.9.0.tar.gz -> screen-4.9.0.tar.gz"
 KEYWORDS="*"
 
 LICENSE="GPL-2"

@@ -6,7 +6,7 @@ inherit flag-o-matic
 
 DESCRIPTION="GNU regular expression matcher"
 HOMEPAGE="https://www.gnu.org/software/grep/"
-SRC_URI="https://ftp.gnu.org/gnu/grep//grep-3.8.tar.xz -> grep-3.8.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/grep/grep-3.8.tar.xz -> grep-3.8.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"

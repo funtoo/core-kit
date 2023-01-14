@@ -6,7 +6,7 @@ inherit flag-o-matic
 
 DESCRIPTION="Use this to make tarballs :)"
 HOMEPAGE="https://www.gnu.org/software/tar/"
-SRC_URI="https://ftp.gnu.org/gnu/tar//tar-1.34.tar.xz -> tar-1.34.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/tar/tar-1.34.tar.xz -> tar-1.34.tar.xz"
 
 LICENSE="GPL-3+"
 SLOT="0"
