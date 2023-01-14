@@ -6,7 +6,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="GNU awk pattern-matching language"
 HOMEPAGE="https://www.gnu.org/software/gawk/gawk.html"
-SRC_URI="https://ftp.gnu.org/gnu/gawk//gawk-5.1.0.tar.xz -> gawk-5.1.0.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/gawk/gawk-5.1.0.tar.xz -> gawk-5.1.0.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

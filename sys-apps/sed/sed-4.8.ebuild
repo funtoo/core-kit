@@ -6,7 +6,7 @@ inherit flag-o-matic
 
 DESCRIPTION="Super-useful stream editor"
 HOMEPAGE="http://sed.sourceforge.net/"
-SRC_URI="https://ftp.gnu.org/gnu/sed//sed-4.8.tar.xz -> sed-4.8.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/sed/sed-4.8.tar.xz -> sed-4.8.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
