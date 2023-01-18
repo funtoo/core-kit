@@ -9,6 +9,6 @@ LICENSE=MIT
 RDEPEND=gpm? ( sys-libs/gpm[-mgorny(-)] ) !<=sys-libs/ncurses-5.9-r4:5 !<sys-libs/slang-2.3.2_pre23 !<x11-terms/rxvt-unicode-9.06-r3 !<x11-terms/st-0.6-r1
 RESTRICT=!test? ( test )
 SLOT=0/6
-SRC_URI=https://invisible-mirror.net/archives/ncurses/ncurses-6.4.tar.gz -> ncurses-6.4.tar.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20221231.patch.gz -> ncurses-6.4-20221231.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230107.patch.gz -> ncurses-6.4-20230107.patch.gz
+SRC_URI=https://invisible-mirror.net/archives/ncurses/ncurses-6.4.tar.gz -> ncurses-6.4.tar.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20221231.patch.gz -> ncurses-6.4-20221231.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230107.patch.gz -> ncurses-6.4-20230107.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230114.patch.gz -> ncurses-6.4-20230114.patch.gz
 _eclasses_=multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
-_md5_=becc543ff575bb0ca3e3f158615e200b
+_md5_=32b94b1877b7e725d7d57bd304b7cd67
