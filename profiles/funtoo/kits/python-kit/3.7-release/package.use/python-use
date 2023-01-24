@@ -22,7 +22,7 @@ dev-lang/yasm python_single_target_python2_7
 sys-apps/etckeeper python_single_target_python2_7
 sys-apps/pacman python_single_target_python2_7
 sys-boot/udk python_single_target_python2_7
-sys-devel/automake python_single_target_python3_10 python_targets_python3_10
+sys-devel/automake python_single_target_python3_9 python_targets_python3_9
 sys-fs/owfs python_single_target_python2_7
 sys-fs/pysize python_single_target_python2_7
 sys-fs/pytagsfs python_single_target_python2_7
