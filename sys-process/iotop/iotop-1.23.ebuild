@@ -6,7 +6,7 @@ inherit fcaps toolchain-funcs
 
 DESCRIPTION="Interactive monitor of Linux IO activity"
 HOMEPAGE="https://github.com/Tomas-M/iotop"
-SRC_URI="https://github.com/Tomas-M/iotop/releases/download/v1.22/iotop-1.22.tar.xz -> iotop-1.22.tar.xz"
+SRC_URI="https://github.com/Tomas-M/iotop/releases/download/v1.23/iotop-1.23.tar.xz -> iotop-1.23.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
