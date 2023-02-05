@@ -4,7 +4,7 @@ EAPI=7
 
 inherit cmake toolchain-funcs
 
-DESCRIPTION="mold: A Modern Linker 🦠"
+DESCRIPTION="Mold: A Modern Linker 🦠"
 HOMEPAGE="https://github.com/rui314/mold"
 SRC_URI="https://github.com/rui314/mold/tarball/040180f933d33fa246f9d2961c2d6e8b74241463 -> mold-1.10.1-040180f.tar.gz"
 KEYWORDS="next"
