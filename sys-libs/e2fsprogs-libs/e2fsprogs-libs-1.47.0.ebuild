@@ -6,7 +6,7 @@ inherit toolchain-funcs usr-ldscript
 
 DESCRIPTION="e2fsprogs libraries (common error and subsystem)"
 HOMEPAGE="http://e2fsprogs.sourceforge.net/"
-SRC_URI="https://github.com/tytso/e2fsprogs/tarball/20523ce9c451ada3b3439de8abb3f1f48228dbb8 -> e2fsprogs-1.46.6-20523ce.tar.gz"
+SRC_URI="https://github.com/tytso/e2fsprogs/tarball/25ad8a431331b4d1d444a70b6079456cc612ac40 -> e2fsprogs-1.47.0-25ad8a4.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
