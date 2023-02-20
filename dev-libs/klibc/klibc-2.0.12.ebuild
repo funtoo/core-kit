@@ -17,7 +17,7 @@ inherit eutils toolchain-funcs flag-o-matic
 
 DESCRIPTION="A minimal libc subset for use with initramfs"
 HOMEPAGE="http://www.zytor.com/mailman/listinfo/klibc/ https://www.kernel.org/pub/linux/libs/klibc/"
-SRC_URI="https://git.kernel.org/pub/scm/libs/klibc/klibc.git/snapshot/klibc-2.0.12.tar.gz -> klibc-2.0.12.tar.gz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.1.tar.xz -> linux-6.1.tar.xz"
+SRC_URI="https://git.kernel.org/pub/scm/libs/klibc/klibc.git/snapshot/klibc-2.0.12.tar.gz -> klibc-2.0.12.tar.gz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.2.tar.xz -> linux-6.2.tar.xz"
 
 LICENSE="|| ( GPL-2 LGPL-2 )"
 KEYWORDS="*"
@@ -27,7 +27,7 @@ IUSE="debug test custom-cflags"
 DEPEND="dev-lang/perl"
 RDEPEND="${DEPEND}"
 
-KS="${WORKDIR}/linux-6.1"
+KS="${WORKDIR}/linux-6.2"
 
 # Klibc has no PT_GNU_STACK support, so scanning for execstacks is moot
 QA_EXECSTACK="*"
