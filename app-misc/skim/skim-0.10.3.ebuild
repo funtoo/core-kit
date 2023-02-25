@@ -12,7 +12,6 @@ beef-0.5.2
 bitflags-1.3.2
 bumpalo-3.11.1
 cc-1.0.73
-cfg-if-0.1.10
 cfg-if-1.0.0
 chrono-0.4.22
 clap-3.2.22
@@ -20,12 +19,10 @@ clap_lex-0.2.4
 codespan-reporting-0.11.1
 core-foundation-sys-0.8.3
 crossbeam-0.8.2
-crossbeam-channel-0.4.4
 crossbeam-channel-0.5.6
 crossbeam-deque-0.8.2
 crossbeam-epoch-0.9.11
 crossbeam-queue-0.3.6
-crossbeam-utils-0.7.2
 crossbeam-utils-0.8.12
 cxx-1.0.80
 cxx-build-1.0.80
@@ -34,7 +31,7 @@ cxxbridge-macro-1.0.80
 darling-0.14.1
 darling_core-0.14.1
 darling_macro-0.14.1
-defer-drop-1.2.0
+defer-drop-1.3.0
 derive_builder-0.11.2
 derive_builder_core-0.11.2
 derive_builder_macro-0.11.2
@@ -57,7 +54,6 @@ lazy_static-1.4.0
 libc-0.2.135
 link-cplusplus-1.0.7
 log-0.4.17
-maybe-uninit-2.0.0
 memchr-2.5.0
 memoffset-0.6.5
 nix-0.24.2
@@ -115,7 +111,7 @@ inherit cargo
 
 DESCRIPTION="Command-line fuzzy finder"
 HOMEPAGE="https://github.com/lotabout/skim"
-SRC_URI="https://api.github.com/repos/lotabout/skim/tarball/v0.10.2 -> skim-0.10.2.tar.gz
+SRC_URI="https://api.github.com/repos/lotabout/skim/tarball/v0.10.3 -> skim-0.10.3.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 MIT MPL-2.0 Unlicense"
