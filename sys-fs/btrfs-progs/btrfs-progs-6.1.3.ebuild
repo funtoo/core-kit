@@ -4,14 +4,14 @@ EAPI=7
 
 PYTHON_COMPAT=( python3+ )
 
-inherit bash-completion-r1 python-single-r1
+inherit autotools bash-completion-r1 python-single-r1
 
 libbtrfs_soname=0
 
 MY_PV="v${PV/_/-}"
 [[ "${PV}" = *_rc* ]] || \
 KEYWORDS="*"
-SRC_URI="https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v6.2.tar.xz -> btrfs-progs-v6.2.tar.xz"
+SRC_URI="https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v6.1.3.tar.gz -> btrfs-progs-v6.1.3.tar.gz"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
 DESCRIPTION="Btrfs filesystem utilities"
