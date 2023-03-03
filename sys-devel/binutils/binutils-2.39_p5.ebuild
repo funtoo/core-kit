@@ -7,28 +7,19 @@ inherit eutils libtool flag-o-matic gnuconfig multilib toolchain-funcs
 DESCRIPTION="Tools necessary to build programs"
 HOMEPAGE="https://sourceware.org/binutils/"
 LICENSE="GPL-3+"
-# Proposition: consider disabling gold for binutils-2.39 and greater
-# Related Bug: https://bugs.funtoo.org/browse/FL-10758
-# GNU Gold is considered to be suffering from upstream bitrot: https://en.wikipedia.org/wiki/Gold_(linker)
-# GNU Gold is a project of Google and they sadly have decided to move onto other linkers
-# It currently has no official upstream maintainer due to Google abandoning it
-# GNU Gold has considerable less upstream commit activity than the main GNU bfd (ld) linker
-# Upstream GNU gold commits: https://sourceware.org/git/?p=binutils-gdb.git;a=history;f=gold;hb=HEAD
-# Setting the gold USE flag to match sys-devel/binutils-2.36.1_p3-r1 for now, which is forcing it on by default
-# The future Funtoo toolchain development efforts can collectively consider this GNU Gold deprecation proposal
 IUSE="cet default-gold doc +gold multitarget +nls +plugins static-libs test vanilla"
 REQUIRED_USE="default-gold? ( gold )"
 
-SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz -> binutils-2.36.1.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz -> binutils-2.36.1-patches-3.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/binutils/binutils-2.39.tar.xz -> binutils-2.39.tar.xz https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-5.tar.xz -> binutils-2.39-patches-5.tar.xz"
 SLOT=$(ver_cut 1-2)
 
-S="${WORKDIR}/binutils-2.36.1"
+S="${WORKDIR}/binutils-2.39"
 
 KEYWORDS="*"
 RDEPEND="
 !sys-devel/binutils-config
-!<sys-libs/binutils-libs-2.36.1_p3-r1
-!<sys-devel/binutils-2.36.1_p3-r1
+!<sys-libs/binutils-libs-2.39_p5
+!<sys-devel/binutils-2.39_p5
 sys-libs/zlib"
 DEPEND="${RDEPEND}"
 BDEPEND="
@@ -41,26 +32,22 @@ BDEPEND="
 	sys-devel/flex
 	virtual/yacc
 "
-PDEPEND="=sys-libs/binutils-libs-2.36.1_p3-r1"
-
-PATCHES=(
-"${FILESDIR}"/binutils-2.36.1-cve-2021-45078.patch
-)
+PDEPEND="=sys-libs/binutils-libs-2.39_p5"
 
 RESTRICT="!test? ( test )"
 
 MY_BUILDDIR=${WORKDIR}/build
 
 src_unpack() {
-	unpack binutils-2.36.1.tar.xz
+	unpack binutils-2.39.tar.xz
 	cd "${WORKDIR}" || die
-	unpack binutils-2.36.1-patches-3.tar.xz
+	unpack binutils-2.39-patches-5.tar.xz
 	mkdir -p "${MY_BUILDDIR}" || die
 }
 
 src_prepare() {
 	if ! use vanilla; then
-		einfo "Applying binutils patchset binutils-2.36.1-patches-3.tar.xz"
+		einfo "Applying binutils patchset binutils-2.39-patches-5.tar.xz"
 		eapply "${WORKDIR}/patch"
 		einfo "Done."
 	fi
@@ -72,11 +59,6 @@ src_prepare() {
 }
 
 src_configure() {
-	# See https://www.gnu.org/software/make/manual/html_node/Parallel-Output.html
-	# Avoid really confusing logs from subconfigure spam, makes logs far
-	# more legible.
-	MAKEOPTS="--output-sync=line ${MAKEOPTS}"
-
 	strip-linguas -u */po
 
 	# Keep things sane
@@ -116,12 +98,6 @@ src_configure() {
 		myconf+=( --enable-default-hash-style=gnu )
 	fi
 
-	if use vanilla ; then
-		PKG_VERSION="Funtoo"
-	else
-		PKG_VERSION="Funtoo 2.36.1_p3 patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.36.1-patches-3.tar.xz"
-	fi
-
 	myconf+=(
 		--prefix=/usr
 		--host=${CHOST}
@@ -137,7 +113,7 @@ src_configure() {
 		--enable-textrel-check=warning
 		--disable-werror
 		--with-bugurl="https://bugs.funtoo.org/"
-		--with-pkgversion="${PKG_VERSION}"
+		--with-pkgversion="Funtoo 2.39_p5 patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-5.tar.xz"
 		--with-system-zlib
 		--without-zlib
 		# Strip out broken static link flags.
