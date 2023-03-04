@@ -10,7 +10,7 @@ inherit distutils-r1 libtool usr-ldscript
 MY_P=${P/_}
 DESCRIPTION="Password Checking Library"
 HOMEPAGE="https://github.com/cracklib/cracklib/"
-SRC_URI="https://github.com/cracklib/cracklib/releases/download/v2.9.8/cracklib-2.9.8.tar.gz -> cracklib-2.9.8.tar.gz https://github.com/cracklib/cracklib/releases/download/v2.9.8/cracklib-words-2.9.8.gz -> cracklib-words-2.9.8.gz"
+SRC_URI="https://github.com/cracklib/cracklib/releases/download/v2.9.9/cracklib-2.9.9.tar.gz -> cracklib-2.9.9.tar.gz https://github.com/cracklib/cracklib/releases/download/v2.9.9/cracklib-words-2.9.9.gz -> cracklib-words-2.9.9.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
