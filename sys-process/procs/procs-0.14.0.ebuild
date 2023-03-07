@@ -4,8 +4,9 @@ EAPI=7
 
 CRATES="
 adler-1.0.2
+aho-corasick-0.7.20
 android_system_properties-0.1.5
-anyhow-1.0.68
+anyhow-1.0.69
 async-channel-1.7.1
 async-executor-1.4.1
 async-global-executor-2.3.0
@@ -17,7 +18,7 @@ atomic-waker-1.0.0
 atty-0.2.14
 autocfg-1.1.0
 base64-0.13.0
-bindgen-0.59.2
+bindgen-0.64.0
 bitflags-1.3.2
 blocking-1.2.0
 bumpalo-3.11.1
@@ -40,9 +41,12 @@ concurrent-queue-1.2.4
 console-0.15.5
 core-foundation-sys-0.8.3
 crc32fast-1.3.2
+crossbeam-channel-0.5.7
 crossbeam-utils-0.8.12
 crossterm-0.19.0
+crossterm-0.22.1
 crossterm_winapi-0.7.0
+crossterm_winapi-0.9.0
 ctor-0.1.26
 cxx-1.0.79
 cxx-build-1.0.79
@@ -51,7 +55,7 @@ cxxbridge-macro-1.0.79
 directories-4.0.1
 dirs-4.0.0
 dirs-sys-0.3.7
-dockworker-0.1.0
+dockworker-0.1.2
 either-1.8.0
 encode_unicode-0.3.6
 errno-0.2.8
@@ -99,7 +103,7 @@ lazy_static-1.4.0
 lazycell-1.3.0
 libc-0.2.139
 libloading-0.7.3
-libproc-0.12.0
+libproc-0.13.0
 link-cplusplus-1.0.7
 linux-raw-sys-0.1.3
 lock_api-0.4.9
@@ -110,6 +114,7 @@ memoffset-0.7.1
 mime-0.3.16
 minimal-lexical-0.2.1
 miniz_oxide-0.5.4
+minus-5.2.0
 mio-0.7.14
 mio-0.8.4
 miow-0.3.7
@@ -122,7 +127,7 @@ ntapi-0.3.7
 num-integer-0.1.45
 num-traits-0.2.15
 num_cpus-1.13.1
-once_cell-1.17.0
+once_cell-1.17.1
 os_str_bytes-6.3.0
 pager-0.16.1
 parking-2.0.0
@@ -140,7 +145,7 @@ polling-2.3.0
 proc-macro-error-1.0.4
 proc-macro-error-attr-1.0.4
 proc-macro2-1.0.47
-procfs-0.14.2
+procfs-0.15.1
 quote-1.0.21
 redox_syscall-0.2.16
 redox_users-0.4.3
@@ -154,9 +159,11 @@ scratch-1.0.2
 serde-1.0.152
 serde_derive-1.0.152
 serde_json-1.0.86
-serde_spanned-0.6.0
+serde_spanned-0.6.1
 shlex-1.1.0
 signal-hook-0.1.17
+signal-hook-0.3.15
+signal-hook-mio-0.2.3
 signal-hook-registry-1.4.0
 slab-0.4.7
 smallvec-1.10.0
@@ -165,20 +172,20 @@ static_assertions-1.1.0
 strsim-0.10.0
 syn-1.0.104
 tar-0.4.38
-termbg-0.4.1
+termbg-0.4.3
 termcolor-1.1.3
 termios-0.3.3
+textwrap-0.13.4
 textwrap-0.16.0
 thiserror-1.0.37
 thiserror-impl-1.0.37
-time-0.1.44
 tinyvec-1.6.0
 tinyvec_macros-0.1.0
-tokio-1.24.1
+tokio-1.25.0
 tokio-macros-1.8.0
-toml-0.7.0
-toml_datetime-0.6.0
-toml_edit-0.19.0
+toml-0.7.2
+toml_datetime-0.6.1
+toml_edit-0.19.3
 tower-service-0.3.2
 tracing-0.1.37
 tracing-core-0.1.30
@@ -195,7 +202,6 @@ value-bag-1.0.0-alpha.9
 version_check-0.9.4
 waker-fn-1.1.0
 want-0.3.0
-wasi-0.10.0+wasi-snapshot-preview1
 wasi-0.11.0+wasi-snapshot-preview1
 wasm-bindgen-0.2.83
 wasm-bindgen-backend-0.2.83
@@ -231,7 +237,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.13.4 -> procs-0.13.4.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.14.0 -> procs-0.14.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
