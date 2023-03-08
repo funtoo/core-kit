@@ -7,7 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION=""
 HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/fchroot/browse https://pypi.org/project/fchroot/"
-SRC_URI="https://files.pythonhosted.org/packages/85/63/fdea42f69f4f1af6d1a9d4a041db4f6e82409ab751e5147d8288951dca7d/fchroot-1.0.0.tar.gz -> fchroot-1.0.0.tar.gz
+SRC_URI="https://files.pythonhosted.org/packages/a0/6c/611c40f90d5f2081cefd723c6d9a444f004546761139be790477bec3b373/fchroot-1.0.1.tar.gz -> fchroot-1.0.1.tar.gz
 "
 
 DEPEND=""
@@ -22,4 +22,4 @@ IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
-S="${WORKDIR}/fchroot-1.0.0"
+S="${WORKDIR}/fchroot-1.0.1"
