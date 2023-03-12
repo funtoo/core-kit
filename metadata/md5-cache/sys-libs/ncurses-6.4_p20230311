@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install postinst preinst test
+DEPEND=gpm? ( sys-libs/gpm[-mgorny(-)] )
+DESCRIPTION=console display library
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncurses/
+IUSE=ada +cxx debug doc gpm minimal profile static-libs test tinfo trace unicode abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_s390_32 abi_s390_64 +split-usr
+KEYWORDS=next
+LICENSE=MIT
+RDEPEND=gpm? ( sys-libs/gpm[-mgorny(-)] ) !<=sys-libs/ncurses-5.9-r4:5 !<sys-libs/slang-2.3.2_pre23 !<x11-terms/rxvt-unicode-9.06-r3 !<x11-terms/st-0.6-r1
+RESTRICT=!test? ( test )
+SLOT=0/6
+SRC_URI=https://invisible-mirror.net/archives/ncurses/ncurses-6.4.tar.gz -> ncurses-6.4.tar.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20221231.patch.gz -> ncurses-6.4-20221231.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230107.patch.gz -> ncurses-6.4-20230107.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230114.patch.gz -> ncurses-6.4-20230114.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230121.patch.gz -> ncurses-6.4-20230121.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230128.patch.gz -> ncurses-6.4-20230128.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230211.patch.gz -> ncurses-6.4-20230211.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230218.patch.gz -> ncurses-6.4-20230218.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230225.patch.gz -> ncurses-6.4-20230225.patch.gz https://invisible-mirror.net/archives/ncurses/6.4/ncurses-6.4-20230311.patch.gz -> ncurses-6.4-20230311.patch.gz
+_eclasses_=multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
+_md5_=f4defdbfbd7ee567bb358d8883f97c20

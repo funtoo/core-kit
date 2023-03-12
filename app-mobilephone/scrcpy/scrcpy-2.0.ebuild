@@ -8,8 +8,8 @@ DESCRIPTION="Display and control your Android device"
 HOMEPAGE="https://github.com/Genymobile/scrcpy"
 SRC_URI="
 
-https://api.github.com/repos/Genymobile/scrcpy/tarball/v1.25 -> scrcpy-1.25.tar.gz
-https://github.com/Genymobile/scrcpy/releases/download/v1.25/scrcpy-server-v1.25 -> scrcpy-server-v1.25
+https://api.github.com/repos/Genymobile/scrcpy/tarball/v2.0 -> scrcpy-2.0.tar.gz
+https://github.com/Genymobile/scrcpy/releases/download/v2.0/scrcpy-server-v2.0 -> scrcpy-server-v2.0
 "
 
 LICENSE="Apache-2.0"
