@@ -1,73 +1,65 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-if [[ ${PV} = *9999* ]]; then
-	EGIT_REPO_URI="https://github.com/MidnightCommander/mc.git"
-	LIVE_ECLASSES="git-r3 autotools"
-	LIVE_EBUILD=yes
-fi
+inherit autotools flag-o-matic
 
-inherit flag-o-matic ${LIVE_ECLASSES}
-
-MY_P=${P/_/-}
-
-if [[ -z ${LIVE_EBUILD} ]]; then
-	SRC_URI="http://ftp.midnight-commander.org/${MY_P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris"
-fi
+MY_P="${P/_/-}"
 
 DESCRIPTION="GNU Midnight Commander is a text based file manager"
-HOMEPAGE="https://www.midnight-commander.org"
+HOMEPAGE="https://midnight-commander.org"
+SRC_URI="http://ftp.midnight-commander.org/mc-4.8.29.tar.xz -> mc-4.8.29.tar.xz"
+KEYWORDS="*"
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="+edit gpm nls samba sftp +slang spell test unicode X +xdg"
+IUSE="+edit gpm nls sftp +slang spell test unicode X"
 
 REQUIRED_USE="spell? ( edit )"
 
-RDEPEND=">=dev-libs/glib-2.26.0:2
+DEPEND="
+	>=dev-libs/glib-2.30.0:2
 	gpm? ( sys-libs/gpm )
-	kernel_linux? ( sys-fs/e2fsprogs )
-	samba? ( net-fs/samba )
+	kernel_linux? ( sys-fs/e2fsprogs[tools(+)] )
 	sftp? ( net-libs/libssh2 )
 	slang? ( >=sys-libs/slang-2 )
-	!slang? ( sys-libs/ncurses:0=[unicode?] )
+	!slang? ( sys-libs/ncurses:= )
 	spell? ( app-text/aspell )
-	X? ( x11-libs/libX11
+	X? (
+		x11-libs/libX11
 		x11-libs/libICE
 		x11-libs/libXau
 		x11-libs/libXdmcp
-		x11-libs/libSM )"
-DEPEND="${RDEPEND}
+		x11-libs/libSM
+	)
+"
+RDEPEND="${DEPEND}
+	spell? ( app-dicts/aspell-en )"
+BDEPEND="
 	app-arch/xz-utils
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )
 	test? ( dev-libs/check )
-	"
+"
 
-pkg_pretend() {
-	if use slang && use unicode ; then
-		ewarn "\"unicode\" USE flag only takes effect when the \"slang\" USE flag is disabled."
-	fi
-}
+RESTRICT="!test? ( test )"
+
+S="${WORKDIR}/${MY_P}"
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-4.8.26-ncurses-mouse.patch
+)
 
 src_prepare() {
 	default
-
-	[[ -n ${LIVE_EBUILD} ]] && ./autogen.sh
+	# patch touches configure.ac
+	eautoreconf
 }
 
 src_configure() {
-	[[ ${CHOST} == *-solaris* ]] && append-ldflags "-lnsl -lsocket"
-
 	local myeconfargs=(
-		--disable-dependency-tracking
-		--disable-silent-rules
 		--enable-charset
 		--enable-vfs
-		--with-homedir=$(usex xdg 'XDG' '.mc')
 		--with-screen=$(usex slang 'slang' "ncurses$(usex unicode 'w' '')")
 		$(use_enable kernel_linux vfs-undelfs)
 		# Today mclib does not expose any headers and is linked to
@@ -76,7 +68,6 @@ src_configure() {
 		# as it also conflicts with sci-libs/mc: bug #685938
 		--disable-mclib
 		$(use_enable nls)
-		$(use_enable samba vfs-smb)
 		$(use_enable sftp vfs-sftp)
 		$(use_enable spell aspell)
 		$(use_enable test tests)
@@ -88,6 +79,12 @@ src_configure() {
 }
 
 src_test() {
+	# Bug #759466
+	if [[ ${EUID} == 0 ]] ; then
+		ewarn "You are emerging ${PN} as root with 'userpriv' disabled."
+		ewarn "Expect some test failures, or emerge with 'FEATURES=userpriv'!"
+	fi
+
 	# CK_FORK=no to avoid using fork() in check library
 	# as mc mocks fork() itself: bug #644462.
 	#
@@ -97,21 +94,22 @@ src_test() {
 }
 src_install() {
 	emake DESTDIR="${D}" install
-	dodoc AUTHORS doc/{FAQ,NEWS,README}
+	dodoc AUTHORS NEWS README
 
 	# fix bug #334383
 	if use kernel_linux && [[ ${EUID} == 0 ]] ; then
 		fowners root:tty /usr/libexec/mc/cons.saver
 		fperms g+s /usr/libexec/mc/cons.saver
 	fi
-
-	if ! use xdg ; then
-		sed 's@MC_XDG_OPEN="xdg-open"@MC_XDG_OPEN="/bin/false"@' \
-			-i "${ED%/}"/usr/libexec/mc/ext.d/*.sh || die
-	fi
 }
 
 pkg_postinst() {
+	if use spell && ! has_version app-dicts/aspell-en ; then
+		elog "'spell' USE flag is enabled however app-dicts/aspell-en is not installed."
+		elog "You should manually set 'spell_language' in the Misc section of ~/.config/mc/ini"
+		elog "It has to be set to one of your installed aspell dictionaries or 'NONE'"
+		elog
+	fi
 	elog "To enable exiting to latest working directory,"
 	elog "put this into your ~/.bashrc:"
 	elog ". ${EPREFIX}/usr/libexec/mc/mc.sh"
