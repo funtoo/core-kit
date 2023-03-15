@@ -1,0 +1,16 @@
+BDEPEND=app-arch/xz-utils virtual/pkgconfig nls? ( sys-devel/gettext ) test? ( dev-libs/check ) >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install postinst prepare test
+DEPEND=>=dev-libs/glib-2.30.0:2 gpm? ( sys-libs/gpm ) kernel_linux? ( sys-fs/e2fsprogs[tools(+)] ) sftp? ( net-libs/libssh2 ) slang? ( >=sys-libs/slang-2 ) !slang? ( sys-libs/ncurses:= ) spell? ( app-text/aspell ) X? ( x11-libs/libX11 x11-libs/libICE x11-libs/libXau x11-libs/libXdmcp x11-libs/libSM )
+DESCRIPTION=GNU Midnight Commander is a text based file manager
+EAPI=7
+HOMEPAGE=https://midnight-commander.org
+IUSE=+edit gpm nls sftp +slang spell test unicode X
+KEYWORDS=*
+LICENSE=GPL-3
+RDEPEND=>=dev-libs/glib-2.30.0:2 gpm? ( sys-libs/gpm ) kernel_linux? ( sys-fs/e2fsprogs[tools(+)] ) sftp? ( net-libs/libssh2 ) slang? ( >=sys-libs/slang-2 ) !slang? ( sys-libs/ncurses:= ) spell? ( app-text/aspell ) X? ( x11-libs/libX11 x11-libs/libICE x11-libs/libXau x11-libs/libXdmcp x11-libs/libSM ) spell? ( app-dicts/aspell-en )
+REQUIRED_USE=spell? ( edit )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=http://ftp.midnight-commander.org/mc-4.8.29.tar.xz -> mc-4.8.29.tar.xz
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=6aff69403f9fd4c321b9585aec11dfff
