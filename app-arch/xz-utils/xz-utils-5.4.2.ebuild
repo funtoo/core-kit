@@ -4,7 +4,7 @@ EAPI=7
 
 inherit libtool preserve-libs usr-ldscript
 MY_P="${PN/-utils}-${PV/_}"
-SRC_URI="https://tukaani.org/xz//xz-5.4.1.tar.gz -> xz-5.4.1.tar.gz"
+SRC_URI="https://tukaani.org/xz//xz-5.4.2.tar.gz -> xz-5.4.2.tar.gz"
 KEYWORDS="*"
 S="${WORKDIR}/${MY_P}"
 
