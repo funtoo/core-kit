@@ -147,7 +147,7 @@ windows_x86_64_msvc-0.42.2
 
 DESCRIPTION="A command-line benchmarking tool"
 HOMEPAGE="https://github.com/sharkdp/hyperfine"
-SRC_URI="https://api.github.com/repos/sharkdp/hyperfine/tarball/v1.16.0 -> hyperfine-1.16.0.tar.gz
+SRC_URI="https://api.github.com/repos/sharkdp/hyperfine/tarball/v1.16.1 -> hyperfine-1.16.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 LICENSE="Apache-2.0 MIT"
 SLOT="0"
