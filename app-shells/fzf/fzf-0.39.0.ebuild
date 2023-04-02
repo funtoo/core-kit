@@ -21,8 +21,8 @@ EGO_SUM=(
 	"github.com/mattn/go-shellwords v1.0.12"
 	"github.com/mattn/go-shellwords v1.0.12/go.mod"
 	"github.com/rivo/uniseg v0.2.0/go.mod"
-	"github.com/rivo/uniseg v0.4.2"
-	"github.com/rivo/uniseg v0.4.2/go.mod"
+	"github.com/rivo/uniseg v0.4.4"
+	"github.com/rivo/uniseg v0.4.4/go.mod"
 	"github.com/saracen/walker v0.1.3"
 	"github.com/saracen/walker v0.1.3/go.mod"
 	"github.com/yuin/goldmark v1.4.13/go.mod"
@@ -41,11 +41,13 @@ EGO_SUM=(
 	"golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1/go.mod"
 	"golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a/go.mod"
 	"golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f/go.mod"
-	"golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab"
 	"golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod"
+	"golang.org/x/sys v0.6.0"
+	"golang.org/x/sys v0.6.0/go.mod"
 	"golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod"
-	"golang.org/x/term v0.0.0-20210927222741-03fcf44c2211"
 	"golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod"
+	"golang.org/x/term v0.6.0"
+	"golang.org/x/term v0.6.0/go.mod"
 	"golang.org/x/text v0.3.0/go.mod"
 	"golang.org/x/text v0.3.3/go.mod"
 	"golang.org/x/text v0.3.7/go.mod"
@@ -59,7 +61,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/archive/0.38.0.tar.gz -> fzf-0.38.0.tar.gz
+SRC_URI="https://github.com/junegunn/fzf/archive/0.39.0.tar.gz -> fzf-0.39.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT BSD-with-disclosure"
