@@ -14,7 +14,7 @@ SRC_URI="
 		https://github.com/firecracker-microvm/firecracker/releases/download/v1.3.1/firecracker-v1.3.1-aarch64.tgz -> firecracker-v1.3.1-aarch64.tgz
 	)"
 
-LICENSE="|| ( Apache-2.0 BSD-3 )"
+LICENSE="|| ( Apache-2.0 BSD )"
 SLOT="0"
 KEYWORDS="~amd64 ~aarch64"
 

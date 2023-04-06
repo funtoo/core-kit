@@ -61,12 +61,16 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/archive/0.39.0.tar.gz -> fzf-0.39.0.tar.gz
-	${EGO_SUM_SRC_URI}"
+SRC_URI="https://github.com/junegunn/fzf/tarball/20230402d087858ca9a93aa8fe53d289f29c1836 -> fzf-0.39.0-2023040.tar.gz
+https://direct.funtoo.org/87/57/6d/87576d4e0bfbb49236d60845e44c32f712353e506073127173594ac840785db788f48500880a0eb99d742a1662ea6dff1a7f6ff8d8e6a72c9c762df8250d50c4 -> fzf-0.39.0-funtoo-go-bundle-88ca0cb904c738bac10062a8fc49178383b2b2de4d663f357207eb5dd5e11899fe1514a048e71d420807969e28df7399c43f151943c97e688d8885facc4a2159.tar.gz"
 
 LICENSE="MIT BSD-with-disclosure"
 SLOT="0"
 KEYWORDS="*"
+
+post_src_unpack() {
+	mv ${WORKDIR}/junegunn* ${S} || die
+}
 
 src_compile() {
 	emake PREFIX=${EPREFIX}/usr FZF_VERSION=${PV} FZF_REVISION=tarball bin/${PN}
@@ -85,7 +89,7 @@ src_install() {
 	insinto /usr/share/nvim/runtime/plugin
 	doins plugin/${PN}.vim
 
-	newbashcomp shell/completion.bash ${PN}
+	newbashcomp shell/completion.bash ${PN} || die
 
 	insinto /usr/share/zsh/site-functions
 	newins shell/completion.zsh _${PN}

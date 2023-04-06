@@ -31,8 +31,8 @@ go-module_set_globals
 
 DESCRIPTION="Direnv is an environment switcher for the shell"
 HOMEPAGE="https://direnv.net"
-SRC_URI="https://api.github.com/repos/direnv/direnv/tarball/v2.32.2 -> direnv-2.32.2.tar.gz
-	${EGO_SUM_SRC_URI}"
+SRC_URI="https://github.com/direnv/direnv/tarball/357825f4ddcc8d7ef62a6276b60d9aa36449ac96 -> direnv-2.32.2-357825f.tar.gz
+https://direct.funtoo.org/57/5a/d2/575ad2bacb6aa0f2efa0cd56f6298a400173a19f25e7e8e4f0b96097a050d719202fa211005fd7aa1ccb7bce5bd8d09da02e10683f64416c12ed2f62116ac4d0 -> direnv-2.32.2-funtoo-go-bundle-88d17fb7238febb9164af104584deabe10ca0b0b32db328a9d1e789bf9c67b153d4f1a83e4857c545e5627f44ee9c496a1dc821645a1fde6c9a821e867f9f036.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

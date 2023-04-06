@@ -11,5 +11,5 @@ RDEPEND=btrfs? ( sys-fs/btrfs-progs ) seccomp? ( sys-libs/libseccomp ) ~app-emul
 RESTRICT=strip strip test
 SLOT=0
 SRC_URI=https://github.com/containerd/containerd/tarball/a17ec496a95e55601607ca50828147e8ccaeebf1 -> containerd-1.5.13-a17ec49.tar.gz
-_eclasses_=go-module	58afbb6ecd89d2a9fe6270f9bde00daf	multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
+_eclasses_=go-module	67d6d3669d71be01a4f7523db6e95038	multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
 _md5_=6185d42fdb182d519afc5269e1b89736
