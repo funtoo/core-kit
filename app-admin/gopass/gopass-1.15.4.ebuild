@@ -235,8 +235,8 @@ go-module_set_globals
 
 DESCRIPTION="a simple but powerful password manager for the terminal"
 HOMEPAGE="https://www.gopass.pw/"
-SRC_URI="https://api.github.com/repos/gopasspw/gopass/tarball/v1.15.4 -> gopass-1.15.4.tar.gz
-	${EGO_SUM_SRC_URI}"
+SRC_URI="https://github.com/gopasspw/gopass/tarball/13713aae14127c11794404e5405bce94cd57cadc -> gopass-1.15.4-13713aa.tar.gz
+https://direct.funtoo.org/96/d3/d7/96d3d77514ec8ccbde30638dce10ee2d94bd9cc77727a8589a7c724ce4836c0a8f6277c1efe28bebb0db61b5bb7176093441b1213098a527bdd4774153fa50a2 -> gopass-1.15.4-funtoo-go-bundle-174d6626e3809aa040752639aaebc63a925a187d9ac17fe22d953bf99810e38d197d6a24ed7af9b997242dc413af97d830ea681d1ae9ecd0b6ac26f7b0f0018b.tar.gz"
 
 LICENSE="MIT Apache-2.0 BSD MPL-2.0 BSD-2"
 SLOT="0"

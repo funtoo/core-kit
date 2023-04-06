@@ -6,7 +6,7 @@ DESCRIPTION="Use any linux distribution inside your terminal. Enable both backwa
 HOMEPAGE="https://distrobox.privatedns.org/ https://github.com/89luca89/distrobox"
 SRC_URI="https://github.com/89luca89/distrobox/tarball/b2f7b5059b685fc01cbd1a2ba5b39b9d82739f5c -> distrobox-1.4.2.1-b2f7b50.tar.gz"
 
-LICENSE="GPLv3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="*"
 IUSE=""
