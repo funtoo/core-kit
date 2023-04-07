@@ -10,5 +10,5 @@ RDEPEND=app-emulation/docker
 RESTRICT=strip
 SLOT=0
 SRC_URI=https://github.com/kubernetes-sigs/kind/tarball/4e693a795585ffb57f281b79fb5cc5258fc4af94 -> kind-0.18.0-4e693a7.tar.gz https://direct.funtoo.org/6c/da/f3/6cdaf360a495d0262e1b32e3ca21a87d019fc7a5ce5f1852e1683dd54662a74af7c92050c8c92906dc730e9a1eb9e3076078d8df6f903cdb8a12437e5304e3a6 -> kind-0.18.0-funtoo-go-bundle-b59322c751ee5eb5a878014e028fa3e653265c4f6993ab90d4ecbb6ff9ec4f98c1bc8e59c64ba71a7476b13d7cfcc08b45ae19e2fb9e0c0dac0e717a18f77f47.tar.gz
-_eclasses_=go-module	67d6d3669d71be01a4f7523db6e95038	xdg-utils	14d00d009167652b1fa363e55effe213
+_eclasses_=go-module	7aad60675732a578d7eb16e3e26a47e8	xdg-utils	14d00d009167652b1fa363e55effe213
 _md5_=00ea59208976dddf8662aba28e1330a7
