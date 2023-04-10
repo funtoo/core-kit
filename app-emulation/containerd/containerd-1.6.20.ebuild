@@ -5,7 +5,7 @@ inherit go-module systemd
 
 DESCRIPTION="A daemon to control runC"
 HOMEPAGE="https://containerd.io/"
-SRC_URI="{{artifacts[0].src_uri}}"
+SRC_URI="https://github.com/containerd/containerd/tarball/2806fc1057397dbaeefbea0e4e17bddfbd388f38 -> containerd-1.6.20-2806fc1.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -34,7 +34,7 @@ RESTRICT+=" strip test"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv {{ github_user }}-{{ github_repo }}* "${S}" || die
+		mv containerd-containerd* "${S}" || die
 	fi
 }
 
@@ -67,7 +67,7 @@ src_compile() {
 	myemakeargs=(
 		BUILDTAGS="${options[*]}"
 		LDFLAGS="$(usex hardened '-extldflags -fno-PIC' '')"
-		REVISION="{{sha}}"
+		REVISION="2806fc1057397dbaeefbea0e4e17bddfbd388f38"
 		VERSION=v${PV}
 	)
 
