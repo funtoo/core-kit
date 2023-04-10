@@ -5,11 +5,11 @@ inherit go-module systemd
 
 DESCRIPTION="A daemon to control runC"
 HOMEPAGE="https://containerd.io/"
-SRC_URI="https://github.com/containerd/containerd/tarball/10c12954828e7c7c9b6e0ea9b0c02b01407d3ae1 -> containerd-1.6.6-10c1295.tar.gz"
+SRC_URI="{{artifacts[0].src_uri}}"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="apparmor btrfs device-mapper +cri hardened +seccomp selinux test"
 
 DEPEND="
@@ -20,7 +20,7 @@ DEPEND="
 # recommended version of runc is found at https://github.com/containerd/containerd/tree/release/1.5/script/setup
 RDEPEND="
 	${DEPEND}
-	~app-emulation/runc-1.1.3
+	~app-emulation/runc-1.1.5
 "
 
 BDEPEND="
@@ -34,7 +34,7 @@ RESTRICT+=" strip test"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv containerd-containerd* "${S}" || die
+		mv {{ github_user }}-{{ github_repo }}* "${S}" || die
 	fi
 }
 
@@ -67,7 +67,7 @@ src_compile() {
 	myemakeargs=(
 		BUILDTAGS="${options[*]}"
 		LDFLAGS="$(usex hardened '-extldflags -fno-PIC' '')"
-		REVISION="10c12954828e7c7c9b6e0ea9b0c02b01407d3ae1"
+		REVISION="{{sha}}"
 		VERSION=v${PV}
 	)
 
