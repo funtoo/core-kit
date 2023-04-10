@@ -10,6 +10,6 @@ LICENSE=BSD
 RDEPEND=>=sys-libs/ncurses-5.1:0= sys-libs/libxcrypt virtual/libiconv
 RESTRICT=test
 SLOT=0
-SRC_URI=https://astron.com/pub/tcsh/tcsh-6.24.07.tar.gz -> tcsh-6.24.07.tar.gz
+SRC_URI=https://astron.com/pub/tcsh/tcsh-6.24.08.tar.gz -> tcsh-6.24.08.tar.gz
 _eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=2ea216cbaefcc93514611fd874e87051
+_md5_=2d2e5b2ca9a204f7f9bd8aa9a8517fbd
