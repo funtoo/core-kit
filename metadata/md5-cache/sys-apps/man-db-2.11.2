@@ -1,0 +1,15 @@
+BDEPEND=app-arch/xz-utils virtual/pkgconfig nls? ( >=app-text/po4a-0.45 sys-devel/gettext virtual/libiconv virtual/libintl ) virtual/pkgconfig
+DEFINED_PHASES=configure install postinst preinst setup
+DEPEND=>=dev-libs/libpipeline-1.5.0 sys-apps/groff sys-libs/gdbm:= seccomp? ( sys-libs/libseccomp ) zlib? ( sys-libs/zlib ) sys-apps/shadow
+DESCRIPTION=A man replacement that utilizes dbm instead of flat files
+EAPI=7
+HOMEPAGE=https://gitlab.com/man-db/man-db https://www.nongnu.org/man-db/
+IUSE=+manpager nls +seccomp selinux static-libs zlib
+KEYWORDS=*
+LICENSE=GPL-3
+PDEPEND=manpager? ( app-text/manpager )
+RDEPEND=>=dev-libs/libpipeline-1.5.0 sys-apps/groff sys-libs/gdbm:= seccomp? ( sys-libs/libseccomp ) zlib? ( sys-libs/zlib ) selinux? ( sec-policy/selinux-mandb ) virtual/tmpfiles
+SLOT=0
+SRC_URI=https://download.savannah.nongnu.org/releases/man-db/man-db-2.11.2.tar.xz -> man-db-2.11.2.tar.xz
+_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
+_md5_=7280c1062f7f05adcaecf9a9e33e25ca
