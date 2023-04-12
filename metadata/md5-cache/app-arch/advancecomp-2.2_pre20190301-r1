@@ -4,11 +4,11 @@ DEPEND=app-arch/bzip2:= sys-libs/zlib:=
 DESCRIPTION=Recompress ZIP, PNG and MNG, considerably improving compression
 EAPI=7
 HOMEPAGE=http://www.advancemame.it/comp-readme.html
-KEYWORDS=~alpha amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 x86 ~x86-fbsd
+KEYWORDS=*
 LICENSE=GPL-2+ Apache-2.0 LGPL-2.1+ MIT
 RDEPEND=app-arch/bzip2:= sys-libs/zlib:=
 RESTRICT=test
 SLOT=0
 SRC_URI=https://github.com/amadvance/advancecomp/archive/fcf71a89265c78fc26243574dda3a872574a5c02.tar.gz -> advancecomp-fcf71a89265c78fc26243574dda3a872574a5c02.tar.gz
-_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=a1f92ead025b63782c993e16dcad70c4
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=746832dd10780420aa0f2d5e46aef719
