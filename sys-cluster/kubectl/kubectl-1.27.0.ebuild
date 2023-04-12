@@ -5,7 +5,7 @@ inherit bash-completion-r1 go-module
 
 DESCRIPTION="CLI to run commands against Kubernetes clusters"
 HOMEPAGE="https://kubernetes.io"
-SRC_URI="https://api.github.com/repos/kubernetes/kubernetes/tarball/v1.26.3 -> kubernetes-1.26.3.tar.gz"
+SRC_URI="https://api.github.com/repos/kubernetes/kubernetes/tarball/v1.27.0 -> kubernetes-1.27.0.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
