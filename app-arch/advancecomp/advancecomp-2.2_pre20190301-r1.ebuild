@@ -1,9 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit autotools
+inherit autotools flag-o-matic
 
 EGIT_COMMIT="fcf71a89265c78fc26243574dda3a872574a5c02"
 DESCRIPTION="Recompress ZIP, PNG and MNG, considerably improving compression"
@@ -13,7 +12,7 @@ SRC_URI="https://github.com/amadvance/advancecomp/archive/${EGIT_COMMIT}.tar.gz
 
 LICENSE="GPL-2+ Apache-2.0 LGPL-2.1+ MIT"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ppc ~ppc64 x86 ~x86-fbsd"
+KEYWORDS="*"
 IUSE=""
 
 RDEPEND="app-arch/bzip2:=
@@ -28,6 +27,7 @@ S=${WORKDIR}/${PN}-${EGIT_COMMIT}
 
 src_prepare() {
 	default
+	append-cxxflags -std=c++98
 	eautoreconf
 }
 
