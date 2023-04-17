@@ -1,0 +1,15 @@
+BDEPEND=>=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure prepare
+DEPEND=>=sys-fs/fuse-3.4:3 virtual/pkgconfig
+DESCRIPTION=FUSE filesystem for bind mounting with altered permissions
+EAPI=7
+HOMEPAGE=https://bindfs.org/
+IUSE=debug
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=>=sys-fs/fuse-3.4:3
+RESTRICT=test
+SLOT=0
+SRC_URI=https://github.com/mpartel/bindfs/tarball/a0f98a7aef83b45f5ffca7f2c5095b14024f0814 -> bindfs-1.17.2-a0f98a7.tar.gz
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=0e5a04ea701ab16478166d0ded306040
