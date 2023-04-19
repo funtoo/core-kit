@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install postinst prepare setup test
+DEPEND=static-libs? ( >=dev-libs/json-c-0.16_p20220414:=[static-libs(+)] dev-libs/popt[static-libs(+)] >=sys-apps/util-linux-2.31-r1[static-libs(+)] app-crypt/argon2:=[static-libs(+)] gcrypt? ( dev-libs/libgcrypt:0=[static-libs(+)] dev-libs/libgpg-error[static-libs(+)] ) nettle? ( >=dev-libs/nettle-2.4[static-libs(+)] ) openssl? ( dev-libs/openssl:0=[static-libs(+)] ) pwquality? ( dev-libs/libpwquality[static-libs(+)] ) ssh? ( net-libs/libssh[static-libs(+)] ) sys-fs/lvm2[static-libs(+)] ) >=dev-libs/json-c-0.16_p20220414:= dev-libs/popt >=sys-apps/util-linux-2.31-r1 app-crypt/argon2:= gcrypt? ( dev-libs/libgcrypt:0= dev-libs/libgpg-error ) nettle? ( >=dev-libs/nettle-2.4 ) openssl? ( dev-libs/openssl:0= ) pwquality? ( dev-libs/libpwquality ) ssh? ( net-libs/libssh ) sys-fs/lvm2 udev? ( virtual/libudev:= ) doc? ( app-text/asciidoctor ) static? ( >=dev-libs/json-c-0.16_p20220414:=[static-libs(+)] dev-libs/popt[static-libs(+)] >=sys-apps/util-linux-2.31-r1[static-libs(+)] app-crypt/argon2:=[static-libs(+)] gcrypt? ( dev-libs/libgcrypt:0=[static-libs(+)] dev-libs/libgpg-error[static-libs(+)] ) nettle? ( >=dev-libs/nettle-2.4[static-libs(+)] ) openssl? ( dev-libs/openssl:0=[static-libs(+)] ) pwquality? ( dev-libs/libpwquality[static-libs(+)] ) ssh? ( net-libs/libssh[static-libs(+)] ) sys-fs/lvm2[static-libs(+)] ) test? ( app-editors/vim-core )
+DESCRIPTION=Tool to setup encrypted devices with dm-crypt
+EAPI=7
+HOMEPAGE=https://gitlab.com/cryptsetup/cryptsetup/blob/master/README.md
+IUSE=gcrypt kernel nettle +openssl doc fips nls pwquality +reencrypt ssh static static-libs test +udev urandom kernel_linux
+KEYWORDS=*
+LICENSE=GPL-2+
+RDEPEND=static-libs? ( >=dev-libs/json-c-0.16_p20220414:=[static-libs(+)] dev-libs/popt[static-libs(+)] >=sys-apps/util-linux-2.31-r1[static-libs(+)] app-crypt/argon2:=[static-libs(+)] gcrypt? ( dev-libs/libgcrypt:0=[static-libs(+)] dev-libs/libgpg-error[static-libs(+)] ) nettle? ( >=dev-libs/nettle-2.4[static-libs(+)] ) openssl? ( dev-libs/openssl:0=[static-libs(+)] ) pwquality? ( dev-libs/libpwquality[static-libs(+)] ) ssh? ( net-libs/libssh[static-libs(+)] ) sys-fs/lvm2[static-libs(+)] ) >=dev-libs/json-c-0.16_p20220414:= dev-libs/popt >=sys-apps/util-linux-2.31-r1 app-crypt/argon2:= gcrypt? ( dev-libs/libgcrypt:0= dev-libs/libgpg-error ) nettle? ( >=dev-libs/nettle-2.4 ) openssl? ( dev-libs/openssl:0= ) pwquality? ( dev-libs/libpwquality ) ssh? ( net-libs/libssh ) sys-fs/lvm2 udev? ( virtual/libudev:= ) virtual/tmpfiles
+REQUIRED_USE=^^ ( gcrypt kernel nettle openssl ) static? ( !gcrypt !openssl !udev !fips ) fips? ( !kernel !nettle )
+RESTRICT=!test? ( test )
+SLOT=0/9
+SRC_URI=https://github.com/mbroz/cryptsetup/tarball/4fc619853d39b56cc16a14108877a6802b001f3d -> cryptsetup-2.6.1-4fc6198.tar.gz
+_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=fade1c1793b040ac246b928bc45ccb8e
