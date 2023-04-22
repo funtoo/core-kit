@@ -1,0 +1,12 @@
+BDEPEND=doc? ( >=app-doc/doxygen-1.8.13 ) || ( >=sys-libs/glibc-2.36[static-libs?] ( dev-libs/libbsd[static-libs?] app-crypt/libmd[static-libs?] ) ) dev-util/ninja dev-util/cmake
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=!dev-libs/json:0/True
+DESCRIPTION=A JSON implementation in C
+EAPI=7
+HOMEPAGE=https://github.com/json-c/json-c/wiki
+IUSE=cpu_flags_x86_rdrand doc static-libs threads
+KEYWORDS=*
+SLOT=0/5
+SRC_URI=https://github.com/json-c/json-c/tarball/2f2ddc1f2dbca56c874e8f9c31b5b963202d80e7 -> json-c-0.16-2f2ddc1.tar.gz
+_eclasses_=cmake	ac7cb516f6a288b6a82bc0649ce49878	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=703374b6375d25579357742a3cf753a9
