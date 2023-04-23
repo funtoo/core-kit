@@ -1,51 +1,51 @@
-# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
+EAPI=7
 
-inherit autotools eutils git-r3 ltprune python-any-r1 readme.gentoo-r1 xdg-utils
+PYTHON_COMPAT=( python3+ )
+inherit autotools python-any-r1 readme.gentoo-r1 xdg-utils
 
 DESCRIPTION="SPICE server"
 HOMEPAGE="https://www.spice-space.org/"
-SRC_URI=""
-EGIT_REPO_URI="https://anongit.freedesktop.org/git/spice/spice.git"
+SRC_URI="https://gitlab.freedesktop.org/spice/spice/uploads/5b40fad4ec02e7983c182a24266541f5/spice-0.15.1.tar.bz2 -> spice-0.15.1-c7b313ba.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS=""
-IUSE="libressl lz4 sasl smartcard static-libs gstreamer"
+KEYWORDS="*"
+IUSE="gstreamer lz4 sasl smartcard static-libs test"
+
+RESTRICT="!test? ( test )"
 
 # the libspice-server only uses the headers of libcacard
-RDEPEND="
-	dev-lang/orc[static-libs(+)?]
-	>=dev-libs/glib-2.22:2[static-libs(+)?]
+RDEPEND="dev-lang/orc[static-libs(+)?]
+	>=dev-libs/glib-2.38:2[static-libs(+)?]
+	dev-libs/openssl:0=[static-libs(+)?]
 	media-libs/opus[static-libs(+)?]
+	media-libs/libjpeg-turbo:0=[static-libs(+)?]
 	sys-libs/zlib[static-libs(+)?]
-	virtual/jpeg:0=[static-libs(+)?]
 	>=x11-libs/pixman-0.17.7[static-libs(+)?]
-	!libressl? ( dev-libs/openssl:0=[static-libs(+)?] )
-	libressl? ( dev-libs/libressl:0=[static-libs(+)?] )
 	lz4? ( app-arch/lz4:0=[static-libs(+)?] )
-	smartcard? ( >=app-emulation/libcacard-0.1.2 )
+	smartcard? ( >=app-emulation/libcacard-2.5.1 )
 	sasl? ( dev-libs/cyrus-sasl[static-libs(+)?] )
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
 	)"
 DEPEND="${RDEPEND}
-	${PYTHON_DEPS}
-	=app-emulation/spice-protocol-9999
+	>=app-emulation/spice-protocol-0.14.3
+	smartcard? ( app-emulation/qemu[smartcard] )
+	test? ( net-libs/glib-networking )"
+BDEPEND="${PYTHON_DEPS}
+	sys-devel/autoconf-archive
 	virtual/pkgconfig
 	$(python_gen_any_dep '
 		>=dev-python/pyparsing-1.5.6-r2[${PYTHON_USEDEP}]
 		dev-python/six[${PYTHON_USEDEP}]
-	')
-	smartcard? ( app-emulation/qemu[smartcard] )"
+	')"
 
 python_check_deps() {
-	has_version ">=dev-python/pyparsing-1.5.6-r2[${PYTHON_USEDEP}]"
-	has_version "dev-python/six[${PYTHON_USEDEP}]"
+	python_has_version -b ">=dev-python/pyparsing-1.5.6-r2[${PYTHON_USEDEP}]"
+	python_has_version -b "dev-python/six[${PYTHON_USEDEP}]"
 }
 
 pkg_setup() {
@@ -66,15 +66,17 @@ src_configure() {
 
 	xdg_environment_reset
 
-	local myconf="
+	local myconf=(
 		$(use_enable static-libs static)
 		$(use_enable lz4)
 		$(use_with sasl)
 		$(use_enable smartcard)
+		$(use_enable test tests)
 		--enable-gstreamer=$(usex gstreamer "1.0" "no")
 		--disable-celt051
-		"
-	econf ${myconf}
+	)
+
+	econf "${myconf[@]}"
 }
 
 src_compile() {
@@ -88,7 +90,7 @@ src_compile() {
 
 src_install() {
 	default
-	use static-libs || prune_libtool_files
+	use static-libs || find "${D}" -name '*.la' -type f -delete || die
 	readme.gentoo_create_doc
 }
 

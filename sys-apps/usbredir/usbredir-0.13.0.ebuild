@@ -4,11 +4,9 @@ EAPI=7
 
 inherit flag-o-matic meson
 
-MY_PV=${PV/_p*/}
-
-DESCRIPTION="usbredir libraries and utilities"
+DESCRIPTION=""
 HOMEPAGE="https://www.spice-space.org/usbredir.html"
-SRC_URI="https://github.com/freedesktop/spice-usbredir/tarball/5fc0e1c43194d948545941d408f4c10d084eb6ed -> spice-usbredir-0.13.0-5fc0e1c.tar.gz"
+SRC_URI="https://gitlab.freedesktop.org/spice/usbredir/uploads/211844dd64853ca4378ad7e74faf3e00/usbredir-0.13.0.tar.xz -> usbredir-0.13.0-5fc0e1c4.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
@@ -23,6 +21,6 @@ DOCS="README* TODO *.txt"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv "${WORKDIR}"/freedesktop-spice-usbredir* "${S}" || die
+		mv "${WORKDIR}"/spice-usbredir* "${S}" || die
 	fi
 }
