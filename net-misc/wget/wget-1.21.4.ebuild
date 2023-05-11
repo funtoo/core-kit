@@ -7,7 +7,7 @@ inherit flag-o-matic python-any-r1 toolchain-funcs
 
 DESCRIPTION="Network utility to retrieve files from the WWW"
 HOMEPAGE="https://www.gnu.org/software/wget/"
-SRC_URI="https://ftp.gnu.org/gnu/wget/wget-1.21.3.tar.gz -> wget-1.21.3.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/wget/wget-1.21.4.tar.gz -> wget-1.21.4.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
