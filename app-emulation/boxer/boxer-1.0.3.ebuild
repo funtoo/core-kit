@@ -12,8 +12,8 @@ SRC_URI="https://files.pythonhosted.org/packages/51/54/a7ccf2a3a3858e83425528fcf
 
 DEPEND=">=dev-python/subpop-2.0.0[${PYTHON_USEDEP}]"
 RDEPEND="
-	dev-python/colorama[${PYTHON_USEDEP}]
 	>=dev-python/jinja-3[${PYTHON_USEDEP}]
+	dev-python/colorama[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]"
 
 IUSE=""

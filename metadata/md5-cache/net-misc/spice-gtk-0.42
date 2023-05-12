@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=LGPL-2.1
 RDEPEND=dev-libs/glib:2 dev-libs/json-glib:0= media-libs/gst-plugins-base:1.0 media-libs/gst-plugins-good:1.0 media-libs/gstreamer:1.0[introspection?] media-libs/opus media-libs/libjpeg-turbo:= sys-libs/zlib x11-libs/cairo x11-libs/pixman x11-libs/libX11 gtk3? ( x11-libs/gtk+:3[introspection?] ) introspection? ( dev-libs/gobject-introspection ) dev-libs/openssl:= lz4? ( app-arch/lz4 ) sasl? ( dev-libs/cyrus-sasl ) smartcard? ( app-emulation/qemu[smartcard] ) usbredir? ( sys-apps/hwids sys-apps/usbredir virtual/acl virtual/libusb:1 policykit? ( sys-auth/polkit ) ) webdav? ( net-libs/phodav:= net-libs/libsoup:= ) amd64? ( x11-libs/libva:= ) arm64? ( x11-libs/libva:= ) x86? ( x11-libs/libva:= )
 SLOT=0
-SRC_URI=https://gitlab.freedesktop.org/spice/spice-gtk/uploads/e41347144c5d2f9947e215c894969f0e/spice-gtk-0.42.tar.xz -> spice-gtk-0.42-f04479c1.tar.xz
+SRC_URI=https://gitlab.freedesktop.org/spice/spice-gtk/-/archive/v0.42/spice-gtk-v0.42.tar.gz -> spice-gtk-v0.42.tar.gz
 _eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	meson	2fbe03e3b496f82fd941bcdb9d351c91	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	optfeature	8e0c2c8d30c10832f241f5e76ef3f0c7	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	d3f9ec72badd0291b655682d67876adc	readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=8d232df7ef6cee2af77f657660a88aea
+_md5_=f67281cc9c5a972f55db2e68e2ba5248

@@ -7,7 +7,7 @@ inherit flag-o-matic meson
 
 DESCRIPTION=""
 HOMEPAGE="https://www.spice-space.org/usbredir.html"
-SRC_URI="https://gitlab.freedesktop.org/spice/usbredir/uploads/211844dd64853ca4378ad7e74faf3e00/usbredir-0.13.0.tar.xz -> usbredir-0.13.0-5fc0e1c4.tar.xz"
+SRC_URI="https://gitlab.freedesktop.org/spice/usbredir/-/archive/usbredir-0.13.0/usbredir-usbredir-0.13.0.tar.gz -> usbredir-usbredir-0.13.0.tar.gz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
