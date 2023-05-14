@@ -1309,7 +1309,7 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/slimtoolkit/docker-slim/tarball/ba04c4e2a72464be6fd4f0b5496d20168ad33bef -> docker-slim-1.40.2-ba04c4e.tar.gz
+SRC_URI="https://github.com/slimtoolkit/docker-slim/tarball/92f6ac93c667733b6f08c6d159d2a8be7625219b -> docker-slim-1.40.2-92f6ac9.tar.gz
 https://direct.funtoo.org/f0/02/50/f002506d370f7f7f380d023a148e7e16b1566196f0aecf2dc75a175fb0c66bd3472aa3d519c8a0fb61a59c0337570666a767ba6bfc31ea34af9778e7c883963e -> docker-slim-1.40.2-funtoo-go-bundle-25aae37a3ed85028150a3963883d837122d32baef54703e47467453dad1e0dde7088817d9bd24fd62668913149e35489ae489830b177889f093d4c2836d8e4bd.tar.gz"
 
 DESCRIPTION="Make your containers better, smaller, more secure and do less to get there"

@@ -1,7 +1,6 @@
 # Distributed under the terms of the GNU General Public License v2
 # 🦊 ❤ metatools: {autogen_id}
 
-
 EAPI=7
 PYTHON_COMPAT=( python3+ )
 
@@ -11,7 +10,7 @@ DESCRIPTION="Set of GObject and Gtk objects for connecting to Spice servers and 
 HOMEPAGE="https://www.spice-space.org https://cgit.freedesktop.org/spice/spice-gtk/"
 SRC_URI="https://gitlab.freedesktop.org/spice/spice-gtk/-/archive/v0.42/spice-gtk-v0.42.tar.gz -> spice-gtk-v0.42.tar.gz"
 KEYWORDS="*"
-
+S="${WORKDIR}/${PN}-v0.42"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
