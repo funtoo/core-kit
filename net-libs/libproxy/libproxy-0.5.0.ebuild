@@ -8,7 +8,7 @@ inherit cmake flag-o-matic mono-env python-r1
 
 DESCRIPTION="Library for automatic proxy configuration management"
 HOMEPAGE="https://github.com/libproxy/libproxy"
-SRC_URI="https://github.com/libproxy/libproxy/tarball/caccaf28e3df6ea612d2d4b39f781c4324019fdb -> libproxy-0.4.18-caccaf2.tar.gz"
+SRC_URI="https://github.com/libproxy/libproxy/tarball/52a6d29899f8acd020c8fa5c83111193c87f9305 -> libproxy-0.5.0-52a6d29.tar.gz"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
