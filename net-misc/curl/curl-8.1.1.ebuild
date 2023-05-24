@@ -6,7 +6,7 @@ inherit autotools eutils prefix multilib-minimal
 
 DESCRIPTION="A Client that groks URLs"
 HOMEPAGE="https://curl.haxx.se/"
-SRC_URI="https://api.github.com/repos/curl/curl/tarball/curl-8_1_0 -> curl-8.1.0.tar.gz" 
+SRC_URI="https://github.com/curl/curl/releases/download/curl-8_1_1/curl-8.1.1.tar.gz -> curl-8.1.1.tar.gz"
 
 LICENSE="curl"
 SLOT="0"
@@ -65,13 +65,6 @@ RDEPEND="ldap? ( net-nds/openldap[${MULTILIB_USEDEP}] )
 	sys-libs/zlib[${MULTILIB_USEDEP}]
 	zstd? ( app-arch/zstd:=[${MULTILIB_USEDEP}] )"
 
-# Do we need to enforce the same ssl backend for curl and rtmpdump? Bug #423303
-#	rtmp? (
-#		media-video/rtmpdump
-#		curl_ssl_gnutls? ( media-video/rtmpdump[gnutls] )
-#		curl_ssl_openssl? ( media-video/rtmpdump[-gnutls,ssl] )
-#	)
-
 DEPEND="${RDEPEND}"
 BDEPEND="dev-lang/perl
 	virtual/pkgconfig
@@ -89,9 +82,10 @@ MULTILIB_CHOST_TOOLS=(
 	/usr/bin/curl-config
 )
 
-src_unpack() {
-    default
-    mv "curl-curl-189aed6" "${S}" || die
+post_src_unpack() {
+	if [ ! -e "${S}" ]; then
+		mv "curl-curl-" "${S}" || die
+	fi
 }
 
 src_prepare() {
