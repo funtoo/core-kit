@@ -12,7 +12,6 @@ SRC_URI="https://files.pythonhosted.org/packages/09/f9/b7204bb5d466cef6a3f212349
 
 DEPEND=""
 RDEPEND="dev-python/pyyaml[${PYTHON_USEDEP}]"
-
 IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"

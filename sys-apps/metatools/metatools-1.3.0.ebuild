@@ -26,7 +26,6 @@ RDEPEND="
 	dev-python/toml[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
 	dev-python/colorama[${PYTHON_USEDEP}]"
-
 IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"

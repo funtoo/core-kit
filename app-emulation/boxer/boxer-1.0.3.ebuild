@@ -15,7 +15,6 @@ RDEPEND="
 	dev-python/colorama[${PYTHON_USEDEP}]
 	>=dev-python/jinja-3[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]"
-
 IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
