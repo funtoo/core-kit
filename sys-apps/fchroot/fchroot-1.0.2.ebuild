@@ -17,7 +17,6 @@ RDEPEND="
 	sys-apps/attr[static-libs]
 	sys-libs/zlib[static-libs]
 	dev-libs/libpcre[static-libs]"
-
 IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
