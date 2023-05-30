@@ -7,7 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION="Funtoo's metatools -- autogeneration framework."
 HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/funtoo-metatools/browse https://pypi.org/project/funtoo-metatools/"
-SRC_URI="https://files.pythonhosted.org/packages/be/4b/5e2345e3de77f8dba942423a88fa4d4cdd17ccdb96415c2e9c7d6913c4e4/funtoo-metatools-1.2.0.tar.gz -> funtoo-metatools-1.2.0.tar.gz
+SRC_URI="https://files.pythonhosted.org/packages/7d/6d/a7a4fa5c693e1d7b65dec911d9781ac93569d3bf3273240a9f6142a1afbe/funtoo-metatools-1.3.0.tar.gz -> funtoo-metatools-1.3.0.tar.gz
 "
 
 DEPEND=">=dev-python/subpop-2.0.0[${PYTHON_USEDEP}]"
@@ -21,6 +21,7 @@ RDEPEND="
 	dev-python/psutil[${PYTHON_USEDEP}]
 	dev-python/pymongo[${PYTHON_USEDEP}]
 	dev-python/pyyaml[${PYTHON_USEDEP}]
+	dev-python/pyzmq[${PYTHON_USEDEP}]
 	dev-python/rich[${PYTHON_USEDEP}]
 	dev-python/toml[${PYTHON_USEDEP}]
 	dev-python/xmltodict[${PYTHON_USEDEP}]
@@ -30,4 +31,4 @@ IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
-S="${WORKDIR}/funtoo-metatools-1.2.0"
+S="${WORKDIR}/funtoo-metatools-1.3.0"
