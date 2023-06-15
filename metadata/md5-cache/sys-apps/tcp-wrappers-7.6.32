@@ -8,6 +8,6 @@ KEYWORDS=*
 LICENSE=tcp_wrappers_license
 RDEPEND=netgroups? ( net-libs/libnsl:= )
 SLOT=0
-SRC_URI=http://deb.debian.org/debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q.orig.tar.gz -> tcp-wrappers_7.6.q.orig.tar.gz http://deb.debian.org/debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q-31.debian.tar.xz -> tcp-wrappers_7.6.q-31.debian.tar.xz
+SRC_URI=http://deb.debian.org/debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q.orig.tar.gz -> tcp-wrappers_7.6.q.orig.tar.gz http://deb.debian.org/debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q-32.debian.tar.xz -> tcp-wrappers_7.6.q-32.debian.tar.xz
 _eclasses_=multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
-_md5_=55651a60eab0b1b8a8eb01c09b77804f
+_md5_=dd29aeec8f5ed5ff313edbbfd9997e63
