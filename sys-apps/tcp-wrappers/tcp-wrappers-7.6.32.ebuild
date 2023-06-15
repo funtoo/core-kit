@@ -10,7 +10,7 @@ MY_P="${PN//-/_}_${MY_PV}"
 DESCRIPTION="TCP Wrappers"
 HOMEPAGE="http://ftp.porcupine.org/pub/security"
 SRC_URI="http://deb.debian.org/debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q.orig.tar.gz -> tcp-wrappers_7.6.q.orig.tar.gz
-	http://deb.debian.org/debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q-31.debian.tar.xz -> tcp-wrappers_7.6.q-31.debian.tar.xz"
+	http://deb.debian.org/debian/pool/main/t/tcp-wrappers/tcp-wrappers_7.6.q-32.debian.tar.xz -> tcp-wrappers_7.6.q-32.debian.tar.xz"
 
 LICENSE="tcp_wrappers_license"
 SLOT="0"

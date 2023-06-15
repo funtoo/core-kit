@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Message Digest functions from BSD systems"
 HOMEPAGE="https://www.hadrons.org/software/libmd/"
-SRC_URI="https://archive.hadrons.org/software/libmd/libmd-1.0.4.tar.xz -> libmd-1.0.4.tar.xz"
+SRC_URI="https://archive.hadrons.org/software/libmd/libmd-1.1.0.tar.xz -> libmd-1.1.0.tar.xz"
 
 IUSE="static-libs"
 
