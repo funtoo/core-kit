@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/openzfs/zfs"
 MY_PV="${PV/_rc/-rc}"
 SRC_URI="https://github.com/openzfs/zfs/releases/download/zfs-2.1.12/zfs-2.1.12.tar.gz -> zfs-2.1.12.tar.gz"
 KEYWORDS="*"
-ZFS_KERNEL_COMPAT="6.1"
+ZFS_KERNEL_COMPAT="6.3"
 
 LICENSE="CDDL MIT debug? ( GPL-2+ )"
 SLOT="0"
