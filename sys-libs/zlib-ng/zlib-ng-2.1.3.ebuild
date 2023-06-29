@@ -6,7 +6,7 @@ inherit cmake
 
 DESCRIPTION='zlib replacement with optimizations for "next generation" systems.'
 HOMEPAGE="https://github.com/zlib-ng/zlib-ng"
-SRC_URI="https://github.com/zlib-ng/zlib-ng/tarball/f75c6856c32a0ade1f33e266fb370bac92d15fac -> zlib-ng-2.1.2-f75c685.tar.gz"
+SRC_URI="https://github.com/zlib-ng/zlib-ng/tarball/cf89cf35037f152ce7adfeca864656de5d33ea1e -> zlib-ng-2.1.3-cf89cf3.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
