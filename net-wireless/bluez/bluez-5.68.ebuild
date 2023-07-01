@@ -7,7 +7,7 @@ inherit autotools linux-info python-single-r1 readme.gentoo-r1 systemd udev mult
 
 DESCRIPTION="Bluetooth Tools and System Daemons for Linux"
 HOMEPAGE="http://www.bluez.org"
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz -> bluez-5.66.tar.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.68.tar.xz -> bluez-5.68.tar.xz"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/3"
@@ -70,7 +70,7 @@ PATCHES=(
 
 	# Fedora patches
 	# http://www.spinics.net/lists/linux-bluetooth/msg40136.html
-	"${FILESDIR}"/0001-obex-Use-GLib-helper-function-to-manipulate-paths.patch
+	"${FILESDIR}"/bluez-5.68-obex-use-glib-path-functions.patch
 
 	# This reverts commit ac2c2e10b3adb432a572b618c6f53cabb6b3c80b. It
 	# causes problems with Logitech MX wireless input devices (see
