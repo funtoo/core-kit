@@ -1,2 +1,2 @@
-PYTHON_TARGETS="python3_9 python3_7"
+PYTHON_TARGETS="python3_9 None"
 PYTHON_SINGLE_TARGET="python3_9"
