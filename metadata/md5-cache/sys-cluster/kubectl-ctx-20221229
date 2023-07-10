@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DEPEND=sys-cluster/kubectl app-shells/fzf
+DESCRIPTION=A kubectl plugin for interactively changing the kubeconfig context
+EAPI=7
+HOMEPAGE=https://github.com/weibeld/kubectl-ctx
+KEYWORDS=*
+RDEPEND=sys-cluster/kubectl app-shells/fzf
+SLOT=0
+SRC_URI=https://github.com/weibeld/kubectl-ctx/archive/84ce9a632d4cdc33dc31ce7a00bda1365b3707a7.tar.gz -> kubectl-ctx-20221229-84ce9a632d4cdc33dc31ce7a00bda1365b3707a7.tar.gz
+_md5_=1c770057df0ce8fa859ced99ecc2902d
