@@ -10,7 +10,7 @@ DESCRIPTION="Allows users or groups to run commands as other users"
 HOMEPAGE="https://www.sudo.ws/"
 
 KEYWORDS="*"
-SRC_URI="https://github.com/sudo-project/sudo/tarball/e1b4d21a2351e5969dbc68d0338a79367025a5b7 -> sudo-1.9.14.1-e1b4d21.tar.gz"
+SRC_URI="https://github.com/sudo-project/sudo/tarball/2a3b848e4f1c2ee8e97d34253baed2ed932b327c -> sudo-1.9.14.2-2a3b848.tar.gz"
 # Basic license is ISC-style as-is, some files are released under
 # 3-clause BSD license
 LICENSE="ISC BSD"
