@@ -5,7 +5,7 @@ inherit autotools libtool
 
 DESCRIPTION="Multi-format archive and compression library"
 HOMEPAGE="https://www.libarchive.org/"
-SRC_URI="https://github.com/libarchive/libarchive/tarball/ba80276ccc3c941c4918ec6e2460059f0c525c43 -> libarchive-3.6.2-ba80276.tar.gz"
+SRC_URI="https://github.com/libarchive/libarchive/tarball/ee45796171324519f0c0bfd012018dd099296336 -> libarchive-3.7.0-ee45796.tar.gz"
 
 LICENSE="BSD BSD-2 BSD-4 public-domain"
 SLOT="0/13"
