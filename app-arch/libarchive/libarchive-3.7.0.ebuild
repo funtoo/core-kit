@@ -1,11 +1,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit autotools libtool
+inherit libtool
 
 DESCRIPTION="Multi-format archive and compression library"
 HOMEPAGE="https://www.libarchive.org/"
-SRC_URI="https://github.com/libarchive/libarchive/tarball/ee45796171324519f0c0bfd012018dd099296336 -> libarchive-3.7.0-ee45796.tar.gz"
+SRC_URI="https://github.com/libarchive/libarchive/releases/download/v3.7.0/libarchive-3.7.0.tar.gz -> libarchive-3.7.0.tar.gz"
 
 LICENSE="BSD BSD-2 BSD-4 public-domain"
 SLOT="0/13"
@@ -36,22 +36,10 @@ DEPEND="${RDEPEND}
 		e2fsprogs? ( sys-fs/e2fsprogs )
 	)"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-3.3.3-libressl.patch
-	"${FILESDIR}"/libarchive_remove_iconv_from_requires_private.patch
-)
-
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
 		mv libarchive-libarchive* "${S}"
 	fi
-}
-
-src_prepare() {
-	eautoreconf	# required since autogen downloads a tagged snapshot rather
-	eautomake
-	elibtoolize  # is required for Solaris sol2_ld linker fix
-	default
 }
 
 src_configure() {
