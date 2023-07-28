@@ -7,7 +7,7 @@ inherit flag-o-matic meson python-any-r1
 
 DESCRIPTION="Creates, deletes and cleans up volatile and temporary files and directories"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/systemd"
-SRC_URI="https://github.com/systemd/systemd-stable/tarball/f1c4da0414640cf201147144f558e1af31a3ae80 -> systemd-stable-253.7-f1c4da0.tar.gz"
+SRC_URI="https://github.com/systemd/systemd-stable/tarball/994c7978608a0bd9b317f4f74ff266dd50a3e74e -> systemd-stable-254-994c797.tar.gz"
 
 LICENSE="BSD-2 GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0"
@@ -85,9 +85,8 @@ src_configure() {
 		-Dbacklight=false
 		-Dbinfmt=false
 		-Dblkid=false
+		-Dbootloader=false
 		-Dbpf-framework=false
-		-Dbuild.cpp_debugstl=false
-		-Dbuild.cpp_rtti=false
 		-Dbump-proc-sys-fs-file-max=false
 		-Dbump-proc-sys-fs-nr-open=false
 		-Dbzip2=false
@@ -111,7 +110,6 @@ src_configure() {
 		-Dfuzz-tests=false
 		-Dgcrypt=false
 		-Dglib=false
-		-Dgnu-efi=false
 		-Dgnutls=false
 		-Dgshadow=false
 		-Dhibernate=false
@@ -138,6 +136,7 @@ src_configure() {
 		-Dlink-boot-shared=false
 		-Dlink-journalctl-shared=false
 		-Dlink-networkd-shared=false
+		-Dlink-portabled-shared=false
 		-Dlink-systemctl-shared=false
 		-Dlink-timesyncd-shared=false
 		-Dlink-udev-shared=false
@@ -162,9 +161,12 @@ src_configure() {
 		-Doss-fuzz=false
 		-Dp11kit=false
 		-Dpam=false
+		-Dpasswdqc=false
 		-Dpcre2=false
+		-Dpkgconfig.relocatable=false
 		-Dpolkit=false
 		-Dportabled=false
+		-Dprefer_static=false
 		-Dpstore=false
 		-Dpwquality=false
 		-Dqrencode=false
@@ -200,8 +202,8 @@ src_configure() {
 		-Durlify=false
 		-Duserdb=false
 		-Dutmp=false
-		-Dvalgrind=false
 		-Dvconsole=false
+		-Dvsenv=false
 		-Dwerror=false
 		-Dwheel-group=false
 		-Dxdg-autostart=false

@@ -13,6 +13,7 @@ SRC_URI="https://files.pythonhosted.org/packages/5f/d3/d67f443fa8840d1ef25f21c9c
 DEPEND=">=dev-python/subpop-2.0.0[${PYTHON_USEDEP}]"
 RDEPEND="
 	app-arch/unzip
+	>=dev-utils/meson-1.2.0
 	dev-python/beautifulsoup[${PYTHON_USEDEP}]
 	dev-python/dict-toolbox[${PYTHON_USEDEP}]
 	>=dev-python/httpx-0.24.0[${PYTHON_USEDEP}]
