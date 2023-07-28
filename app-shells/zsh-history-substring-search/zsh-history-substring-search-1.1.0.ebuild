@@ -6,7 +6,7 @@ inherit prefix readme.gentoo-r1
 
 DESCRIPTION="ZSH port of Fish history search (up arrow)"
 HOMEPAGE="https://github.com/zsh-users/zsh-history-substring-search/"
-SRC_URI="https://api.github.com/repos/zsh-users/zsh-history-substring-search/tarball/refs/tags/v1.0.2 -> zsh-history-substring-search-1.0.2.tar.gz"
+SRC_URI="https://api.github.com/repos/zsh-users/zsh-history-substring-search/tarball/refs/tags/v1.1.0 -> zsh-history-substring-search-1.1.0.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="*"
