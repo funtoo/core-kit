@@ -12,7 +12,7 @@ SRC_URI="https://files.pythonhosted.org/packages/f9/fa/646343cf9f6313cf3808fc13d
 
 DEPEND=""
 RDEPEND="
-	app-arch/xz
+	app-arch/xz-utils
 	app-arch/zstd
 	app-misc/pax-utils
 	sys-apps/busybox[-pam,static]
