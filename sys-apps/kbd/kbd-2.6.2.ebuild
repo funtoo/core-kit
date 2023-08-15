@@ -3,7 +3,7 @@
 EAPI=7
 
 inherit autotools
-SRC_URI="https://github.com/legionus/kbd/archive/refs/tags/v2.6.1.tar.gz -> kbd-2.6.1.tar.gz"
+SRC_URI="https://github.com/legionus/kbd/archive/refs/tags/v2.6.2.tar.gz -> kbd-2.6.2.tar.gz"
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
