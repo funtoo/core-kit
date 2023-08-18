@@ -7,7 +7,7 @@ inherit autotools toolchain-funcs
 
 DESCRIPTION="Standard (de)compression library"
 HOMEPAGE="https://zlib.net/"
-SRC_URI="https://zlib.net/current/zlib-1.2.13.tar.gz -> zlib-1.2.13.tar.gz"
+SRC_URI="https://zlib.net/current/zlib-1.3.tar.gz -> zlib-1.3.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
