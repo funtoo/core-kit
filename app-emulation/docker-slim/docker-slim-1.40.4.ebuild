@@ -722,6 +722,8 @@ EGO_SUM=(
 	"github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d/go.mod"
 	"github.com/satori/go.uuid v1.2.0/go.mod"
 	"github.com/seccomp/libseccomp-golang v0.9.1/go.mod"
+	"github.com/segmentio/ksuid v1.0.4"
+	"github.com/segmentio/ksuid v1.0.4/go.mod"
 	"github.com/sergi/go-diff v1.1.0"
 	"github.com/shurcoo!l/sanitized_anchor_name v1.0.0/go.mod"
 	"github.com/sirupsen/logrus v1.0.4-0.20170822132746-89742aefa4b2/go.mod"
@@ -1279,8 +1281,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/slimtoolkit/docker-slim/tarball/155f1b79556b7d100726f5ef4633f81a6ed27a2b -> docker-slim-1.40.3-155f1b7.tar.gz
-https://direct.funtoo.org/9e/86/b2/9e86b2ba779227cbcfc370ec7f4d18734cd4e1a078c31dca66798d435cfd873fef534abe5cdce310a606fd026c660055054e4eb0b3596f758b57a8f7a3f8ecfe -> docker-slim-1.40.3-funtoo-go-bundle-d1b3ca598942eddf1f36185c263b4166c0e28d5f668ea65e24dc5d292c4b27eb5272216a4b214ef69e2525bd9de830b5465eb71332c23cce7a9eff06cd494d98.tar.gz"
+SRC_URI="https://github.com/slimtoolkit/docker-slim/tarball/d310b07567dc90763f5f27f94c618f057295b55d -> docker-slim-1.40.4-d310b07.tar.gz
+https://direct.funtoo.org/ea/e3/3a/eae33a1abd67d0ec1ec56ed28ee9020918430170d3209423f1f5cfca244f60f040a1de6e83b05caefb079964a52a4596e091eb1d0a1164424222915b39aee5f7 -> docker-slim-1.40.4-funtoo-go-bundle-ec284ff59eeb40ed6543ea5bdbda8ec8b33f1456e67aa8e5f7e3ae21e1aa96bae58e7772e96fe99bab9cdfb1767517fc612f7841222abb3f7c974089b288d2d2.tar.gz"
 
 DESCRIPTION="Make your containers better, smaller, more secure and do less to get there"
 HOMEPAGE="https://dockersl.im/ https://github.com/docker-slim/docker-slim"
