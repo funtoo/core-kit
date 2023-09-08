@@ -6,7 +6,7 @@ PYTHON_COMPAT=( python3+ )
 
 inherit python-single-r1
 
-DESCRIPTION="Python3 compatible clone of dstat"
+DESCRIPTION="Python3 compatible fork of dstat"
 HOMEPAGE="https://github.com/scottchiefbaker/dool"
 SRC_URI="https://github.com/scottchiefbaker/dool/tarball/755e94050925125a67187276b4386621eda54b9f -> dool-1.2.0-755e940.tar.gz"
 
