@@ -112,6 +112,7 @@ src_configure() {
 		--enable-install-libiberty
 		--enable-textrel-check=warning
 		--disable-werror
+		--enable-new-dtags
 		--with-bugurl="https://bugs.funtoo.org/"
 		--with-pkgversion="Funtoo 2.39_p5 patchset: https://dev.gentoo.org/~dilfridge/distfiles/binutils-2.39-patches-5.tar.xz"
 		--with-system-zlib
