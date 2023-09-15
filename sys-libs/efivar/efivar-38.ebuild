@@ -6,7 +6,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="Tools and library to manipulate EFI variables"
 HOMEPAGE="https://github.com/rhinstaller/efivar"
-SRC_URI="https://github.com/rhboot/efivar/tarball/c1d6b10e1ed4ba2be07f385eae5bceb694478a10 -> efivar-37-c1d6b10.tar.gz"
+SRC_URI="https://github.com/rhboot/efivar/tarball/1753149d4176ebfb2b135ac0aaf79340bf0e7a93 -> efivar-38-1753149.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0/1"
