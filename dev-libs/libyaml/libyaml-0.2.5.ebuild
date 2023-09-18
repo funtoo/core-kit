@@ -6,7 +6,7 @@ inherit autotools libtool
 
 DESCRIPTION="A C library for parsing and emitting YAML"
 HOMEPAGE="https://github.com/yaml/libyaml"
-SRC_URI="https://github.com/yaml/libyaml/tarball/2c891fc7a770e8ba2fec34fc6b545c672beb37e6 -> libyaml-0.2.5-2c891fc.tar.gz"
+SRC_URI="https://github.com/yaml/libyaml/tarball/65d19898a301b817261003b00d1dcef00895a7b4 -> libyaml-0.2.5-65d1989.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
