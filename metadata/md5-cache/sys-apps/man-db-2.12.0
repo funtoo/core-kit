@@ -10,6 +10,6 @@ LICENSE=GPL-3
 PDEPEND=manpager? ( app-text/manpager )
 RDEPEND=>=dev-libs/libpipeline-1.5.0 sys-apps/groff sys-libs/gdbm:= seccomp? ( sys-libs/libseccomp ) zlib? ( sys-libs/zlib ) selinux? ( sec-policy/selinux-mandb ) virtual/tmpfiles
 SLOT=0
-SRC_URI=https://download-mirror.savannah.nongnu.org/releases/man-db/man-db-2.11.2.tar.xz -> man-db-2.11.2.tar.xz
+SRC_URI=https://download-mirror.savannah.nongnu.org/releases/man-db/man-db-2.12.0.tar.xz -> man-db-2.12.0.tar.xz
 _eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
-_md5_=cd19f9034f5a1bc52e1304b66d9f9370
+_md5_=a65dd66ee60e04d4b3e019c06b71490c
