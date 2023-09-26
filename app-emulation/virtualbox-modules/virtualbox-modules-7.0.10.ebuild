@@ -11,9 +11,6 @@ SRC_URI="https://download.virtualbox.org/virtualbox/7.0.10/VirtualBox-7.0.10-158
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="*"
-IUSE="pax_kernel"
-
-RDEPEND="!=app-emulation/virtualbox-9999"
 
 BUILD_TARGETS="all"
 BUILD_TARGET_ARCH="${ARCH}"
@@ -35,10 +32,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	if use pax_kernel && kernel_is -ge 3 0 0 ; then
-		eapply -p0 "${FILESDIR}"/${PN}-pax-const.patch
-	fi
-
+	sed -i -e 's/^#if RTLNX_VER_MIN(6,5,0)/#if RTLNX_VER_MIN(6,4,10)/' ${S}/vboxnetflt/linux/VBoxNetFlt-linux.c || die
 	default
 }
 
