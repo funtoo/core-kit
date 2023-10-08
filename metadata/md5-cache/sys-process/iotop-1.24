@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=sys-libs/ncurses:=
 SLOT=0
-SRC_URI=https://github.com/Tomas-M/iotop/releases/download/v1.23/iotop-1.23.tar.xz -> iotop-1.23.tar.xz
+SRC_URI=https://github.com/Tomas-M/iotop/releases/download/v1.24/iotop-1.24.tar.xz -> iotop-1.24.tar.xz
 _eclasses_=fcaps	9445d60c1eb084a91c38ef4c070b2f16	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=158ab203848abd65339cf1718647c10b
+_md5_=2f24b2c61d292513c032f2583799baf8
