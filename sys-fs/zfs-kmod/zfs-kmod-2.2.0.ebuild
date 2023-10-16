@@ -8,9 +8,9 @@ DESCRIPTION="Linux ZFS kernel module for sys-fs/zfs"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
 MY_PV="${PV/_rc/-rc}"
-SRC_URI="https://github.com/openzfs/zfs/tarball/6ea6e89028b2d15c59201fa8ea4db7cfe5709b8c -> zfs-2.2.0_rc5-6ea6e89.tar.gz"
+SRC_URI="https://github.com/openzfs/zfs/tarball/1ac524ec2d834db9eae5b5a37d0d4cb83dc3d1e2 -> zfs-2.2.0-1ac524e.tar.gz"
 KEYWORDS="*"
-ZFS_KERNEL_COMPAT="6.4"
+ZFS_KERNEL_COMPAT="6.5"
 
 LICENSE="CDDL MIT debug? ( GPL-2+ )"
 SLOT="0"
