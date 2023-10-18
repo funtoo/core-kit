@@ -8,8 +8,8 @@ inherit xdg-utils gnome2 pax-utils python-r1 udev unpacker eapi7-ver
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI=" https://download.virtualbox.org/virtualbox/7.0.10/VirtualBox-7.0.10-158379-Linux_amd64.run -> VirtualBox-7.0.10-158379-Linux_amd64.run https://download.virtualbox.org/virtualbox/7.0.10/Oracle_VM_VirtualBox_Extension_Pack-7.0.10-158379.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-7.0.10-158379.tar.gz
-	sdk? ( https://download.virtualbox.org/virtualbox/7.0.10/VirtualBoxSDK-7.0.10-158379.zip -> VirtualBoxSDK-7.0.10-158379.zip )"
+SRC_URI=" https://download.virtualbox.org/virtualbox/7.0.12/VirtualBox-7.0.12-159484-Linux_amd64.run -> VirtualBox-7.0.12-159484-Linux_amd64.run https://download.virtualbox.org/virtualbox/7.0.12/Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-7.0.12-159484.tar.gz
+	sdk? ( https://download.virtualbox.org/virtualbox/7.0.12/VirtualBoxSDK-7.0.12-159484.zip -> VirtualBoxSDK-7.0.12-159484.zip )"
 
 LICENSE="GPL-2 PUEL"
 SLOT="0"
@@ -21,7 +21,7 @@ DEPEND="app-arch/unzip
 	${PYTHON_DEPS}"
 
 RDEPEND="!app-emulation/virtualbox-additions
-	~app-emulation/virtualbox-modules-7.0.10
+	~app-emulation/virtualbox-modules-7.0.12
 	!headless? (
 		dev-libs/glib
 		media-libs/fontconfig
@@ -56,16 +56,16 @@ QA_PREBUILT="opt/VirtualBox/*"
 PYTHON_UPDATER_IGNORE="1"
 
 src_unpack() {
-	unpack_makeself VirtualBox-7.0.10-158379-Linux_amd64.run
+	unpack_makeself VirtualBox-7.0.12-159484-Linux_amd64.run
 	unpack ./VirtualBox.tar.bz2
 
 	mkdir "${S}"/Oracle_VM_VirtualBox_Extension_Pack || die
 	pushd "${S}"/Oracle_VM_VirtualBox_Extension_Pack &>/dev/null || die
-	unpack Oracle_VM_VirtualBox_Extension_Pack-7.0.10-158379.tar.gz
+	unpack Oracle_VM_VirtualBox_Extension_Pack-7.0.12-159484.tar.gz
 	popd &>/dev/null || die
 
 	if use sdk ; then
-		unpack VirtualBoxSDK-7.0.10-158379.zip
+		unpack VirtualBoxSDK-7.0.12-159484.zip
 	fi
 }
 

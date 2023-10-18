@@ -5,12 +5,12 @@ EAPI=7
 CRATES="
 addr2line-0.21.0
 adler-1.0.2
-aho-corasick-1.1.1
+aho-corasick-1.1.2
 android-tzdata-0.1.1
 android_system_properties-0.1.5
 anyhow-1.0.75
 async-channel-1.9.0
-async-executor-1.5.4
+async-executor-1.6.0
 async-global-executor-2.3.1
 async-io-1.13.0
 async-lock-2.8.0
@@ -18,16 +18,19 @@ async-std-1.12.0
 async-stream-0.3.5
 async-stream-impl-0.3.5
 async-task-4.4.1
-async-trait-0.1.73
+async-trait-0.1.74
 atomic-waker-1.1.2
 atty-0.2.14
 autocfg-1.1.0
 backtrace-0.3.69
 base64-0.21.4
+bindgen-0.65.1
 bindgen-0.68.1
 bitflags-1.3.2
-bitflags-2.4.0
-blocking-1.4.0
+bitflags-2.4.1
+blocking-1.4.1
+bsd-kvm-0.1.0
+bsd-kvm-sys-0.1.0
 bumpalo-3.14.0
 byte-unit-4.0.19
 byteorder-1.5.0
@@ -59,13 +62,13 @@ either-1.9.0
 encode_unicode-0.3.6
 equivalent-1.0.1
 errno-0.2.8
-errno-0.3.4
+errno-0.3.5
 errno-dragonfly-0.1.2
 event-listener-2.5.3
 fastrand-1.9.0
 fastrand-2.0.1
 filetime-0.2.22
-flate2-1.0.27
+flate2-1.0.28
 fnv-1.0.7
 form_urlencoded-1.2.0
 futures-0.3.28
@@ -107,19 +110,19 @@ js-sys-0.3.64
 kv-log-macro-1.0.7
 lazy_static-1.4.0
 lazycell-1.3.0
-libc-0.2.148
+libc-0.2.149
 libloading-0.7.4
 libproc-0.14.2
 linux-raw-sys-0.1.4
 linux-raw-sys-0.3.8
-linux-raw-sys-0.4.8
+linux-raw-sys-0.4.10
 lock_api-0.4.10
 log-0.4.20
 memchr-2.6.4
 memoffset-0.7.1
 minimal-lexical-0.2.1
 miniz_oxide-0.7.1
-minus-5.4.1
+minus-5.4.2
 mio-0.7.14
 mio-0.8.8
 miow-0.3.7
@@ -128,12 +131,12 @@ nix-0.26.4
 nix-0.27.1
 nom-7.1.3
 ntapi-0.3.7
-num-traits-0.2.16
+num-traits-0.2.17
 num_cpus-1.16.0
 object-0.32.1
 once_cell-1.18.0
 option-ext-0.2.0
-os_str_bytes-6.5.1
+os_str_bytes-6.6.1
 pager-0.16.1
 parking-2.1.1
 parking_lot-0.11.2
@@ -148,26 +151,27 @@ pin-project-lite-0.2.13
 pin-utils-0.1.0
 piper-0.2.1
 polling-2.8.0
+prettyplease-0.2.15
 proc-macro-error-1.0.4
 proc-macro-error-attr-1.0.4
-proc-macro2-1.0.68
+proc-macro2-1.0.69
 procfs-0.15.1
 quote-1.0.33
 redox_syscall-0.2.16
 redox_syscall-0.3.5
 redox_users-0.4.3
-regex-1.9.6
-regex-automata-0.3.9
-regex-syntax-0.7.5
+regex-1.10.2
+regex-automata-0.4.3
+regex-syntax-0.8.2
 rustc-demangle-0.1.23
 rustc-hash-1.1.0
-rustix-0.36.15
-rustix-0.37.24
-rustix-0.38.17
+rustix-0.36.16
+rustix-0.37.25
+rustix-0.38.19
 ryu-1.0.15
 scopeguard-1.2.0
-serde-1.0.188
-serde_derive-1.0.188
+serde-1.0.189
+serde_derive-1.0.189
 serde_json-1.0.107
 serde_spanned-0.6.3
 shlex-1.2.0
@@ -191,7 +195,7 @@ thiserror-1.0.49
 thiserror-impl-1.0.49
 tinyvec-1.6.0
 tinyvec_macros-0.1.1
-tokio-1.32.0
+tokio-1.33.0
 tokio-macros-2.1.0
 tokio-stream-0.1.14
 tokio-util-0.7.9
@@ -199,16 +203,16 @@ toml-0.8.2
 toml_datetime-0.6.3
 toml_edit-0.20.2
 tower-service-0.3.2
-tracing-0.1.37
-tracing-core-0.1.31
+tracing-0.1.39
+tracing-core-0.1.32
 try-lock-0.2.4
 unicode-bidi-0.3.13
 unicode-ident-1.0.12
 unicode-normalization-0.1.22
 unicode-width-0.1.11
 url-2.4.1
-users-0.11.0
 utf8-width-0.1.6
+uzers-0.11.3
 value-bag-1.4.1
 version_check-0.9.4
 waker-fn-1.1.1
@@ -245,7 +249,7 @@ windows_x86_64_gnullvm-0.42.2
 windows_x86_64_gnullvm-0.48.5
 windows_x86_64_msvc-0.42.2
 windows_x86_64_msvc-0.48.5
-winnow-0.5.16
+winnow-0.5.17
 xattr-1.0.1
 "
 
@@ -253,7 +257,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.14.1 -> procs-0.14.1.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.14.2 -> procs-0.14.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
