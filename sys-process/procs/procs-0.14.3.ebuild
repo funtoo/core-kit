@@ -17,7 +17,7 @@ async-lock-2.8.0
 async-std-1.12.0
 async-stream-0.3.5
 async-stream-impl-0.3.5
-async-task-4.4.1
+async-task-4.5.0
 async-trait-0.1.74
 atomic-waker-1.1.2
 atty-0.2.14
@@ -29,8 +29,8 @@ bindgen-0.68.1
 bitflags-1.3.2
 bitflags-2.4.1
 blocking-1.4.1
-bsd-kvm-0.1.0
-bsd-kvm-sys-0.1.0
+bsd-kvm-0.1.2
+bsd-kvm-sys-0.2.0
 bumpalo-3.14.0
 byte-unit-4.0.19
 byteorder-1.5.0
@@ -86,7 +86,7 @@ gimli-0.28.0
 glob-0.3.1
 gloo-timers-0.2.6
 hashbrown-0.12.3
-hashbrown-0.14.1
+hashbrown-0.14.2
 heck-0.4.1
 hermit-abi-0.1.19
 hermit-abi-0.3.3
@@ -98,13 +98,14 @@ httparse-1.8.0
 httpdate-1.0.3
 hyper-0.14.27
 hyperlocal-0.8.0
-iana-time-zone-0.1.57
+iana-time-zone-0.1.58
 iana-time-zone-haiku-0.1.2
 idna-0.4.0
 indexmap-1.9.3
 indexmap-2.0.2
 instant-0.1.12
 io-lifetimes-1.0.11
+is-terminal-0.4.9
 itoa-1.0.9
 js-sys-0.3.64
 kv-log-macro-1.0.7
@@ -116,7 +117,7 @@ libproc-0.14.2
 linux-raw-sys-0.1.4
 linux-raw-sys-0.3.8
 linux-raw-sys-0.4.10
-lock_api-0.4.10
+lock_api-0.4.11
 log-0.4.20
 memchr-2.6.4
 memoffset-0.7.1
@@ -138,11 +139,11 @@ once_cell-1.18.0
 option-ext-0.2.0
 os_str_bytes-6.6.1
 pager-0.16.1
-parking-2.1.1
+parking-2.2.0
 parking_lot-0.11.2
 parking_lot-0.12.1
 parking_lot_core-0.8.6
-parking_lot_core-0.9.8
+parking_lot_core-0.9.9
 peeking_take_while-0.1.2
 percent-encoding-2.3.0
 pin-project-1.1.3
@@ -159,6 +160,7 @@ procfs-0.15.1
 quote-1.0.33
 redox_syscall-0.2.16
 redox_syscall-0.3.5
+redox_syscall-0.4.1
 redox_users-0.4.3
 regex-1.10.2
 regex-automata-0.4.3
@@ -166,8 +168,8 @@ regex-syntax-0.8.2
 rustc-demangle-0.1.23
 rustc-hash-1.1.0
 rustix-0.36.16
-rustix-0.37.25
-rustix-0.38.19
+rustix-0.37.26
+rustix-0.38.20
 ryu-1.0.15
 scopeguard-1.2.0
 serde-1.0.189
@@ -191,8 +193,8 @@ termbg-0.4.3
 termcolor-1.3.0
 termios-0.3.3
 textwrap-0.16.0
-thiserror-1.0.49
-thiserror-impl-1.0.49
+thiserror-1.0.50
+thiserror-impl-1.0.50
 tinyvec-1.6.0
 tinyvec_macros-0.1.1
 tokio-1.33.0
@@ -203,7 +205,7 @@ toml-0.8.2
 toml_datetime-0.6.3
 toml_edit-0.20.2
 tower-service-0.3.2
-tracing-0.1.39
+tracing-0.1.40
 tracing-core-0.1.32
 try-lock-0.2.4
 unicode-bidi-0.3.13
@@ -213,7 +215,7 @@ unicode-width-0.1.11
 url-2.4.1
 utf8-width-0.1.6
 uzers-0.11.3
-value-bag-1.4.1
+value-bag-1.4.2
 version_check-0.9.4
 waker-fn-1.1.1
 want-0.3.1
@@ -226,11 +228,12 @@ wasm-bindgen-macro-support-0.2.87
 wasm-bindgen-shared-0.2.87
 web-sys-0.3.64
 which-4.4.2
+which-5.0.0
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
 winapi-util-0.1.6
 winapi-x86_64-pc-windows-gnu-0.4.0
-windows-0.48.0
+windows-core-0.51.1
 windows-sys-0.45.0
 windows-sys-0.48.0
 windows-targets-0.42.2
@@ -257,7 +260,7 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.14.2 -> procs-0.14.2.tar.gz
+SRC_URI="https://api.github.com/repos/dalance/procs/tarball/v0.14.3 -> procs-0.14.3.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
