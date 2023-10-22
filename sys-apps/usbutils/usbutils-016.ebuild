@@ -8,7 +8,7 @@ inherit autotools python-single-r1
 DESCRIPTION="USB enumeration utilities"
 HOMEPAGE="https://www.kernel.org/pub/linux/utils/usb/usbutils/
 	https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usbutils.git/"
-SRC_URI="https://api.github.com/repos/gregkh/usbutils/tarball/refs/tags/v015 -> usbutils-015.tar.gz"
+SRC_URI="https://api.github.com/repos/gregkh/usbutils/tarball/refs/tags/v016 -> usbutils-016.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
