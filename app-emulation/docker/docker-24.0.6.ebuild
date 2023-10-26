@@ -251,8 +251,8 @@ src_install() {
 	dobin bundles/dynbinary-daemon/dockerd
 	dobin bundles/dynbinary-daemon/docker-proxy
 
-	newinitd ${REPODIR}/app-emulation/docker/files/${PN}/${PN}.initd ${PN}
-	newconfd ${REPODIR}/app-emulation/docker/files/${PN}/${PN}.confd ${PN}
+	newinitd ${REPODIR}/app-emulation/docker/files/${PN}.initd ${PN}
+	newconfd ${REPODIR}/app-emulation/docker/files/${PN}.confd ${PN}
 
 	systemd_dounit contrib/init/systemd/docker.{service,socket}
 
