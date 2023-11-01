@@ -7,8 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION="Funtoo's metatools -- autogeneration framework."
 HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/funtoo-metatools/browse https://pypi.org/project/funtoo-metatools/"
-SRC_URI="https://files.pythonhosted.org/packages/9b/05/11834c97fd880b705dd9f09a17587137462ef4f18520cb2e8b3e57e44b62/funtoo-metatools-1.3.4.tar.gz -> funtoo-metatools-1.3.4.tar.gz
-"
+SRC_URI="https://files.pythonhosted.org/packages/9b/05/11834c97fd880b705dd9f09a17587137462ef4f18520cb2e8b3e57e44b62/funtoo-metatools-1.3.4.tar.gz -> funtoo-metatools-1.3.4.tar.gz"
 
 DEPEND=">=dev-python/subpop-2.0.0[${PYTHON_USEDEP}]"
 RDEPEND="

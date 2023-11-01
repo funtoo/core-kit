@@ -10,7 +10,7 @@ SRC_URI="https://github.com/microsoft/mimalloc/tarball/43ce4bd7fd34bcc730c1c7471
 
 LICENSE="MIT"
 SLOT="0/2"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="hardened test"
 RESTRICT="!test? ( test )"
 

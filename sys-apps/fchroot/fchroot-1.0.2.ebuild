@@ -7,8 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION="Funtoo franken-chroot tool."
 HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/fchroot/browse https://pypi.org/project/fchroot/"
-SRC_URI="https://files.pythonhosted.org/packages/38/b4/fae68592292c001b3b5323c88931459373db447f4e4e8400fd9cd0b99151/fchroot-1.0.2.tar.gz -> fchroot-1.0.2.tar.gz
-"
+SRC_URI="https://files.pythonhosted.org/packages/38/b4/fae68592292c001b3b5323c88931459373db447f4e4e8400fd9cd0b99151/fchroot-1.0.2.tar.gz -> fchroot-1.0.2.tar.gz"
 
 DEPEND=""
 RDEPEND="

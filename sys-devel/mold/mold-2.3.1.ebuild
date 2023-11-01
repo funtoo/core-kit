@@ -7,18 +7,19 @@ inherit cmake toolchain-funcs
 DESCRIPTION="Mold: A Modern Linker 🦠"
 HOMEPAGE="https://github.com/rui314/mold"
 SRC_URI="https://github.com/rui314/mold/tarball/34c53777fbb4fe6bff59ed745321d92dbf7e4fab -> mold-2.3.1-34c5377.tar.gz"
-KEYWORDS="next"
 
-# mold (AGPL-3)
+# mold (MIT)
 #  - xxhash (BSD-2)
-LICENSE="AGPL-3 BSD-2"
+LICENSE="MIT BSD-2"
 SLOT="0"
+KEYWORDS="*"
 IUSE="lto"
 
 RDEPEND="
 	app-arch/zstd:=
 	>=dev-cpp/tbb-2021.7.0:=
 	sys-libs/zlib
+	dev-libs/blake3:=
 	>=dev-libs/mimalloc-2:=
 	dev-libs/openssl:=
 	>=sys-devel/gcc-12.2.0

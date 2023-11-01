@@ -1,0 +1,15 @@
+BDEPEND=>=virtual/pkgconfig-1 app-arch/xz-utils >=app-portage/elt-patches-20170815
+DEFINED_PHASES=compile configure install prepare setup
+DEPEND=~dev-libs/libxml2-2.11.5:2 crypt? ( >=dev-libs/libgcrypt-1.5.3:0= ) python? ( python_single_target_python3_10? ( dev-lang/python:3.10 >=dev-lang/python-exec-2:=[python_targets_python3_10] ) python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) ) python_single_target_python3_10? ( dev-lang/python:3.10 >=dev-lang/python-exec-2:=[python_targets_python3_10] ) python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] )
+DESCRIPTION=XSLT libraries and tools
+EAPI=7
+HOMEPAGE=https://gitlab.gnome.org/GNOME/libxslt
+IUSE=crypt debug examples python static-libs python_single_target_python3_10 python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 python_targets_python3_10 python_targets_python3_7 python_targets_python3_9 python_targets_python3_8
+KEYWORDS=*
+LICENSE=MIT
+PDEPEND=python? ( dev-python/libxslt-python )
+RDEPEND=~dev-libs/libxml2-2.11.5:2 crypt? ( >=dev-libs/libgcrypt-1.5.3:0= ) python? ( python_single_target_python3_10? ( dev-lang/python:3.10 >=dev-lang/python-exec-2:=[python_targets_python3_10] ) python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) )
+SLOT=0
+SRC_URI=https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.38.tar.xz -> libxslt-1.1.38.tar.xz
+_eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	gnome.org	532d56d07b9eace4831aaa817d2b756a	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	d3f9ec72badd0291b655682d67876adc	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=bb4f235a5adc7150de43ffab045410d8
