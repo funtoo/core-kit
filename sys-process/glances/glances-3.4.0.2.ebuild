@@ -17,10 +17,11 @@ SLOT="0"
 KEYWORDS="*"
 IUSE=""
 
-RDEPEND="dev-python/future[${PYTHON_USEDEP}]
-	>=dev-python/psutil-5.4.3[${PYTHON_USEDEP}]
+RDEPEND="
 	dev-python/defusedxml[${PYTHON_USEDEP}]
-	dev-python/ujson[${PYTHON_USEDEP}]
+	dev-python/packaging[${PYTHON_USEDEP}]
+	>=dev-python/psutil-5.6.7[${PYTHON_USEDEP}]
+	>=dev-python/ujson-5.4.0[${PYTHON_USEDEP}]
 "
 
 # PYTHON_USEDEP omitted on purpose

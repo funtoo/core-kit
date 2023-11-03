@@ -1281,8 +1281,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/slimtoolkit/docker-slim/tarball/47ba16de2d6c214d2802eb664696d1ab43e9148c -> docker-slim-1.40.5-47ba16d.tar.gz
-https://direct.funtoo.org/90/6b/c4/906bc444575d61a6121da6f708e749d03e351ec305f28aacfc1399862bee172acbb3af37aca554e2109564648450ef0876138d3386aec1ec45b2947bca8cab72 -> docker-slim-1.40.5-funtoo-go-bundle-ec284ff59eeb40ed6543ea5bdbda8ec8b33f1456e67aa8e5f7e3ae21e1aa96bae58e7772e96fe99bab9cdfb1767517fc612f7841222abb3f7c974089b288d2d2.tar.gz"
+SRC_URI="https://github.com/slimtoolkit/docker-slim/tarball/ae3100726ad5a37a1ac21c5648b6b65cc83a8763 -> docker-slim-1.40.6-ae31007.tar.gz
+https://direct.funtoo.org/65/0a/78/650a78ff070c25baca1931e347309ecdc015dad528aa1d48bb6b7c1693a2c6444ba8c1e71438264db387e906ed46937930e270cf0822d8e575f5f10d3e1e0afe -> docker-slim-1.40.6-funtoo-go-bundle-ec284ff59eeb40ed6543ea5bdbda8ec8b33f1456e67aa8e5f7e3ae21e1aa96bae58e7772e96fe99bab9cdfb1767517fc612f7841222abb3f7c974089b288d2d2.tar.gz"
 
 DESCRIPTION="Make your containers better, smaller, more secure and do less to get there"
 HOMEPAGE="https://dockersl.im/ https://github.com/docker-slim/docker-slim"
