@@ -7,7 +7,7 @@ inherit autotools
 
 DESCRIPTION="FUSE filesystem for bind mounting with altered permissions"
 HOMEPAGE="https://bindfs.org/"
-SRC_URI="https://github.com/mpartel/bindfs/tarball/5b8ba507db901d7915d999535927ead4cdcf3b09 -> bindfs-1.17.4-5b8ba50.tar.gz"
+SRC_URI="https://github.com/mpartel/bindfs/tarball/3f57fa69448ad68f31cf62cf75b5a9b2e5096c05 -> bindfs-1.17.5-3f57fa6.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
