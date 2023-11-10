@@ -8,6 +8,6 @@ KEYWORDS=*
 LICENSE=GPL-3
 RDEPEND=>=sys-libs/ncurses-5.2-r2:0= nls? ( virtual/libintl )
 SLOT=0
-SRC_URI=https://ftp.gnu.org/gnu/bash/bash-5.2.15.tar.gz -> bash-5.2.15.tar.gz
+SRC_URI=https://ftp.gnu.org/gnu/bash/bash-5.2.21.tar.gz -> bash-5.2.21.tar.gz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=034c6a499fe17779c725fcc48e62177f
+_md5_=3899a48d79cd900cf92462966c3ecef9
