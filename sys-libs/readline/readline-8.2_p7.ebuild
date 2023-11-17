@@ -10,6 +10,12 @@ HOMEPAGE="https://tiswww.case.edu/php/chet/readline/rltop.html"
 SRC_URI="
 	https://ftp.gnu.org/gnu/readline/readline-8.2.tar.gz -> readline-8.2.tar.gz
 	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-001 -> readline82-001
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-002 -> readline82-002
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-003 -> readline82-003
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-004 -> readline82-004
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-005 -> readline82-005
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-006 -> readline82-006
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-007 -> readline82-007
 "
 
 LICENSE="GPL-3"
@@ -22,7 +28,7 @@ DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 UPSTREAM_PATCHES=(
-	"${DISTDIR}"/readline82-001
+	"${DISTDIR}"/readline82-001"${DISTDIR}"/readline82-002"${DISTDIR}"/readline82-003"${DISTDIR}"/readline82-004"${DISTDIR}"/readline82-005"${DISTDIR}"/readline82-006"${DISTDIR}"/readline82-007
 )
 
 PATCHES=(
