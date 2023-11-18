@@ -28,7 +28,14 @@ DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 UPSTREAM_PATCHES=(
-	"${DISTDIR}"/readline82-001"${DISTDIR}"/readline82-002"${DISTDIR}"/readline82-003"${DISTDIR}"/readline82-004"${DISTDIR}"/readline82-005"${DISTDIR}"/readline82-006"${DISTDIR}"/readline82-007
+	
+		"${DISTDIR}"/readline82-001
+		"${DISTDIR}"/readline82-002
+		"${DISTDIR}"/readline82-003
+		"${DISTDIR}"/readline82-004
+		"${DISTDIR}"/readline82-005
+		"${DISTDIR}"/readline82-006
+		"${DISTDIR}"/readline82-007
 )
 
 PATCHES=(
@@ -38,6 +45,9 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-8.0-headers.patch
 )
 
+src_unpack() {
+	unpack readline-8.2.tar.gz || die
+}
 
 src_prepare() {
 	eapply -p0 "${UPSTREAM_PATCHES[@]}"
