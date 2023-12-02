@@ -11,7 +11,7 @@ DESCRIPTION="OpenZFS on Linux and FreeBSD"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
 MY_P="${P/_rc/-rc}"
-SRC_URI="https://github.com/openzfs/zfs/tarball/285101326c6e989405aac65d64399f911f063dcf -> zfs-2.2.1-2851013.tar.gz"
+SRC_URI="https://github.com/openzfs/zfs/tarball/8bec727758fea0c8a2ee395af2fd9f486fc131fa -> zfs-2.2.2-8bec727.tar.gz"
 KEYWORDS="*"
 
 LICENSE="BSD-2 CDDL MIT"
