@@ -8,7 +8,7 @@
 
 inherit eutils
 
-DEPEND=">=app-arch/rpm2targz-9.0.0.3g"
+DEPEND=">=app-arch/rpm"
 
 # @FUNCTION: rpm_unpack
 # @USAGE: <rpms>
@@ -28,7 +28,7 @@ rpm_unpack() {
 		else
 			a="${DISTDIR}/${a}"
 		fi
-		rpm2tar -O "${a}" | tar xf - || die "failure unpacking ${a}"
+		rpm2cpio "${a}" | cpio -idmv || die "failure unpacking ${a}"
 	done
 }
 
