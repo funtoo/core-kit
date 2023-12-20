@@ -6,7 +6,7 @@ inherit readme.gentoo-r1
 
 DESCRIPTION="Fish shell like syntax highlighting for Zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-syntax-highlighting/"
-SRC_URI="https://api.github.com/repos/zsh-users/zsh-syntax-highlighting/tarball/refs/tags/0.7.1 -> zsh-syntax-highlighting-0.7.1.tar.gz"
+SRC_URI="https://api.github.com/repos/zsh-users/zsh-syntax-highlighting/tarball/refs/tags/0.8.0 -> zsh-syntax-highlighting-0.8.0.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
