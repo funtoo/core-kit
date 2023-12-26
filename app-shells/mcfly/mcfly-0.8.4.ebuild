@@ -15,7 +15,7 @@ anstyle-parse-0.2.2
 anstyle-query-1.0.0
 anstyle-wincon-3.0.1
 autocfg-1.1.0
-autopilot-0.4.0-ae5263bfde2e9de1ff0a59c4db6a4a4e8aacb3b9
+autopilot-0.4.0
 bitflags-1.3.2
 bitflags-2.4.1
 block-0.1.6
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="Context-aware bash history search replacement (ctrl-r)"
 HOMEPAGE="https://github.com/cantino/mcfly"
-SRC_URI="https://api.github.com/repos/cantino/mcfly/tarball/v0.8.3 -> mcfly-0.8.3.tar.gz
+SRC_URI="https://api.github.com/repos/cantino/mcfly/tarball/v0.8.4 -> mcfly-0.8.4.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT Unlicense"
