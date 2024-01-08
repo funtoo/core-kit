@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Library to provide useful functions commonly found on BSD systems"
 HOMEPAGE="https://libbsd.freedesktop.org/wiki/ https://gitlab.freedesktop.org/libbsd/libbsd"
-SRC_URI="https://libbsd.freedesktop.org/releases/libbsd-0.11.7.tar.xz -> libbsd-0.11.7.tar.xz"
+SRC_URI="https://libbsd.freedesktop.org/releases/libbsd-0.11.8.tar.xz -> libbsd-0.11.8.tar.xz"
 
 LICENSE="BSD BSD-2 BSD-4 ISC"
 SLOT="0"
