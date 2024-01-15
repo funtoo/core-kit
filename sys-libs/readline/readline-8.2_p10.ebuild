@@ -16,6 +16,9 @@ SRC_URI="
 	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-005 -> readline82-005
 	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-006 -> readline82-006
 	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-007 -> readline82-007
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-008 -> readline82-008
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-009 -> readline82-009
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-010 -> readline82-010
 "
 
 LICENSE="GPL-3"
@@ -36,6 +39,9 @@ UPSTREAM_PATCHES=(
 		"${DISTDIR}"/readline82-005
 		"${DISTDIR}"/readline82-006
 		"${DISTDIR}"/readline82-007
+		"${DISTDIR}"/readline82-008
+		"${DISTDIR}"/readline82-009
+		"${DISTDIR}"/readline82-010
 )
 
 PATCHES=(
