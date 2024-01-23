@@ -12,6 +12,8 @@ EGO_SUM=(
 	"github.com/gdamore/encoding v1.0.0/go.mod"
 	"github.com/gdamore/tcell/v2 v2.5.4"
 	"github.com/gdamore/tcell/v2 v2.5.4/go.mod"
+	"github.com/junegunn/uniseg v0.0.0-20240120174029-b504da4f6ed2"
+	"github.com/junegunn/uniseg v0.0.0-20240120174029-b504da4f6ed2/go.mod"
 	"github.com/lucasb-eyer/go-colorful v1.2.0"
 	"github.com/lucasb-eyer/go-colorful v1.2.0/go.mod"
 	"github.com/mattn/go-isatty v0.0.17"
@@ -29,14 +31,11 @@ EGO_SUM=(
 	"golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod"
 	"golang.org/x/crypto v0.0.0-20210921155107-089bfa567519/go.mod"
 	"golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4/go.mod"
-	"golang.org/x/mod v0.14.0"
-	"golang.org/x/mod v0.14.0/go.mod"
 	"golang.org/x/net v0.0.0-20190620200207-3b0461eec859/go.mod"
 	"golang.org/x/net v0.0.0-20210226172049-e18ecbb05110/go.mod"
 	"golang.org/x/net v0.0.0-20220722155237-a158d28d115b/go.mod"
 	"golang.org/x/sync v0.0.0-20190423024810-112230192c58/go.mod"
 	"golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f/go.mod"
-	"golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4"
 	"golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4/go.mod"
 	"golang.org/x/sync v0.5.0"
 	"golang.org/x/sync v0.5.0/go.mod"
@@ -46,12 +45,12 @@ EGO_SUM=(
 	"golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a/go.mod"
 	"golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f/go.mod"
 	"golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod"
-	"golang.org/x/sys v0.15.0"
-	"golang.org/x/sys v0.15.0/go.mod"
+	"golang.org/x/sys v0.16.0"
+	"golang.org/x/sys v0.16.0/go.mod"
 	"golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod"
 	"golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod"
-	"golang.org/x/term v0.15.0"
-	"golang.org/x/term v0.15.0/go.mod"
+	"golang.org/x/term v0.16.0"
+	"golang.org/x/term v0.16.0/go.mod"
 	"golang.org/x/text v0.3.0/go.mod"
 	"golang.org/x/text v0.3.3/go.mod"
 	"golang.org/x/text v0.3.7/go.mod"
@@ -60,15 +59,13 @@ EGO_SUM=(
 	"golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod"
 	"golang.org/x/tools v0.0.0-20191119224855-298f0cb1881e/go.mod"
 	"golang.org/x/tools v0.1.12/go.mod"
-	"golang.org/x/tools v0.16.1"
-	"golang.org/x/tools v0.16.1/go.mod"
 	"golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod"
 )
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/tarball/bb1a78629f4bbdbab1403c6a3ff330b4eb400f26 -> fzf-0.45.0-bb1a786.tar.gz
-https://direct.funtoo.org/27/bf/3e/27bf3eb44021a776abd0ee550fcd1e00c27a569f5c1f0e431ef74c33613f33cdb50b0b88e45624bb83c2e03da5f434e7e789b82546c75abf7d7b18b7d8aecea2 -> fzf-0.45.0-funtoo-go-bundle-c16ca7a0340e88d77041e04ae73cb2e4db60dc7c9e94df1ae2d7475f2dfa1655d1503fac2a42b7ce368c4e66bdcef27d6074c0973cb1355b57d5c9466ba913de.tar.gz"
+SRC_URI="https://github.com/junegunn/fzf/tarball/15d6aac8d44cb37bbc267dadb03db0f19c2a95ae -> fzf-0.46.0-15d6aac.tar.gz
+https://direct.funtoo.org/5f/de/d1/5fded18b37a8a4f06339853c5ec3b5202ca756e5a0459e7240d6c477146e40bacc32ba6b683dce530b7497b7aca4cbbdc525e1ef8833e963afde891640851310 -> fzf-0.46.0-funtoo-go-bundle-015c6abcb335fdf9ebf45ace8173e59d2385c2eedc4532df60fe6cb2016696ce74b600e075810765518314e9a390652f1d27e87eda1c3ea6248156fc5bbdafbb.tar.gz"
 
 LICENSE="MIT BSD-with-disclosure"
 SLOT="0"
