@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="A shell tool for executing jobs in parallel locally or on remote machines"
 HOMEPAGE="https://www.gnu.org/software/parallel/"
-SRC_URI="https://ftp.gnu.org/gnu/parallel/parallel-20231222.tar.bz2 -> parallel-20231222.tar.bz2"
+SRC_URI="https://ftp.gnu.org/gnu/parallel/parallel-20240122.tar.bz2 -> parallel-20240122.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
