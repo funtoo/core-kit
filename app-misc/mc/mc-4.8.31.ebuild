@@ -8,7 +8,7 @@ MY_P="${P/_/-}"
 
 DESCRIPTION="GNU Midnight Commander is a text based file manager"
 HOMEPAGE="https://midnight-commander.org"
-SRC_URI="http://ftp.midnight-commander.org/mc-4.8.30.tar.xz -> mc-4.8.30.tar.xz"
+SRC_URI="http://ftp.midnight-commander.org/mc-4.8.31.tar.xz -> mc-4.8.31.tar.xz"
 KEYWORDS="*"
 
 LICENSE="GPL-3"
