@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst
+DEPEND=>=sys-apps/sed-4 sys-apps/shadow
+DESCRIPTION=Collection of tools for managing UNIX services
+EAPI=7
+HOMEPAGE=https://untroubled.org/daemontools-encore/
+IUSE=selinux
+KEYWORDS=*
+LICENSE=GPL-2 MIT
+RDEPEND=!app-doc/daemontools-man !sys-process/daemontools selinux? ( sec-policy/selinux-daemontools )
+SLOT=0
+SRC_URI=https://github.com/bruceg/daemontools-encore/tarball/b40600d9ee0aa6025f33f2644207e069315ca64c -> daemontools-encore-1.11-b40600d.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	fixheadtails	6b7b3d896b0b285c12a94f3105c2a06c	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	qmail	e40eb00e01771b6bdc9d24bb1717c281	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
+_md5_=c1b1df1041ec58c4930926cae11836fd

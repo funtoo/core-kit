@@ -1,15 +1,15 @@
 BDEPEND=app-arch/xz-utils nls? ( sys-devel/gettext )
 DEFINED_PHASES=compile configure prepare setup
-DEPEND=selinux? ( sys-libs/libselinux ) nls? ( virtual/libintl ) test? ( || ( >=dev-lang/python-2.7.5-r2:2.7 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 dev-lang/python:3.10 ) )
+DEPEND=selinux? ( sys-libs/libselinux ) nls? ( virtual/libintl ) test? ( || ( dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 dev-lang/python:3.10 ) )
 DESCRIPTION=GNU utilities for finding files
 EAPI=7
 HOMEPAGE=https://www.gnu.org/software/findutils/
 IUSE=nls selinux static test
-KEYWORDS=next
+KEYWORDS=*
 LICENSE=GPL-3+
 RDEPEND=selinux? ( sys-libs/libselinux ) nls? ( virtual/libintl )
 RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://ftp.gnu.org/gnu/findutils/findutils-4.9.0.tar.xz -> findutils-4.9.0.tar.xz
 _eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	d3f9ec72badd0291b655682d67876adc	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=248e381e638c073e99a54b429dde86cb
+_md5_=a59333cc180cc844ed0e530792e527e4

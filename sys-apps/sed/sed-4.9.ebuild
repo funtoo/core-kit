@@ -10,7 +10,7 @@ SRC_URI="https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz -> sed-4.9.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="acl nls selinux static"
 
 RDEPEND="

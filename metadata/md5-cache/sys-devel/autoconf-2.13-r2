@@ -1,0 +1,13 @@
+BDEPEND=sys-apps/texinfo >=dev-lang/perl-5.10 >=sys-devel/m4-1.4.16
+DEFINED_PHASES=configure install prepare test
+DESCRIPTION=Used to create autoconfiguration files
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/autoconf/autoconf.html
+IUSE=emacs
+KEYWORDS=*
+LICENSE=GPL-2
+PDEPEND=emacs? ( app-emacs/autoconf-mode )
+RDEPEND=sys-apps/texinfo >=dev-lang/perl-5.10 >=sys-devel/m4-1.4.16 >=sys-devel/autoconf-wrapper-13 sys-devel/gnuconfig !~sys-devel/autoconf-2.13:2.5
+SLOT=2.1
+SRC_URI=https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz -> autoconf-2.13.tar.gz
+_md5_=230f8e1fe2157291edb21c41adecc414

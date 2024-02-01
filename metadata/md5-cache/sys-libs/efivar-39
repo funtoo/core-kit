@@ -1,0 +1,15 @@
+BDEPEND=app-text/mandoc test? ( sys-boot/grub:2 )
+DEFINED_PHASES=configure prepare
+DEPEND=dev-libs/popt >=sys-kernel/linux-headers-3.18 virtual/pkgconfig
+DESCRIPTION=Tools and library to manipulate EFI variables
+EAPI=7
+HOMEPAGE=https://github.com/rhinstaller/efivar
+IUSE=test
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=dev-libs/popt
+RESTRICT=!test? ( test )
+SLOT=0/1
+SRC_URI=https://github.com/rhboot/efivar/tarball/a77a4ffec000ad5dfc5d6394d208784672acda82 -> efivar-39-a77a4ff.tar.gz
+_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=f56881a6ee73ad2739293b1f8c01f2cc

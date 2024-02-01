@@ -1,0 +1,16 @@
+BDEPEND=doc? ( app-doc/doxygen ) >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=udev? ( >=virtual/libudev-208:=[-mgorny(-)] ) !udev? ( virtual/os-headers )
+DESCRIPTION=A cross-platform library to access USB devices
+EAPI=7
+HOMEPAGE=https://libusb.info/ https://github.com/libusb/libusb
+IUSE=debug doc examples static-libs test udev abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_s390_32 abi_s390_64 +split-usr
+KEYWORDS=*
+LICENSE=LGPL-2.1
+RDEPEND=udev? ( >=virtual/libudev-208:=[-mgorny(-)] )
+REQUIRED_USE=static-libs? ( !udev )
+RESTRICT=!test? ( test )
+SLOT=1
+SRC_URI=https://github.com/libusb/libusb/tarball/d52e355daa09f17ce64819122cb067b8a2ee0d4b -> libusb-1.0.27-d52e355.tar.gz
+_eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
+_md5_=47f466c61cf4a258018b79578b80b62a

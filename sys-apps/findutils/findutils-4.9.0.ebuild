@@ -2,7 +2,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2+ )
+PYTHON_COMPAT=( python3+ )
 
 inherit flag-o-matic python-any-r1
 
@@ -12,7 +12,7 @@ SRC_URI="https://ftp.gnu.org/gnu/findutils/findutils-4.9.0.tar.xz -> findutils-4
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="nls selinux static test"
 RESTRICT="!test? ( test )"
 

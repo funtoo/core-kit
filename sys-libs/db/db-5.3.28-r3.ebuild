@@ -1,33 +1,18 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
+
 inherit eutils db flag-o-matic java-pkg-opt-2 autotools multilib multilib-minimal toolchain-funcs
 
-#Number of official patches
-#PATCHNO=`echo ${PV}|sed -e "s,\(.*_p\)\([0-9]*\),\2,"`
-PATCHNO=${PV/*.*.*_p}
-if [[ ${PATCHNO} == "${PV}" ]] ; then
-	MY_PV=${PV}
-	MY_P=${P}
-	PATCHNO=0
-else
-	MY_PV=${PV/_p${PATCHNO}}
-	MY_P=${PN}-${MY_PV}
-fi
 
-S_BASE="${WORKDIR}/${MY_P}"
-S="${S_BASE}/build_unix"
+S="${WORKDIR}/${P}/build_unix"
 DESCRIPTION="Oracle Berkeley DB"
 HOMEPAGE="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html"
-SRC_URI="http://download.oracle.com/berkeley-db/${MY_P}.tar.gz"
-for (( i=1 ; i<=${PATCHNO} ; i++ )) ; do
-	export SRC_URI="${SRC_URI} http://www.oracle.com/technology/products/berkeley-db/db/update/${MY_PV}/patch.${MY_PV}.${i}"
-done
+SRC_URI="http://download.oracle.com/berkeley-db/${P}.tar.gz"
 
 LICENSE="Sleepycat"
 SLOT="5.3"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="*"
 IUSE="doc java cxx tcl test"
 
 REQUIRED_USE="test? ( tcl )"
@@ -45,46 +30,43 @@ MULTILIB_WRAPPED_HEADERS=(
 )
 
 src_prepare() {
-	cd "${WORKDIR}"/"${MY_P}"
-	for (( i=1 ; i<=${PATCHNO} ; i++ ))
-	do
-		epatch "${DISTDIR}"/patch."${MY_PV}"."${i}"
-	done
-
+	default
+	cd "${S}"/.. || die
 	# bug #510506
-	epatch "${FILESDIR}"/${PN}-4.8.24-java-manifest-location.patch
+	eapply "${FILESDIR}"/${PN}-4.8.24-java-manifest-location.patch
 
 	# use the includes from the prefix
-	epatch "${FILESDIR}"/${PN}-4.6-jni-check-prefix-first.patch
-	epatch "${FILESDIR}"/${PN}-4.3-listen-to-java-options.patch
+	eapply -p0 "${FILESDIR}"/${PN}-4.6-jni-check-prefix-first.patch
+	eapply "${FILESDIR}"/${PN}-4.3-listen-to-java-options.patch
 
 	# sqlite configure call has an extra leading ..
 	# upstreamed:5.2.36, missing in 5.3.x
-	epatch "${FILESDIR}"/${PN}-5.2.28-sqlite-configure-path.patch
+	eapply "${FILESDIR}"/${PN}-5.2.28-sqlite-configure-path.patch
 
 	# The upstream testsuite copies .lib and the binaries for each parallel test
 	# core, ~300MB each. This patch uses links instead, saves a lot of space.
-	epatch "${FILESDIR}"/${PN}-6.0.20-test-link.patch
+	eapply "${FILESDIR}"/${PN}-6.0.20-test-link.patch
 
 	# Needed when compiling with clang
-	epatch "${FILESDIR}"/${PN}-5.1.29-rename-atomic-compare-exchange.patch
+	eapply "${FILESDIR}"/${PN}-5.1.29-rename-atomic-compare-exchange.patch
+	
+	cd dist || die
 
 	# Upstream release script grabs the dates when the script was run, so lets
 	# end-run them to keep the date the same.
 	export REAL_DB_RELEASE_DATE="$(awk \
 		'/^DB_VERSION_STRING=/{ gsub(".*\\(|\\).*","",$0); print $0; }' \
-		"${S_BASE}"/dist/configure)"
+		configure)"
 	sed -r -i \
 		-e "/^DB_RELEASE_DATE=/s~=.*~='${REAL_DB_RELEASE_DATE}'~g" \
-		"${S_BASE}"/dist/RELEASE || die
+		RELEASE || die
 
 	# Include the SLOT for Java JAR files
 	# This supersedes the unused jarlocation patches.
 	sed -r -i \
 		-e '/jarfile=.*\.jar$/s,(.jar$),-$(LIBVERSION)\1,g' \
-		"${S_BASE}"/dist/Makefile.in || die
+		Makefile.in || die
 
-	cd "${S_BASE}"/dist || die
 	rm -f aclocal/libtool.m4
 	sed -i \
 		-e '/AC_PROG_LIBTOOL$/aLT_OUTPUT' \
@@ -108,7 +90,7 @@ src_prepare() {
 	# looks for 'Skipping\s'
 	sed -i \
 		-e '/db_repsite/s,Skipping:,Skipping,g' \
-		"${S_BASE}"/test/tcl/reputils.tcl || die
+		"${S}"/../test/tcl/reputils.tcl || die
 }
 
 multilib_src_configure() {
@@ -151,7 +133,7 @@ multilib_src_configure() {
 	# --enable-sql_compat
 	# Don't --enable-sql* because we don't want to use bundled sqlite.
 	# See Gentoo bug #605688
-	ECONF_SOURCE="${S_BASE}"/dist \
+	ECONF_SOURCE="${S}"/../dist \
 	STRIP="true" \
 	econf \
 		--enable-compat185 \
@@ -212,16 +194,9 @@ pkg_postrm() {
 }
 
 src_test() {
-	# db_repsite is impossible to build, as upstream strips those sources.
-	# db_repsite is used directly in the setup_site_prog,
-	# setup_site_prog is called from open_site_prog
-	# which is called only from tests in the multi_repmgr group.
-	#sed -ri \
-	#	-e '/set subs/s,multi_repmgr,,g' \
-	#	"${S_BASE}/test/testparams.tcl"
 	sed -ri \
 		-e '/multi_repmgr/d' \
-		"${S_BASE}/test/tcl/test.tcl" || die
+		"${S}/../test/tcl/test.tcl" || die
 
 	# This is the only failure in 5.2.28 so far, and looks like a false positive.
 	# Repmgr018 (btree): Test of repmgr stats.
@@ -234,7 +209,7 @@ src_test() {
 	sed -ri \
 		-e '/set parms.*repmgr018/d' \
 		-e 's/repmgr018//g' \
-		"${S_BASE}/test/tcl/test.tcl" || die
+		"${S}/../test/tcl/test.tcl" || die
 
 	multilib-minimal_src_test
 }

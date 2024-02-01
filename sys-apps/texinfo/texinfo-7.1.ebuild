@@ -14,7 +14,7 @@ SRC_URI="https://ftp.gnu.org/gnu/texinfo/texinfo-7.1.tar.xz -> texinfo-7.1.tar.x
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="nls +standalone static"
 
 RDEPEND="

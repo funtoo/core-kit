@@ -1,7 +1,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit db flag-o-matic java-pkg-opt-2 autotools eapi7-ver toolchain-funcs
+EAPI=7
+
+inherit db flag-o-matic java-pkg-opt-2 autotools toolchain-funcs
 
 RESTRICT="!test? ( test )"
 

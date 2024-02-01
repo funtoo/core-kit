@@ -10,7 +10,7 @@ SRC_URI="https://ftp.gnu.org/gnu/diffutils/diffutils-3.10.tar.xz -> diffutils-3.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="nls static"
 
 BDEPEND="

@@ -1,4 +1,4 @@
-BDEPEND=>=dev-util/intltool-0.41.0 sys-devel/gettext virtual/pkgconfig >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+BDEPEND=>=dev-util/intltool-0.41.0 sys-devel/gettext virtual/pkgconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4
 DEFINED_PHASES=configure install postinst prepare setup
 DEPEND=>=dev-libs/libgcrypt-1.2.0:0= dev-libs/nss >=sys-apps/keyutils-1.5.11-r1:= sys-process/lsof gpg? ( app-crypt/gpgme:= ) gtk? ( x11-libs/gtk+:2 ) openssl? ( >=dev-libs/openssl-0.9.7:= ) pam? ( sys-libs/pam ) pkcs11? ( >=dev-libs/openssl-0.9.7:= >=dev-libs/pkcs11-helper-1.04 ) tpm? ( app-crypt/trousers ) dev-libs/glib:2
 DESCRIPTION=eCryptfs userspace utilities
@@ -10,5 +10,5 @@ LICENSE=GPL-2
 RDEPEND=>=dev-libs/libgcrypt-1.2.0:0= dev-libs/nss >=sys-apps/keyutils-1.5.11-r1:= sys-process/lsof gpg? ( app-crypt/gpgme:= ) gtk? ( x11-libs/gtk+:2 ) openssl? ( >=dev-libs/openssl-0.9.7:= ) pam? ( sys-libs/pam ) pkcs11? ( >=dev-libs/openssl-0.9.7:= >=dev-libs/pkcs11-helper-1.04 ) tpm? ( app-crypt/trousers )
 SLOT=0
 SRC_URI=https://bazaar.launchpad.net/~ecryptfs/ecryptfs/trunk/tarball/894 -> ecryptfs-utils-111_p20170609.tgz
-_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	pam	756a09f72c4cdbb55f2694c95f1e0860	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	pam	756a09f72c4cdbb55f2694c95f1e0860	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=eb0071ac6f66b332fab4c3b02bf2631f

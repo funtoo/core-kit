@@ -1,20 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit db flag-o-matic java-pkg-opt-2 autotools multilib multilib-minimal eapi7-ver toolchain-funcs
+EAPI=7
 
-#Number of official patches
-#PATCHNO=`echo ${PV}|sed -e "s,\(.*_p\)\([0-9]*\),\2,"`
-PATCHNO=${PV/*.*.*_p}
-if [[ ${PATCHNO} == "${PV}" ]] ; then
-	MY_PV=${PV}
-	MY_P=${P}
-	PATCHNO=0
-else
-	MY_PV=${PV/_p${PATCHNO}}
-	MY_P=${PN}-${MY_PV}
-fi
+inherit db flag-o-matic java-pkg-opt-2 autotools multilib multilib-minimal toolchain-funcs
+
+MY_PV=${PV}
+MY_P=${P}
 
 S_BASE="${WORKDIR}/${MY_P}"
 S="${S_BASE}/dist"
@@ -22,9 +13,6 @@ DESCRIPTION="Oracle Berkeley DB"
 HOMEPAGE="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html"
 SRC_URI="https://download.oracle.com/otn/berkeley-db/${MY_P}.tar.gz
 	mirror://gentoo/${MY_P}.tar.gz"
-for (( i=1 ; i<=${PATCHNO} ; i++ )) ; do
-	SRC_URI+=" http://www.oracle.com/technology/products/berkeley-db/db/update/${MY_PV}/patch.${MY_PV}.${i}"
-done
 
 LICENSE="AGPL-3"
 SLOT="$(ver_cut 1-2)"
@@ -65,11 +53,6 @@ PATCHES=(
 
 src_prepare() {
 	cd "${WORKDIR}"/"${MY_P}"
-	for (( i=1 ; i<=${PATCHNO} ; i++ ))
-	do
-		eapply "${DISTDIR}"/patch."${MY_PV}"."${i}"
-	done
-
 	default
 
 	# Upstream release script grabs the dates when the script was run, so lets

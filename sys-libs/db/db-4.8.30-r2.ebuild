@@ -1,33 +1,17 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 inherit eutils db flag-o-matic java-pkg-opt-2 autotools multilib multilib-minimal toolchain-funcs
 
-#Number of official patches
-#PATCHNO=`echo ${PV}|sed -e "s,\(.*_p\)\([0-9]*\),\2,"`
-PATCHNO=${PV/*.*.*_p}
-if [[ ${PATCHNO} == "${PV}" ]] ; then
-	MY_PV=${PV}
-	MY_P=${P}
-	PATCHNO=0
-else
-	MY_PV=${PV/_p${PATCHNO}}
-	MY_P=${PN}-${MY_PV}
-fi
-
-S="${WORKDIR}/${MY_P}/build_unix"
+S="${WORKDIR}/${P}/build_unix"
 DESCRIPTION="Oracle Berkeley DB"
 HOMEPAGE="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html"
-SRC_URI="http://download.oracle.com/berkeley-db/${MY_P}.tar.gz"
-for (( i=1 ; i<=${PATCHNO} ; i++ )) ; do
-	export SRC_URI="${SRC_URI} http://www.oracle.com/technology/products/berkeley-db/db/update/${MY_PV}/patch.${MY_PV}.${i}"
-done
+SRC_URI="http://download.oracle.com/berkeley-db/${P}.tar.gz"
 
 LICENSE="Sleepycat"
 SLOT="4.8"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="*"
 IUSE="doc java cxx tcl test"
 
 REQUIRED_USE="test? ( tcl )"
@@ -41,30 +25,27 @@ RDEPEND="tcl? ( >=dev-lang/tcl-8.5.15-r1:0=[${MULTILIB_USEDEP}] )
 	java? ( >=virtual/jre-1.5 )"
 
 src_prepare() {
-	cd "${WORKDIR}"/"${MY_P}" || die
-	for (( i=1 ; i<=${PATCHNO} ; i++ ))
-	do
-		epatch "${DISTDIR}"/patch."${MY_PV}"."${i}"
-	done
-	epatch "${FILESDIR}"/${PN}-4.8-libtool.patch
-	epatch "${FILESDIR}"/${PN}-4.8.24-java-manifest-location.patch
-	epatch "${FILESDIR}"/${PN}-4.8.30-rename-atomic-compare-exchange.patch
+	default
+	cd "${S}"/.. || die
+	eapply -p0 "${FILESDIR}"/${PN}-4.8-libtool.patch
+	eapply "${FILESDIR}"/${PN}-4.8.24-java-manifest-location.patch
+	eapply "${FILESDIR}"/${PN}-4.8.30-rename-atomic-compare-exchange.patch
 
 	# use the includes from the prefix
-	epatch "${FILESDIR}"/${PN}-4.6-jni-check-prefix-first.patch
-	epatch "${FILESDIR}"/${PN}-4.3-listen-to-java-options.patch
+	eapply -p0 "${FILESDIR}"/${PN}-4.6-jni-check-prefix-first.patch
+	eapply "${FILESDIR}"/${PN}-4.3-listen-to-java-options.patch
 
 	sed -e "/^DB_RELEASE_DATE=/s/%B %e, %Y/%Y-%m-%d/" -i dist/RELEASE \
 		|| die
+	
+	cd "${S}"/../dist || die
 
 	# Include the SLOT for Java JAR files
 	# This supersedes the unused jarlocation patches.
 	sed -r -i \
 		-e '/jarfile=.*\.jar$/s,(.jar$),-$(LIBVERSION)\1,g' \
-		"${S}"/../dist/Makefile.in || die
-
-	cd "${S}"/../dist || die
-	rm -f aclocal/libtool.m4
+		Makefile.in || die
+	rm -f aclocal/libtool.m4 || die
 	sed -i \
 		-e '/AC_PROG_LIBTOOL$/aLT_OUTPUT' \
 		configure.ac || die

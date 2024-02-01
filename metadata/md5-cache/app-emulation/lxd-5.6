@@ -1,4 +1,4 @@
-BDEPEND=>=dev-lang/go-1.18 >=sys-kernel/linux-headers-4.15 nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-lang/go-1.10
+BDEPEND=>=dev-lang/go-1.18 >=sys-kernel/linux-headers-4.15 nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4 >=dev-lang/go-1.10
 DEFINED_PHASES=compile configure install postinst prepare setup
 DEPEND=app-arch/xz-utils app-arch/lz4 >=app-emulation/lxc-4.0.6[apparmor?] dev-lang/tcl dev-libs/libuv dev-libs/lzo >=dev-util/xdelta-3.0 net-dns/dnsmasq[dhcp,ipv6?] sys-apps/shadow
 DESCRIPTION=Fast, dense and secure container management
@@ -11,5 +11,5 @@ RDEPEND=app-arch/xz-utils app-arch/lz4 >=app-emulation/lxc-4.0.6[apparmor?] dev-
 RESTRICT=test
 SLOT=0
 SRC_URI=https://github.com/canonical/lxd/releases/download/lxd-5.6/lxd-5.6.tar.gz -> lxd-5.6.tar.gz
-_eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	golang-base	e62ea82a4485a73fb191120f7aad958e	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
+_eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	golang-base	e62ea82a4485a73fb191120f7aad958e	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
 _md5_=28ddab34046e92f9f8cb36519a7b59e0

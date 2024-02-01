@@ -10,7 +10,7 @@ SRC_URI="https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz -> tar-1.35.tar.xz"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="acl elibc_glibc minimal nls selinux userland_GNU xattr"
 
 RDEPEND="
