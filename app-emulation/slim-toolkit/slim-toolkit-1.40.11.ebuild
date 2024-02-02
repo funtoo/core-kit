@@ -6,7 +6,7 @@ inherit go-module
 
 go-module_set_globals
 
-SRC_URI="https://github.com/slimtoolkit/slim/tarball/f4a53d03b7d7c5c8b2e522c98fa6c0220a926d5c -> slim-1.40.10-f4a53d0.tar.gz"
+SRC_URI="https://github.com/slimtoolkit/slim/tarball/628dcf8011434e9a0b9ab4f4b3c6d423cbc104cf -> slim-1.40.11-628dcf8.tar.gz"
 
 DESCRIPTION="Make your containers better, smaller, more secure and do less to get there"
 HOMEPAGE="https://slimtoolkit.org https://github.com/slimtoolkit/slim"
