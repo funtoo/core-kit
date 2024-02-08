@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="The utility to manipulate machines owner keys which managed in shim"
 HOMEPAGE="https://github.com/lcp/mokutil"
-SRC_URI="https://github.com/lcp/mokutil/tarball/b4d8693f04bcf43986aba061845947534b384152 -> mokutil-0.6.0-b4d8693.tar.gz"
+SRC_URI="https://github.com/lcp/mokutil/tarball/c361087100fbb6955f32a9f364dee21b24724fb4 -> mokutil-0.7.0-c361087.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
