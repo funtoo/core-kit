@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=sys-apps/dbus client? ( sys-libs/readline:0= ) ~dev-libs/ell-0.62 net-wireless/wireless-regdb crda? ( net-wireless/crda ) standalone? ( systemd? ( sys-apps/systemd ) !systemd? ( virtual/resolvconf ) )
 SLOT=0
-SRC_URI=https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.13.tar.xz -> iwd-2.13.tar.xz
+SRC_URI=https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.14.tar.xz -> iwd-2.14.tar.xz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=dd7674d451d2fd08ca138f432a92055d
+_md5_=9f6882e676d328c1da2a96d0351a3ee3
