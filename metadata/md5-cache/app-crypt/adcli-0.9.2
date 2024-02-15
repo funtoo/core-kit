@@ -1,0 +1,14 @@
+BDEPEND=doc? ( app-text/docbook-xml-dtd:4.3 app-text/xmlto dev-libs/libxslt ) >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure prepare
+DEPEND=app-crypt/mit-krb5 net-nds/openldap:=[sasl]
+DESCRIPTION=Tool for performing actions on an Active Directory domain
+EAPI=7
+HOMEPAGE=https://www.freedesktop.org/software/realmd/adcli/adcli.html
+IUSE=doc
+KEYWORDS=*
+LICENSE=LGPL-2.1
+RDEPEND=app-crypt/mit-krb5 net-nds/openldap:=[sasl]
+SLOT=0
+SRC_URI=https://gitlab.freedesktop.org/realmd/adcli/-/archive/0.9.2/adcli-0.9.2.tar.bz2 -> adcli-0.9.2.tar.bz2
+_eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=6ce1371514741c8b316a61f090b2402e
