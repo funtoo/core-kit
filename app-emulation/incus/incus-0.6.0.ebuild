@@ -6,7 +6,7 @@ inherit autotools golang-base bash-completion-r1 linux-info user systemd
 
 DESCRIPTION="Fast, dense and secure container management"
 HOMEPAGE="https://linuxcontainers.org/incus/introduction/ https://github.com/lxc/incus"
-SRC_URI="https://github.com/lxc/incus/releases/download/v0.5.1/incus-0.5.1.tar.xz -> incus-0.5.1.tar.xz"
+SRC_URI="https://github.com/lxc/incus/releases/download/v0.6.0/incus-0.6.tar.xz -> incus-0.6.tar.xz"
 
 # Needs to include licenses for all bundled programs and libraries.
 LICENSE="Apache-2.0 BSD BSD-2 LGPL-3 MIT MPL-2.0"
@@ -61,7 +61,7 @@ QA_PREBUILT="/usr/lib/incus/libcowsql.so.0.0.1
 	/usr/bin/incus-user
 	/usr/sbin/incusd"
 
-S="${WORKDIR}/incus-0.5.1"
+S="${WORKDIR}/incus-0.6"
 RESTRICT="test"
 VDIR="${S}/vendor"
 
