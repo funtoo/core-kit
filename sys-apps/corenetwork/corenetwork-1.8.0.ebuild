@@ -9,11 +9,11 @@ LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="*"
 
-SRC_URI="https://github.com/funtoo/corenetwork/tarball/3ca17653889a0cd6aa155b0ced67a82080f52208 -> corenetwork-1.7.0-3ca1765.tar.gz"
+SRC_URI="https://github.com/funtoo/corenetwork/tarball/87aff581398eba1f63bc38a3ea1dfac61eb34191 -> corenetwork-1.8.0-87aff58.tar.gz"
 
 RDEPEND="sys-apps/openrc !<=sys-apps/openrc-0.12.4-r4"
 
-S="${WORKDIR}/funtoo-corenetwork-3ca1765"
+S="${WORKDIR}/funtoo-corenetwork-87aff58"
 
 #src_unpack() {
 #	unpack $A

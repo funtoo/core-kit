@@ -6,5 +6,5 @@ KEYWORDS=*
 LICENSE=BSD-2
 RDEPEND=sys-apps/openrc !<=sys-apps/openrc-0.12.4-r4
 SLOT=0
-SRC_URI=https://github.com/funtoo/corenetwork/tarball/3ca17653889a0cd6aa155b0ced67a82080f52208 -> corenetwork-1.7.0-3ca1765.tar.gz
-_md5_=f184b6efa586914e5885d76d4284a70d
+SRC_URI=https://github.com/funtoo/corenetwork/tarball/87aff581398eba1f63bc38a3ea1dfac61eb34191 -> corenetwork-1.8.0-87aff58.tar.gz
+_md5_=6a2521b00f545f072ad22885b48e3b18
