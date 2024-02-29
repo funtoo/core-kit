@@ -273,7 +273,8 @@ src_unpack() {
 }
 
 src_install() {
+	# Avoid calling doman from eclass. It fails.
+	rm -rf ${S}/man
 	cargo_src_install
-
 	dodoc README.md
 }
