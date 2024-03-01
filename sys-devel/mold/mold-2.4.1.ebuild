@@ -6,7 +6,7 @@ inherit cmake toolchain-funcs
 
 DESCRIPTION="Mold: A Modern Linker 🦠"
 HOMEPAGE="https://github.com/rui314/mold"
-SRC_URI="https://github.com/rui314/mold/tarball/3d9b4d5c05250fa7c507b0c74038915929f990f1 -> mold-2.4.0-3d9b4d5.tar.gz"
+SRC_URI="https://github.com/rui314/mold/tarball/fb3c166f80b92ca34ebd1b3f467edbcad7cae649 -> mold-2.4.1-fb3c166.tar.gz"
 
 # mold (MIT)
 #  - xxhash (BSD-2)

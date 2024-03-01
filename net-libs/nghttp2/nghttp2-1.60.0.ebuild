@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="HTTP/2 C Library"
 HOMEPAGE="https://nghttp2.org/"
-SRC_URI="https://github.com/nghttp2/nghttp2/releases/download/v1.59.0/nghttp2-1.59.0.tar.xz -> nghttp2-1.59.0.tar.xz"
+SRC_URI="https://github.com/nghttp2/nghttp2/releases/download/v1.60.0/nghttp2-1.60.0.tar.xz -> nghttp2-1.60.0.tar.xz"
 
 LICENSE="MIT"
 SLOT="0/1.14" # <C++>.<C> SONAMEs
