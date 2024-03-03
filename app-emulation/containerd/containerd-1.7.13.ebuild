@@ -5,7 +5,7 @@ inherit go-module systemd
 
 DESCRIPTION="A daemon to control runC"
 HOMEPAGE="https://containerd.io/"
-SRC_URI="https://github.com/containerd/containerd/tarball/39bb06f98f17c7a226b10269d325c861585b2389 -> containerd-1.5.18-39bb06f.tar.gz"
+SRC_URI="https://github.com/containerd/containerd/tarball/7c3aca7a610df76212171d200ca3811ff6096eb8 -> containerd-1.7.13-7c3aca7.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -20,7 +20,7 @@ DEPEND="
 # recommended version of runc is found at https://github.com/containerd/containerd/tree/release/1.5/script/setup
 RDEPEND="
 	${DEPEND}
-	~app-emulation/runc-1.1.5
+	app-emulation/runc
 "
 
 BDEPEND="
@@ -61,7 +61,7 @@ src_compile() {
 	myemakeargs=(
 		BUILDTAGS="${options[*]}"
 		LDFLAGS="$(usex hardened '-extldflags -fno-PIC' '')"
-		REVISION="39bb06f98f17c7a226b10269d325c861585b2389"
+		REVISION="7c3aca7a610df76212171d200ca3811ff6096eb8"
 		VERSION=v${PV}
 	)
 
