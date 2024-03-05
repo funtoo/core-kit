@@ -8,7 +8,7 @@ RC_VER="2.7"
 
 DESCRIPTION="A fast and secure drop-in replacement for sendmail"
 HOMEPAGE="http://www.postfix.org/"
-SRC_URI="https://de.postfix.org/ftpmirror/official/postfix-3.8.5.tar.gz -> postfix-3.8.5.tar.gz"
+SRC_URI="https://de.postfix.org/ftpmirror/official/postfix-3.8.6.tar.gz -> postfix-3.8.6.tar.gz"
 
 LICENSE="|| ( IBM EPL-2.0 )"
 SLOT="0"
