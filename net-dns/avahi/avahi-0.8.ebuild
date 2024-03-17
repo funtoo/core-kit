@@ -8,12 +8,13 @@ inherit autotools flag-o-matic mono-env python-single-r1 systemd user xdg-utils
 
 DESCRIPTION="System which facilitates service discovery on a local network"
 HOMEPAGE="https://avahi.org/"
-SRC_URI="https://github.com/lathiat/avahi/tarball/f060abee2807c943821d88839c013ce15db17b58 -> avahi-0.8-f060abe.tar.gz"
+SRC_URI="https://github.com/avahi/avahi/tarball/f060abee2807c943821d88839c013ce15db17b58 -> avahi-0.8-f060abe.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="*"
 IUSE="autoipd bookmarks +dbus doc gdbm gtk howl-compat +introspection ipv6 kernel_linux +mdnsresponder-compat mono nls python qt5 selinux systemd test"
+S="${WORKDIR}/avahi-avahi-f060abe"
 
 REQUIRED_USE="
 	python? ( dbus gdbm ${PYTHON_REQUIRED_USE} )
@@ -60,13 +61,6 @@ BDEPEND="
 	sys-devel/gettext
 	virtual/pkgconfig
 "
-
-post_src_unpack() {
-	if [ ! -d "${S}" ]; then
-		mv lathiat-avahi* "${S}" || die
-	fi
-}
-
 
 pkg_preinst() {
 	enewgroup netdev
