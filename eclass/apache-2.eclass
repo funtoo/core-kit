@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: apache-2.eclass
@@ -10,7 +9,7 @@
 # This eclass handles apache-2.x ebuild functions such as LoadModule generation
 # and inter-module dependency checking.
 
-inherit autotools flag-o-matic multilib ssl-cert user toolchain-funcs eapi7-ver
+inherit autotools flag-o-matic multilib ssl-cert user toolchain-funcs
 
 [[ ${CATEGORY}/${PN} != www-servers/apache ]] \
 	&& die "Do not use this eclass with anything else than www-servers/apache ebuilds!"
@@ -37,44 +36,16 @@ case $(ver_cut 1-2) in
 	;;
 esac
 
+# @VARIABLE: APACHE_LAYOUT
+# @DESCRIPTION:
+# This variable set the name of the config layout to use.
+APACHE_LAYOUT=${APACHE_LAYOUT:-Funtoo}
+
 # ==============================================================================
 # INTERNAL VARIABLES
 # ==============================================================================
 
-# @ECLASS-VARIABLE: GENTOO_PATCHNAME
-# @DESCRIPTION:
-# This internal variable contains the prefix for the patch tarball.
-# Defaults to the full name and version (including revision) of the package.
-# If you want to override this in an ebuild, use:
-# ORIG_PR="(revision of Gentoo stuff you want)"
-# GENTOO_PATCHNAME="gentoo-${PN}-${PV}${ORIG_PR:+-${ORIG_PR}}"
-[[ -n "${GENTOO_PATCHNAME}" ]] || GENTOO_PATCHNAME="gentoo-${PF}"
-
-# @ECLASS-VARIABLE: GENTOO_PATCHDIR
-# @DESCRIPTION:
-# This internal variable contains the working directory where patches and config
-# files are located.
-# Defaults to the patchset name appended to the working directory.
-[[ -n "${GENTOO_PATCHDIR}" ]] || GENTOO_PATCHDIR="${WORKDIR}/${GENTOO_PATCHNAME}"
-
-# @VARIABLE: GENTOO_DEVELOPER
-# @DESCRIPTION:
-# This variable needs to be set in the ebuild and contains the name of the
-# gentoo developer who created the patch tarball
-
-# @VARIABLE: GENTOO_PATCHSTAMP
-# @DESCRIPTION:
-# This variable needs to be set in the ebuild and contains the date the patch
-# tarball was created at in YYYYMMDD format
-
-# @VARIABLE: GENTOO_PATCH_A
-# @DESCRIPTION:
-# This variable should contain the entire filename of patch tarball.
-# Defaults to the name of the patchset, with a datestamp.
-[[ -n "${GENTOO_PATCH_A}" ]] || GENTOO_PATCH_A="${GENTOO_PATCHNAME}-${GENTOO_PATCHSTAMP}.tar.bz2"
-
-SRC_URI="mirror://apache/httpd/httpd-${PV}.tar.bz2
-	https://dev.gentoo.org/~${GENTOO_DEVELOPER}/dist/apache/${GENTOO_PATCH_A}"
+SRC_URI="mirror://apache/httpd/httpd-${PV}.tar.bz2"
 
 # @VARIABLE: IUSE_MPMS_FORK
 # @DESCRIPTION:
@@ -326,48 +297,6 @@ setup_modules() {
 	check_module_critical
 }
 
-# @VARIABLE: MODULE_DEFINES
-# @DESCRIPTION:
-# This variable needs to be set in the ebuild and contains a space-separated
-# list of tokens each mapping a module to a runtime define which can be
-# specified in APACHE2_OPTS in /etc/conf.d/apache2 to enable this particular
-# module.
-
-# @FUNCTION: generate_load_module
-# @DESCRIPTION:
-# This internal function generates the LoadModule lines for httpd.conf based on
-# the current module selection and MODULE_DEFINES
-generate_load_module() {
-	local endit=0 mod_lines= mod_dir="${ED%/}/usr/$(get_libdir)/apache2/modules"
-
-	if use static; then
-		sed -i -e "/%%LOAD_MODULE%%/d" \
-			"${GENTOO_PATCHDIR}"/conf/httpd.conf
-		return
-	fi
-
-	for m in ${MY_MODS[@]} ; do
-		if [[ -e "${mod_dir}/mod_${m}.so" ]] ; then
-			for def in ${MODULE_DEFINES} ; do
-				if [[ "${m}" == "${def%:*}" ]] ; then
-					mod_lines="${mod_lines}\n<IfDefine ${def#*:}>"
-					endit=1
-				fi
-			done
-
-			mod_lines="${mod_lines}\nLoadModule ${m}_module modules/mod_${m}.so"
-
-			if [[ ${endit} -ne 0 ]] ; then
-				mod_lines="${mod_lines}\n</IfDefine>"
-				endit=0
-			fi
-		fi
-	done
-
-	sed -i -e "s:%%LOAD_MODULE%%:${mod_lines}:" \
-		"${GENTOO_PATCHDIR}"/conf/httpd.conf
-}
-
 # @FUNCTION: check_upgrade
 # @DESCRIPTION:
 # This internal function checks if the previous configuration file for built-in
@@ -425,99 +354,6 @@ apache-2_pkg_setup() {
 	fi
 }
 
-# @FUNCTION: apache-2_src_prepare
-# @DESCRIPTION:
-# This function applies patches, configures a custom file-system layout and
-# rebuilds the configure scripts.
-apache-2_src_prepare() {
-	#fix prefix in conf files etc (bug #433736)
-	use !prefix || sed -e "s@/\(usr\|var\|etc\|run\)/@${EPREFIX}&@g" \
-		-i "${GENTOO_PATCHDIR}"/conf/httpd.conf "${GENTOO_PATCHDIR}"/scripts/* \
-		"${GENTOO_PATCHDIR}"/docs/*.example "${GENTOO_PATCHDIR}"/patches/*.layout \
-		"${GENTOO_PATCHDIR}"/init/* "${GENTOO_PATCHDIR}"/conf/vhosts.d/* \
-		"${GENTOO_PATCHDIR}"/conf/modules.d/* || die
-
-	# 03_all_gentoo-apache-tools.patch injects -Wl,-z,now, which is not a good
-	# idea for everyone
-	case ${CHOST} in
-		*-linux-gnu|*-solaris*|*-freebsd*)
-			# do nothing, these use GNU binutils
-			:
-		;;
-		*-darwin*)
-			sed -i -e 's/-Wl,-z,now/-Wl,-bind_at_load/g' \
-				"${GENTOO_PATCHDIR}"/patches/03_all_gentoo_apache-tools.patch
-		;;
-		*)
-			# patch it out to be like upstream
-			sed -i -e 's/-Wl,-z,now//g' \
-				"${GENTOO_PATCHDIR}"/patches/03_all_gentoo_apache-tools.patch
-		;;
-	esac
-
-	# Use correct multilib libdir in gentoo patches
-	sed -i -e "s:/usr/lib:/usr/$(get_libdir):g" \
-		"${GENTOO_PATCHDIR}"/{conf/httpd.conf,init/*,patches/config.layout} \
-		|| die "libdir sed failed"
-
-	if [[ "${EAPI}" -ge 6 ]] ; then
-		default
-		eapply "${GENTOO_PATCHDIR}"/patches/*.patch
-	else
-		epatch "${GENTOO_PATCHDIR}"/patches/*.patch
-	fi
-
-	if [[ ${EAPI} = 5 ]] ; then
-		# Handle patches from ebuild's PATCHES array if one is given
-		if [[ -n "${PATCHES}" ]] ; then
-			local patchestype=$(declare -p PATCHES 2>&-)
-			if [[ "${patchestype}" != "declare -a PATCHES="* ]] ; then
-				die "Declaring PATCHES as a variable is forbidden. Please use an array instead."
-			fi
-			epatch "${PATCHES[@]}"
-		fi
-
-		# Handle user patches
-		epatch_user
-	fi
-
-	# Don't rename configure.in _before_ any possible user patches!
-	if [[ -f "configure.in" ]] ; then
-		mv configure.{in,ac} || die
-	fi
-
-	# setup the filesystem layout config
-	cat "${GENTOO_PATCHDIR}"/patches/config.layout >> "${S}"/config.layout || \
-		die "Failed preparing config.layout!"
-	sed -i -e "s:version:${PF}:g" "${S}"/config.layout
-
-	# apache2.8 instead of httpd.8 (bug #194828)
-	mv docs/man/{httpd,apache2}.8
-	sed -i -e 's/httpd\.8/apache2.8/g' Makefile.in
-
-	# patched-in MPMs need the build environment rebuilt
-	sed -i -e '/sinclude/d' configure.ac
-	AT_M4DIR=build eautoreconf
-
-	# ${T} must be not group-writable, else grsec TPE will block it
-	chmod g-w "${T}"
-
-	# This package really should upgrade to using pcre's .pc file.
-	cat <<-\EOF >"${T}"/pcre-config
-	#!/bin/bash
-	flags=()
-	for flag; do
-		if [[ ${flag} == "--version" ]]; then
-			flags+=( --modversion )
-		else
-			flags+=( "${flag}" )
-		fi
-	done
-	exec ${PKG_CONFIG} libpcre "${flags[@]}"
-	EOF
-	chmod a+x "${T}"/pcre-config
-}
-
 # @FUNCTION: apache-2_src_configure
 # @DESCRIPTION:
 # This function adds compiler flags and runs econf and emake based on MY_MPM and
@@ -535,6 +371,9 @@ apache-2_src_configure() {
 	# Instead of filtering --as-needed (bug #128505), append --no-as-needed
 	# Thanks to Harald van Dijk
 	append-ldflags $(no-as-needed)
+
+	# Brain dead check.
+	tc-is-cross-compiler && export ap_cv_void_ptr_lt_long="no"
 
 	# peruser MPM debugging with -X is nearly impossible
 	if has peruser ${IUSE_MPMS} && use apache2_mpms_peruser ; then
@@ -556,97 +395,12 @@ apache-2_src_configure() {
 		--with-z="${EPREFIX}"/usr
 		--with-port=80
 		--with-program-name=apache2
-		--enable-layout=Gentoo
+		--enable-layout=${APACHE_LAYOUT}
 	)
 	ac_cv_path_PKGCONFIG=${PKG_CONFIG} \
 	econf "${MY_CONF[@]}"
 
 	sed -i -e 's:apache2\.conf:httpd.conf:' include/ap_config_auto.h || die
-}
-
-# @FUNCTION: apache-2_src_install
-# @DESCRIPTION:
-# This function runs `emake install' and generates, installs and adapts the gentoo
-# specific configuration files found in the tarball
-apache-2_src_install() {
-	emake DESTDIR="${D}" MKINSTALLDIRS="mkdir -p" install
-
-	# install our configuration files
-	keepdir /etc/apache2/vhosts.d
-	keepdir /etc/apache2/modules.d
-
-	generate_load_module
-	insinto /etc/apache2
-	doins -r "${GENTOO_PATCHDIR}"/conf/*
-	use apache2_modules_mime_magic && doins docs/conf/magic
-
-	insinto /etc/logrotate.d
-	newins "${GENTOO_PATCHDIR}"/scripts/apache2-logrotate apache2
-
-	# generate a sane default APACHE2_OPTS
-	APACHE2_OPTS="-D DEFAULT_VHOST -D INFO"
-	use doc && APACHE2_OPTS+=" -D MANUAL"
-	use ssl && APACHE2_OPTS+=" -D SSL -D SSL_DEFAULT_VHOST"
-	use suexec && APACHE2_OPTS+=" -D SUEXEC"
-	if has negotiation ${APACHE2_MODULES} && use apache2_modules_negotiation; then
-		APACHE2_OPTS+=" -D LANGUAGE"
-	fi
-
-	sed -i -e "s:APACHE2_OPTS=\".*\":APACHE2_OPTS=\"${APACHE2_OPTS}\":" \
-		"${GENTOO_PATCHDIR}"/init/apache2.confd || die
-
-	newconfd "${GENTOO_PATCHDIR}"/init/apache2.confd apache2
-	newinitd "${GENTOO_PATCHDIR}"/init/apache2.initd apache2
-
-	# install apache2ctl wrapper for our init script if available
-	if test -e "${GENTOO_PATCHDIR}"/scripts/apache2ctl; then
-		exeinto /usr/sbin
-		doexe "${GENTOO_PATCHDIR}"/scripts/apache2ctl
-	else
-		dosym /etc/init.d/apache2 /usr/sbin/apache2ctl
-	fi
-
-	# provide legacy symlink for apxs, bug 177697
-	dosym apxs /usr/sbin/apxs2
-
-	# install some documentation
-	dodoc ABOUT_APACHE CHANGES LAYOUT README README.platforms VERSIONING
-	dodoc "${GENTOO_PATCHDIR}"/docs/*
-
-	# drop in a convenient link to the manual
-	if use doc ; then
-		sed -i -e "s:VERSION:${PVR}:" "${ED%/}/etc/apache2/modules.d/00_apache_manual.conf"
-		docompress -x /usr/share/doc/${PF}/manual # 503640
-	else
-		rm -f "${ED%/}/etc/apache2/modules.d/00_apache_manual.conf"
-		rm -Rf "${ED%/}/usr/share/doc/${PF}/manual"
-	fi
-
-	# the default icons and error pages get stored in
-	# /usr/share/apache2/{error,icons}
-	dodir /usr/share/apache2
-	mv -f "${ED%/}/var/www/localhost/error" "${ED%/}/usr/share/apache2/error"
-	mv -f "${ED%/}/var/www/localhost/icons" "${ED%/}/usr/share/apache2/icons"
-	rm -rf "${ED%/}/var/www/localhost/"
-	eend $?
-
-	# set some sane permissions for suexec
-	if use suexec ; then
-		local needs_adjustment="$(ver_test ${PV} -ge 2.4.34 && { { ! use suexec-syslog || ! use suexec-caps ; } && echo true || echo false ; } || echo true)"
-		if ${needs_adjustment} ; then
-			fowners 0:${SUEXEC_CALLER:-apache} /usr/sbin/suexec
-			fperms 4710 /usr/sbin/suexec
-			# provide legacy symlink for suexec, bug 177697
-			dosym /usr/sbin/suexec /usr/sbin/suexec2
-		fi
-	fi
-
-	# empty dirs
-	for i in /var/lib/dav /var/log/apache2 /var/cache/apache2 ; do
-		keepdir ${i}
-		fowners apache:apache ${i}
-		fperms 0750 ${i}
-	done
 }
 
 # @FUNCTION: apache-2_pkg_postinst
@@ -681,4 +435,4 @@ apache-2_pkg_postinst() {
 
 }
 
-EXPORT_FUNCTIONS pkg_setup src_prepare src_configure src_install pkg_postinst
+EXPORT_FUNCTIONS pkg_setup src_configure pkg_postinst
