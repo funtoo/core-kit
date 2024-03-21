@@ -18,7 +18,7 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="CMake"
 SLOT="0"
 KEYWORDS="*"
-IUSE="+doc emacs ncurses qt5 test"
+IUSE="doc emacs ncurses qt5 test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="

@@ -9,7 +9,7 @@ go-module_set_globals
 DESCRIPTION="Define and run multi-container applications with Docker"
 HOMEPAGE="https://github.com/docker/compose"
 SRC_URI="https://github.com/docker/compose/tarball/47bb4f966066d79f5f1cb88cff57c8df43b87137 -> compose-2.21.0-47bb4f9.tar.gz
-https://direct.funtoo.org/ae/aa/ec/aeaaecfea21eb2f58f7ad6add2d6359f289cffcef7874c3b34d644e545298404fcd9545d7c87d3dcf0ea07d4fe8144d3e9be2f83cab581ccd2c71f653a52af17 -> docker-compose-2.21.0-funtoo-go-bundle-fde9fbd24f7587a011cd17022e88190ee79c86b4f4eb57e328abd20fbbbef500cefe85d010aea4645e92b75afbe725bd617360c3c56b300f193a864519aa79f5.tar.gz"
+https://direct.funtoo.org/d8/22/1c/d8221c05beb795c313c0c9774ecf59c977284cc33a8e255594c084daab9747440b8fb1a5b843cffbb62696efa1fe29ef026397f4909e8243e8617e3f0d73eb8a -> docker-compose-2.21.0-funtoo-go-bundle-fde9fbd24f7587a011cd17022e88190ee79c86b4f4eb57e328abd20fbbbef500cefe85d010aea4645e92b75afbe725bd617360c3c56b300f193a864519aa79f5.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="2"
