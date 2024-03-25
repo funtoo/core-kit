@@ -115,7 +115,7 @@ futures-util-0.3.30
 generic-array-0.14.7
 gethostname-0.4.3
 getrandom-0.2.11
-gix-0.61.0
+gix-0.61.1
 gix-actor-0.31.1
 gix-bitmap-0.2.11
 gix-chunk-0.4.8
@@ -160,7 +160,7 @@ iana-time-zone-0.1.58
 iana-time-zone-haiku-0.1.2
 idna-0.5.0
 indexmap-1.9.3
-indexmap-2.2.5
+indexmap-2.2.6
 instant-0.1.12
 io-lifetimes-1.0.11
 is-docker-0.2.0
@@ -212,7 +212,7 @@ open-5.1.2
 ordered-float-2.10.1
 ordered-multimap-0.7.1
 ordered-stream-0.2.0
-os_info-3.8.1
+os_info-3.8.2
 parking-2.2.0
 parking_lot-0.12.1
 parking_lot_core-0.9.9
@@ -253,7 +253,7 @@ rayon-1.9.0
 rayon-core-1.12.1
 redox_syscall-0.4.1
 redox_users-0.4.4
-regex-1.10.3
+regex-1.10.4
 regex-automata-0.4.4
 regex-syntax-0.8.2
 rust-ini-0.21.0
@@ -346,7 +346,7 @@ wasm-bindgen-backend-0.2.89
 wasm-bindgen-macro-0.2.89
 wasm-bindgen-macro-support-0.2.89
 wasm-bindgen-shared-0.2.89
-which-6.0.0
+which-6.0.1
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
 winapi-util-0.1.6
@@ -377,6 +377,7 @@ windows_x86_64_msvc-0.52.3
 winnow-0.5.40
 winnow-0.6.5
 winres-0.1.12
+winsafe-0.0.19
 xdg-home-1.0.0
 yaml-rust-0.4.5
 zbus-3.14.1
@@ -393,7 +394,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.18.0 -> starship-v1.18.0.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.18.1 -> starship-v1.18.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
