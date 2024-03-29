@@ -16,6 +16,7 @@ anstyle-query-1.0.2
 anstyle-wincon-3.0.2
 anyhow-1.0.77
 arc-swap-1.6.0
+arraydeque-0.5.1
 arrayvec-0.7.4
 async-broadcast-0.5.1
 async-channel-2.1.1
@@ -46,11 +47,11 @@ bytesize-1.3.0
 cc-1.0.83
 cfg-if-1.0.0
 cfg_aliases-0.1.1
-chrono-0.4.35
-clap-4.5.3
+chrono-0.4.37
+clap-4.5.4
 clap_builder-4.5.2
 clap_complete-4.5.1
-clap_derive-4.5.3
+clap_derive-4.5.4
 clap_lex-0.7.0
 clru-0.6.1
 cmake-0.1.50
@@ -78,14 +79,17 @@ derivative-2.2.0
 digest-0.9.0
 digest-0.10.7
 dirs-4.0.0
+dirs-5.0.1
 dirs-next-2.0.0
 dirs-sys-0.3.7
+dirs-sys-0.4.1
 dirs-sys-next-0.1.2
 dlv-list-0.5.2
 downcast-0.11.0
 dunce-1.0.4
 dyn-clone-1.0.16
 either-1.9.0
+encoding_rs-0.8.33
 enumflags2-0.7.8
 enumflags2_derive-0.7.8
 equivalent-1.0.1
@@ -115,7 +119,7 @@ futures-util-0.3.30
 generic-array-0.14.7
 gethostname-0.4.3
 getrandom-0.2.11
-gix-0.61.1
+gix-0.61.0
 gix-actor-0.31.1
 gix-bitmap-0.2.11
 gix-chunk-0.4.8
@@ -152,6 +156,7 @@ gix-validate-0.8.4
 guess_host_triple-0.1.3
 hashbrown-0.12.3
 hashbrown-0.14.3
+hashlink-0.8.4
 heck-0.5.0
 hermit-abi-0.3.3
 hex-0.4.3
@@ -177,7 +182,6 @@ libc-0.2.153
 libredox-0.0.1
 libz-ng-sys-1.1.14
 libz-sys-1.1.14
-linked-hash-map-0.5.6
 linux-raw-sys-0.3.8
 linux-raw-sys-0.4.12
 lock_api-0.4.11
@@ -209,6 +213,7 @@ objc_id-0.1.1
 once_cell-1.19.0
 opaque-debug-0.3.0
 open-5.1.2
+option-ext-0.2.0
 ordered-float-2.10.1
 ordered-multimap-0.7.1
 ordered-stream-0.2.0
@@ -249,7 +254,7 @@ quote-1.0.35
 rand-0.8.5
 rand_chacha-0.3.1
 rand_core-0.6.4
-rayon-1.9.0
+rayon-1.10.0
 rayon-core-1.12.1
 redox_syscall-0.4.1
 redox_users-0.4.4
@@ -270,7 +275,7 @@ semver-parser-0.10.2
 serde-1.0.197
 serde_derive-1.0.197
 serde_derive_internals-0.26.0
-serde_json-1.0.114
+serde_json-1.0.115
 serde_repr-0.1.17
 serde_spanned-0.6.5
 sha1-0.10.6
@@ -379,7 +384,7 @@ winnow-0.6.5
 winres-0.1.12
 winsafe-0.0.19
 xdg-home-1.0.0
-yaml-rust-0.4.5
+yaml-rust2-0.8.0
 zbus-3.14.1
 zbus_macros-3.14.1
 zbus_names-2.6.0
@@ -394,7 +399,7 @@ inherit cargo
 
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
-SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.18.1 -> starship-v1.18.1.tar.gz
+SRC_URI="https://api.github.com/repos/starship/starship/tarball/v1.18.2 -> starship-v1.18.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="ISC"
