@@ -1,32 +1,40 @@
-# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="4"
+EAPI=7
 
-inherit versionator eutils autotools toolchain-funcs multilib flag-o-matic
+inherit autotools flag-o-matic toolchain-funcs usr-ldscript
 
 DESCRIPTION="Light-weight 'standard library' of C functions"
 HOMEPAGE="https://launchpad.net/libnih"
-SRC_URI="https://launchpad.net/${PN}/$(get_version_component_range 1-2)/${PV}/+download/${P}.tar.gz"
+SRC_URI="https://github.com/keybuk/libnih/tarball/e4edea5653e700a07c67f714ab8b7c63179f3be2 -> libnih-1.0.3-e4edea5.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sparc x86"
+KEYWORDS="*"
 IUSE="+dbus nls static-libs +threads"
 
-# The configure phase will check for valgrind headers, and the tests will use
-# that header, but only to do dynamic valgrind detection.  The tests aren't
-# run directly through valgrind, only by developers directly.  So don't bother
-# depending on valgrind here. #559830
+S="${WORKDIR}/keybuk-libnih-e4edea5"
+
 RDEPEND="dbus? ( dev-libs/expat >=sys-apps/dbus-1.2.16 )"
 DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
+PATCHES=(
+	${FILESDIR}/${P}-optional-dbus.patch
+)
+
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-1.0.3-optional-dbus.patch
-	epatch "${FILESDIR}"/${PN}-1.0.3-pkg-config.patch
-	epatch "${FILESDIR}"/${PN}-1.0.3-signal-race.patch
+	default
+	sed \
+		-e '/^pkgconfigdir/s:prefix)/lib:libdir):' \
+		-i nih-dbus/Makefile.am
+	sed \
+		-e '/^pkgconfigdir/s:prefix)/lib:libdir):' \
+		-i nih/Makefile.am
+	sed \
+		-e 's:char \*output_package:extern char \*output_package:' \
+		-i nih-dbus-tool/output.h
 	eautoreconf
 }
 
