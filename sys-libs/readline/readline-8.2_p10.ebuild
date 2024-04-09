@@ -29,7 +29,6 @@ IUSE="static-libs +unicode utils"
 RDEPEND=">=sys-libs/ncurses-5.9-r3:=[static-libs?,${MULTILIB_USEDEP}]"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
-
 UPSTREAM_PATCHES=(
 	
 		"${DISTDIR}"/readline82-001
@@ -57,7 +56,6 @@ src_unpack() {
 
 src_prepare() {
 	eapply -p0 "${UPSTREAM_PATCHES[@]}"
-
 	default
 
 	# Force ncurses linking. #71420
