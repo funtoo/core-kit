@@ -6,7 +6,7 @@ inherit flag-o-matic
 
 DESCRIPTION="groovy little assembler"
 HOMEPAGE="https://www.nasm.us"
-SRC_URI="https://www.nasm.us/pub/nasm/releasebuilds/2.16.02/nasm-2.16.02.tar.xz -> nasm-2.16.02.tar.xz"
+SRC_URI="https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.xz -> nasm-2.16.03.tar.xz"
 
 LICENSE="BSD-2"
 SLOT="0"
