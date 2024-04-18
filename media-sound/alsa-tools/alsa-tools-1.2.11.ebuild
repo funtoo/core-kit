@@ -6,7 +6,7 @@ inherit autotools flag-o-matic xdg
 
 DESCRIPTION="Advanced Linux Sound Architecture tools"
 HOMEPAGE="https://alsa-project.org/"
-SRC_URI="https://www.alsa-project.org/files/pub/tools/alsa-tools-1.2.2.tar.bz2 -> alsa-tools-1.2.2.tar.bz2"
+SRC_URI="https://www.alsa-project.org/files/pub/tools/alsa-tools-1.2.11.tar.bz2 -> alsa-tools-1.2.11.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0.9"

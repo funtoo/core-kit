@@ -7,7 +7,7 @@ inherit autotools python-single-r1
 
 DESCRIPTION="Advanced Linux Sound Architecture Library"
 HOMEPAGE="https://alsa-project.org/"
-SRC_URI="https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2 -> alsa-lib-1.2.4.tar.bz2"
+SRC_URI="https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.11.tar.bz2 -> alsa-lib-1.2.11.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

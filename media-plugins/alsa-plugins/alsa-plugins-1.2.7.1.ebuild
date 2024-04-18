@@ -5,7 +5,7 @@ inherit autotools flag-o-matic multilib multilib-minimal
 
 DESCRIPTION="ALSA extra plugins"
 HOMEPAGE="http://www.alsa-project.org/"
-SRC_URI="https://www.alsa-project.org/files/pub/plugins/alsa-plugins-1.2.2.tar.bz2 -> alsa-plugins-1.2.2.tar.bz2"
+SRC_URI="https://www.alsa-project.org/files/pub/plugins/alsa-plugins-1.2.7.1.tar.bz2 -> alsa-plugins-1.2.7.1.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"

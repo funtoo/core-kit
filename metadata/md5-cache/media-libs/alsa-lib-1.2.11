@@ -10,6 +10,6 @@ LICENSE=LGPL-2.1
 RDEPEND=python? ( python_single_target_python3_10? ( dev-lang/python:3.10 >=dev-lang/python-exec-2:=[python_targets_python3_10] ) python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) ) media-libs/alsa-topology-conf media-libs/alsa-ucm-conf
 REQUIRED_USE=python? ( ^^ ( python_single_target_python3_10 python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 ) )
 SLOT=0
-SRC_URI=https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.4.tar.bz2 -> alsa-lib-1.2.4.tar.bz2
+SRC_URI=https://www.alsa-project.org/files/pub/lib/alsa-lib-1.2.11.tar.bz2 -> alsa-lib-1.2.11.tar.bz2
 _eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	d3f9ec72badd0291b655682d67876adc	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=7e39e9ecbfef76b15f3abc03b363d958
+_md5_=15013d96583f848cef007b996286ec36

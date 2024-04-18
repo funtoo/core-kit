@@ -7,5 +7,5 @@ KEYWORDS=*
 LICENSE=BSD
 RDEPEND=!<media-libs/alsa-lib-1.2.1
 SLOT=0
-SRC_URI=https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.4.tar.bz2 -> alsa-ucm-conf-1.2.4.tar.bz2
-_md5_=167c726f032b328f93f3a3d238faea24
+SRC_URI=https://www.alsa-project.org/files/pub/lib/alsa-ucm-conf-1.2.11.tar.bz2 -> alsa-ucm-conf-1.2.11.tar.bz2
+_md5_=262911b2ddbff9c5fe90f0f9927090fb
