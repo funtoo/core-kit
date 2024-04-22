@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile configure install postinst preinst prepare setup unpack
+DEPEND=>=sys-libs/ncurses-5.2-r2:0= nls? ( virtual/libintl )
+DESCRIPTION=The standard GNU Bourne again shell
+EAPI=7
+HOMEPAGE=http://tiswww.case.edu/php/chet/bash/bashtop.html
+IUSE=afs bashlogger examples mem-scramble +net nls plugins +readline
+LICENSE=GPL-3
+RDEPEND=>=sys-libs/ncurses-5.2-r2:0= nls? ( virtual/libintl )
+SLOT=0
+SRC_URI=https://ftp.gnu.org/gnu/bash/bash-5.3-alpha.tar.gz -> bash-5.3-alpha.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=1476e45e6c67f4ad4cb42f19d27e459e
