@@ -27,8 +27,10 @@
 #
 # EAPI phase trickery borrowed from enlightenment.eclass
 
-inherit autotools versionator
-
+case "${EAPI:-0}" in
+	2|3|4|5|6) inherit autotools versionator ;;
+	*) inherit autotools ;;
+esac
 
 FOX_EXPF="src_unpack src_compile src_install pkg_postinst"
 case "${EAPI:-0}" in
@@ -47,7 +49,10 @@ EXPORT_FUNCTIONS ${FOX_EXPF}
 # @DESCRIPTION:
 # The major.minor version of FOX_PV, usually acts as $SLOT and is used in
 # building the applications
-FOXVER=$(get_version_component_range 1-2 ${FOX_PV})
+case "${EAPI:-0}" in
+	2|3|4|5|6) FOXVER=$(get_version_component_range 1-2 ${FOX_PV}) ;;
+	*) FOXVER=$(ver_cut 1-2 ${FOX_PV}) ;;
+esac
 
 # @ECLASS-VARIABLE: FOX_APPS
 # @INTERNAL
