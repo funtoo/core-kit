@@ -4,11 +4,21 @@ EAPI=7
 
 inherit flag-o-matic multilib multilib-minimal preserve-libs toolchain-funcs usr-ldscript
 
-S="${WORKDIR}"/${PN}-8.3
+S="${WORKDIR}"/${PN}-8.2
 DESCRIPTION="Another cute console display library"
 HOMEPAGE="https://tiswww.case.edu/php/chet/readline/rltop.html"
 SRC_URI="
-	https://ftp.gnu.org/gnu/readline/readline-8.3-alpha.tar.gz -> readline-8.3-alpha.tar.gz
+	https://ftp.gnu.org/gnu/readline/readline-8.2.tar.gz -> readline-8.2.tar.gz
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-001 -> readline82-001
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-002 -> readline82-002
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-003 -> readline82-003
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-004 -> readline82-004
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-005 -> readline82-005
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-006 -> readline82-006
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-007 -> readline82-007
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-008 -> readline82-008
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-009 -> readline82-009
+	https://ftp.gnu.org/gnu/readline/readline-8.2-patches/readline82-010 -> readline82-010
 "
 
 LICENSE="GPL-3"
@@ -19,6 +29,19 @@ IUSE="static-libs +unicode utils"
 RDEPEND=">=sys-libs/ncurses-5.9-r3:=[static-libs?,${MULTILIB_USEDEP}]"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
+UPSTREAM_PATCHES=(
+	
+		"${DISTDIR}"/readline82-001
+		"${DISTDIR}"/readline82-002
+		"${DISTDIR}"/readline82-003
+		"${DISTDIR}"/readline82-004
+		"${DISTDIR}"/readline82-005
+		"${DISTDIR}"/readline82-006
+		"${DISTDIR}"/readline82-007
+		"${DISTDIR}"/readline82-008
+		"${DISTDIR}"/readline82-009
+		"${DISTDIR}"/readline82-010
+)
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-5.0-no_rpath.patch
@@ -28,10 +51,11 @@ PATCHES=(
 )
 
 src_unpack() {
-	unpack readline-8.3-alpha.tar.gz || die
+	unpack readline-8.2.tar.gz || die
 }
 
 src_prepare() {
+	eapply -p0 "${UPSTREAM_PATCHES[@]}"
 	default
 
 	# Force ncurses linking. #71420
