@@ -4,7 +4,7 @@ EAPI=7
 
 inherit autotools
 
-SRC_URI="https://api.github.com/repos/google/google-authenticator-libpam/tarball/refs/tags/1.09 -> google-authenticator-libpam-1.09.tar.gz"
+SRC_URI="https://api.github.com/repos/google/google-authenticator-libpam/tarball/refs/tags/1.10 -> google-authenticator-libpam-1.10.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="PAM Module for two step verification via mobile platform"
