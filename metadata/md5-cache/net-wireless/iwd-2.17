@@ -1,14 +1,14 @@
 BDEPEND=virtual/pkgconfig virtual/pkgconfig
 DEFINED_PHASES=compile configure install setup
-DEPEND=sys-apps/dbus client? ( sys-libs/readline:0= ) ~dev-libs/ell-0.64
+DEPEND=sys-apps/dbus client? ( sys-libs/readline:0= ) ~dev-libs/ell-0.65
 DESCRIPTION=Wireless daemon for linux
 EAPI=7
 HOMEPAGE=https://git.kernel.org/pub/scm/network/wireless/iwd.git/
 IUSE=+client cpu_flags_x86_aes cpu_flags_x86_ssse3 +crda +monitor ofono standalone systemd wired kernel_linux
 KEYWORDS=*
 LICENSE=GPL-2
-RDEPEND=sys-apps/dbus client? ( sys-libs/readline:0= ) ~dev-libs/ell-0.64 net-wireless/wireless-regdb crda? ( net-wireless/crda ) standalone? ( systemd? ( sys-apps/systemd ) !systemd? ( virtual/resolvconf ) )
+RDEPEND=sys-apps/dbus client? ( sys-libs/readline:0= ) ~dev-libs/ell-0.65 net-wireless/wireless-regdb crda? ( net-wireless/crda ) standalone? ( systemd? ( sys-apps/systemd ) !systemd? ( virtual/resolvconf ) )
 SLOT=0
 SRC_URI=https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.17.tar.xz -> iwd-2.17.tar.xz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=8457eb9e6ab395547534d3aaf9948921
+_md5_=3cd7d07caa3adc4cfa32f9658e046121
