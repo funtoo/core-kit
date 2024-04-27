@@ -5,7 +5,7 @@ inherit libtool
 
 DESCRIPTION="Multi-format archive and compression library"
 HOMEPAGE="https://www.libarchive.org/"
-SRC_URI="https://github.com/libarchive/libarchive/releases/download/v3.7.3/libarchive-3.7.3.tar.gz -> libarchive-3.7.3.tar.gz"
+SRC_URI="https://github.com/libarchive/libarchive/releases/download/v3.7.4/libarchive-3.7.4.tar.gz -> libarchive-3.7.4.tar.gz"
 
 LICENSE="BSD BSD-2 BSD-4 public-domain"
 SLOT="0/13"
