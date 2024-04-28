@@ -14,7 +14,7 @@ IUSE=""
 SLOT="0"
 LICENSE=""
 KEYWORDS="*"
-S="${WORKDIR}/Brotli-1.1.0"
+S="${WORKDIR}/brotli-1.1.0"
 
 src_unpack() {
 	unpack ${ROOT}/usr/share/brotli/bindings/brotli-python-${PV}.tar.gz || die
