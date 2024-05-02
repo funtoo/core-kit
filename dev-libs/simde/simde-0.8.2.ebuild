@@ -6,7 +6,7 @@ inherit meson
 
 DESCRIPTION="Header-only library provides fast, portable implementations of SIMD intrinsics"
 HOMEPAGE="https://github.com/simd-everywhere/simde"
-SRC_URI="https://github.com/simd-everywhere/simde/tarball/589c7d599ae2213823acc4334a3ae8ef8caefe18 -> simde-0.8.0-589c7d5.tar.gz"
+SRC_URI="https://github.com/simd-everywhere/simde/tarball/71fd833d9666141edcd1d3c109a80e228303d8d7 -> simde-0.8.2-71fd833.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
