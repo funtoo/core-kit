@@ -10,6 +10,7 @@ DESCRIPTION="console display library"
 HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncurses/"
 SRC_URI="
 	https://invisible-mirror.net/archives/ncurses/ncurses-6.5.tar.gz -> ncurses-6.5.tar.gz
+	https://invisible-mirror.net/archives/ncurses/6.5/ncurses-6.5-20240504.patch.gz -> ncurses-6.5-20240504.patch.gz
 "
 
 LICENSE="MIT"
@@ -29,6 +30,7 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
+	"${WORKDIR}"/ncurses-6.5-20240504.patch
 	
 	"${FILESDIR}/${PN}-5.7-nongnu.patch"
 	"${FILESDIR}/${PN}-6.0-rxvt-unicode-9.15.patch" #192083 #383871
