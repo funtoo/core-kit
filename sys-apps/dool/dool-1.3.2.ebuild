@@ -8,7 +8,7 @@ inherit python-single-r1
 
 DESCRIPTION="Python3 compatible fork of dstat"
 HOMEPAGE="https://github.com/scottchiefbaker/dool"
-SRC_URI="https://github.com/scottchiefbaker/dool/tarball/30847c748483bc088549486292232d805b086b1f -> dool-1.3.1-30847c7.tar.gz"
+SRC_URI="https://github.com/scottchiefbaker/dool/tarball/b2862905be841232c9e36ce1e059d3fe34ef0cdf -> dool-1.3.2-b286290.tar.gz"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${PYTHON_DEPS}"
