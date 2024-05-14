@@ -1,0 +1,14 @@
+BDEPEND=dev-lang/go >=dev-lang/go-1.12 app-arch/unzip
+DEFINED_PHASES=compile install postinst prepare unpack
+DESCRIPTION=Tool for running local Kubernetes clusters using Docker container nodes
+EAPI=7
+HOMEPAGE=https://kind.sigs.k8s.io/ https://github.com/kubernetes-sigs/kind
+IUSE=hardened
+KEYWORDS=*
+LICENSE=Apache-2.0
+RDEPEND=app-emulation/docker
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/kubernetes-sigs/kind/tarball/0296c52b38a6bb5ccdcbcf4e57f0ba79415e6ff2 -> kind-0.23.0-0296c52.tar.gz https://direct.funtoo.org/74/fb/44/74fb44e9b90a75cdd48f60b84efe28e49266b0b65e5f0e4a5116f7e3fad1bac7d90e191327e3c14160a5ad8dd1348c84bf3d623ba714aac60b331694406c01dd -> kind-0.23.0-funtoo-go-bundle-db8518754d1e638fe192cccde4cd9c8baca418c8936f901d6d2db1e6009b8fa11f36d0b9b408145c7e40589ef57a913145ee061c9553745746ed550b1abef7fc.tar.gz
+_eclasses_=go-module	cb10a443c46556a15ed035d7a99128e8	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=7e6761069d0d41b56105178bff1758bf
