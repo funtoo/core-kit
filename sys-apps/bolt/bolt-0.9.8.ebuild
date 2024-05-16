@@ -6,7 +6,7 @@ inherit linux-info meson systemd
 
 DESCRIPTION="Userspace system daemon to enable security levels for Thunderbolt 3"
 HOMEPAGE="https://gitlab.freedesktop.org/bolt/bolt"
-SRC_URI="https://gitlab.freedesktop.org/bolt/bolt/-/archive/0.9.7/bolt-0.9.7.tar.bz2 -> bolt-0.9.7.tar.bz2"
+SRC_URI="https://gitlab.freedesktop.org/bolt/bolt/-/archive/0.9.8/bolt-0.9.8.tar.bz2 -> bolt-0.9.8.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
