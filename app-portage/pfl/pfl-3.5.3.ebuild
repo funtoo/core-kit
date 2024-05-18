@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Searchable online file/package database for Gentoo"
 HOMEPAGE="http://www.portagefilelist.de https://github.com/portagefilelist/client"
-SRC_URI="https://api.github.com/repos/portagefilelist/client/tarball/3.5.2 -> pfl-3.5.2.tar.gz"
+SRC_URI="https://api.github.com/repos/portagefilelist/client/tarball/3.5.3 -> pfl-3.5.3.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
