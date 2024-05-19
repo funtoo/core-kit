@@ -4,7 +4,7 @@ EAPI=7
 
 inherit libtool preserve-libs usr-ldscript
 MY_P="${PN/-utils}-${PV/_}"
-SRC_URI="https://deb.debian.org/debian/pool/main/x/xz-utils/xz-utils_5.4.4.orig.tar.xz -> xz-utils_5.4.4.orig.tar.xz"
+SRC_URI="https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz -> xz-5.4.6.tar.gz"
 KEYWORDS="*"
 S="${WORKDIR}/${MY_P}"
 
