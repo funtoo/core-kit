@@ -5,7 +5,8 @@ EAPI=7
 inherit autotools toolchain-funcs
 
 DESCRIPTION="Popular filesystem benchmark"
-SRC_URI="https://www.samba.org/ftp/tridge/dbench/dbench-4.0.tar.gz -> dbench-4.0.tar.gz"
+SRC_URI="https://www.samba.org/ftp/tridge/dbench/dbench-4.0.tar.gz -> dbench-4.0.tar.gz
+"
 HOMEPAGE="https://dbench.samba.org/web/index.html https://www.samba.org/ftp/tridge/dbench/"
 
 LICENSE="GPL-2"

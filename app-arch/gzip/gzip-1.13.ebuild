@@ -6,7 +6,8 @@ inherit flag-o-matic
 
 DESCRIPTION="Standard GNU compressor"
 HOMEPAGE="https://www.gnu.org/software/gzip/"
-SRC_URI="https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz -> gzip-1.13.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/gzip/gzip-1.13.tar.xz -> gzip-1.13.tar.xz
+"
 
 LICENSE="GPL-3"
 SLOT="0"

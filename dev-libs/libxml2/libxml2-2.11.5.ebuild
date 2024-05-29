@@ -14,9 +14,9 @@ KEYWORDS="*"
 
 SRC_URI="https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.5.tar.xz -> libxml2-2.11.5.tar.xz
 test? (
-https://www.w3.org/XML/2004/xml-schema-test-suite/xmlschema2002-01-16/xsts-2002-01-16.tar.gz -> xsts-2002-01-16.tar.gz
-https://www.w3.org/XML/2004/xml-schema-test-suite/xmlschema2004-01-14/xsts-2004-01-14.tar.gz -> xsts-2004-01-14.tar.gz
-https://www.w3.org/XML/Test/xmlts20130923.tar.gz -> xmlts20130923.tar.gz
+  https://www.w3.org/XML/2004/xml-schema-test-suite/xmlschema2002-01-16/xsts-2002-01-16.tar.gz -> xsts-2002-01-16.tar.gz
+  https://www.w3.org/XML/2004/xml-schema-test-suite/xmlschema2004-01-14/xsts-2004-01-14.tar.gz -> xsts-2004-01-14.tar.gz
+  https://www.w3.org/XML/Test/xmlts20130923.tar.gz -> xmlts20130923.tar.gz
 )
 "
 

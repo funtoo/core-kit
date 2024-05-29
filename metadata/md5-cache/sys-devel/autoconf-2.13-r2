@@ -10,4 +10,4 @@ PDEPEND=emacs? ( app-emacs/autoconf-mode )
 RDEPEND=sys-apps/texinfo >=dev-lang/perl-5.10 >=sys-devel/m4-1.4.16 >=sys-devel/autoconf-wrapper-13 sys-devel/gnuconfig !~sys-devel/autoconf-2.13:2.5
 SLOT=2.1
 SRC_URI=https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz -> autoconf-2.13.tar.gz
-_md5_=230f8e1fe2157291edb21c41adecc414
+_md5_=0345c5ad9d9b9a262d0d5bd0786a0565

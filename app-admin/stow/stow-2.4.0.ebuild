@@ -6,7 +6,8 @@ inherit perl-functions
 
 DESCRIPTION="GNU Stow is a symlink farm manager"
 HOMEPAGE="https://www.gnu.org/software/stow/ https://git.savannah.gnu.org/cgit/stow.git"
-SRC_URI="https://ftp.gnu.org/gnu/stow/stow-2.4.0.tar.gz -> stow-2.4.0.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/stow/stow-2.4.0.tar.gz -> stow-2.4.0.tar.gz
+"
 
 LICENSE="GPL-3+"
 SLOT="0"

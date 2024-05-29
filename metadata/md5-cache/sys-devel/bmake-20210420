@@ -1,0 +1,10 @@
+DEFINED_PHASES=compile configure install test
+DESCRIPTION=NetBSD's portable make
+EAPI=7
+HOMEPAGE=http://www.crufty.net/help/sjg/bmake.html
+KEYWORDS=*
+LICENSE=BSD
+SLOT=0
+SRC_URI=http://void.crufty.net/ftp/pub/sjg/bmake-20210420.tar.gz http://void.crufty.net/ftp/pub/sjg/mk-20210420.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8
+_md5_=03561359c280b2230414e41f99ba7264

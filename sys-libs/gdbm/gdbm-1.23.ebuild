@@ -6,7 +6,8 @@ inherit autotools multilib-minimal
 
 DESCRIPTION="Standard GNU database libraries"
 HOMEPAGE="https://www.gnu.org/software/gdbm/"
-SRC_URI="https://ftp.gnu.org/gnu/gdbm/gdbm-1.23.tar.gz -> gdbm-1.23.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/gdbm/gdbm-1.23.tar.gz -> gdbm-1.23.tar.gz
+"
 
 LICENSE="GPL-3"
 SLOT="0/6" # libgdbm.so version

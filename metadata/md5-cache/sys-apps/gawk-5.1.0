@@ -11,4 +11,4 @@ RDEPEND=dev-libs/gmp:0= mpfr? ( dev-libs/mpfr:0= ) readline? ( sys-libs/readline
 SLOT=0
 SRC_URI=https://ftp.gnu.org/gnu/gawk/gawk-5.1.0.tar.xz -> gawk-5.1.0.tar.xz
 _eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=cd860389555d83c72fe905667bc1a238
+_md5_=1457e1084cdc4e9ef949a02965793c84

@@ -1,0 +1,14 @@
+DEFINED_PHASES=configure install postinst prepare
+DEPEND=caps? ( static? ( sys-libs/libcap-ng:=[static-libs] ) !static? ( sys-libs/libcap-ng:= ) ) selinux? ( sys-libs/libselinux:= )
+DESCRIPTION=Tools to monitor storage systems to provide advanced warning of disk degradation
+EAPI=7
+HOMEPAGE=https://www.smartmontools.org
+IUSE=caps +daemon selinux static +update-drivedb
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=caps? ( static? ( sys-libs/libcap-ng:=[static-libs] ) !static? ( sys-libs/libcap-ng:= ) ) selinux? ( sys-libs/libselinux:= ) daemon? ( virtual/mailx ) selinux? ( sec-policy/selinux-smartmon ) update-drivedb? ( app-crypt/gnupg || ( net-misc/curl net-misc/wget www-client/lynx dev-vcs/subversion ) )
+REQUIRED_USE=( caps? ( daemon ) )
+SLOT=0
+SRC_URI=https://github.com/smartmontools/smartmontools/tarball/0c0bada5eedb759c9d7bb50ff54959cf0809c5a9 -> smartmontools-7.4-0c0bada.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=892ee1aebde12261cb3ecfc63874f4d4

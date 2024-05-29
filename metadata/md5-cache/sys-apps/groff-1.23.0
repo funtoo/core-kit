@@ -11,4 +11,4 @@ RDEPEND=uchardet? ( app-i18n/uchardet ) X? ( x11-libs/libICE x11-libs/libSM x11-
 SLOT=0
 SRC_URI=https://ftp.gnu.org/gnu/groff/groff-1.23.0.tar.gz -> groff-1.23.0.tar.gz
 _eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=f5f59612e736f6b408e6eda412091da9
+_md5_=8a0dffc0958aa6c862831b24d66314ea

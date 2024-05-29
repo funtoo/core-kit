@@ -2,7 +2,8 @@
 
 EAPI=7
 
-SRC_URI="https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz -> autoconf-2.72.tar.xz"
+SRC_URI="https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz -> autoconf-2.72.tar.xz
+"
 KEYWORDS="*"
 
 DESCRIPTION="Used to create autoconfiguration files"

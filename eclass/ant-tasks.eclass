@@ -22,7 +22,7 @@ case "${EAPI:-0}" in
 		;;
 esac
 
-# we set ant-core dep ourselves, restricted
+# we set ant-bin dep ourselves, restricted
 JAVA_ANT_DISABLE_ANT_CORE_DEP=true
 # rewriting build.xml for are the testcases has no reason atm
 JAVA_PKG_BSFIX_ALL=no
@@ -63,7 +63,7 @@ ANT_TASK_DEPNAME=${ANT_TASK_DEPNAME-${ANT_TASK_NAME}}
 
 # @VARIABLE: ANT_TASK_PV
 # @INTERNAL
-# Version of ant-core this task is intended to register and thus load with.
+# Version of ant-bin this task is intended to register and thus load with.
 ANT_TASK_PV="${PV}"
 
 # default for final releases
@@ -83,7 +83,7 @@ SRC_URI="${UPSTREAM_PREFIX}/${MY_P}-src.tar.bz2
 LICENSE="Apache-2.0"
 SLOT="0"
 
-RDEPEND="~dev-java/ant-core-${PV}:0"
+RDEPEND="~dev-java/ant-bin-${PV}:1.10"
 DEPEND="${RDEPEND}"
 
 if [[ -z "${ANT_TASK_DISABLE_VM_DEPS}" ]]; then
@@ -102,7 +102,7 @@ S="${WORKDIR}/${MY_P}"
 # The function Is split into two parts, defaults to both of them ('all').
 #
 # base: performs the unpack, build.xml replacement and symlinks ant.jar from
-#	ant-core
+#	ant-bin
 #
 # jar-dep: symlinks the jar file(s) from dependency package
 ant-tasks_src_unpack() {
@@ -126,7 +126,7 @@ ant-tasks_src_unpack() {
 				rm -f *.jar
 
 				# ant.jar to build against
-				java-pkg_jar-from --build-only ant-core ant.jar;;
+				java-pkg_jar-from --build-only ant-bin-1.10 ant.jar;;
 			jar-dep)
 				# get jar from the dependency package
 				if [[ -n "${ANT_TASK_DEPNAME}" ]]; then
@@ -142,7 +142,7 @@ ant-tasks_src_unpack() {
 
 # @FUNCTION: ant-tasks_src_compile
 # @DESCRIPTION:
-# Compiles the jar with installed ant-core.
+# Compiles the jar with installed ant-bin.
 ant-tasks_src_compile() {
 	ANT_TASKS="none" eant -Dbuild.dep=${ANT_TASK_NAME} jar-dep
 }
@@ -150,7 +150,7 @@ ant-tasks_src_compile() {
 # @FUNCTION: ant-tasks_src_install
 # @DESCRIPTION:
 # Installs the jar and registers its presence for the ant launcher script.
-# Version param ensures it won't get loaded (thus break) when ant-core is
+# Version param ensures it won't get loaded (thus break) when ant-bin is
 # updated to newer version.
 ant-tasks_src_install() {
 	java-pkg_dojar build/lib/${PN}.jar

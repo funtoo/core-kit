@@ -10,4 +10,4 @@ RDEPEND=dev-libs/popt
 SLOT=0
 SRC_URI=https://www.samba.org/ftp/tridge/dbench/dbench-4.0.tar.gz -> dbench-4.0.tar.gz
 _eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=e15d67379a09bc0c9073987ee8257106
+_md5_=39f6a9a1e617e56bc5ee0f223e75431d
