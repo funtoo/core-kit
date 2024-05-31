@@ -30,7 +30,7 @@ IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
-S="${WORKDIR}/funtoo-metatools-1.3.6"
+S="${WORKDIR}/funtoo_metatools-1.3.6"
 
 src_configure() {
 	unset PYTHONPATH
