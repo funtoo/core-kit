@@ -89,7 +89,7 @@ src_configure() {
 		--disable-checks
 		--with-editor=/usr/libexec/editor
 		--with-shell=/bin/sh
-		--with-dsssl-dir=/usr/share/sgml/docbook/dsssl-stylesheets-1.79
+		--without-dsssl-dir
 		--with-rootname=${rootuser}
 		--with-rootgroup=${rootgroup}
 	)
