@@ -7,7 +7,7 @@ inherit flag-o-matic meson python-any-r1
 
 DESCRIPTION="Creates, deletes and cleans up volatile and temporary files and directories"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/systemd"
-SRC_URI="https://github.com/systemd/systemd-stable/tarball/e4817103d0f32a3492608f14da6628d5c9b83197 -> systemd-stable-255.7-e481710.tar.gz"
+SRC_URI="https://github.com/systemd/systemd-stable/tarball/5c79cdec10a547a866764a66e1e14898112a00cd -> systemd-stable-256-5c79cde.tar.gz"
 
 LICENSE="BSD-2 GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0"
@@ -69,6 +69,7 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
+		-Dauto_features=disabled
 		-Dadm-group=false
 		-Danalyze=false
 		-Db_asneeded=false
@@ -90,6 +91,7 @@ src_configure() {
 		-Dcreate-log-dirs=false
 		-Ddebug=false
 		-Ddefault-kill-user-processes=false
+		-Ddefault-mountfsd-trusted-directories=false
 		-Ddefault-network=false
 		-Ddns-over-tls=false
 		-Defi=false
@@ -108,6 +110,7 @@ src_configure() {
 		-Dinitrd=false
 		-Dinstall-sysconfdir=false
 		-Dinstall-tests=false
+		-Dintegration-tests=false
 		-Dkernel-install=false
 		-Dldconfig=false
 		-Dlink-boot-shared=false
@@ -123,8 +126,10 @@ src_configure() {
 		-Dlogind=false
 		-Dmachined=false
 		-Dmemory-accounting-default=false
+		-Dmountfsd=false
 		-Dnetworkd=false
 		-Dnscd=false
+		-Dnsresourced=false
 		-Dnss-myhostname=false
 		-Dnss-systemd=false
 		-Doomd=false
@@ -159,12 +164,13 @@ src_configure() {
 		-Duserdb=false
 		-Dutmp=false
 		-Dvconsole=false
+		-Dvcs-tag=false
 		-Dvsenv=false
 		-Dwerror=false
 		-Dwheel-group=false
 		-Dxdg-autostart=false
 		-Drootprefix="${EPREFIX:-/}"
-		-Dacl=true
+		-Dacl=enabled
 		-Db_staticpic=true
 		-Dtmpfiles=true
 		-Dstandalone-binaries=true # this and below option does the magic
