@@ -64,7 +64,6 @@ PATCHES=(
 	"${FILESDIR}"/"${PN}-2.03.22-autoconf-2.72-egrep.patch"
 )
 
-
 pkg_setup() {
 	local CONFIG_CHECK="~SYSVIPC"
 
@@ -92,7 +91,6 @@ pkg_setup() {
 src_prepare() {
 	default
 
-
 	eautoreconf
 }
 
@@ -113,7 +111,7 @@ src_configure() {
 		$(use_enable lvm lvmpolld)
 
 		# This only causes the .static versions to become available
-		$(usev static --enable-static_link)
+		$(use static && echo --enable-static_link)
 
 		# dmeventd requires mirrors to be internal, and snapshot available
 		# so we cannot disable them
