@@ -8,5 +8,5 @@ KEYWORDS=*
 LICENSE=|| ( GPL-3 BSD-2 )
 RDEPEND=>=app-misc/editor-wrapper-3 >=sys-libs/ncurses-5.2:0= pcre? ( dev-libs/libpcre2 ) sys-apps/groff
 SLOT=0
-SRC_URI=https://www.greenwoodsoftware.com/less/less-643.tar.gz -> less-643.tar.gz
-_md5_=3f5f5141038030754ed5422df76941c1
+SRC_URI=https://www.greenwoodsoftware.com/less/less-661.tar.gz -> less-661.tar.gz
+_md5_=8de7bd9c026a6d3def75e5ca582f1054
