@@ -8,8 +8,8 @@ DESCRIPTION="A general-purpose command-line fuzzy finder, written in GoLang"
 HOMEPAGE="https://github.com/junegunn/fzf"
 
 EGO_SUM=(
-	"github.com/charlievieth/fastwalk v1.0.3"
-	"github.com/charlievieth/fastwalk v1.0.3/go.mod"
+	"github.com/charlievieth/fastwalk v1.0.7-0.20240703190418-87029d931815"
+	"github.com/charlievieth/fastwalk v1.0.7-0.20240703190418-87029d931815/go.mod"
 	"github.com/gdamore/encoding v1.0.0"
 	"github.com/gdamore/encoding v1.0.0/go.mod"
 	"github.com/gdamore/tcell/v2 v2.7.4"
@@ -46,14 +46,14 @@ EGO_SUM=(
 	"golang.org/x/sys v0.5.0/go.mod"
 	"golang.org/x/sys v0.6.0/go.mod"
 	"golang.org/x/sys v0.17.0/go.mod"
-	"golang.org/x/sys v0.20.0"
-	"golang.org/x/sys v0.20.0/go.mod"
+	"golang.org/x/sys v0.22.0"
+	"golang.org/x/sys v0.22.0/go.mod"
 	"golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod"
 	"golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod"
 	"golang.org/x/term v0.5.0/go.mod"
 	"golang.org/x/term v0.17.0/go.mod"
-	"golang.org/x/term v0.20.0"
-	"golang.org/x/term v0.20.0/go.mod"
+	"golang.org/x/term v0.22.0"
+	"golang.org/x/term v0.22.0/go.mod"
 	"golang.org/x/text v0.3.0/go.mod"
 	"golang.org/x/text v0.3.3/go.mod"
 	"golang.org/x/text v0.3.7/go.mod"
@@ -69,8 +69,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/tarball/3734424d7d7d1f8d4032dab8dab164d468d3c17d -> fzf-0.53.0-3734424.tar.gz
-https://direct.funtoo.org/14/10/00/1410000f36f54c40ddb3d2e2d500081b0029a1c77a573dd2d19358c1fcebfb38509be5bc6fcc9ebd14e632e41da78bd8fe103594f622714a591aa47e91631c20 -> fzf-0.53.0-funtoo-go-bundle-7569362357358d8ea63dfef877de67e7092ae166c860309d7a7d33d5a11dd67edacb3d59c3fd12979933d294ca462c86ce175e6240aee5ffe4168055d2c3dfcf.tar.gz"
+SRC_URI="https://github.com/junegunn/fzf/tarball/bef6567090c78afb4e0247ac1b8af0f0a781c4ad -> fzf-0.54.0-bef6567.tar.gz
+https://direct.funtoo.org/f4/26/0d/f4260d1af50ae530df80ef1179a5a72592671cf74a92632f6de55f80c9bcef361bff097fbcad0b25304d781b822f6765a7fe22d38e795f78eb0d0bee8ac94064 -> fzf-0.54.0-funtoo-go-bundle-c3617f74bd70c590773ac28c766da46637573aec0bca309cbee7c046be448558ac75e574fb0f8141b82e0557476b359fb71f95020ed80d422c75e25f8c82bb95.tar.gz"
 
 LICENSE="MIT BSD-with-disclosure"
 SLOT="0"
