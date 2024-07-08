@@ -7,7 +7,7 @@ inherit autotools linux-info python-single-r1 readme.gentoo-r1 systemd udev mult
 
 DESCRIPTION="Bluetooth Tools and System Daemons for Linux"
 HOMEPAGE="http://www.bluez.org"
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.76.tar.xz -> bluez-5.76.tar.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.77.tar.xz -> bluez-5.77.tar.xz"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0/3"
@@ -37,10 +37,10 @@ BDEPEND="
 "
 DEPEND="
 	>=dev-libs/glib-2.28:2[${MULTILIB_USEDEP}]
-	btpclient? ( ~dev-libs/ell-0.66 )
+	btpclient? ( ~dev-libs/ell-0.67 )
 	cups? ( net-print/cups:= )
 	mesh? (
-		~dev-libs/ell-0.66
+		~dev-libs/ell-0.67
 		>=dev-libs/json-c-0.13:=
 		sys-libs/readline:0=
 	)
