@@ -10,7 +10,7 @@ S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="VirtualBox kernel modules and user-space tools for Gentoo guests"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="https://download.virtualbox.org/virtualbox/7.0.18/VirtualBox-7.0.18.tar.bz2 -> VirtualBox-7.0.18.tar.bz2"
+SRC_URI="https://download.virtualbox.org/virtualbox/7.0.20/VirtualBox-7.0.20.tar.bz2 -> VirtualBox-7.0.20.tar.bz2"
 
 LICENSE="GPL-3 LGPL-2.1+ MIT || ( GPL-3 CDDL )"
 SLOT="0"
