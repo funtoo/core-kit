@@ -8,8 +8,8 @@ DESCRIPTION="A general-purpose command-line fuzzy finder, written in GoLang"
 HOMEPAGE="https://github.com/junegunn/fzf"
 
 EGO_SUM=(
-	"github.com/charlievieth/fastwalk v1.0.7-0.20240703190418-87029d931815"
-	"github.com/charlievieth/fastwalk v1.0.7-0.20240703190418-87029d931815/go.mod"
+	"github.com/charlievieth/fastwalk v1.0.8"
+	"github.com/charlievieth/fastwalk v1.0.8/go.mod"
 	"github.com/gdamore/encoding v1.0.0"
 	"github.com/gdamore/encoding v1.0.0/go.mod"
 	"github.com/gdamore/tcell/v2 v2.7.4"
@@ -69,8 +69,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/tarball/bef6567090c78afb4e0247ac1b8af0f0a781c4ad -> fzf-0.54.0-bef6567.tar.gz
-https://direct.funtoo.org/f4/26/0d/f4260d1af50ae530df80ef1179a5a72592671cf74a92632f6de55f80c9bcef361bff097fbcad0b25304d781b822f6765a7fe22d38e795f78eb0d0bee8ac94064 -> fzf-0.54.0-funtoo-go-bundle-c3617f74bd70c590773ac28c766da46637573aec0bca309cbee7c046be448558ac75e574fb0f8141b82e0557476b359fb71f95020ed80d422c75e25f8c82bb95.tar.gz"
+SRC_URI="https://github.com/junegunn/fzf/tarball/182f20aa0e5007c700e132742ed5e3460870efad -> fzf-0.54.1-182f20a.tar.gz
+https://direct.funtoo.org/69/dc/b9/69dcb9351f857c091728fa118bbe231b8e32132155ccfa395bb321bf023e9f0eddf04cd53e3a4b196ee450347a91c8e6b966e93982e5cc3ed078b6f2f29bbd06 -> fzf-0.54.1-funtoo-go-bundle-105ff9b38872482c0e34a75ec6522d747c121489763a3fc8de66fe040f046a891bd2f92a2372d3ee694cf98664c286c1782213092fcaf5456dd3e17c60ae34b9.tar.gz"
 
 LICENSE="MIT BSD-with-disclosure"
 SLOT="0"

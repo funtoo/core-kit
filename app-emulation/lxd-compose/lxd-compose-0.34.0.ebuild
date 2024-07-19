@@ -10,6 +10,8 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="*"
 
+DEPEND=">=dev-lang/go-1.22"
+
 S="${WORKDIR}"
 
 src_compile() {

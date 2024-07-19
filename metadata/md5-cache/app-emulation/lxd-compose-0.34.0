@@ -1,4 +1,5 @@
 DEFINED_PHASES=compile install
+DEPEND=>=dev-lang/go-1.22
 DESCRIPTION=Deploy a complex environment to an LXD Cluster or LXD standalone installation
 EAPI=7
 HOMEPAGE=https://github.com/MottainaiCI/lxd-compose https://mottainaici.github.io/lxd-compose-docs
@@ -6,4 +7,4 @@ KEYWORDS=*
 LICENSE=GPL-3
 SLOT=0
 SRC_URI=https://github.com/MottainaiCI/lxd-compose/releases/download/v0.34.0/lxd-compose-v0.34.0-source.tar.gz -> lxd-compose-0.34.0.tar.gz
-_md5_=255749bc7d1e800fb6141949061dbf1e
+_md5_=a3e750da1aa5541cf6eef3ca3a6b6dcd

@@ -4,7 +4,7 @@ EAPI="6"
 
 inherit autotools eutils
 
-SRC_URI="https://github.com/ostreedev/ostree/releases/download/v2024.6/libostree-2024.6.tar.xz -> libostree-2024.6.tar.xz"
+SRC_URI="https://github.com/ostreedev/ostree/releases/download/v2024.7/libostree-2024.7.tar.xz -> libostree-2024.7.tar.xz"
 DESCRIPTION="OSTree is a tool for managing bootable, immutable, versioned filesystem trees."
 HOMEPAGE="https://github.com/ostreedev/ostree"
 
