@@ -9,7 +9,7 @@ HOMEPAGE="https://w1.fi/wpa_supplicant/"
 LICENSE="|| ( GPL-2 BSD )"
 
 KEYWORDS="*"
-SRC_URI="https://w1.fi/releases/wpa_supplicant-2.10.tar.gz -> wpa_supplicant-2.10.tar.gz"
+SRC_URI="https://w1.fi/releases/wpa_supplicant-2.11.tar.gz -> wpa_supplicant-2.11.tar.gz"
 
 SLOT="0"
 IUSE="ap bindist dbus eap-sim eapol_test fasteap +fils +hs2-0 libressl macsec p2p privsep ps3 qt5 readline selinux smartcard tdls uncommon-eap-types wimax wps kernel_linux kernel_FreeBSD"
