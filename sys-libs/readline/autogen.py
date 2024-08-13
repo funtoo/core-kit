@@ -2,6 +2,7 @@
 
 from bs4 import BeautifulSoup
 from metatools.version import generic
+from metatools.fastpull import spider
 import os
 import re
 
@@ -21,13 +22,15 @@ async def generate(hub, **pkginfo):
 	#latest = max([v for v in versions if v[0] < mask_above and not v[0].is_prerelease])
 
 	tarball_artifact = [hub.pkgtools.ebuild.Artifact(url=f"{package_url}/{latest[1]}")]
-
-	# get patches for versions that don't have a micro (e.g. 8.1 or 8.2, but not 8.1.2 or 8.2.1)
-	patch_level, patch_artifacts = await fetch_patches(hub, package_url, name, latest[0])
 	version = f"{latest[0].public}"
-	if patch_level:
-		version += f"_p{patch_level}"
 
+	try:
+		# get patches for versions that don't have a micro (e.g. 8.1 or 8.2, but not 8.1.2 or 8.2.1)
+		patch_level, patch_artifacts = await fetch_patches(hub, package_url, name, latest[0])
+		if patch_level:
+			version += f"_p{patch_level}"
+	except spider.FetchError:
+		patch_artifacts = []
 	ebuild = hub.pkgtools.ebuild.BreezyBuild(
 		**pkginfo,
 		soname=latest[0].major,

@@ -1,0 +1,14 @@
+BDEPEND=>=dev-lang/go-1.12 app-arch/unzip
+DEFINED_PHASES=install postinst prepare unpack
+DEPEND=dev-lang/go
+DESCRIPTION=a simple but powerful password manager for the terminal
+EAPI=7
+HOMEPAGE=https://www.gopass.pw/
+KEYWORDS=*
+LICENSE=MIT Apache-2.0 BSD MPL-2.0 BSD-2
+RDEPEND=dev-vcs/git app-crypt/gnupg
+RESTRICT=strip test
+SLOT=0
+SRC_URI=https://github.com/gopasspw/gopass/tarball/cdf8bd7b78bcb36c61ac4864a8c10b011d02aa60 -> gopass-1.15.14-cdf8bd7.tar.gz https://direct.funtoo.org/f6/da/86/f6da8693968eefab911b10beb01ac391a88170ec3f1071af7b0827619331101e83c8f41507e648b5cd9209045dbd664ecb45073d12ebc74c56d2e9a94c263839 -> gopass-1.15.14-funtoo-go-bundle-9310bbe2c6c954cf2ab76a52a47cdee05b928e2acb9e9713233635039a48b3d059268664bdbbf2ef385ad5bfe050f42e552ccf49c1a82f012533edb8af0750c3.tar.gz
+_eclasses_=go-module	cb10a443c46556a15ed035d7a99128e8	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=2d501fd1257325f2e8bdc5507471becf

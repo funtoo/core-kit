@@ -12,7 +12,7 @@
 # service shutdown
 IP6TABLES_SAVE="/var/lib/ip6tables/rules-save"
 
-# Options to pass to ip6tables-save and ip6tables-restore 
+# Options to pass to ip6tables-save and ip6tables-restore
 SAVE_RESTORE_OPTIONS="-c"
 
 # Save state on stopping ip6tables

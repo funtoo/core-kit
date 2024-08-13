@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install postinst prepare test unpack
+DEPEND=kmod? ( sys-apps/kmod ) static-libs? ( zlib? ( >=sys-libs/zlib-1.2.8-r1[static-libs(+),-mgorny(-)] ) ) !static-libs? ( zlib? ( >=sys-libs/zlib-1.2.8-r1[-mgorny(-)] ) ) udev? ( >=virtual/libudev-208[-mgorny(-)] ) kmod? ( virtual/pkgconfig )
+DESCRIPTION=Various utilities dealing with the PCI bus
+EAPI=7
+HOMEPAGE=http://mj.ucw.cz/sw/pciutils/ https://git.kernel.org/?p=utils/pciutils/pciutils.git
+IUSE=dns +kmod static-libs +udev zlib abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_s390_32 abi_s390_64
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=kmod? ( sys-apps/kmod ) static-libs? ( zlib? ( >=sys-libs/zlib-1.2.8-r1[static-libs(+),-mgorny(-)] ) ) !static-libs? ( zlib? ( >=sys-libs/zlib-1.2.8-r1[-mgorny(-)] ) ) udev? ( >=virtual/libudev-208[-mgorny(-)] ) sys-apps/hwids
+SLOT=0
+SRC_URI=https://github.com/pciutils/pciutils/tarball/7c5bf915f87d8e4c62be66275c8e73a5f03fa5ee -> pciutils-3.13.0-7c5bf91.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=74654b30ffb13ce3a7a3401eba135f3f

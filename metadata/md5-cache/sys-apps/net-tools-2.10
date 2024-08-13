@@ -1,0 +1,15 @@
+BDEPEND=selinux? ( virtual/pkgconfig ) app-arch/xz-utils
+DEFINED_PHASES=configure install unpack
+DEPEND=selinux? ( sys-libs/libselinux )
+DESCRIPTION=Standard Linux networking tools
+EAPI=7
+HOMEPAGE=https://net-tools.sourceforge.io/
+IUSE=+arp +hostname ipv6 nis nls plipconfig selinux slattach static
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=selinux? ( sys-libs/libselinux ) hostname? ( !sys-apps/coreutils[hostname] ) nis? ( !net-nds/yp-tools )
+REQUIRED_USE=nis? ( hostname )
+SLOT=0
+SRC_URI=https://github.com/ecki/net-tools/tarball/80d7b95067f1f22fece9537dea6dff53081f4886 -> net-tools-2.10-80d7b95.tar.gz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=97f80ec61ca426a136fa7b2878713016

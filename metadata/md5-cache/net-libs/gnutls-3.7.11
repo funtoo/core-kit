@@ -1,0 +1,16 @@
+BDEPEND=dev-util/gtk-doc-am >=virtual/pkgconfig-0-r1 doc? ( dev-util/gtk-doc ) nls? ( sys-devel/gettext ) test-full? ( app-crypt/dieharder || ( sys-libs/libfaketime >=app-misc/datefudge-1.22 ) dev-libs/softhsm:2[-bindist(-)] net-dialup/ppp net-misc/socat ) >=app-portage/elt-patches-20170815
+DEFINED_PHASES=configure prepare
+DEPEND=>=dev-libs/libtasn1-4.9:= dev-libs/libunistring:= >=dev-libs/nettle-3.6:=[gmp] >=dev-libs/gmp-5.1.3-r1:= brotli? ( >=app-arch/brotli-1.0.0:= ) dane? ( >=net-dns/unbound-1.4.20:= ) nls? ( >=virtual/libintl-0-r1:= ) pkcs11? ( >=app-crypt/p11-kit-0.23.1 ) idn? ( >=net-dns/libidn2-0.16-r1:= ) zlib? ( sys-libs/zlib ) zstd? ( >=app-arch/zstd-1.3.0:= ) test? ( seccomp? ( sys-libs/libseccomp ) )
+DESCRIPTION=A secure communications library implementing the SSL, TLS and DTLS protocols
+EAPI=7
+HOMEPAGE=https://www.gnutls.org/
+IUSE=brotli +cxx dane doc examples +idn nls +openssl +pkcs11 seccomp sslv2 sslv3 static-libs test test-full +tls-heartbeat tools zlib zstd
+KEYWORDS=*
+LICENSE=GPL-3 LGPL-2.1+
+RDEPEND=>=dev-libs/libtasn1-4.9:= dev-libs/libunistring:= >=dev-libs/nettle-3.6:=[gmp] >=dev-libs/gmp-5.1.3-r1:= brotli? ( >=app-arch/brotli-1.0.0:= ) dane? ( >=net-dns/unbound-1.4.20:= ) nls? ( >=virtual/libintl-0-r1:= ) pkcs11? ( >=app-crypt/p11-kit-0.23.1 ) idn? ( >=net-dns/libidn2-0.16-r1:= ) zlib? ( sys-libs/zlib ) zstd? ( >=app-arch/zstd-1.3.0:= )
+REQUIRED_USE=test-full? ( cxx dane doc examples idn nls openssl pkcs11 seccomp tls-heartbeat tools )
+RESTRICT=!test? ( test )
+SLOT=0/30.30
+SRC_URI=https://www.gnupg.org/ftp/gcrypt/gnutls/v3.7/gnutls-3.7.11.tar.xz -> gnutls-3.7.11.tar.xz
+_eclasses_=libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=a10053054a17ffeb2626eee814d40f35

@@ -7,7 +7,8 @@ inherit distutils-r1
 
 DESCRIPTION="Funtoo framework for creating initial ramdisks."
 HOMEPAGE="https://code.funtoo.org/bitbucket/users/drobbins/repos/funtoo-ramdisk/browse https://pypi.org/project/funtoo-ramdisk/"
-SRC_URI="https://files.pythonhosted.org/packages/15/ac/2d51a609c3a9789be66cf6471589cfccceb005c1a06af319a36825f567fb/funtoo_ramdisk-1.1.16.tar.gz -> funtoo_ramdisk-1.1.16.tar.gz"
+SRC_URI="https://files.pythonhosted.org/packages/15/ac/2d51a609c3a9789be66cf6471589cfccceb005c1a06af319a36825f567fb/funtoo_ramdisk-1.1.16.tar.gz -> funtoo_ramdisk-1.1.16.tar.gz
+"
 
 DEPEND=""
 RDEPEND="

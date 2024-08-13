@@ -12,7 +12,7 @@
 # service shutdown
 IPTABLES_SAVE="/var/lib/iptables/rules-save"
 
-# Options to pass to iptables-save and iptables-restore 
+# Options to pass to iptables-save and iptables-restore
 SAVE_RESTORE_OPTIONS="-c"
 
 # Save state on stopping iptables

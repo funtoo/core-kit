@@ -1,0 +1,14 @@
+BDEPEND=virtual/rust >=virtual/rust-1.37.0
+DEFINED_PHASES=compile configure install postinst test unpack
+DEPEND=libressl? ( dev-libs/libressl:0= ) !libressl? ( dev-libs/openssl:0= ) sys-libs/zlib:=
+DESCRIPTION=The minimal, blazing-fast, and infinitely customizable prompt for any shell
+EAPI=7
+HOMEPAGE=https://github.com/starship/starship
+IUSE=libressl debug
+KEYWORDS=*
+LICENSE=ISC
+RDEPEND=libressl? ( dev-libs/libressl:0= ) !libressl? ( dev-libs/openssl:0= ) sys-libs/zlib:=
+SLOT=0
+SRC_URI=https://github.com/starship/starship/tarball/f505324dac96a7f39b92ff85477c109d7efe6c5e -> starship-1.20.1-f505324.tar.gz https://direct.funtoo.org/79/58/9b/79589b06ede558d1e80e06e7655f2036e5607b64088350a8aca9ea3edc1158b1772115d76fe67f28c843c9a948273b85556376ef285e0726141fb869b06bf703 -> starship-1.20.1-funtoo-crates-bundle-b1cd1bdefca30ce5920a3d988eebb8be834a9ac38ba591026edaebf304bd9b322dc76fa9dfa7c8dca1e75f29f4d0cbd337b3f917fb2c6d0213daea47afac2527.tar.gz
+_eclasses_=cargo	a3e90d3e6ca8541d967cff212149cffc	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=00b84776455bff5e1006a8ff33d7448a
