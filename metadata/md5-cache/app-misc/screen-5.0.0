@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=>=sys-libs/ncurses-5.2:= pam? ( sys-libs/pam ) selinux? ( sec-policy/selinux-screen ) virtual/tmpfiles
 SLOT=0
-SRC_URI=https://ftp.gnu.org/gnu/screen/screen-4.9.1.tar.gz -> screen-4.9.1.tar.gz
+SRC_URI=https://ftp.gnu.org/gnu/screen/screen-5.0.0.tar.gz -> screen-5.0.0.tar.gz
 _eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	pam	756a09f72c4cdbb55f2694c95f1e0860	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=8424f8e49ffd84aeee55b91676b15683
+_md5_=f52ce0ced9557f37315a7ce76b5e7e04

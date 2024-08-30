@@ -6,7 +6,7 @@ inherit systemd tmpfiles user
 
 DESCRIPTION="A man replacement that utilizes dbm instead of flat files"
 HOMEPAGE="https://gitlab.com/man-db/man-db https://www.nongnu.org/man-db/"
-SRC_URI="https://download-mirror.savannah.nongnu.org/releases/man-db/man-db-2.12.1.tar.xz -> man-db-2.12.1.tar.xz"
+SRC_URI="https://download-mirror.savannah.nongnu.org/releases/man-db/man-db-2.13.0.tar.xz -> man-db-2.13.0.tar.xz"
 KEYWORDS="*"
 
 LICENSE="GPL-3"
