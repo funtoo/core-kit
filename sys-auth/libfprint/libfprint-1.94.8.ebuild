@@ -6,7 +6,7 @@ inherit meson udev
 
 DESCRIPTION="Library to add support for consumer fingerprint readers"
 HOMEPAGE="https://gitlab.freedesktop.org/libfprint/libfprint"
-SRC_URI="https://gitlab.freedesktop.org/libfprint/libfprint/-/archive/v1.94.7/libfprint-v1.94.7.tar.bz2 -> libfprint-v1.94.7.tar.bz2"
+SRC_URI="https://gitlab.freedesktop.org/libfprint/libfprint/-/archive/v1.94.8/libfprint-v1.94.8.tar.bz2 -> libfprint-v1.94.8.tar.bz2"
 
 LICENSE="LGPL-2.1+"
 SLOT="2"
