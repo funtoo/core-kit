@@ -8,7 +8,7 @@ inherit meson pam python-any-r1
 
 DESCRIPTION="D-Bus service to access fingerprint readers"
 HOMEPAGE="https://gitlab.freedesktop.org/libfprint/fprintd"
-SRC_URI="https://gitlab.freedesktop.org/libfprint/fprintd/-/archive/v1.94.3/fprintd-v1.94.3.tar.bz2 -> fprintd-v1.94.3.tar.bz2"
+SRC_URI="https://gitlab.freedesktop.org/libfprint/fprintd/-/archive/v1.94.4/fprintd-v1.94.4.tar.bz2 -> fprintd-v1.94.4.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
