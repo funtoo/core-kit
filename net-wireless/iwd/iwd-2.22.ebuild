@@ -5,7 +5,7 @@ inherit flag-o-matic linux-info systemd
 
 DESCRIPTION="Wireless daemon for linux"
 HOMEPAGE="https://git.kernel.org/pub/scm/network/wireless/iwd.git/"
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.21.tar.xz -> iwd-2.21.tar.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-2.22.tar.xz -> iwd-2.22.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

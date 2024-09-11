@@ -11,6 +11,6 @@ RDEPEND=ldap? ( net-nds/openldap[-mgorny(-)] ) brotli? ( app-arch/brotli:=[-mgor
 REQUIRED_USE=threads? ( !adns ) ssl? ( ^^ ( curl_ssl_gnutls curl_ssl_mbedtls curl_ssl_openssl ) )
 RESTRICT=test
 SLOT=0
-SRC_URI=https://github.com/curl/curl/releases/download/curl-8_9_1/curl-8.9.1.tar.gz -> curl-8.9.1.tar.gz
+SRC_URI=https://github.com/curl/curl/releases/download/curl-8_10_0/curl-8.10.0.tar.gz -> curl-8.10.0.tar.gz
 _eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=57b70262b56dffc2b3a3c363b18667ac
+_md5_=091ee272eae9ab3408c544175206f26c

@@ -4,12 +4,12 @@ EAPI=6
 
 PYTHON_COMPAT=( python2+ )
 
-inherit xdg-utils gnome2 pax-utils python-r1 udev unpacker eapi7-ver
+inherit xdg-utils gnome2 pax-utils python-r1 udev unpacker eapi7-ver user
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI=" https://download.virtualbox.org/virtualbox/7.0.20/VirtualBox-7.0.20-163906-Linux_amd64.run -> VirtualBox-7.0.20-163906-Linux_amd64.run https://download.virtualbox.org/virtualbox/7.0.20/Oracle_VM_VirtualBox_Extension_Pack-7.0.20.vbox-extpack -> Oracle_VM_VirtualBox_Extension_Pack-7.0.20-163906.tar.gz
-	sdk? ( https://download.virtualbox.org/virtualbox/7.0.20/VirtualBoxSDK-7.0.20-163906.zip -> VirtualBoxSDK-7.0.20-163906.zip )"
+SRC_URI=" https://download.virtualbox.org/virtualbox/7.1.0/VirtualBox-7.1.0-164728-Linux_amd64.run -> VirtualBox-7.1.0-164728-Linux_amd64.run https://download.virtualbox.org/virtualbox/7.1.0/Oracle_VirtualBox_Extension_Pack-7.1.0-164728.vbox-extpack -> Oracle_VirtualBox_Extension_Pack-7.1.0-164728.tar.gz
+	sdk? ( https://download.virtualbox.org/virtualbox/7.1.0/VirtualBoxSDK-7.1.0-164728.zip -> VirtualBoxSDK-7.1.0-164728.zip )"
 
 LICENSE="GPL-2 PUEL"
 SLOT="0"
@@ -20,7 +20,7 @@ DEPEND="app-arch/unzip
 	${PYTHON_DEPS}"
 
 RDEPEND="!app-emulation/virtualbox-additions
-	~app-emulation/virtualbox-modules-7.0.20
+	~app-emulation/virtualbox-modules-7.1.0
 	!headless? (
 		app-crypt/mit-krb5
 		dev-libs/glib
@@ -56,16 +56,16 @@ QA_PREBUILT="opt/VirtualBox/*"
 PYTHON_UPDATER_IGNORE="1"
 
 src_unpack() {
-	unpack_makeself VirtualBox-7.0.20-163906-Linux_amd64.run
+	unpack_makeself VirtualBox-7.1.0-164728-Linux_amd64.run
 	unpack ./VirtualBox.tar.bz2
 
-	mkdir "${S}"/Oracle_VM_VirtualBox_Extension_Pack || die
-	pushd "${S}"/Oracle_VM_VirtualBox_Extension_Pack &>/dev/null || die
-	unpack Oracle_VM_VirtualBox_Extension_Pack-7.0.20-163906.tar.gz
+	mkdir "${S}"/Oracle_VirtualBox_Extension_Pack || die
+	pushd "${S}"/Oracle_VirtualBox_Extension_Pack &>/dev/null || die
+	unpack Oracle_VirtualBox_Extension_Pack-7.1.0-164728.tar.gz
 	popd &>/dev/null || die
 
 	if use sdk ; then
-		unpack VirtualBoxSDK-7.0.20-163906.zip
+		unpack VirtualBoxSDK-7.1.0-164728.zip
 	fi
 }
 
@@ -75,6 +75,10 @@ src_configure() {
 
 src_compile() {
 	:;
+}
+
+pkg_setup() {
+	enewgroup vboxusers
 }
 
 src_install() {
@@ -107,12 +111,12 @@ src_install() {
 		newins "${S}"/icons/48x48/virtualbox.png ${PN}.png
 	fi
 
-	pushd "${S}"/Oracle_VM_VirtualBox_Extension_Pack &>/dev/null || die
-	insinto /opt/VirtualBox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack
+	pushd "${S}"/Oracle_VirtualBox_Extension_Pack &>/dev/null || die
+	insinto /opt/VirtualBox/ExtensionPacks/Oracle_VirtualBox_Extension_Pack
 	doins -r linux.${ARCH}
 	doins ExtPack* PXE-Intel.rom
 	popd &>/dev/null || die
-	rm -rf "${S}"/Oracle_VM_VirtualBox_Extension_Pack
+	rm -rf "${S}"/Oracle_VirtualBox_Extension_Pack
 
 	insinto /opt/VirtualBox
 	dodir /opt/bin
@@ -174,8 +178,7 @@ src_install() {
 	dosym ../VBoxXPCOM.so /opt/VirtualBox/components/VBoxXPCOM.so
 
 	local each
-	#for each in VBox{Manage,SVC,XPCOMIPCD,Tunctl,TestOGL,ExtPackHelperApp} $(usex headless '' VirtualBox) ; do
-	for each in VBox{Manage,SVC,XPCOMIPCD,TestOGL,ExtPackHelperApp} $(usex headless '' VirtualBox) ; do
+	for each in VBox{Manage,SVC,ExtPackHelperApp} $(usex headless '' VirtualBox) ; do
 		fowners root:vboxusers /opt/VirtualBox/${each}
 		fperms 0750 /opt/VirtualBox/${each}
 		pax-mark -m "${ED%/}"/opt/VirtualBox/${each}

@@ -10,7 +10,7 @@ S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="VirtualBox kernel modules and user-space tools for Gentoo guests"
 HOMEPAGE="https://www.virtualbox.org/"
-SRC_URI="{{artifacts[0].src_uri}}"
+SRC_URI="{{src_uri}}"
 
 LICENSE="GPL-3 LGPL-2.1+ MIT || ( GPL-3 CDDL )"
 SLOT="0"
@@ -240,7 +240,7 @@ src_install() {
 	use systemd && systemd_dounit "${FILESDIR}/${PN}.service"
 }
 
-pkg_preinst() {
+pkg_setup() {
 	enewgroup vboxguest
 	enewuser vboxguest -1 /bin/sh /dev/null vboxguest
 	# automount Error: VBoxServiceAutoMountWorker: Group "vboxsf" does not exist
