@@ -1,0 +1,14 @@
+BDEPEND=>=dev-lang/go-1.21 >=dev-lang/go-1.12 app-arch/unzip
+DEFINED_PHASES=compile install postinst prepare unpack
+DEPEND=!sys-cluster/kubernetes
+DESCRIPTION=CLI to run commands against Kubernetes clusters
+EAPI=7
+HOMEPAGE=https://kubernetes.io
+IUSE=hardened
+KEYWORDS=*
+LICENSE=Apache-2.0
+RESTRICT=strip test
+SLOT=0
+SRC_URI=https://github.com/kubernetes/kubernetes/tarball/4190e7226e6c56f2317388e88511f3f73cfbe29c -> kubernetes-1.31.1-4190e72.tar.gz https://direct.funtoo.org/cd/96/3e/cd963e8154d375d04cb70274a5cc0e7a7be99a630f5c1e0fa909bb4c8b6e1b50ef42e867974264f1b5ec3fa0d574aa980211007b591d3da72060cd796df6af29 -> kubectl-1.31.1-funtoo-go-bundle-143668f49e8b58ebd2d69e6d3e44b1f9c3d44dc00241c4dc92b50a0d1b7899a7511a55f2174b0dfed345c1f0a315da40d1abb3056f332387523a0e6abf70711c.tar.gz
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	go-module	cb10a443c46556a15ed035d7a99128e8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=6bdfe68a30a88ebf3b977a327ff23007

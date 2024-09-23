@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig sys-devel/autoconf >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4 virtual/pkgconfig
+DEFINED_PHASES=configure install postinst preinst prepare test
+DEPEND=!static? ( audit? ( sys-process/audit ) ldns? ( net-libs/ldns[ecdsa(+),ssl(+)] ) libedit? ( dev-libs/libedit:= ) security-key? ( >=dev-libs/libfido2-1.5.0:= ) selinux? ( >=sys-libs/libselinux-1.28 ) ssl? ( >=dev-libs/openssl-1.1.1l:0= ) >=sys-libs/zlib-1.2.3:= ) pam? ( sys-libs/pam ) kerberos? ( virtual/krb5 ) sys-kernel/linux-headers static? ( audit? ( sys-process/audit[static-libs(+)] ) ldns? ( net-libs/ldns[ecdsa(+),ssl(+)] ) libedit? ( dev-libs/libedit:=[static-libs(+)] ) security-key? ( >=dev-libs/libfido2-1.5.0:=[static-libs(+)] ) selinux? ( >=sys-libs/libselinux-1.28[static-libs(+)] ) ssl? ( >=dev-libs/openssl-1.1.1l:0=[static-libs(+)] ) >=sys-libs/zlib-1.2.3:=[static-libs(+)] ) sys-apps/shadow
+DESCRIPTION=Port of OpenBSD's free SSH release
+EAPI=7
+HOMEPAGE=https://www.openssh.com/
+IUSE=abi_mips_n32 audit bindist debug hpn kerberos kernel_linux ldns libedit livecd pam +pie +scp security-key sctp selinux +ssl static test X xmss
+KEYWORDS=*
+LICENSE=BSD GPL-2
+RDEPEND=!static? ( audit? ( sys-process/audit ) ldns? ( net-libs/ldns[ecdsa(+),ssl(+)] ) libedit? ( dev-libs/libedit:= ) security-key? ( >=dev-libs/libfido2-1.5.0:= ) selinux? ( >=sys-libs/libselinux-1.28 ) ssl? ( >=dev-libs/openssl-1.1.1l:0= ) >=sys-libs/zlib-1.2.3:= ) pam? ( sys-libs/pam ) kerberos? ( virtual/krb5 ) pam? ( >=sys-auth/pambase-20081028 ) !prefix? ( sys-apps/shadow ) X? ( x11-apps/xauth )
+REQUIRED_USE=ldns? ( ssl ) pie? ( !static ) static? ( !kerberos !pam ) xmss? ( ssl ) test? ( ssl )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://github.com/openssh/openssh-portable/tarball/53a80baaebda180f46e6e8571f3ff800e1f5c496 -> openssh-portable-9.9_p1-53a80ba.tar.gz
+_eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	pam	756a09f72c4cdbb55f2694c95f1e0860	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
+_md5_=1a366ca3d1775fac3f0047f4bae6472b

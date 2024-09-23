@@ -1,0 +1,11 @@
+DEFINED_PHASES=configure install postinst
+DEPEND=dev-lang/perl:= dev-perl/Devel-Size virtual/perl-Data-Dumper virtual/perl-File-Temp virtual/perl-IO
+DESCRIPTION=A shell tool for executing jobs in parallel locally or on remote machines
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/parallel/
+KEYWORDS=*
+LICENSE=GPL-3
+RDEPEND=dev-lang/perl:= dev-perl/Devel-Size virtual/perl-Data-Dumper virtual/perl-File-Temp virtual/perl-IO
+SLOT=0
+SRC_URI=https://ftp.gnu.org/gnu/parallel/parallel-20240922.tar.bz2 -> parallel-20240922.tar.bz2
+_md5_=8f0a1513c222496727325f36c208bca2
