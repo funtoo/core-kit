@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=MIT BSD-2
 RDEPEND=app-arch/zstd:= >=dev-cpp/tbb-2021.7.0:= sys-libs/zlib dev-libs/blake3:= >=dev-libs/mimalloc-2:= dev-libs/openssl:= >=sys-devel/gcc-12.2.0
 SLOT=0
-SRC_URI=https://github.com/rui314/mold/tarball/1ab637cea4e76401d7a85039f68be8cd10d58324 -> mold-2.33.0-1ab637c.tar.gz
+SRC_URI=https://github.com/rui314/mold/tarball/ed7cc1b85aed2ba14fdcf868228e2f704d45ae6c -> mold-2.34.0-ed7cc1b.tar.gz
 _eclasses_=cmake	ac7cb516f6a288b6a82bc0649ce49878	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=80e45e4cfc6295685fe1d74faf29e59a
+_md5_=5a6f4c4b28fe8c43265319a4d8fa4e16

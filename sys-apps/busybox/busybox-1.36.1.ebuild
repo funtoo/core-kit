@@ -8,7 +8,7 @@ inherit flag-o-matic savedconfig toolchain-funcs
 
 DESCRIPTION="Utilities for rescue and embedded systems"
 HOMEPAGE="https://www.busybox.net/"
-SRC_URI="https://github.com/mirror/busybox/tarball/70f77e4617e06077231b8b63c3fb3406d7f8865d -> busybox-1.36.0-70f77e4.tar.gz"
+SRC_URI="https://github.com/mirror/busybox/tarball/1a64f6a20aaf6ea4dbba68bbfa8cc1ab7e5c57c4 -> busybox-1.36.1-1a64f6a.tar.gz"
 KEYWORDS="*"
 
 LICENSE="GPL-2" # GPL-2 only
