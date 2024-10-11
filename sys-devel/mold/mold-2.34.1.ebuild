@@ -4,9 +4,9 @@ EAPI=7
 
 inherit cmake toolchain-funcs
 
-DESCRIPTION="{{ description }}"
-HOMEPAGE="https://github.com/{{ github_user }}/{{ github_repo }}"
-SRC_URI="{{ src_uri }}"
+DESCRIPTION="Mold: A Modern Linker 🦠"
+HOMEPAGE="https://github.com/rui314/mold"
+SRC_URI="https://github.com/rui314/mold/tarball/de65f6bd75b93eeb9f3775fc136ee79683ff35f1 -> mold-2.34.1-de65f6b.tar.gz"
 
 # mold (MIT)
 #  - xxhash (BSD-2)
@@ -39,7 +39,7 @@ pkg_pretend() {
 
 post_src_unpack() {
 	if [ ! -d "${S}" ] ; then
-		mv "${WORKDIR}"/{{ github_user }}-* "${S}" || die
+		mv "${WORKDIR}"/rui314-* "${S}" || die
 	fi
 }
 

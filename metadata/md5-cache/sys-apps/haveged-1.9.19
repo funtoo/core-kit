@@ -1,0 +1,11 @@
+DEFINED_PHASES=configure install
+DESCRIPTION=A simple entropy daemon using the HAVEGE algorithm
+EAPI=7
+HOMEPAGE=http://www.issihosts.com/haveged/
+IUSE=selinux static-libs threads
+KEYWORDS=*
+LICENSE=GPL-3+
+RDEPEND=!<sys-apps/openrc-0.11.8 selinux? ( sec-policy/selinux-entropyd )
+SLOT=0
+SRC_URI=https://github.com/jirka-h/haveged/archive/refs/tags/v1.9.19.tar.gz -> haveged-1.9.19.tar.gz
+_md5_=d7ee6529302fe18b25f2e83ac18518be

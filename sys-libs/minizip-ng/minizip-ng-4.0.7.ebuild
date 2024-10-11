@@ -30,14 +30,9 @@ DEPEND="
 	test? ( dev-cpp/gtest )
 "
 
-PATCHES=(
-	${REPODIR}//files/${PN}-3.0.7-system-gtest.patch
-)
-
 post_src_unpack() {
 	mv ${WORKDIR}/zlib-ng-minizip-ng-* ${S} || die
 }
-
 
 src_configure() {
 	local mycmakeargs=(

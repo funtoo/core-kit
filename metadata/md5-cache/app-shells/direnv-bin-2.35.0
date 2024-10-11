@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DESCRIPTION=Direnv is an environment switcher for the shell
+EAPI=7
+HOMEPAGE=https://direnv.net
+KEYWORDS=amd64 arm64
+LICENSE=MIT
+RESTRICT=test
+SLOT=0
+SRC_URI=amd64? ( https://github.com/direnv/direnv/releases/download/v2.35.0/direnv.linux-amd64 -> direnv.linux-amd64 ) arm64? ( https://github.com/direnv/direnv/releases/download/v2.35.0/direnv.linux-arm64 -> direnv.linux-arm64 )
+_md5_=4e211e575537d5d622192ca5f4bf8fdd
