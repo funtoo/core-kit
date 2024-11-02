@@ -1,0 +1,14 @@
+BDEPEND=app-arch/xz-utils nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install postinst postrm prepare setup
+DEPEND=nls? ( virtual/libintl ) sqlite? ( >=dev-db/sqlite-3:= )
+DESCRIPTION=Search and query ebuilds
+EAPI=7
+HOMEPAGE=https://github.com/vaeth/eix/
+IUSE=debug doc nls sqlite
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=nls? ( virtual/libintl ) sqlite? ( >=dev-db/sqlite-3:= ) >=app-shells/push-2.0-r1 >=app-shells/quoter-3.0_p2-r1 virtual/tmpfiles
+SLOT=0
+SRC_URI=https://github.com/vaeth/eix/releases/download/v0.36.9/eix-0.36.9.tar.xz -> eix-0.36.9.tar.xz
+_eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=53a9376acee13441ef74f260e7a14ca8

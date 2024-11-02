@@ -1,0 +1,12 @@
+DEFINED_PHASES=configure install
+DEPEND=>=app-misc/editor-wrapper-3 >=sys-libs/ncurses-5.2:0= pcre? ( dev-libs/libpcre2 ) sys-apps/groff
+DESCRIPTION=Excellent text file viewer
+EAPI=7
+HOMEPAGE=http://www.greenwoodsoftware.com/less/
+IUSE=pcre unicode
+KEYWORDS=*
+LICENSE=|| ( GPL-3 BSD-2 )
+RDEPEND=>=app-misc/editor-wrapper-3 >=sys-libs/ncurses-5.2:0= pcre? ( dev-libs/libpcre2 ) sys-apps/groff
+SLOT=0
+SRC_URI=https://www.greenwoodsoftware.com/less/less-668.tar.gz -> less-668.tar.gz
+_md5_=ddd928d2e1a487b0395835dc4d84e5c5

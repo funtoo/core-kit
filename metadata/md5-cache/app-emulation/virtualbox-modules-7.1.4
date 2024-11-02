@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install postinst postrm preinst prepare setup unpack
+DEPEND=kernel_linux? ( virtual/modutils ) sys-apps/sed kernel_linux? ( virtual/linux-sources virtual/libelf ) sys-apps/shadow
+DESCRIPTION=Kernel Modules for Virtualbox
+EAPI=7
+HOMEPAGE=https://www.virtualbox.org/
+IUSE=kernel_linux kernel_linux
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=kernel_linux? ( virtual/modutils )
+SLOT=0
+SRC_URI=https://download.virtualbox.org/virtualbox/7.1.4/VirtualBox-7.1.4-165100-Linux_amd64.run -> VirtualBox-7.1.4-165100-Linux_amd64.run
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	linux-mod	6c7b3e7b9d39bd049bf23a991c16315e	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
+_md5_=34ac9228fd10c7f6084642eec5d2239c

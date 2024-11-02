@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DESCRIPTION=Family of powerful x86 virtualization products for enterprise and home use
+EAPI=6
+HOMEPAGE=https://www.virtualbox.org/
+IUSE=+additions doc headless python vboxwebsrv rdesktop-vrdp sdk
+KEYWORDS=*
+LICENSE=GPL-2 PUEL
+RDEPEND==app-emulation/virtualbox-bin-7.1.4.165100[additions?,doc?,headless?,python?,vboxwebsrv?,rdesktop-vrdp?,sdk?]
+SLOT=0
+_md5_=9c7df12e1b7ac03de6dd561c861f9fae
