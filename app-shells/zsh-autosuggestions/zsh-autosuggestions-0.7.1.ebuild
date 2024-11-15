@@ -4,7 +4,7 @@ EAPI=7
 
 inherit readme.gentoo-r1
 
-SRC_URI="https://api.github.com/repos/zsh-users/zsh-autosuggestions/tarball/refs/tags/v0.7.0 -> zsh-autosuggestions-0.7.0.tar.gz"
+SRC_URI="https://api.github.com/repos/zsh-users/zsh-autosuggestions/tarball/refs/tags/v0.7.1 -> zsh-autosuggestions-0.7.1.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Fish shell-like autosuggestions for zsh"
