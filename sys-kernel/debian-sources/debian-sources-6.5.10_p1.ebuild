@@ -133,9 +133,9 @@ src_prepare() {
 	make -s mrproper || die "make mrproper failed"
 	cd "${S}" || die
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-	epatch "${FILESDIR}"/latest/ikconfig.patch || die
-	epatch "${FILESDIR}"/latest/mcelog.patch || die
-	epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
+	epatch "${FILESDIR}"/6.5/ikconfig.patch || die
+	epatch "${FILESDIR}"/6.5/mcelog.patch || die
+	epatch "${FILESDIR}"/6.5/extra_cpu_optimizations.patch || die
 	# revert recent changes to the rtw89 driver that cause problems for Wi-Fi:
 	rm -rf "${S}"/drivers/net/wireless/rtw89 || die
 	tar xzf "${DISTDIR}"/debian-sources-6.3.7_p1-rtw89-driver.tar.gz -C "${S}"/drivers/net/wireless/ || die
@@ -176,7 +176,7 @@ src_prepare() {
 		setyes_config .config CONFIG_IXGBEVF
 	fi
 	if use logo; then
-		epatch "${FILESDIR}"/latest/funtoo_logo.patch || die
+		epatch "${FILESDIR}"/6.5/funtoo_logo.patch || die
 		tweak_config .config CONFIG_LOGO y
 		ewarn "Linux kernel frame buffer boot logo is now enabled with a custom Funtoo pixmap."
 		ewarn "The new logo can be viewed at /usr/src/linux/drivers/video/logo/logo_linux_clut224.ppm"
