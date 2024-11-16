@@ -3,7 +3,7 @@
 EAPI=7
 PYTHON_COMPAT=( python3+ )
 
-inherit autotools python-single-r1
+inherit meson python-single-r1
 
 DESCRIPTION="USB enumeration utilities"
 HOMEPAGE="https://www.kernel.org/pub/linux/utils/usb/usbutils/
@@ -32,27 +32,15 @@ pkg_setup() {
 
 src_prepare() {
 	default
-	eautoreconf
-	use python && python_fix_shebang lsusb.py.in
+	use python && python_fix_shebang lsusb.py
 }
 
 post_src_unpack() {
 	mv ${WORKDIR}/gregkh-usbutils-* ${S} || die
 }
 
-src_configure() {
-	local myeconfargs=(
-		--datarootdir="${EPREFIX}/usr/share"
-		--datadir="${EPREFIX}/usr/share/misc"
-	)
-	econf "${myeconfargs[@]}"
-}
-
 src_install() {
-	default
-	newdoc usbhid-dump/NEWS NEWS.usbhid-dump
-	dobin usbreset # noinst_PROGRAMS, but installed by other distros
-
+	meson_src_install
 	if ! use python ; then
 		rm -f "${ED}"/usr/bin/lsusb.py || die
 	fi
