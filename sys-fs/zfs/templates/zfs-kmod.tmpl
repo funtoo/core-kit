@@ -8,7 +8,7 @@ DESCRIPTION="Linux ZFS kernel module for sys-fs/zfs"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
 MY_PV="${PV/_rc/-rc}"
-SRC_URI="{{artifacts[0].src_uri}}"
+SRC_URI="{{src_uri}}"
 KEYWORDS="*"
 ZFS_KERNEL_COMPAT="{{kernel_compat}}"
 
@@ -121,7 +121,7 @@ src_install() {
 	set_arch_to_kernel
 
 	myemakeargs+=(
-		DEPMOD=:
+		DEPMOD=/bin/true
 		DESTDIR="${D}"
 	)
 
