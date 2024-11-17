@@ -28,7 +28,7 @@ RDEPEND="
 		<sys-apps/gawk-5.2.0
 		>=sys-apps/gawk-5.2.1
 	)
-	binary? ( >=sys-apps/ramdisk-1.1.17 )
+	binary? ( >=sys-apps/ramdisk-1.1.18 )
 "
 DEPEND="
 	virtual/libelf
