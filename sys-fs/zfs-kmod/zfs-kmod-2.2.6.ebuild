@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/openzfs/zfs"
 MY_PV="${PV/_rc/-rc}"
 SRC_URI="https://github.com/openzfs/zfs/tarball/e304863d53994e6e1c42ef3671d8b59a32e47d68 -> zfs-2.2.6-e304863.tar.gz"
 KEYWORDS="*"
-ZFS_KERNEL_COMPAT="6.5"
+ZFS_KERNEL_COMPAT="6.1"
 
 LICENSE="CDDL MIT debug? ( GPL-2+ )"
 SLOT="0"
