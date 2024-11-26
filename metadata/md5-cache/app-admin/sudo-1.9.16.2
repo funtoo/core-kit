@@ -10,6 +10,6 @@ LICENSE=ISC BSD
 RDEPEND=sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:= ) ldap? ( >=net-nds/openldap-2.1.30-r1 sasl? ( dev-libs/cyrus-sasl net-nds/openldap[sasl] ) ) pam? ( sys-libs/pam ) sasl? ( dev-libs/cyrus-sasl ) skey? ( >=sys-auth/skey-1.1.5-r1 ) ssl? ( !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) ) sssd? ( sys-auth/sssd[sudo] ) >=app-misc/editor-wrapper-3 virtual/editor ldap? ( dev-lang/perl ) pam? ( sys-auth/pambase ) selinux? ( sec-policy/selinux-sudo ) sendmail? ( virtual/mta ) virtual/tmpfiles
 REQUIRED_USE=?? ( pam skey ) ?? ( gcrypt ssl )
 SLOT=0
-SRC_URI=https://github.com/sudo-project/sudo/tarball/7b41190db66e2006d03cf317224f9f751b2b28cc -> sudo-1.9.16.1-7b41190.tar.gz
+SRC_URI=https://github.com/sudo-project/sudo/tarball/172cbd968e6fe5f64d3384896a90c0a1aa73238d -> sudo-1.9.16.2-172cbd9.tar.gz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	pam	756a09f72c4cdbb55f2694c95f1e0860	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=01a2d57c4e7903eb1b525d7cb1ea765d
+_md5_=f0f66fa5f32b4d88092fd2c39b80275d

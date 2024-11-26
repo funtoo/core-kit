@@ -6,7 +6,7 @@ inherit flag-o-matic linux-info multilib-minimal
 
 DESCRIPTION="Embedded Linux Library provides core, low-level functionality for system daemons"
 HOMEPAGE="https://01.org/ell"
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/libs/ell/ell-0.70.tar.xz -> ell-0.70.tar.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/libs/ell/ell-0.71.tar.xz -> ell-0.71.tar.xz"
 KEYWORDS="*"
 LICENSE="LGPL-2.1"
 SLOT="0"

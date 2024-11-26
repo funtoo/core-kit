@@ -7,5 +7,5 @@ KEYWORDS=*
 LICENSE=GPL-3
 RDEPEND=dev-lang/perl:= dev-perl/Devel-Size virtual/perl-Data-Dumper virtual/perl-File-Temp virtual/perl-IO
 SLOT=0
-SRC_URI=https://ftp.gnu.org/gnu/parallel/parallel-20241022.tar.bz2 -> parallel-20241022.tar.bz2
-_md5_=e732c0d18256da9153cf4d6b6b6a4e3f
+SRC_URI=https://ftp.gnu.org/gnu/parallel/parallel-20241122.tar.bz2 -> parallel-20241122.tar.bz2
+_md5_=1a1a778bd5d24c0b213a1145d4b150ef
