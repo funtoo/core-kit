@@ -175,16 +175,19 @@ cargo_src_unpack() {
 
 		pushd "${crates_dir}" >/dev/null
 
-		local extra
-		for extra in "${WORKDIR}"/funtoo-crates-bundle-"${PN}"/*.tar.xz; do
-				tar xf "${extra}"
-				local filename=$(basename "${extra}")
-				local unpack_dir="${filename%.tar.xz}"
 
-				pushd "${unpack_dir}" >/dev/null
-				cat funtoo_config.toml | sed "s|%CRATES_DIR%|${crates_dir}|g" >> "${ECARGO_HOME}"/config
-				popd >/dev/null
-		done
+		if compgen -G "${WORKDIR}"/funtoo-crates-bundle-"${PN}"/*.tar.xz > /dev/null; then
+			local extra
+			for extra in "${WORKDIR}"/funtoo-crates-bundle-"${PN}"/*.tar.xz; do
+					tar xf "${extra}"
+					local filename=$(basename "${extra}")
+					local unpack_dir="${filename%.tar.xz}"
+	
+					pushd "${unpack_dir}" >/dev/null
+					cat funtoo_config.toml | sed "s|%CRATES_DIR%|${crates_dir}|g" >> "${ECARGO_HOME}"/config
+					popd >/dev/null
+			done
+		fi
 
 		popd >/dev/null
 	else

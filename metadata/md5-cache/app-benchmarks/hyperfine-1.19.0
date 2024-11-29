@@ -9,5 +9,5 @@ LICENSE=Apache-2.0 MIT
 RDEPEND=bash-completion? ( app-shells/bash-completion ) zsh-completion? ( app-shells/zsh-completions ) fish-completion? ( app-shells/fish )
 SLOT=0
 SRC_URI=https://github.com/sharkdp/hyperfine/tarball/12fec42098642a19855ead34c8cb1e0be28c8ead -> hyperfine-1.19.0-12fec42.tar.gz https://direct.funtoo.org/c2/ed/e7/c2ede787acf3bcfca47b1fec2a3783f47b4e872f262eb1bdfb371c256da63f89cb72eb5171d2c8281f5b2f084a25c6e978c8f2967ec00e40663687b850d68418 -> hyperfine-1.19.0-funtoo-crates-bundle-0c594f191ed7bbe77127dd0205e165920bf88eb79f3f767b436ed54bc5bc362cb5241504a0243a2222103037dc8d92485e361a1b269ba666ac1a41aa57768a39.tar.gz
-_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	cargo	a3e90d3e6ca8541d967cff212149cffc	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	cargo	8b733ed04b1f3d24fafdeac20420742b	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=2a8ec99e4432edb1f2077276bcbf94ef
