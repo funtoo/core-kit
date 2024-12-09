@@ -8,7 +8,7 @@ inherit bash-completion-r1 linux-info meson python-any-r1 readme.gentoo-r1 user
 
 DESCRIPTION="C toolkit to manipulate virtual machines"
 HOMEPAGE="https://www.libvirt.org/"
-SRC_URI="https://libvirt.org/sources/libvirt-10.9.0.tar.xz -> libvirt-10.9.0.tar.xz"
+SRC_URI="https://libvirt.org/sources/libvirt-10.10.0.tar.xz -> libvirt-10.10.0.tar.xz"
 
 SLOT="0/${PV}"
 LICENSE="LGPL-2.1"
