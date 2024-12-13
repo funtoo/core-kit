@@ -8,7 +8,7 @@ DESCRIPTION="Linux ZFS kernel module for sys-fs/zfs"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
 MY_PV="${PV/_rc/-rc}"
-SRC_URI="https://github.com/openzfs/zfs/tarball/e304863d53994e6e1c42ef3671d8b59a32e47d68 -> zfs-2.2.6-e304863.tar.gz"
+SRC_URI="https://github.com/openzfs/zfs/tarball/9e6cb3f730bf39831c9b8acc6ce889668beab7ff -> zfs-2.2.7-9e6cb3f.tar.gz"
 KEYWORDS="*"
 ZFS_KERNEL_COMPAT="6.10"
 
