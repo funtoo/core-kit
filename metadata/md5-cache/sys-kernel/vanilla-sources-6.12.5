@@ -1,6 +1,6 @@
 DEFINED_PHASES=compile install postinst postrm preinst prepare setup test unpack
 DEPEND=!build? ( sys-apps/sed >=sys-devel/binutils-2.11.90.0.31 )
-DESCRIPTION=Linux 6.12.4
+DESCRIPTION=Linux 6.12.5
 EAPI=6
 HOMEPAGE=https://www.kernel.org/ https://www.gentoo.org/ http://kernel.org/
 IUSE=symlink build
@@ -8,7 +8,7 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=virtual/linux-sources !build? ( dev-lang/perl sys-devel/bc sys-devel/bison sys-devel/flex sys-devel/make >=sys-libs/ncurses-5.2 virtual/libelf )
 RESTRICT=binchecks strip
-SLOT=6.12.4
-SRC_URI=https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.12.tar.xz -> linux-6.12.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/patch-6.12.4.xz -> patch-6.12.4.xz
+SLOT=6.12.5
+SRC_URI=https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/linux-6.12.tar.xz -> linux-6.12.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v6.x/patch-6.12.5.xz -> patch-6.12.5.xz
 _eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	estack	43ddf5aaffa7a8d0482df54d25a66a1f	kernel-2	12a17088d0306f0e3d3c97d58534409e	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	d3f9ec72badd0291b655682d67876adc	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=7598826631f63374fc2b10172f7463e9
+_md5_=0a52ef60f4653c4478db7b098feffbb4
