@@ -6,7 +6,7 @@ inherit cmake
 
 DESCRIPTION="Heavily optimized DEFLATE/zlib/gzip (de)compression"
 HOMEPAGE="https://github.com/libdeflate/ebiggers"
-SRC_URI="https://github.com/ebiggers/libdeflate/tarball/9d624d1d8ba82c690d6d6be1d0a961fc5a983ea4 -> libdeflate-1.22-9d624d1.tar.gz"
+SRC_URI="https://github.com/ebiggers/libdeflate/tarball/733848901289eca058804ca0737f8796875204c8 -> libdeflate-1.23-7338489.tar.gz"
 
 KEYWORDS="*"
 
@@ -17,7 +17,7 @@ IUSE="static-libs test"
 RESTRICT="!test? ( test )"
 
 post_src_unpack() {
-	cd ${WORKDIR} && mv ebiggers-libdeflate-* libdeflate-1.22
+	cd ${WORKDIR} && mv ebiggers-libdeflate-* libdeflate-1.23
 }
 
 src-configure() {
