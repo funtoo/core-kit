@@ -10,7 +10,7 @@ inherit flag-o-matic
 
 DESCRIPTION="The GNU info program and utilities"
 HOMEPAGE="https://www.gnu.org/software/texinfo/"
-SRC_URI="https://ftp.gnu.org/gnu/texinfo/texinfo-7.1.1.tar.xz -> texinfo-7.1.1.tar.xz
+SRC_URI="https://ftp.gnu.org/gnu/texinfo/texinfo-7.2.tar.xz -> texinfo-7.2.tar.xz
 "
 
 LICENSE="GPL-3"

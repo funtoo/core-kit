@@ -9,7 +9,7 @@ inherit unpacker
 
 DESCRIPTION="Common CA Certificates PEM files"
 HOMEPAGE="https://packages.debian.org/sid/ca-certificates"
-SRC_URI="https://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20240203_all.deb -> ca-certificates_20240203_all.deb"
+SRC_URI="https://ftp.debian.org/debian/pool/main/c/ca-certificates/ca-certificates_20241223_all.deb -> ca-certificates_20241223_all.deb"
 LICENSE="MPL-1.1"
 SLOT="0"
 KEYWORDS="*"
@@ -24,7 +24,7 @@ BDEPEND="${CDEPEND}"
 DEPEND=""
 RDEPEND="${CDEPEND} ${DEPEND}"
 
-DEB_VER="20240203"
+DEB_VER="20241223"
 
 S=${WORKDIR}
 
