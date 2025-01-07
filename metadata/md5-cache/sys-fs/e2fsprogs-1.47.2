@@ -1,14 +1,14 @@
 BDEPEND=nls? ( sys-devel/gettext ) virtual/pkgconfig sys-apps/texinfo virtual/pkgconfig
 DEFINED_PHASES=compile configure install prepare
-DEPEND=~sys-libs/e2fsprogs-libs-1.47.1 >=sys-apps/util-linux-2.16 cron? ( sys-fs/lvm2[-device-mapper-only(-)] ) fuse? ( sys-fs/fuse:0 ) nls? ( virtual/libintl )
+DEPEND=~sys-libs/e2fsprogs-libs-1.47.2 >=sys-apps/util-linux-2.16 cron? ( sys-fs/lvm2[-device-mapper-only(-)] ) fuse? ( sys-fs/fuse:0 ) nls? ( virtual/libintl )
 DESCRIPTION=Standard EXT2/EXT3/EXT4 filesystem utilities
 EAPI=7
 HOMEPAGE=http://e2fsprogs.sourceforge.net/
 IUSE=cron fuse lto nls static-libs +threads elibc_FreeBSD +split-usr
 KEYWORDS=*
 LICENSE=GPL-2 BSD
-RDEPEND=~sys-libs/e2fsprogs-libs-1.47.1 >=sys-apps/util-linux-2.16 cron? ( sys-fs/lvm2[-device-mapper-only(-)] ) fuse? ( sys-fs/fuse:0 ) nls? ( virtual/libintl )
+RDEPEND=~sys-libs/e2fsprogs-libs-1.47.2 >=sys-apps/util-linux-2.16 cron? ( sys-fs/lvm2[-device-mapper-only(-)] ) fuse? ( sys-fs/fuse:0 ) nls? ( virtual/libintl )
 SLOT=0
-SRC_URI=https://github.com/tytso/e2fsprogs/tarball/950a0d69c82b585aba30118f01bf80151deffe8c -> e2fsprogs-1.47.1-950a0d6.tar.gz
+SRC_URI=https://github.com/tytso/e2fsprogs/tarball/c3cce4a07efefc62bc7fc57a678cb870af27d0f2 -> e2fsprogs-1.47.2-c3cce4a.tar.gz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	udev	7752f306eec7b286d00bdb47b763e7ac	usr-ldscript	4ccde96ab6c8f52f7b2591eca379b866
-_md5_=a531430d2777316f162f5f11c9e46dc7
+_md5_=3976a577194b5cbf11ff147bbaff549d
