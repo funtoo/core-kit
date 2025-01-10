@@ -5,7 +5,7 @@ PYTHON_COMPAT=( python3+ )
 
 inherit autotools linux-info python-any-r1 user
 
-SRC_URI="https://github.com/flatpak/flatpak/releases/download/1.14.10/flatpak-1.14.10.tar.xz -> flatpak-1.14.10.tar.xz"
+SRC_URI="https://github.com/flatpak/flatpak/releases/download/1.16.0/flatpak-1.16.0.tar.xz -> flatpak-1.16.0.tar.xz"
 DESCRIPTION="Application distribution framework"
 HOMEPAGE="http://flatpak.org/"
 
