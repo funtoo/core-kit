@@ -7,7 +7,7 @@ inherit autotools linux-info toolchain-funcs tmpfiles udev flag-o-matic
 
 DESCRIPTION="test"
 HOMEPAGE="https://sourceware.org/lvm2/"
-SRC_URI="https://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.29.tgz -> LVM2.2.03.29.tgz
+SRC_URI="https://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.30.tgz -> LVM2.2.03.30.tgz
 "
 S="${WORKDIR}/${PN^^}.${PV}"
 

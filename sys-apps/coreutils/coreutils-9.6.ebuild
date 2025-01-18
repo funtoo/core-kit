@@ -7,7 +7,7 @@ inherit flag-o-matic python-any-r1 toolchain-funcs
 
 DESCRIPTION="Standard GNU utilities (chmod, cp, dd, ls, sort, tr, head, wc, who,...)"
 HOMEPAGE="https://www.gnu.org/software/coreutils/"
-SRC_URI="https://ftp.gnu.org/gnu/coreutils/coreutils-9.5.tar.xz -> coreutils-9.5.tar.xz
+SRC_URI="https://ftp.gnu.org/gnu/coreutils/coreutils-9.6.tar.xz -> coreutils-9.6.tar.xz
 "
 
 LICENSE="GPL-3"
