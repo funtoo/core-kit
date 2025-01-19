@@ -17,7 +17,9 @@ async def generate(hub, **pkginfo):
 	latest_release = get_release(json_list)
 	if latest_release is None:
 		raise hub.pkgtools.ebuild.BreezyError(f"Can't find a suitable release of {github_repo}")
-	version = latest_release["tag_name"].lstrip("v")
+	#version = latest_release["tag_name"].lstrip("v")
+	# See https://github.com/htop-dev/htop/issues/1470
+	version = "3.2.2"
 	url = latest_release["tarball_url"]
 	final_name = f"{github_repo}-{version}.tar.gz"
 	src_artifact = hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)
