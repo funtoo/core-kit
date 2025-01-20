@@ -36,15 +36,8 @@ pkg_setup() {
 	linux-info_pkg_setup
 }
 
-src_unpack() {
-	default
-	rm -rf ${S}
-	mv ${WORKDIR}/htop-dev-htop-* ${S} || die
-}
-
 src_prepare() {
 	default
-
 	eautoreconf
 }
 

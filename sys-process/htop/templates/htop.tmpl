@@ -36,15 +36,8 @@ pkg_setup() {
 	linux-info_pkg_setup
 }
 
-src_unpack() {
-	default
-	rm -rf ${S}
-	mv ${WORKDIR}/{{github_user}}-{{github_repo}}-* ${S} || die
-}
-
 src_prepare() {
 	default
-
 	eautoreconf
 }
 
