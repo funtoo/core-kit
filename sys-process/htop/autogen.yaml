@@ -1,0 +1,12 @@
+htop:
+  generator: github-1
+  packages:
+    - htop:
+        github:
+          user: htop-dev
+          query: releases
+          tarball: "htop-{version}.tar.xz"
+        # See https://github.com/htop-dev/htop/issues/1470
+        version: 3.2.2
+        revision:
+          3.2.2: "1"
