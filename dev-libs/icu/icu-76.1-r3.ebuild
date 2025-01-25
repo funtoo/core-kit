@@ -25,6 +25,12 @@ BDEPEND="
 	doc? ( app-text/doxygen[dot] )
 "
 
+PATCHES=(
+	# `pkg-config icu-i18n --libs` will not include -licuuc which is needed for
+	# undefined symbols in icu-i18n so that it links properly with eg. libxml2.
+	"${FILESDIR}/${PN}-76.1-undo-pkgconfig-change-for-now.patch"
+)
+
 src_prepare() {
 	default
 
