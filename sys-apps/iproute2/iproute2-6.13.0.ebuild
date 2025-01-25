@@ -4,7 +4,7 @@ EAPI=7
 
 inherit toolchain-funcs flag-o-matic
 
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.12.0.tar.xz -> iproute2-6.12.0.tar.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.13.0.tar.xz -> iproute2-6.13.0.tar.xz"
 KEYWORDS="*"
 
 DESCRIPTION="kernel routing and traffic control utilities"
