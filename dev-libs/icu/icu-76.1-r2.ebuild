@@ -2,7 +2,6 @@
 
 EAPI=7
 
-
 PYTHON_COMPAT=( python3+ )
 inherit autotools python-any-r1 toolchain-funcs
 
@@ -21,7 +20,7 @@ RESTRICT="!test? ( test )"
 
 BDEPEND="
 	${PYTHON_DEPS}
-	dev-build/autoconf-archive
+	sys-devel/autoconf
 	virtual/pkgconfig
 	doc? ( app-text/doxygen[dot] )
 "
