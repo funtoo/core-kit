@@ -11,6 +11,6 @@ RDEPEND=bzip2? ( app-arch/bzip2:= ) icu? ( >=dev-libs/icu-3.6:= ) !icu? ( virtua
 REQUIRED_USE=python? ( || ( python_targets_python3_10 python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 ) )
 RESTRICT=test
 SLOT=0/1.83.0
-SRC_URI=https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.tar.bz2
+SRC_URI=https://archives.boost.io/release/1.83.0/source/1.83.0/source/boost_1_83_0.tar.bz2
 _eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	d3f9ec72badd0291b655682d67876adc	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=1c19965d236f36234e72260c246b1b7b
+_md5_=e8121135030f26052ab1801e70185ed7
