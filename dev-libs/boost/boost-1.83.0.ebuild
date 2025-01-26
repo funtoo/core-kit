@@ -10,7 +10,7 @@ MY_PV="$(ver_rs 1- _)"
 
 DESCRIPTION="Boost Libraries for C++"
 HOMEPAGE="https://www.boost.org/"
-SRC_URI="https://archives.boost.io/release/1.83.0/source/${PV}/source/boost_${MY_PV}.tar.bz2"
+SRC_URI="https://archives.boost.io/release/${PV}/source/boost_${MY_PV}.tar.bz2"
 S="${WORKDIR}/${PN}_${MY_PV}"
 
 LICENSE="Boost-1.0"
