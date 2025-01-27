@@ -1,0 +1,5 @@
+screen:
+  generator: gnu-1
+  packages:
+    - screen:
+        compression: gz

@@ -22,22 +22,12 @@ RDEPEND="${DEPEND}
 	selinux? ( sec-policy/selinux-screen )"
 BDEPEND=">=sys-apps/texinfo-7"
 
-PATCHES=(
-	# Don't use utempter even if it is found on the system.
-	"${FILESDIR}"/${PN}-4.3.0-no-utempter.patch
-	"${FILESDIR}"/${PN}-4.6.2-utmp-exit.patch
-)
-
 pkg_setup() {
 	enewgroup utmp
 }
 
 src_prepare() {
 	default
-
-	# sched.h is a system header and causes problems with some C libraries
-	mv sched.h _sched.h || die
-	sed -i '/include/ s:sched.h:_sched.h:' screen.h || die
 
 	# Fix manpage
 	sed -i \
@@ -48,25 +38,12 @@ src_prepare() {
 		-e "s:/local/screens/S\\\-:${EPREFIX}/tmp/screen/S\\\-:g" \
 		doc/screen.1 || die
 
-	if [[ ${CHOST} == *-darwin* ]] || use elibc_musl; then
-		sed -i -e '/^#define UTMPOK/s/define/undef/' acconfig.h || die
-	fi
-
-	# disable musl dummy headers for utmp[x]
-	use elibc_musl && append-cppflags "-D_UTMP_H -D_UTMPX_H"
-
 	# reconfigure
 	eautoreconf
 }
 
 src_configure() {
 	append-cppflags "-DMAXWIN=${MAX_SCREEN_WINDOWS:-100}"
-
-	if [[ ${CHOST} == *-solaris* ]]; then
-		# enable msg_header by upping the feature standard compatible
-		# with c99 mode
-		append-cppflags -D_XOPEN_SOURCE=600
-	fi
 
 	use nethack || append-cppflags "-DNONETHACK"
 	use debug && append-cppflags "-DDEBUG"
@@ -84,17 +61,9 @@ src_configure() {
 	econf "${myeconfargs[@]}"
 }
 
-src_compile() {
-	LC_ALL=POSIX emake comm.h term.h
-	emake osdef.h
-
-	emake -C doc screen.info
-	default
-}
-
 src_install() {
 	local DOCS=(
-		README ChangeLog INSTALL TODO NEWS* patchlevel.h
+		README ChangeLog INSTALL TODO NEWS*
 		doc/{FAQ,README.DOTSCREEN,fdpat.ps,window_to_display.ps}
 	)
 
@@ -102,16 +71,10 @@ src_install() {
 
 	local tmpfiles_perms tmpfiles_group
 
-	if use multiuser || use prefix ; then
-		fperms 4755 /usr/bin/${P}
-		tmpfiles_perms="0755"
-		tmpfiles_group="root"
-	else
-		fowners root:utmp /usr/bin/${P}
-		fperms 2755 /usr/bin/${P}
-		tmpfiles_perms="0775"
-		tmpfiles_group="utmp"
-	fi
+	fowners root:utmp /usr/bin/${P}
+	fperms 2755 /usr/bin/${P}
+	tmpfiles_perms="0775"
+	tmpfiles_group="utmp"
 
 	newtmpfiles - screen.conf <<<"d /tmp/screen ${tmpfiles_perms} root ${tmpfiles_group}"
 
